@@ -5,79 +5,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shane Soper - Professional CV & Portfolio</title>
     <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #e74c3c;
+            --bg-color: #f4f4f9;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #555555;
+            --border-color: #eaeaea;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f4f4f9;
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             line-height: 1.6;
         }
+
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            background: #fff;
-            padding: 30px;
+            background: var(--card-bg);
+            padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        h1 { margin-top: 0; color: #111; text-align: center; }
-        
-        /* Company Logo Style */
-        .company-logo {
-            display: block;
-            max-width: 150px;
-            height: auto;
-            margin: 0 auto 15px auto;
-            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
-        .role-card {
-            border-bottom: 2px solid #eaeaea;
+        /* Header Styling */
+        .cv-header {
+            text-align: center;
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 25px;
+            margin-bottom: 35px;
+        }
+        .cv-header h1 {
+            margin: 0 0 10px 0;
+            color: #111;
+            font-size: 32px;
+        }
+        .cv-header p {
+            margin: 5px 0;
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        /* Section Heading */
+        h2.section-title {
+            color: var(--primary);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-top: 0;
             margin-bottom: 25px;
-        }
-        .role-title {
             font-size: 22px;
-            font-weight: bold;
-            color: #2c3e50;
-            text-align: center;
         }
-        .company {
-            font-size: 16px;
-            color: #7f8c8d;
+
+        /* Role Card Container */
+        .role-card {
+            background: #fafafa;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: box-shadow 0.2s ease;
+        }
+        .role-card:hover {
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        /* Logo Placeholder Styling */
+        .logo-placeholder {
+            width: 140px;
+            height: 50px;
+            background: #e2e8f0;
+            border: 2px dashed #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #64748b;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .role-meta {
+            font-weight: bold;
+            color: var(--accent);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .main-role-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 4px 0 12px 0;
+        }
+
+        .role-summary {
+            font-style: italic;
+            color: var(--text-muted);
             margin-bottom: 15px;
-            font-weight: bold;
-            text-align: center;
+            font-size: 15px;
         }
+
+        /* Toggle Button */
         .btn-toggle {
-            background-color: #e74c3c;
+            background-color: var(--primary);
             color: white;
             border: none;
-            padding: 10px 16px;
+            padding: 10px 18px;
             font-size: 14px;
             border-radius: 4px;
             cursor: pointer;
-            margin: 25px 0 15px 0;
+            margin-top: 15px;
             transition: background 0.2s;
-            display: block;
-            width: 100%;
-            text-align: center;
+            display: inline-block;
         }
-        .btn-toggle:hover { background-color: #c0392b; }
-        
+        .btn-toggle:hover { background-color: #34495e; }
+
+        /* Collapsible Content */
         .collapsible-content {
             display: none;
-            margin-top: 15px;
-            padding-top: 10px;
-            border-top: 2px dashed #eaeaea;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed var(--border-color);
         }
         .collapsible-content.show { display: block; }
 
-        ul { padding-left: 20px; }
-        li { margin-bottom: 8px; }
+        ul { padding-left: 20px; margin: 10px 0; }
+        li { margin-bottom: 8px; font-size: 15px; }
 
-        /* Carousel Styles */
+        /* Carousel / Horizontal Scroll Style for XClean Campaign Tiles */
         .carousel-container {
             position: relative;
             max-width: 100%;
@@ -89,7 +153,7 @@
         }
         .carousel-slide {
             display: none;
-            max-height: 450px;
+            max-height: 400px;
             object-fit: contain;
             width: 100%;
             margin: 0 auto;
@@ -140,85 +204,296 @@
 <body>
 
 <div class="container">
-    <h1>Online CV & Portfolio</h1>
-    
+    <!-- Header Section -->
+    <div class="cv-header">
+        <h1>Shane Soper</h1>
+        <p>153 East Road, Ascot, Invercargill, Southland, New Zealand</p>
+        <p>📧 uvshane@gmail.com &nbsp;|&nbsp; 📞 020 4085 4362 &nbsp;|&nbsp; D.O.B 24/4/1974[cite: 1]</p>
+    </div>
+
+    <h2 class="section-title">Professional Career History & Portfolio</h2>
+
+    <!-- Role 1: Devil Burger -->
     <div class="role-card">
-        <!-- Logo Image matching image1.png -->
-        <img src="image1.png" class="company-logo" alt="Devil Burger Logo">
+        <div class="logo-placeholder">Logo: Devil Burger</div>
+        <div class="role-meta">2023–2025[cite: 1, 2]</div>
+        <div class="main-role-title">Digital Project Manager – Devil Burger</div>
+        <div class="role-summary">Operations consulting for owners' multiple other business interests. Completed while delivering digital projects[cite: 2].</div>
+        
+        <button class="btn-toggle" onclick="toggleRole('role1')">+ Expand Role Details & Media</button>
+        
+        <div id="role1" class="collapsible-content">
+            <h4>Key Achievements & Responsibilities:</h4>
+            <ul>
+                <li>Delivered full in-store digital transformation: menus, hardware, software, graphics, video[cite: 2].</li>
+                <li>Built and deployed EPOS and Deliverect integrations across all NZ ordering platforms[cite: 2].</li>
+                <li>Produced annual marketing kit covering radio, social media, and in-store graphics[cite: 2].</li>
+                <li>Developed ghost kitchen brands including strategy, identity, and product development[cite: 2].</li>
+                <li>Managed kiosk integration and multi-platform menu syncing[cite: 2].</li>
+                <li>Provided pseudo operations manager support across owners' multiple business interests[cite: 2].</li>
+                <li>Increased turnover, reduced operating costs, and left turnkey marketing solutions[cite: 2].</li>
+                <li><em>Additional shareholder projects:</em> Tim Smellie – Mainland Meats in 2012; Daryle Blackler – United Video in 2008.</li>
+            </ul>
 
-        <div class="role-title">Operations Consulting for Owner’s Multiple Business Interests</div>
-        <div class="company">Devil Burger & Associated Shareholder Ventures</div>
-        <p style="text-align: center;"><em>Completed while delivering digital projects.</em></p>
-
-        <!-- Master Page Content (Always Visible) -->
-        <h4>Key Operational & Digital Achievements:</h4>
-        <ul>
-            <li>Delivered full in-store digital transformation: menus, hardware, software, graphics, video</li>
-            <li>Built and deployed EPOS and Deliverect integrations across all NZ ordering platforms</li>
-            <li>Produced annual marketing kit covering radio, social media, and in-store graphics</li>
-            <li>Developed ghost kitchen brands including strategy, identity, and product development</li>
-            <li>Managed kiosk integration and multi-platform menu syncing</li>
-            <li>Provided pseudo operations manager support across owner’s multiple business interests</li>
-            <li>Increased turnover, reduced operating costs, and left turnkey marketing solutions</li>
-        </ul>
-
-        <h4>Other Fixed-Term Projects Completed for Shareholders:</h4>
-        <ul>
-            <li><strong>Tim Smellie</strong> – Mainland Meats in 2012</li>
-            <li><strong>Daryle Blackler</strong> – United Video in 2008</li>
-        </ul>
-
-        <!-- Project Portfolio Gallery -->
-        <h4>Project Portfolio Gallery</h4>
-        <div class="carousel-container">
-            <img src="image1.png" class="carousel-slide active" alt="Devil Burger Logo">
-            <img src="$10 Tuesday for summer .jpg" class="carousel-slide" alt="$10 Tuesday Marketing Campaign">
-            
-            <button class="carousel-btn prev" onclick="moveSlide(-1)">&#8592;</button>
-            <button class="carousel-btn next" onclick="moveSlide(1)">&#8594;</button>
-        </div>
-
-        <!-- Embedded YouTube Videos -->
-        <h4>Embedded Video References / Testimonials</h4>
-        <div class="video-grid">
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube-nocookie.com/embed/keXY9SO2CMA" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <h4>Embedded Video Testimonials & References:</h4>
+            <div class="video-grid">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube-nocookie.com/embed/2Hj5Q6kU3nE" title="Devil Burger Testimonial 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube-nocookie.com/embed/V2HS1ttGNLY" title="Devil Burger Testimonial 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
             </div>
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube-nocookie.com/embed/2Hj5Q6kU3nE" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-        </div>
-
-        <!-- Toggle Button for Future Extended Details -->
-        <button class="btn-toggle" onclick="toggleDetails()">+ Read Full Role Details (More info coming soon)</button>
-
-        <!-- Collapsible Content Reserved for Future Info -->
-        <div id="fullDetails" class="collapsible-content">
-            <p><em>Additional in-depth role breakdowns, expanded strategic case studies, and extra documentation will be added here soon...</em></p>
         </div>
     </div>
+
+    <!-- Role 2: National Sales Manager - XClean -->
+    <div class="role-card">
+        <div class="logo-placeholder">Logo: XClean</div>
+        <div class="role-meta">2018–2022[cite: 1, 2]</div>
+        <div class="main-role-title">National Sales Manager – XClean</div>
+        <div class="role-summary">Company selling cleaning chemicals into industry, agriculture and hospitality sectors[cite: 2].</div>
+        
+        <button class="btn-toggle" onclick="toggleRole('role2')">+ Expand Role Details & Media</button>
+        
+        <div id="role2" class="collapsible-content">
+            <h4>Key Achievements & Responsibilities:</h4>
+            <ul>
+                <li>Asked to return to rebuild the business (previously involved 2013)[cite: 2].</li>
+                <li>Scaled operations from zero staff to eight separate regions manned by over 20 staff[cite: 2].</li>
+                <li>Personally responsible for $550,000 gross profit per annum from my own activity[cite: 2].</li>
+                <li>Grew total team sales and gross profit output to $2 million annually[cite: 2].</li>
+                <li>Restored brand reputation after major legacy issues[cite: 2].</li>
+                <li>Led territory rebuild across all regional centres[cite: 2].</li>
+                <li>Designed and deployed sign-written vans with custom shelving to expand product range[cite: 2].</li>
+                <li>Managed product formulation, global sourcing, importation, and industry approvals[cite: 2].</li>
+                <li>Delivered consistent cold-call conversions and territory coverage[cite: 2].</li>
+                <li>Navigated COVID disruptions and franchise realignment[cite: 2].</li>
+                <li><strong>XClean COVID Crisis Campaign Highlight:</strong> Engineered a custom crisis marketing campaign that generated $500k worth of turnover for the company during its initial 14-day run.</li>
+            </ul>
+
+            <h4>Embedded Video Testimonials & COVID Campaign Showcase:</h4>
+            <div class="video-grid">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube-nocookie.com/embed/sdTLpnb2hw4" title="XClean Testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube-nocookie.com/embed/uYoG6WgsOzk" title="Clients Providing Product Testimonials" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <div class="video-wrapper" style="grid-column: 1 / -1;">
+                    <iframe src="https://www.youtube-nocookie.com/embed/-OauqERIzjQ" title="XClean COVID Crisis Campaign Showcase" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Role 3: A/V Systems Architect - Royal Albatross Centre -->
+    <div class="role-card">
+        <div class="logo-placeholder">Logo: Albatross Centre</div>
+        <div class="role-meta">2017[cite: 1, 2]</div>
+        <div class="main-role-title">Principal A/V Architect – Royal Albatross Centre</div>
+        <div class="role-summary">Project: Build a bespoke A/V theater without alteration to heritage site[cite: 2].</div>
+        
+        <button class="btn-toggle" onclick="toggleRole('role3')">+ Expand Role Details</button>
+        
+        <div id="role3" class="collapsible-content">
+            <h4>Key Achievements & Responsibilities:</h4>
+            <ul>
+                <li>Delivered a custom solution where no off-the-shelf option existed[cite: 2].</li>
+                <li>Successfully delivered an enterprise deployment on time and under budget[cite: 2].</li>
+                <li>Engineered custom lens manufactured overseas[cite: 2].</li>
+                <li>Completed fabrication including CNC machining, welding, cabinetry, soldering, calibration[cite: 2].</li>
+                <li>Global procurement from Germany, Japan, and China[cite: 2].</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Role 4: Site Acquisition Manager - ISee Digital -->
+    <div class="role-card">
+        <div class="logo-placeholder">Logo: ISee Digital</div>
+        <div class="role-meta">2015–2017[cite: 1, 2]</div>
+        <div class="main-role-title">Site Acquisition Manager – ISee Digital</div>
+        <div class="role-summary">Company sold advertising on indoor and outdoor digital billboards to increase screen locations and build the network[cite: 2].</div>
+        
+        <button class="btn-toggle" onclick="toggleRole('role4')">+ Expand Role Details</button>
+        
+        <div id="role4" class="collapsible-content">
+            <h4>Key Achievements & Responsibilities:</h4>
+            <ul>
+                <li>Secured 32 billboard sites across the North Island[cite: 2].</li>
+                <li>Completed geo testing and resource consent approvals[cite: 2].</li>
+                <li>Secured a national billboard footprint representing a commitment of approximately $29 million[cite: 2].</li>
+                <li>Secured 2000+ retail locations nationwide and negotiated revenue-share agreements[cite: 2].</li>
+                <li>Delivered an in-store digital network representing a commitment of approximately $3.7 million[cite: 2].</li>
+                <li>Procured 2000+ single-board computers, screens, brackets, and cabling[cite: 2].</li>
+                <li>Completed national installation ahead of schedule and under budget[cite: 2].</li>
+                <li>Traveled extensively nationwide managing site acquisition, establishing B2B relationships, and securing lease agreements[cite: 2].</li>
+                <li>Handled the physical installation for the majority of the network[cite: 2].</li>
+                <li>Supported new owners after network sell-off[cite: 2].</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Role 5: Sales Manager - XClean (2013-2015) -->
+    <div class="role-card">
+        <div class="logo-placeholder">Logo: XClean</div>
+        <div class="role-meta">2013–2015[cite: 1, 2]</div>
+        <div class="main-role-title">Sales Manager – XClean</div>
+        <div class="role-summary">Company selling cleaning chemicals into industry, agriculture and hospitality sectors[cite: 2].</div>
+        
+        <button class="btn-toggle" onclick="toggleRole('role5')">+ Expand Role Details & Media</button>
+        
+        <div id="role5" class="collapsible-content">
+            <h4>Key Achievements & Responsibilities:</h4>
+            <ul>
+                <li>Expanded operations from a single staff member to training 12-person team[cite: 2].</li>
+                <li>Rebuilding territories, deploying new commission-only sales teams nationally[cite: 2].</li>
+                <li>Driving high-conversion cold-calling across all regions myself in vans with the reps[cite: 2].</li>
+                <li>Transformation Resulting in a fully functioning national operation under 12 months[cite: 2].</li>
+                <li>Lifted revenue from a stagnant $156,000 baseline to $2 million per annum[cite: 2].</li>
+                <li>Delivered free on-farm training across multiple regions[cite: 2].</li>
+                <li>Managed crisis communications during industry product failures[cite: 2].</li>
+            </ul>
+
+            <h4>Embedded Video Reference:</h4>
+            <div class="video-grid">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube-nocookie.com/embed/o8yDFvZrZ-k" title="XClean Sales Manager Testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Role 6: Regional Sales Manager - SKY Television / Integrate Group -->
+    <div class="role-card">
+        <div class="logo-placeholder">Logo: Integrate / Sky</div>
+        <div class="role-meta">2007–2014[cite: 1, 2]</div>
+        <div class="main-role-title">Regional Sales Manager – Integrate Group / Sky</div>
+        <div class="role-summary">Direct marketing of SKY Television - Door Knocking Sales[cite: 2].</div>
+        
+        <button class="btn-toggle" onclick="toggleRole('role6')">+ Expand Role Details & Media</button>
+        
+        <div id="role6" class="collapsible-content">
+            <h4>Key Achievements & Responsibilities:</h4>
+            <ul>
+                <li>Outperformed larger population centers by activation totals and member average[cite: 2].</li>
+                <li>Consistently drove more than 6,000 new subscribers per annum[cite: 2].</li>
+                <li>Built the team from 1 to 8 members, continuously recruiting to manage burnout inherent in door-to-door sales[cite: 2].</li>
+                <li>Six evenings a week across Southland and Otago to maximize territory coverage[cite: 2].</li>
+                <li>Managed employment, onboarding, training, and territory planning[cite: 2].</li>
+                <li>Coordinated installation workflows and harvested referrals to drive ongoing sales[cite: 2].</li>
+                <li><em>Additional notes:</em> Encouraged to take on additional crisis management / turnaround roles requiring discretion, speed, and problem-solving (meat processing, distribution & automotive sales) providing they did not interfere with scheduled road trips[cite: 2].</li>
+            </ul>
+
+            <h4>Embedded Video Reference:</h4>
+            <div class="video-grid">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube-nocookie.com/embed/qwOzstXXSpM" title="Sky / Integrate Group Testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Role 7: Manager - Mobilefone Solutions -->
+    <div class="role-card">
+        <div class="logo-placeholder">Logo: Mobilefone</div>
+        <div class="role-meta">2002–2006[cite: 1, 2]</div>
+        <div class="main-role-title">Manager (Vodafone Franchise) – Mobilefone Solutions</div>
+        <div class="role-summary">Turnaround role to maximize on the new opportunities[cite: 2].</div>
+        
+        <button class="btn-toggle" onclick="toggleRole('role7')">+ Expand Role Details & Media</button>
+        
+        <div id="role7" class="collapsible-content">
+            <h4>Key Achievements & Responsibilities:</h4>
+            <ul>
+                <li>Built the store team from 1 staff member to a 4[cite: 2].</li>
+                <li>Established and led an additional outbound sales team of 4[cite: 2].</li>
+                <li>Increased in-store turnover from $30k per month to $100-120k per month[cite: 2].</li>
+                <li>Achieved personal national recognition as in top-performing sales representatives nationally[cite: 2].</li>
+                <li>My team members constantly recognized in a group of top-performers regionally[cite: 2].</li>
+                <li>Delivered offsite promotional campaigns and managed full store operations[cite: 2].</li>
+                <li>Ran comprehensive sales training programs to lift team capability and output[cite: 2].</li>
+            </ul>
+
+            <h4>Embedded Video Reference:</h4>
+            <div class="video-grid">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube-nocookie.com/embed/S4JQVaSFlfc" title="Mobilefone Solutions Testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Role 8: Department Manager - H&J Smith -->
+    <div class="role-card">
+        <div class="logo-placeholder">Logo: H&J Smith</div>
+        <div class="role-meta">2001–2002[cite: 1, 2]</div>
+        <div class="main-role-title">Department Manager – H&J Smith</div>
+        <div class="role-summary">Turnaround role to reinvigorate the category across the brand[cite: 2].</div>
+        
+        <button class="btn-toggle" onclick="toggleRole('role8')">+ Expand Role Details</button>
+        
+        <div id="role8" class="collapsible-content">
+            <h4>Key Achievements & Responsibilities:</h4>
+            <ul>
+                <li>Led sales and customer engagement across multiple stores[cite: 2].</li>
+                <li>Delivered showroom redesigns across Invercargill, Balclutha, Queenstown, and Blenheim[cite: 2].</li>
+                <li>Delivered new product categories and established new brand relationships[cite: 2].</li>
+                <li>Broke multiple sales records including best day ever by over 30%[cite: 2].</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Role 9: Area & Branch Manager - Smiths City / Powerstore -->
+    <div class="role-card">
+        <div class="logo-placeholder">Logo: Smiths City</div>
+        <div class="role-meta">1992–2001[cite: 1, 2]</div>
+        <div class="main-role-title">Area & Branch Manager – Smiths City / Powerstore</div>
+        <div class="role-summary">Trade the company out of receivership via Scheme-of-arrangement[cite: 2].</div>
+        
+        <button class="btn-toggle" onclick="toggleRole('role9')">+ Expand Role Details & Media</button>
+        
+        <div id="role9" class="collapsible-content">
+            <h4>Key Achievements & Responsibilities:</h4>
+            <ul>
+                <li>Increase turnover and profitability + location growth + off site promotional activity[cite: 2].</li>
+                <li>Progressed from salesperson to store manager and ultimately area manager[cite: 2].</li>
+                <li>Consistently delivered annual personal sales approaching $1,000,000[cite: 2].</li>
+                <li>Lead sales team from the front while meeting all management KPIs[cite: 2].</li>
+                <li>Managed multiple locations Invercargill, Queenstown, three Christchurch stores, and Timaru[cite: 2].</li>
+                <li>Delivered regional offsite promotions across the entire South Island to drive presence/sales[cite: 2].</li>
+                <li>Achieved personal best individual day sales day of $86,000 (no commercial sales)[cite: 2].</li>
+                <li>Provided operational support to product managers and to other store managers[cite: 2].</li>
+                <li>Developed non-negotiable standards and procedures later implemented nationally[cite: 2].</li>
+                <li>Instrumental in the acquisition and integration of seven businesses across the South Island[cite: 2].</li>
+                <li>Played a key role in opening ten new stores, supporting full setup and operational launch[cite: 2].</li>
+                <li>2001 group successfully traded out of receivership[cite: 2].</li>
+            </ul>
+
+            <h4>Embedded Video Reference:</h4>
+            <div class="video-grid">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube-nocookie.com/embed/MSCRSFC-tL0" title="Smiths City Testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script>
-    function toggleDetails() {
-        const content = document.getElementById("fullDetails");
-        const btn = document.querySelector(".btn-toggle");
+    function toggleRole(roleId) {
+        const content = document.getElementById(roleId);
+        const card = content.closest('.role-card');
+        const btn = card.querySelector('.btn-toggle');
+        
         if (content.classList.contains("show")) {
             content.classList.remove("show");
-            btn.textContent = "+ Read Full Role Details (More info coming soon)";
+            btn.textContent = "+ Expand Role Details" + (btn.textContent.includes("Media") ? " & Media" : "");
         } else {
             content.classList.add("show");
-            btn.textContent = "- Hide Full Role Details";
+            btn.textContent = "- Hide Role Details";
         }
-    }
-
-    let currentSlide = 0;
-    const slides = document.querySelectorAll(".carousel-slide");
-
-    function moveSlide(direction) {
-        slides[currentSlide].classList.remove("active");
-        currentSlide = (currentSlide + direction + slides.length) % slides.length;
-        slides[currentSlide].classList.add("active");
     }
 </script>
 
