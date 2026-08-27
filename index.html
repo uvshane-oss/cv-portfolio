@@ -18,7 +18,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 10px; /* Reduced padding for mobile */
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
@@ -26,11 +26,18 @@
 
         .container {
             max-width: 900px;
+            width: 100%;
             margin: 0 auto;
             background: var(--card-bg);
-            padding: 40px;
+            padding: 15px; /* Responsive inner padding */
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-sizing: border-box;
+        }
+
+        @media(min-width: 768px) {
+            body { padding: 20px; }
+            .container { padding: 40px; }
         }
 
         /* Header Styling */
@@ -43,12 +50,18 @@
         .cv-header h1 {
             margin: 0 0 10px 0;
             color: #111;
-            font-size: 32px;
+            font-size: 28px;
+        }
+        @media(min-width: 768px) {
+            .cv-header h1 { font-size: 32px; }
         }
         .cv-header p {
             margin: 5px 0;
             color: var(--text-muted);
-            font-size: 15px;
+            font-size: 14px;
+        }
+        @media(min-width: 768px) {
+            .cv-header p { font-size: 15px; }
         }
 
         /* Section Heading */
@@ -58,7 +71,10 @@
             padding-bottom: 8px;
             margin-top: 0;
             margin-bottom: 25px;
-            font-size: 22px;
+            font-size: 20px;
+        }
+        @media(min-width: 768px) {
+            h2.section-title { font-size: 22px; }
         }
 
         /* Role Card Container */
@@ -66,9 +82,12 @@
             background: #fafafa;
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            padding: 25px;
-            margin-bottom: 25px;
+            padding: 15px; /* Compact padding for small screens */
+            margin-bottom: 20px;
             transition: box-shadow 0.2s ease;
+        }
+        @media(min-width: 768px) {
+            .role-card { padding: 25px; margin-bottom: 25px; }
         }
         .role-card:hover {
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
@@ -76,7 +95,7 @@
 
         /* Logo Image Styling */
         .role-logo {
-            max-height: 50px;
+            max-height: 45px;
             width: auto;
             object-fit: contain;
             margin-bottom: 12px;
@@ -86,23 +105,29 @@
         .role-meta {
             font-weight: bold;
             color: var(--accent);
-            font-size: 14px;
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .main-role-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             color: var(--primary);
-            margin: 4px 0 12px 0;
+            margin: 4px 0 10px 0;
+        }
+        @media(min-width: 768px) {
+            .main-role-title { font-size: 20px; }
         }
 
         .role-summary {
             font-style: italic;
             color: var(--text-muted);
             margin-bottom: 15px;
-            font-size: 15px;
+            font-size: 14px;
+        }
+        @media(min-width: 768px) {
+            .role-summary { font-size: 15px; }
         }
 
         /* Toggle Button */
@@ -117,6 +142,10 @@
             margin-top: 15px;
             transition: background 0.2s;
             display: inline-block;
+            width: 100%; /* Full width on mobile for easier tapping */
+        }
+        @media(min-width: 768px) {
+            .btn-toggle { width: auto; }
         }
         .btn-toggle:hover { background-color: #34495e; }
 
@@ -129,8 +158,11 @@
         }
         .collapsible-content.show { display: block; }
 
-        ul { padding-left: 20px; margin: 10px 0; }
-        li { margin-bottom: 8px; font-size: 15px; }
+        ul { padding-left: 18px; margin: 10px 0; }
+        li { margin-bottom: 8px; font-size: 14px; }
+        @media(min-width: 768px) {
+            li { font-size: 15px; }
+        }
 
         /* Portfolio Media Gallery Grid */
         .portfolio-gallery {
@@ -188,6 +220,7 @@
 <body>
 
 <div class="container">
+    <!-- Header Section -->
     <div class="cv-header">
         <h1>Shane Soper</h1>
         <p>153 East Road, Ascot, Invercargill, Southland, New Zealand</p>
@@ -196,6 +229,7 @@
 
     <h2 class="section-title">Professional Career History & Portfolio</h2>
 
+    <!-- Role 1: Devil Burger -->
     <div class="role-card">
         <div class="logo-placeholder" style="width: 140px; height: 50px; background: #e2e8f0; border: 2px dashed #cbd5e1; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #64748b; font-weight: bold; border-radius: 4px; margin-bottom: 12px;">DEVIL BURGER LOGO</div>
         <div class="role-meta">2023–2025</div>
@@ -237,6 +271,7 @@
         </div>
     </div>
 
+    <!-- Role 2: National Sales Manager - XClean -->
     <div class="role-card">
         <img src="xclean.jpg" alt="XClean Logo" class="role-logo">
         <div class="role-meta">2018–2022</div>
@@ -276,6 +311,7 @@
         </div>
     </div>
 
+    <!-- Role 3: A/V Systems Architect - Royal Albatross Centre -->
     <div class="role-card">
         <img src="albatross logo.png" alt="Albatross Centre Logo" class="role-logo">
         <div class="role-meta">2017</div>
@@ -296,6 +332,7 @@
         </div>
     </div>
 
+    <!-- Role 4: Site Acquisition Manager - ISee Digital -->
     <div class="role-card">
         <img src="isee digital logo.jpeg" alt="ISee Digital Logo" class="role-logo">
         <div class="role-meta">2015–2017</div>
@@ -321,6 +358,7 @@
         </div>
     </div>
 
+    <!-- Role 5: Sales Manager - XClean (2013-2015) -->
     <div class="role-card">
         <img src="xclean.jpg" alt="XClean Logo" class="role-logo">
         <div class="role-meta">2013–2015</div>
@@ -350,6 +388,7 @@
         </div>
     </div>
 
+    <!-- Role 6: Regional Sales Manager - SKY Television / Integrate Group -->
     <div class="role-card">
         <img src="Integrate logo.png" alt="Integrate Group Logo" class="role-logo">
         <div class="role-meta">2007–2014</div>
@@ -379,6 +418,7 @@
         </div>
     </div>
 
+    <!-- Role 7: Manager - Mobilefone Solutions -->
     <div class="role-card">
         <img src="mobilefone solutions logo.png" alt="Mobilefone Solutions Logo" class="role-logo">
         <div class="role-meta">2002–2006</div>
@@ -408,6 +448,7 @@
         </div>
     </div>
 
+    <!-- Role 8: Department Manager - H&J Smith -->
     <div class="role-card">
         <img src="h&J logo.png" alt="H&J Smith Logo" class="role-logo">
         <div class="role-meta">2001–2002</div>
@@ -427,6 +468,7 @@
         </div>
     </div>
 
+    <!-- Role 9: Area & Branch Manager - Smiths City / Powerstore -->
     <div class="role-card">
         <img src="smiths city logo.png" alt="Smiths City Logo" class="role-logo">
         <div class="role-meta">1992–2001</div>
