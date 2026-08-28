@@ -86,10 +86,27 @@
 
         details.role-card summary {
             list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 16px;
         }
 
         details.role-card summary::-webkit-details-marker {
             display: none;
+        }
+
+        .role-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            border-radius: 4px;
+            background: #f4f4f5;
+            padding: 2px;
+            flex-shrink: 0;
+        }
+
+        .role-info {
+            flex-grow: 1;
         }
 
         .role-badge {
@@ -99,13 +116,13 @@
             padding: 2px 6px;
             border-radius: 4px;
             display: inline-block;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .role-title {
             font-size: 16px;
             font-weight: bold;
-            margin: 0 0 6px 0;
+            margin: 0 0 4px 0;
             background: #e4e4e7;
             padding: 2px 4px;
             display: inline-block;
@@ -216,12 +233,14 @@
     <!-- Role 1: Devil Burger -->
     <details class="role-card">
         <summary>
-            <div class="role-badge">2023–2025</div><br>
-            <div class="role-title">Digital Project Manager – Devil Burger</div><br>
-            <div class="role-desc">Digital Projects Completed, providing Operational Consulting across owner's other business.</div>
+            <img src="image1.png" alt="Devil Burger Logo" class="role-logo">
+            <div class="role-info">
+                <div class="role-badge">2023–2025</div><br>
+                <div class="role-title">Digital Project Manager – Devil Burger</div><br>
+                <div class="role-desc">Digital Projects Completed, providing Operational Consulting across owner's other business.</div>
+            </div>
         </summary>
         <div class="details-section">
-            <p><strong>Linked Logo / Asset File:</strong> image1.png</p>
             <h4>Key Highlights:</h4>
             <ul>
                 <li>Delivered full in-store digital transformation across menus, hardware, and POS sync.</li>
@@ -259,12 +278,14 @@
     <!-- Role 2: XClean (2018–2022) -->
     <details class="role-card">
         <summary>
-            <div class="role-badge">2018–2022</div><br>
-            <div class="role-title">National Sales Manager – XClean</div><br>
-            <div class="role-desc">Company selling cleaning chemicals into industry, agriculture, and hospitality sectors.</div>
+            <img src="xclean.jpg" alt="XClean Logo" class="role-logo">
+            <div class="role-info">
+                <div class="role-badge">2018–2022</div><br>
+                <div class="role-title">National Sales Manager – XClean</div><br>
+                <div class="role-desc">Company selling cleaning chemicals into industry, agriculture, and hospitality sectors.</div>
+            </div>
         </summary>
         <div class="details-section">
-            <p><strong>Linked Logo / Asset File:</strong> xclean.jpg</p>
             <h4>Key Highlights:</h4>
             <ul>
                 <li>Asked to return to rebuild the business after prior involvement.</li>
@@ -314,12 +335,14 @@
     <!-- Role 3: Royal Albatross Centre -->
     <details class="role-card">
         <summary>
-            <div class="role-badge">2017</div><br>
-            <div class="role-title">Principal A/V Architect – Royal Albatross Centre</div><br>
-            <div class="role-desc">Project: Build a bespoke A/V theater without alteration to heritage site.</div>
+            <img src="albatross logo.png" alt="Royal Albatross Centre Logo" class="role-logo">
+            <div class="role-info">
+                <div class="role-badge">2017</div><br>
+                <div class="role-title">Principal A/V Architect – Royal Albatross Centre</div><br>
+                <div class="role-desc">Project: Build a bespoke A/V theater without alteration to heritage site.</div>
+            </div>
         </summary>
         <div class="details-section">
-            <p><strong>Linked Logo / Asset File:</strong> albatross logo.png</p>
             <h4>Key Highlights:</h4>
             <ul>
                 <li>Built a bespoke A/V theater without alteration to heritage site.</li>
@@ -336,12 +359,14 @@
     <!-- Role 4: ISee Digital -->
     <details class="role-card">
         <summary>
-            <div class="role-badge">2015–2017</div><br>
-            <div class="role-title">Site Acquisition Manager – ISee Digital</div><br>
-            <div class="role-desc">Indoor and Outdoor digital billboards marketing company wanted bigger network. Secured national digital billboard and retail network footprint across New Zealand.</div>
+            <img src="isee digital logo.jpeg" alt="ISee Digital Logo" class="role-logo">
+            <div class="role-info">
+                <div class="role-badge">2015–2017</div><br>
+                <div class="role-title">Site Acquisition Manager – ISee Digital</div><br>
+                <div class="role-desc">Indoor and Outdoor digital billboards marketing company wanted bigger network. Secured national digital billboard and retail network footprint across New Zealand.</div>
+            </div>
         </summary>
         <div class="details-section">
-            <p><strong>Linked Logo / Asset File:</strong> isee digital logo.jpeg</p>
             <h4>Key Highlights:</h4>
             <ul>
                 <li>Secured 32 billboard sites across the North Island.</li>
@@ -381,12 +406,14 @@
     <!-- Role 5: XClean (2013–2015) -->
     <details class="role-card">
         <summary>
-            <div class="role-badge">2013–2015</div><br>
-            <div class="role-title">Sales Manager – XClean</div><br>
-            <div class="role-desc">Company selling cleaning chemicals into industry, agriculture and hospitality sectors.</div>
+            <img src="xclean.jpg" alt="XClean Logo" class="role-logo">
+            <div class="role-info">
+                <div class="role-badge">2013–2015</div><br>
+                <div class="role-title">Sales Manager – XClean</div><br>
+                <div class="role-desc">Company selling cleaning chemicals into industry, agriculture and hospitality sectors.</div>
+            </div>
         </summary>
         <div class="details-section">
-            <p><strong>Linked Logo / Asset File:</strong> xclean.jpg</p>
             <h4>Key Highlights:</h4>
             <ul>
                 <li>Expanded operations from single staff member to training 12-person team.</li>
@@ -408,12 +435,14 @@
     <!-- Role 6: Integrate Group / Sky -->
     <details class="role-card">
         <summary>
-            <div class="role-badge">2007–2014</div><br>
-            <div class="role-title">Regional Sales Manager – Integrate Group / Sky</div><br>
-            <div class="role-desc">High-volume direct marketing operations – Door knocking.</div>
+            <img src="Integrate logo.png" alt="Integrate Group Logo" class="role-logo">
+            <div class="role-info">
+                <div class="role-badge">2007–2014</div><br>
+                <div class="role-title">Regional Sales Manager – Integrate Group / Sky</div><br>
+                <div class="role-desc">High-volume direct marketing operations – Door knocking.</div>
+            </div>
         </summary>
         <div class="details-section">
-            <p><strong>Linked Logo / Asset File:</strong> Integrate logo.png</p>
             <h4>Key Highlights:</h4>
             <ul>
                 <li>Outperformed larger population centres by activation totals and averages.</li>
@@ -433,12 +462,14 @@
     <!-- Role 7: Mobilefone Solutions -->
     <details class="role-card">
         <summary>
-            <div class="role-badge">2002–2006</div><br>
-            <div class="role-title">Manager (Vodafone Franchise) – Mobilefone Solutions</div><br>
-            <div class="role-desc">Turn around role to maximize on the new opportunity's</div>
+            <img src="mobilefone solutions logo.png" alt="Mobilefone Solutions Logo" class="role-logo">
+            <div class="role-info">
+                <div class="role-badge">2002–2006</div><br>
+                <div class="role-title">Manager (Vodafone Franchise) – Mobilefone Solutions</div><br>
+                <div class="role-desc">Turn around role to maximize on the new opportunity's</div>
+            </div>
         </summary>
         <div class="details-section">
-            <p><strong>Linked Logo / Asset File:</strong> mobilefone solutions logo.png</p>
             <h4>Key Highlights:</h4>
             <ul>
                 <li>Turned around branch to maximize new market opportunities.</li>
@@ -457,12 +488,14 @@
     <!-- Role 8: H&J Smith -->
     <details class="role-card">
         <summary>
-            <div class="role-badge">2001–2002</div><br>
-            <div class="role-title">Department Manager – H&J Smith</div><br>
-            <div class="role-desc">Turn around role to reinvigorate the category across the brand.</div>
+            <img src="h&J logo.png" alt="H&J Smith Logo" class="role-logo">
+            <div class="role-info">
+                <div class="role-badge">2001–2002</div><br>
+                <div class="role-title">Department Manager – H&J Smith</div><br>
+                <div class="role-desc">Turn around role to reinvigorate the category across the brand.</div>
+            </div>
         </summary>
         <div class="details-section">
-            <p><strong>Linked Logo / Asset File:</strong> h&J logo.png</p>
             <h4>Key Highlights:</h4>
             <ul>
                 <li>Reinvigorated category across the brand via turnaround role.</li>
@@ -478,12 +511,14 @@
     <!-- Role 9: Smiths City / Powerstore -->
     <details class="role-card">
         <summary>
-            <div class="role-badge">1992–2001</div><br>
-            <div class="role-title">Area & Branch Manager – Smiths City / Powerstore</div><br>
-            <div class="role-desc">Multi-store regional leadership through corporate restructuring and receivership turnaround.</div>
+            <img src="smiths city logo.png" alt="Smiths City Logo" class="role-logo">
+            <div class="role-info">
+                <div class="role-badge">1992–2001</div><br>
+                <div class="role-title">Area & Branch Manager – Smiths City / Powerstore</div><br>
+                <div class="role-desc">Multi-store regional leadership through corporate restructuring and receivership turnaround.</div>
+            </div>
         </summary>
         <div class="details-section">
-            <p><strong>Linked Logo / Asset File:</strong> smiths city logo.png</p>
             <h4>Key Highlights:</h4>
             <ul>
                 <li>Increased turnover, profitability, location growth, and off-site promotions.</li>
