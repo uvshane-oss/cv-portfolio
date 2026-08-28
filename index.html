@@ -198,6 +198,97 @@
             border-radius: 4px;
         }
 
+        /* Carousel Styling */
+        .carousel-container {
+            position: relative;
+            max-width: 100%;
+            margin: 15px auto;
+            background: #000;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .carousel-track-container {
+            overflow: hidden;
+            width: 100%;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .carousel-slide img {
+            width: 100%;
+            max-height: 350px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+            cursor: pointer;
+            background: #000;
+        }
+        .carousel-caption {
+            font-size: 12px;
+            color: #fff;
+            background: rgba(0,0,0,0.7);
+            padding: 6px;
+            margin: 0;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            font-size: 18px;
+            padding: 10px 12px;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 4px;
+        }
+        .carousel-btn:hover {
+            background: rgba(0,0,0,0.8);
+        }
+        .carousel-btn-prev { left: 10px; }
+        .carousel-btn-next { right: 10px; }
+
+        /* Fullscreen Modal for Images */
+        .img-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .img-modal img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        .img-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
         /* Video Grid */
         .video-grid {
             display: grid;
@@ -358,6 +449,32 @@
                 <li>Completed fabrication including CNC machining, welding, and calibration.</li>
                 <li>Managed global procurement from Germany, Japan, and China.</li>
             </ul>
+
+            <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Supporting Portfolio</h4>
+            <div class="carousel-container">
+                <button class="carousel-btn carousel-btn-prev" onclick="moveSlide(-1)">&#10094;</button>
+                <div class="carousel-track-container">
+                    <ul class="carousel-track" id="albatrossCarousel">
+                        <li class="carousel-slide">
+                            <img src="Screen end & projector.jpg" alt="Screen end & projector" onclick="openModal(this.src)">
+                            <p class="carousel-caption">Screen end & projector</p>
+                        </li>
+                        <li class="carousel-slide">
+                            <img src="Screen side.jpg" alt="Screen side" onclick="openModal(this.src)">
+                            <p class="carousel-caption">Screen side</p>
+                        </li>
+                        <li class="carousel-slide">
+                            <img src="back of screen.jpg" alt="back of screen" onclick="openModal(this.src)">
+                            <p class="carousel-caption">back of screen</p>
+                        </li>
+                        <li class="carousel-slide">
+                            <img src="front on.jpg" alt="front on" onclick="openModal(this.src)">
+                            <p class="carousel-caption">front on</p>
+                        </li>
+                    </ul>
+                </div>
+                <button class="carousel-btn carousel-btn-next" onclick="moveSlide(1)">&#10095;</button>
+            </div>
 
             <div class="detail-link-container">
                 <span class="detail-link" onclick="openFullDetail(event, 'Albatross Centre A/V')">View Full Detailed Case Study &rarr;</span>
@@ -566,6 +683,11 @@
 
 </div>
 
+<div id="imgModal" class="img-modal" onclick="closeModal()">
+    <span class="img-modal-close">&times;</span>
+    <img id="modalImg" src="" alt="Full Size Image">
+</div>
+
 <script>
     function toggleRole(event, roleId) {
         if (event.target.classList.contains('detail-link')) return;
@@ -581,6 +703,31 @@
     function openFullDetail(event, roleName) {
         event.stopPropagation();
         alert("Opening detailed expanded report/case study window for: " + roleName);
+    }
+
+    /* Carousel Functionality */
+    let currentSlideIndex = 0;
+
+    function moveSlide(direction) {
+        const track = document.getElementById('albatrossCarousel');
+        const slides = track.children;
+        const totalSlides = slides.length;
+        
+        currentSlideIndex = (currentSlideIndex + direction + totalSlides) % totalSlides;
+        const amountToMove = currentSlideIndex * 100;
+        track.style.transform = `translateX(-${amountToMove}%)`;
+    }
+
+    /* Fullscreen Modal Functions */
+    function openModal(imageSrc) {
+        const modal = document.getElementById('imgModal');
+        const modalImg = document.getElementById('modalImg');
+        modal.style.display = "flex";
+        modalImg.src = imageSrc;
+    }
+
+    function closeModal() {
+        document.getElementById('imgModal').style.display = "none";
     }
 </script>
 
