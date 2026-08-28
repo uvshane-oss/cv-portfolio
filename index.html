@@ -8,6 +8,7 @@
         :root {
             --primary: #2c3e50;
             --accent: #e74c3c;
+            --highlight-blue: #1d4ed8;
             --bg-color: #f4f4f9;
             --card-bg: #ffffff;
             --text-main: #333333;
@@ -112,10 +113,21 @@
             font-size: 17px;
             font-weight: bold;
             color: var(--primary);
-            margin: 3px 0 6px 0;
+            margin: 3px 0 2px 0;
         }
         @media(min-width: 768px) {
             .main-role-title { font-size: 20px; }
+        }
+
+        /* Highlighted text right below role name */
+        .role-summary-highlight {
+            font-size: 13px;
+            color: var(--highlight-blue);
+            font-weight: bold;
+            margin: 0 0 6px 0;
+        }
+        @media(min-width: 768px) {
+            .role-summary-highlight { font-size: 14px; }
         }
 
         .role-summary {
@@ -138,7 +150,7 @@
         }
         .collapsible-content.show { display: block; }
 
-        /* Logo Image Styling (Hidden until expanded) */
+        /* Logo Image Styling */
         .role-logo {
             max-height: 45px;
             width: auto;
@@ -151,6 +163,12 @@
         li { margin-bottom: 6px; font-size: 13px; }
         @media(min-width: 768px) {
             li { font-size: 15px; }
+        }
+
+        /* Blue text highlight for specific bullet items */
+        .highlight-item {
+            color: var(--highlight-blue);
+            font-weight: bold;
         }
 
         /* Portfolio Media Gallery Grid */
@@ -237,7 +255,7 @@
     <div class="role-card" onclick="toggleRole(event, 'role1')">
         <div class="role-meta">2023–2025</div>
         <div class="main-role-title">Digital Project Manager – Devil Burger</div>
-        <div class="role-summary">Digital Projects Completed, providing Operational Consulting across owner's other business</div>
+        <div class="role-summary-highlight">Digital Projects Completed, providing Operational Consulting across owner's other business</div>
         
         <div id="role1" class="collapsible-content">
             <img src="image1.png" alt="Devil Burger Logo" class="role-logo">
@@ -280,7 +298,7 @@
     <div class="role-card" onclick="toggleRole(event, 'role2')">
         <div class="role-meta">2018–2022</div>
         <div class="main-role-title">National Sales Manager – XClean</div>
-        <div class="role-summary">Company selling cleaning chemicals into industry, agriculture and hospitality sectors</div>
+        <div class="role-summary-highlight">Company selling cleaning chemicals into industry, agriculture and hospitality sectors</div>
         
         <div id="role2" class="collapsible-content">
             <img src="xclean.jpg" alt="XClean Logo" class="role-logo">
@@ -326,7 +344,7 @@
     <div class="role-card" onclick="toggleRole(event, 'role3')">
         <div class="role-meta">2017</div>
         <div class="main-role-title">Principal A/V Architect – Royal Albatross Centre</div>
-        <div class="role-summary">Project : Build a bespoke A/V theater without alteration to heritage site</div>
+        <div class="role-summary-highlight">Project : Build a bespoke A/V theater without alteration to heritage site</div>
         
         <div id="role3" class="collapsible-content">
             <img src="albatross logo.png" alt="Albatross Centre Logo" class="role-logo">
@@ -350,7 +368,7 @@
     <div class="role-card" onclick="toggleRole(event, 'role4')">
         <div class="role-meta">2015–2017</div>
         <div class="main-role-title">Site Acquisition Manager – ISee Digital</div>
-        <div class="role-summary">Indoor and Outdoor digital billboards marketing company wanted bigger network. Secured national digital billboard and retail network footprint across New Zealand.</div>
+        <div class="role-summary-highlight">Indoor and Outdoor digital billboards marketing company wanted bigger network. Secured national digital billboard and retail network footprint across New Zealand.</div>
         
         <div id="role4" class="collapsible-content">
             <img src="isee digital logo.jpeg" alt="ISee Digital Logo" class="role-logo">
@@ -389,7 +407,7 @@
     <div class="role-card" onclick="toggleRole(event, 'role5')">
         <div class="role-meta">2013–2015</div>
         <div class="main-role-title">Sales Manager – XClean</div>
-        <div class="role-summary">Company selling cleaning chemicals into industry, agriculture and hospitality sectors</div>
+        <div class="role-summary-highlight">Company selling cleaning chemicals into industry, agriculture and hospitality sectors</div>
         
         <div id="role5" class="collapsible-content">
             <img src="xclean.jpg" alt="XClean Logo" class="role-logo">
@@ -404,7 +422,7 @@
                 <li>Delivered free on-farm training across multiple regions.</li>
                 <li>Managed crisis communications during “payout” collapse</li>
                 <li>Managed crisis communications during “Teatmate” product failures.</li>
-                <li style="list-style: none; margin-left: -18px; font-style: italic; color: var(--text-muted);">Supported clients with integrity – we were misled by fraudulent “Teatmate” claims, advising on best practice and recourse since the product did not meet XClean or ACVM expectations</li>
+                <li class="highlight-item" style="list-style: none; margin-left: -18px; font-style: italic;">Supported clients with integrity – we were misled by fraudulent “Teatmate” claims, advising on best practice and recourse since the product did not meet XClean or ACVM expectations</li>
             </ul>
 
             <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
@@ -423,7 +441,7 @@
     <div class="role-card" onclick="toggleRole(event, 'role6')">
         <div class="role-meta">2007–2014</div>
         <div class="main-role-title">Regional Sales Manager – Integrate Group / Sky</div>
-        <div class="role-summary">High-volume direct marketing operations – Door knocking</div>
+        <div class="role-summary-highlight">High-volume direct marketing operations – Door knocking</div>
         
         <div id="role6" class="collapsible-content">
             <img src="Integrate logo.png" alt="Integrate Group Logo" class="role-logo">
@@ -436,7 +454,7 @@
                 <li>Worked six evenings a week across Southland and Otago.</li>
                 <li>Managed employment, onboarding, training, and territory planning.</li>
                 <li>Coordinated installation workflows and harvested referrals.</li>
-                <li style="list-style: none; margin-left: -18px; font-style: italic; color: var(--text-muted);">Encouraged to take on secondary fixed-term crisis/turnaround roles (meat processing, distribution, automotive) provided they did not interfere with road trips.</li>
+                <li class="highlight-item" style="list-style: none; margin-left: -18px; font-style: italic;">Encouraged to take on secondary fixed-term crisis/turnaround roles (meat processing, distribution, automotive) provided they did not interfere with road trips.</li>
             </ul>
 
             <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
@@ -455,7 +473,7 @@
     <div class="role-card" onclick="toggleRole(event, 'role7')">
         <div class="role-meta">2002–2006</div>
         <div class="main-role-title">Manager (Vodafone Franchise) – Mobilefone Solutions</div>
-        <div class="role-summary">Turn around role to maximize on the new opportunity's</div>
+        <div class="role-summary-highlight">Turn around role to maximize on the new opportunity's</div>
         
         <div id="role7" class="collapsible-content">
             <img src="mobilefone solutions logo.png" alt="Mobilefone Solutions Logo" class="role-logo">
@@ -489,7 +507,7 @@
     <div class="role-card" onclick="toggleRole(event, 'role8')">
         <div class="role-meta">2001–2002</div>
         <div class="main-role-title">Department Manager – H&J Smith</div>
-        <div class="role-summary">Turn around role to reinvigorate the category across the brand</div>
+        <div class="role-summary-highlight">Turn around role to reinvigorate the category across the brand</div>
         
         <div id="role8" class="collapsible-content">
             <img src="h&J logo.png" alt="H&J Smith Logo" class="role-logo">
@@ -512,7 +530,7 @@
     <div class="role-card" onclick="toggleRole(event, 'role9')">
         <div class="role-meta">1992–2001</div>
         <div class="main-role-title">Area & Branch Manager – Smiths City / Powerstore</div>
-        <div class="role-summary">Multi-store regional leadership through corporate restructuring and receivership turnaround.</div>
+        <div class="role-summary-highlight">Multi-store regional leadership through corporate restructuring and receivership turnaround.</div>
         
         <div id="role9" class="collapsible-content">
             <img src="smiths city logo.png" alt="Smiths City Logo" class="role-logo">
