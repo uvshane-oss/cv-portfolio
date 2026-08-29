@@ -159,17 +159,32 @@ h2.section-title {
 .portfolio-sub-section.show {
   display: block;
 }
-.portfolio-toggle-link {
-  display: inline-block;
-  margin-top: 15px;
-  font-size: 14px;
-  color: var(--highlight-blue);
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: underline;
+
+/* Centered Pulsing/Bumping Portfolio Image Button */
+.portfolio-btn-container {
+  text-align: center;
+  margin: 20px 0 15px 0;
 }
-.portfolio-toggle-link:hover {
-  color: var(--accent);
+.portfolio-image-btn {
+  display: inline-block;
+  max-width: 100%;
+  width: 460px;
+  height: auto;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.portfolio-image-btn:hover {
+  box-shadow: 0 4px 15px rgba(29, 78, 216, 0.4);
+}
+.portfolio-image-btn.pulse-animation {
+  animation: pulseButton 1.2s infinite ease-in-out;
+}
+
+@keyframes pulseButton {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); box-shadow: 0 0 20px rgba(231, 76, 60, 0.6); }
+  100% { transform: scale(1); }
 }
 
 /* Logo Image Styling */
@@ -520,8 +535,10 @@ li { margin-bottom: 6px; font-size: 13px; }
         <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/keXY9SO2CMA" title="Devil Burger Video 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
       </div>
 
-      <!-- Toggle Link for Devil Burger Portfolio Content -->
-      <span class="portfolio-toggle-link" onclick="toggleDevilBurgerPortfolio(event)">Devil Burger Portfolio &or;</span>
+      <!-- Centered Pulsing Portfolio Image Button replacing text link -->
+      <div class="portfolio-btn-container">
+        <img id="devilBurgerPortfolioBtn" src="DB portfolio.jpg" alt="Devil Burger Portfolio" class="portfolio-image-btn" onclick="toggleDevilBurgerPortfolio(event)">
+      </div>
 
       <!-- Hidden Devil Burger Portfolio Sub-Section -->
       <div id="devilBurgerPortfolioSection" class="portfolio-sub-section">
@@ -850,25 +867,40 @@ li { margin-bottom: 6px; font-size: 13px; }
 
 <script>
 function toggleRole(event, roleId) {
-  if (event.target.classList.contains('detail-link') || event.target.classList.contains('portfolio-toggle-link') || event.target.closest('.marquee-container') || event.target.closest('.carousel-expanded-overlay') || event.target.closest('.radio-grid') || event.target.closest('.portfolio-sub-section')) return;
+  if (event.target.classList.contains('detail-link') || event.target.closest('.portfolio-btn-container') || event.target.closest('.marquee-container') || event.target.closest('.carousel-expanded-overlay') || event.target.closest('.radio-grid') || event.target.closest('.portfolio-sub-section')) return;
   const content = document.getElementById(roleId);
+  const btn = document.getElementById('devilBurgerPortfolioBtn');
+  
   if (content.classList.contains("show")) {
     content.classList.remove("show");
+    // Also close portfolio sub-section if role collapses
+    document.getElementById('devilBurgerPortfolioSection').classList.remove('show');
+    if (btn) btn.classList.remove('pulse-animation');
   } else {
     content.classList.add("show");
+    // When role1 opens, start pulsing the portfolio button
+    if (roleId === 'role1' && btn) {
+      const portfolioSec = document.getElementById('devilBurgerPortfolioSection');
+      if (!portfolioSec.classList.contains('show')) {
+        btn.classList.add('pulse-animation');
+      }
+    }
   }
 }
 
 function toggleDevilBurgerPortfolio(event) {
   event.stopPropagation();
   const portfolioSection = document.getElementById('devilBurgerPortfolioSection');
-  const toggleLink = event.target;
+  const btn = document.getElementById('devilBurgerPortfolioBtn');
+  
   if (portfolioSection.classList.contains('show')) {
     portfolioSection.classList.remove('show');
-    toggleLink.innerHTML = "Devil Burger Portfolio &or;";
+    // Re-enable pulsing if role1 is still open
+    if (btn) btn.classList.add('pulse-animation');
   } else {
     portfolioSection.classList.add('show');
-    toggleLink.innerHTML = "Devil Burger Portfolio &and;";
+    // Stop pulsing when portfolio is open
+    if (btn) btn.classList.remove('pulse-animation');
   }
 }
 
