@@ -228,7 +228,7 @@
             box-sizing: border-box;
             cursor: pointer;
         }
-        .marquee-item img {
+        .marquee-item img, .marquee-item video {
             width: 100%;
             height: 160px;
             object-fit: contain;
@@ -300,11 +300,39 @@
             border-radius: 6px;
             overflow: hidden;
         }
-        .video-wrapper iframe {
+        .video-wrapper iframe, .video-wrapper video {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
             border: 0;
+            object-fit: contain;
+        }
+
+        /* Radio Section Styles */
+        .radio-banner {
+            width: 100%;
+            max-height: 180px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .audio-item {
+            background: #f1f3f5;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-bottom: 8px;
+        }
+        .audio-item p {
+            margin: 0 0 6px 0;
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        .audio-item audio {
+            width: 100%;
+            height: 36px;
         }
 
         /* Detailed Study Link Style */
@@ -351,25 +379,126 @@
                 <li>Produced annual multi-channel marketing kits covering radio, social, and print.</li>
                 <li>Developed profitable ghost kitchen brands from concept to launch.</li>
                 <li>Delivered general operations support across multiple stakeholder business interests.</li>
-                <li>Increased turnover</li>
-                <li>Reduced operating costs left turnkey marketing solutions</li>
+                <li>Increased turnover[cite: 1]</li>
+                <li>Reduced operating costs left turnkey marketing solutions[cite: 1]</li>
             </ul>
 
-            <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Gallery:</h4>
-            <div class="portfolio-gallery">
-                <div class="portfolio-img-wrapper">
-                    <img src="$10 Tuesday for summer .jpg" alt="Summer Promo Campaign">
-                    <p style="font-size: 12px; color: #555; margin: 6px 0 0 0;">Summer Promotion Artwork</p>
-                </div>
-            </div>
-
-            <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Showcases:</h4>
+            <!-- 1) Video Testimonials -->
+            <h4 style="margin: 20px 0 4px 0; font-size: 15px; color: var(--primary);">1) Video Testimonials :</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 10px 0; font-style: italic;">Alice & Tim discuss working with Shane</p>
             <div class="video-grid">
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube-nocookie.com/embed/2Hj5Q6kU3nE" title="Devil Burger Video 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube-nocookie.com/embed/keXY9SO2CMA" title="Devil Burger Video 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- 2) Social Media Advertising Carousel -->
+            <h4 style="margin: 20px 0 8px 0; font-size: 15px; color: var(--primary);">2) Social media advertising</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 10px 0; font-style: italic;">Advertising produced by Shane</p>
+            <div class="marquee-container">
+                <div class="marquee-track">
+                    <div class="marquee-item" onclick="openModal('$10 Tuesday for summer .jpg')">
+                        <img src="$10 Tuesday for summer .jpg" alt="Summer Promo Campaign">
+                        <p class="marquee-caption">Summer Promotion Artwork</p>
+                    </div>
+                    <div class="marquee-item" onclick="openModal('social media carosel.jpg')">
+                        <img src="social media carosel.jpg" alt="Social Media Carousel">
+                        <p class="marquee-caption">social media carosel.jpg</p>
+                    </div>
+                    <div class="marquee-item">
+                        <video src="socila media 1.mp4" controls preload="metadata"></video>
+                        <p class="marquee-caption">socila media 1.mp4</p>
+                    </div>
+                    <div class="marquee-item">
+                        <video src="socila media 2.mp4" controls preload="metadata"></video>
+                        <p class="marquee-caption">socila media 2.mp4</p>
+                    </div>
+                    <div class="marquee-item">
+                        <video src="social media 3.mp4" controls preload="metadata"></video>
+                        <p class="marquee-caption">social media 3.mp4</p>
+                    </div>
+                    <div class="marquee-item">
+                        <video src="social media 4.mp4" controls preload="metadata"></video>
+                        <p class="marquee-caption">social media 4.mp4</p>
+                    </div>
+                    <!-- Repeated for infinite loop smoothness -->
+                    <div class="marquee-item" onclick="openModal('$10 Tuesday for summer .jpg')">
+                        <img src="$10 Tuesday for summer .jpg" alt="Summer Promo Campaign">
+                        <p class="marquee-caption">Summer Promotion Artwork</p>
+                    </div>
+                    <div class="marquee-item" onclick="openModal('social media carosel.jpg')">
+                        <img src="social media carosel.jpg" alt="Social Media Carousel">
+                        <p class="marquee-caption">social media carosel.jpg</p>
+                    </div>
+                    <div class="marquee-item">
+                        <video src="socila media 1.mp4" controls preload="metadata"></video>
+                        <p class="marquee-caption">socila media 1.mp4</p>
+                    </div>
+                    <div class="marquee-item">
+                        <video src="socila media 2.mp4" controls preload="metadata"></video>
+                        <p class="marquee-caption">socila media 2.mp4</p>
+                    </div>
+                    <div class="marquee-item">
+                        <video src="social media 3.mp4" controls preload="metadata"></video>
+                        <p class="marquee-caption">social media 3.mp4</p>
+                    </div>
+                    <div class="marquee-item">
+                        <video src="social media 4.mp4" controls preload="metadata"></video>
+                        <p class="marquee-caption">social media 4.mp4</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3) Radio -->
+            <h4 style="margin: 20px 0 8px 0; font-size: 15px; color: var(--primary);">3) Radio</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 10px 0; font-style: italic;">Radio produced and voiced by Shane</p>
+            <img src="radio button.jpg" alt="Radio Button" class="radio-banner" onclick="openModal('radio button.jpg')" style="cursor: pointer;">
+            
+            <div class="audio-item">
+                <p>DB Radio Long Weekend</p>
+                <audio controls preload="none">
+                    <source src="DB Radio LONGWEEKEND.wav" type="audio/wav">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <div class="audio-item">
+                <p>Radio Devil's Staircase Friday</p>
+                <audio controls preload="none">
+                    <source src="Radio DEVILSTAIRCASE_FRIDAY.wav" type="audio/wav">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <div class="audio-item">
+                <p>Radio Pork Death</p>
+                <audio controls preload="none">
+                    <source src="Radio PORKDEATH.wav" type="audio/wav">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <div class="audio-item">
+                <p>Radio Spicy Beef</p>
+                <audio controls preload="none">
+                    <source src="Radio SPICEYBEEF.wav" type="audio/wav">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <div class="audio-item">
+                <p>Radio Salmon</p>
+                <audio controls preload="none">
+                    <source src="radio salmon.wav" type="audio/wav">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+
+            <!-- 4) Midway through video wall installation -->
+            <h4 style="margin: 20px 0 8px 0; font-size: 15px; color: var(--primary);">4) Midway through video wall installation</h4>
+            <div class="portfolio-gallery">
+                <div class="portfolio-img-wrapper">
+                    <img src="$10 Tuesday for summer .jpg" alt="Summer Promo Campaign">
+                    <p style="font-size: 12px; color: #555; margin: 6px 0 0 0;">Summer Promotion Artwork</p>
                 </div>
             </div>
 
@@ -382,25 +511,25 @@
     <div class="role-card" onclick="toggleRole(event, 'role2')">
         <div class="role-meta">2018–2022</div>
         <div class="main-role-title">National Sales Manager – XClean</div>
-        <div class="role-summary-highlight">Company selling cleaning chemicals into industry, agriculture and hospitality sectors</div>
+        <div class="role-summary-highlight">Company selling cleaning chemicals into industry, agriculture and hospitality sectors[cite: 1]</div>
         
         <div id="role2" class="collapsible-content">
             <img src="xclean.jpg" alt="XClean Logo" class="role-logo">
             
             <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
             <ul>
-                <li>Asked to return to rebuild the business after prior involvement.</li>
-                <li>Scaled operations from zero staff to 8 separate regions and 20+ personnel.</li>
-                <li>Personally responsible for $550k gross profit per annum from own activity.</li>
-                <li>Grew total team sales and gross profit output to $X million annually.</li>
-                <li>Restored brand reputation after major legacy issues.</li>
-                <li>Led territory rebuild across all regional centres.</li>
-                <li>Painted and deployed sign-written vans myself</li>
-                <li>Built custom shelving for fleet myself</li>
-                <li>Managed product formulation, global sourcing, importation, and approvals.</li>
-                <li>Engineered a custom COVID crisis campaign generating $500k in 14 days.</li>
-                <li>Delivered consistent cold-call conversions and territory coverage</li>
-                <li>Navigated COVID disruptions and franchise realignment</li>
+                <li>Asked to return to rebuild the business after prior involvement.[cite: 1]</li>
+                <li>Scaled operations from zero staff to 8 separate regions and 20+ personnel.[cite: 1]</li>
+                <li>Personally responsible for $550k gross profit per annum from own activity.[cite: 1]</li>
+                <li>Grew total team sales and gross profit output to $X million annually.[cite: 1]</li>
+                <li>Restored brand reputation after major legacy issues.[cite: 1]</li>
+                <li>Led territory rebuild across all regional centres.[cite: 1]</li>
+                <li>Painted and deployed sign-written vans myself[cite: 1]</li>
+                <li>Built custom shelving for fleet myself[cite: 1]</li>
+                <li>Managed product formulation, global sourcing, importation, and approvals.[cite: 1]</li>
+                <li>Engineered a custom COVID crisis campaign generating $500k in 14 days.[cite: 1]</li>
+                <li>Delivered consistent cold-call conversions and territory coverage[cite: 1]</li>
+                <li>Navigated COVID disruptions and franchise realignment[cite: 1]</li>
             </ul>
 
             <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media & Campaign Showcases:</h4>
@@ -428,19 +557,19 @@
     <div class="role-card" onclick="toggleRole(event, 'role3')">
         <div class="role-meta">2017</div>
         <div class="main-role-title">Principal A/V Architect – Royal Albatross Centre</div>
-        <div class="role-summary-highlight">Project : Build a bespoke A/V theater without alteration to heritage site</div>
+        <div class="role-summary-highlight">Project : Build a bespoke A/V theater without alteration to heritage site[cite: 1]</div>
         
         <div id="role3" class="collapsible-content">
             <img src="albatross logo.png" alt="Albatross Centre Logo" class="role-logo">
             
             <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
             <ul>
-                <li>Built a bespoke A/V theater without alteration to heritage site.</li>
-                <li>Delivered custom solutions where no off-the-shelf option existed.</li>
-                <li>Delivered enterprise deployment on time and under budget.</li>
-                <li>Facilitated custom engineered optical lenses to be manufactured overseas.</li>
-                <li>Completed fabrication including CNC machining, welding, and calibration.</li>
-                <li>Managed global procurement from Germany, Japan, and China.</li>
+                <li>Built a bespoke A/V theater without alteration to heritage site.[cite: 1]</li>
+                <li>Delivered custom solutions where no off-the-shelf option existed.[cite: 1]</li>
+                <li>Delivered enterprise deployment on time and under budget.[cite: 1]</li>
+                <li>Facilitated custom engineered optical lenses to be manufactured overseas.[cite: 1]</li>
+                <li>Completed fabrication including CNC machining, welding, and calibration.[cite: 1]</li>
+                <li>Managed global procurement from Germany, Japan, and China.[cite: 1]</li>
             </ul>
 
             <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Supporting Portfolio</h4>
@@ -490,21 +619,21 @@
     <div class="role-card" onclick="toggleRole(event, 'role4')">
         <div class="role-meta">2015–2017</div>
         <div class="main-role-title">Site Acquisition Manager – ISee Digital</div>
-        <div class="role-summary-highlight">Indoor and Outdoor digital billboards marketing company wanted bigger network. Secured national digital billboard and retail network footprint across New Zealand.</div>
+        <div class="role-summary-highlight">Indoor and Outdoor digital billboards marketing company wanted bigger network. Secured national digital billboard and retail network footprint across New Zealand.[cite: 1]</div>
         
         <div id="role4" class="collapsible-content">
             <img src="isee digital logo.jpeg" alt="ISee Digital Logo" class="role-logo">
             
             <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
             <ul>
-                <li>Secured 32 billboard sites across the North Island.</li>
-                <li>Completed geo testing and resource consent approvals.</li>
-                <li>Secured national footprint representing ~$XX million commitment.</li>
-                <li>Secured 2,000+ retail locations and negotiated revenue-share agreements.</li>
-                <li>Delivered in-store digital network representing ~$X.X million commitment.</li>
-                <li>Procured 2,000+ single-board computers, screens, brackets, and cabling.</li>
-                <li>Completed national installation ahead of schedule and under budget.</li>
-                <li>Handled physical installation for the majority of the network.</li>
+                <li>Secured 32 billboard sites across the North Island.[cite: 1]</li>
+                <li>Completed geo testing and resource consent approvals.[cite: 1]</li>
+                <li>Secured national footprint representing ~$XX million commitment.[cite: 1]</li>
+                <li>Secured 2,000+ retail locations and negotiated revenue-share agreements.[cite: 1]</li>
+                <li>Delivered in-store digital network representing ~$X.X million commitment.[cite: 1]</li>
+                <li>Procured 2,000+ single-board computers, screens, brackets, and cabling.[cite: 1]</li>
+                <li>Completed national installation ahead of schedule and under budget.[cite: 1]</li>
+                <li>Handled physical installation for the majority of the network.[cite: 1]</li>
             </ul>
 
             <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Shorts & Video Showcases:</h4>
@@ -529,22 +658,22 @@
     <div class="role-card" onclick="toggleRole(event, 'role5')">
         <div class="role-meta">2013–2015</div>
         <div class="main-role-title">Sales Manager – XClean</div>
-        <div class="role-summary-highlight">Company selling cleaning chemicals into industry, agriculture and hospitality sectors</div>
+        <div class="role-summary-highlight">Company selling cleaning chemicals into industry, agriculture and hospitality sectors[cite: 1]</div>
         
         <div id="role5" class="collapsible-content">
             <img src="xclean.jpg" alt="XClean Logo" class="role-logo">
             
             <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
             <ul>
-                <li>Expanded operations from single staff member to training 12-person team.</li>
-                <li>Rebuilt territories, deploying new commission-only sales teams nationally.</li>
-                <li>Drove high-conversion cold-calling across regions in vans with reps.</li>
-                <li>Built a cohesive national sales team in under 12 months.</li>
-                <li>Lifted revenue from stagnant $156k baseline to $X million per annum.</li>
-                <li>Delivered free on-farm training across multiple regions.</li>
-                <li>Managed crisis communications during “payout” collapse</li>
-                <li>Managed crisis communications during “Teatmate” product failures.</li>
-                <li class="highlight-item" style="list-style: none; margin-left: -18px; font-style: italic;">Supported clients with integrity – we were misled by fraudulent “Teatmate” claims, advising on best practice and recourse since the product did not meet XClean or ACVM expectations</li>
+                <li>Expanded operations from single staff member to training 12-person team.[cite: 1]</li>
+                <li>Rebuilt territories, deploying new commission-only sales teams nationally.[cite: 1]</li>
+                <li>Drove high-conversion cold-calling across regions in vans with reps.[cite: 1]</li>
+                <li>Built a cohesive national sales team in under 12 months.[cite: 1]</li>
+                <li>Lifted revenue from stagnant $156k baseline to $X million per annum.[cite: 1]</li>
+                <li>Delivered free on-farm training across multiple regions.[cite: 1]</li>
+                <li>Managed crisis communications during “payout” collapse[cite: 1]</li>
+                <li>Managed crisis communications during “Teatmate” product failures.[cite: 1]</li>
+                <li class="highlight-item" style="list-style: none; margin-left: -18px; font-style: italic;">Supported clients with integrity – we were misled by fraudulent “Teatmate” claims, advising on best practice and recourse since the product did not meet XClean or ACVM expectations[cite: 1]</li>
             </ul>
 
             <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
@@ -563,20 +692,20 @@
     <div class="role-card" onclick="toggleRole(event, 'role6')">
         <div class="role-meta">2007–2014</div>
         <div class="main-role-title">Regional Sales Manager – Integrate Group / Sky</div>
-        <div class="role-summary-highlight">High-volume direct marketing operations – Door knocking</div>
+        <div class="role-summary-highlight">High-volume direct marketing operations – Door knocking[cite: 1]</div>
         
         <div id="role6" class="collapsible-content">
             <img src="Integrate logo.png" alt="Integrate Group Logo" class="role-logo">
             
             <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
             <ul>
-                <li>Outperformed larger population centres by activation totals and averages.</li>
-                <li>Consistently drove more than 6,000 new subscribers per annum.</li>
-                <li>Built team from 1 to 8 members, managing burnout in door-to-door sales.</li>
-                <li>Worked six evenings a week across Southland and Otago.</li>
-                <li>Managed employment, onboarding, training, and territory planning.</li>
-                <li>Coordinated installation workflows and harvested referrals.</li>
-                <li class="highlight-item" style="list-style: none; margin-left: -18px; font-style: italic;">Encouraged to take on secondary fixed-term crisis/turnaround roles (meat processing, distribution, automotive) provided they did not interfere with road trips.</li>
+                <li>Outperformed larger population centres by activation totals and averages.[cite: 1]</li>
+                <li>Consistently drove more than 6,000 new subscribers per annum.[cite: 1]</li>
+                <li>Built team from 1 to 8 members, managing burnout in door-to-door sales.[cite: 1]</li>
+                <li>Worked six evenings a week across Southland and Otago.[cite: 1]</li>
+                <li>Managed employment, onboarding, training, and territory planning.[cite: 1]</li>
+                <li>Coordinated installation workflows and harvested referrals.[cite: 1]</li>
+                <li class="highlight-item" style="list-style: none; margin-left: -18px; font-style: italic;">Encouraged to take on secondary fixed-term crisis/turnaround roles (meat processing, distribution, automotive) provided they did not interfere with road trips.[cite: 1]</li>
             </ul>
 
             <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
@@ -595,19 +724,19 @@
     <div class="role-card" onclick="toggleRole(event, 'role7')">
         <div class="role-meta">2002–2006</div>
         <div class="main-role-title">Manager (Vodafone Franchise) – Mobilefone Solutions</div>
-        <div class="role-summary-highlight">Turn around role to maximize on the new opportunity's</div>
+        <div class="role-summary-highlight">Turn around role to maximize on the new opportunity's[cite: 1]</div>
         
         <div id="role7" class="collapsible-content">
             <img src="mobilefone solutions logo.png" alt="Mobilefone Solutions Logo" class="role-logo">
             
             <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
             <ul>
-                <li>Turned around branch to maximize new market opportunities.</li>
-                <li>Built store team from 1 staff member to 4.</li>
-                <li>Established and led additional outbound sales team of 4.</li>
-                <li>Increased in-store turnover from $30k to $XXX k per month.</li>
-                <li>Achieved national recognition as top-performing sales representative.</li>
-                <li>Delivered offsite promotional campaigns and full store operations.</li>
+                <li>Turned around branch to maximize new market opportunities.[cite: 1]</li>
+                <li>Built store team from 1 staff member to 4.[cite: 1]</li>
+                <li>Established and led additional outbound sales team of 4.[cite: 1]</li>
+                <li>Increased in-store turnover from $30k to $XXX k per month.[cite: 1]</li>
+                <li>Achieved national recognition as top-performing sales representative.[cite: 1]</li>
+                <li>Delivered offsite promotional campaigns and full store operations.[cite: 1]</li>
             </ul>
 
             <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media References:</h4>
@@ -629,18 +758,18 @@
     <div class="role-card" onclick="toggleRole(event, 'role8')">
         <div class="role-meta">2001–2002</div>
         <div class="main-role-title">Department Manager – H&J Smith</div>
-        <div class="role-summary-highlight">Turn around role to reinvigorate the category across the brand</div>
+        <div class="role-summary-highlight">Turn around role to reinvigorate the category across the brand[cite: 1]</div>
         
         <div id="role8" class="collapsible-content">
             <img src="h&J logo.png" alt="H&J Smith Logo" class="role-logo">
             
             <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
             <ul>
-                <li>Reinvigorated category across the brand via turnaround role.</li>
-                <li>Led sales and customer engagement across multiple stores.</li>
-                <li>Delivered showroom redesigns across Invercargill, Queenstown, Balclutha, Blenheim.</li>
-                <li>Delivered new product categories and established new brand relationships.</li>
-                <li>Broke multiple sales records including best day ever by over 30%.</li>
+                <li>Reinvigorated category across the brand via turnaround role.[cite: 1]</li>
+                <li>Led sales and customer engagement across multiple stores.[cite: 1]</li>
+                <li>Delivered showroom redesigns across Invercargill, Queenstown, Balclutha, Blenheim.[cite: 1]</li>
+                <li>Delivered new product categories and established new brand relationships.[cite: 1]</li>
+                <li>Broke multiple sales records including best day ever by over 30%.[cite: 1]</li>
             </ul>
 
             <div class="detail-link-container">
@@ -652,25 +781,25 @@
     <div class="role-card" onclick="toggleRole(event, 'role9')">
         <div class="role-meta">1992–2001</div>
         <div class="main-role-title">Area & Branch Manager – Smiths City / Powerstore</div>
-        <div class="role-summary-highlight">Multi-store regional leadership through corporate restructuring and receivership turnaround.</div>
+        <div class="role-summary-highlight">Multi-store regional leadership through corporate restructuring and receivership turnaround.[cite: 1]</div>
         
         <div id="role9" class="collapsible-content">
             <img src="smiths city logo.png" alt="Smiths City Logo" class="role-logo">
             
             <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
             <ul>
-                <li>Increased turnover, profitability, location growth, and off-site promotions.</li>
-                <li>Progressed from salesperson to store manager and area manager.</li>
-                <li>Delivered annual personal sales approaching $X Million</li>
-                <li>Managed locations across Invercargill, Gore.</li>
-                <li>Managed locations across Queenstown, Wanaka, Alexandra, Roxburgh.</li>
-                <li>Managed locations across Canterbury, 3 x Christchurch stores, Timaru.</li>
-                <li>Achieved personal best individual daily sales of $86,000.</li>
-                <li>Active in the acquisition - 7 businesses across the South Island.</li>
-                <li>Developed non-negotiable standards, later implemented nationally.</li>
-                <li>Played a core role in launching 10 new stores.</li>
-                <li>Active role in meeting Scheme-of-arrangement.</li>
-                <li>2001 group successfully traded out of receivership.</li>
+                <li>Increased turnover, profitability, location growth, and off-site promotions.[cite: 1]</li>
+                <li>Progressed from salesperson to store manager and area manager.[cite: 1]</li>
+                <li>Delivered annual personal sales approaching $X Million[cite: 1]</li>
+                <li>Managed locations across Invercargill, Gore.[cite: 1]</li>
+                <li>Managed locations across Queenstown, Wanaka, Alexandra, Roxburgh.[cite: 1]</li>
+                <li>Managed locations across Canterbury, 3 x Christchurch stores, Timaru.[cite: 1]</li>
+                <li>Achieved personal best individual daily sales of $86,000.[cite: 1]</li>
+                <li>Active in the acquisition - 7 businesses across the South Island.[cite: 1]</li>
+                <li>Developed non-negotiable standards, later implemented nationally.[cite: 1]</li>
+                <li>Played a core role in launching 10 new stores.[cite: 1]</li>
+                <li>Active role in meeting Scheme-of-arrangement.[cite: 1]</li>
+                <li>2001 group successfully traded out of receivership.[cite: 1]</li>
             </ul>
 
             <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
@@ -695,7 +824,7 @@
 
 <script>
     function toggleRole(event, roleId) {
-        if (event.target.classList.contains('detail-link') || event.target.closest('.marquee-container')) return;
+        if (event.target.classList.contains('detail-link') || event.target.closest('.marquee-container') || event.target.closest('audio') || event.target.closest('video')) return;
 
         const content = document.getElementById(roleId);
         if (content.classList.contains("show")) {
