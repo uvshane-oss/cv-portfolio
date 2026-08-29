@@ -687,7 +687,7 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
       <div class="video-grid">
-        <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/V2HS1ttGNLY" title="Smiths City Testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <div class="video-wrapper"><iframe src="https://www.youtube-nocynthings... https://www.youtube-nocookie.com/embed/V2HS1ttGNLY" title="Smiths City Testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
       </div>
       <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'Smiths City Regional Management')">View Full Detailed Case Study &rarr;</span></div>
     </div>
@@ -745,9 +745,11 @@ function expandCarouselItem(roleId, type, source, captionText) {
   }
   
   overlay.classList.add('active');
+  
+  // Keep marquee running while media is playing in the pop-up window
   const marqueeTrack = document.querySelector('#marquee-' + roleId + ' .marquee-track');
   if (marqueeTrack) {
-    marqueeTrack.style.animationPlayState = 'paused';
+    marqueeTrack.style.animationPlayState = 'running';
   }
 }
 
@@ -761,11 +763,6 @@ function closeCarouselExpanded(roleId) {
 
   overlay.classList.remove('active');
   contentDiv.innerHTML = '';
-  
-  const marqueeTrack = document.querySelector('#marquee-' + roleId + ' .marquee-track');
-  if (marqueeTrack) {
-    marqueeTrack.style.animationPlayState = 'running';
-  }
 }
 
 // Ensure audio elements mutually pause others when played
