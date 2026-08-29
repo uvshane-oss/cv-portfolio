@@ -266,29 +266,73 @@ li { margin-bottom: 6px; font-size: 13px; }
   }
 }
 .radio-card-item {
-  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('radio button.png');
+  background-image: url('radio button.png');
   background-size: cover;
   background-position: center;
   border-radius: 6px;
   padding: 15px;
   box-sizing: border-box;
-  border: 1px solid #333;
+  border: 1px solid #444;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 130px;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: overlay;
 }
 .radio-title {
   color: #fff;
   font-size: 13px;
   font-weight: bold;
-  margin-bottom: 10px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  margin-top: 10px;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+  background: rgba(0,0,0,0.6);
+  padding: 4px 8px;
+  border-radius: 4px;
 }
 .radio-card-item audio {
   width: 100%;
   outline: none;
+  position: relative;
+  z-index: 2;
 }
+
+/* Equalizer Bars Visualization Overlay */
+.equalizer-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+.radio-card-item.is-playing .equalizer-overlay {
+  opacity: 1;
+}
+.eq-bar {
+  width: 6px;
+  height: 30px;
+  background: var(--accent);
+  border-radius: 3px;
+  animation: bounceEq 0.6s ease-in-out infinite alternate;
+}
+.eq-bar:nth-child(2) { animation-delay: 0.2s; background: var(--highlight-blue); }
+.eq-bar:nth-child(3) { animation-delay: 0.4s; background: #22c55e; }
+.eq-bar:nth-child(4) { animation-delay: 0.1s; background: #eab308; }
+
+@keyframes bounceEq {
+  0% { height: 8px; }
+  100% { height: 45px; }
+}
+
 /* Interactive Carousel Expanded View Modal/Overlay inside components */
 .carousel-expanded-overlay {
   display: none;
@@ -470,39 +514,44 @@ li { margin-bottom: 6px; font-size: 13px; }
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Radio produced and voiced by Shane</h4>
       <div class="radio-grid">
         <div class="radio-card-item" onclick="event.stopPropagation()">
-          <div class="radio-title">Radio LONGWEEKEND.wav</div>
+          <audio controls preload="none">
+            <source src="Radio DEVILSTAIRCASE_FRIDAY.wav" type="audio/wav">
+            Your browser does not support the audio element.
+          </audio>
+          <div class="radio-title">Devil's Staircase Friday</div>
+          <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
+        </div>
+        <div class="radio-card-item" onclick="event.stopPropagation()">
           <audio controls preload="none">
             <source src="Radio LONGWEEKEND.wav" type="audio/wav">
             Your browser does not support the audio element.
           </audio>
+          <div class="radio-title">Long Weekend</div>
+          <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
         </div>
         <div class="radio-card-item" onclick="event.stopPropagation()">
-          <div class="radio-title">Radio salmon.wav</div>
           <audio controls preload="none">
-            <source src="Radio salmon.wav" type="audio/wav">
+            <source src="Radio PORKDEATH.wav" type="audio/wav">
             Your browser does not support the audio element.
           </audio>
+          <div class="radio-title">Death by Pork</div>
+          <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
         </div>
         <div class="radio-card-item" onclick="event.stopPropagation()">
-          <div class="radio-title">Radio SPICEYBEEF.wav</div>
           <audio controls preload="none">
             <source src="Radio SPICEYBEEF.wav" type="audio/wav">
             Your browser does not support the audio element.
           </audio>
+          <div class="radio-title">Spicy Beef</div>
+          <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
         </div>
         <div class="radio-card-item" onclick="event.stopPropagation()">
-          <div class="radio-title">Radio SPICEYBEEF 2.wav</div>
           <audio controls preload="none">
-            <source src="Radio SPICEYBEEF 2.wav" type="audio/wav">
+            <source src="Radio salmon.wav" type="audio/wav">
             Your browser does not support the audio element.
           </audio>
-        </div>
-        <div class="radio-card-item" onclick="event.stopPropagation()">
-          <div class="radio-title">Radio STRIKE.wav</div>
-          <audio controls preload="none">
-            <source src="Radio STRIKE.wav" type="audio/wav">
-            Your browser does not support the audio element.
-          </audio>
+          <div class="radio-title">Salmon</div>
+          <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
         </div>
       </div>
 
@@ -761,7 +810,6 @@ function closeModal() {
 
 /* Interactive Social Media Carousel UX Functions with Auto-Close & Exclusive Playback */
 function expandCarouselItem(roleId, type, source, captionText) {
-  // Pause any other playing HTML5 audio or video elements on the page first
   document.querySelectorAll('video, audio').forEach(media => {
     if (!media.paused) media.pause();
   });
@@ -777,7 +825,6 @@ function expandCarouselItem(roleId, type, source, captionText) {
   
   overlay.classList.add('active');
   
-  // Keep marquee running while media is playing in the pop-up window
   const marqueeTrack = document.querySelector('#marquee-' + roleId + ' .marquee-track');
   if (marqueeTrack) {
     marqueeTrack.style.animationPlayState = 'running';
@@ -788,7 +835,6 @@ function closeCarouselExpanded(roleId) {
   const overlay = document.getElementById('expanded-view-' + roleId);
   const contentDiv = document.getElementById('expanded-content-' + roleId);
   
-  // Pause any playing media inside the expanded view before clearing
   const playingMedia = contentDiv.querySelectorAll('video');
   playingMedia.forEach(v => v.pause());
 
@@ -796,7 +842,7 @@ function closeCarouselExpanded(roleId) {
   contentDiv.innerHTML = '';
 }
 
-// Ensure audio elements mutually pause others when played
+/* Audio Play State & Equalizer Toggle Handler */
 document.addEventListener('play', function(e) {
   if (e.target.tagName === 'AUDIO' || e.target.tagName === 'VIDEO') {
     document.querySelectorAll('audio, video').forEach(media => {
@@ -804,6 +850,28 @@ document.addEventListener('play', function(e) {
         media.pause();
       }
     });
+  }
+  
+  if (e.target.tagName === 'AUDIO') {
+    document.querySelectorAll('.radio-card-item').forEach(card => card.classList.remove('is-playing'));
+    const parentCard = e.target.closest('.radio-card-item');
+    if (parentCard) parentCard.classList.add('is-playing');
+  }
+}, true);
+
+document.addEventListener('pause', function(e) {
+  if (e.target.tagName === 'AUDIO') {
+    const parentCard = e.target.closest('.radio-card-item');
+    if (parentCard && e.target.paused) {
+      parentCard.classList.remove('is-playing');
+    }
+  }
+}, true);
+
+document.addEventListener('ended', function(e) {
+  if (e.target.tagName === 'AUDIO') {
+    const parentCard = e.target.closest('.radio-card-item');
+    if (parentCard) parentCard.classList.remove('is-playing');
   }
 }, true);
 </script>
