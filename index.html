@@ -295,7 +295,6 @@ li { margin-bottom: 6px; font-size: 13px; }
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-size: 18px;
   transition: all 0.2s ease;
   box-shadow: 0 4px 10px rgba(0,0,0,0.4);
   z-index: 2;
@@ -335,11 +334,17 @@ li { margin-bottom: 6px; font-size: 13px; }
   background: var(--highlight-blue);
   border-color: var(--highlight-blue);
 }
-.radio-card-item.is-playing .play-icon {
+.radio-card-item.is-playing .idle-dot {
   display: none;
 }
 .radio-card-item.is-playing .equalizer-container {
   display: flex;
+}
+.idle-dot {
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
 }
 .eq-bar {
   width: 4px;
@@ -543,7 +548,7 @@ li { margin-bottom: 6px; font-size: 13px; }
             Your browser does not support the audio element.
           </audio>
           <div class="radio-button-graphic">
-            <span class="play-icon">&#9658;</span>
+            <div class="idle-dot"></div>
             <div class="equalizer-container">
               <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
             </div>
@@ -556,7 +561,7 @@ li { margin-bottom: 6px; font-size: 13px; }
             Your browser does not support the audio element.
           </audio>
           <div class="radio-button-graphic">
-            <span class="play-icon">&#9658;</span>
+            <div class="idle-dot"></div>
             <div class="equalizer-container">
               <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
             </div>
@@ -569,7 +574,7 @@ li { margin-bottom: 6px; font-size: 13px; }
             Your browser does not support the audio element.
           </audio>
           <div class="radio-button-graphic">
-            <span class="play-icon">&#9658;</span>
+            <div class="idle-dot"></div>
             <div class="equalizer-container">
               <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
             </div>
@@ -582,7 +587,7 @@ li { margin-bottom: 6px; font-size: 13px; }
             Your browser does not support the audio element.
           </audio>
           <div class="radio-button-graphic">
-            <span class="play-icon">&#9658;</span>
+            <div class="idle-dot"></div>
             <div class="equalizer-container">
               <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
             </div>
@@ -595,7 +600,7 @@ li { margin-bottom: 6px; font-size: 13px; }
             Your browser does not support the audio element.
           </audio>
           <div class="radio-button-graphic">
-            <span class="play-icon">&#9658;</span>
+            <div class="idle-dot"></div>
             <div class="equalizer-container">
               <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
             </div>
@@ -919,7 +924,7 @@ function toggleAudioCard(cardElement, event) {
   }
 }
 
-// Reset play icons and equalizer state when audio naturally ends or pauses externally
+// Reset equalizer state when audio naturally ends or pauses externally
 document.addEventListener('pause', function(e) {
   if (e.target.tagName === 'AUDIO') {
     const card = e.target.closest('.radio-card-item');
