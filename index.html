@@ -232,7 +232,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-/* Radio Static Grid Layout */
+/* Radio Static Grid Layout - 3 across, 2 below evenly spaced */
 .radio-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -241,7 +241,30 @@ li { margin-bottom: 6px; font-size: 13px; }
   margin-bottom: 15px;
 }
 @media(min-width: 600px) {
-  .radio-grid { grid-template-columns: 1fr 1fr; }
+  .radio-grid { 
+    grid-template-columns: repeat(3, 1fr); 
+  }
+  /* Center or span the bottom 2 items if desired, or let grid wrap naturally */
+  .radio-card-item:nth-child(4) {
+    grid-column: 1 / 2;
+    margin-left: 50%;
+  }
+  .radio-card-item:nth-child(5) {
+    grid-column: 2 / 3;
+    margin-left: 50%;
+  }
+}
+@media(min-width: 900px) {
+  .radio-card-item:nth-child(4) {
+    grid-column: 1 / span 1;
+    margin-left: 0;
+    transform: translateX(50%);
+  }
+  .radio-card-item:nth-child(5) {
+    grid-column: span 1 / 4;
+    margin-left: 0;
+    transform: translateX(-50%);
+  }
 }
 .radio-card-item {
   background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('radio button.png');
@@ -379,7 +402,6 @@ li { margin-bottom: 6px; font-size: 13px; }
   <h2 class="section-title">Professional Career History & Portfolio</h2>
   <p style="font-size: 13px; color: var(--text-muted); margin-top: -10px; margin-bottom: 20px;">Tap any role below to view details, media, and campaign highlights.</p>
 
-  <!-- ROLE 1: Devil Burger -->
   <div class="role-card" onclick="toggleRole(event, 'role1')">
     <div class="role-meta">2023–2025</div>
     <div class="main-role-title">Digital Project Manager – Devil Burger</div>
@@ -397,7 +419,6 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Reduced operating costs left turnkey marketing solutions</li>
       </ul>
 
-      <!-- Reordered Sections per instructions -->
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials :</h4>
       <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 8px 0;">Alice & Tim discuss working with Shane</p>
       <div class="video-grid">
@@ -436,7 +457,6 @@ li { margin-bottom: 6px; font-size: 13px; }
             <img src="$10 Tuesday for summer .jpg" alt="Summer Promo Campaign">
             <p class="marquee-caption">Summer Promotion Artwork</p>
           </div>
-          <!-- Duplicate items for smooth infinite loop -->
           <div class="marquee-item" onclick="expandCarouselItem('role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
             <video src="social media 1.mp4" muted loop playsinline></video>
             <p class="marquee-caption">Social Media Clip 1</p>
@@ -451,6 +471,20 @@ li { margin-bottom: 6px; font-size: 13px; }
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Radio produced and voiced by Shane</h4>
       <div class="radio-grid">
         <div class="radio-card-item" onclick="event.stopPropagation()">
+          <div class="radio-title">Radio LONGWEEKEND.wav</div>
+          <audio controls preload="none">
+            <source src="Radio LONGWEEKEND.wav" type="audio/wav">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+        <div class="radio-card-item" onclick="event.stopPropagation()">
+          <div class="radio-title">Radio salmon.wav</div>
+          <audio controls preload="none">
+            <source src="Radio salmon.wav" type="audio/wav">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+        <div class="radio-card-item" onclick="event.stopPropagation()">
           <div class="radio-title">Radio SPICEYBEEF.wav</div>
           <audio controls preload="none">
             <source src="Radio SPICEYBEEF.wav" type="audio/wav">
@@ -458,9 +492,16 @@ li { margin-bottom: 6px; font-size: 13px; }
           </audio>
         </div>
         <div class="radio-card-item" onclick="event.stopPropagation()">
-          <div class="radio-title">Radio Salmon</div>
+          <div class="radio-title">Radio SPICEYBEEF 2.wav</div>
           <audio controls preload="none">
-            <source src="radio salmon.wav" type="audio/wav">
+            <source src="Radio SPICEYBEEF 2.wav" type="audio/wav">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+        <div class="radio-card-item" onclick="event.stopPropagation()">
+          <div class="radio-title">Radio STRIKE.wav</div>
+          <audio controls preload="none">
+            <source src="Radio STRIKE.wav" type="audio/wav">
             Your browser does not support the audio element.
           </audio>
         </div>
@@ -477,7 +518,6 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
-  <!-- ROLE 2: XClean National Sales Manager -->
   <div class="role-card" onclick="toggleRole(event, 'role2')">
     <div class="role-meta">2018–2022</div>
     <div class="main-role-title">National Sales Manager – XClean</div>
@@ -510,7 +550,6 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
-  <!-- ROLE 3: Royal Albatross Centre -->
   <div class="role-card" onclick="toggleRole(event, 'role3')">
     <div class="role-meta">2017</div>
     <div class="main-role-title">Principal A/V Architect – Royal Albatross Centre</div>
@@ -539,7 +578,6 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
-  <!-- ROLE 4: ISee Digital -->
   <div class="role-card" onclick="toggleRole(event, 'role4')">
     <div class="role-meta">2015–2017</div>
     <div class="main-role-title">Site Acquisition Manager – ISee Digital</div>
@@ -567,7 +605,6 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
-  <!-- ROLE 5: XClean Growth Phase -->
   <div class="role-card" onclick="toggleRole(event, 'role5')">
     <div class="role-meta">2013–2015</div>
     <div class="main-role-title">Sales Manager – XClean</div>
@@ -594,7 +631,6 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
-  <!-- ROLE 6: Integrate Group / Sky -->
   <div class="role-card" onclick="toggleRole(event, 'role6')">
     <div class="role-meta">2007–2014</div>
     <div class="main-role-title">Regional Sales Manager – Integrate Group / Sky</div>
@@ -619,7 +655,6 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
-  <!-- ROLE 7: Mobilefone Solutions -->
   <div class="role-card" onclick="toggleRole(event, 'role7')">
     <div class="role-meta">2002–2006</div>
     <div class="main-role-title">Manager (Vodafone Franchise) – Mobilefone Solutions</div>
@@ -644,7 +679,6 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
-  <!-- ROLE 8: H&J Smith -->
   <div class="role-card" onclick="toggleRole(event, 'role8')">
     <div class="role-meta">2001–2002</div>
     <div class="main-role-title">Department Manager – H&J Smith</div>
@@ -663,7 +697,6 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
-  <!-- ROLE 9: Smiths City -->
   <div class="role-card" onclick="toggleRole(event, 'role9')">
     <div class="role-meta">1992–2001</div>
     <div class="main-role-title">Area & Branch Manager – Smiths City / Powerstore</div>
@@ -687,7 +720,7 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
       <div class="video-grid">
-        <div class="video-wrapper"><iframe src="https://www.youtube-nocynthings... https://www.youtube-nocookie.com/embed/V2HS1ttGNLY" title="Smiths City Testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/V2HS1ttGNLY" title="Smiths City Testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
       </div>
       <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'Smiths City Regional Management')">View Full Detailed Case Study &rarr;</span></div>
     </div>
@@ -695,7 +728,6 @@ li { margin-bottom: 6px; font-size: 13px; }
 
 </div>
 
-<!-- Fullscreen Image Modal -->
 <div id="imgModal" class="img-modal" onclick="closeModal()">
   <span class="img-modal-close">&times;</span>
   <img id="modalImg" src="" alt="Full Size Image">
