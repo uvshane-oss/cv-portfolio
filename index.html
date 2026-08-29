@@ -419,6 +419,755 @@
             </ul>
 
             <!-- 1) Video Testimonials -->
+            <h4 style="margin: 20px 0 4px 0; font-size: 15px; color: var(--primary);">Video Testimonials :</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 10px 0; font-style: italic;">Alice & Tim discuss working with Shane</p>
+            <div class="video-grid">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube-nocookie.com/embed/2Hj5Q6kU3nE" title="Devil Burger Video 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube-nocookie.com/embed/keXY9SO2CMA" title="Devil Burger Video 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- 2) Social media advertising -->
+            <h4 style="margin: 20px 0 8px 0; font-size: 15px; color: var(--primary);">Social media advertising</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 10px 0; font-style: italic;">Advertising produced by Shane</p>
+            
+            <!-- Expanded Half-Size Focused Video Display Container -->
+            <div id="focusedVideoContainer" class="focused-video-container">
+                <button class="close-focused-btn" onclick="closeFocusedVideo()">Close / Resume Carousel</button>
+                <div class="focused-video-wrapper">
+                    <video id="activeFocusedVideo" controls></video>
+                </div>
+            </div>
+
+            <div class="marquee-container" id="socialMarquee">
+                <div class="marquee-track">
+                    <div class="marquee-item" onclick="openModal('$10 Tuesday for summer .jpg')">
+                        <img src="$10 Tuesday for summer .jpg" alt="Summer Promo Campaign">
+                        <p class="marquee-caption">Summer Promotion Artwork</p>
+                    </div>
+                    <div class="marquee-item" onclick="openModal('social media carosel.jpg')">
+                        <img src="social media carosel.jpg" alt="Social Media Carousel">
+                        <p class="marquee-caption">social media carosel.jpg</p>
+                    </div>
+                    <div class="marquee-item" onclick="expandAndPlayVideo('socila media 1.mp4')">
+                        <video src="socila media 1.mp4" preload="metadata"></video>
+                        <p class="marquee-caption">socila media 1.mp4</p>
+                    </div>
+                    <div class="marquee-item" onclick="expandAndPlayVideo('socila media 2.mp4')">
+                        <video src="socila media 2.mp4" preload="metadata"></video>
+                        <p class="marquee-caption">socila media 2.mp4</p>
+                    </div>
+                    <div class="marquee-item" onclick="expandAndPlayVideo('social media 3.mp4')">
+                        <video src="social media 3.mp4" preload="metadata"></video>
+                        <p class="marquee-caption">social media 3.mp4</p>
+                    </div>
+                    <div class="marquee-item" onclick="expandAndPlayVideo('social media 4.mp4')">
+                        <video src="social media 4.mp4" preload="metadata"></video>
+                        <p class="marquee-caption">social media 4.mp4</p>
+                    </div>
+                    <!-- Repeated for smooth infinite loop -->
+                    <div class="marquee-item" onclick="openModal('$10 Tuesday for summer .jpg')">
+                        <img src="$10 Tuesday for summer .jpg" alt="Summer Promo Campaign">
+                        <p class="marquee-caption">Summer Promotion Artwork</p>
+                    </div>
+                    <div class="marquee-item" onclick="openModal('social media carosel.jpg')">
+                        <img src="social media carosel.jpg" alt="Social Media Carousel">
+                        <p class="marquee-caption">social media carosel.jpg</p>
+                    </div>
+                    <div class="marquee-item" onclick="expandAndPlayVideo('socila media 1.mp4')">
+                        <video src="socila media 1.mp4" preload="metadata"></video>
+                        <p class="marquee-caption">socila media 1.mp4</p>
+                    </div>
+                    <div class="marquee-item" onclick="expandAndPlayVideo('socila media 2.mp4')">
+                        <video src="socila media 2.mp4" preload="metadata"></video>
+                        <p class="marquee-caption">socila media 2.mp4</p>
+                    </div>
+                    <div class="marquee-item" onclick="expandAndPlayVideo('social media 3.mp4')">
+                        <video src="social media 3.mp4" preload="metadata"></video>
+                        <p class="marquee-caption">social media 3.mp4</p>
+                    </div>
+                    <div class="marquee-item" onclick="expandAndPlayVideo('social media 4.mp4')">
+                        <video src="social media 4.mp4" preload="metadata"></video>
+                        <p class="marquee-caption">social media 4.mp4</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3) Radio -->
+            <h4 style="margin: 20px 0 8px 0; font-size: 15px; color: var(--primary);">Radio produced and voiced by Shane</h4>
+            
+            <div class="radio-grid">
+                <div class="radio-card-item">
+                    <img src="radio button.png" alt="Radio Button" class="radio-bg-img">
+                    <div class="ghost-waveform"></div>
+                    <div class="radio-info-overlay">
+                        <p>DB Radio Long Weekend</p>
+                        <audio controls preload="none" onplay="highlightRadioCard(this)" onpause="unhighlightRadioCard(this)">
+                            <source src="DB Radio LONGWEEKEND.wav" type="audio/wav">
+                        </audio>
+                    </div>
+                </div>
+                <div class="radio-card-item">
+                    <img src="radio button.png" alt="Radio Button" class="radio-bg-img">
+                    <div class="ghost-waveform"></div>
+                    <div class="radio-info-overlay">
+                        <p>Radio Devil's Staircase Friday</p>
+                        <audio controls preload="none" onplay="highlightRadioCard(this)" onpause="unhighlightRadioCard(this)">
+                            <source src="Radio DEVILSTAIRCASE_FRIDAY.wav" type="audio/wav">
+                        </audio>
+                    </div>
+                </div>
+                <div class="radio-card-item">
+                    <img src="radio button.png" alt="Radio Button" class="radio-bg-img">
+                    <div class="ghost-waveform"></div>
+                    <div class="radio-info-overlay">
+                        <p>Radio Pork Death</p>
+                        <audio controls preload="none" onplay="highlightRadioCard(this)" onpause="unhighlightRadioCard(this)">
+                            <source src="Radio PORKDEATH.wav" type="audio/wav">
+                        </audio>
+                    </div>
+                </div>
+                <div class="radio-card-item">
+                    <img src="radio button.png" alt="Radio Button" class="radio-bg-img">
+                    <div class="ghost-waveform"></div>
+                    <div class="radio-info-overlay">
+                        <p>Radio Spicy Beef</p>
+                        <audio controls preload="none" onplay="highlightRadioCard(this)" onpause="unhighlightRadioCard(this)">
+                            <source src="Radio SPICEYBEEF.wav" type="audio/wav">
+                        </audio>
+                    </div>
+                </div>
+                <div class="radio-card-item">
+                    <img src="radio button.png" alt="Radio Button" class="radio-bg-img">
+                    <div class="ghost-waveform"></div>
+                    <div class="radio-info-overlay">
+                        <p>Radio Salmon</p>
+                        <audio controls preload="none" onplay="highlightRadioCard(this)" onpause="unhighlightRadioCard(this)">
+                            <source src="radio salmon.wav" type="audio/wav">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4) Midway through video wall installation -->
+            <h4 style="margin: 20px 0 8px 0; font-size: 15px; color: var(--primary);">Midway through video wall installation</h4>
+            <div class="video-grid" style="grid-template-columns: 1fr; margin-top: 10px;">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube-nocookie.com/embed/Y5qYcugyoD0" title="Midway through video wall installation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="detail-link-container">
+                <span class="detail-link" onclick="openFullDetail(event, 'Devil Burger')">View Full Detailed Case Study &rarr;</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Role 2: XClean -->
+    <div class="role-card" onclick="toggleRole(event, 'role2')">
+        <div class="role-meta">2018–2022</div>
+        <div class="main-role-title">National Sales Manager – XClean</div>
+        <div class="role-summary-highlight">Company selling cleaning chemicals into industry, agriculture and hospitality sectors</div>
+        
+        <div id="role2" class="collapsible-content">
+            <img src="xclean.jpg" alt="XClean Logo" class="role-logo">
+            
+            <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
+            <ul>
+                <li>Asked to return to rebuild the business after prior involvement.</li>
+                <li>Scaled operations from zero staff to 8 regional centres and 20+ personnel.</li>
+                <li>Personally responsible for $550k gross profit per annum from own activity.</li>
+                <li>Grew total team sales and gross profit output significantly.</li>
+                <li>Restored brand reputation after major legacy issues.</li>
+                <li>Engineered a custom COVID crisis campaign generating $500k in 14 days.</li>
+            </ul>
+
+            <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media & Campaign Showcases:</h4>
+            <div class="video-grid">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube-nocookie.com/embed/sdTLpnb2hw4" title="XClean Testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube-nocookie.com/embed/-OauqERIzjQ" title="XClean COVID Crisis Campaign" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Role 3: Royal Albatross Centre -->
+    <div class="role-card" onclick="toggleRole(event, 'role3')">
+        <div class="role-meta">2017</div>
+        <div class="main-role-title">Principal A/V Architect – Royal Albatross Centre</div>
+        <div class="role-summary-highlight">Project: Build a bespoke A/V theater without alteration to heritage site</div>
+        
+        <div id="role3" class="collapsible-content">
+            <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
+            <ul>
+                <li>Designed and deployed an immersive multi-screen theater installation within strict historic building constraints.</li>
+                <li>Engineered custom mounting and signal distribution architectures protecting fragile heritage structures.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Role 4: ISee Digital -->
+    <div class="role-card" onclick="toggleRole(event, 'role4')">
+        <div class="role-meta">2015–2017</div>
+        <div class="main-role-title">Site Acquisition Manager – ISee Digital</div>
+        <div class="role-summary-highlight">Secured national digital billboard and retail network footprint across New Zealand.</div>
+        
+        <div id="role4" class="collapsible-content">
+            <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
+            <ul>
+                <li>Identified and secured high-traffic commercial property leases for digital screen deployments.</li>
+                <li>Negotiated complex municipal consents and landlord agreements nationwide.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Role 5: Integrate Group / Sky -->
+    <div class="role-card" onclick="toggleRole(event, 'role5')">
+        <div class="role-meta">2007–2014</div>
+        <div class="main-role-title">Regional Sales Manager – Integrate Group / Sky</div>
+        <div class="role-summary-highlight">High-volume direct marketing operations – Door knocking</div>
+        
+        <div id="role5" class="collapsible-content">
+            <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
+            <ul>
+                <li>Managed regional sales teams executing direct acquisition campaigns.</li>
+                <li>Consistently drove top-tier conversion metrics across competitive territories.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Role 6: Smiths City & Powerstore -->
+    <div class="role-card" onclick="toggleRole(event, 'role6')">
+        <div class="role-meta">1992–2001</div>
+        <div class="main-role-title">Area and Branch Manager – Smiths City & Powerstore</div>
+        <div class="role-summary-highlight">Managed high-volume multi-site retail operations, inventory, and teams.</div>
+        
+        <div id="role6" class="collapsible-content">
+            <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
+            <ul>
+                <li>Managed multiple retail locations and regional store performance.</li>
+                <li>Played a key role in launching ten new stores.</li>
+                <li>Oversaw major staff teams, commercial inventory management, and profit-and-loss targets.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Role 7: H&J Smith -->
+    <div class="role-card" onclick="toggleRole(event, 'role7')">
+        <div class="role-meta">Prior Experience</div>
+        <div class="main-role-title">Department & Operations Management – H&J Smith</div>
+        <div class="role-summary-highlight">Foundational large-scale department store leadership and merchandising.</div>
+        
+        <div id="role7" class="collapsible-content">
+            <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
+            <ul>
+                <li>Directed core retail department operations, floor merchandising, and staff supervision.</li>
+                <li>Delivered high standards of customer service and operational execution within a historic retail group.</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div id="imgModal" class="img-modal" onclick="closeModal()">
+    <span class="img-modal-close">&times;</span>
+    <img id="modalImg" src="" alt="Full Size Image">
+</div>
+
+<script>
+    function toggleRole(event, roleId) {
+        if (event.target.classList.contains('detail-link') || event.target.closest('.marquee-container') || event.target.closest('audio') || event.target.closest('video') || event.target.closest('.radio-grid') || event.target.closest('.focused-video-container')) return;
+
+        const content = document.getElementById(roleId);
+        if (content.classList.contains("show")) {
+            content.classList.remove("show");
+        } else {
+            content.classList.add("show");
+        }
+    }
+
+    function openFullDetail(event, roleName) {
+        event.stopPropagation();
+        alert("Opening detailed expanded report/case study window for: " + roleName);
+    }
+
+    function openModal(imageSrc) {
+        const modal = document.getElementById('imgModal');
+        const modalImg = document.getElementById('modalImg');
+        modal.style.display = "flex";
+        modalImg.src = imageSrc;
+    }
+
+    function closeModal() {
+        document.getElementById('imgModal').style.display = "none";
+    }
+
+    /* Social Media Marquee Video Expansion UX */
+    function expandAndPlayVideo(videoSrc) {
+        const marquee = document.getElementById('socialMarquee');
+        marquee.style.animationPlayState = 'paused';
+        marquee.querySelector('.marquee-track').style.animationPlayState = 'paused';
+
+        const container = document.getElementById('focusedVideoContainer');
+        const videoEl = document.getElementById('activeFocusedVideo');
+        
+        videoEl.src = videoSrc;
+        container.classList.add('active');
+        videoEl.play();
+    }
+
+    function closeFocusedVideo() {
+        const container = document.getElementById('focusedVideoContainer');
+        const videoEl = document.getElementById('activeFocusedVideo');
+        
+        videoEl.pause();
+        videoEl.src = '';
+        container.classList.remove('active');
+
+        const marquee = document.getElementById('socialMarquee');
+        marquee.querySelector('.marquee-track').style.animationPlayState = 'running';
+    }
+
+    /* Radio Ghost Waveform Highlighting */
+    function highlightRadioCard(audioElement) {
+        const cardItem = audioElement.closest('.radio-card-item');
+        if (cardItem) cardItem.classList.add('playing');
+    }
+
+    function unhighlightRadioCard(audioElement) {
+        const cardItem = audioElement.closest('.radio-card-item');
+        if (cardItem) cardItem.classList.remove('playing');
+    }
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shane Soper - Professional CV & Portfolio</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #e74c3c;
+            --highlight-blue: #1d4ed8;
+            --bg-color: #f4f4f9;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #555555;
+            --border-color: #eaeaea;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 8px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-sizing: border-box;
+        }
+
+        @media(min-width: 768px) {
+            body { padding: 20px; }
+            .container { padding: 40px; }
+        }
+
+        /* Header Styling */
+        .cv-header {
+            text-align: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+        .cv-header h1 {
+            margin: 0 0 8px 0;
+            color: #111;
+            font-size: 26px;
+        }
+        @media(min-width: 768px) {
+            .cv-header h1 { font-size: 32px; }
+        }
+        .cv-header p {
+            margin: 4px 0;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+        @media(min-width: 768px) {
+            .cv-header p { font-size: 15px; }
+        }
+
+        /* Section Heading */
+        h2.section-title {
+            color: var(--primary);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        @media(min-width: 768px) {
+            h2.section-title { font-size: 22px; }
+        }
+
+        /* Clickable Role Card */
+        .role-card {
+            background: #fafafa;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 14px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        @media(min-width: 768px) {
+            .role-card { padding: 20px; margin-bottom: 16px; }
+        }
+        .role-card:hover {
+            background: #f1f3f5;
+            border-color: #cbd5e1;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+        }
+
+        .role-meta {
+            font-weight: bold;
+            color: var(--accent);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        @media(min-width: 768px) {
+            .role-meta { font-size: 13px; }
+        }
+
+        .main-role-title {
+            font-size: 17px;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 3px 0 2px 0;
+        }
+        @media(min-width: 768px) {
+            .main-role-title { font-size: 20px; }
+        }
+
+        .role-summary-highlight {
+            font-size: 13px;
+            color: var(--highlight-blue);
+            font-weight: bold;
+            margin: 0 0 6px 0;
+        }
+        @media(min-width: 768px) {
+            .role-summary-highlight { font-size: 14px; }
+        }
+
+        .collapsible-content {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px dashed var(--border-color);
+            cursor: default;
+        }
+        .collapsible-content.show { display: block; }
+
+        .role-logo {
+            max-height: 45px;
+            width: auto;
+            object-fit: contain;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        ul { padding-left: 18px; margin: 8px 0; }
+        li { margin-bottom: 6px; font-size: 13px; }
+        @media(min-width: 768px) {
+            li { font-size: 15px; }
+        }
+
+        /* Auto-Scrolling Marquee Gallery Styling */
+        .marquee-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background: #000;
+            border-radius: 6px;
+            margin: 15px 0;
+            padding: 10px 0;
+            box-sizing: border-box;
+        }
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: scrollMarquee 25s linear infinite;
+        }
+        .marquee-container:hover .marquee-track {
+            animation-play-state: paused;
+        }
+        .marquee-item {
+            width: 260px;
+            margin-right: 15px;
+            background: #111;
+            border-radius: 4px;
+            overflow: hidden;
+            text-align: center;
+            flex-shrink: 0;
+            box-sizing: border-box;
+            cursor: pointer;
+            position: relative;
+        }
+        .marquee-item img, .marquee-item video {
+            width: 100%;
+            height: 160px;
+            object-fit: contain;
+            display: block;
+            background: #000;
+        }
+        .marquee-caption {
+            font-size: 11px;
+            color: #fff;
+            background: rgba(0,0,0,0.8);
+            padding: 5px;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @keyframes scrollMarquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Expanded Focused Video Container */
+        .focused-video-container {
+            display: none;
+            background: #111;
+            border: 2px solid var(--accent);
+            border-radius: 6px;
+            padding: 12px;
+            margin: 15px 0;
+            text-align: center;
+            position: relative;
+        }
+        .focused-video-container.active {
+            display: block;
+        }
+        .focused-video-wrapper {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        .focused-video-wrapper video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: contain;
+            background: #000;
+            border-radius: 4px;
+        }
+        .close-focused-btn {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Radio Ghost Waveform Cards */
+        .radio-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        @media(min-width: 600px) {
+            .radio-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media(min-width: 800px) {
+            .radio-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        .radio-card-item {
+            width: 260px;
+            height: 160px;
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            background: #000;
+            margin: 0 auto;
+        }
+        .radio-bg-img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .ghost-waveform {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(231,76,60,0.3), rgba(29,78,216,0.3));
+            mix-blend-mode: overlay;
+            opacity: 0.2;
+            transition: opacity 0.3s ease, filter 0.3s ease;
+            z-index: 2;
+        }
+        .radio-card-item:hover .ghost-waveform,
+        .radio-card-item.playing .ghost-waveform {
+            opacity: 0.9;
+            filter: drop-shadow(0 0 8px rgba(231,76,60,0.8));
+        }
+        .radio-info-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(0,0,0,0.85);
+            padding: 6px 10px;
+            z-index: 3;
+            color: #fff;
+        }
+        .radio-info-overlay p {
+            margin: 0 0 4px 0;
+            font-size: 11px;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .radio-info-overlay audio {
+            width: 100%;
+            height: 28px;
+        }
+
+        /* Fullscreen Modal for Images */
+        .img-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .img-modal img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        .img-modal-close {
+            position: absolute;
+            top: 20px; right: 30px;
+            color: #fff;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        @media(min-width: 600px) {
+            .video-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            background: #000;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .video-wrapper iframe, .video-wrapper video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 0;
+            object-fit: contain;
+        }
+
+        .detail-link-container {
+            margin-top: 15px;
+            text-align: right;
+        }
+        .detail-link {
+            font-size: 13px;
+            color: var(--primary);
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .detail-link:hover {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="cv-header">
+        <h1>Shane Soper</h1>
+        <p>153 East Road, Ascot, Invercargill, Southland, New Zealand</p>
+        <p>📧 uvshane@gmail.com &nbsp;|&nbsp; 📞 020 4085 4362 &nbsp;|&nbsp; D.O.B 24/4/1974</p>
+    </div>
+
+    <h2 class="section-title">Professional Career History & Portfolio</h2>
+    <p style="font-size: 13px; color: var(--text-muted); margin-top: -10px; margin-bottom: 20px;">Tap any role below to view details, media, and campaign highlights.</p>
+
+    <!-- Role 1: Devil Burger -->
+    <div class="role-card" onclick="toggleRole(event, 'role1')">
+        <div class="role-meta">2023–2025</div>
+        <div class="main-role-title">Digital Project Manager – Devil Burger</div>
+        <div class="role-summary-highlight">Digital Projects Completed, providing Operational Consulting across owner's other business</div>
+        
+        <div id="role1" class="collapsible-content">
+            <img src="image1.png" alt="Devil Burger Logo" class="role-logo">
+            
+            <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
+            <ul>
+                <li>Delivered full in-store digital transformation across menus, hardware, and POS sync.</li>
+                <li>Deployed integrated EPOS and Deliverect ordering platforms seamlessly.</li>
+                <li>Produced annual multi-channel marketing kits covering radio, social, and print.</li>
+                <li>Developed profitable ghost kitchen brands from concept to launch.</li>
+                <li>Delivered general operations support across multiple stakeholder business interests.</li>
+                <li>Increased turnover.</li>
+                <li>Reduced operating costs and left turnkey marketing solutions.</li>
+            </ul>
+
+            <!-- 1) Video Testimonials -->
             <h4 style="margin: 20px 0 4px 0; font-size: 15px; color: var(--primary);">1) Video Testimonials :</h4>
             <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 10px 0; font-style: italic;">Alice & Tim discuss working with Shane</p>
             <div class="video-grid">
