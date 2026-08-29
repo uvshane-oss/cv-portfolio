@@ -270,33 +270,57 @@ li { margin-bottom: 6px; font-size: 13px; }
   background-size: cover;
   background-position: center;
   border-radius: 6px;
-  padding: 15px;
+  padding: 12px;
   box-sizing: border-box;
   border: 1px solid #444;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 130px;
+  align-items: center;
+  justify-content: center;
+  min-height: 110px;
   position: relative;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.3);
   background-blend-mode: overlay;
+  cursor: pointer;
+}
+.radio-card-item audio {
+  display: none;
+}
+.radio-button-graphic {
+  width: 44px;
+  height: 44px;
+  background: rgba(0, 0, 0, 0.65);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  z-index: 2;
+}
+.radio-card-item:hover .radio-button-graphic {
+  background: var(--accent);
+  transform: scale(1.08);
 }
 .radio-title {
   color: #fff;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 8px;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,0.9);
-  background: rgba(0,0,0,0.6);
-  padding: 4px 8px;
+  background: rgba(0,0,0,0.7);
+  padding: 3px 8px;
   border-radius: 4px;
-}
-.radio-card-item audio {
   width: 100%;
-  outline: none;
-  position: relative;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   z-index: 2;
 }
 
@@ -304,7 +328,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 .equalizer-overlay {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.65);
+  background: rgba(0,0,0,0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -317,9 +341,13 @@ li { margin-bottom: 6px; font-size: 13px; }
 .radio-card-item.is-playing .equalizer-overlay {
   opacity: 1;
 }
+.radio-card-item.is-playing .radio-button-graphic {
+  background: var(--highlight-blue);
+  border-color: var(--highlight-blue);
+}
 .eq-bar {
   width: 6px;
-  height: 30px;
+  height: 25px;
   background: var(--accent);
   border-radius: 3px;
   animation: bounceEq 0.6s ease-in-out infinite alternate;
@@ -329,8 +357,8 @@ li { margin-bottom: 6px; font-size: 13px; }
 .eq-bar:nth-child(4) { animation-delay: 0.1s; background: #eab308; }
 
 @keyframes bounceEq {
-  0% { height: 8px; }
-  100% { height: 45px; }
+  0% { height: 6px; }
+  100% { height: 38px; }
 }
 
 /* Interactive Carousel Expanded View Modal/Overlay inside components */
@@ -513,43 +541,48 @@ li { margin-bottom: 6px; font-size: 13px; }
 
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Radio produced and voiced by Shane</h4>
       <div class="radio-grid">
-        <div class="radio-card-item" onclick="event.stopPropagation()">
-          <audio controls preload="none">
+        <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
+          <audio preload="none">
             <source src="Radio DEVILSTAIRCASE_FRIDAY.wav" type="audio/wav">
             Your browser does not support the audio element.
           </audio>
+          <div class="radio-button-graphic">&#9658;</div>
           <div class="radio-title">Devil's Staircase Friday</div>
           <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
         </div>
-        <div class="radio-card-item" onclick="event.stopPropagation()">
-          <audio controls preload="none">
+        <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
+          <audio preload="none">
             <source src="Radio LONGWEEKEND.wav" type="audio/wav">
             Your browser does not support the audio element.
           </audio>
+          <div class="radio-button-graphic">&#9658;</div>
           <div class="radio-title">Long Weekend</div>
           <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
         </div>
-        <div class="radio-card-item" onclick="event.stopPropagation()">
-          <audio controls preload="none">
+        <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
+          <audio preload="none">
             <source src="Radio PORKDEATH.wav" type="audio/wav">
             Your browser does not support the audio element.
           </audio>
+          <div class="radio-button-graphic">&#9658;</div>
           <div class="radio-title">Death by Pork</div>
           <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
         </div>
-        <div class="radio-card-item" onclick="event.stopPropagation()">
-          <audio controls preload="none">
+        <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
+          <audio preload="none">
             <source src="Radio SPICEYBEEF.wav" type="audio/wav">
             Your browser does not support the audio element.
           </audio>
+          <div class="radio-button-graphic">&#9658;</div>
           <div class="radio-title">Spicy Beef</div>
           <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
         </div>
-        <div class="radio-card-item" onclick="event.stopPropagation()">
-          <audio controls preload="none">
+        <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
+          <audio preload="none">
             <source src="Radio salmon.wav" type="audio/wav">
             Your browser does not support the audio element.
           </audio>
+          <div class="radio-button-graphic">&#9658;</div>
           <div class="radio-title">Salmon</div>
           <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
         </div>
@@ -813,6 +846,7 @@ function expandCarouselItem(roleId, type, source, captionText) {
   document.querySelectorAll('video, audio').forEach(media => {
     if (!media.paused) media.pause();
   });
+  document.querySelectorAll('.radio-card-item').forEach(card => card.classList.remove('is-playing'));
 
   const overlay = document.getElementById('expanded-view-' + roleId);
   const contentDiv = document.getElementById('expanded-content-' + roleId);
@@ -842,36 +876,56 @@ function closeCarouselExpanded(roleId) {
   contentDiv.innerHTML = '';
 }
 
-/* Audio Play State & Equalizer Toggle Handler */
-document.addEventListener('play', function(e) {
-  if (e.target.tagName === 'AUDIO' || e.target.tagName === 'VIDEO') {
-    document.querySelectorAll('audio, video').forEach(media => {
-      if (media !== e.target && !media.paused) {
-        media.pause();
-      }
-    });
-  }
-  
-  if (e.target.tagName === 'AUDIO') {
-    document.querySelectorAll('.radio-card-item').forEach(card => card.classList.remove('is-playing'));
-    const parentCard = e.target.closest('.radio-card-item');
-    if (parentCard) parentCard.classList.add('is-playing');
-  }
-}, true);
+/* Custom Audio Card Toggle and Playback Management */
+function toggleAudioCard(cardElement, event) {
+  event.stopPropagation();
+  const audio = cardElement.querySelector('audio');
+  const graphic = cardElement.querySelector('.radio-button-graphic');
 
+  // Pause all other audio/video elements across the page
+  document.querySelectorAll('audio, video').forEach(media => {
+    if (media !== audio && !media.paused) {
+      media.pause();
+    }
+  });
+  document.querySelectorAll('.radio-card-item').forEach(card => {
+    if (card !== cardElement) card.classList.remove('is-playing');
+  });
+
+  if (audio.paused) {
+    audio.play().then(() => {
+      cardElement.classList.add('is-playing');
+      graphic.innerHTML = '&#10074;&#10074;'; // Pause icon
+    }).catch(err => {
+      console.log("Playback prevented or failed:", err);
+    });
+  } else {
+    audio.pause();
+    cardElement.classList.remove('is-playing');
+    graphic.innerHTML = '&#9658;'; // Play icon
+  }
+}
+
+// Reset play icons and equalizer state when audio naturally ends or pauses externally
 document.addEventListener('pause', function(e) {
   if (e.target.tagName === 'AUDIO') {
-    const parentCard = e.target.closest('.radio-card-item');
-    if (parentCard && e.target.paused) {
-      parentCard.classList.remove('is-playing');
+    const card = e.target.closest('.radio-card-item');
+    if (card && e.target.paused) {
+      card.classList.remove('is-playing');
+      const graphic = card.querySelector('.radio-button-graphic');
+      if (graphic) graphic.innerHTML = '&#9658;';
     }
   }
 }, true);
 
 document.addEventListener('ended', function(e) {
   if (e.target.tagName === 'AUDIO') {
-    const parentCard = e.target.closest('.radio-card-item');
-    if (parentCard) parentCard.classList.remove('is-playing');
+    const card = e.target.closest('.radio-card-item');
+    if (card) {
+      card.classList.remove('is-playing');
+      const graphic = card.querySelector('.radio-button-graphic');
+      if (graphic) graphic.innerHTML = '&#9658;';
+    }
   }
 }, true);
 </script>
