@@ -443,37 +443,36 @@ li { margin-bottom: 6px; font-size: 13px; }
   font-weight: bold;
   cursor: pointer;
 }
-/* Global Featured/Active Video Player Window (Appears above role cards when playing) */
-.active-video-player-container {
+/* Inline Embedded Video Player Window (Appears right between description text and thumbnails, ~40-50% width centered) */
+.inline-video-player-container {
   display: none;
   background: #111;
   border: 2px solid var(--highlight-blue);
   border-radius: 8px;
   padding: 15px;
-  margin-bottom: 20px;
+  margin: 15px auto;
+  max-width: 550px; /* roughly 40-50% screen width target */
   box-shadow: 0 8px 25px rgba(29, 78, 216, 0.4);
   position: relative;
   box-sizing: border-box;
   text-align: center;
 }
-.active-video-player-container.active {
+.inline-video-player-container.active {
   display: block;
 }
-.active-video-wrapper {
+.inline-video-wrapper {
   position: relative;
   width: 100%;
-  max-width: 550px; /* roughly 50-60% width target on desktop, scales full on mobile */
-  margin: 0 auto;
   padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
   background: #000;
   border-radius: 6px;
   overflow: hidden;
 }
-.active-video-wrapper iframe {
+.inline-video-wrapper iframe {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%; border: 0;
 }
-.close-active-video-btn {
+.close-inline-video-btn {
   position: absolute;
   top: 10px;
   right: 15px;
@@ -487,7 +486,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   cursor: pointer;
   z-index: 10;
 }
-.active-video-title {
+.inline-video-title {
   color: #fff;
   font-size: 14px;
   font-weight: bold;
@@ -552,21 +551,12 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-08-30 14:50 NZST</div>
+  <div class="revision-stamp">Rev: 2026-08-30 15:15 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
     <p>153 East Road, Ascot, Invercargill, Southland, New Zealand</p>
     <p>📧 uvshane@gmail.com &nbsp;|&nbsp; 📞 020 4085 4362 &nbsp;|&nbsp; D.O.B 24/4/1974</p>
-  </div>
-
-  <!-- Global Master Featured Video Player Window (Shared across entire page so only 1 plays at a time and auto-enlarges above) -->
-  <div id="masterVideoPlayer" class="active-video-player-container">
-    <button class="close-active-video-btn" onclick="closeMasterVideo()">Close / Stop</button>
-    <div id="masterVideoTitle" class="active-video-title">Now Playing</div>
-    <div class="active-video-wrapper">
-      <div id="masterVideoFrameSlot"></div>
-    </div>
   </div>
 
   <h2 class="section-title">Professional Career History & Portfolio</h2>
@@ -591,13 +581,23 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
 
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials :</h4>
-      <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 8px 0;">Alice & Tim discuss working with Shane (Tap to play in enlarged upper viewer)</p>
+      <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 8px 0;">Alice & Tim discuss working with Shane (Tap to play inline)</p>
+      
+      <!-- Inline Embedded Video Player Slot for Role 1 -->
+      <div id="inlinePlayer-role1" class="inline-video-player-container">
+        <button class="close-inline-video-btn" onclick="closeInlineVideo('role1')">Close / Stop</button>
+        <div id="inlineTitle-role1" class="inline-video-title">Now Playing</div>
+        <div class="inline-video-wrapper">
+          <div id="inlineFrameSlot-role1"></div>
+        </div>
+      </div>
+
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playMasterVideo('2Hj5Q6kU3nE', 'Alice & Tim Testimonial - Devil Burger')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo('role1', '2Hj5Q6kU3nE', 'Alice & Tim Testimonial - Devil Burger')">
           <img src="https://img.youtube.com/vi/2Hj5Q6kU3nE/hqdefault.jpg" alt="Devil Burger Video 1 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playMasterVideo('keXY9SO2CMA', 'Devil Burger Team Testimonial 2')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo('role1', 'keXY9SO2CMA', 'Devil Burger Team Testimonial 2')">
           <img src="https://img.youtube.com/vi/keXY9SO2CMA/hqdefault.jpg" alt="Devil Burger Video 2 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -681,8 +681,18 @@ li { margin-bottom: 6px; font-size: 13px; }
         </div>
 
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Midway through video wall installation</h4>
+        
+        <!-- Inline Embedded Video Player Slot for Video Wall -->
+        <div id="inlinePlayer-role1-wall" class="inline-video-player-container">
+          <button class="close-inline-video-btn" onclick="closeInlineVideo('role1-wall')">Close / Stop</button>
+          <div id="inlineTitle-role1-wall" class="inline-video-title">Now Playing</div>
+          <div class="inline-video-wrapper">
+            <div id="inlineFrameSlot-role1-wall"></div>
+          </div>
+        </div>
+
         <div class="video-grid">
-          <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="playMasterVideo('Y5qYcugyoD0', 'Video Wall Installation Progress')">
+          <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="playInlineVideo('role1-wall', 'Y5qYcugyoD0', 'Video Wall Installation Progress')">
             <img src="https://img.youtube.com/vi/Y5qYcugyoD0/hqdefault.jpg" alt="Video Wall Installation Progress Thumbnail">
             <div class="thumbnail-glow-overlay"></div>
           </div>
@@ -716,20 +726,30 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Navigated COVID disruptions and franchise realignment</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media & Campaign Showcases:</h4>
+      
+      <!-- Inline Embedded Video Player Slot for Role 2 -->
+      <div id="inlinePlayer-role2" class="inline-video-player-container">
+        <button class="close-inline-video-btn" onclick="closeInlineVideo('role2')">Close / Stop</button>
+        <div id="inlineTitle-role2" class="inline-video-title">Now Playing</div>
+        <div class="inline-video-wrapper">
+          <div id="inlineFrameSlot-role2"></div>
+        </div>
+      </div>
+
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playMasterVideo('sdTLpnb2hw4', 'XClean Client Testimonial')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo('role2', 'sdTLpnb2hw4', 'XClean Client Testimonial')">
           <img src="https://img.youtube.com/vi/sdTLpnb2hw4/hqdefault.jpg" alt="XClean Testimonial Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playMasterVideo('-OauqERIzjQ', 'XClean COVID Crisis Campaign')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo('role2', '-OauqERIzjQ', 'XClean COVID Crisis Campaign')">
           <img src="https://img.youtube.com/vi/-OauqERIzjQ/hqdefault.jpg" alt="XClean COVID Crisis Campaign Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playMasterVideo('o8yDFvZrZ-k', 'XClean Operations Showcase 1')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo('role2', 'o8yDFvZrZ-k', 'XClean Operations Showcase 1')">
           <img src="https://img.youtube.com/vi/o8yDFvZrZ-k/hqdefault.jpg" alt="XClean Additional Video 1 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playMasterVideo('uYoG6WgsOzk', 'XClean Operations Showcase 2')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo('role2', 'uYoG6WgsOzk', 'XClean Operations Showcase 2')">
           <img src="https://img.youtube.com/vi/uYoG6WgsOzk/hqdefault.jpg" alt="XClean Additional Video 2 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -821,16 +841,26 @@ li { margin-bottom: 6px; font-size: 13px; }
       </div>
 
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Shorts & Video Showcases:</h4>
+      
+      <!-- Inline Embedded Video Player Slot for Role 4 -->
+      <div id="inlinePlayer-role4" class="inline-video-player-container">
+        <button class="close-inline-video-btn" onclick="closeInlineVideo('role4')">Close / Stop</button>
+        <div id="inlineTitle-role4" class="inline-video-title">Now Playing</div>
+        <div class="inline-video-wrapper">
+          <div id="inlineFrameSlot-role4"></div>
+        </div>
+      </div>
+
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playMasterVideo('vgUFuPfXllc', 'ISee Digital Short Showcase 1')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo('role4', 'vgUFuPfXllc', 'ISee Digital Short Showcase 1')">
           <img src="https://img.youtube.com/vi/vgUFuPfXllc/hqdefault.jpg" alt="ISee Digital Short 1 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playMasterVideo('qfxGa20ZPG4', 'ISee Digital Short Showcase 2')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo('role4', 'qfxGa20ZPG4', 'ISee Digital Short Showcase 2')">
           <img src="https://img.youtube.com/vi/qfxGa20ZPG4/hqdefault.jpg" alt="ISee Digital Short 2 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="playMasterVideo('0z-yf2n8hQw', 'ISee Digital Feature Showcase')">
+        <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="playInlineVideo('role4', '0z-yf2n8hQw', 'ISee Digital Feature Showcase')">
           <img src="https://img.youtube.com/vi/0z-yf2n8hQw/hqdefault.jpg" alt="ISee Digital Short 3 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -859,8 +889,18 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li class="highlight-item" style="list-style: none; margin-left: -18px; font-style: italic;">Supported clients with integrity – we were misled by fraudulent “Teatmate” claims, advising on best practice and recourse since the product did not meet XClean or ACVM expectations</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
+      
+      <!-- Inline Embedded Video Player Slot for Role 5 -->
+      <div id="inlinePlayer-role5" class="inline-video-player-container">
+        <button class="close-inline-video-btn" onclick="closeInlineVideo('role5')">Close / Stop</button>
+        <div id="inlineTitle-role5" class="inline-video-title">Now Playing</div>
+        <div class="inline-video-wrapper">
+          <div id="inlineFrameSlot-role5"></div>
+        </div>
+      </div>
+
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playMasterVideo('sdTLpnb2hw4', 'XClean Growth Phase Testimonial')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo('role5', 'sdTLpnb2hw4', 'XClean Growth Phase Testimonial')">
           <img src="https://img.youtube.com/vi/sdTLpnb2hw4/hqdefault.jpg" alt="XClean Shared Testimonial Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -887,8 +927,18 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li class="highlight-item" style="list-style: none; margin-left: -18px; font-style: italic;">Encouraged to take on secondary fixed-term crisis/turnaround roles (meat processing, distribution, automotive) provided they did not interfere with road trips.</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
+      
+      <!-- Inline Embedded Video Player Slot for Role 6 -->
+      <div id="inlinePlayer-role6" class="inline-video-player-container">
+        <button class="close-inline-video-btn" onclick="closeInlineVideo('role6')">Close / Stop</button>
+        <div id="inlineTitle-role6" class="inline-video-title">Now Playing</div>
+        <div class="inline-video-wrapper">
+          <div id="inlineFrameSlot-role6"></div>
+        </div>
+      </div>
+
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playMasterVideo('MSCRSFC-tL0', 'Integrate Group / Sky Testimonial')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo('role6', 'MSCRSFC-tL0', 'Integrate Group / Sky Testimonial')">
           <img src="https://img.youtube.com/vi/MSCRSFC-tL0/hqdefault.jpg" alt="Integrate Group Testimonial Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -914,12 +964,22 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Delivered offsite promotional campaigns and full store operations.</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media References:</h4>
+      
+      <!-- Inline Embedded Video Player Slot for Role 7 -->
+      <div id="inlinePlayer-role7" class="inline-video-player-container">
+        <button class="close-inline-video-btn" onclick="closeInlineVideo('role7')">Close / Stop</button>
+        <div id="inlineTitle-role7" class="inline-video-title">Now Playing</div>
+        <div class="inline-video-wrapper">
+          <div id="inlineFrameSlot-role7"></div>
+        </div>
+      </div>
+
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playMasterVideo('S4JQVaSFlfc', 'Mobilefone Solutions Testimonial 1')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo('role7', 'S4JQVaSFlfc', 'Mobilefone Solutions Testimonial 1')">
           <img src="https://img.youtube.com/vi/S4JQVaSFlfc/hqdefault.jpg" alt="Mobilefone Solutions Testimonial 1 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playMasterVideo('qwOzstXXSpM', 'Mobilefone Solutions Testimonial 2')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo('role7', 'qwOzstXXSpM', 'Mobilefone Solutions Testimonial 2')">
           <img src="https://img.youtube.com/vi/qwOzstXXSpM/hqdefault.jpg" alt="Mobilefone Solutions Testimonial 2 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -970,8 +1030,18 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>2001 group successfully traded out of receivership.</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
+      
+      <!-- Inline Embedded Video Player Slot for Role 9 -->
+      <div id="inlinePlayer-role9" class="inline-video-player-container">
+        <button class="close-inline-video-btn" onclick="closeInlineVideo('role9')">Close / Stop</button>
+        <div id="inlineTitle-role9" class="inline-video-title">Now Playing</div>
+        <div class="inline-video-wrapper">
+          <div id="inlineFrameSlot-role9"></div>
+        </div>
+      </div>
+
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playMasterVideo('V2HS1ttGNLY', 'Smiths City Testimonial')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo('role9', 'V2HS1ttGNLY', 'Smiths City Testimonial')">
           <img src="https://img.youtube.com/vi/V2HS1ttGNLY/hqdefault.jpg" alt="Smiths City Testimonial Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -989,7 +1059,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 
 <script>
 function toggleRole(event, roleId) {
-  if (event.target.classList.contains('detail-link') || event.target.closest('.portfolio-btn-container') || event.target.closest('.marquee-container') || event.target.closest('.carousel-expanded-overlay') || event.target.closest('.radio-grid') || event.target.closest('.portfolio-sub-section')) return;
+  if (event.target.classList.contains('detail-link') || event.target.closest('.portfolio-btn-container') || event.target.closest('.marquee-container') || event.target.closest('.carousel-expanded-overlay') || event.target.closest('.radio-grid') || event.target.closest('.portfolio-sub-section') || event.target.closest('.inline-video-player-container')) return;
   const content = document.getElementById(roleId);
   const dbBtn = document.getElementById('devilBurgerPortfolioBtn');
   const iseeBtn = document.getElementById('iseeDigitalPortfolioBtn');
@@ -1090,9 +1160,9 @@ function closeModal() {
   document.getElementById('imgModal').style.display = "none";
 }
 
-/* Master Shared Video Player Logic: Auto-enlarges above, stops radio, and guarantees only 1 video or audio clip plays at a time across the page */
-function playMasterVideo(videoId, videoTitle) {
-  // Stop all playing audio cards
+/* Global Inline Embedded Video Player Logic: Opens right between text description and video thumbnails within the specific role section, auto-closes others, stops radio, and ensures only 1 media clip plays at a time */
+function playInlineVideo(containerKey, videoId, videoTitle) {
+  // Stop all playing audio cards across the page
   document.querySelectorAll('audio').forEach(audio => {
     if (!audio.paused) audio.pause();
   });
@@ -1103,31 +1173,40 @@ function playMasterVideo(videoId, videoTitle) {
     vid.pause();
   });
 
-  const masterPlayer = document.getElementById('masterVideoPlayer');
-  const titleSlot = document.getElementById('masterVideoTitle');
-  const frameSlot = document.getElementById('masterVideoFrameSlot');
+  // Close all other active inline video players globally
+  document.querySelectorAll('.inline-video-player-container').forEach(container => {
+    container.classList.remove('active');
+    container.querySelector('.inline-video-wrapper').innerHTML = '';
+  });
+
+  const playerContainer = document.getElementById('inlinePlayer-' + containerKey);
+  const titleSlot = document.getElementById('inlineTitle-' + containerKey);
+  const frameSlot = document.getElementById('inlineFrameSlot-' + containerKey);
 
   titleSlot.textContent = "▶ " + videoTitle;
   frameSlot.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>`;
   
-  masterPlayer.classList.add('active');
+  playerContainer.classList.add('active');
 
-  // Smoothly scroll the master player into view at the top of the screen
-  masterPlayer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Smoothly scroll the inline player into view
+  playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-function closeMasterVideo() {
-  const masterPlayer = document.getElementById('masterVideoPlayer');
-  const frameSlot = document.getElementById('masterVideoFrameSlot');
+function closeInlineVideo(containerKey) {
+  const playerContainer = document.getElementById('inlinePlayer-' + containerKey);
+  const frameSlot = document.getElementById('inlineFrameSlot-' + containerKey);
   
-  masterPlayer.classList.remove('active');
+  playerContainer.classList.remove('active');
   frameSlot.innerHTML = '';
 }
 
 /* Interactive Social Media Carousel UX Functions with Auto-Close & Exclusive Playback */
 function expandCarouselItem(roleId, type, source, captionText) {
-  // Close active master youtube video if playing
-  closeMasterVideo();
+  // Close active inline videos if playing
+  document.querySelectorAll('.inline-video-player-container').forEach(container => {
+    container.classList.remove('active');
+    container.querySelector('.inline-video-wrapper').innerHTML = '';
+  });
 
   document.querySelectorAll('audio, video').forEach(media => {
     if (!media.paused) media.pause();
@@ -1166,8 +1245,11 @@ function closeCarouselExpanded(roleId) {
 function toggleAudioCard(cardElement, event) {
   event.stopPropagation();
   
-  // Close active master youtube video if playing
-  closeMasterVideo();
+  // Close active inline videos if playing
+  document.querySelectorAll('.inline-video-player-container').forEach(container => {
+    container.classList.remove('active');
+    container.querySelector('.inline-video-wrapper').innerHTML = '';
+  });
 
   const audio = cardElement.querySelector('audio');
 
