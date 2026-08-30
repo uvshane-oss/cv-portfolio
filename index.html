@@ -551,7 +551,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-08-30 15:35 NZST</div>
+  <div class="revision-stamp">Rev: 2026-08-30 16:10 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1060,44 +1060,41 @@ li { margin-bottom: 6px; font-size: 13px; }
 <script>
 function toggleRole(event, roleId) {
   if (event.target.classList.contains('detail-link') || event.target.closest('.portfolio-btn-container') || event.target.closest('.marquee-container') || event.target.closest('.carousel-expanded-overlay') || event.target.closest('.radio-grid') || event.target.closest('.portfolio-sub-section') || event.target.closest('.inline-video-player-container')) return;
-  const content = document.getElementById(roleId);
-  const dbBtn = document.getElementById('devilBurgerPortfolioBtn');
-  const iseeBtn = document.getElementById('iseeDigitalPortfolioBtn');
-  const xcleanBtn = document.getElementById('xcleanPortfolioBtn');
   
-  if (content.classList.contains("show")) {
-    content.classList.remove("show");
+  const targetContent = document.getElementById(roleId);
+  const isCurrentlyOpen = targetContent.classList.contains("show");
+
+  // Close all open roles and reset their sub-menus/media players globally
+  document.querySelectorAll('.collapsible-content').forEach(content => {
+    content.classList.remove('show');
+  });
+  document.querySelectorAll('.portfolio-sub-section').forEach(sub => {
+    sub.classList.remove('show');
+  });
+  document.querySelectorAll('.portfolio-image-btn').forEach(btn => {
+    btn.classList.remove('pulse-animation');
+  });
+  document.querySelectorAll('.inline-video-player-container').forEach(container => {
+    container.classList.remove('active');
+    const iframe = container.querySelector('iframe');
+    if (iframe) iframe.src = '';
+  });
+
+  // If the clicked role wasn't already open, open it and handle initial button pulse state
+  if (!isCurrentlyOpen) {
+    targetContent.classList.add("show");
+    
     if (roleId === 'role1') {
-      document.getElementById('devilBurgerPortfolioSection').classList.remove('show');
-      if (dbBtn) dbBtn.classList.remove('pulse-animation');
+      const dbBtn = document.getElementById('devilBurgerPortfolioBtn');
+      if (dbBtn) dbBtn.classList.add('pulse-animation');
     }
     if (roleId === 'role4') {
-      document.getElementById('iseeDigitalPortfolioSection').classList.remove('show');
-      if (iseeBtn) iseeBtn.classList.remove('pulse-animation');
+      const iseeBtn = document.getElementById('iseeDigitalPortfolioBtn');
+      if (iseeBtn) iseeBtn.classList.add('pulse-animation');
     }
     if (roleId === 'role2') {
-      document.getElementById('xcleanPortfolioSection').classList.remove('show');
-      if (xcleanBtn) xcleanBtn.classList.remove('pulse-animation');
-    }
-  } else {
-    content.classList.add("show");
-    if (roleId === 'role1' && dbBtn) {
-      const portfolioSec = document.getElementById('devilBurgerPortfolioSection');
-      if (!portfolioSec.classList.contains('show')) {
-        dbBtn.classList.add('pulse-animation');
-      }
-    }
-    if (roleId === 'role4' && iseeBtn) {
-      const portfolioSec = document.getElementById('iseeDigitalPortfolioSection');
-      if (!portfolioSec.classList.contains('show')) {
-        iseeBtn.classList.add('pulse-animation');
-      }
-    }
-    if (roleId === 'role2' && xcleanBtn) {
-      const portfolioSec = document.getElementById('xcleanPortfolioSection');
-      if (!portfolioSec.classList.contains('show')) {
-        xcleanBtn.classList.add('pulse-animation');
-      }
+      const xcleanBtn = document.getElementById('xcleanPortfolioBtn');
+      if (xcleanBtn) xcleanBtn.classList.add('pulse-animation');
     }
   }
 }
