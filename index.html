@@ -284,38 +284,14 @@ li { margin-bottom: 6px; font-size: 13px; }
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-/* Radio Static Grid Layout - 3 across, 2 below evenly spaced */
+/* Unified Responsive Radio Grid Layout (Flexbox Auto-Wrap with Centering) */
 .radio-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
   margin-top: 15px;
   margin-bottom: 15px;
-}
-@media(min-width: 600px) {
-  .radio-grid { 
-    grid-template-columns: repeat(3, 1fr); 
-  }
-  .radio-card-item:nth-child(4) {
-    grid-column: 1 / 2;
-    margin-left: 50%;
-  }
-  .radio-card-item:nth-child(5) {
-    grid-column: 2 / 3;
-    margin-left: 50%;
-  }
-}
-@media(min-width: 900px) {
-  .radio-card-item:nth-child(4) {
-    grid-column: 1 / span 1;
-    margin-left: 0;
-    transform: translateX(50%);
-  }
-  .radio-card-item:nth-child(5) {
-    grid-column: span 1 / 4;
-    margin-left: 0;
-    transform: translateX(-50%);
-  }
 }
 .radio-card-item {
   background-image: url('radio button.png');
@@ -334,6 +310,13 @@ li { margin-bottom: 6px; font-size: 13px; }
   overflow: hidden;
   cursor: pointer;
   transition: all 0.2s ease;
+  width: calc(33.333% - 7px);
+  min-width: 130px;
+}
+@media(max-width: 600px) {
+  .radio-card-item {
+    width: calc(50% - 6px);
+  }
 }
 .radio-card-item:hover {
   border-color: var(--highlight-blue);
@@ -460,15 +443,12 @@ li { margin-bottom: 6px; font-size: 13px; }
   font-weight: bold;
   cursor: pointer;
 }
-/* Video Grid */
+/* Unified Permanent Side-by-Side Video Grid Layout */
 .video-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
   margin-top: 15px;
-}
-@media(min-width: 600px) {
-  .video-grid { grid-template-columns: 1fr 1fr; }
 }
 .video-wrapper {
   position: relative;
@@ -502,7 +482,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-08-30 14:15 NZST</div>
+  <div class="revision-stamp">Rev: 2026-08-30 14:19 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
