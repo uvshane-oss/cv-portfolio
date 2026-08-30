@@ -443,6 +443,59 @@ li { margin-bottom: 6px; font-size: 13px; }
   font-weight: bold;
   cursor: pointer;
 }
+/* Global Featured/Active Video Player Window (Appears above role cards when playing) */
+.active-video-player-container {
+  display: none;
+  background: #111;
+  border: 2px solid var(--highlight-blue);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 25px rgba(29, 78, 216, 0.4);
+  position: relative;
+  box-sizing: border-box;
+  text-align: center;
+}
+.active-video-player-container.active {
+  display: block;
+}
+.active-video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 550px; /* roughly 50-60% width target on desktop, scales full on mobile */
+  margin: 0 auto;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  background: #000;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.active-video-wrapper iframe {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%; border: 0;
+}
+.close-active-video-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 10;
+}
+.active-video-title {
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: left;
+  padding-right: 80px;
+}
+
 /* Unified Permanent Side-by-Side Video Grid Layout with Thumbnail Swap */
 .video-grid {
   display: grid;
@@ -499,12 +552,21 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-08-30 14:34 NZST</div>
+  <div class="revision-stamp">Rev: 2026-08-30 14:50 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
     <p>153 East Road, Ascot, Invercargill, Southland, New Zealand</p>
     <p>📧 uvshane@gmail.com &nbsp;|&nbsp; 📞 020 4085 4362 &nbsp;|&nbsp; D.O.B 24/4/1974</p>
+  </div>
+
+  <!-- Global Master Featured Video Player Window (Shared across entire page so only 1 plays at a time and auto-enlarges above) -->
+  <div id="masterVideoPlayer" class="active-video-player-container">
+    <button class="close-active-video-btn" onclick="closeMasterVideo()">Close / Stop</button>
+    <div id="masterVideoTitle" class="active-video-title">Now Playing</div>
+    <div class="active-video-wrapper">
+      <div id="masterVideoFrameSlot"></div>
+    </div>
   </div>
 
   <h2 class="section-title">Professional Career History & Portfolio</h2>
@@ -529,13 +591,13 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
 
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials :</h4>
-      <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 8px 0;">Alice & Tim discuss working with Shane (Tap thumbnail to play instantly)</p>
+      <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 8px 0;">Alice & Tim discuss working with Shane (Tap to play in enlarged upper viewer)</p>
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, '2Hj5Q6kU3nE')">
+        <div class="video-thumbnail-card" onclick="playMasterVideo('2Hj5Q6kU3nE', 'Alice & Tim Testimonial - Devil Burger')">
           <img src="https://img.youtube.com/vi/2Hj5Q6kU3nE/hqdefault.jpg" alt="Devil Burger Video 1 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'keXY9SO2CMA')">
+        <div class="video-thumbnail-card" onclick="playMasterVideo('keXY9SO2CMA', 'Devil Burger Team Testimonial 2')">
           <img src="https://img.youtube.com/vi/keXY9SO2CMA/hqdefault.jpg" alt="Devil Burger Video 2 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -620,7 +682,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Midway through video wall installation</h4>
         <div class="video-grid">
-          <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="loadYouTubeVideo(this, 'Y5qYcugyoD0')">
+          <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="playMasterVideo('Y5qYcugyoD0', 'Video Wall Installation Progress')">
             <img src="https://img.youtube.com/vi/Y5qYcugyoD0/hqdefault.jpg" alt="Video Wall Installation Progress Thumbnail">
             <div class="thumbnail-glow-overlay"></div>
           </div>
@@ -655,19 +717,19 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media & Campaign Showcases:</h4>
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'sdTLpnb2hw4')">
+        <div class="video-thumbnail-card" onclick="playMasterVideo('sdTLpnb2hw4', 'XClean Client Testimonial')">
           <img src="https://img.youtube.com/vi/sdTLpnb2hw4/hqdefault.jpg" alt="XClean Testimonial Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, '-OauqERIzjQ')">
+        <div class="video-thumbnail-card" onclick="playMasterVideo('-OauqERIzjQ', 'XClean COVID Crisis Campaign')">
           <img src="https://img.youtube.com/vi/-OauqERIzjQ/hqdefault.jpg" alt="XClean COVID Crisis Campaign Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'o8yDFvZrZ-k')">
+        <div class="video-thumbnail-card" onclick="playMasterVideo('o8yDFvZrZ-k', 'XClean Operations Showcase 1')">
           <img src="https://img.youtube.com/vi/o8yDFvZrZ-k/hqdefault.jpg" alt="XClean Additional Video 1 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'uYoG6WgsOzk')">
+        <div class="video-thumbnail-card" onclick="playMasterVideo('uYoG6WgsOzk', 'XClean Operations Showcase 2')">
           <img src="https://img.youtube.com/vi/uYoG6WgsOzk/hqdefault.jpg" alt="XClean Additional Video 2 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -760,15 +822,15 @@ li { margin-bottom: 6px; font-size: 13px; }
 
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Shorts & Video Showcases:</h4>
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'vgUFuPfXllc')">
+        <div class="video-thumbnail-card" onclick="playMasterVideo('vgUFuPfXllc', 'ISee Digital Short Showcase 1')">
           <img src="https://img.youtube.com/vi/vgUFuPfXllc/hqdefault.jpg" alt="ISee Digital Short 1 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'qfxGa20ZPG4')">
+        <div class="video-thumbnail-card" onclick="playMasterVideo('qfxGa20ZPG4', 'ISee Digital Short Showcase 2')">
           <img src="https://img.youtube.com/vi/qfxGa20ZPG4/hqdefault.jpg" alt="ISee Digital Short 2 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="loadYouTubeVideo(this, '0z-yf2n8hQw')">
+        <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="playMasterVideo('0z-yf2n8hQw', 'ISee Digital Feature Showcase')">
           <img src="https://img.youtube.com/vi/0z-yf2n8hQw/hqdefault.jpg" alt="ISee Digital Short 3 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -798,7 +860,7 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'sdTLpnb2hw4')">
+        <div class="video-thumbnail-card" onclick="playMasterVideo('sdTLpnb2hw4', 'XClean Growth Phase Testimonial')">
           <img src="https://img.youtube.com/vi/sdTLpnb2hw4/hqdefault.jpg" alt="XClean Shared Testimonial Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -826,7 +888,7 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'MSCRSFC-tL0')">
+        <div class="video-thumbnail-card" onclick="playMasterVideo('MSCRSFC-tL0', 'Integrate Group / Sky Testimonial')">
           <img src="https://img.youtube.com/vi/MSCRSFC-tL0/hqdefault.jpg" alt="Integrate Group Testimonial Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -853,11 +915,11 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media References:</h4>
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'S4JQVaSFlfc')">
+        <div class="video-thumbnail-card" onclick="playMasterVideo('S4JQVaSFlfc', 'Mobilefone Solutions Testimonial 1')">
           <img src="https://img.youtube.com/vi/S4JQVaSFlfc/hqdefault.jpg" alt="Mobilefone Solutions Testimonial 1 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'qwOzstXXSpM')">
+        <div class="video-thumbnail-card" onclick="playMasterVideo('qwOzstXXSpM', 'Mobilefone Solutions Testimonial 2')">
           <img src="https://img.youtube.com/vi/qwOzstXXSpM/hqdefault.jpg" alt="Mobilefone Solutions Testimonial 2 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -909,7 +971,7 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'V2HS1ttGNLY')">
+        <div class="video-thumbnail-card" onclick="playMasterVideo('V2HS1ttGNLY', 'Smiths City Testimonial')">
           <img src="https://img.youtube.com/vi/V2HS1ttGNLY/hqdefault.jpg" alt="Smiths City Testimonial Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -1028,19 +1090,46 @@ function closeModal() {
   document.getElementById('imgModal').style.display = "none";
 }
 
-/* YouTube Thumbnail Swap Function for Immediate One-Tap Play */
-function loadYouTubeVideo(container, videoId) {
+/* Master Shared Video Player Logic: Auto-enlarges above, stops radio, and guarantees only 1 video or audio clip plays at a time across the page */
+function playMasterVideo(videoId, videoTitle) {
+  // Stop all playing audio cards
   document.querySelectorAll('audio').forEach(audio => {
     if (!audio.paused) audio.pause();
   });
   document.querySelectorAll('.radio-card-item').forEach(card => card.classList.remove('is-playing'));
 
-  container.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>`;
+  // Pause/stop any open social media carousel videos
+  document.querySelectorAll('.carousel-expanded-overlay video').forEach(vid => {
+    vid.pause();
+  });
+
+  const masterPlayer = document.getElementById('masterVideoPlayer');
+  const titleSlot = document.getElementById('masterVideoTitle');
+  const frameSlot = document.getElementById('masterVideoFrameSlot');
+
+  titleSlot.textContent = "▶ " + videoTitle;
+  frameSlot.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>`;
+  
+  masterPlayer.classList.add('active');
+
+  // Smoothly scroll the master player into view at the top of the screen
+  masterPlayer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closeMasterVideo() {
+  const masterPlayer = document.getElementById('masterVideoPlayer');
+  const frameSlot = document.getElementById('masterVideoFrameSlot');
+  
+  masterPlayer.classList.remove('active');
+  frameSlot.innerHTML = '';
 }
 
 /* Interactive Social Media Carousel UX Functions with Auto-Close & Exclusive Playback */
 function expandCarouselItem(roleId, type, source, captionText) {
-  document.querySelectorAll('video, audio').forEach(media => {
+  // Close active master youtube video if playing
+  closeMasterVideo();
+
+  document.querySelectorAll('audio, video').forEach(media => {
     if (!media.paused) media.pause();
   });
   document.querySelectorAll('.radio-card-item').forEach(card => card.classList.remove('is-playing'));
@@ -1073,9 +1162,13 @@ function closeCarouselExpanded(roleId) {
   contentDiv.innerHTML = '';
 }
 
-/* Custom Audio Card Toggle and Playback Management */
+/* Custom Audio Card Toggle and Playback Management (Ensures radio turns off YouTube and vice versa) */
 function toggleAudioCard(cardElement, event) {
   event.stopPropagation();
+  
+  // Close active master youtube video if playing
+  closeMasterVideo();
+
   const audio = cardElement.querySelector('audio');
 
   document.querySelectorAll('audio, video').forEach(media => {
