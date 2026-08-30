@@ -230,7 +230,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   object-fit: contain;
   border-radius: 4px;
 }
-/* Auto-Scrolling Marquee Gallery Styling */
+/* Auto-Scrolling Marquee Gallery Styling with Mobile Width/Height Stability */
 .marquee-container {
   position: relative;
   width: 100%;
@@ -251,6 +251,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 }
 .marquee-item {
   width: 260px;
+  min-width: 260px;
   margin-right: 15px;
   background: #111;
   border-radius: 4px;
@@ -264,7 +265,8 @@ li { margin-bottom: 6px; font-size: 13px; }
 .marquee-item img, .marquee-item video {
   width: 100%;
   height: 160px;
-  object-fit: contain;
+  min-height: 160px;
+  object-fit: cover;
   display: block;
   background: #000;
 }
@@ -500,7 +502,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-08-30 13:42 NZST</div>
+  <div class="revision-stamp">Rev: 2026-08-30 14:15 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -511,6 +513,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   <h2 class="section-title">Professional Career History & Portfolio</h2>
   <p style="font-size: 13px; color: var(--text-muted); margin-top: -10px; margin-bottom: 20px;">Tap any role below to view details, media, and campaign highlights.</p>
 
+  <!-- ROLE 1: Devil Burger -->
   <div class="role-card" onclick="toggleRole(event, 'role1')">
     <div class="role-meta">2023–2025</div>
     <div class="main-role-title">Digital Project Manager – Devil Burger</div>
@@ -535,12 +538,10 @@ li { margin-bottom: 6px; font-size: 13px; }
         <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/keXY9SO2CMA" title="Devil Burger Video 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
       </div>
 
-      <!-- Centered Pulsing Portfolio Image Button replacing text link -->
       <div class="portfolio-btn-container">
         <img id="devilBurgerPortfolioBtn" src="DB portfolio.png" alt="Devil Burger Portfolio" class="portfolio-image-btn" onclick="toggleDevilBurgerPortfolio(event)">
       </div>
 
-      <!-- Hidden Devil Burger Portfolio Sub-Section -->
       <div id="devilBurgerPortfolioSection" class="portfolio-sub-section">
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Social Media Advertising</h4>
         <div class="carousel-expanded-overlay" id="expanded-view-role1">
@@ -550,35 +551,36 @@ li { margin-bottom: 6px; font-size: 13px; }
         <div class="marquee-container" id="marquee-role1">
           <div class="marquee-track">
             <div class="marquee-item" onclick="expandCarouselItem('role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
-              <video src="social media 1.mp4#t=1" preload="metadata" muted loop playsinline></video>
+              <video src="social media 1.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
               <p class="marquee-caption">Social Media Clip 1</p>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem('role1', 'video', 'social media 2.mp4', 'Social Media Campaign 2')">
-              <video src="social media 2.mp4" muted loop playsinline></video>
+              <video src="social media 2.mp4" preload="metadata" muted loop playsinline webkit-playsinline></video>
               <p class="marquee-caption">Social Media Clip 2</p>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem('role1', 'video', 'social media 3.mp4', 'Social Media Campaign 3')">
-              <video src="social media 3.mp4" muted loop playsinline></video>
+              <video src="social media 3.mp4" preload="metadata" muted loop playsinline webkit-playsinline></video>
               <p class="marquee-caption">Social Media Clip 3</p>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem('role1', 'video', 'social media 4.mp4', 'Social Media Campaign 4')">
-              <video src="social media 4.mp4#t=1" preload="metadata" muted loop playsinline></video>
+              <video src="social media 4.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
               <p class="marquee-caption">Social Media Clip 4</p>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem('role1', 'image', 'social media carosel.jpg', 'Social Media Carousel Assets')">
-              <img src="social media carosel.jpg" alt="Social Media Carousel">
+              <img src="social media carosel.jpg" alt="Social Media Carousel" width="260" height="160">
               <p class="marquee-caption">Carousel Layout</p>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem('role1', 'image', '$10 Tuesday for summer .jpg', 'Summer Promotion Artwork')">
-              <img src="$10 Tuesday for summer .jpg" alt="Summer Promo Campaign">
+              <img src="$10 Tuesday for summer .jpg" alt="Summer Promo Campaign" width="260" height="160">
               <p class="marquee-caption">Summer Promotion Artwork</p>
             </div>
+            <!-- Duplicated loop for smooth infinite scroll -->
             <div class="marquee-item" onclick="expandCarouselItem('role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
-              <video src="social media 1.mp4#t=1" preload="metadata" muted loop playsinline></video>
+              <video src="social media 1.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
               <p class="marquee-caption">Social Media Clip 1</p>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem('role1', 'video', 'social media 2.mp4', 'Social Media Campaign 2')">
-              <video src="social media 2.mp4" muted loop playsinline></video>
+              <video src="social media 2.mp4" preload="metadata" muted loop playsinline webkit-playsinline></video>
               <p class="marquee-caption">Social Media Clip 2</p>
             </div>
           </div>
@@ -587,53 +589,28 @@ li { margin-bottom: 6px; font-size: 13px; }
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Radio produced and voiced by Shane</h4>
         <div class="radio-grid">
           <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
-            <audio preload="none">
-              <source src="Radio DEVILSTAIRCASE_FRIDAY.wav" type="audio/wav">
-              Your browser does not support the audio element.
-            </audio>
-            <div class="equalizer-overlay">
-              <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-            </div>
+            <audio preload="none"><source src="Radio DEVILSTAIRCASE_FRIDAY.wav" type="audio/wav">Your browser does not support the audio element.</audio>
+            <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
             <div class="radio-title">Devil's Staircase Friday</div>
           </div>
           <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
-            <audio preload="none">
-              <source src="Radio Long Weekend.mp3" type="audio/mpeg">
-              Your browser does not support the audio element.
-            </audio>
-            <div class="equalizer-overlay">
-              <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-            </div>
+            <audio preload="none"><source src="Radio Long Weekend.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
+            <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
             <div class="radio-title">Long Weekend</div>
           </div>
           <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
-            <audio preload="none">
-              <source src="Radio PORKDEATH.wav" type="audio/wav">
-              Your browser does not support the audio element.
-            </audio>
-            <div class="equalizer-overlay">
-              <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-            </div>
+            <audio preload="none"><source src="Radio PORKDEATH.wav" type="audio/wav">Your browser does not support the audio element.</audio>
+            <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
             <div class="radio-title">Death by Pork</div>
           </div>
           <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
-            <audio preload="none">
-              <source src="Radio SPICEYBEEF.wav" type="audio/wav">
-              Your browser does not support the audio element.
-            </audio>
-            <div class="equalizer-overlay">
-              <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-            </div>
+            <audio preload="none"><source src="Radio SPICEYBEEF.wav" type="audio/wav">Your browser does not support the audio element.</audio>
+            <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
             <div class="radio-title">Spicy Beef</div>
           </div>
           <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
-            <audio preload="none">
-              <source src="Radio Salmon.mp3" type="audio/mpeg">
-              Your browser does not support the audio element.
-            </audio>
-            <div class="equalizer-overlay">
-              <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-            </div>
+            <audio preload="none"><source src="Radio Salmon.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
+            <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
             <div class="radio-title">Salmon</div>
           </div>
         </div>
@@ -650,6 +627,7 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
+  <!-- ROLE 2: XClean National Sales Manager (2018-2022) -->
   <div class="role-card" onclick="toggleRole(event, 'role2')">
     <div class="role-meta">2018–2022</div>
     <div class="main-role-title">National Sales Manager – XClean</div>
@@ -679,19 +657,16 @@ li { margin-bottom: 6px; font-size: 13px; }
         <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/uYoG6WgsOzk" title="XClean Additional Video 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
       </div>
 
-      <!-- Centered Pulsing Portfolio Image Button: XClean Portfolio -->
       <div class="portfolio-btn-container">
         <img id="xcleanPortfolioBtn" src="xclean portfolio-4.png" alt="XClean Portfolio" class="portfolio-image-btn" onclick="toggleXcleanPortfolio(event)">
       </div>
 
-      <!-- Hidden XClean Portfolio Sub-Section -->
       <div id="xcleanPortfolioSection" class="portfolio-sub-section">
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">XClean Extended Portfolio & Campaign Assets</h4>
         <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 10px 0;">Additional documentation, fleet deployment visuals, and formulation records.</p>
-        <!-- Content placeholder for XClean portfolio expansion -->
         <div class="portfolio-gallery">
           <div class="portfolio-img-wrapper" onclick="openModal('xclean.jpg')">
-            <img src="xclean.jpg" alt="XClean Operations">
+            <img src="xclean.jpg" alt="XClean Operations" width="260" height="160">
             <p class="marquee-caption">XClean Fleet & Brand Asset</p>
           </div>
         </div>
@@ -701,6 +676,7 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
+  <!-- ROLE 3: Royal Albatross Centre -->
   <div class="role-card" onclick="toggleRole(event, 'role3')">
     <div class="role-meta">2017</div>
     <div class="main-role-title">Principal A/V Architect – Royal Albatross Centre</div>
@@ -719,16 +695,20 @@ li { margin-bottom: 6px; font-size: 13px; }
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Supporting Portfolio</h4>
       <div class="marquee-container">
         <div class="marquee-track">
-          <div class="marquee-item" onclick="openModal('Screen end & projector.jpg')"><img src="Screen end & projector.jpg" alt="Screen end & projector"><p class="marquee-caption">Screen end & projector</p></div>
-          <div class="marquee-item" onclick="openModal('Screen side.jpg')"><img src="Screen side.jpg" alt="Screen side"><p class="marquee-caption">Screen side</p></div>
-          <div class="marquee-item" onclick="openModal('back of screen.jpg')"><img src="back of screen.jpg" alt="back of screen"><p class="marquee-caption">back of screen</p></div>
-          <div class="marquee-item" onclick="openModal('front on.jpg')"><img src="front on.jpg" alt="front on"><p class="marquee-caption">front on</p></div>
+          <div class="marquee-item" onclick="openModal('Screen end & projector.jpg')"><img src="Screen end & projector.jpg" alt="Screen end & projector" width="260" height="160"><p class="marquee-caption">Screen end & projector</p></div>
+          <div class="marquee-item" onclick="openModal('Screen side.jpg')"><img src="Screen side.jpg" alt="Screen side" width="260" height="160"><p class="marquee-caption">Screen side</p></div>
+          <div class="marquee-item" onclick="openModal('back of screen.jpg')"><img src="back of screen.jpg" alt="back of screen" width="260" height="160"><p class="marquee-caption">back of screen</p></div>
+          <div class="marquee-item" onclick="openModal('front on.jpg')"><img src="front on.jpg" alt="front on" width="260" height="160"><p class="marquee-caption">front on</p></div>
+          <!-- Duplicated loop for smooth infinite scroll -->
+          <div class="marquee-item" onclick="openModal('Screen end & projector.jpg')"><img src="Screen end & projector.jpg" alt="Screen end & projector" width="260" height="160"><p class="marquee-caption">Screen end & projector</p></div>
+          <div class="marquee-item" onclick="openModal('Screen side.jpg')"><img src="Screen side.jpg" alt="Screen side" width="260" height="160"><p class="marquee-caption">Screen side</p></div>
         </div>
       </div>
       <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'Albatross Centre A/V')">View Full Detailed Case Study &rarr;</span></div>
     </div>
   </div>
 
+  <!-- ROLE 4: ISee Digital -->
   <div class="role-card" onclick="toggleRole(event, 'role4')">
     <div class="role-meta">2015–2017</div>
     <div class="main-role-title">Site Acquisition Manager – ISee Digital</div>
@@ -747,18 +727,16 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Handled physical installation for the majority of the network.</li>
       </ul>
 
-      <!-- Centered Pulsing Portfolio Image Button: ISee Digital Portfolio placed right before Shorts & Video Showcases -->
       <div class="portfolio-btn-container">
         <img id="iseeDigitalPortfolioBtn" src="isee digital portfolio.png" alt="ISee Digital Portfolio" class="portfolio-image-btn" onclick="toggleIseePortfolio(event)">
       </div>
 
-      <!-- Hidden ISee Digital Portfolio Sub-Section -->
       <div id="iseeDigitalPortfolioSection" class="portfolio-sub-section">
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">ISee Digital National Network Expansion Assets</h4>
         <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 10px 0;">Documentation and photographic records covering billboard rollouts and retail deployments.</p>
         <div class="portfolio-gallery">
           <div class="portfolio-img-wrapper" onclick="openModal('isee digital logo.jpeg')">
-            <img src="isee digital logo.jpeg" alt="ISee Digital Network Asset">
+            <img src="isee digital logo.jpeg" alt="ISee Digital Network Asset" width="260" height="160">
             <p class="marquee-caption">Network Rollout Map & Assets</p>
           </div>
         </div>
@@ -774,6 +752,7 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
+  <!-- ROLE 5: XClean Growth Phase (2013-2015) -->
   <div class="role-card" onclick="toggleRole(event, 'role5')">
     <div class="role-meta">2013–2015</div>
     <div class="main-role-title">Sales Manager – XClean</div>
@@ -800,6 +779,7 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
+  <!-- ROLE 6: Regional Sales Manager – Integrate Group / Sky (2007-2014) -->
   <div class="role-card" onclick="toggleRole(event, 'role6')">
     <div class="role-meta">2007–2014</div>
     <div class="main-role-title">Regional Sales Manager – Integrate Group / Sky</div>
@@ -824,6 +804,7 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
+  <!-- ROLE 7: Mobilefone Solutions (2002-2006) -->
   <div class="role-card" onclick="toggleRole(event, 'role7')">
     <div class="role-meta">2002–2006</div>
     <div class="main-role-title">Manager (Vodafone Franchise) – Mobilefone Solutions</div>
@@ -848,6 +829,7 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
+  <!-- ROLE 8: H&J Smith (2001-2002) -->
   <div class="role-card" onclick="toggleRole(event, 'role8')">
     <div class="role-meta">2001–2002</div>
     <div class="main-role-title">Department Manager – H&J Smith</div>
@@ -866,6 +848,7 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
+  <!-- ROLE 9: Smiths City / Powerstore (1992-2001) -->
   <div class="role-card" onclick="toggleRole(event, 'role9')">
     <div class="role-meta">1992–2001</div>
     <div class="main-role-title">Area & Branch Manager – Smiths City / Powerstore</div>
@@ -912,7 +895,6 @@ function toggleRole(event, roleId) {
   
   if (content.classList.contains("show")) {
     content.classList.remove("show");
-    // Also close portfolio sub-sections if role collapses
     if (roleId === 'role1') {
       document.getElementById('devilBurgerPortfolioSection').classList.remove('show');
       if (dbBtn) dbBtn.classList.remove('pulse-animation');
@@ -927,7 +909,6 @@ function toggleRole(event, roleId) {
     }
   } else {
     content.classList.add("show");
-    // When roles open, start pulsing their respective portfolio buttons
     if (roleId === 'role1' && dbBtn) {
       const portfolioSec = document.getElementById('devilBurgerPortfolioSection');
       if (!portfolioSec.classList.contains('show')) {
@@ -1018,7 +999,7 @@ function expandCarouselItem(roleId, type, source, captionText) {
   const contentDiv = document.getElementById('expanded-content-' + roleId);
   
   if (type === 'video') {
-    contentDiv.innerHTML = `<video src="${source}" controls autoplay style="width:100%; max-height:350px; border-radius:4px;"></video><p style="color:#fff; font-size:13px; margin-top:8px;">${captionText}</p>`;
+    contentDiv.innerHTML = `<video src="${source}" controls autoplay style="width:100%; max-height:350px; border-radius:4px;" playsinline webkit-playsinline></video><p style="color:#fff; font-size:13px; margin-top:8px;">${captionText}</p>`;
   } else {
     contentDiv.innerHTML = `<img src="${source}" alt="${captionText}" style="width:100%; max-height:350px; object-fit:contain; border-radius:4px;"><p style="color:#fff; font-size:13px; margin-top:8px;">${captionText}</p>`;
   }
