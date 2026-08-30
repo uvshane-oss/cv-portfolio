@@ -443,25 +443,42 @@ li { margin-bottom: 6px; font-size: 13px; }
   font-weight: bold;
   cursor: pointer;
 }
-/* Unified Permanent Side-by-Side Video Grid Layout */
+/* Unified Permanent Side-by-Side Video Grid Layout with Thumbnail Swap */
 .video-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
   margin-top: 15px;
 }
-.video-wrapper {
+.video-thumbnail-card {
   position: relative;
+  width: 100%;
   padding-bottom: 56.25%;
-  height: 0;
   background: #000;
   border-radius: 6px;
   overflow: hidden;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.video-wrapper iframe {
+.video-thumbnail-card img {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  border: 0;
+  object-fit: cover;
+}
+.thumbnail-glow-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(29, 78, 216, 0.1);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.video-thumbnail-card:hover {
+  border-color: var(--highlight-blue);
+  box-shadow: 0 4px 15px rgba(29, 78, 216, 0.3);
+}
+.video-thumbnail-card:hover .thumbnail-glow-overlay {
+  opacity: 1;
 }
 /* Detailed Study Link Style */
 .detail-link-container {
@@ -482,7 +499,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-08-30 14:19 NZST</div>
+  <div class="revision-stamp">Rev: 2026-08-30 14:34 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -512,10 +529,16 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
 
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials :</h4>
-      <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 8px 0;">Alice & Tim discuss working with Shane</p>
+      <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 8px 0;">Alice & Tim discuss working with Shane (Tap thumbnail to play instantly)</p>
       <div class="video-grid">
-        <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/2Hj5Q6kU3nE" title="Devil Burger Video 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-        <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/keXY9SO2CMA" title="Devil Burger Video 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, '2Hj5Q6kU3nE')">
+          <img src="https://img.youtube.com/vi/2Hj5Q6kU3nE/hqdefault.jpg" alt="Devil Burger Video 1 Thumbnail">
+          <div class="thumbnail-glow-overlay"></div>
+        </div>
+        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'keXY9SO2CMA')">
+          <img src="https://img.youtube.com/vi/keXY9SO2CMA/hqdefault.jpg" alt="Devil Burger Video 2 Thumbnail">
+          <div class="thumbnail-glow-overlay"></div>
+        </div>
       </div>
 
       <div class="portfolio-btn-container">
@@ -597,8 +620,9 @@ li { margin-bottom: 6px; font-size: 13px; }
 
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Midway through video wall installation</h4>
         <div class="video-grid">
-          <div class="video-wrapper" style="grid-column: 1 / -1;">
-            <iframe src="https://www.youtube-nocookie.com/embed/Y5qYcugyoD0" title="Video Wall Installation Progress" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="loadYouTubeVideo(this, 'Y5qYcugyoD0')">
+            <img src="https://img.youtube.com/vi/Y5qYcugyoD0/hqdefault.jpg" alt="Video Wall Installation Progress Thumbnail">
+            <div class="thumbnail-glow-overlay"></div>
           </div>
         </div>
 
@@ -631,10 +655,22 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media & Campaign Showcases:</h4>
       <div class="video-grid">
-        <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/sdTLpnb2hw4" title="XClean Testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-        <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/-OauqERIzjQ" title="XClean COVID Crisis Campaign" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-        <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/o8yDFvZrZ-k" title="XClean Additional Video 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-        <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/uYoG6WgsOzk" title="XClean Additional Video 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'sdTLpnb2hw4')">
+          <img src="https://img.youtube.com/vi/sdTLpnb2hw4/hqdefault.jpg" alt="XClean Testimonial Thumbnail">
+          <div class="thumbnail-glow-overlay"></div>
+        </div>
+        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, '-OauqERIzjQ')">
+          <img src="https://img.youtube.com/vi/-OauqERIzjQ/hqdefault.jpg" alt="XClean COVID Crisis Campaign Thumbnail">
+          <div class="thumbnail-glow-overlay"></div>
+        </div>
+        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'o8yDFvZrZ-k')">
+          <img src="https://img.youtube.com/vi/o8yDFvZrZ-k/hqdefault.jpg" alt="XClean Additional Video 1 Thumbnail">
+          <div class="thumbnail-glow-overlay"></div>
+        </div>
+        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'uYoG6WgsOzk')">
+          <img src="https://img.youtube.com/vi/uYoG6WgsOzk/hqdefault.jpg" alt="XClean Additional Video 2 Thumbnail">
+          <div class="thumbnail-glow-overlay"></div>
+        </div>
       </div>
 
       <div class="portfolio-btn-container">
@@ -724,9 +760,18 @@ li { margin-bottom: 6px; font-size: 13px; }
 
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Shorts & Video Showcases:</h4>
       <div class="video-grid">
-        <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/vgUFuPfXllc" title="ISee Digital Short 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-        <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/qfxGa20ZPG4" title="ISee Digital Short 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-        <div class="video-wrapper" style="grid-column: 1 / -1;"><iframe src="https://www.youtube-nocookie.com/embed/0z-yf2n8hQw" title="ISee Digital Short 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'vgUFuPfXllc')">
+          <img src="https://img.youtube.com/vi/vgUFuPfXllc/hqdefault.jpg" alt="ISee Digital Short 1 Thumbnail">
+          <div class="thumbnail-glow-overlay"></div>
+        </div>
+        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'qfxGa20ZPG4')">
+          <img src="https://img.youtube.com/vi/qfxGa20ZPG4/hqdefault.jpg" alt="ISee Digital Short 2 Thumbnail">
+          <div class="thumbnail-glow-overlay"></div>
+        </div>
+        <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="loadYouTubeVideo(this, '0z-yf2n8hQw')">
+          <img src="https://img.youtube.com/vi/0z-yf2n8hQw/hqdefault.jpg" alt="ISee Digital Short 3 Thumbnail">
+          <div class="thumbnail-glow-overlay"></div>
+        </div>
       </div>
       <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'ISee Digital Network')">View Full Detailed Case Study &rarr;</span></div>
     </div>
@@ -753,7 +798,10 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
       <div class="video-grid">
-        <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/sdTLpnb2hw4?start=4" title="XClean Shared Testimonial with Timestamp" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'sdTLpnb2hw4')">
+          <img src="https://img.youtube.com/vi/sdTLpnb2hw4/hqdefault.jpg" alt="XClean Shared Testimonial Thumbnail">
+          <div class="thumbnail-glow-overlay"></div>
+        </div>
       </div>
       <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'XClean Growth Phase')">View Full Detailed Case Study &rarr;</span></div>
     </div>
@@ -778,7 +826,10 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
       <div class="video-grid">
-        <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/MSCRSFC-tL0" title="Integrate Group Testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'MSCRSFC-tL0')">
+          <img src="https://img.youtube.com/vi/MSCRSFC-tL0/hqdefault.jpg" alt="Integrate Group Testimonial Thumbnail">
+          <div class="thumbnail-glow-overlay"></div>
+        </div>
       </div>
       <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'Sky Direct Sales')">View Full Detailed Case Study &rarr;</span></div>
     </div>
@@ -802,8 +853,14 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media References:</h4>
       <div class="video-grid">
-        <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/S4JQVaSFlfc" title="Mobilefone Solutions Testimonial 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-        <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/qwOzstXXSpM" title="Mobilefone Solutions Testimonial 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'S4JQVaSFlfc')">
+          <img src="https://img.youtube.com/vi/S4JQVaSFlfc/hqdefault.jpg" alt="Mobilefone Solutions Testimonial 1 Thumbnail">
+          <div class="thumbnail-glow-overlay"></div>
+        </div>
+        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'qwOzstXXSpM')">
+          <img src="https://img.youtube.com/vi/qwOzstXXSpM/hqdefault.jpg" alt="Mobilefone Solutions Testimonial 2 Thumbnail">
+          <div class="thumbnail-glow-overlay"></div>
+        </div>
       </div>
       <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'Mobilefone Solutions')">View Full Detailed Case Study &rarr;</span></div>
     </div>
@@ -852,7 +909,10 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
       <div class="video-grid">
-        <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/V2HS1ttGNLY" title="Smiths City Testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <div class="video-thumbnail-card" onclick="loadYouTubeVideo(this, 'V2HS1ttGNLY')">
+          <img src="https://img.youtube.com/vi/V2HS1ttGNLY/hqdefault.jpg" alt="Smiths City Testimonial Thumbnail">
+          <div class="thumbnail-glow-overlay"></div>
+        </div>
       </div>
       <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'Smiths City Regional Management')">View Full Detailed Case Study &rarr;</span></div>
     </div>
@@ -966,6 +1026,16 @@ function openModal(imageSrc) {
 
 function closeModal() {
   document.getElementById('imgModal').style.display = "none";
+}
+
+/* YouTube Thumbnail Swap Function for Immediate One-Tap Play */
+function loadYouTubeVideo(container, videoId) {
+  document.querySelectorAll('audio').forEach(audio => {
+    if (!audio.paused) audio.pause();
+  });
+  document.querySelectorAll('.radio-card-item').forEach(card => card.classList.remove('is-playing'));
+
+  container.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>`;
 }
 
 /* Interactive Social Media Carousel UX Functions with Auto-Close & Exclusive Playback */
