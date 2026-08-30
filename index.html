@@ -551,7 +551,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-08-30 15:15 NZST</div>
+  <div class="revision-stamp">Rev: 2026-08-30 15:30 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -593,11 +593,11 @@ li { margin-bottom: 6px; font-size: 13px; }
       </div>
 
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playInlineVideo('role1', '2Hj5Q6kU3nE', 'Alice & Tim Testimonial - Devil Burger')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role1', '2Hj5Q6kU3nE', 'Alice & Tim Testimonial - Devil Burger')">
           <img src="https://img.youtube.com/vi/2Hj5Q6kU3nE/hqdefault.jpg" alt="Devil Burger Video 1 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playInlineVideo('role1', 'keXY9SO2CMA', 'Devil Burger Team Testimonial 2')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role1', 'keXY9SO2CMA', 'Devil Burger Team Testimonial 2')">
           <img src="https://img.youtube.com/vi/keXY9SO2CMA/hqdefault.jpg" alt="Devil Burger Video 2 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -615,36 +615,36 @@ li { margin-bottom: 6px; font-size: 13px; }
         </div>
         <div class="marquee-container" id="marquee-role1">
           <div class="marquee-track">
-            <div class="marquee-item" onclick="expandCarouselItem('role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
               <video src="social media 1.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
               <p class="marquee-caption">Social Media Clip 1</p>
             </div>
-            <div class="marquee-item" onclick="expandCarouselItem('role1', 'video', 'social media 2.mp4', 'Social Media Campaign 2')">
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 2.mp4', 'Social Media Campaign 2')">
               <video src="social media 2.mp4" preload="metadata" muted loop playsinline webkit-playsinline></video>
               <p class="marquee-caption">Social Media Clip 2</p>
             </div>
-            <div class="marquee-item" onclick="expandCarouselItem('role1', 'video', 'social media 3.mp4', 'Social Media Campaign 3')">
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 3.mp4', 'Social Media Campaign 3')">
               <video src="social media 3.mp4" preload="metadata" muted loop playsinline webkit-playsinline></video>
               <p class="marquee-caption">Social Media Clip 3</p>
             </div>
-            <div class="marquee-item" onclick="expandCarouselItem('role1', 'video', 'social media 4.mp4', 'Social Media Campaign 4')">
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 4.mp4', 'Social Media Campaign 4')">
               <video src="social media 4.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
               <p class="marquee-caption">Social Media Clip 4</p>
             </div>
-            <div class="marquee-item" onclick="expandCarouselItem('role1', 'image', 'social media carosel.jpg', 'Social Media Carousel Assets')">
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'image', 'social media carosel.jpg', 'Social Media Carousel Assets')">
               <img src="social media carosel.jpg" alt="Social Media Carousel" width="260" height="160">
               <p class="marquee-caption">Carousel Layout</p>
             </div>
-            <div class="marquee-item" onclick="expandCarouselItem('role1', 'image', '$10 Tuesday for summer .jpg', 'Summer Promotion Artwork')">
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'image', '$10 Tuesday for summer .jpg', 'Summer Promotion Artwork')">
               <img src="$10 Tuesday for summer .jpg" alt="Summer Promo Campaign" width="260" height="160">
               <p class="marquee-caption">Summer Promotion Artwork</p>
             </div>
             <!-- Duplicated loop for smooth infinite scroll -->
-            <div class="marquee-item" onclick="expandCarouselItem('role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
               <video src="social media 1.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
               <p class="marquee-caption">Social Media Clip 1</p>
             </div>
-            <div class="marquee-item" onclick="expandCarouselItem('role1', 'video', 'social media 2.mp4', 'Social Media Campaign 2')">
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 2.mp4', 'Social Media Campaign 2')">
               <video src="social media 2.mp4" preload="metadata" muted loop playsinline webkit-playsinline></video>
               <p class="marquee-caption">Social Media Clip 2</p>
             </div>
@@ -692,7 +692,7 @@ li { margin-bottom: 6px; font-size: 13px; }
         </div>
 
         <div class="video-grid">
-          <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="playInlineVideo('role1-wall', 'Y5qYcugyoD0', 'Video Wall Installation Progress')">
+          <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="playInlineVideo(event, 'role1-wall', 'Y5qYcugyoD0', 'Video Wall Installation Progress')">
             <img src="https://img.youtube.com/vi/Y5qYcugyoD0/hqdefault.jpg" alt="Video Wall Installation Progress Thumbnail">
             <div class="thumbnail-glow-overlay"></div>
           </div>
@@ -737,19 +737,19 @@ li { margin-bottom: 6px; font-size: 13px; }
       </div>
 
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playInlineVideo('role2', 'sdTLpnb2hw4', 'XClean Client Testimonial')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'sdTLpnb2hw4', 'XClean Client Testimonial')">
           <img src="https://img.youtube.com/vi/sdTLpnb2hw4/hqdefault.jpg" alt="XClean Testimonial Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playInlineVideo('role2', '-OauqERIzjQ', 'XClean COVID Crisis Campaign')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', '-OauqERIzjQ', 'XClean COVID Crisis Campaign')">
           <img src="https://img.youtube.com/vi/-OauqERIzjQ/hqdefault.jpg" alt="XClean COVID Crisis Campaign Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playInlineVideo('role2', 'o8yDFvZrZ-k', 'XClean Operations Showcase 1')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'o8yDFvZrZ-k', 'XClean Operations Showcase 1')">
           <img src="https://img.youtube.com/vi/o8yDFvZrZ-k/hqdefault.jpg" alt="XClean Additional Video 1 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playInlineVideo('role2', 'uYoG6WgsOzk', 'XClean Operations Showcase 2')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'uYoG6WgsOzk', 'XClean Operations Showcase 2')">
           <img src="https://img.youtube.com/vi/uYoG6WgsOzk/hqdefault.jpg" alt="XClean Additional Video 2 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -852,15 +852,15 @@ li { margin-bottom: 6px; font-size: 13px; }
       </div>
 
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playInlineVideo('role4', 'vgUFuPfXllc', 'ISee Digital Short Showcase 1')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role4', 'vgUFuPfXllc', 'ISee Digital Short Showcase 1')">
           <img src="https://img.youtube.com/vi/vgUFuPfXllc/hqdefault.jpg" alt="ISee Digital Short 1 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playInlineVideo('role4', 'qfxGa20ZPG4', 'ISee Digital Short Showcase 2')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role4', 'qfxGa20ZPG4', 'ISee Digital Short Showcase 2')">
           <img src="https://img.youtube.com/vi/qfxGa20ZPG4/hqdefault.jpg" alt="ISee Digital Short 2 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="playInlineVideo('role4', '0z-yf2n8hQw', 'ISee Digital Feature Showcase')">
+        <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="playInlineVideo(event, 'role4', '0z-yf2n8hQw', 'ISee Digital Feature Showcase')">
           <img src="https://img.youtube.com/vi/0z-yf2n8hQw/hqdefault.jpg" alt="ISee Digital Short 3 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -900,7 +900,7 @@ li { margin-bottom: 6px; font-size: 13px; }
       </div>
 
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playInlineVideo('role5', 'sdTLpnb2hw4', 'XClean Growth Phase Testimonial')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role5', 'sdTLpnb2hw4', 'XClean Growth Phase Testimonial')">
           <img src="https://img.youtube.com/vi/sdTLpnb2hw4/hqdefault.jpg" alt="XClean Shared Testimonial Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -938,7 +938,7 @@ li { margin-bottom: 6px; font-size: 13px; }
       </div>
 
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playInlineVideo('role6', 'MSCRSFC-tL0', 'Integrate Group / Sky Testimonial')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role6', 'MSCRSFC-tL0', 'Integrate Group / Sky Testimonial')">
           <img src="https://img.youtube.com/vi/MSCRSFC-tL0/hqdefault.jpg" alt="Integrate Group Testimonial Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -975,11 +975,11 @@ li { margin-bottom: 6px; font-size: 13px; }
       </div>
 
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playInlineVideo('role7', 'S4JQVaSFlfc', 'Mobilefone Solutions Testimonial 1')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role7', 'S4JQVaSFlfc', 'Mobilefone Solutions Testimonial 1')">
           <img src="https://img.youtube.com/vi/S4JQVaSFlfc/hqdefault.jpg" alt="Mobilefone Solutions Testimonial 1 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playInlineVideo('role7', 'qwOzstXXSpM', 'Mobilefone Solutions Testimonial 2')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role7', 'qwOzstXXSpM', 'Mobilefone Solutions Testimonial 2')">
           <img src="https://img.youtube.com/vi/qwOzstXXSpM/hqdefault.jpg" alt="Mobilefone Solutions Testimonial 2 Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -1041,7 +1041,7 @@ li { margin-bottom: 6px; font-size: 13px; }
       </div>
 
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playInlineVideo('role9', 'V2HS1ttGNLY', 'Smiths City Testimonial')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role9', 'V2HS1ttGNLY', 'Smiths City Testimonial')">
           <img src="https://img.youtube.com/vi/V2HS1ttGNLY/hqdefault.jpg" alt="Smiths City Testimonial Thumbnail">
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -1160,8 +1160,10 @@ function closeModal() {
   document.getElementById('imgModal').style.display = "none";
 }
 
-/* Global Inline Embedded Video Player Logic: Opens right between text description and video thumbnails within the specific role section, auto-closes others, stops radio, and ensures only 1 media clip plays at a time */
-function playInlineVideo(containerKey, videoId, videoTitle) {
+/* Global Inline Embedded Video Player Logic: Stops bubbling so role-card collapse event isn't triggered, preventing the window from closing */
+function playInlineVideo(event, containerKey, videoId, videoTitle) {
+  event.stopPropagation();
+
   // Stop all playing audio cards across the page
   document.querySelectorAll('audio').forEach(audio => {
     if (!audio.paused) audio.pause();
@@ -1201,7 +1203,9 @@ function closeInlineVideo(containerKey) {
 }
 
 /* Interactive Social Media Carousel UX Functions with Auto-Close & Exclusive Playback */
-function expandCarouselItem(roleId, type, source, captionText) {
+function expandCarouselItem(event, roleId, type, source, captionText) {
+  event.stopPropagation();
+
   // Close active inline videos if playing
   document.querySelectorAll('.inline-video-player-container').forEach(container => {
     container.classList.remove('active');
