@@ -149,7 +149,7 @@ h2.section-title {
 }
 .collapsible-content.show { display: block; }
 
-/* Devil Burger Portfolio Collapsible Sub-Section */
+/* Portfolio Collapsible Sub-Section */
 .portfolio-sub-section {
   display: none;
   margin-top: 15px;
@@ -500,7 +500,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-08-30 12:21 NZST</div>
+  <div class="revision-stamp">Rev: 2026-08-30 13:42 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -678,6 +678,25 @@ li { margin-bottom: 6px; font-size: 13px; }
         <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/o8yDFvZrZ-k" title="XClean Additional Video 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
         <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/uYoG6WgsOzk" title="XClean Additional Video 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
       </div>
+
+      <!-- Centered Pulsing Portfolio Image Button: XClean Portfolio -->
+      <div class="portfolio-btn-container">
+        <img id="xcleanPortfolioBtn" src="xclean portfolio-4.png" alt="XClean Portfolio" class="portfolio-image-btn" onclick="toggleXcleanPortfolio(event)">
+      </div>
+
+      <!-- Hidden XClean Portfolio Sub-Section -->
+      <div id="xcleanPortfolioSection" class="portfolio-sub-section">
+        <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">XClean Extended Portfolio & Campaign Assets</h4>
+        <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 10px 0;">Additional documentation, fleet deployment visuals, and formulation records.</p>
+        <!-- Content placeholder for XClean portfolio expansion -->
+        <div class="portfolio-gallery">
+          <div class="portfolio-img-wrapper" onclick="openModal('xclean.jpg')">
+            <img src="xclean.jpg" alt="XClean Operations">
+            <p class="marquee-caption">XClean Fleet & Brand Asset</p>
+          </div>
+        </div>
+      </div>
+
       <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'XClean National Sales')">View Full Detailed Case Study &rarr;</span></div>
     </div>
   </div>
@@ -727,6 +746,24 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Completed national installation ahead of schedule and under budget.</li>
         <li>Handled physical installation for the majority of the network.</li>
       </ul>
+
+      <!-- Centered Pulsing Portfolio Image Button: ISee Digital Portfolio placed right before Shorts & Video Showcases -->
+      <div class="portfolio-btn-container">
+        <img id="iseeDigitalPortfolioBtn" src="isee digital portfolio.png" alt="ISee Digital Portfolio" class="portfolio-image-btn" onclick="toggleIseePortfolio(event)">
+      </div>
+
+      <!-- Hidden ISee Digital Portfolio Sub-Section -->
+      <div id="iseeDigitalPortfolioSection" class="portfolio-sub-section">
+        <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">ISee Digital National Network Expansion Assets</h4>
+        <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 10px 0;">Documentation and photographic records covering billboard rollouts and retail deployments.</p>
+        <div class="portfolio-gallery">
+          <div class="portfolio-img-wrapper" onclick="openModal('isee digital logo.jpeg')">
+            <img src="isee digital logo.jpeg" alt="ISee Digital Network Asset">
+            <p class="marquee-caption">Network Rollout Map & Assets</p>
+          </div>
+        </div>
+      </div>
+
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Shorts & Video Showcases:</h4>
       <div class="video-grid">
         <div class="video-wrapper"><iframe src="https://www.youtube-nocookie.com/embed/vgUFuPfXllc" title="ISee Digital Short 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
@@ -869,20 +906,44 @@ li { margin-bottom: 6px; font-size: 13px; }
 function toggleRole(event, roleId) {
   if (event.target.classList.contains('detail-link') || event.target.closest('.portfolio-btn-container') || event.target.closest('.marquee-container') || event.target.closest('.carousel-expanded-overlay') || event.target.closest('.radio-grid') || event.target.closest('.portfolio-sub-section')) return;
   const content = document.getElementById(roleId);
-  const btn = document.getElementById('devilBurgerPortfolioBtn');
+  const dbBtn = document.getElementById('devilBurgerPortfolioBtn');
+  const iseeBtn = document.getElementById('iseeDigitalPortfolioBtn');
+  const xcleanBtn = document.getElementById('xcleanPortfolioBtn');
   
   if (content.classList.contains("show")) {
     content.classList.remove("show");
-    // Also close portfolio sub-section if role collapses
-    document.getElementById('devilBurgerPortfolioSection').classList.remove('show');
-    if (btn) btn.classList.remove('pulse-animation');
+    // Also close portfolio sub-sections if role collapses
+    if (roleId === 'role1') {
+      document.getElementById('devilBurgerPortfolioSection').classList.remove('show');
+      if (dbBtn) dbBtn.classList.remove('pulse-animation');
+    }
+    if (roleId === 'role4') {
+      document.getElementById('iseeDigitalPortfolioSection').classList.remove('show');
+      if (iseeBtn) iseeBtn.classList.remove('pulse-animation');
+    }
+    if (roleId === 'role2') {
+      document.getElementById('xcleanPortfolioSection').classList.remove('show');
+      if (xcleanBtn) xcleanBtn.classList.remove('pulse-animation');
+    }
   } else {
     content.classList.add("show");
-    // When role1 opens, start pulsing the portfolio button
-    if (roleId === 'role1' && btn) {
+    // When roles open, start pulsing their respective portfolio buttons
+    if (roleId === 'role1' && dbBtn) {
       const portfolioSec = document.getElementById('devilBurgerPortfolioSection');
       if (!portfolioSec.classList.contains('show')) {
-        btn.classList.add('pulse-animation');
+        dbBtn.classList.add('pulse-animation');
+      }
+    }
+    if (roleId === 'role4' && iseeBtn) {
+      const portfolioSec = document.getElementById('iseeDigitalPortfolioSection');
+      if (!portfolioSec.classList.contains('show')) {
+        iseeBtn.classList.add('pulse-animation');
+      }
+    }
+    if (roleId === 'role2' && xcleanBtn) {
+      const portfolioSec = document.getElementById('xcleanPortfolioSection');
+      if (!portfolioSec.classList.contains('show')) {
+        xcleanBtn.classList.add('pulse-animation');
       }
     }
   }
@@ -895,11 +956,37 @@ function toggleDevilBurgerPortfolio(event) {
   
   if (portfolioSection.classList.contains('show')) {
     portfolioSection.classList.remove('show');
-    // Re-enable pulsing if role1 is still open
     if (btn) btn.classList.add('pulse-animation');
   } else {
     portfolioSection.classList.add('show');
-    // Stop pulsing when portfolio is open
+    if (btn) btn.classList.remove('pulse-animation');
+  }
+}
+
+function toggleIseePortfolio(event) {
+  event.stopPropagation();
+  const portfolioSection = document.getElementById('iseeDigitalPortfolioSection');
+  const btn = document.getElementById('iseeDigitalPortfolioBtn');
+  
+  if (portfolioSection.classList.contains('show')) {
+    portfolioSection.classList.remove('show');
+    if (btn) btn.classList.add('pulse-animation');
+  } else {
+    portfolioSection.classList.add('show');
+    if (btn) btn.classList.remove('pulse-animation');
+  }
+}
+
+function toggleXcleanPortfolio(event) {
+  event.stopPropagation();
+  const portfolioSection = document.getElementById('xcleanPortfolioSection');
+  const btn = document.getElementById('xcleanPortfolioBtn');
+  
+  if (portfolioSection.classList.contains('show')) {
+    portfolioSection.classList.remove('show');
+    if (btn) btn.classList.add('pulse-animation');
+  } else {
+    portfolioSection.classList.add('show');
     if (btn) btn.classList.remove('pulse-animation');
   }
 }
@@ -960,7 +1047,6 @@ function toggleAudioCard(cardElement, event) {
   event.stopPropagation();
   const audio = cardElement.querySelector('audio');
 
-  // Pause all other audio/video elements across the page
   document.querySelectorAll('audio, video').forEach(media => {
     if (media !== audio && !media.paused) {
       media.pause();
@@ -982,7 +1068,6 @@ function toggleAudioCard(cardElement, event) {
   }
 }
 
-// Reset card state when audio naturally ends or pauses externally
 document.addEventListener('pause', function(e) {
   if (e.target.tagName === 'AUDIO') {
     const card = e.target.closest('.radio-card-item');
@@ -1003,4 +1088,3 @@ document.addEventListener('ended', function(e) {
 </script>
 </body>
 </html>
-```[cite: 1]
