@@ -24,7 +24,7 @@ body {
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
 }
-/* Temporary Revision Version Stamp - Top Left */
+/* Revision Version Stamp */
 .revision-stamp {
   font-size: 10px;
   color: #888888;
@@ -149,7 +149,7 @@ h2.section-title {
 }
 .collapsible-content.show { display: block; }
 
-/* Portfolio Collapsible Sub-Section */
+/* Portfolio Sub-Section */
 .portfolio-sub-section {
   display: none;
   margin-top: 15px;
@@ -160,7 +160,7 @@ h2.section-title {
   display: block;
 }
 
-/* Centered Pulsing/Bumping Portfolio Image Button */
+/* Portfolio Button Container */
 .portfolio-btn-container {
   text-align: center;
   margin: 20px 0 15px 0;
@@ -204,7 +204,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   color: var(--highlight-blue);
   font-weight: bold;
 }
-/* Portfolio Media Gallery Grid */
+/* Portfolio Gallery */
 .portfolio-gallery {
   display: grid;
   grid-template-columns: 1fr;
@@ -230,7 +230,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   object-fit: contain;
   border-radius: 4px;
 }
-/* Auto-Scrolling Marquee Gallery Styling with Mobile Width/Height Stability */
+/* Marquee Gallery */
 .marquee-container {
   position: relative;
   width: 100%;
@@ -284,7 +284,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-/* Unified Responsive Radio Grid Layout (Flexbox Auto-Wrap with Centering) */
+/* Radio Grid */
 .radio-grid {
   display: flex;
   flex-wrap: wrap;
@@ -347,7 +347,6 @@ li { margin-bottom: 6px; font-size: 13px; }
   z-index: 2;
 }
 
-/* Equalizer overlay container when playing */
 .equalizer-overlay {
   display: none;
   position: absolute;
@@ -382,7 +381,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   100% { height: 32px; }
 }
 
-/* Interactive Carousel Expanded View Modal/Overlay inside components */
+/* Carousel Expanded View Modal */
 .carousel-expanded-overlay {
   display: none;
   position: relative;
@@ -417,7 +416,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   border-radius: 4px;
   cursor: pointer;
 }
-/* Fullscreen Modal for Images */
+/* Image Modal */
 .img-modal {
   display: none;
   position: fixed;
@@ -443,7 +442,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   font-weight: bold;
   cursor: pointer;
 }
-/* Inline Embedded Video Player Window (Appears right between description text and thumbnails, ~40-50% width centered) */
+/* Inline Embedded Video Player Window */
 .inline-video-player-container {
   display: none;
   background: #111;
@@ -463,7 +462,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 .inline-video-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  padding-bottom: 56.25%;
   background: #000;
   border-radius: 6px;
   overflow: hidden;
@@ -495,7 +494,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   padding-right: 80px;
 }
 
-/* Unified Permanent Side-by-Side Video Grid Layout with Thumbnail Swap */
+/* Video Grid */
 .video-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -518,11 +517,11 @@ li { margin-bottom: 6px; font-size: 13px; }
   top: 0; left: 0; width: 100%; height: 100%;
   object-fit: cover;
 }
-/* Overlay custom graphic styling with pointer-events: none so entire card triggers click */
+/* Corrected overlay positioning so `video testimonial overlay.png` sits accurately on top */
 .thumbnail-custom-overlay {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   pointer-events: none;
   z-index: 2;
 }
@@ -541,7 +540,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 .video-thumbnail-card:hover .thumbnail-glow-overlay {
   opacity: 1;
 }
-/* Detailed Study Link Style */
+/* Detail Link */
 .detail-link-container {
   margin-top: 15px;
   text-align: right;
@@ -560,7 +559,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-09-02 06:54 NZST</div>
+  <div class="revision-stamp">Rev: 2026-09-02 07:05 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -602,12 +601,12 @@ li { margin-bottom: 6px; font-size: 13px; }
       <div class="video-grid">
         <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role1', '2Hj5Q6kU3nE', 'Alice & Tim Testimonial - Devil Burger')">
           <img src="alice thumbnail.jpg" alt="Alice & Tim Testimonial">
-          <img src="g5.png" alt="Overlay Button" class="thumbnail-custom-overlay">
+          <img src="video testimonial overlay.png" alt="Overlay Button" class="thumbnail-custom-overlay">
           <div class="thumbnail-glow-overlay"></div>
         </div>
         <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role1', 'keXY9SO2CMA', 'Devil Burger Team Testimonial 2')">
           <img src="https://img.youtube.com/vi/keXY9SO2CMA/hqdefault.jpg" alt="Devil Burger Video 2 Thumbnail">
-          <img src="g5.png" alt="Overlay Button" class="thumbnail-custom-overlay">
+          <img src="video testimonial overlay.png" alt="Overlay Button" class="thumbnail-custom-overlay">
           <div class="thumbnail-glow-overlay"></div>
         </div>
       </div>
@@ -662,27 +661,27 @@ li { margin-bottom: 6px; font-size: 13px; }
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Radio produced and voiced by Shane</h4>
         <div class="radio-grid">
           <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
-            <audio preload="none"><source src="Radio DEVILSTAIRCASE_FRIDAY.wav" type="audio/wav">Your browser does not support the audio element.</audio>
+            <audio preload="none"><source src="Radio DEVILSTAIRCASE_FRIDAY.wav" type="audio/wav"></audio>
             <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
             <div class="radio-title">Devil's Staircase Friday</div>
           </div>
           <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
-            <audio preload="none"><source src="Radio Long Weekend.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
+            <audio preload="none"><source src="Radio Long Weekend.mp3" type="audio/mpeg"></audio>
             <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
             <div class="radio-title">Long Weekend</div>
           </div>
           <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
-            <audio preload="none"><source src="Radio PORKDEATH.wav" type="audio/wav">Your browser does not support the audio element.</audio>
+            <audio preload="none"><source src="Radio PORKDEATH.wav" type="audio/wav"></audio>
             <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
             <div class="radio-title">Death by Pork</div>
           </div>
           <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
-            <audio preload="none"><source src="Radio SPICEYBEEF.wav" type="audio/wav">Your browser does not support the audio element.</audio>
+            <audio preload="none"><source src="Radio SPICEYBEEF.wav" type="audio/wav"></audio>
             <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
             <div class="radio-title">Spicy Beef</div>
           </div>
           <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
-            <audio preload="none"><source src="Radio Salmon.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
+            <audio preload="none"><source src="Radio Salmon.mp3" type="audio/mpeg"></audio>
             <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
             <div class="radio-title">Salmon</div>
           </div>
@@ -728,8 +727,6 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Built custom shelving for fleet myself</li>
         <li>Managed product formulation, global sourcing, importation, and approvals.</li>
         <li>Engineered a custom COVID crisis campaign generating $500k in 14 days.</li>
-        <li>Delivered consistent cold-call conversions and territory coverage</li>
-        <li>Navigated COVID disruptions and franchise realignment</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media & Campaign Showcases:</h4>
       
@@ -766,7 +763,6 @@ li { margin-bottom: 6px; font-size: 13px; }
 
       <div id="xcleanPortfolioSection" class="portfolio-sub-section">
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">XClean Extended Portfolio & Campaign Assets</h4>
-        <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 10px 0;">Additional documentation, fleet deployment visuals, and formulation records.</p>
         <div class="portfolio-gallery">
           <div class="portfolio-img-wrapper" onclick="openModal('xclean.jpg')">
             <img src="xclean.jpg" alt="XClean Operations" width="260" height="160">
@@ -791,8 +787,6 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Delivered custom solutions where no off-the-shelf option existed.</li>
         <li>Delivered enterprise deployment on time and under budget.</li>
         <li>Facilitated custom engineered optical lenses to be manufactured overseas.</li>
-        <li>Completed fabrication including CNC machining, welding, and calibration.</li>
-        <li>Managed global procurement from Germany, Japan, and China.</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Supporting Portfolio</h4>
       <div class="marquee-container">
@@ -802,7 +796,6 @@ li { margin-bottom: 6px; font-size: 13px; }
           <div class="marquee-item" onclick="openModal('back of screen.jpg')"><img src="back of screen.jpg" alt="back of screen" width="260" height="160"><p class="marquee-caption">back of screen</p></div>
           <div class="marquee-item" onclick="openModal('front on.jpg')"><img src="front on.jpg" alt="front on" width="260" height="160"><p class="marquee-caption">front on</p></div>
           <div class="marquee-item" onclick="openModal('Screen end & projector.jpg')"><img src="Screen end & projector.jpg" alt="Screen end & projector" width="260" height="160"><p class="marquee-caption">Screen end & projector</p></div>
-          <div class="marquee-item" onclick="openModal('Screen side.jpg')"><img src="Screen side.jpg" alt="Screen side" width="260" height="160"><p class="marquee-caption">Screen side</p></div>
         </div>
       </div>
       <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'Albatross Centre A/V')">View Full Detailed Case Study &rarr;</span></div>
@@ -821,10 +814,6 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Completed geo testing and resource consent approvals.</li>
         <li>Secured national footprint representing ~$XX million commitment.</li>
         <li>Secured 2,000+ retail locations and negotiated revenue-share agreements.</li>
-        <li>Delivered in-store digital network representing ~$X.X million commitment.</li>
-        <li>Procured 2,000+ single-board computers, screens, brackets, and cabling.</li>
-        <li>Completed national installation ahead of schedule and under budget.</li>
-        <li>Handled physical installation for the majority of the network.</li>
       </ul>
 
       <div class="portfolio-btn-container">
@@ -833,7 +822,6 @@ li { margin-bottom: 6px; font-size: 13px; }
 
       <div id="iseeDigitalPortfolioSection" class="portfolio-sub-section">
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">ISee Digital National Network Expansion Assets</h4>
-        <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 10px 0;">Documentation and photographic records covering billboard rollouts and retail deployments.</p>
         <div class="portfolio-gallery">
           <div class="portfolio-img-wrapper" onclick="openModal('isee digital logo.jpeg')">
             <img src="isee digital logo.jpeg" alt="ISee Digital Network Asset" width="260" height="160">
@@ -880,13 +868,7 @@ li { margin-bottom: 6px; font-size: 13px; }
       <ul>
         <li>Expanded operations from single staff member to training 12-person team.</li>
         <li>Rebuilt territories, deploying new commission-only sales teams nationally.</li>
-        <li>Drove high-conversion cold-calling across regions in vans with reps.</li>
-        <li>Built a cohesive national sales team in under 12 months.</li>
         <li>Lifted revenue from stagnant $156k baseline to $X million per annum.</li>
-        <li>Delivered free on-farm training across multiple regions.</li>
-        <li>Managed crisis communications during “payout” collapse</li>
-        <li>Managed crisis communications during “Teatmate” product failures.</li>
-        <li class="highlight-item" style="list-style: none; margin-left: -18px; font-style: italic;">Supported clients with integrity – we were misled by fraudulent “Teatmate” claims, advising on best practice and recourse since the product did not meet XClean or ACVM expectations</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
       
@@ -918,11 +900,6 @@ li { margin-bottom: 6px; font-size: 13px; }
       <ul>
         <li>Outperformed larger population centres by activation totals and averages.</li>
         <li>Consistently drove more than 6,000 new subscribers per annum.</li>
-        <li>Built team from 1 to 8 members, managing burnout in door-to-door sales.</li>
-        <li>Worked six evenings a week across Southland and Otago.</li>
-        <li>Managed employment, onboarding, training, and territory planning.</li>
-        <li>Coordinated installation workflows and harvested referrals.</li>
-        <li class="highlight-item" style="list-style: none; margin-left: -18px; font-style: italic;">Encouraged to take on secondary fixed-term crisis/turnaround roles (meat processing, distribution, automotive) provided they did not interfere with road trips.</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
       
@@ -954,10 +931,6 @@ li { margin-bottom: 6px; font-size: 13px; }
       <ul>
         <li>Turned around branch to maximize new market opportunities.</li>
         <li>Built store team from 1 staff member to 4.</li>
-        <li>Established and led additional outbound sales team of 4.</li>
-        <li>Increased in-store turnover from $30k to $XXX k per month.</li>
-        <li>Achieved national recognition as top-performing sales representative.</li>
-        <li>Delivered offsite promotional campaigns and full store operations.</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media References:</h4>
       
@@ -993,9 +966,6 @@ li { margin-bottom: 6px; font-size: 13px; }
       <ul>
         <li>Reinvigorated category across the brand via turnaround role.</li>
         <li>Led sales and customer engagement across multiple stores.</li>
-        <li>Delivered showroom redesigns across Invercargill, Queenstown, Balclutha, Blenheim.</li>
-        <li>Delivered new product categories and established new brand relationships.</li>
-        <li>Broke multiple sales records including best day ever by over 30%.</li>
       </ul>
       <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'HJ Smith Department')">View Full Detailed Case Study &rarr;</span></div>
     </div>
@@ -1011,16 +981,6 @@ li { margin-bottom: 6px; font-size: 13px; }
       <ul>
         <li>Increased turnover, profitability, location growth, and off-site promotions.</li>
         <li>Progressed from salesperson to store manager and area manager.</li>
-        <li>Delivered annual personal sales approaching $X Million</li>
-        <li>Managed locations across Invercargill, Gore.</li>
-        <li>Managed locations across Queenstown, Wanaka, Alexandra, Roxburgh.</li>
-        <li>Managed locations across Canterbury, 3 x Christchurch stores, Timaru.</li>
-        <li>Achieved personal best individual daily sales of $86,000.</li>
-        <li>Active in the acquisition - 7 businesses across the South Island.</li>
-        <li>Developed non-negotiable standards, later implemented nationally.</li>
-        <li>Played a core role in launching 10 new stores.</li>
-        <li>Active role in meeting Scheme-of-arrangement.</li>
-        <li>2001 group successfully traded out of receivership.</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
       
@@ -1056,7 +1016,6 @@ function toggleRole(event, cardElement, roleId) {
   const targetContent = document.getElementById(roleId);
   const isCurrentlyOpen = targetContent.classList.contains("show");
 
-  // Close all open roles and reset their sub-menus/media players globally
   document.querySelectorAll('.collapsible-content').forEach(content => {
     content.classList.remove('show');
   });
@@ -1072,7 +1031,6 @@ function toggleRole(event, cardElement, roleId) {
     if (iframe) iframe.src = '';
   });
 
-  // If the clicked role wasn't already open, open it, handle initial button pulse state, and smooth-scroll with top offset
   if (!isCurrentlyOpen) {
     targetContent.classList.add("show");
     
@@ -1089,7 +1047,6 @@ function toggleRole(event, cardElement, roleId) {
       if (xcleanBtn) xcleanBtn.classList.add('pulse-animation');
     }
 
-    // Option 3 Solution: Smooth scroll card to top with offset (e.g. 15px breathing room)
     setTimeout(() => {
       const elementPosition = cardElement.getBoundingClientRect().top + window.pageYOffset;
       const offsetPosition = elementPosition - 15;
@@ -1159,22 +1116,18 @@ function closeModal() {
   document.getElementById('imgModal').style.display = "none";
 }
 
-/* Updated Persistent Iframe Playback Logic */
 function playInlineVideo(event, containerKey, videoId, videoTitle) {
   event.stopPropagation();
 
-  // Stop all playing audio cards across the page
   document.querySelectorAll('audio').forEach(audio => {
     if (!audio.paused) audio.pause();
   });
   document.querySelectorAll('.radio-card-item').forEach(card => card.classList.remove('is-playing'));
 
-  // Pause/stop any open social media carousel videos
   document.querySelectorAll('.carousel-expanded-overlay video').forEach(vid => {
     vid.pause();
   });
 
-  // Close and clear src for all other active inline video players globally
   document.querySelectorAll('.inline-video-player-container').forEach(container => {
     container.classList.remove('active');
     const iframe = container.querySelector('iframe');
@@ -1189,8 +1142,6 @@ function playInlineVideo(event, containerKey, videoId, videoTitle) {
   iframeSlot.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
   
   playerContainer.classList.add('active');
-
-  // Smoothly scroll the inline player into view
   playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
@@ -1202,11 +1153,9 @@ function closeInlineVideo(containerKey) {
   iframeSlot.src = '';
 }
 
-/* Interactive Social Media Carousel UX Functions with Auto-Close & Exclusive Playback */
 function expandCarouselItem(event, roleId, type, source, captionText) {
   event.stopPropagation();
 
-  // Close active inline videos if playing
   document.querySelectorAll('.inline-video-player-container').forEach(container => {
     container.classList.remove('active');
     const iframe = container.querySelector('iframe');
@@ -1246,11 +1195,9 @@ function closeCarouselExpanded(roleId) {
   contentDiv.innerHTML = '';
 }
 
-/* Custom Audio Card Toggle and Playback Management */
 function toggleAudioCard(cardElement, event) {
   event.stopPropagation();
   
-  // Close active inline videos if playing
   document.querySelectorAll('.inline-video-player-container').forEach(container => {
     container.classList.remove('active');
     const iframe = container.querySelector('iframe');
