@@ -468,9 +468,10 @@ li { margin-bottom: 6px; font-size: 13px; }
   border-radius: 6px;
   overflow: hidden;
 }
-.inline-video-wrapper iframe {
+.inline-video-wrapper video {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%; border: 0;
+  object-fit: contain;
 }
 .close-inline-video-btn {
   position: absolute;
@@ -513,7 +514,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   border: 1px solid var(--border-color);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.video-thumbnail-card img {
+.video-thumbnail-card video {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
   object-fit: cover;
@@ -588,18 +589,18 @@ li { margin-bottom: 6px; font-size: 13px; }
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role1')">Close / Stop</button>
         <div id="inlineTitle-role1" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
-          <iframe id="inlineIframe-role1" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
+          <video id="inlineVideo-role1" controls playsinline webkit-playsinline></video>
         </div>
       </div>
 
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role1', '2Hj5Q6kU3nE', 'Alice & Tim Testimonial - Devil Burger')">
-          <img src="https://img.youtube.com/vi/2Hj5Q6kU3nE/hqdefault.jpg" alt="Devil Burger Video 1 Thumbnail">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role1', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Alice%20GM%20Devil%20Burger.mp4', 'Alice & Tim Testimonial - Devil Burger')">
+          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Alice%20GM%20Devil%20Burger.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
           <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role1', 'keXY9SO2CMA', 'Devil Burger Team Testimonial 2')">
-          <img src="https://img.youtube.com/vi/keXY9SO2CMA/hqdefault.jpg" alt="Devil Burger Video 2 Thumbnail">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role1', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Tim%20Smellie%20_%20Owner%20Devil%20Burger%20Invercargill.mp4', 'Devil Burger Team Testimonial 2')">
+          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Tim%20Smellie%20_%20Owner%20Devil%20Burger%20Invercargill.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
           <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
           <div class="thumbnail-glow-overlay"></div>
         </div>
@@ -653,7 +654,7 @@ li { margin-bottom: 6px; font-size: 13px; }
           </div>
         </div>
 
-        <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Radio produced and voiced by Shane</h4>
+        <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Radio produced and voiced by Shane[cite: 1]</h4>
         <div class="radio-grid">
           <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
             <audio preload="none"><source src="Radio DEVILSTAIRCASE_FRIDAY.wav" type="audio/wav">Your browser does not support the audio element.</audio>
@@ -682,20 +683,20 @@ li { margin-bottom: 6px; font-size: 13px; }
           </div>
         </div>
 
-        <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Midway through video wall installation</h4>
+        <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Midway through video wall installation[cite: 1]</h4>
         
         <!-- Inline Embedded Video Player Slot for Video Wall -->
         <div id="inlinePlayer-role1-wall" class="inline-video-player-container">
           <button class="close-inline-video-btn" onclick="closeInlineVideo('role1-wall')">Close / Stop</button>
           <div id="inlineTitle-role1-wall" class="inline-video-title">Now Playing</div>
           <div class="inline-video-wrapper">
-            <iframe id="inlineIframe-role1-wall" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
+            <video id="inlineVideo-role1-wall" controls playsinline webkit-playsinline></video>
           </div>
         </div>
 
         <div class="video-grid">
-          <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="playInlineVideo(event, 'role1-wall', 'Y5qYcugyoD0', 'Video Wall Installation Progress')">
-            <img src="https://img.youtube.com/vi/Y5qYcugyoD0/hqdefault.jpg" alt="Video Wall Installation Progress Thumbnail">
+          <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="playInlineVideo(event, 'role1-wall', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Install%20day%20%20-%20midway%20through.mp4', 'Video Wall Installation Progress')">
+            <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Install%20day%20%20-%20midway%20through.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
             <div class="thumbnail-glow-overlay"></div>
           </div>
         </div>
@@ -727,32 +728,32 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Delivered consistent cold-call conversions and territory coverage</li>
         <li>Navigated COVID disruptions and franchise realignment</li>
       </ul>
-      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media & Campaign Showcases:</h4>
+      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media & Campaign Showcases:[cite: 1]</h4>
       
       <!-- Inline Embedded Video Player Slot for Role 2 -->
       <div id="inlinePlayer-role2" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role2')">Close / Stop</button>
         <div id="inlineTitle-role2" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
-          <iframe id="inlineIframe-role2" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
+          <video id="inlineVideo-role2" controls playsinline webkit-playsinline></video>
         </div>
       </div>
 
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'sdTLpnb2hw4', 'XClean Client Testimonial')">
-          <img src="https://img.youtube.com/vi/sdTLpnb2hw4/hqdefault.jpg" alt="XClean Testimonial Thumbnail">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Glen%20Hackell%20owner%20of%20XClean%202015.mp4', 'XClean Client Testimonial')">
+          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Glen%20Hackell%20owner%20of%20XClean%202015.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', '-OauqERIzjQ', 'XClean COVID Crisis Campaign')">
-          <img src="https://img.youtube.com/vi/-OauqERIzjQ/hqdefault.jpg" alt="XClean COVID Crisis Campaign Thumbnail">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/X%20Clean%20covid%20crisis.mp4', 'XClean COVID Crisis Campaign')">
+          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/X%20Clean%20covid%20crisis.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'o8yDFvZrZ-k', 'XClean Operations Showcase 1')">
-          <img src="https://img.youtube.com/vi/o8yDFvZrZ-k/hqdefault.jpg" alt="XClean Additional Video 1 Thumbnail">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Deb%20Crump%20talks%20about%20he%20experience%20working%20with%20Shane.mp4', 'XClean Operations Showcase 1')">
+          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Deb%20Crump%20talks%20about%20he%20experience%20working%20with%20Shane.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'uYoG6WgsOzk', 'XClean Operations Showcase 2')">
-          <img src="https://img.youtube.com/vi/uYoG6WgsOzk/hqdefault.jpg" alt="XClean Additional Video 2 Thumbnail">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/September%201%2C%202021.mp4', 'XClean Operations Showcase 2')">
+          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/September%201%2C%202021.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
           <div class="thumbnail-glow-overlay"></div>
         </div>
       </div>
@@ -842,28 +843,28 @@ li { margin-bottom: 6px; font-size: 13px; }
         </div>
       </div>
 
-      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Shorts & Video Showcases:</h4>
+      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Shorts & Video Showcases:[cite: 1]</h4>
       
       <!-- Inline Embedded Video Player Slot for Role 4 -->
       <div id="inlinePlayer-role4" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role4')">Close / Stop</button>
         <div id="inlineTitle-role4" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
-          <iframe id="inlineIframe-role4" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
+          <video id="inlineVideo-role4" controls playsinline webkit-playsinline></video>
         </div>
       </div>
 
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role4', 'vgUFuPfXllc', 'ISee Digital Short Showcase 1')">
-          <img src="https://img.youtube.com/vi/vgUFuPfXllc/hqdefault.jpg" alt="ISee Digital Short 1 Thumbnail">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role4', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Video%20testimonial%202.mp4', 'ISee Digital Short Showcase 1')">
+          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Video%20testimonial%202.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role4', 'qfxGa20ZPG4', 'ISee Digital Short Showcase 2')">
-          <img src="https://img.youtube.com/vi/qfxGa20ZPG4/hqdefault.jpg" alt="ISee Digital Short 2 Thumbnail">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role4', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Video%20testimonial%203.mp4', 'ISee Digital Short Showcase 2')">
+          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Video%20testimonial%203.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="playInlineVideo(event, 'role4', '0z-yf2n8hQw', 'ISee Digital Feature Showcase')">
-          <img src="https://img.youtube.com/vi/0z-yf2n8hQw/hqdefault.jpg" alt="ISee Digital Short 3 Thumbnail">
+        <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="playInlineVideo(event, 'role4', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Video%20testimonial%204.mp4', 'ISee Digital Feature Showcase')">
+          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Video%20testimonial%204.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
           <div class="thumbnail-glow-overlay"></div>
         </div>
       </div>
@@ -890,20 +891,20 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Managed crisis communications during “Teatmate” product failures.</li>
         <li class="highlight-item" style="list-style: none; margin-left: -18px; font-style: italic;">Supported clients with integrity – we were misled by fraudulent “Teatmate” claims, advising on best practice and recourse since the product did not meet XClean or ACVM expectations</li>
       </ul>
-      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
+      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:[cite: 1]</h4>
       
       <!-- Inline Embedded Video Player Slot for Role 5 -->
       <div id="inlinePlayer-role5" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role5')">Close / Stop</button>
         <div id="inlineTitle-role5" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
-          <iframe id="inlineIframe-role5" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
+          <video id="inlineVideo-role5" controls playsinline webkit-playsinline></video>
         </div>
       </div>
 
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role5', 'sdTLpnb2hw4', 'XClean Growth Phase Testimonial')">
-          <img src="https://img.youtube.com/vi/sdTLpnb2hw4/hqdefault.jpg" alt="XClean Shared Testimonial Thumbnail">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role5', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Glen%20Hackell%20owner%20of%20XClean%202015.mp4', 'XClean Growth Phase Testimonial')">
+          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Glen%20Hackell%20owner%20of%20XClean%202015.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
           <div class="thumbnail-glow-overlay"></div>
         </div>
       </div>
@@ -928,20 +929,20 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Coordinated installation workflows and harvested referrals.</li>
         <li class="highlight-item" style="list-style: none; margin-left: -18px; font-style: italic;">Encouraged to take on secondary fixed-term crisis/turnaround roles (meat processing, distribution, automotive) provided they did not interfere with road trips.</li>
       </ul>
-      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
+      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:[cite: 1]</h4>
       
       <!-- Inline Embedded Video Player Slot for Role 6 -->
       <div id="inlinePlayer-role6" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role6')">Close / Stop</button>
         <div id="inlineTitle-role6" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
-          <iframe id="inlineIframe-role6" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
+          <video id="inlineVideo-role6" controls playsinline webkit-playsinline></video>
         </div>
       </div>
 
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role6', 'MSCRSFC-tL0', 'Integrate Group / Sky Testimonial')">
-          <img src="https://img.youtube.com/vi/MSCRSFC-tL0/hqdefault.jpg" alt="Integrate Group Testimonial Thumbnail">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role6', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Bruce%20Cushen%20Sales%20Manager%20at%20Sky%20Television.mp4', 'Integrate Group / Sky Testimonial')">
+          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Bruce%20Cushen%20Sales%20Manager%20at%20Sky%20Television.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
           <div class="thumbnail-glow-overlay"></div>
         </div>
       </div>
@@ -965,24 +966,24 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Achieved national recognition as top-performing sales representative.</li>
         <li>Delivered offsite promotional campaigns and full store operations.</li>
       </ul>
-      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media References:</h4>
+      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media References:[cite: 1]</h4>
       
       <!-- Inline Embedded Video Player Slot for Role 7 -->
       <div id="inlinePlayer-role7" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role7')">Close / Stop</button>
         <div id="inlineTitle-role7" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
-          <iframe id="inlineIframe-role7" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
+          <video id="inlineVideo-role7" controls playsinline webkit-playsinline></video>
         </div>
       </div>
 
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role7', 'S4JQVaSFlfc', 'Mobilefone Solutions Testimonial 1')">
-          <img src="https://img.youtube.com/vi/S4JQVaSFlfc/hqdefault.jpg" alt="Mobilefone Solutions Testimonial 1 Thumbnail">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role7', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Alana%20Talks%20On%20Her%20Time%20Working%20With%20Shane%20(1).mp4', 'Mobilefone Solutions Testimonial 1')">
+          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Alana%20Talks%20On%20Her%20Time%20Working%20With%20Shane%20(1).mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
           <div class="thumbnail-glow-overlay"></div>
         </div>
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role7', 'qwOzstXXSpM', 'Mobilefone Solutions Testimonial 2')">
-          <img src="https://img.youtube.com/vi/qwOzstXXSpM/hqdefault.jpg" alt="Mobilefone Solutions Testimonial 2 Thumbnail">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role7', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Jenna%20speaks%20on%20her%20time%20working%20for%20Shane.mp4', 'Mobilefone Solutions Testimonial 2')">
+          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Jenna%20speaks%20on%20her%20time%20working%20for%20Shane.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
           <div class="thumbnail-glow-overlay"></div>
         </div>
       </div>
@@ -1031,20 +1032,20 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Active role in meeting Scheme-of-arrangement.</li>
         <li>2001 group successfully traded out of receivership.</li>
       </ul>
-      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
+      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:[cite: 1]</h4>
       
       <!-- Inline Embedded Video Player Slot for Role 9 -->
       <div id="inlinePlayer-role9" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role9')">Close / Stop</button>
         <div id="inlineTitle-role9" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
-          <iframe id="inlineIframe-role9" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
+          <video id="inlineVideo-role9" controls playsinline webkit-playsinline></video>
         </div>
       </div>
 
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role9', 'V2HS1ttGNLY', 'Smiths City Testimonial')">
-          <img src="https://img.youtube.com/vi/V2HS1ttGNLY/hqdefault.jpg" alt="Smiths City Testimonial Thumbnail">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role9', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Michael%20Botting%20Store%20manager%2C%20Area%20manager%20for%20the%20Smiths%20city%20Group.mp4', 'Smiths City Testimonial')">
+          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Michael%20Botting%20Store%20manager%2C%20Area%20manager%20for%20the%20Smiths%20city%20Group.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
           <div class="thumbnail-glow-overlay"></div>
         </div>
       </div>
@@ -1078,8 +1079,11 @@ function toggleRole(event, cardElement, roleId) {
   });
   document.querySelectorAll('.inline-video-player-container').forEach(container => {
     container.classList.remove('active');
-    const iframe = container.querySelector('iframe');
-    if (iframe) iframe.src = '';
+    const vid = container.querySelector('video');
+    if (vid) {
+      vid.pause();
+      vid.src = '';
+    }
   });
 
   // If the clicked role wasn't already open, open it, handle initial button pulse state, and smooth-scroll with top offset
@@ -1169,8 +1173,8 @@ function closeModal() {
   document.getElementById('imgModal').style.display = "none";
 }
 
-/* Updated Persistent Iframe Playback Logic */
-function playInlineVideo(event, containerKey, videoId, videoTitle) {
+/* Updated Persistent Video Element Playback Logic */
+function playInlineVideo(event, containerKey, videoUrl, videoTitle) {
   event.stopPropagation();
 
   // Stop all playing audio cards across the page
@@ -1187,18 +1191,24 @@ function playInlineVideo(event, containerKey, videoId, videoTitle) {
   // Close and clear src for all other active inline video players globally
   document.querySelectorAll('.inline-video-player-container').forEach(container => {
     container.classList.remove('active');
-    const iframe = container.querySelector('iframe');
-    if (iframe) iframe.src = '';
+    const vid = container.querySelector('video');
+    if (vid) {
+      vid.pause();
+      vid.src = '';
+    }
   });
 
   const playerContainer = document.getElementById('inlinePlayer-' + containerKey);
   const titleSlot = document.getElementById('inlineTitle-' + containerKey);
-  const iframeSlot = document.getElementById('inlineIframe-' + containerKey);
+  const videoSlot = document.getElementById('inlineVideo-' + containerKey);
 
   titleSlot.textContent = "▶ " + videoTitle;
-  iframeSlot.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&iv_load_policy=3`;
+  videoSlot.src = videoUrl;
   
   playerContainer.classList.add('active');
+  videoSlot.play().catch(err => {
+    console.log("Autoplay prevented or failed:", err);
+  });
 
   // Smoothly scroll the inline player into view
   playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -1206,10 +1216,11 @@ function playInlineVideo(event, containerKey, videoId, videoTitle) {
 
 function closeInlineVideo(containerKey) {
   const playerContainer = document.getElementById('inlinePlayer-' + containerKey);
-  const iframeSlot = document.getElementById('inlineIframe-' + containerKey);
+  const videoSlot = document.getElementById('inlineVideo-' + containerKey);
   
   playerContainer.classList.remove('active');
-  iframeSlot.src = '';
+  videoSlot.pause();
+  videoSlot.src = '';
 }
 
 /* Interactive Social Media Carousel UX Functions with Auto-Close & Exclusive Playback */
@@ -1219,8 +1230,11 @@ function expandCarouselItem(event, roleId, type, source, captionText) {
   // Close active inline videos if playing
   document.querySelectorAll('.inline-video-player-container').forEach(container => {
     container.classList.remove('active');
-    const iframe = container.querySelector('iframe');
-    if (iframe) iframe.src = '';
+    const vid = container.querySelector('video');
+    if (vid) {
+      vid.pause();
+      vid.src = '';
+    }
   });
 
   document.querySelectorAll('audio, video').forEach(media => {
@@ -1263,8 +1277,11 @@ function toggleAudioCard(cardElement, event) {
   // Close active inline videos if playing
   document.querySelectorAll('.inline-video-player-container').forEach(container => {
     container.classList.remove('active');
-    const iframe = container.querySelector('iframe');
-    if (iframe) iframe.src = '';
+    const vid = container.querySelector('video');
+    if (vid) {
+      vid.pause();
+      vid.src = '';
+    }
   });
 
   const audio = cardElement.querySelector('audio');
