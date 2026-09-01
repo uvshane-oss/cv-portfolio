@@ -24,7 +24,7 @@ body {
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
 }
-/* Revision Version Stamp */
+/* Temporary Revision Version Stamp - Top Left */
 .revision-stamp {
   font-size: 10px;
   color: #888888;
@@ -149,7 +149,7 @@ h2.section-title {
 }
 .collapsible-content.show { display: block; }
 
-/* Portfolio Sub-Section */
+/* Portfolio Collapsible Sub-Section */
 .portfolio-sub-section {
   display: none;
   margin-top: 15px;
@@ -160,7 +160,7 @@ h2.section-title {
   display: block;
 }
 
-/* Portfolio Button Container */
+/* Centered Pulsing/Bumping Portfolio Image Button */
 .portfolio-btn-container {
   text-align: center;
   margin: 20px 0 15px 0;
@@ -204,7 +204,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   color: var(--highlight-blue);
   font-weight: bold;
 }
-/* Portfolio Gallery */
+/* Portfolio Media Gallery Grid */
 .portfolio-gallery {
   display: grid;
   grid-template-columns: 1fr;
@@ -230,7 +230,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   object-fit: contain;
   border-radius: 4px;
 }
-/* Marquee Gallery */
+/* Auto-Scrolling Marquee Gallery Styling with Mobile Width/Height Stability */
 .marquee-container {
   position: relative;
   width: 100%;
@@ -284,7 +284,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-/* Radio Grid */
+/* Unified Responsive Radio Grid Layout (Flexbox Auto-Wrap with Centering) */
 .radio-grid {
   display: flex;
   flex-wrap: wrap;
@@ -347,6 +347,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   z-index: 2;
 }
 
+/* Equalizer overlay container when playing */
 .equalizer-overlay {
   display: none;
   position: absolute;
@@ -381,7 +382,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   100% { height: 32px; }
 }
 
-/* Carousel Expanded View Modal */
+/* Interactive Carousel Expanded View Modal/Overlay inside components */
 .carousel-expanded-overlay {
   display: none;
   position: relative;
@@ -416,7 +417,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   border-radius: 4px;
   cursor: pointer;
 }
-/* Image Modal */
+/* Fullscreen Modal for Images */
 .img-modal {
   display: none;
   position: fixed;
@@ -442,7 +443,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   font-weight: bold;
   cursor: pointer;
 }
-/* Inline Embedded Video Player Window */
+/* Inline Embedded Video Player Window (Appears right between description text and thumbnails, ~40-50% width centered) */
 .inline-video-player-container {
   display: none;
   background: #111;
@@ -462,7 +463,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 .inline-video-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
   background: #000;
   border-radius: 6px;
   overflow: hidden;
@@ -494,7 +495,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   padding-right: 80px;
 }
 
-/* Video Grid */
+/* Unified Permanent Side-by-Side Video Grid Layout with Thumbnail Swap */
 .video-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -517,21 +518,12 @@ li { margin-bottom: 6px; font-size: 13px; }
   top: 0; left: 0; width: 100%; height: 100%;
   object-fit: cover;
 }
-/* Corrected overlay positioning so `video testimonial overlay.png` sits accurately on top */
-.thumbnail-custom-overlay {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-  z-index: 2;
-}
 .thumbnail-glow-overlay {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
   background: rgba(29, 78, 216, 0.1);
   opacity: 0;
   transition: opacity 0.2s ease;
-  z-index: 1;
 }
 .video-thumbnail-card:hover {
   border-color: var(--highlight-blue);
@@ -540,7 +532,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 .video-thumbnail-card:hover .thumbnail-glow-overlay {
   opacity: 1;
 }
-/* Detail Link */
+/* Detailed Study Link Style */
 .detail-link-container {
   margin-top: 15px;
   text-align: right;
@@ -559,7 +551,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-09-02 07:05 NZST</div>
+  <div class="revision-stamp">Rev: 2026-08-30 16:18 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -570,6 +562,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   <h2 class="section-title">Professional Career History & Portfolio</h2>
   <p style="font-size: 13px; color: var(--text-muted); margin-top: -10px; margin-bottom: 20px;">Tap any role below to view details, media, and campaign highlights.</p>
 
+  <!-- ROLE 1: Devil Burger -->
   <div class="role-card" onclick="toggleRole(event, this, 'role1')">
     <div class="role-meta">2023–2025</div>
     <div class="main-role-title">Digital Project Manager – Devil Burger</div>
@@ -588,25 +581,26 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
 
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials :</h4>
-      <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 8px 0;">Alice & Tim discuss working with Shane (Tap anywhere on thumbnail to play)</p>
+      <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 8px 0;">Alice & Tim discuss working with Shane (Tap to play inline)</p>
       
+      <!-- Inline Embedded Video Player Slot for Role 1 -->
       <div id="inlinePlayer-role1" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role1')">Close / Stop</button>
         <div id="inlineTitle-role1" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
-          <iframe id="inlineIframe-role1" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
+          <iframe id="inlineIframe-role1" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
         </div>
       </div>
 
       <div class="video-grid">
         <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role1', '2Hj5Q6kU3nE', 'Alice & Tim Testimonial - Devil Burger')">
-          <img src="alice thumbnail.jpg" alt="Alice & Tim Testimonial">
-          <img src="video testimonial overlay.png" alt="Overlay Button" class="thumbnail-custom-overlay">
+          <img src="https://img.youtube.com/vi/2Hj5Q6kU3nE/hqdefault.jpg" alt="Devil Burger Video 1 Thumbnail">
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
           <div class="thumbnail-glow-overlay"></div>
         </div>
         <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role1', 'keXY9SO2CMA', 'Devil Burger Team Testimonial 2')">
           <img src="https://img.youtube.com/vi/keXY9SO2CMA/hqdefault.jpg" alt="Devil Burger Video 2 Thumbnail">
-          <img src="video testimonial overlay.png" alt="Overlay Button" class="thumbnail-custom-overlay">
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
           <div class="thumbnail-glow-overlay"></div>
         </div>
       </div>
@@ -647,6 +641,7 @@ li { margin-bottom: 6px; font-size: 13px; }
               <img src="$10 Tuesday for summer .jpg" alt="Summer Promo Campaign" width="260" height="160">
               <p class="marquee-caption">Summer Promotion Artwork</p>
             </div>
+            <!-- Duplicated loop for smooth infinite scroll -->
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
               <video src="social media 1.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
               <p class="marquee-caption">Social Media Clip 1</p>
@@ -661,27 +656,27 @@ li { margin-bottom: 6px; font-size: 13px; }
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Radio produced and voiced by Shane</h4>
         <div class="radio-grid">
           <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
-            <audio preload="none"><source src="Radio DEVILSTAIRCASE_FRIDAY.wav" type="audio/wav"></audio>
+            <audio preload="none"><source src="Radio DEVILSTAIRCASE_FRIDAY.wav" type="audio/wav">Your browser does not support the audio element.</audio>
             <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
             <div class="radio-title">Devil's Staircase Friday</div>
           </div>
           <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
-            <audio preload="none"><source src="Radio Long Weekend.mp3" type="audio/mpeg"></audio>
+            <audio preload="none"><source src="Radio Long Weekend.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
             <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
             <div class="radio-title">Long Weekend</div>
           </div>
           <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
-            <audio preload="none"><source src="Radio PORKDEATH.wav" type="audio/wav"></audio>
+            <audio preload="none"><source src="Radio PORKDEATH.wav" type="audio/wav">Your browser does not support the audio element.</audio>
             <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
             <div class="radio-title">Death by Pork</div>
           </div>
           <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
-            <audio preload="none"><source src="Radio SPICEYBEEF.wav" type="audio/wav"></audio>
+            <audio preload="none"><source src="Radio SPICEYBEEF.wav" type="audio/wav">Your browser does not support the audio element.</audio>
             <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
             <div class="radio-title">Spicy Beef</div>
           </div>
           <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
-            <audio preload="none"><source src="Radio Salmon.mp3" type="audio/mpeg"></audio>
+            <audio preload="none"><source src="Radio Salmon.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
             <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
             <div class="radio-title">Salmon</div>
           </div>
@@ -689,11 +684,12 @@ li { margin-bottom: 6px; font-size: 13px; }
 
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Midway through video wall installation</h4>
         
+        <!-- Inline Embedded Video Player Slot for Video Wall -->
         <div id="inlinePlayer-role1-wall" class="inline-video-player-container">
           <button class="close-inline-video-btn" onclick="closeInlineVideo('role1-wall')">Close / Stop</button>
           <div id="inlineTitle-role1-wall" class="inline-video-title">Now Playing</div>
           <div class="inline-video-wrapper">
-            <iframe id="inlineIframe-role1-wall" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
+            <iframe id="inlineIframe-role1-wall" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
           </div>
         </div>
 
@@ -709,6 +705,7 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
+  <!-- ROLE 2: XClean National Sales Manager (2018-2022) -->
   <div class="role-card" onclick="toggleRole(event, this, 'role2')">
     <div class="role-meta">2018–2022</div>
     <div class="main-role-title">National Sales Manager – XClean</div>
@@ -727,14 +724,17 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Built custom shelving for fleet myself</li>
         <li>Managed product formulation, global sourcing, importation, and approvals.</li>
         <li>Engineered a custom COVID crisis campaign generating $500k in 14 days.</li>
+        <li>Delivered consistent cold-call conversions and territory coverage</li>
+        <li>Navigated COVID disruptions and franchise realignment</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media & Campaign Showcases:</h4>
       
+      <!-- Inline Embedded Video Player Slot for Role 2 -->
       <div id="inlinePlayer-role2" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role2')">Close / Stop</button>
         <div id="inlineTitle-role2" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
-          <iframe id="inlineIframe-role2" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
+          <iframe id="inlineIframe-role2" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
         </div>
       </div>
 
@@ -763,6 +763,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 
       <div id="xcleanPortfolioSection" class="portfolio-sub-section">
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">XClean Extended Portfolio & Campaign Assets</h4>
+        <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 10px 0;">Additional documentation, fleet deployment visuals, and formulation records.</p>
         <div class="portfolio-gallery">
           <div class="portfolio-img-wrapper" onclick="openModal('xclean.jpg')">
             <img src="xclean.jpg" alt="XClean Operations" width="260" height="160">
@@ -775,6 +776,7 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
+  <!-- ROLE 3: Royal Albatross Centre -->
   <div class="role-card" onclick="toggleRole(event, this, 'role3')">
     <div class="role-meta">2017</div>
     <div class="main-role-title">Principal A/V Architect – Royal Albatross Centre</div>
@@ -787,6 +789,8 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Delivered custom solutions where no off-the-shelf option existed.</li>
         <li>Delivered enterprise deployment on time and under budget.</li>
         <li>Facilitated custom engineered optical lenses to be manufactured overseas.</li>
+        <li>Completed fabrication including CNC machining, welding, and calibration.</li>
+        <li>Managed global procurement from Germany, Japan, and China.</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Supporting Portfolio</h4>
       <div class="marquee-container">
@@ -795,13 +799,16 @@ li { margin-bottom: 6px; font-size: 13px; }
           <div class="marquee-item" onclick="openModal('Screen side.jpg')"><img src="Screen side.jpg" alt="Screen side" width="260" height="160"><p class="marquee-caption">Screen side</p></div>
           <div class="marquee-item" onclick="openModal('back of screen.jpg')"><img src="back of screen.jpg" alt="back of screen" width="260" height="160"><p class="marquee-caption">back of screen</p></div>
           <div class="marquee-item" onclick="openModal('front on.jpg')"><img src="front on.jpg" alt="front on" width="260" height="160"><p class="marquee-caption">front on</p></div>
+          <!-- Duplicated loop for smooth infinite scroll -->
           <div class="marquee-item" onclick="openModal('Screen end & projector.jpg')"><img src="Screen end & projector.jpg" alt="Screen end & projector" width="260" height="160"><p class="marquee-caption">Screen end & projector</p></div>
+          <div class="marquee-item" onclick="openModal('Screen side.jpg')"><img src="Screen side.jpg" alt="Screen side" width="260" height="160"><p class="marquee-caption">Screen side</p></div>
         </div>
       </div>
       <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'Albatross Centre A/V')">View Full Detailed Case Study &rarr;</span></div>
     </div>
   </div>
 
+  <!-- ROLE 4: ISee Digital -->
   <div class="role-card" onclick="toggleRole(event, this, 'role4')">
     <div class="role-meta">2015–2017</div>
     <div class="main-role-title">Site Acquisition Manager – ISee Digital</div>
@@ -814,6 +821,10 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Completed geo testing and resource consent approvals.</li>
         <li>Secured national footprint representing ~$XX million commitment.</li>
         <li>Secured 2,000+ retail locations and negotiated revenue-share agreements.</li>
+        <li>Delivered in-store digital network representing ~$X.X million commitment.</li>
+        <li>Procured 2,000+ single-board computers, screens, brackets, and cabling.</li>
+        <li>Completed national installation ahead of schedule and under budget.</li>
+        <li>Handled physical installation for the majority of the network.</li>
       </ul>
 
       <div class="portfolio-btn-container">
@@ -822,6 +833,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 
       <div id="iseeDigitalPortfolioSection" class="portfolio-sub-section">
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">ISee Digital National Network Expansion Assets</h4>
+        <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 10px 0;">Documentation and photographic records covering billboard rollouts and retail deployments.</p>
         <div class="portfolio-gallery">
           <div class="portfolio-img-wrapper" onclick="openModal('isee digital logo.jpeg')">
             <img src="isee digital logo.jpeg" alt="ISee Digital Network Asset" width="260" height="160">
@@ -832,11 +844,12 @@ li { margin-bottom: 6px; font-size: 13px; }
 
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Shorts & Video Showcases:</h4>
       
+      <!-- Inline Embedded Video Player Slot for Role 4 -->
       <div id="inlinePlayer-role4" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role4')">Close / Stop</button>
         <div id="inlineTitle-role4" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
-          <iframe id="inlineIframe-role4" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
+          <iframe id="inlineIframe-role4" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
         </div>
       </div>
 
@@ -858,6 +871,7 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
+  <!-- ROLE 5: XClean Growth Phase (2013-2015) -->
   <div class="role-card" onclick="toggleRole(event, this, 'role5')">
     <div class="role-meta">2013–2015</div>
     <div class="main-role-title">Sales Manager – XClean</div>
@@ -868,15 +882,22 @@ li { margin-bottom: 6px; font-size: 13px; }
       <ul>
         <li>Expanded operations from single staff member to training 12-person team.</li>
         <li>Rebuilt territories, deploying new commission-only sales teams nationally.</li>
+        <li>Drove high-conversion cold-calling across regions in vans with reps.</li>
+        <li>Built a cohesive national sales team in under 12 months.</li>
         <li>Lifted revenue from stagnant $156k baseline to $X million per annum.</li>
+        <li>Delivered free on-farm training across multiple regions.</li>
+        <li>Managed crisis communications during “payout” collapse</li>
+        <li>Managed crisis communications during “Teatmate” product failures.</li>
+        <li class="highlight-item" style="list-style: none; margin-left: -18px; font-style: italic;">Supported clients with integrity – we were misled by fraudulent “Teatmate” claims, advising on best practice and recourse since the product did not meet XClean or ACVM expectations</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
       
+      <!-- Inline Embedded Video Player Slot for Role 5 -->
       <div id="inlinePlayer-role5" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role5')">Close / Stop</button>
         <div id="inlineTitle-role5" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
-          <iframe id="inlineIframe-role5" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
+          <iframe id="inlineIframe-role5" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
         </div>
       </div>
 
@@ -890,6 +911,7 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
+  <!-- ROLE 6: Regional Sales Manager – Integrate Group / Sky (2007-2014) -->
   <div class="role-card" onclick="toggleRole(event, this, 'role6')">
     <div class="role-meta">2007–2014</div>
     <div class="main-role-title">Regional Sales Manager – Integrate Group / Sky</div>
@@ -900,14 +922,20 @@ li { margin-bottom: 6px; font-size: 13px; }
       <ul>
         <li>Outperformed larger population centres by activation totals and averages.</li>
         <li>Consistently drove more than 6,000 new subscribers per annum.</li>
+        <li>Built team from 1 to 8 members, managing burnout in door-to-door sales.</li>
+        <li>Worked six evenings a week across Southland and Otago.</li>
+        <li>Managed employment, onboarding, training, and territory planning.</li>
+        <li>Coordinated installation workflows and harvested referrals.</li>
+        <li class="highlight-item" style="list-style: none; margin-left: -18px; font-style: italic;">Encouraged to take on secondary fixed-term crisis/turnaround roles (meat processing, distribution, automotive) provided they did not interfere with road trips.</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
       
+      <!-- Inline Embedded Video Player Slot for Role 6 -->
       <div id="inlinePlayer-role6" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role6')">Close / Stop</button>
         <div id="inlineTitle-role6" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
-          <iframe id="inlineIframe-role6" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
+          <iframe id="inlineIframe-role6" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
         </div>
       </div>
 
@@ -921,6 +949,7 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
+  <!-- ROLE 7: Mobilefone Solutions (2002-2006) -->
   <div class="role-card" onclick="toggleRole(event, this, 'role7')">
     <div class="role-meta">2002–2006</div>
     <div class="main-role-title">Manager (Vodafone Franchise) – Mobilefone Solutions</div>
@@ -931,14 +960,19 @@ li { margin-bottom: 6px; font-size: 13px; }
       <ul>
         <li>Turned around branch to maximize new market opportunities.</li>
         <li>Built store team from 1 staff member to 4.</li>
+        <li>Established and led additional outbound sales team of 4.</li>
+        <li>Increased in-store turnover from $30k to $XXX k per month.</li>
+        <li>Achieved national recognition as top-performing sales representative.</li>
+        <li>Delivered offsite promotional campaigns and full store operations.</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media References:</h4>
       
+      <!-- Inline Embedded Video Player Slot for Role 7 -->
       <div id="inlinePlayer-role7" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role7')">Close / Stop</button>
         <div id="inlineTitle-role7" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
-          <iframe id="inlineIframe-role7" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
+          <iframe id="inlineIframe-role7" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
         </div>
       </div>
 
@@ -956,6 +990,7 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
+  <!-- ROLE 8: H&J Smith (2001-2002) -->
   <div class="role-card" onclick="toggleRole(event, this, 'role8')">
     <div class="role-meta">2001–2002</div>
     <div class="main-role-title">Department Manager – H&J Smith</div>
@@ -966,11 +1001,15 @@ li { margin-bottom: 6px; font-size: 13px; }
       <ul>
         <li>Reinvigorated category across the brand via turnaround role.</li>
         <li>Led sales and customer engagement across multiple stores.</li>
+        <li>Delivered showroom redesigns across Invercargill, Queenstown, Balclutha, Blenheim.</li>
+        <li>Delivered new product categories and established new brand relationships.</li>
+        <li>Broke multiple sales records including best day ever by over 30%.</li>
       </ul>
       <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'HJ Smith Department')">View Full Detailed Case Study &rarr;</span></div>
     </div>
   </div>
 
+  <!-- ROLE 9: Smiths City / Powerstore (1992-2001) -->
   <div class="role-card" onclick="toggleRole(event, this, 'role9')">
     <div class="role-meta">1992–2001</div>
     <div class="main-role-title">Area & Branch Manager – Smiths City / Powerstore</div>
@@ -981,14 +1020,25 @@ li { margin-bottom: 6px; font-size: 13px; }
       <ul>
         <li>Increased turnover, profitability, location growth, and off-site promotions.</li>
         <li>Progressed from salesperson to store manager and area manager.</li>
+        <li>Delivered annual personal sales approaching $X Million</li>
+        <li>Managed locations across Invercargill, Gore.</li>
+        <li>Managed locations across Queenstown, Wanaka, Alexandra, Roxburgh.</li>
+        <li>Managed locations across Canterbury, 3 x Christchurch stores, Timaru.</li>
+        <li>Achieved personal best individual daily sales of $86,000.</li>
+        <li>Active in the acquisition - 7 businesses across the South Island.</li>
+        <li>Developed non-negotiable standards, later implemented nationally.</li>
+        <li>Played a core role in launching 10 new stores.</li>
+        <li>Active role in meeting Scheme-of-arrangement.</li>
+        <li>2001 group successfully traded out of receivership.</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
       
+      <!-- Inline Embedded Video Player Slot for Role 9 -->
       <div id="inlinePlayer-role9" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role9')">Close / Stop</button>
         <div id="inlineTitle-role9" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
-          <iframe id="inlineIframe-role9" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
+          <iframe id="inlineIframe-role9" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
         </div>
       </div>
 
@@ -1016,6 +1066,7 @@ function toggleRole(event, cardElement, roleId) {
   const targetContent = document.getElementById(roleId);
   const isCurrentlyOpen = targetContent.classList.contains("show");
 
+  // Close all open roles and reset their sub-menus/media players globally
   document.querySelectorAll('.collapsible-content').forEach(content => {
     content.classList.remove('show');
   });
@@ -1031,6 +1082,7 @@ function toggleRole(event, cardElement, roleId) {
     if (iframe) iframe.src = '';
   });
 
+  // If the clicked role wasn't already open, open it, handle initial button pulse state, and smooth-scroll with top offset
   if (!isCurrentlyOpen) {
     targetContent.classList.add("show");
     
@@ -1047,6 +1099,7 @@ function toggleRole(event, cardElement, roleId) {
       if (xcleanBtn) xcleanBtn.classList.add('pulse-animation');
     }
 
+    // Option 3 Solution: Smooth scroll card to top with offset (e.g. 15px breathing room)
     setTimeout(() => {
       const elementPosition = cardElement.getBoundingClientRect().top + window.pageYOffset;
       const offsetPosition = elementPosition - 15;
@@ -1116,18 +1169,22 @@ function closeModal() {
   document.getElementById('imgModal').style.display = "none";
 }
 
+/* Updated Persistent Iframe Playback Logic */
 function playInlineVideo(event, containerKey, videoId, videoTitle) {
   event.stopPropagation();
 
+  // Stop all playing audio cards across the page
   document.querySelectorAll('audio').forEach(audio => {
     if (!audio.paused) audio.pause();
   });
   document.querySelectorAll('.radio-card-item').forEach(card => card.classList.remove('is-playing'));
 
+  // Pause/stop any open social media carousel videos
   document.querySelectorAll('.carousel-expanded-overlay video').forEach(vid => {
     vid.pause();
   });
 
+  // Close and clear src for all other active inline video players globally
   document.querySelectorAll('.inline-video-player-container').forEach(container => {
     container.classList.remove('active');
     const iframe = container.querySelector('iframe');
@@ -1142,6 +1199,8 @@ function playInlineVideo(event, containerKey, videoId, videoTitle) {
   iframeSlot.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
   
   playerContainer.classList.add('active');
+
+  // Smoothly scroll the inline player into view
   playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
@@ -1153,9 +1212,11 @@ function closeInlineVideo(containerKey) {
   iframeSlot.src = '';
 }
 
+/* Interactive Social Media Carousel UX Functions with Auto-Close & Exclusive Playback */
 function expandCarouselItem(event, roleId, type, source, captionText) {
   event.stopPropagation();
 
+  // Close active inline videos if playing
   document.querySelectorAll('.inline-video-player-container').forEach(container => {
     container.classList.remove('active');
     const iframe = container.querySelector('iframe');
@@ -1195,9 +1256,11 @@ function closeCarouselExpanded(roleId) {
   contentDiv.innerHTML = '';
 }
 
+/* Custom Audio Card Toggle and Playback Management */
 function toggleAudioCard(cardElement, event) {
   event.stopPropagation();
   
+  // Close active inline videos if playing
   document.querySelectorAll('.inline-video-player-container').forEach(container => {
     container.classList.remove('active');
     const iframe = container.querySelector('iframe');
