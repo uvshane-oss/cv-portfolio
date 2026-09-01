@@ -518,12 +518,21 @@ li { margin-bottom: 6px; font-size: 13px; }
   top: 0; left: 0; width: 100%; height: 100%;
   object-fit: cover;
 }
+/* Overlay custom graphic styling with pointer-events: none so entire card triggers click */
+.thumbnail-custom-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+}
 .thumbnail-glow-overlay {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
   background: rgba(29, 78, 216, 0.1);
   opacity: 0;
   transition: opacity 0.2s ease;
+  z-index: 1;
 }
 .video-thumbnail-card:hover {
   border-color: var(--highlight-blue);
@@ -551,7 +560,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-08-30 16:18 NZST</div>
+  <div class="revision-stamp">Rev: 2026-09-02 06:54 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -562,7 +571,6 @@ li { margin-bottom: 6px; font-size: 13px; }
   <h2 class="section-title">Professional Career History & Portfolio</h2>
   <p style="font-size: 13px; color: var(--text-muted); margin-top: -10px; margin-bottom: 20px;">Tap any role below to view details, media, and campaign highlights.</p>
 
-  <!-- ROLE 1: Devil Burger -->
   <div class="role-card" onclick="toggleRole(event, this, 'role1')">
     <div class="role-meta">2023–2025</div>
     <div class="main-role-title">Digital Project Manager – Devil Burger</div>
@@ -581,9 +589,8 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
 
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials :</h4>
-      <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 8px 0;">Alice & Tim discuss working with Shane (Tap to play inline)</p>
+      <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 8px 0;">Alice & Tim discuss working with Shane (Tap anywhere on thumbnail to play)</p>
       
-      <!-- Inline Embedded Video Player Slot for Role 1 -->
       <div id="inlinePlayer-role1" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role1')">Close / Stop</button>
         <div id="inlineTitle-role1" class="inline-video-title">Now Playing</div>
@@ -594,11 +601,13 @@ li { margin-bottom: 6px; font-size: 13px; }
 
       <div class="video-grid">
         <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role1', '2Hj5Q6kU3nE', 'Alice & Tim Testimonial - Devil Burger')">
-          <img src="https://img.youtube.com/vi/2Hj5Q6kU3nE/hqdefault.jpg" alt="Devil Burger Video 1 Thumbnail">
+          <img src="alice thumbnail.jpg" alt="Alice & Tim Testimonial">
+          <img src="g5.png" alt="Overlay Button" class="thumbnail-custom-overlay">
           <div class="thumbnail-glow-overlay"></div>
         </div>
         <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role1', 'keXY9SO2CMA', 'Devil Burger Team Testimonial 2')">
           <img src="https://img.youtube.com/vi/keXY9SO2CMA/hqdefault.jpg" alt="Devil Burger Video 2 Thumbnail">
+          <img src="g5.png" alt="Overlay Button" class="thumbnail-custom-overlay">
           <div class="thumbnail-glow-overlay"></div>
         </div>
       </div>
@@ -639,7 +648,6 @@ li { margin-bottom: 6px; font-size: 13px; }
               <img src="$10 Tuesday for summer .jpg" alt="Summer Promo Campaign" width="260" height="160">
               <p class="marquee-caption">Summer Promotion Artwork</p>
             </div>
-            <!-- Duplicated loop for smooth infinite scroll -->
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
               <video src="social media 1.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
               <p class="marquee-caption">Social Media Clip 1</p>
@@ -682,7 +690,6 @@ li { margin-bottom: 6px; font-size: 13px; }
 
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Midway through video wall installation</h4>
         
-        <!-- Inline Embedded Video Player Slot for Video Wall -->
         <div id="inlinePlayer-role1-wall" class="inline-video-player-container">
           <button class="close-inline-video-btn" onclick="closeInlineVideo('role1-wall')">Close / Stop</button>
           <div id="inlineTitle-role1-wall" class="inline-video-title">Now Playing</div>
@@ -703,7 +710,6 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
-  <!-- ROLE 2: XClean National Sales Manager (2018-2022) -->
   <div class="role-card" onclick="toggleRole(event, this, 'role2')">
     <div class="role-meta">2018–2022</div>
     <div class="main-role-title">National Sales Manager – XClean</div>
@@ -727,7 +733,6 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media & Campaign Showcases:</h4>
       
-      <!-- Inline Embedded Video Player Slot for Role 2 -->
       <div id="inlinePlayer-role2" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role2')">Close / Stop</button>
         <div id="inlineTitle-role2" class="inline-video-title">Now Playing</div>
@@ -774,7 +779,6 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
-  <!-- ROLE 3: Royal Albatross Centre -->
   <div class="role-card" onclick="toggleRole(event, this, 'role3')">
     <div class="role-meta">2017</div>
     <div class="main-role-title">Principal A/V Architect – Royal Albatross Centre</div>
@@ -797,7 +801,6 @@ li { margin-bottom: 6px; font-size: 13px; }
           <div class="marquee-item" onclick="openModal('Screen side.jpg')"><img src="Screen side.jpg" alt="Screen side" width="260" height="160"><p class="marquee-caption">Screen side</p></div>
           <div class="marquee-item" onclick="openModal('back of screen.jpg')"><img src="back of screen.jpg" alt="back of screen" width="260" height="160"><p class="marquee-caption">back of screen</p></div>
           <div class="marquee-item" onclick="openModal('front on.jpg')"><img src="front on.jpg" alt="front on" width="260" height="160"><p class="marquee-caption">front on</p></div>
-          <!-- Duplicated loop for smooth infinite scroll -->
           <div class="marquee-item" onclick="openModal('Screen end & projector.jpg')"><img src="Screen end & projector.jpg" alt="Screen end & projector" width="260" height="160"><p class="marquee-caption">Screen end & projector</p></div>
           <div class="marquee-item" onclick="openModal('Screen side.jpg')"><img src="Screen side.jpg" alt="Screen side" width="260" height="160"><p class="marquee-caption">Screen side</p></div>
         </div>
@@ -806,7 +809,6 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
-  <!-- ROLE 4: ISee Digital -->
   <div class="role-card" onclick="toggleRole(event, this, 'role4')">
     <div class="role-meta">2015–2017</div>
     <div class="main-role-title">Site Acquisition Manager – ISee Digital</div>
@@ -842,7 +844,6 @@ li { margin-bottom: 6px; font-size: 13px; }
 
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Shorts & Video Showcases:</h4>
       
-      <!-- Inline Embedded Video Player Slot for Role 4 -->
       <div id="inlinePlayer-role4" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role4')">Close / Stop</button>
         <div id="inlineTitle-role4" class="inline-video-title">Now Playing</div>
@@ -869,7 +870,6 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
-  <!-- ROLE 5: XClean Growth Phase (2013-2015) -->
   <div class="role-card" onclick="toggleRole(event, this, 'role5')">
     <div class="role-meta">2013–2015</div>
     <div class="main-role-title">Sales Manager – XClean</div>
@@ -890,7 +890,6 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
       
-      <!-- Inline Embedded Video Player Slot for Role 5 -->
       <div id="inlinePlayer-role5" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role5')">Close / Stop</button>
         <div id="inlineTitle-role5" class="inline-video-title">Now Playing</div>
@@ -909,7 +908,6 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
-  <!-- ROLE 6: Regional Sales Manager – Integrate Group / Sky (2007-2014) -->
   <div class="role-card" onclick="toggleRole(event, this, 'role6')">
     <div class="role-meta">2007–2014</div>
     <div class="main-role-title">Regional Sales Manager – Integrate Group / Sky</div>
@@ -928,7 +926,6 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
       
-      <!-- Inline Embedded Video Player Slot for Role 6 -->
       <div id="inlinePlayer-role6" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role6')">Close / Stop</button>
         <div id="inlineTitle-role6" class="inline-video-title">Now Playing</div>
@@ -947,7 +944,6 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
-  <!-- ROLE 7: Mobilefone Solutions (2002-2006) -->
   <div class="role-card" onclick="toggleRole(event, this, 'role7')">
     <div class="role-meta">2002–2006</div>
     <div class="main-role-title">Manager (Vodafone Franchise) – Mobilefone Solutions</div>
@@ -965,7 +961,6 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media References:</h4>
       
-      <!-- Inline Embedded Video Player Slot for Role 7 -->
       <div id="inlinePlayer-role7" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role7')">Close / Stop</button>
         <div id="inlineTitle-role7" class="inline-video-title">Now Playing</div>
@@ -988,7 +983,6 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
-  <!-- ROLE 8: H&J Smith (2001-2002) -->
   <div class="role-card" onclick="toggleRole(event, this, 'role8')">
     <div class="role-meta">2001–2002</div>
     <div class="main-role-title">Department Manager – H&J Smith</div>
@@ -1007,7 +1001,6 @@ li { margin-bottom: 6px; font-size: 13px; }
     </div>
   </div>
 
-  <!-- ROLE 9: Smiths City / Powerstore (1992-2001) -->
   <div class="role-card" onclick="toggleRole(event, this, 'role9')">
     <div class="role-meta">1992–2001</div>
     <div class="main-role-title">Area & Branch Manager – Smiths City / Powerstore</div>
@@ -1031,7 +1024,6 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
       
-      <!-- Inline Embedded Video Player Slot for Role 9 -->
       <div id="inlinePlayer-role9" class="inline-video-player-container">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role9')">Close / Stop</button>
         <div id="inlineTitle-role9" class="inline-video-title">Now Playing</div>
