@@ -694,7 +694,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-09-02 16:55 NZST</div>
+  <div class="revision-stamp">Rev: 2026-09-02 17:20 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1589,6 +1589,49 @@ function toggleDevilBurgerPortfolio(event) {
   const sub = document.getElementById('devilBurgerPortfolioSection');
   sub.classList.toggle('show');
 }
+
+// Inline Video Player Controller Functions
+function playInlineVideo(event, roleKey, videoUrl, videoTitle) {
+  event.stopPropagation();
+  
+  // Close all other inline players first
+  document.querySelectorAll('.inline-video-player-container').forEach(container => {
+    container.classList.remove('active');
+    const v = container.querySelector('video');
+    if (v) {
+      v.pause();
+      v.src = '';
+    }
+  });
+
+  const playerContainer = document.getElementById('inlinePlayer-' + roleKey);
+  const videoEl = document.getElementById('inlineVideo-' + roleKey);
+  const titleEl = document.getElementById('inlineTitle-' + roleKey);
+
+  if (playerContainer && videoEl) {
+    if (titleEl) titleEl.textContent = videoTitle;
+    videoEl.src = videoUrl;
+    playerContainer.classList.add('active');
+    videoEl.play().catch(err => console.log("Autoplay prevented:", err));
+
+    // Scroll smoothly into view
+    setTimeout(() => {
+      playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+  }
+}
+
+function closeInlineVideo(roleKey) {
+  const playerContainer = document.getElementById('inlinePlayer-' + roleKey);
+  const videoEl = document.getElementById('inlineVideo-' + roleKey);
+
+  if (playerContainer && videoEl) {
+    videoEl.pause();
+    videoEl.src = '';
+    playerContainer.classList.remove('active');
+  }
+}
 </script>
 </body>
 </html>
+```[cite: 10]
