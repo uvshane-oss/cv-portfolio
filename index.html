@@ -284,6 +284,165 @@ li { margin-bottom: 6px; font-size: 13px; }
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
+/* Instore Locations Horizontal Scroll Carousel Styles for Role 4 */
+.instore-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 15px 0;
+  background: #111;
+  border-radius: 6px;
+  padding: 15px 10px;
+  box-sizing: border-box;
+}
+.instore-carousel-track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--highlight-blue) #333;
+}
+.instore-carousel-track::-webkit-scrollbar {
+  height: 8px;
+}
+.instore-carousel-track::-webkit-scrollbar-track {
+  background: #222;
+  border-radius: 4px;
+}
+.instore-carousel-track::-webkit-scrollbar-thumb {
+  background: var(--highlight-blue);
+  border-radius: 4px;
+}
+.instore-thumb-card {
+  flex: 0 0 200px;
+  width: 200px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+.instore-thumb-card:hover {
+  border-color: var(--highlight-blue);
+  transform: translateY(-2px);
+}
+.instore-img-container {
+  width: 100%;
+  height: 130px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.instore-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.instore-thumb-caption {
+  font-size: 10px;
+  color: #fff;
+  background: rgba(0,0,0,0.85);
+  padding: 6px;
+  text-align: center;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Lightbox Modal Framework */
+.image-modal-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0,0,0,0.9);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.image-modal-lightbox.active {
+  display: flex;
+}
+.lightbox-content-wrapper {
+  position: relative;
+  max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox-content-wrapper img {
+  max-width: 90vw;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 4px;
+  background: #000;
+}
+.lightbox-caption {
+  color: #fff;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+.lightbox-close-btn {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  color: #fff;
+  font-size: 32px;
+  font-weight: bold;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0 10px;
+}
+.lightbox-close-btn:hover {
+  color: var(--accent);
+}
+.lightbox-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 24px;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  z-index: 2010;
+  transition: background 0.2s ease;
+}
+.lightbox-nav-btn:hover {
+  background: var(--highlight-blue);
+  border-color: var(--highlight-blue);
+}
+.lightbox-prev {
+  left: -60px;
+}
+@media(max-width: 768px) {
+  .lightbox-prev { left: 10px; }
+}
+.lightbox-next {
+  right: -60px;
+}
+@media(max-width: 768px) {
+  .lightbox-next { right: 10px; }
+}
+
 /* Unified Responsive Radio Grid Layout (Flexbox Auto-Wrap with Centering) */
 .radio-grid {
   display: flex;
@@ -552,7 +711,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-09-02 12:18 NZST</div>
+  <div class="revision-stamp">Rev: 2026-09-02 14:00 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -837,6 +996,94 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Handled physical installation for the majority of the network.</li>
       </ul>
 
+      <!-- Sample of instore locations installed -->
+      <h4 style="margin: 20px 0 10px 0; font-size: 15px; color: var(--primary);">Sample of instore locations installed</h4>
+      <div class="instore-carousel-wrapper">
+        <div class="instore-carousel-track" id="instoreCarouselTrack">
+          <!-- 20 Image Asset Sequence -->
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(0)">
+            <div class="instore-img-container"><img src="1758755805584.jpeg" alt="Instore location 1758755805584"></div>
+            <p class="instore-thumb-caption">Location 1</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(1)">
+            <div class="instore-img-container"><img src="1758755819777.jpeg" alt="Instore location 1758755819777"></div>
+            <p class="instore-thumb-caption">Location 2</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(2)">
+            <div class="instore-img-container"><img src="1758755833446.jpeg" alt="Instore location 1758755833446"></div>
+            <p class="instore-thumb-caption">Location 3</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(3)">
+            <div class="instore-img-container"><img src="1758755850257.jpeg" alt="Instore location 1758755850257"></div>
+            <p class="instore-thumb-caption">Location 4</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(4)">
+            <div class="instore-img-container"><img src="1758755871302.jpeg" alt="Instore location 1758755871302"></div>
+            <p class="instore-thumb-caption">Location 5</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(5)">
+            <div class="instore-img-container"><img src="1758755900222.jpeg" alt="Instore location 1758755900222"></div>
+            <p class="instore-thumb-caption">Location 6</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(6)">
+            <div class="instore-img-container"><img src="1758755920703.jpeg" alt="Instore location 1758755920703"></div>
+            <p class="instore-thumb-caption">Location 7</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(7)">
+            <div class="instore-img-container"><img src="1758755940003.jpeg" alt="Instore location 1758755940003"></div>
+            <p class="instore-thumb-caption">Location 8</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(8)">
+            <div class="instore-img-container"><img src="1758755963507.jpeg" alt="Instore location 1758755963507"></div>
+            <p class="instore-thumb-caption">Location 9</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(9)">
+            <div class="instore-img-container"><img src="1758755998126.jpeg" alt="Instore location 1758755998126"></div>
+            <p class="instore-thumb-caption">Location 10</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(10)">
+            <div class="instore-img-container"><img src="1758756024921.jpeg" alt="Instore location 1758756024921"></div>
+            <p class="instore-thumb-caption">Location 11</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(11)">
+            <div class="instore-img-container"><img src="1758756044738.jpeg" alt="Instore location 1758756044738"></div>
+            <p class="instore-thumb-caption">Location 12</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(12)">
+            <div class="instore-img-container"><img src="1758756064971.jpeg" alt="Instore location 1758756064971"></div>
+            <p class="instore-thumb-caption">Location 13</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(13)">
+            <div class="instore-img-container"><img src="1758756087532.jpeg" alt="Instore location 1758756087532"></div>
+            <p class="instore-thumb-caption">Location 14</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(14)">
+            <div class="instore-img-container"><img src="1758756111162.jpeg" alt="Instore location 1758756111162"></div>
+            <p class="instore-thumb-caption">Location 15</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(15)">
+            <div class="instore-img-container"><img src="1758756133930.jpeg" alt="Instore location 1758756133930"></div>
+            <p class="instore-thumb-caption">Location 16</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(16)">
+            <div class="instore-img-container"><img src="1758756157833.jpeg" alt="Instore location 1758756157833"></div>
+            <p class="instore-thumb-caption">Location 17</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(17)">
+            <div class="instore-img-container"><img src="1758756788812.jpeg" alt="Instore location 1758756788812"></div>
+            <p class="instore-thumb-caption">Location 18</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(18)">
+            <div class="instore-img-container"><img src="1758757134376.jpeg" alt="Instore location 1758757134376"></div>
+            <p class="instore-thumb-caption">Location 19</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(19)">
+            <div class="instore-img-container"><img src="1758757157638.jpeg" alt="Instore location 1758757157638"></div>
+            <p class="instore-thumb-caption">Location 20</p>
+          </div>
+        </div>
+      </div>
+
       <div class="portfolio-btn-container">
         <img id="iseeDigitalPortfolioBtn" src="isee digital portfolio.png" alt="ISee Digital Portfolio" class="portfolio-image-btn" onclick="toggleIseePortfolio(event)">
       </div>
@@ -1072,14 +1319,137 @@ li { margin-bottom: 6px; font-size: 13px; }
 
 </div>
 
+<!-- General Fullscreen Modal for Images -->
 <div id="imgModal" class="img-modal" onclick="closeModal()">
   <span class="img-modal-close">&times;</span>
   <img id="modalImg" src="" alt="Full Size Image">
 </div>
 
+<!-- Lightbox Modal Framework for Instore Locations Carousel -->
+<div id="instoreLightboxModal" class="image-modal-lightbox" onclick="handleLightboxBackdropClick(event)">
+  <div class="lightbox-content-wrapper">
+    <button class="lightbox-close-btn" onclick="closeInstoreLightbox()">&times;</button>
+    <button class="lightbox-nav-btn lightbox-prev" onclick="navigateInstoreLightbox(-1, event)">&#10094;</button>
+    <button class="lightbox-nav-btn lightbox-next" onclick="navigateInstoreLightbox(1, event)">&#10095;</button>
+    <img id="instoreLightboxImg" src="" alt="Expanded Instore Location">
+    <p id="instoreLightboxCaption" class="lightbox-caption"></p>
+  </div>
+</div>
+
 <script>
+// Data array for the 20 instore locations carousel
+const instoreImagesData = [
+  { src: "1758755805584.jpeg", caption: "Instore Location 1 (1758755805584)" },
+  { src: "1758755819777.jpeg", caption: "Instore Location 2 (1758755819777)" },
+  { src: "1758755833446.jpeg", caption: "Instore Location 3 (1758755833446)" },
+  { src: "1758755850257.jpeg", caption: "Instore Location 4 (1758755850257)" },
+  { src: "1758755871302.jpeg", caption: "Instore Location 5 (1758755871302)" },
+  { src: "1758755900222.jpeg", caption: "Instore Location 6 (1758755900222)" },
+  { src: "1758755920703.jpeg", caption: "Instore Location 7 (1758755920703)" },
+  { src: "1758755940003.jpeg", caption: "Instore Location 8 (1758755940003)" },
+  { src: "1758755963507.jpeg", caption: "Instore Location 9 (1758755963507)" },
+  { src: "1758755998126.jpeg", caption: "Instore Location 10 (1758755998126)" },
+  { src: "1758756024921.jpeg", caption: "Instore Location 11 (1758756024921)" },
+  { src: "1758756044738.jpeg", caption: "Instore Location 12 (1758756044738)" },
+  { src: "1758756064971.jpeg", caption: "Instore Location 13 (1758756064971)" },
+  { src: "1758756087532.jpeg", caption: "Instore Location 14 (1758756087532)" },
+  { src: "1758756111162.jpeg", caption: "Instore Location 15 (1758756111162)" },
+  { src: "1758756133930.jpeg", caption: "Instore Location 16 (1758756133930)" },
+  { src: "1758756157833.jpeg", caption: "Instore Location 17 (1758756157833)" },
+  { src: "1758756788812.jpeg", caption: "Instore Location 18 (1758756788812)" },
+  { src: "1758757134376.jpeg", caption: "Instore Location 19 (1758757134376)" },
+  { src: "1758757157638.jpeg", caption: "Instore Location 20 (1758757157638)" }
+];
+
+let currentInstoreIndex = 0;
+
+function openInstoreLightbox(index) {
+  currentInstoreIndex = index;
+  const modal = document.getElementById('instoreLightboxModal');
+  const imgEl = document.getElementById('instoreLightboxImg');
+  const captionEl = document.getElementById('instoreLightboxCaption');
+  
+  imgEl.src = instoreImagesData[currentInstoreIndex].src;
+  captionEl.textContent = instoreImagesData[currentInstoreIndex].caption;
+  modal.classList.add('active');
+}
+
+function closeInstoreLightbox() {
+  const modal = document.getElementById('instoreLightboxModal');
+  modal.classList.remove('active');
+}
+
+function navigateInstoreLightbox(direction, event) {
+  if (event) event.stopPropagation();
+  currentInstoreIndex += direction;
+  if (currentInstoreIndex < 0) {
+    currentInstoreIndex = instoreImagesData.length - 1;
+  } else if (currentInstoreIndex >= instoreImagesData.length) {
+    currentInstoreIndex = 0;
+  }
+  const imgEl = document.getElementById('instoreLightboxImg');
+  const captionEl = document.getElementById('instoreLightboxCaption');
+  imgEl.src = instoreImagesData[currentInstoreIndex].src;
+  captionEl.textContent = instoreImagesData[currentInstoreIndex].caption;
+}
+
+function handleLightboxBackdropClick(event) {
+  if (event.target.id === 'instoreLightboxModal') {
+    closeInstoreLightbox();
+  }
+}
+
+// Keyboard navigation listeners for Lightbox and drag-to-scroll for mouse users
+document.addEventListener('keydown', function(e) {
+  const modal = document.getElementById('instoreLightboxModal');
+  if (modal.classList.contains('active')) {
+    if (e.key === 'Escape') {
+      closeInstoreLightbox();
+    } else if (e.key === 'ArrowLeft') {
+      navigateInstoreLightbox(-1);
+    } else if (e.key === 'ArrowRight') {
+      navigateInstoreLightbox(1);
+    }
+  }
+});
+
+// Drag to scroll functionality for desktop users on the carousel track
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.getElementById('instoreCarouselTrack');
+  if (track) {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    track.addEventListener('mousedown', (e) => {
+      isDown = true;
+      track.style.cursor = 'grabbing';
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+
+    track.addEventListener('mouseleave', () => {
+      isDown = false;
+      track.style.cursor = 'default';
+    });
+
+    track.addEventListener('mouseup', () => {
+      isDown = false;
+      track.style.cursor = 'default';
+    });
+
+    track.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      const walk = (x - startX) * 2; // scroll speed multiplier
+      track.scrollLeft = scrollLeft - walk;
+    });
+  }
+});
+
 function toggleRole(event, cardElement, roleId) {
-  if (event.target.classList.contains('detail-link') || event.target.closest('.portfolio-btn-container') || event.target.closest('.marquee-container') || event.target.closest('.carousel-expanded-overlay') || event.target.closest('.radio-grid') || event.target.closest('.portfolio-sub-section') || event.target.closest('.inline-video-player-container')) return;
+  if (event.target.classList.contains('detail-link') || event.target.closest('.portfolio-btn-container') || event.target.closest('.marquee-container') || event.target.closest('.carousel-expanded-overlay') || event.target.closest('.radio-grid') || event.target.closest('.portfolio-sub-section') || event.target.closest('.inline-video-player-container') || event.target.closest('.instore-carousel-wrapper')) return;
   
   const targetContent = document.getElementById(roleId);
   const isCurrentlyOpen = targetContent.classList.contains("show");
