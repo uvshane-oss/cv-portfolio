@@ -687,7 +687,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 08:24 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 08:52 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1415,7 +1415,7 @@ function updateDynamicTimestamp() {
     const tzName = tzMatch ? tzMatch[1] : 'NZST';
     stampEl.textContent = `Rev: ${year}-${month}-${day} ${hour}:${minute} ${tzName}`;
   } catch (e) {
-    stampEl.textContent = `Rev: 2026-09-03 08:24 NZST`;
+    stampEl.textContent = `Rev: 2026-09-03 08:52 NZST`;
   }
 }
 updateDynamicTimestamp();
@@ -1425,7 +1425,9 @@ setInterval(updateDynamicTimestamp, 60000);
 function stopAllMedia() {
   document.querySelectorAll('video, audio').forEach(el => {
     el.pause();
-    el.currentTime = 0;
+    if (!el.closest('.video-thumbnail-card')) {
+      el.currentTime = 0;
+    }
   });
   document.querySelectorAll('.radio-card-item').forEach(card => {
     card.classList.remove('is-playing');
