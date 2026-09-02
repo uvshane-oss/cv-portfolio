@@ -694,7 +694,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-09-03 17:30 NZST</div>
+  <div class="revision-stamp">Rev: 2026-09-03 05:52 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1452,6 +1452,30 @@ li { margin-bottom: 6px; font-size: 13px; }
 </div>
 
 <script>
+// Global Stop Function to halt all media playback across the document
+function stopAllMedia() {
+  document.querySelectorAll('video, audio').forEach(el => {
+    el.pause();
+    el.currentTime = 0;
+  });
+  document.querySelectorAll('.radio-card-item').forEach(card => {
+    card.classList.remove('is-playing');
+  });
+  document.querySelectorAll('.inline-video-player-container').forEach(container => {
+    container.classList.remove('active');
+    const vid = container.querySelector('video');
+    if (vid) {
+      vid.pause();
+      vid.src = '';
+    }
+  });
+  document.querySelectorAll('.carousel-expanded-overlay').forEach(overlay => {
+    overlay.classList.remove('active');
+    const content = overlay.querySelector('[id^="expanded-content-"]');
+    if (content) content.innerHTML = '';
+  });
+}
+
 // Data array for the 25 alternating instore & outdoor billboard locations carousel
 const instoreImagesData = [
   { src: "BB1758835159986.jpeg", caption: "Outdoor Billboard BB1" },
@@ -1590,19 +1614,10 @@ function toggleDevilBurgerPortfolio(event) {
   sub.classList.toggle('show');
 }
 
-// Inline Video Player Controller Functions
+// Inline Video Player Controller Functions with stopAllMedia integration
 function playInlineVideo(event, roleKey, videoUrl, videoTitle) {
   event.stopPropagation();
-  
-  // Close all other inline players first
-  document.querySelectorAll('.inline-video-player-container').forEach(container => {
-    container.classList.remove('active');
-    const v = container.querySelector('video');
-    if (v) {
-      v.pause();
-      v.src = '';
-    }
-  });
+  stopAllMedia();
 
   const playerContainer = document.getElementById('inlinePlayer-' + roleKey);
   const videoEl = document.getElementById('inlineVideo-' + roleKey);
@@ -1614,7 +1629,6 @@ function playInlineVideo(event, roleKey, videoUrl, videoTitle) {
     playerContainer.classList.add('active');
     videoEl.play().catch(err => console.log("Autoplay prevented:", err));
 
-    // Scroll smoothly into view
     setTimeout(() => {
       playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }, 100);
@@ -1629,6 +1643,63 @@ function closeInlineVideo(roleKey) {
     videoEl.pause();
     videoEl.src = '';
     playerContainer.classList.remove('active');
+  }
+}
+
+// Audio Card Toggling with stopAllMedia integration
+function toggleAudioCard(cardElement, event) {
+  if (event) event.stopPropagation();
+  stopAllMedia();
+
+  const audio = cardElement.querySelector('audio');
+  if (!audio) return;
+
+  if (audio.paused) {
+    audio.play().then(() => {
+      cardElement.classList.add('is-playing');
+    }).catch(err => console.log("Audio play prevented:", err));
+  } else {
+    audio.pause();
+    cardElement.classList.remove('is-playing');
+  }
+
+  audio.onended = function() {
+    cardElement.classList.remove('is-playing');
+  };
+}
+
+// Carousel Item Expansion Handler with stopAllMedia integration
+function expandCarouselItem(event, roleKey, type, src, caption) {
+  event.stopPropagation();
+  stopAllMedia();
+
+  const overlay = document.getElementById('expanded-view-' + roleKey);
+  const contentContainer = document.getElementById('expanded-content-' + roleKey);
+  if (!overlay || !contentContainer) return;
+
+  if (type === 'video') {
+    contentContainer.innerHTML = `
+      <div style="font-size:14px; color:#fff; font-weight:bold; margin-bottom:8px;">${caption}</div>
+      <video src="${src}" controls autoplay playsinline webkit-playsinline></video>
+    `;
+  } else if (type === 'image') {
+    contentContainer.innerHTML = `
+      <div style="font-size:14px; color:#fff; font-weight:bold; margin-bottom:8px;">${caption}</div>
+      <img src="${src}" alt="${caption}">
+    `;
+  }
+  overlay.classList.add('active');
+  overlay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function closeCarouselExpanded(roleKey) {
+  const overlay = document.getElementById('expanded-view-' + roleKey);
+  const contentContainer = document.getElementById('expanded-content-' + roleKey);
+  if (overlay) overlay.classList.remove('active');
+  if (contentContainer) {
+    const vid = contentContainer.querySelector('video');
+    if (vid) vid.pause();
+    contentContainer.innerHTML = '';
   }
 }
 
@@ -1656,88 +1727,6 @@ function openModal(imgSrc) {
 function closeModal() {
   const modal = document.getElementById('imgModal');
   modal.style.display = "none";
-}
-
-// Carousel Expanded Item Overlay Handler (Role 1 Social Media)
-function expandCarouselItem(event, roleKey, type, sourcePath, captionText) {
-  event.stopPropagation();
-  const overlay = document.getElementById('expanded-view-' + roleKey);
-  const contentContainer = document.getElementById('expanded-content-' + roleKey);
-  
-  if (overlay && contentContainer) {
-    contentContainer.innerHTML = '';
-    if (type === 'video') {
-      const vid = document.createElement('video');
-      vid.src = sourcePath;
-      vid.controls = true;
-      vid.autoplay = true;
-      vid.playsInline = true;
-      vid.setAttribute('webkit-playsinline', '');
-      contentContainer.appendChild(vid);
-    } else if (type === 'image') {
-      const img = document.createElement('img');
-      img.src = sourcePath;
-      img.alt = captionText;
-      contentContainer.appendChild(img);
-    }
-    overlay.classList.add('active');
-    overlay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-}
-
-function closeCarouselExpanded(roleKey) {
-  const overlay = document.getElementById('expanded-view-' + roleKey);
-  const contentContainer = document.getElementById('expanded-content-' + roleKey);
-  if (overlay && contentContainer) {
-    const activeVideo = contentContainer.querySelector('video');
-    if (activeVideo) {
-      activeVideo.pause();
-    }
-    contentContainer.innerHTML = '';
-    overlay.classList.remove('active');
-  }
-}
-
-// Radio Audio Card Playback Handler with Equalizer toggle (.is-playing class)
-function toggleAudioCard(cardElement, event) {
-  if (event) event.stopPropagation();
-  
-  const audioEl = cardElement.querySelector('audio');
-  if (!audioEl) return;
-
-  // Pause all other audio cards and remove active state
-  document.querySelectorAll('.radio-card-item').forEach(card => {
-    if (card !== cardElement) {
-      const otherAudio = card.querySelector('audio');
-      if (otherAudio) {
-        otherAudio.pause();
-        otherAudio.currentTime = 0;
-      }
-      card.classList.remove('is-playing');
-    }
-  });
-
-  if (audioEl.paused) {
-    audioEl.play().then(() => {
-      cardElement.classList.add('is-playing');
-    }).catch(err => {
-      console.log("Audio playback error:", err);
-    });
-  } else {
-    audioEl.pause();
-    audioEl.currentTime = 0;
-    cardElement.classList.remove('is-playing');
-  }
-
-  // Handle when audio finishes playing naturally
-  audioEl.onended = function() {
-    cardElement.classList.remove('is-playing');
-  };
-}
-
-function openFullDetail(event, roleTitle) {
-  event.stopPropagation();
-  alert("Full detailed case study for " + roleTitle + " is available upon request.");
 }
 </script>
 </body>
