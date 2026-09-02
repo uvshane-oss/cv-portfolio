@@ -245,6 +245,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   display: flex;
   width: max-content;
   animation: scrollMarquee 25s linear infinite;
+  will-change: transform;
 }
 .marquee-container:hover .marquee-track {
   animation-play-state: running;
@@ -252,6 +253,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 .marquee-item {
   width: 260px;
   min-width: 260px;
+  max-width: 260px;
   margin-right: 15px;
   background: #111;
   border-radius: 4px;
@@ -266,6 +268,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   width: 100%;
   height: 160px;
   min-height: 160px;
+  max-height: 160px;
   object-fit: contain;
   display: block;
   background: #000;
@@ -295,6 +298,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   gap: 12px;
   animation: scrollInstoreMarquee 60s linear infinite;
   -webkit-overflow-scrolling: touch;
+  will-change: transform;
 }
 .instore-carousel-wrapper:hover .instore-carousel-track {
   animation-play-state: paused;
@@ -302,6 +306,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 .instore-thumb-card {
   flex: 0 0 200px;
   width: 200px;
+  max-width: 200px;
   background: #1a1a1a;
   border: 1px solid #333;
   border-radius: 6px;
@@ -311,6 +316,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   transition: border-color 0.2s ease, transform 0.2s ease;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 }
 .instore-thumb-card:hover {
   border-color: var(--highlight-blue);
@@ -1530,6 +1536,8 @@ document.addEventListener('keydown', function(e) {
 function toggleRole(event, cardElement, roleId) {
   if (event.target.classList.contains('detail-link') || event.target.closest('.portfolio-btn-container') || event.target.closest('.marquee-container') || event.target.closest('.carousel-expanded-overlay') || event.target.closest('.radio-grid') || event.target.closest('.portfolio-sub-section') || event.target.closest('.inline-video-player-container') || event.target.closest('.instore-carousel-wrapper')) return;
   
+  stopAllMedia();
+
   const targetContent = document.getElementById(roleId);
   const isCurrentlyOpen = targetContent.classList.contains("show");
 
@@ -1541,14 +1549,6 @@ function toggleRole(event, cardElement, roleId) {
   });
   document.querySelectorAll('.portfolio-image-btn').forEach(btn => {
     btn.classList.remove('pulse-animation');
-  });
-  document.querySelectorAll('.inline-video-player-container').forEach(container => {
-    container.classList.remove('active');
-    const vid = container.querySelector('video');
-    if (vid) {
-      vid.pause();
-      vid.src = '';
-    }
   });
 
   if (!isCurrentlyOpen) {
@@ -1646,6 +1646,7 @@ function toggleAudioCard(cardElement, event) {
 }
 
 function openModal(imgSrc) {
+  stopAllMedia();
   const modal = document.getElementById('imgModal');
   const modalImg = document.getElementById('modalImg');
   modal.style.display = "flex";
@@ -1659,23 +1660,27 @@ function closeModal() {
 
 function openFullDetail(event, roleName) {
   event.stopPropagation();
+  stopAllMedia();
   alert("Opening detailed case study for: " + roleName);
 }
 
 function toggleDevilBurgerPortfolio(event) {
   event.stopPropagation();
+  stopAllMedia();
   const section = document.getElementById('devilBurgerPortfolioSection');
   section.classList.toggle('show');
 }
 
 function toggleXcleanPortfolio(event) {
   event.stopPropagation();
+  stopAllMedia();
   const section = document.getElementById('xcleanPortfolioSection');
   section.classList.toggle('show');
 }
 
 function toggleIseePortfolio(event) {
   event.stopPropagation();
+  stopAllMedia();
   const section = document.getElementById('iseeDigitalPortfolioSection');
   section.classList.toggle('show');
 }
