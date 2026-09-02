@@ -990,11 +990,17 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Handled physical installation for the majority of the network.</li>
       </ul>
 
-      <!-- Sample of instore locations installed -->
-      <h4 style="margin: 20px 0 10px 0; font-size: 15px; color: var(--primary);">Sample of instore locations installed</h4>
+      <!-- Sample of Instore & Outdoor locations -->
+      <h4 style="margin: 20px 0 10px 0; font-size: 15px; color: var(--primary);">Sample of Instore & Outdoor locations</h4>
       <div class="instore-carousel-wrapper" id="instoreMarquee">
         <div class="instore-carousel-track" id="instoreCarouselTrack">
-          <!-- 20 Image Asset Sequence -->
+          <!-- Alternating Pattern: 1 BB file from GitHub, followed by 4 existing reel files, repeating in perpetuity -->
+          
+          <!-- Set 1 -->
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(20)">
+            <div class="instore-img-container"><img src="https://raw.githubusercontent.com/username/repo/main/bb1.jpg" alt="Outdoor BB Location 1"></div>
+            <p class="instore-thumb-caption">Outdoor BB 1</p>
+          </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(0)">
             <div class="instore-img-container"><img src="1758755805584.jpeg" alt="Instore location 1758755805584"></div>
             <p class="instore-thumb-caption">Location 1</p>
@@ -1010,6 +1016,12 @@ li { margin-bottom: 6px; font-size: 13px; }
           <div class="instore-thumb-card" onclick="openInstoreLightbox(3)">
             <div class="instore-img-container"><img src="1758755979137.jpeg" alt="Instore location 1758755979137"></div>
             <p class="instore-thumb-caption">Location 4</p>
+          </div>
+
+          <!-- Set 2 -->
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(21)">
+            <div class="instore-img-container"><img src="https://raw.githubusercontent.com/username/repo/main/bb2.jpg" alt="Outdoor BB Location 2"></div>
+            <p class="instore-thumb-caption">Outdoor BB 2</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(4)">
             <div class="instore-img-container"><img src="1758756024609.jpeg" alt="Instore location 1758756024609"></div>
@@ -1027,6 +1039,12 @@ li { margin-bottom: 6px; font-size: 13px; }
             <div class="instore-img-container"><img src="1758756639804.jpeg" alt="Instore location 1758756639804"></div>
             <p class="instore-thumb-caption">Location 8</p>
           </div>
+
+          <!-- Set 3 -->
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(22)">
+            <div class="instore-img-container"><img src="https://raw.githubusercontent.com/username/repo/main/bb3.jpg" alt="Outdoor BB Location 3"></div>
+            <p class="instore-thumb-caption">Outdoor BB 3</p>
+          </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(8)">
             <div class="instore-img-container"><img src="1758756679346.jpeg" alt="Instore location 1758756679346"></div>
             <p class="instore-thumb-caption">Location 9</p>
@@ -1042,6 +1060,12 @@ li { margin-bottom: 6px; font-size: 13px; }
           <div class="instore-thumb-card" onclick="openInstoreLightbox(11)">
             <div class="instore-img-container"><img src="1758756798411.jpeg" alt="Instore location 1758756798411"></div>
             <p class="instore-thumb-caption">Location 12</p>
+          </div>
+
+          <!-- Set 4 -->
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(23)">
+            <div class="instore-img-container"><img src="https://raw.githubusercontent.com/username/repo/main/bb4.jpg" alt="Outdoor BB Location 4"></div>
+            <p class="instore-thumb-caption">Outdoor BB 4</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(12)">
             <div class="instore-img-container"><img src="1758756849533.jpeg" alt="Instore location 1758756849533"></div>
@@ -1059,6 +1083,12 @@ li { margin-bottom: 6px; font-size: 13px; }
             <div class="instore-img-container"><img src="1758756996703.jpeg" alt="Instore location 1758756996703"></div>
             <p class="instore-thumb-caption">Location 16</p>
           </div>
+
+          <!-- Set 5 -->
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(24)">
+            <div class="instore-img-container"><img src="https://raw.githubusercontent.com/username/repo/main/bb5.jpg" alt="Outdoor BB Location 5"></div>
+            <p class="instore-thumb-caption">Outdoor BB 5</p>
+          </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(16)">
             <div class="instore-img-container"><img src="1758757029987.jpeg" alt="Instore location 1758757029987"></div>
             <p class="instore-thumb-caption">Location 17</p>
@@ -1075,7 +1105,12 @@ li { margin-bottom: 6px; font-size: 13px; }
             <div class="instore-img-container"><img src="1758757157638.jpeg" alt="Instore location 1758757157638"></div>
             <p class="instore-thumb-caption">Location 20</p>
           </div>
+
           <!-- Duplicated loop for smooth infinite scroll -->
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(20)">
+            <div class="instore-img-container"><img src="https://raw.githubusercontent.com/username/repo/main/bb1.jpg" alt="Outdoor BB Location 1"></div>
+            <p class="instore-thumb-caption">Outdoor BB 1</p>
+          </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(0)">
             <div class="instore-img-container"><img src="1758755805584.jpeg" alt="Instore location 1758755805584"></div>
             <p class="instore-thumb-caption">Location 1</p>
@@ -1091,70 +1126,6 @@ li { margin-bottom: 6px; font-size: 13px; }
           <div class="instore-thumb-card" onclick="openInstoreLightbox(3)">
             <div class="instore-img-container"><img src="1758755979137.jpeg" alt="Instore location 1758755979137"></div>
             <p class="instore-thumb-caption">Location 4</p>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(4)">
-            <div class="instore-img-container"><img src="1758756024609.jpeg" alt="Instore location 1758756024609"></div>
-            <p class="instore-thumb-caption">Location 5</p>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(5)">
-            <div class="instore-img-container"><img src="1758756069198.jpeg" alt="Instore location 1758756069198"></div>
-            <p class="instore-thumb-caption">Location 6</p>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(6)">
-            <div class="instore-img-container"><img src="1758756574017.jpeg" alt="Instore location 1758756574017"></div>
-            <p class="instore-thumb-caption">Location 7</p>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(7)">
-            <div class="instore-img-container"><img src="1758756639804.jpeg" alt="Instore location 1758756639804"></div>
-            <p class="instore-thumb-caption">Location 8</p>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(8)">
-            <div class="instore-img-container"><img src="1758756679346.jpeg" alt="Instore location 1758756679346"></div>
-            <p class="instore-thumb-caption">Location 9</p>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(9)">
-            <div class="instore-img-container"><img src="1758756712158.jpeg" alt="Instore location 1758756712158"></div>
-            <p class="instore-thumb-caption">Location 10</p>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(10)">
-            <div class="instore-img-container"><img src="1758756759188.jpeg" alt="Instore location 1758756759188"></div>
-            <p class="instore-thumb-caption">Location 11</p>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(11)">
-            <div class="instore-img-container"><img src="1758756798411.jpeg" alt="Instore location 1758756798411"></div>
-            <p class="instore-thumb-caption">Location 12</p>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(12)">
-            <div class="instore-img-container"><img src="1758756849533.jpeg" alt="Instore location 1758756849533"></div>
-            <p class="instore-thumb-caption">Location 13</p>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(13)">
-            <div class="instore-img-container"><img src="1758756921948.jpeg" alt="Instore location 1758756921948"></div>
-            <p class="instore-thumb-caption">Location 14</p>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(14)">
-            <div class="instore-img-container"><img src="1758756956376.jpeg" alt="Instore location 1758756956376"></div>
-            <p class="instore-thumb-caption">Location 15</p>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(15)">
-            <div class="instore-img-container"><img src="1758756996703.jpeg" alt="Instore location 1758756996703"></div>
-            <p class="instore-thumb-caption">Location 16</p>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(16)">
-            <div class="instore-img-container"><img src="1758757029987.jpeg" alt="Instore location 1758757029987"></div>
-            <p class="instore-thumb-caption">Location 17</p>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(17)">
-            <div class="instore-img-container"><img src="1758757078499.jpeg" alt="Instore location 1758757078499"></div>
-            <p class="instore-thumb-caption">Location 18</p>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(18)">
-            <div class="instore-img-container"><img src="1758757119457.jpeg" alt="Instore location 1758757119457"></div>
-            <p class="instore-thumb-caption">Location 19</p>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(19)">
-            <div class="instore-img-container"><img src="1758757157638.jpeg" alt="Instore location 1758757157638"></div>
-            <p class="instore-thumb-caption">Location 20</p>
           </div>
         </div>
       </div>
@@ -1412,7 +1383,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </div>
 
 <script>
-// Data array for the 20 instore locations carousel
+// Data array for the 20 instore locations carousel + 5 GitHub BB files (Indices 0-19: Instore, 20-24: GitHub BB files)
 const instoreImagesData = [
   { src: "1758755805584.jpeg", caption: "Instore Location 1 (1758755805584)" },
   { src: "1758755929727.jpeg", caption: "Instore Location 2 (1758755929727)" },
@@ -1433,13 +1404,18 @@ const instoreImagesData = [
   { src: "1758757029987.jpeg", caption: "Instore Location 17 (1758757029987)" },
   { src: "1758757078499.jpeg", caption: "Instore Location 18 (1758757078499)" },
   { src: "1758757119457.jpeg", caption: "Instore Location 19 (1758757119457)" },
-  { src: "1758757157638.jpeg", caption: "Instore Location 20 (1758757157638)" }
+  { src: "1758757157638.jpeg", caption: "Instore Location 20 (1758757157638)" },
+  { src: "https://raw.githubusercontent.com/username/repo/main/bb1.jpg", caption: "Outdoor Billboard 1 (GitHub)" },
+  { src: "https://raw.githubusercontent.com/username/repo/main/bb2.jpg", caption: "Outdoor Billboard 2 (GitHub)" },
+  { src: "https://raw.githubusercontent.com/username/repo/main/bb3.jpg", caption: "Outdoor Billboard 3 (GitHub)" },
+  { src: "https://raw.githubusercontent.com/username/repo/main/bb4.jpg", caption: "Outdoor Billboard 4 (GitHub)" },
+  { src: "https://raw.githubusercontent.com/username/repo/main/bb5.jpg", caption: "Outdoor Billboard 5 (GitHub)" }
 ];
 
 let currentInstoreIndex = 0;
 
 function openInstoreLightbox(index) {
-  currentInstoreIndex = index % 20;
+  currentInstoreIndex = index % instoreImagesData.length;
   const modal = document.getElementById('instoreLightboxModal');
   const imgEl = document.getElementById('instoreLightboxImg');
   const captionEl = document.getElementById('instoreLightboxCaption');
@@ -1682,63 +1658,7 @@ function closeCarouselExpanded(roleId) {
   
   const playingMedia = contentDiv.querySelectorAll('video');
   playingMedia.forEach(v => v.pause());
-
-  overlay.classList.remove('active');
-  contentDiv.innerHTML = '';
 }
-
-function toggleAudioCard(cardElement, event) {
-  event.stopPropagation();
-  
-  document.querySelectorAll('.inline-video-player-container').forEach(container => {
-    container.classList.remove('active');
-    const vid = container.querySelector('video');
-    if (vid) {
-      vid.pause();
-      vid.src = '';
-    }
-  });
-
-  const audio = cardElement.querySelector('audio');
-
-  document.querySelectorAll('audio, video').forEach(media => {
-    if (media !== audio && !media.paused) {
-      media.pause();
-    }
-  });
-  document.querySelectorAll('.radio-card-item').forEach(card => {
-    if (card !== cardElement) card.classList.remove('is-playing');
-  });
-
-  if (audio.paused) {
-    audio.play().then(() => {
-      cardElement.classList.add('is-playing');
-    }).catch(err => {
-      console.log("Playback prevented or failed:", err);
-    });
-  } else {
-    audio.pause();
-    cardElement.classList.remove('is-playing');
-  }
-}
-
-document.addEventListener('pause', function(e) {
-  if (e.target.tagName === 'AUDIO') {
-    const card = e.target.closest('.radio-card-item');
-    if (card && e.target.paused) {
-      card.classList.remove('is-playing');
-    }
-  }
-}, true);
-
-document.addEventListener('ended', function(e) {
-  if (e.target.tagName === 'AUDIO') {
-    const card = e.target.closest('.radio-card-item');
-    if (card) {
-      card.classList.remove('is-playing');
-    }
-  }
-}, true);
 </script>
 </body>
 </html>
