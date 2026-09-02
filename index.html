@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1591,38 +1592,105 @@ function toggleRole(event, cardElement, roleId) {
         top: offsetPosition,
         behavior: 'smooth'
       });
-    }, 50);
+    }, 150);
   }
 }
 
 function toggleDevilBurgerPortfolio(event) {
   event.stopPropagation();
   const sub = document.getElementById('devilBurgerPortfolioSection');
-  const btn = document.getElementById('devilBurgerPortfolioBtn');
   sub.classList.toggle('show');
-  if (sub.classList.contains('show')) {
-    btn.classList.remove('pulse-animation');
-  }
 }
 
 function toggleXcleanPortfolio(event) {
   event.stopPropagation();
   const sub = document.getElementById('xcleanPortfolioSection');
-  const btn = document.getElementById('xcleanPortfolioBtn');
   sub.classList.toggle('show');
-  if (sub.classList.contains('show')) {
-    btn.classList.remove('pulse-animation');
-  }
 }
 
 function toggleIseePortfolio(event) {
   event.stopPropagation();
   const sub = document.getElementById('iseeDigitalPortfolioSection');
-  const btn = document.getElementById('iseeDigitalPortfolioBtn');
   sub.classList.toggle('show');
-  if (sub.classList.contains('show')) {
-    btn.classList.remove('pulse-animation');
+}
+
+function expandCarouselItem(event, roleKey, type, src, caption) {
+  event.stopPropagation();
+  const overlay = document.getElementById('expanded-view-' + roleKey);
+  const contentDiv = document.getElementById('expanded-content-' + roleKey);
+  
+  if (type === 'video') {
+    contentDiv.innerHTML = `<video src="${src}" controls autoplay playsinline webkit-playsinline style="max-width:100%; max-height:350px; border-radius:4px;"></video><p style="color:#fff; font-size:13px; margin-top:8px;">${caption}</p>`;
+  } else {
+    contentDiv.innerHTML = `<img src="${src}" alt="${caption}" style="max-width:100%; max-height:350px; object-fit:contain; border-radius:4px;"><p style="color:#fff; font-size:13px; margin-top:8px;">${caption}</p>`;
   }
+  overlay.classList.add('active');
+}
+
+function closeCarouselExpanded(roleKey) {
+  const overlay = document.getElementById('expanded-view-' + roleKey);
+  const contentDiv = document.getElementById('expanded-content-' + roleKey);
+  contentDiv.innerHTML = '';
+  overlay.classList.remove('active');
+}
+
+function toggleAudioCard(cardElement, event) {
+  event.stopPropagation();
+  const audioEl = cardElement.querySelector('audio');
+  
+  document.querySelectorAll('.radio-card-item').forEach(item => {
+    if (item !== cardElement) {
+      const otherAudio = item.querySelector('audio');
+      if (otherAudio) {
+        otherAudio.pause();
+        otherAudio.currentTime = 0;
+      }
+      item.classList.remove('is-playing');
+    }
+  });
+
+  if (audioEl.paused) {
+    audioEl.play().then(() => {
+      cardElement.classList.add('is-playing');
+    }).catch(e => {
+      console.log("Audio playback prevented or error:", e);
+    });
+  } else {
+    audioEl.pause();
+    cardElement.classList.remove('is-playing');
+  }
+
+  audioEl.onended = function() {
+    cardElement.classList.remove('is-playing');
+  };
+}
+
+function playInlineVideo(event, playerKey, videoSrc, titleText) {
+  event.stopPropagation();
+  const container = document.getElementById('inlinePlayer-' + playerKey);
+  const videoEl = document.getElementById('inlineVideo-' + playerKey);
+  const titleEl = document.getElementById('inlineTitle-' + playerKey);
+
+  titleEl.textContent = titleText;
+  videoEl.src = videoSrc;
+  container.classList.add('active');
+  videoEl.play().catch(err => {
+    console.log("Auto-play was prevented:", err);
+  });
+
+  setTimeout(() => {
+    container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 100);
+}
+
+function closeInlineVideo(playerKey) {
+  const container = document.getElementById('inlinePlayer-' + playerKey);
+  const videoEl = document.getElementById('inlineVideo-' + playerKey);
+  if (videoEl) {
+    videoEl.pause();
+    videoEl.src = '';
+  }
+  container.classList.remove('active');
 }
 
 function openModal(imgSrc) {
@@ -1637,102 +1705,12 @@ function closeModal() {
   modal.style.display = "none";
 }
 
-function playInlineVideo(event, roleKey, videoSrc, videoTitle) {
-  event.stopPropagation();
-  const playerContainer = document.getElementById('inlinePlayer-' + roleKey);
-  const videoEl = document.getElementById('inlineVideo-' + roleKey);
-  const titleEl = document.getElementById('inlineTitle-' + roleKey);
-
-  if (!playerContainer || !videoEl) return;
-
-  titleEl.textContent = videoTitle;
-  videoEl.src = videoSrc;
-  playerContainer.classList.add('active');
-  videoEl.play().catch(e => console.log("Autoplay prevented:", e));
-
-  setTimeout(() => {
-    playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }, 50);
-}
-
-function closeInlineVideo(roleKey) {
-  const playerContainer = document.getElementById('inlinePlayer-' + roleKey);
-  if (!playerContainer) return;
-  const videoEl = playerContainer.querySelector('video');
-  if (videoEl) {
-    videoEl.pause();
-    videoEl.src = '';
-  }
-  playerContainer.classList.remove('active');
-}
-
-function expandCarouselItem(event, roleKey, mediaType, mediaSrc, mediaTitle) {
-  event.stopPropagation();
-  const overlay = document.getElementById('expanded-view-' + roleKey);
-  const contentWrapper = document.getElementById('expanded-content-' + roleKey);
-  
-  if (!overlay || !contentWrapper) return;
-
-  if (mediaType === 'video') {
-    contentWrapper.innerHTML = `<p style="color:#fff; font-size:13px; font-weight:bold; margin-bottom:8px;">${mediaTitle}</p><video src="${mediaSrc}" controls autoplay playsinline webkit-playsinline style="max-width:100%; max-height:320px; border-radius:4px;"></video>`;
-  } else {
-    contentWrapper.innerHTML = `<p style="color:#fff; font-size:13px; font-weight:bold; margin-bottom:8px;">${mediaTitle}</p><img src="${mediaSrc}" alt="${mediaTitle}" style="max-width:100%; max-height:320px; object-fit:contain; border-radius:4px;" />`;
-  }
-  overlay.classList.add('active');
-  overlay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-function closeCarouselExpanded(roleKey) {
-  const overlay = document.getElementById('expanded-view-' + roleKey);
-  if (!overlay) return;
-  const vid = overlay.querySelector('video');
-  if (vid) {
-    vid.pause();
-    vid.src = '';
-  }
-  overlay.classList.remove('active');
-}
-
-function toggleAudioCard(cardElement, event) {
-  event.stopPropagation();
-  const audio = cardElement.querySelector('audio');
-  if (!audio) return;
-
-  const isPlaying = cardElement.classList.contains('is-playing');
-
-  // Stop all other playing audio cards
-  document.querySelectorAll('.radio-card-item').forEach(item => {
-    if (item !== cardElement) {
-      item.classList.remove('is-playing');
-      const otherAudio = item.querySelector('audio');
-      if (otherAudio) {
-        otherAudio.pause();
-        otherAudio.currentTime = 0;
-      }
-    }
-  });
-
-  if (isPlaying) {
-    audio.pause();
-    cardElement.classList.remove('is-playing');
-  } else {
-    audio.play().then(() => {
-      cardElement.classList.add('is-playing');
-    }).catch(e => {
-      console.log("Audio playback error:", e);
-    });
-
-    audio.onended = function() {
-      cardElement.classList.remove('is-playing');
-    };
-  }
-}
-
 function openFullDetail(event, roleName) {
   event.stopPropagation();
-  alert("Full detailed case study and analytics package for " + roleName + " is available upon request.");
+  alert("Full detailed case study view for: " + roleName + " (Opening dedicated view or modal...)");
 }
 </script>
 </body>
 </html>
-```[cite: 5]
+
+```
