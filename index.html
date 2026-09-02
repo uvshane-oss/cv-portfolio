@@ -1555,7 +1555,10 @@ function toggleRole(event, cardElement, roleId) {
     targetContent.classList.add("show");
     
     targetContent.querySelectorAll('video').forEach(video => {
-      video.load();
+      // Retain preview timestamps (#t=...) natively without resetting head to 0
+      if (!video.currentTime && video.src && video.src.includes('#t=')) {
+        video.load();
+      }
     });
     
     if (roleId === 'role1') {
@@ -1629,6 +1632,11 @@ function closeCarouselExpanded(roleKey) {
   if (overlay && contentWrapper) {
     overlay.classList.remove('active');
     contentWrapper.innerHTML = '';
+    
+    // Refresh marquee videos to ensure preview timestamp state is preserved without jumping back to 0
+    document.querySelectorAll('#marquee-' + roleKey + ' video').forEach(v => {
+      if (!v.paused) v.pause();
+    });
   }
 }
 
@@ -1666,8 +1674,26 @@ function openFullDetail(event, roleName) {
 
 function toggleDevilBurgerPortfolio(event) {
   event.stopPropagation();
+  // Aggressively halt all ongoing media playback (testimonials, active players, marquee expansions) at the very beginning of execution
   stopAllMedia();
+  
   const section = document.getElementById('devilBurgerPortfolioSection');
+  const isOpen = section.classList.contains('show');
+  
+  if (isOpen) {
+    // If the portfolio section is currently open and about to be closed, aggressively tear down nested portfolio media elements
+    section.querySelectorAll('video, audio').forEach(el => {
+      el.pause();
+      el.currentTime = 0;
+    });
+    const expandedOverlay = document.getElementById('expanded-view-role1');
+    if (expandedOverlay) {
+      expandedOverlay.classList.remove('active');
+      const content = expandedOverlay.querySelector('#expanded-content-role1');
+      if (content) content.innerHTML = '';
+    }
+  }
+  
   section.classList.toggle('show');
 }
 
@@ -1687,3 +1713,4 @@ function toggleIseePortfolio(event) {
 </script>
 </body>
 </html>
+```
