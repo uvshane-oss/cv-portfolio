@@ -285,36 +285,26 @@ li { margin-bottom: 6px; font-size: 13px; }
   100% { transform: translateX(-50%); }
 }
 
-/* Instore Locations Horizontal Scroll Carousel Styles for Role 4 */
+/* Instore Locations Horizontal Scroll Carousel Styles for Role 4 (Auto-Scrolling Marquee) */
 .instore-carousel-wrapper {
   position: relative;
   width: 100%;
-  margin: 15px 0;
+  overflow: hidden;
   background: #111;
   border-radius: 6px;
-  padding: 15px 10px;
+  margin: 15px 0;
+  padding: 15px 0;
   box-sizing: border-box;
 }
 .instore-carousel-track {
   display: flex;
+  width: max-content;
   gap: 12px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
+  animation: scrollInstoreMarquee 50s linear infinite;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 8px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--highlight-blue) #333;
 }
-.instore-carousel-track::-webkit-scrollbar {
-  height: 8px;
-}
-.instore-carousel-track::-webkit-scrollbar-track {
-  background: #222;
-  border-radius: 4px;
-}
-.instore-carousel-track::-webkit-scrollbar-thumb {
-  background: var(--highlight-blue);
-  border-radius: 4px;
+.instore-carousel-wrapper:hover .instore-carousel-track {
+  animation-play-state: paused;
 }
 .instore-thumb-card {
   flex: 0 0 200px;
@@ -358,6 +348,10 @@ li { margin-bottom: 6px; font-size: 13px; }
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+@keyframes scrollInstoreMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* Lightbox Modal Framework */
@@ -711,7 +705,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-09-02 14:28 NZST</div>
+  <div class="revision-stamp">Rev: 2026-09-02 14:35 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -998,9 +992,90 @@ li { margin-bottom: 6px; font-size: 13px; }
 
       <!-- Sample of instore locations installed -->
       <h4 style="margin: 20px 0 10px 0; font-size: 15px; color: var(--primary);">Sample of instore locations installed</h4>
-      <div class="instore-carousel-wrapper">
+      <div class="instore-carousel-wrapper" id="instoreMarquee">
         <div class="instore-carousel-track" id="instoreCarouselTrack">
           <!-- 20 Image Asset Sequence -->
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(0)">
+            <div class="instore-img-container"><img src="1758755805584.jpeg" alt="Instore location 1758755805584"></div>
+            <p class="instore-thumb-caption">Location 1</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(1)">
+            <div class="instore-img-container"><img src="1758755929727.jpeg" alt="Instore location 1758755929727"></div>
+            <p class="instore-thumb-caption">Location 2</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(2)">
+            <div class="instore-img-container"><img src="1758755954119.jpeg" alt="Instore location 1758755954119"></div>
+            <p class="instore-thumb-caption">Location 3</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(3)">
+            <div class="instore-img-container"><img src="1758755979137.jpeg" alt="Instore location 1758755979137"></div>
+            <p class="instore-thumb-caption">Location 4</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(4)">
+            <div class="instore-img-container"><img src="1758756024609.jpeg" alt="Instore location 1758756024609"></div>
+            <p class="instore-thumb-caption">Location 5</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(5)">
+            <div class="instore-img-container"><img src="1758756069198.jpeg" alt="Instore location 1758756069198"></div>
+            <p class="instore-thumb-caption">Location 6</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(6)">
+            <div class="instore-img-container"><img src="1758756574017.jpeg" alt="Instore location 1758756574017"></div>
+            <p class="instore-thumb-caption">Location 7</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(7)">
+            <div class="instore-img-container"><img src="1758756639804.jpeg" alt="Instore location 1758756639804"></div>
+            <p class="instore-thumb-caption">Location 8</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(8)">
+            <div class="instore-img-container"><img src="1758756679346.jpeg" alt="Instore location 1758756679346"></div>
+            <p class="instore-thumb-caption">Location 9</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(9)">
+            <div class="instore-img-container"><img src="1758756712158.jpeg" alt="Instore location 1758756712158"></div>
+            <p class="instore-thumb-caption">Location 10</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(10)">
+            <div class="instore-img-container"><img src="1758756759188.jpeg" alt="Instore location 1758756759188"></div>
+            <p class="instore-thumb-caption">Location 11</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(11)">
+            <div class="instore-img-container"><img src="1758756798411.jpeg" alt="Instore location 1758756798411"></div>
+            <p class="instore-thumb-caption">Location 12</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(12)">
+            <div class="instore-img-container"><img src="1758756849533.jpeg" alt="Instore location 1758756849533"></div>
+            <p class="instore-thumb-caption">Location 13</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(13)">
+            <div class="instore-img-container"><img src="1758756921948.jpeg" alt="Instore location 1758756921948"></div>
+            <p class="instore-thumb-caption">Location 14</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(14)">
+            <div class="instore-img-container"><img src="1758756956376.jpeg" alt="Instore location 1758756956376"></div>
+            <p class="instore-thumb-caption">Location 15</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(15)">
+            <div class="instore-img-container"><img src="1758756996703.jpeg" alt="Instore location 1758756996703"></div>
+            <p class="instore-thumb-caption">Location 16</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(16)">
+            <div class="instore-img-container"><img src="1758757029987.jpeg" alt="Instore location 1758757029987"></div>
+            <p class="instore-thumb-caption">Location 17</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(17)">
+            <div class="instore-img-container"><img src="1758757078499.jpeg" alt="Instore location 1758757078499"></div>
+            <p class="instore-thumb-caption">Location 18</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(18)">
+            <div class="instore-img-container"><img src="1758757119457.jpeg" alt="Instore location 1758757119457"></div>
+            <p class="instore-thumb-caption">Location 19</p>
+          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(19)">
+            <div class="instore-img-container"><img src="1758757157638.jpeg" alt="Instore location 1758757157638"></div>
+            <p class="instore-thumb-caption">Location 20</p>
+          </div>
+          <!-- Duplicated loop for smooth infinite scroll -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(0)">
             <div class="instore-img-container"><img src="1758755805584.jpeg" alt="Instore location 1758755805584"></div>
             <p class="instore-thumb-caption">Location 1</p>
@@ -1364,7 +1439,7 @@ const instoreImagesData = [
 let currentInstoreIndex = 0;
 
 function openInstoreLightbox(index) {
-  currentInstoreIndex = index;
+  currentInstoreIndex = index % 20;
   const modal = document.getElementById('instoreLightboxModal');
   const imgEl = document.getElementById('instoreLightboxImg');
   const captionEl = document.getElementById('instoreLightboxCaption');
@@ -1399,7 +1474,7 @@ function handleLightboxBackdropClick(event) {
   }
 }
 
-// Keyboard navigation listeners for Lightbox and drag-to-scroll for mouse users
+// Keyboard navigation listeners for Lightbox
 document.addEventListener('keydown', function(e) {
   const modal = document.getElementById('instoreLightboxModal');
   if (modal.classList.contains('active')) {
@@ -1410,41 +1485,6 @@ document.addEventListener('keydown', function(e) {
     } else if (e.key === 'ArrowRight') {
       navigateInstoreLightbox(1);
     }
-  }
-});
-
-// Drag to scroll functionality for desktop users on the carousel track
-document.addEventListener('DOMContentLoaded', () => {
-  const track = document.getElementById('instoreCarouselTrack');
-  if (track) {
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-
-    track.addEventListener('mousedown', (e) => {
-      isDown = true;
-      track.style.cursor = 'grabbing';
-      startX = e.pageX - track.offsetLeft;
-      scrollLeft = track.scrollLeft;
-    });
-
-    track.addEventListener('mouseleave', () => {
-      isDown = false;
-      track.style.cursor = 'default';
-    });
-
-    track.addEventListener('mouseup', () => {
-      isDown = false;
-      track.style.cursor = 'default';
-    });
-
-    track.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - track.offsetLeft;
-      const walk = (x - startX) * 2; // scroll speed multiplier
-      track.scrollLeft = scrollLeft - walk;
-    });
   }
 });
 
