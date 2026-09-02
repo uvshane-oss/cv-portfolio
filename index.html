@@ -300,7 +300,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   display: flex;
   width: max-content;
   gap: 12px;
-  animation: scrollInstoreMarquee 50s linear infinite;
+  animation: scrollInstoreMarquee 60s linear infinite;
   -webkit-overflow-scrolling: touch;
 }
 .instore-carousel-wrapper:hover .instore-carousel-track {
@@ -694,7 +694,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-09-02 17:20 NZST</div>
+  <div class="revision-stamp">Rev: 2026-09-03 17:30 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -765,11 +765,11 @@ li { margin-bottom: 6px; font-size: 13px; }
               <p class="marquee-caption">Social Media Clip 1</p>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 2.mp4', 'Social Media Campaign 2')">
-              <video src="social media 2.mp4" preload="metadata" muted loop playsinline webkit-playsinline></video>
+              <video src="social media 2.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
               <p class="marquee-caption">Social Media Clip 2</p>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 3.mp4', 'Social Media Campaign 3')">
-              <video src="social media 3.mp4" preload="metadata" muted loop playsinline webkit-playsinline></video>
+              <video src="social media 3.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
               <p class="marquee-caption">Social Media Clip 3</p>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 4.mp4', 'Social Media Campaign 4')">
@@ -790,7 +790,7 @@ li { margin-bottom: 6px; font-size: 13px; }
               <p class="marquee-caption">Social Media Clip 1</p>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 2.mp4', 'Social Media Campaign 2')">
-              <video src="social media 2.mp4" preload="metadata" muted loop playsinline webkit-playsinline></video>
+              <video src="social media 2.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
               <p class="marquee-caption">Social Media Clip 2</p>
             </div>
           </div>
@@ -1631,7 +1631,114 @@ function closeInlineVideo(roleKey) {
     playerContainer.classList.remove('active');
   }
 }
+
+// XClean & ISee Portfolio Toggle Functions
+function toggleXcleanPortfolio(event) {
+  event.stopPropagation();
+  const sub = document.getElementById('xcleanPortfolioSection');
+  sub.classList.toggle('show');
+}
+
+function toggleIseePortfolio(event) {
+  event.stopPropagation();
+  const sub = document.getElementById('iseeDigitalPortfolioSection');
+  sub.classList.toggle('show');
+}
+
+// Lightbox Modal Functions for Role 3 & General Images
+function openModal(imgSrc) {
+  const modal = document.getElementById('imgModal');
+  const modalImg = document.getElementById('modalImg');
+  modal.style.display = "flex";
+  modalImg.src = imgSrc;
+}
+
+function closeModal() {
+  const modal = document.getElementById('imgModal');
+  modal.style.display = "none";
+}
+
+// Carousel Expanded Item Overlay Handler (Role 1 Social Media)
+function expandCarouselItem(event, roleKey, type, sourcePath, captionText) {
+  event.stopPropagation();
+  const overlay = document.getElementById('expanded-view-' + roleKey);
+  const contentContainer = document.getElementById('expanded-content-' + roleKey);
+  
+  if (overlay && contentContainer) {
+    contentContainer.innerHTML = '';
+    if (type === 'video') {
+      const vid = document.createElement('video');
+      vid.src = sourcePath;
+      vid.controls = true;
+      vid.autoplay = true;
+      vid.playsInline = true;
+      vid.setAttribute('webkit-playsinline', '');
+      contentContainer.appendChild(vid);
+    } else if (type === 'image') {
+      const img = document.createElement('img');
+      img.src = sourcePath;
+      img.alt = captionText;
+      contentContainer.appendChild(img);
+    }
+    overlay.classList.add('active');
+    overlay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function closeCarouselExpanded(roleKey) {
+  const overlay = document.getElementById('expanded-view-' + roleKey);
+  const contentContainer = document.getElementById('expanded-content-' + roleKey);
+  if (overlay && contentContainer) {
+    const activeVideo = contentContainer.querySelector('video');
+    if (activeVideo) {
+      activeVideo.pause();
+    }
+    contentContainer.innerHTML = '';
+    overlay.classList.remove('active');
+  }
+}
+
+// Radio Audio Card Playback Handler with Equalizer toggle (.is-playing class)
+function toggleAudioCard(cardElement, event) {
+  if (event) event.stopPropagation();
+  
+  const audioEl = cardElement.querySelector('audio');
+  if (!audioEl) return;
+
+  // Pause all other audio cards and remove active state
+  document.querySelectorAll('.radio-card-item').forEach(card => {
+    if (card !== cardElement) {
+      const otherAudio = card.querySelector('audio');
+      if (otherAudio) {
+        otherAudio.pause();
+        otherAudio.currentTime = 0;
+      }
+      card.classList.remove('is-playing');
+    }
+  });
+
+  if (audioEl.paused) {
+    audioEl.play().then(() => {
+      cardElement.classList.add('is-playing');
+    }).catch(err => {
+      console.log("Audio playback error:", err);
+    });
+  } else {
+    audioEl.pause();
+    audioEl.currentTime = 0;
+    cardElement.classList.remove('is-playing');
+  }
+
+  // Handle when audio finishes playing naturally
+  audioEl.onended = function() {
+    cardElement.classList.remove('is-playing');
+  };
+}
+
+function openFullDetail(event, roleTitle) {
+  event.stopPropagation();
+  alert("Full detailed case study for " + roleTitle + " is available upon request.");
+}
 </script>
 </body>
 </html>
-```[cite: 10]
