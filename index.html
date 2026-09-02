@@ -694,7 +694,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-09-03 05:52 NZST</div>
+  <div class="revision-stamp">Rev: 2026-09-03 06:58 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1584,6 +1584,10 @@ function toggleRole(event, cardElement, roleId) {
   if (!isCurrentlyOpen) {
     targetContent.classList.add("show");
     
+    targetContent.querySelectorAll('video').forEach(video => {
+      video.load();
+    });
+    
     if (roleId === 'role1') {
       const dbBtn = document.getElementById('devilBurgerPortfolioBtn');
       if (dbBtn) dbBtn.classList.add('pulse-animation');
@@ -1624,86 +1628,100 @@ function playInlineVideo(event, roleKey, videoUrl, videoTitle) {
   const titleEl = document.getElementById('inlineTitle-' + roleKey);
 
   if (playerContainer && videoEl) {
-    if (titleEl) titleEl.textContent = videoTitle;
+    if (titleEl) titleEl.textContent = videoTitle || 'Now Playing';
     videoEl.src = videoUrl;
     playerContainer.classList.add('active');
-    videoEl.play().catch(err => console.log("Autoplay prevented:", err));
-
-    setTimeout(() => {
-      playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }, 100);
+    videoEl.play().catch(e => console.log("Autoplay blocked:", e));
   }
 }
 
 function closeInlineVideo(roleKey) {
   const playerContainer = document.getElementById('inlinePlayer-' + roleKey);
-  const videoEl = document.getElementById('inlineVideo-' + roleKey);
-
-  if (playerContainer && videoEl) {
-    videoEl.pause();
-    videoEl.src = '';
+  if (playerContainer) {
     playerContainer.classList.remove('active');
+    const videoEl = playerContainer.querySelector('video');
+    if (videoEl) {
+      videoEl.pause();
+      videoEl.src = '';
+    }
   }
 }
 
-// Audio Card Toggling with stopAllMedia integration
-function toggleAudioCard(cardElement, event) {
-  if (event) event.stopPropagation();
-  stopAllMedia();
-
-  const audio = cardElement.querySelector('audio');
-  if (!audio) return;
-
-  if (audio.paused) {
-    audio.play().then(() => {
-      cardElement.classList.add('is-playing');
-    }).catch(err => console.log("Audio play prevented:", err));
-  } else {
-    audio.pause();
-    cardElement.classList.remove('is-playing');
-  }
-
-  audio.onended = function() {
-    cardElement.classList.remove('is-playing');
-  };
-}
-
-// Carousel Item Expansion Handler with stopAllMedia integration
 function expandCarouselItem(event, roleKey, type, src, caption) {
   event.stopPropagation();
-  stopAllMedia();
-
   const overlay = document.getElementById('expanded-view-' + roleKey);
-  const contentContainer = document.getElementById('expanded-content-' + roleKey);
-  if (!overlay || !contentContainer) return;
+  const content = document.getElementById('expanded-content-' + roleKey);
+  if (!overlay || !content) return;
 
+  content.innerHTML = '';
   if (type === 'video') {
-    contentContainer.innerHTML = `
-      <div style="font-size:14px; color:#fff; font-weight:bold; margin-bottom:8px;">${caption}</div>
-      <video src="${src}" controls autoplay playsinline webkit-playsinline></video>
-    `;
+    const vid = document.createElement('video');
+    vid.src = src;
+    vid.controls = true;
+    vid.autoplay = true;
+    vid.playsInline = true;
+    vid.style.maxWidth = '100%';
+    vid.style.maxHeight = '350px';
+    content.appendChild(vid);
   } else if (type === 'image') {
-    contentContainer.innerHTML = `
-      <div style="font-size:14px; color:#fff; font-weight:bold; margin-bottom:8px;">${caption}</div>
-      <img src="${src}" alt="${caption}">
-    `;
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = caption;
+    img.style.maxWidth = '100%';
+    img.style.maxHeight = '350px';
+    content.appendChild(img);
   }
   overlay.classList.add('active');
-  overlay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function closeCarouselExpanded(roleKey) {
   const overlay = document.getElementById('expanded-view-' + roleKey);
-  const contentContainer = document.getElementById('expanded-content-' + roleKey);
-  if (overlay) overlay.classList.remove('active');
-  if (contentContainer) {
-    const vid = contentContainer.querySelector('video');
-    if (vid) vid.pause();
-    contentContainer.innerHTML = '';
+  if (overlay) {
+    overlay.classList.remove('active');
+    const content = overlay.querySelector('[id^="expanded-content-"]');
+    if (content) {
+      const vid = content.querySelector('video');
+      if (vid) vid.pause();
+      content.innerHTML = '';
+    }
   }
 }
 
-// XClean & ISee Portfolio Toggle Functions
+function openModal(imgSrc) {
+  const modal = document.getElementById('imgModal');
+  const modalImg = document.getElementById('modalImg');
+  modal.style.display = 'flex';
+  modalImg.src = imgSrc;
+}
+
+function closeModal() {
+  const modal = document.getElementById('imgModal');
+  modal.style.display = 'none';
+}
+
+function toggleAudioCard(card, event) {
+  event.stopPropagation();
+  const audio = card.querySelector('audio');
+  const isPlaying = card.classList.contains('is-playing');
+
+  document.querySelectorAll('.radio-card-item').forEach(item => {
+    item.classList.remove('is-playing');
+    const a = item.querySelector('audio');
+    if (a) {
+      a.pause();
+      a.currentTime = 0;
+    }
+  });
+
+  if (!isPlaying && audio) {
+    card.classList.add('is-playing');
+    audio.play().catch(e => console.log("Audio play failed:", e));
+    audio.onended = () => {
+      card.classList.remove('is-playing');
+    };
+  }
+}
+
 function toggleXcleanPortfolio(event) {
   event.stopPropagation();
   const sub = document.getElementById('xcleanPortfolioSection');
@@ -1716,17 +1734,9 @@ function toggleIseePortfolio(event) {
   sub.classList.toggle('show');
 }
 
-// Lightbox Modal Functions for Role 3 & General Images
-function openModal(imgSrc) {
-  const modal = document.getElementById('imgModal');
-  const modalImg = document.getElementById('modalImg');
-  modal.style.display = "flex";
-  modalImg.src = imgSrc;
-}
-
-function closeModal() {
-  const modal = document.getElementById('imgModal');
-  modal.style.display = "none";
+function openFullDetail(event, roleName) {
+  event.stopPropagation();
+  alert("Detailed case study view for " + roleName + " is available upon request.");
 }
 </script>
 </body>
