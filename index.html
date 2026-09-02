@@ -247,7 +247,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   animation: scrollMarquee 25s linear infinite;
 }
 .marquee-container:hover .marquee-track {
-  animation-play-state: paused;
+  animation-play-state: running;
 }
 .marquee-item {
   width: 260px;
@@ -687,7 +687,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 08:00 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 08:24 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -754,7 +754,7 @@ li { margin-bottom: 6px; font-size: 13px; }
         <div class="marquee-container" id="marquee-role1">
           <div class="marquee-track">
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
-              <video src="social media 1.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
+              <video src="social media 1.mp4#t=3" preload="metadata" muted loop playsinline webkit-playsinline></video>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 2.mp4', 'Social Media Campaign 2')">
               <video src="social media 2.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
@@ -763,7 +763,7 @@ li { margin-bottom: 6px; font-size: 13px; }
               <video src="social media 3.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 4.mp4', 'Social Media Campaign 4')">
-              <video src="social media 4.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
+              <video src="social media 4.mp4#t=3" preload="metadata" muted loop playsinline webkit-playsinline></video>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'image', 'social media carosel.jpg', 'Social Media Carousel Assets')">
               <img src="social media carosel.jpg" alt="Social Media Carousel" width="260" height="160">
@@ -773,10 +773,10 @@ li { margin-bottom: 6px; font-size: 13px; }
             </div>
             <!-- Duplicated loop for smooth infinite scroll -->
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
-              <video src="social media 1.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
+              <video src="social media 1.mp4#t=3" preload="metadata" muted loop playsinline webkit-playsinline></video>
             </div>
-            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 2.mp4', 'Social Media Campaign 2')">
-              <video src="social media 2.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 4.mp4', 'Social Media Campaign 4')">
+              <video src="social media 4.mp4#t=3" preload="metadata" muted loop playsinline webkit-playsinline></video>
             </div>
           </div>
         </div>
@@ -1390,7 +1390,6 @@ function updateDynamicTimestamp() {
   const stampEl = document.getElementById('dynamic-revision-stamp');
   if (!stampEl) return;
   const now = new Date();
-  // Format options for New Zealand time
   const options = {
     timeZone: 'Pacific/Auckland',
     year: 'numeric',
@@ -1411,20 +1410,18 @@ function updateDynamicTimestamp() {
       if (p.type === 'hour') hour = p.value;
       if (p.type === 'minute') minute = p.value;
     });
-    // Determine time zone abbreviation based on month or standard offset checking
     const nzString = now.toLocaleString('en-US', { timeZone: 'Pacific/Auckland', timeZoneName: 'short' });
     const tzMatch = nzString.match(/(NZST|NZDT)/);
     const tzName = tzMatch ? tzMatch[1] : 'NZST';
     stampEl.textContent = `Rev: ${year}-${month}-${day} ${hour}:${minute} ${tzName}`;
   } catch (e) {
-    // Fallback if Intl formatting fails
-    stampEl.textContent = `Rev: 2026-09-03 08:00 NZST`;
+    stampEl.textContent = `Rev: 2026-09-03 08:24 NZST`;
   }
 }
 updateDynamicTimestamp();
 setInterval(updateDynamicTimestamp, 60000);
 
-// Global Stop Function to halt all media playback across the document
+// Global Stop Function to halt all media playback across the document with mutual exclusivity
 function stopAllMedia() {
   document.querySelectorAll('video, audio').forEach(el => {
     el.pause();
@@ -1515,7 +1512,6 @@ function handleLightboxBackdropClick(event) {
   }
 }
 
-// Keyboard navigation listeners for Lightbox
 document.addEventListener('keydown', function(e) {
   const modal = document.getElementById('instoreLightboxModal');
   if (modal.classList.contains('active')) {
@@ -1639,14 +1635,7 @@ function toggleAudioCard(cardElement, event) {
   const audioEl = cardElement.querySelector('audio');
   const isPlaying = cardElement.classList.contains('is-playing');
   
-  document.querySelectorAll('.radio-card-item').forEach(card => {
-    card.classList.remove('is-playing');
-    const aud = card.querySelector('audio');
-    if (aud) {
-      aud.pause();
-      aud.currentTime = 0;
-    }
-  });
+  stopAllMedia();
 
   if (!isPlaying && audioEl) {
     cardElement.classList.add('is-playing');
@@ -1657,58 +1646,39 @@ function toggleAudioCard(cardElement, event) {
   }
 }
 
+function openModal(imgSrc) {
+  const modal = document.getElementById('imgModal');
+  const modalImg = document.getElementById('modalImg');
+  modal.style.display = "flex";
+  modalImg.src = imgSrc;
+}
+
+function closeModal() {
+  const modal = document.getElementById('imgModal');
+  modal.style.display = "none";
+}
+
+function openFullDetail(event, roleName) {
+  event.stopPropagation();
+  alert("Opening full detailed case study for: " + roleName);
+}
+
 function toggleDevilBurgerPortfolio(event) {
   event.stopPropagation();
   const sec = document.getElementById('devilBurgerPortfolioSection');
-  if (sec) {
-    sec.classList.toggle('show');
-    if (sec.classList.contains('show')) {
-      sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  }
+  if (sec) sec.classList.toggle('show');
 }
 
 function toggleXcleanPortfolio(event) {
   event.stopPropagation();
   const sec = document.getElementById('xcleanPortfolioSection');
-  if (sec) {
-    sec.classList.toggle('show');
-    if (sec.classList.contains('show')) {
-      sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  }
+  if (sec) sec.classList.toggle('show');
 }
 
 function toggleIseePortfolio(event) {
   event.stopPropagation();
   const sec = document.getElementById('iseeDigitalPortfolioSection');
-  if (sec) {
-    sec.classList.toggle('show');
-    if (sec.classList.contains('show')) {
-      sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  }
-}
-
-function openModal(imageSrc) {
-  const modal = document.getElementById('imgModal');
-  const modalImg = document.getElementById('modalImg');
-  if (modal && modalImg) {
-    modal.style.display = 'flex';
-    modalImg.src = imageSrc;
-  }
-}
-
-function closeModal() {
-  const modal = document.getElementById('imgModal');
-  if (modal) {
-    modal.style.display = 'none';
-  }
-}
-
-function openFullDetail(event, roleName) {
-  event.stopPropagation();
-  alert("Opening full detailed case study and deployment records for: " + roleName);
+  if (sec) sec.classList.toggle('show');
 }
 </script>
 </body>
