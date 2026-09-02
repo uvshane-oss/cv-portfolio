@@ -266,19 +266,12 @@ li { margin-bottom: 6px; font-size: 13px; }
   width: 100%;
   height: 160px;
   min-height: 160px;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
   background: #000;
 }
 .marquee-caption {
-  font-size: 11px;
-  color: #fff;
-  background: rgba(0,0,0,0.8);
-  padding: 5px;
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  display: none;
 }
 @keyframes scrollMarquee {
   0% { transform: translateX(0); }
@@ -694,7 +687,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp">Rev: 2026-09-03 06:58 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 08:00 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -723,7 +716,7 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Reduced operating costs left turnkey marketing solutions</li>
       </ul>
 
-      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials :</h4>
+      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials : Alice & Tim discuss working with Shane</h4>
       <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 8px 0;">Alice & Tim discuss working with Shane (Tap to play inline)</p>
       
       <!-- Inline Embedded Video Player Slot for Role 1 -->
@@ -762,36 +755,28 @@ li { margin-bottom: 6px; font-size: 13px; }
           <div class="marquee-track">
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
               <video src="social media 1.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
-              <p class="marquee-caption">Social Media Clip 1</p>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 2.mp4', 'Social Media Campaign 2')">
               <video src="social media 2.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
-              <p class="marquee-caption">Social Media Clip 2</p>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 3.mp4', 'Social Media Campaign 3')">
               <video src="social media 3.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
-              <p class="marquee-caption">Social Media Clip 3</p>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 4.mp4', 'Social Media Campaign 4')">
               <video src="social media 4.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
-              <p class="marquee-caption">Social Media Clip 4</p>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'image', 'social media carosel.jpg', 'Social Media Carousel Assets')">
               <img src="social media carosel.jpg" alt="Social Media Carousel" width="260" height="160">
-              <p class="marquee-caption">Carousel Layout</p>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'image', '$10 Tuesday for summer .jpg', 'Summer Promotion Artwork')">
               <img src="$10 Tuesday for summer .jpg" alt="Summer Promo Campaign" width="260" height="160">
-              <p class="marquee-caption">Summer Promotion Artwork</p>
             </div>
             <!-- Duplicated loop for smooth infinite scroll -->
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
               <video src="social media 1.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
-              <p class="marquee-caption">Social Media Clip 1</p>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 2.mp4', 'Social Media Campaign 2')">
               <video src="social media 2.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
-              <p class="marquee-caption">Social Media Clip 2</p>
             </div>
           </div>
         </div>
@@ -881,7 +866,7 @@ li { margin-bottom: 6px; font-size: 13px; }
         </div>
       </div>
 
-      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials : Glen :Franchise Owner & Deb: Rep discuss working with Shane .</h4>
+      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials : Glen : A Franchise Owner & Deb: A Sales Rep discuss working with Shane .</h4>
       <div class="video-grid">
         <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Glen%20Hackell%20owner%20of%20XClean%202015.mp4', 'Glen - Franchise Owner Testimonial')">
           <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Glen%20Hackell%20owner%20of%20XClean%202015.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
@@ -919,7 +904,6 @@ li { margin-bottom: 6px; font-size: 13px; }
         <div class="portfolio-gallery">
           <div class="portfolio-img-wrapper" onclick="openModal('xclean.jpg')">
             <img src="xclean.jpg" alt="XClean Operations" width="260" height="160">
-            <p class="marquee-caption">XClean Fleet & Brand Asset</p>
           </div>
         </div>
       </div>
@@ -947,13 +931,13 @@ li { margin-bottom: 6px; font-size: 13px; }
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Supporting Portfolio</h4>
       <div class="marquee-container">
         <div class="marquee-track">
-          <div class="marquee-item" onclick="openModal('Screen end & projector.jpg')"><img src="Screen end & projector.jpg" alt="Screen end & projector" width="260" height="160"><p class="marquee-caption">Screen end & projector</p></div>
-          <div class="marquee-item" onclick="openModal('Screen side.jpg')"><img src="Screen side.jpg" alt="Screen side" width="260" height="160"><p class="marquee-caption">Screen side</p></div>
-          <div class="marquee-item" onclick="openModal('back of screen.jpg')"><img src="back of screen.jpg" alt="back of screen" width="260" height="160"><p class="marquee-caption">back of screen</p></div>
-          <div class="marquee-item" onclick="openModal('front on.jpg')"><img src="front on.jpg" alt="front on" width="260" height="160"><p class="marquee-caption">front on</p></div>
+          <div class="marquee-item" onclick="openModal('Screen end & projector.jpg')"><img src="Screen end & projector.jpg" alt="Screen end & projector" width="260" height="160"></div>
+          <div class="marquee-item" onclick="openModal('Screen side.jpg')"><img src="Screen side.jpg" alt="Screen side" width="260" height="160"></div>
+          <div class="marquee-item" onclick="openModal('back of screen.jpg')"><img src="back of screen.jpg" alt="back of screen" width="260" height="160"></div>
+          <div class="marquee-item" onclick="openModal('front on.jpg')"><img src="front on.jpg" alt="front on" width="260" height="160"></div>
           <!-- Duplicated loop for smooth infinite scroll -->
-          <div class="marquee-item" onclick="openModal('Screen end & projector.jpg')"><img src="Screen end & projector.jpg" alt="Screen end & projector" width="260" height="160"><p class="marquee-caption">Screen end & projector</p></div>
-          <div class="marquee-item" onclick="openModal('Screen side.jpg')"><img src="Screen side.jpg" alt="Screen side" width="260" height="160"><p class="marquee-caption">Screen side</p></div>
+          <div class="marquee-item" onclick="openModal('Screen end & projector.jpg')"><img src="Screen end & projector.jpg" alt="Screen end & projector" width="260" height="160"></div>
+          <div class="marquee-item" onclick="openModal('Screen side.jpg')"><img src="Screen side.jpg" alt="Screen side" width="260" height="160"></div>
         </div>
       </div>
       <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'Albatross Centre A/V')">View Full Detailed Case Study &rarr;</span></div>
@@ -987,214 +971,164 @@ li { margin-bottom: 6px; font-size: 13px; }
           <!-- Cycle 1 -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(0)">
             <div class="instore-img-container"><img src="BB1758835159986.jpeg" alt="Outdoor Billboard BB1"></div>
-            <p class="instore-thumb-caption">Outdoor Billboard BB1</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(1)">
             <div class="instore-img-container"><img src="1758755805584.jpeg" alt="Location 1"></div>
-            <p class="instore-thumb-caption">Location 1</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(2)">
             <div class="instore-img-container"><img src="1758755929727.jpeg" alt="Location 2"></div>
-            <p class="instore-thumb-caption">Location 2</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(3)">
             <div class="instore-img-container"><img src="1758755954119.jpeg" alt="Location 3"></div>
-            <p class="instore-thumb-caption">Location 3</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(4)">
             <div class="instore-img-container"><img src="1758755979137.jpeg" alt="Location 4"></div>
-            <p class="instore-thumb-caption">Location 4</p>
           </div>
           <!-- Cycle 2 -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(5)">
             <div class="instore-img-container"><img src="BB1758835290442.jpeg" alt="Outdoor Billboard BB2"></div>
-            <p class="instore-thumb-caption">Outdoor Billboard BB2</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(6)">
             <div class="instore-img-container"><img src="1758756024609.jpeg" alt="Location 5"></div>
-            <p class="instore-thumb-caption">Location 5</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(7)">
             <div class="instore-img-container"><img src="1758756069198.jpeg" alt="Location 6"></div>
-            <p class="instore-thumb-caption">Location 6</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(8)">
             <div class="instore-img-container"><img src="1758756574017.jpeg" alt="Location 7"></div>
-            <p class="instore-thumb-caption">Location 7</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(9)">
             <div class="instore-img-container"><img src="1758756639804.jpeg" alt="Location 8"></div>
-            <p class="instore-thumb-caption">Location 8</p>
           </div>
           <!-- Cycle 3 -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(10)">
             <div class="instore-img-container"><img src="BB1758835313131.jpeg" alt="Outdoor Billboard BB3"></div>
-            <p class="instore-thumb-caption">Outdoor Billboard BB3</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(11)">
             <div class="instore-img-container"><img src="1758756679346.jpeg" alt="Location 9"></div>
-            <p class="instore-thumb-caption">Location 9</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(12)">
             <div class="instore-img-container"><img src="1758756712158.jpeg" alt="Location 10"></div>
-            <p class="instore-thumb-caption">Location 10</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(13)">
             <div class="instore-img-container"><img src="1758756759188.jpeg" alt="Location 11"></div>
-            <p class="instore-thumb-caption">Location 11</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(14)">
             <div class="instore-img-container"><img src="1758756798411.jpeg" alt="Location 12"></div>
-            <p class="instore-thumb-caption">Location 12</p>
           </div>
           <!-- Cycle 4 -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(15)">
             <div class="instore-img-container"><img src="BB1758835334807.jpeg" alt="Outdoor Billboard BB4"></div>
-            <p class="instore-thumb-caption">Outdoor Billboard BB4</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(16)">
             <div class="instore-img-container"><img src="1758756849533.jpeg" alt="Location 13"></div>
-            <p class="instore-thumb-caption">Location 13</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(17)">
             <div class="instore-img-container"><img src="1758756921948.jpeg" alt="Location 14"></div>
-            <p class="instore-thumb-caption">Location 14</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(18)">
             <div class="instore-img-container"><img src="1758756956376.jpeg" alt="Location 15"></div>
-            <p class="instore-thumb-caption">Location 15</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(19)">
             <div class="instore-img-container"><img src="1758756996703.jpeg" alt="Location 16"></div>
-            <p class="instore-thumb-caption">Location 16</p>
           </div>
           <!-- Cycle 5 -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(20)">
             <div class="instore-img-container"><img src="BB1758835159986.jpeg" alt="Outdoor Billboard BB1"></div>
-            <p class="instore-thumb-caption">Outdoor Billboard BB1</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(21)">
             <div class="instore-img-container"><img src="1758757029987.jpeg" alt="Location 17"></div>
-            <p class="instore-thumb-caption">Location 17</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(22)">
             <div class="instore-img-container"><img src="1758757078499.jpeg" alt="Location 18"></div>
-            <p class="instore-thumb-caption">Location 18</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(23)">
             <div class="instore-img-container"><img src="1758757119457.jpeg" alt="Location 19"></div>
-            <p class="instore-thumb-caption">Location 19</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(24)">
             <div class="instore-img-container"><img src="1758757157638.jpeg" alt="Location 20"></div>
-            <p class="instore-thumb-caption">Location 20</p>
           </div>
 
           <!-- Duplicated loop for smooth infinite scroll -->
           <!-- Cycle 1 (Dup) -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(0)">
             <div class="instore-img-container"><img src="BB1758835159986.jpeg" alt="Outdoor Billboard BB1"></div>
-            <p class="instore-thumb-caption">Outdoor Billboard BB1</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(1)">
             <div class="instore-img-container"><img src="1758755805584.jpeg" alt="Location 1"></div>
-            <p class="instore-thumb-caption">Location 1</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(2)">
             <div class="instore-img-container"><img src="1758755929727.jpeg" alt="Location 2"></div>
-            <p class="instore-thumb-caption">Location 2</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(3)">
             <div class="instore-img-container"><img src="1758755954119.jpeg" alt="Location 3"></div>
-            <p class="instore-thumb-caption">Location 3</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(4)">
             <div class="instore-img-container"><img src="1758755979137.jpeg" alt="Location 4"></div>
-            <p class="instore-thumb-caption">Location 4</p>
           </div>
           <!-- Cycle 2 (Dup) -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(5)">
             <div class="instore-img-container"><img src="BB1758835290442.jpeg" alt="Outdoor Billboard BB2"></div>
-            <p class="instore-thumb-caption">Outdoor Billboard BB2</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(6)">
             <div class="instore-img-container"><img src="1758756024609.jpeg" alt="Location 5"></div>
-            <p class="instore-thumb-caption">Location 5</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(7)">
             <div class="instore-img-container"><img src="1758756069198.jpeg" alt="Location 6"></div>
-            <p class="instore-thumb-caption">Location 6</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(8)">
             <div class="instore-img-container"><img src="1758756574017.jpeg" alt="Location 7"></div>
-            <p class="instore-thumb-caption">Location 7</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(9)">
             <div class="instore-img-container"><img src="1758756639804.jpeg" alt="Location 8"></div>
-            <p class="instore-thumb-caption">Location 8</p>
           </div>
           <!-- Cycle 3 (Dup) -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(10)">
             <div class="instore-img-container"><img src="BB1758835313131.jpeg" alt="Outdoor Billboard BB3"></div>
-            <p class="instore-thumb-caption">Outdoor Billboard BB3</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(11)">
             <div class="instore-img-container"><img src="1758756679346.jpeg" alt="Location 9"></div>
-            <p class="instore-thumb-caption">Location 9</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(12)">
             <div class="instore-img-container"><img src="1758756712158.jpeg" alt="Location 10"></div>
-            <p class="instore-thumb-caption">Location 10</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(13)">
             <div class="instore-img-container"><img src="1758756759188.jpeg" alt="Location 11"></div>
-            <p class="instore-thumb-caption">Location 11</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(14)">
             <div class="instore-img-container"><img src="1758756798411.jpeg" alt="Location 12"></div>
-            <p class="instore-thumb-caption">Location 12</p>
           </div>
           <!-- Cycle 4 (Dup) -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(15)">
             <div class="instore-img-container"><img src="BB1758835334807.jpeg" alt="Outdoor Billboard BB4"></div>
-            <p class="instore-thumb-caption">Outdoor Billboard BB4</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(16)">
             <div class="instore-img-container"><img src="1758756849533.jpeg" alt="Location 13"></div>
-            <p class="instore-thumb-caption">Location 13</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(17)">
             <div class="instore-img-container"><img src="1758756921948.jpeg" alt="Location 14"></div>
-            <p class="instore-thumb-caption">Location 14</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(18)">
             <div class="instore-img-container"><img src="1758756956376.jpeg" alt="Location 15"></div>
-            <p class="instore-thumb-caption">Location 15</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(19)">
             <div class="instore-img-container"><img src="1758756996703.jpeg" alt="Location 16"></div>
-            <p class="instore-thumb-caption">Location 16</p>
           </div>
           <!-- Cycle 5 (Dup) -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(20)">
             <div class="instore-img-container"><img src="BB1758835159986.jpeg" alt="Outdoor Billboard BB1"></div>
-            <p class="instore-thumb-caption">Outdoor Billboard BB1</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(21)">
             <div class="instore-img-container"><img src="1758757029987.jpeg" alt="Location 17"></div>
-            <p class="instore-thumb-caption">Location 17</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(22)">
             <div class="instore-img-container"><img src="1758757078499.jpeg" alt="Location 18"></div>
-            <p class="instore-thumb-caption">Location 18</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(23)">
             <div class="instore-img-container"><img src="1758757119457.jpeg" alt="Location 19"></div>
-            <p class="instore-thumb-caption">Location 19</p>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(24)">
             <div class="instore-img-container"><img src="1758757157638.jpeg" alt="Location 20"></div>
-            <p class="instore-thumb-caption">Location 20</p>
           </div>
         </div>
       </div>
@@ -1209,7 +1143,6 @@ li { margin-bottom: 6px; font-size: 13px; }
         <div class="portfolio-gallery">
           <div class="portfolio-img-wrapper" onclick="openModal('isee digital logo.jpeg')">
             <img src="isee digital logo.jpeg" alt="ISee Digital Network Asset" width="260" height="160">
-            <p class="marquee-caption">Network Rollout Map & Assets</p>
           </div>
         </div>
       </div>
@@ -1265,7 +1198,7 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Managed crisis communications during “Teatmate” product failures.</li>
         <li class="highlight-item" style="list-style: none; margin-left: -18px; font-style: italic;">Supported clients with integrity – we were misled by fraudulent “Teatmate” claims, advising on best practice and recourse since the product did not meet XClean or ACVM expectations</li>
       </ul>
-      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
+      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonial : Glen : Franchise Owner discusses working with Shane .</h4>
       
       <!-- Inline Embedded Video Player Slot for Role 5 -->
       <div id="inlinePlayer-role5" class="inline-video-player-container">
@@ -1304,7 +1237,7 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Coordinated installation workflows and harvested referrals.</li>
         <li class="highlight-item" style="list-style: none; margin-left: -18px; font-style: italic;">Encouraged to take on secondary fixed-term crisis/turnaround roles (meat processing, distribution, automotive) provided they did not interfere with road trips.</li>
       </ul>
-      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
+      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonial : Bruce : Sky Regional manager discusses working with Shane .</h4>
       
       <!-- Inline Embedded Video Player Slot for Role 6 -->
       <div id="inlinePlayer-role6" class="inline-video-player-container">
@@ -1342,7 +1275,7 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Achieved national recognition as top-performing sales representative.</li>
         <li>Delivered offsite promotional campaigns and full store operations.</li>
       </ul>
-      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media References:</h4>
+      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials : Alana & Jenna discuss working with Shane .</h4>
       
       <!-- Inline Embedded Video Player Slot for Role 7 -->
       <div id="inlinePlayer-role7" class="inline-video-player-container">
@@ -1410,7 +1343,7 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Active role in meeting Scheme-of-arrangement.</li>
         <li>2001 group successfully traded out of receivership.</li>
       </ul>
-      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Media Reference:</h4>
+      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonial : Mike Regional Manager discusses working with Shane .</h4>
       
       <!-- Inline Embedded Video Player Slot for Role 9 -->
       <div id="inlinePlayer-role9" class="inline-video-player-container">
@@ -1452,6 +1385,45 @@ li { margin-bottom: 6px; font-size: 13px; }
 </div>
 
 <script>
+// Dynamic runtime synchronization for New Zealand local time (NZST/NZDT)
+function updateDynamicTimestamp() {
+  const stampEl = document.getElementById('dynamic-revision-stamp');
+  if (!stampEl) return;
+  const now = new Date();
+  // Format options for New Zealand time
+  const options = {
+    timeZone: 'Pacific/Auckland',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  };
+  try {
+    const formatter = new Intl.DateTimeFormat('en-CA', options);
+    const parts = formatter.formatToParts(now);
+    let year = '', month = '', day = '', hour = '', minute = '';
+    parts.forEach(p => {
+      if (p.type === 'year') year = p.value;
+      if (p.type === 'month') month = p.value;
+      if (p.type === 'day') day = p.value;
+      if (p.type === 'hour') hour = p.value;
+      if (p.type === 'minute') minute = p.value;
+    });
+    // Determine time zone abbreviation based on month or standard offset checking
+    const nzString = now.toLocaleString('en-US', { timeZone: 'Pacific/Auckland', timeZoneName: 'short' });
+    const tzMatch = nzString.match(/(NZST|NZDT)/);
+    const tzName = tzMatch ? tzMatch[1] : 'NZST';
+    stampEl.textContent = `Rev: ${year}-${month}-${day} ${hour}:${minute} ${tzName}`;
+  } catch (e) {
+    // Fallback if Intl formatting fails
+    stampEl.textContent = `Rev: 2026-09-03 08:00 NZST`;
+  }
+}
+updateDynamicTimestamp();
+setInterval(updateDynamicTimestamp, 60000);
+
 // Global Stop Function to halt all media playback across the document
 function stopAllMedia() {
   document.querySelectorAll('video, audio').forEach(el => {
@@ -1600,143 +1572,143 @@ function toggleRole(event, cardElement, roleId) {
       const xcleanBtn = document.getElementById('xcleanPortfolioBtn');
       if (xcleanBtn) xcleanBtn.classList.add('pulse-animation');
     }
+  }
+}
 
-    setTimeout(() => {
-      const elementPosition = cardElement.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = elementPosition - 15;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }, 150);
+function playInlineVideo(event, roleKey, videoUrl, videoTitle) {
+  event.stopPropagation();
+  stopAllMedia();
+  
+  const container = document.getElementById('inlinePlayer-' + roleKey);
+  const titleEl = document.getElementById('inlineTitle-' + roleKey);
+  const videoEl = document.getElementById('inlineVideo-' + roleKey);
+  
+  if (container && videoEl) {
+    titleEl.textContent = videoTitle;
+    videoEl.src = videoUrl;
+    container.classList.add('active');
+    videoEl.play().catch(e => console.log("Autoplay prevented:", e));
+  }
+}
+
+function closeInlineVideo(roleKey) {
+  const container = document.getElementById('inlinePlayer-' + roleKey);
+  const videoEl = document.getElementById('inlineVideo-' + roleKey);
+  
+  if (container && videoEl) {
+    videoEl.pause();
+    videoEl.src = '';
+    container.classList.remove('active');
+  }
+}
+
+function expandCarouselItem(event, roleKey, type, sourceFile, titleText) {
+  event.stopPropagation();
+  stopAllMedia();
+  
+  const overlay = document.getElementById('expanded-view-' + roleKey);
+  const contentWrapper = document.getElementById('expanded-content-' + roleKey);
+  
+  if (overlay && contentWrapper) {
+    if (type === 'video') {
+      contentWrapper.innerHTML = `
+        <h4 style="color:#fff; margin-top:0; font-size:14px;">${titleText}</h4>
+        <video src="${sourceFile}" controls autoplay playsinline webkit-playsinline style="max-width:100%; max-height:320px; border-radius:4px;"></video>
+      `;
+    } else {
+      contentWrapper.innerHTML = `
+        <h4 style="color:#fff; margin-top:0; font-size:14px;">${titleText}</h4>
+        <img src="${sourceFile}" alt="${titleText}" style="max-width:100%; max-height:320px; object-fit:contain; border-radius:4px;">
+      `;
+    }
+    overlay.classList.add('active');
+  }
+}
+
+function closeCarouselExpanded(roleKey) {
+  const overlay = document.getElementById('expanded-view-' + roleKey);
+  const contentWrapper = document.getElementById('expanded-content-' + roleKey);
+  if (overlay && contentWrapper) {
+    overlay.classList.remove('active');
+    contentWrapper.innerHTML = '';
+  }
+}
+
+function toggleAudioCard(cardElement, event) {
+  event.stopPropagation();
+  const audioEl = cardElement.querySelector('audio');
+  const isPlaying = cardElement.classList.contains('is-playing');
+  
+  document.querySelectorAll('.radio-card-item').forEach(card => {
+    card.classList.remove('is-playing');
+    const aud = card.querySelector('audio');
+    if (aud) {
+      aud.pause();
+      aud.currentTime = 0;
+    }
+  });
+
+  if (!isPlaying && audioEl) {
+    cardElement.classList.add('is-playing');
+    audioEl.play().catch(e => console.log("Audio playback error:", e));
+    audioEl.onended = function() {
+      cardElement.classList.remove('is-playing');
+    };
   }
 }
 
 function toggleDevilBurgerPortfolio(event) {
   event.stopPropagation();
-  const sub = document.getElementById('devilBurgerPortfolioSection');
-  sub.classList.toggle('show');
-}
-
-// Inline Video Player Controller Functions with stopAllMedia integration
-function playInlineVideo(event, roleKey, videoUrl, videoTitle) {
-  event.stopPropagation();
-  stopAllMedia();
-
-  const playerContainer = document.getElementById('inlinePlayer-' + roleKey);
-  const videoEl = document.getElementById('inlineVideo-' + roleKey);
-  const titleEl = document.getElementById('inlineTitle-' + roleKey);
-
-  if (playerContainer && videoEl) {
-    if (titleEl) titleEl.textContent = videoTitle || 'Now Playing';
-    videoEl.src = videoUrl;
-    playerContainer.classList.add('active');
-    videoEl.play().catch(e => console.log("Autoplay blocked:", e));
-  }
-}
-
-function closeInlineVideo(roleKey) {
-  const playerContainer = document.getElementById('inlinePlayer-' + roleKey);
-  if (playerContainer) {
-    playerContainer.classList.remove('active');
-    const videoEl = playerContainer.querySelector('video');
-    if (videoEl) {
-      videoEl.pause();
-      videoEl.src = '';
+  const sec = document.getElementById('devilBurgerPortfolioSection');
+  if (sec) {
+    sec.classList.toggle('show');
+    if (sec.classList.contains('show')) {
+      sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
-  }
-}
-
-function expandCarouselItem(event, roleKey, type, src, caption) {
-  event.stopPropagation();
-  const overlay = document.getElementById('expanded-view-' + roleKey);
-  const content = document.getElementById('expanded-content-' + roleKey);
-  if (!overlay || !content) return;
-
-  content.innerHTML = '';
-  if (type === 'video') {
-    const vid = document.createElement('video');
-    vid.src = src;
-    vid.controls = true;
-    vid.autoplay = true;
-    vid.playsInline = true;
-    vid.style.maxWidth = '100%';
-    vid.style.maxHeight = '350px';
-    content.appendChild(vid);
-  } else if (type === 'image') {
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = caption;
-    img.style.maxWidth = '100%';
-    img.style.maxHeight = '350px';
-    content.appendChild(img);
-  }
-  overlay.classList.add('active');
-}
-
-function closeCarouselExpanded(roleKey) {
-  const overlay = document.getElementById('expanded-view-' + roleKey);
-  if (overlay) {
-    overlay.classList.remove('active');
-    const content = overlay.querySelector('[id^="expanded-content-"]');
-    if (content) {
-      const vid = content.querySelector('video');
-      if (vid) vid.pause();
-      content.innerHTML = '';
-    }
-  }
-}
-
-function openModal(imgSrc) {
-  const modal = document.getElementById('imgModal');
-  const modalImg = document.getElementById('modalImg');
-  modal.style.display = 'flex';
-  modalImg.src = imgSrc;
-}
-
-function closeModal() {
-  const modal = document.getElementById('imgModal');
-  modal.style.display = 'none';
-}
-
-function toggleAudioCard(card, event) {
-  event.stopPropagation();
-  const audio = card.querySelector('audio');
-  const isPlaying = card.classList.contains('is-playing');
-
-  document.querySelectorAll('.radio-card-item').forEach(item => {
-    item.classList.remove('is-playing');
-    const a = item.querySelector('audio');
-    if (a) {
-      a.pause();
-      a.currentTime = 0;
-    }
-  });
-
-  if (!isPlaying && audio) {
-    card.classList.add('is-playing');
-    audio.play().catch(e => console.log("Audio play failed:", e));
-    audio.onended = () => {
-      card.classList.remove('is-playing');
-    };
   }
 }
 
 function toggleXcleanPortfolio(event) {
   event.stopPropagation();
-  const sub = document.getElementById('xcleanPortfolioSection');
-  sub.classList.toggle('show');
+  const sec = document.getElementById('xcleanPortfolioSection');
+  if (sec) {
+    sec.classList.toggle('show');
+    if (sec.classList.contains('show')) {
+      sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
 }
 
 function toggleIseePortfolio(event) {
   event.stopPropagation();
-  const sub = document.getElementById('iseeDigitalPortfolioSection');
-  sub.classList.toggle('show');
+  const sec = document.getElementById('iseeDigitalPortfolioSection');
+  if (sec) {
+    sec.classList.toggle('show');
+    if (sec.classList.contains('show')) {
+      sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+}
+
+function openModal(imageSrc) {
+  const modal = document.getElementById('imgModal');
+  const modalImg = document.getElementById('modalImg');
+  if (modal && modalImg) {
+    modal.style.display = 'flex';
+    modalImg.src = imageSrc;
+  }
+}
+
+function closeModal() {
+  const modal = document.getElementById('imgModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
 }
 
 function openFullDetail(event, roleName) {
   event.stopPropagation();
-  alert("Detailed case study view for " + roleName + " is available upon request.");
+  alert("Opening full detailed case study and deployment records for: " + roleName);
 }
 </script>
 </body>
