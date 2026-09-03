@@ -742,7 +742,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 14:54 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 15:02 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1473,7 +1473,7 @@ function updateDynamicTimestamp() {
     const tzName = tzMatch ? tzMatch[1] : 'NZST';
     stampEl.textContent = `Rev: ${year}-${month}-${day} ${hour}:${minute} ${tzName}`;
   } catch (e) {
-    stampEl.textContent = `Rev: 2026-09-03 14:54 NZST`;
+    stampEl.textContent = `Rev: 2026-09-03 15:02 NZST`;
   }
 }
 updateDynamicTimestamp();
@@ -1504,6 +1504,24 @@ function stopAllMedia() {
     const content = overlay.querySelector('[id^="expanded-content-"]');
     if (content) content.innerHTML = '';
   });
+}
+
+// Role Toggle with Mutual Exclusivity and Smooth Scroll to Top
+function toggleRole(event, element, roleKey) {
+  stopAllMedia();
+  
+  const content = document.getElementById(roleKey);
+  const isAlreadyOpen = content.classList.contains('show');
+
+  // Close all collapsible contents across the document
+  document.querySelectorAll('.collapsible-content').forEach(el => {
+    el.classList.remove('show');
+  });
+
+  if (!isAlreadyOpen) {
+    content.classList.add('show');
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
 // Play Inline Video with Strict Mutuality
@@ -1690,21 +1708,23 @@ let currentInstoreIndex = 0;
 
 function openInstoreLightbox(index) {
   currentInstoreIndex = index % instoreImagesData.length;
+  const item = instoreImagesData[currentInstoreIndex];
   const modal = document.getElementById('instoreLightboxModal');
   const imgEl = document.getElementById('instoreLightboxImg');
-  const captionEl = document.getElementById('instoreLightboxCaption');
-  
+  const capEl = document.getElementById('instoreLightboxCaption');
+
   if (modal && imgEl) {
-    const item = instoreImagesData[currentInstoreIndex];
     imgEl.src = item.src;
-    if (captionEl) captionEl.textContent = item.caption;
+    if (capEl) capEl.textContent = item.caption;
     modal.classList.add('active');
   }
 }
 
 function closeInstoreLightbox() {
   const modal = document.getElementById('instoreLightboxModal');
-  if (modal) modal.classList.remove('active');
+  if (modal) {
+    modal.classList.remove('active');
+  }
 }
 
 function navigateInstoreLightbox(direction, event) {
@@ -1712,89 +1732,74 @@ function navigateInstoreLightbox(direction, event) {
   currentInstoreIndex = (currentInstoreIndex + direction + instoreImagesData.length) % instoreImagesData.length;
   const item = instoreImagesData[currentInstoreIndex];
   const imgEl = document.getElementById('instoreLightboxImg');
-  const captionEl = document.getElementById('instoreLightboxCaption');
-  if (imgEl) imgEl.src = item.src;
-  if (captionEl) captionEl.textContent = item.caption;
+  const capEl = document.getElementById('instoreLightboxCaption');
+
+  if (imgEl) {
+    imgEl.src = item.src;
+    if (capEl) capEl.textContent = item.caption;
+  }
 }
 
 function handleLightboxBackdropClick(event) {
-  if (event.target === event.currentTarget) {
+  if (event.target.id === 'instoreLightboxModal') {
     closeInstoreLightbox();
   }
 }
 
-// General Modal Functions for Images
+// General Modal for Single Images
 function openModal(imgSrc) {
   const modal = document.getElementById('imgModal');
   const modalImg = document.getElementById('modalImg');
   if (modal && modalImg) {
-    modalImg.src = imgSrc;
     modal.style.display = 'flex';
+    modalImg.src = imgSrc;
   }
 }
 
 function closeModal() {
   const modal = document.getElementById('imgModal');
-  if (modal) modal.style.display = 'none';
-}
-
-// Collapsible Role Toggle Function with Mutuality
-function toggleRole(event, cardEl, roleId) {
-  if (event.target.closest('.collapsible-content') || event.target.closest('.portfolio-sub-section') || event.target.closest('.carousel-expanded-overlay') || event.target.closest('.radio-card-item') || event.target.closest('.video-thumbnail-card') || event.target.closest('.marquee-container') || event.target.closest('.instore-carousel-wrapper') || event.target.closest('.portfolio-image-btn')) {
-    return;
-  }
-
-  stopAllMedia();
-
-  const content = document.getElementById(roleId);
-  const wasShown = content.classList.contains('show');
-
-  document.querySelectorAll('.collapsible-content').forEach(el => {
-    el.classList.remove('show');
-  });
-
-  if (!wasShown) {
-    content.classList.add('show');
+  if (modal) {
+    modal.style.display = 'none';
   }
 }
 
-// Portfolio Toggle Functions for Role 1 and Role 4
+// Portfolio Toggle Buttons for Sub-sections
 function toggleDevilBurgerPortfolio(event) {
   if (event) event.stopPropagation();
-  const section = document.getElementById('devilBurgerPortfolioSection');
-  if (section) {
-    section.classList.toggle('show');
-    if (section.classList.contains('show')) {
-      section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  const sec = document.getElementById('devilBurgerPortfolioSection');
+  if (sec) {
+    sec.classList.toggle('show');
+    if (sec.classList.contains('show')) {
+      sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }
 }
 
 function toggleXcleanPortfolio(event) {
   if (event) event.stopPropagation();
-  const section = document.getElementById('xcleanPortfolioSection');
-  if (section) {
-    section.classList.toggle('show');
-    if (section.classList.contains('show')) {
-      section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  const sec = document.getElementById('xcleanPortfolioSection');
+  if (sec) {
+    sec.classList.toggle('show');
+    if (sec.classList.contains('show')) {
+      sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }
 }
 
 function toggleIseePortfolio(event) {
   if (event) event.stopPropagation();
-  const section = document.getElementById('iseeDigitalPortfolioSection');
-  if (section) {
-    section.classList.toggle('show');
-    if (section.classList.contains('show')) {
-      section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  const sec = document.getElementById('iseeDigitalPortfolioSection');
+  if (sec) {
+    sec.classList.toggle('show');
+    if (sec.classList.contains('show')) {
+      sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }
 }
 
-function openFullDetail(event, caseStudyName) {
+function openFullDetail(event, roleName) {
   if (event) event.stopPropagation();
-  alert("Opening full detailed case study for: " + caseStudyName + "\n(Detailed documentation view loaded)");
+  alert('Opening detailed case study and metrics for: ' + roleName);
 }
 </script>
 </body>
