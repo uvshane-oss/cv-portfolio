@@ -768,7 +768,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-04 05:21 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-04 05:45 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1473,14 +1473,103 @@ li { margin-bottom: 6px; font-size: 13px; }
 </div>
 
 <script>
+function closePortfolioMedia(sectionElement) {
+  if (!sectionElement) return;
+  sectionElement.querySelectorAll('video').forEach(video => {
+    video.pause();
+    video.currentTime = 0;
+  });
+  sectionElement.querySelectorAll('audio').forEach(audio => {
+    audio.pause();
+    audio.currentTime = 0;
+  });
+  sectionElement.querySelectorAll('.radio-card-item').forEach(card => {
+    card.classList.remove('is-playing');
+  });
+  sectionElement.querySelectorAll('.inline-video-player-container').forEach(container => {
+    container.classList.remove('active');
+  });
+  sectionElement.querySelectorAll('.carousel-expanded-overlay').forEach(overlay => {
+    overlay.classList.remove('active');
+    const content = overlay.querySelector('.inline-video-wrapper > div');
+    if (content) content.innerHTML = '';
+  });
+  if (document.fullscreenElement || document.webkitFullscreenElement) {
+    if (document.exitFullscreen) document.exitFullscreen();
+    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+  }
+}
+
+function toggleDevilBurgerPortfolio(event) {
+  event.stopPropagation();
+  const section = document.getElementById('devilBurgerPortfolioSection');
+  const btn = document.getElementById('devilBurgerPortfolioBtn');
+  const isOpen = section.classList.contains('show');
+  if (isOpen) {
+    closePortfolioMedia(section);
+    section.classList.remove('show');
+    if (btn) btn.classList.add('pulse-animation');
+  } else {
+    section.classList.add('show');
+    if (btn) btn.classList.remove('pulse-animation');
+    section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function toggleXcleanPortfolio(event) {
+  event.stopPropagation();
+  const section = document.getElementById('xcleanPortfolioSection');
+  const btn = document.getElementById('xcleanPortfolioBtn');
+  const isOpen = section.classList.contains('show');
+  if (isOpen) {
+    closePortfolioMedia(section);
+    section.classList.remove('show');
+    if (btn) btn.classList.add('pulse-animation');
+  } else {
+    section.classList.add('show');
+    if (btn) btn.classList.remove('pulse-animation');
+    section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function toggleIseePortfolio(event) {
+  event.stopPropagation();
+  const section = document.getElementById('iseeDigitalPortfolioSection');
+  const btn = document.getElementById('iseeDigitalPortfolioBtn');
+  const isOpen = section.classList.contains('show');
+  if (isOpen) {
+    closePortfolioMedia(section);
+    section.classList.remove('show');
+    if (btn) btn.classList.add('pulse-animation');
+  } else {
+    section.classList.add('show');
+    if (btn) btn.classList.remove('pulse-animation');
+    section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
 function toggleRole(event, cardElement, roleId) {
   event.stopPropagation();
   const content = document.getElementById(roleId);
   const isOpen = content.classList.contains('show');
   
-  // Close all roles
-  document.querySelectorAll('.collapsible-content').forEach(el => el.classList.remove('show'));
-  
+  document.querySelectorAll('.collapsible-content.show').forEach(el => {
+    el.querySelectorAll('.portfolio-sub-section.show').forEach(sub => {
+      closePortfolioMedia(sub);
+      sub.classList.remove('show');
+    });
+    el.querySelectorAll('video').forEach(v => { v.pause(); v.currentTime = 0; });
+    el.querySelectorAll('audio').forEach(a => { a.pause(); a.currentTime = 0; });
+    el.querySelectorAll('.radio-card-item').forEach(c => c.classList.remove('is-playing'));
+    el.querySelectorAll('.inline-video-player-container').forEach(c => c.classList.remove('active'));
+    el.querySelectorAll('.carousel-expanded-overlay').forEach(o => {
+      o.classList.remove('active');
+      const inner = o.querySelector('.inline-video-wrapper > div');
+      if (inner) inner.innerHTML = '';
+    });
+    el.classList.remove('show');
+  });
+
   if (!isOpen) {
     content.classList.add('show');
     setTimeout(() => {
@@ -1604,158 +1693,110 @@ function closeAllInlineVideos() {
   });
 }
 
-function toggleAudioCard(cardItem, event) {
-  event.stopPropagation();
-  const audio = cardItem.querySelector('audio');
-  if (!audio) return;
-  
-  pauseAllRole1Media(audio);
-
-  if (audio.paused) {
-    audio.play().then(() => {
-      cardItem.classList.add('is-playing');
-    }).catch(err => console.log(err));
-  } else {
+function pauseAllRole1Media(exceptElement) {
+  document.querySelectorAll('#role1 audio').forEach(audio => {
     audio.pause();
-    audio.currentTime = 0;
-    cardItem.classList.remove('is-playing');
-  }
-}
-
-function pauseAllRole1Media(activeMedia) {
-  const role1 = document.getElementById('role1');
-  if (!role1) return;
-
-  role1.querySelectorAll('audio').forEach(audio => {
-    if (audio !== activeMedia) {
-      audio.pause();
-      audio.currentTime = 0;
-      const card = audio.closest('.radio-card-item');
-      if (card) card.classList.remove('is-playing');
-    }
   });
-
-  role1.querySelectorAll('video').forEach(video => {
-    if (video !== activeMedia) {
+  document.querySelectorAll('#role1 .radio-card-item').forEach(card => {
+    card.classList.remove('is-playing');
+  });
+  document.querySelectorAll('#role1 video').forEach(video => {
+    if (video !== exceptElement) {
       video.pause();
     }
   });
-
-  // Also close active inline players in role1 if another media starts playing
-  if (activeMedia) {
-    const inline1 = document.getElementById('inlineVideo-role1');
-    const inlineWall = document.getElementById('inlineVideo-role1-wall');
-    if (activeMedia !== inline1 && inline1) {
-      closeInlineVideo('role1');
-    }
-    if (activeMedia !== inlineWall && inlineWall) {
-      closeInlineVideo('role1-wall');
-    }
-  }
 }
 
-function toggleDevilBurgerPortfolio(event) {
+function toggleAudioCard(cardElement, event) {
   event.stopPropagation();
-  const sec = document.getElementById('devilBurgerPortfolioSection');
-  const btn = document.getElementById('devilBurgerPortfolioBtn');
-  if (sec) {
-    sec.classList.toggle('show');
-    if (sec.classList.contains('show')) {
-      if (btn) btn.classList.remove('pulse-animation');
-      sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const audio = cardElement.querySelector('audio');
+  const isPlaying = cardElement.classList.contains('is-playing');
+  
+  document.querySelectorAll('.radio-card-item').forEach(item => {
+    item.classList.remove('is-playing');
+    const a = item.querySelector('audio');
+    if (a) {
+      a.pause();
+      a.currentTime = 0;
     }
-  }
-}
+  });
 
-function toggleXcleanPortfolio(event) {
-  event.stopPropagation();
-  const sec = document.getElementById('xcleanPortfolioSection');
-  if (sec) {
-    sec.classList.toggle('show');
-    if (sec.classList.contains('show')) {
-      sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }
-}
-
-function toggleIseePortfolio(event) {
-  event.stopPropagation();
-  const sec = document.getElementById('iseeDigitalPortfolioSection');
-  if (sec) {
-    sec.classList.toggle('show');
-    if (sec.classList.contains('show')) {
-      sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+  if (!isPlaying) {
+    cardElement.classList.add('is-playing');
+    audio.play().catch(e => console.log(e));
   }
 }
 
 function openModal(imgSrc) {
   const modal = document.getElementById('imageLightbox');
-  const img = document.getElementById('lightboxImg');
-  if (modal && img) {
-    img.src = imgSrc;
-    modal.classList.add('active');
-  }
+  const modalImg = document.getElementById('lightboxImg');
+  modalImg.src = imgSrc;
+  modal.classList.add('active');
 }
 
 function closeModal() {
   const modal = document.getElementById('imageLightbox');
-  if (modal) {
-    modal.classList.remove('active');
-  }
+  modal.classList.remove('active');
 }
 
 let currentInstoreIndex = 0;
 const instoreImages = [
-  "BB1758835159986.jpeg", "1758755805584.jpeg", "1758755929727.jpeg", "1758755954119.jpeg", "1758755979137.jpeg",
-  "BB1758835290442.jpeg", "1758756024609.jpeg", "1758756069198.jpeg", "1758756574017.jpeg", "1758756639804.jpeg",
-  "BB1758835313131.jpeg", "1758756679346.jpeg", "1758756712158.jpeg", "1758756759188.jpeg", "1758756798411.jpeg",
-  "BB1758835334807.jpeg", "1758756849533.jpeg", "1758756921948.jpeg", "1758756956376.jpeg", "1758756996703.jpeg",
-  "BB1758835159986.jpeg", "1758757029987.jpeg", "1758757078499.jpeg", "1758757119457.jpeg", "1758757157638.jpeg"
+  "BB1758835159986.jpeg",
+  "1758755805584.jpeg",
+  "1758755929727.jpeg",
+  "1758755954119.jpeg",
+  "1758755979137.jpeg",
+  "BB1758835290442.jpeg",
+  "1758756024609.jpeg",
+  "1758756069198.jpeg",
+  "1758756574017.jpeg",
+  "1758756639804.jpeg",
+  "BB1758835313131.jpeg",
+  "1758756679346.jpeg",
+  "1758756712158.jpeg",
+  "1758756759188.jpeg",
+  "1758756798411.jpeg",
+  "BB1758835334807.jpeg",
+  "1758756849533.jpeg",
+  "1758756921948.jpeg",
+  "1758756956376.jpeg",
+  "1758756996703.jpeg",
+  "BB1758835159986.jpeg",
+  "1758757029987.jpeg",
+  "1758757078499.jpeg",
+  "1758757119457.jpeg",
+  "1758757157638.jpeg"
 ];
 
 function openInstoreLightbox(index) {
   currentInstoreIndex = index;
   const modal = document.getElementById('instoreLightbox');
-  const img = document.getElementById('instoreLightboxImg');
-  if (modal && img) {
-    img.src = instoreImages[currentInstoreIndex];
-    modal.classList.add('active');
-  }
+  const modalImg = document.getElementById('instoreLightboxImg');
+  modalImg.src = instoreImages[currentInstoreIndex];
+  modal.classList.add('active');
 }
 
 function closeInstoreLightbox() {
   const modal = document.getElementById('instoreLightbox');
-  if (modal) {
-    modal.classList.remove('active');
-  }
+  modal.classList.remove('active');
 }
 
 function nextInstoreLightbox(event) {
   event.stopPropagation();
   currentInstoreIndex = (currentInstoreIndex + 1) % instoreImages.length;
-  const img = document.getElementById('instoreLightboxImg');
-  if (img) img.src = instoreImages[currentInstoreIndex];
+  document.getElementById('instoreLightboxImg').src = instoreImages[currentInstoreIndex];
 }
 
 function prevInstoreLightbox(event) {
   event.stopPropagation();
   currentInstoreIndex = (currentInstoreIndex - 1 + instoreImages.length) % instoreImages.length;
-  const img = document.getElementById('instoreLightboxImg');
-  if (img) img.src = instoreImages[currentInstoreIndex];
+  document.getElementById('instoreLightboxImg').src = instoreImages[currentInstoreIndex];
 }
 
 function openFullDetail(event, roleName) {
   event.stopPropagation();
-  alert('Opening detailed case study and operational report for: ' + roleName);
+  alert("Opening full detailed case study for: " + roleName);
 }
-
-window.addEventListener('DOMContentLoaded', () => {
-  const dbBtn = document.getElementById('devilBurgerPortfolioBtn');
-  if (dbBtn) {
-    dbBtn.classList.add('pulse-animation');
-  }
-});
 </script>
 </body>
 </html>
