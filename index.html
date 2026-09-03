@@ -768,7 +768,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 19:41 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-04 05:21 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1543,12 +1543,21 @@ function expandCarouselItem(event, roleId, type, src, captionText, itemElement) 
 
   let html = '';
   if (type === 'video') {
-    html = `<video src="${src}" controls autoplay playsinline webkit-playsinline></video>`;
+    html = `<video id="expandedVideo-${roleId}" src="${src}" controls autoplay playsinline webkit-playsinline></video>`;
   } else {
     html = `<img src="${src}" alt="${captionText}">`;
   }
   contentContainer.innerHTML = html;
   overlay.classList.add('active');
+
+  if (type === 'video' && roleId === 'role1') {
+    const expVid = document.getElementById(`expandedVideo-${roleId}`);
+    if (expVid) {
+      pauseAllRole1Media(expVid);
+      expVid.play().catch(e => console.log(e));
+    }
+  }
+
   overlay.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
@@ -1560,11 +1569,16 @@ function playInlineVideo(event, roleKey, videoSrc, titleText) {
   const titleEl = document.getElementById('inlineTitle-' + roleKey);
   
   if (playerContainer && videoEl) {
-    if (titleEl) titleEl.textContent = titleText;
     videoEl.src = videoSrc;
+    if (titleEl) titleEl.textContent = titleText;
     playerContainer.classList.add('active');
-    videoEl.play().catch(e => console.log("Autoplay prevented:", e));
-    playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    
+    if (roleKey === 'role1' || roleKey === 'role1-wall') {
+      pauseAllRole1Media(videoEl);
+    }
+
+    videoEl.play().catch(e => console.log(e));
+    playerContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }
 
@@ -1584,49 +1598,114 @@ function closeAllInlineVideos() {
   document.querySelectorAll('.inline-video-player-container').forEach(container => {
     container.classList.remove('active');
   });
-  document.querySelectorAll('.inline-video-wrapper video').forEach(vid => {
-    vid.pause();
-    vid.src = '';
+  document.querySelectorAll('.inline-video-player-container video').forEach(v => {
+    v.pause();
+    v.src = '';
   });
 }
 
-function toggleAudioCard(cardElement, event) {
+function toggleAudioCard(cardItem, event) {
   event.stopPropagation();
-  const audio = cardElement.querySelector('audio');
-  const isPlaying = cardElement.classList.contains('is-playing');
+  const audio = cardItem.querySelector('audio');
+  if (!audio) return;
   
-  // Pause all other audio
-  document.querySelectorAll('.radio-card-item').forEach(item => {
-    item.classList.remove('is-playing');
-    const a = item.querySelector('audio');
-    if (a) {
-      a.pause();
-      a.currentTime = 0;
+  pauseAllRole1Media(audio);
+
+  if (audio.paused) {
+    audio.play().then(() => {
+      cardItem.classList.add('is-playing');
+    }).catch(err => console.log(err));
+  } else {
+    audio.pause();
+    audio.currentTime = 0;
+    cardItem.classList.remove('is-playing');
+  }
+}
+
+function pauseAllRole1Media(activeMedia) {
+  const role1 = document.getElementById('role1');
+  if (!role1) return;
+
+  role1.querySelectorAll('audio').forEach(audio => {
+    if (audio !== activeMedia) {
+      audio.pause();
+      audio.currentTime = 0;
+      const card = audio.closest('.radio-card-item');
+      if (card) card.classList.remove('is-playing');
     }
   });
 
-  if (!isPlaying) {
-    cardElement.classList.add('is-playing');
-    audio.play().catch(e => console.log("Audio play blocked:", e));
-    audio.onended = () => {
-      cardElement.classList.remove('is-playing');
-    };
+  role1.querySelectorAll('video').forEach(video => {
+    if (video !== activeMedia) {
+      video.pause();
+    }
+  });
+
+  // Also close active inline players in role1 if another media starts playing
+  if (activeMedia) {
+    const inline1 = document.getElementById('inlineVideo-role1');
+    const inlineWall = document.getElementById('inlineVideo-role1-wall');
+    if (activeMedia !== inline1 && inline1) {
+      closeInlineVideo('role1');
+    }
+    if (activeMedia !== inlineWall && inlineWall) {
+      closeInlineVideo('role1-wall');
+    }
+  }
+}
+
+function toggleDevilBurgerPortfolio(event) {
+  event.stopPropagation();
+  const sec = document.getElementById('devilBurgerPortfolioSection');
+  const btn = document.getElementById('devilBurgerPortfolioBtn');
+  if (sec) {
+    sec.classList.toggle('show');
+    if (sec.classList.contains('show')) {
+      if (btn) btn.classList.remove('pulse-animation');
+      sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+}
+
+function toggleXcleanPortfolio(event) {
+  event.stopPropagation();
+  const sec = document.getElementById('xcleanPortfolioSection');
+  if (sec) {
+    sec.classList.toggle('show');
+    if (sec.classList.contains('show')) {
+      sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+}
+
+function toggleIseePortfolio(event) {
+  event.stopPropagation();
+  const sec = document.getElementById('iseeDigitalPortfolioSection');
+  if (sec) {
+    sec.classList.toggle('show');
+    if (sec.classList.contains('show')) {
+      sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 }
 
 function openModal(imgSrc) {
   const modal = document.getElementById('imageLightbox');
   const img = document.getElementById('lightboxImg');
-  img.src = imgSrc;
-  modal.classList.add('active');
+  if (modal && img) {
+    img.src = imgSrc;
+    modal.classList.add('active');
+  }
 }
 
 function closeModal() {
   const modal = document.getElementById('imageLightbox');
-  modal.classList.remove('active');
+  if (modal) {
+    modal.classList.remove('active');
+  }
 }
 
-// Instore lightboxes array
+let currentInstoreIndex = 0;
 const instoreImages = [
   "BB1758835159986.jpeg", "1758755805584.jpeg", "1758755929727.jpeg", "1758755954119.jpeg", "1758755979137.jpeg",
   "BB1758835290442.jpeg", "1758756024609.jpeg", "1758756069198.jpeg", "1758756574017.jpeg", "1758756639804.jpeg",
@@ -1635,57 +1714,48 @@ const instoreImages = [
   "BB1758835159986.jpeg", "1758757029987.jpeg", "1758757078499.jpeg", "1758757119457.jpeg", "1758757157638.jpeg"
 ];
 
-let currentInstoreIndex = 0;
-
 function openInstoreLightbox(index) {
   currentInstoreIndex = index;
   const modal = document.getElementById('instoreLightbox');
   const img = document.getElementById('instoreLightboxImg');
-  img.src = instoreImages[currentInstoreIndex];
-  modal.classList.add('active');
+  if (modal && img) {
+    img.src = instoreImages[currentInstoreIndex];
+    modal.classList.add('active');
+  }
 }
 
 function closeInstoreLightbox() {
   const modal = document.getElementById('instoreLightbox');
-  modal.classList.remove('active');
+  if (modal) {
+    modal.classList.remove('active');
+  }
 }
 
 function nextInstoreLightbox(event) {
   event.stopPropagation();
   currentInstoreIndex = (currentInstoreIndex + 1) % instoreImages.length;
   const img = document.getElementById('instoreLightboxImg');
-  img.src = instoreImages[currentInstoreIndex];
+  if (img) img.src = instoreImages[currentInstoreIndex];
 }
 
 function prevInstoreLightbox(event) {
   event.stopPropagation();
   currentInstoreIndex = (currentInstoreIndex - 1 + instoreImages.length) % instoreImages.length;
   const img = document.getElementById('instoreLightboxImg');
-  img.src = instoreImages[currentInstoreIndex];
-}
-
-function toggleDevilBurgerPortfolio(event) {
-  event.stopPropagation();
-  const section = document.getElementById('devilBurgerPortfolioSection');
-  section.classList.toggle('show');
-}
-
-function toggleXcleanPortfolio(event) {
-  event.stopPropagation();
-  const section = document.getElementById('xcleanPortfolioSection');
-  section.classList.toggle('show');
-}
-
-function toggleIseePortfolio(event) {
-  event.stopPropagation();
-  const section = document.getElementById('iseeDigitalPortfolioSection');
-  section.classList.toggle('show');
+  if (img) img.src = instoreImages[currentInstoreIndex];
 }
 
 function openFullDetail(event, roleName) {
   event.stopPropagation();
-  alert("Detailed case study view for " + roleName + " is currently loaded in interactive production mode.");
+  alert('Opening detailed case study and operational report for: ' + roleName);
 }
+
+window.addEventListener('DOMContentLoaded', () => {
+  const dbBtn = document.getElementById('devilBurgerPortfolioBtn');
+  if (dbBtn) {
+    dbBtn.classList.add('pulse-animation');
+  }
+});
 </script>
 </body>
 </html>
