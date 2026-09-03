@@ -693,7 +693,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 12:17 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 12:40 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1421,7 +1421,7 @@ function updateDynamicTimestamp() {
     const tzName = tzMatch ? tzMatch[1] : 'NZST';
     stampEl.textContent = `Rev: ${year}-${month}-${day} ${hour}:${minute} ${tzName}`;
   } catch (e) {
-    stampEl.textContent = `Rev: 2026-09-03 12:17 NZST`;
+    stampEl.textContent = `Rev: 2026-09-03 12:40 NZST`;
   }
 }
 updateDynamicTimestamp();
@@ -1536,13 +1536,41 @@ document.addEventListener('keydown', function(e) {
 function toggleRole(event, cardElement, roleId) {
   if (event.target.classList.contains('detail-link') || event.target.closest('.portfolio-btn-container') || event.target.closest('.marquee-container') || event.target.closest('.carousel-expanded-overlay') || event.target.closest('.radio-grid') || event.target.closest('.portfolio-sub-section') || event.target.closest('.inline-video-player-container') || event.target.closest('.instore-carousel-wrapper')) return;
   
-  stopAllMedia();
-
   const targetContent = document.getElementById(roleId);
   const isCurrentlyOpen = targetContent.classList.contains("show");
 
+  if (isCurrentlyOpen) {
+    // If the role card is being closed, stop all media inside it first
+    targetContent.querySelectorAll('video, audio').forEach(el => {
+      el.pause();
+      if (!el.closest('.video-thumbnail-card')) {
+        el.currentTime = 0;
+      }
+    });
+    targetContent.querySelectorAll('.radio-card-item').forEach(card => {
+      card.classList.remove('is-playing');
+    });
+    targetContent.querySelectorAll('.inline-video-player-container').forEach(container => {
+      container.classList.remove('active');
+      const vid = container.querySelector('video');
+      if (vid) {
+        vid.pause();
+        vid.src = '';
+      }
+    });
+    targetContent.querySelectorAll('.carousel-expanded-overlay').forEach(overlay => {
+      overlay.classList.remove('active');
+      const content = overlay.querySelector('[id^="expanded-content-"]');
+      if (content) content.innerHTML = '';
+    });
+  } else {
+    stopAllMedia();
+  }
+
   document.querySelectorAll('.collapsible-content').forEach(content => {
-    content.classList.remove('show');
+    if (content !== targetContent) {
+      content.classList.remove('show');
+    }
   });
   document.querySelectorAll('.portfolio-sub-section').forEach(sub => {
     sub.classList.remove('show');
@@ -1572,6 +1600,8 @@ function toggleRole(event, cardElement, roleId) {
       const xcleanBtn = document.getElementById('xcleanPortfolioBtn');
       if (xcleanBtn) xcleanBtn.classList.add('pulse-animation');
     }
+  } else {
+    targetContent.classList.remove("show");
   }
 }
 
@@ -1579,6 +1609,31 @@ function toggleDevilBurgerPortfolio(event) {
   event.stopPropagation();
   const section = document.getElementById('devilBurgerPortfolioSection');
   if (section) {
+    const isOpen = section.classList.contains('show');
+    if (isOpen) {
+      section.querySelectorAll('video, audio').forEach(el => {
+        el.pause();
+        if (!el.closest('.video-thumbnail-card')) {
+          el.currentTime = 0;
+        }
+      });
+      section.querySelectorAll('.radio-card-item').forEach(card => {
+        card.classList.remove('is-playing');
+      });
+      section.querySelectorAll('.inline-video-player-container').forEach(container => {
+        container.classList.remove('active');
+        const vid = container.querySelector('video');
+        if (vid) {
+          vid.pause();
+          vid.src = '';
+        }
+      });
+      section.querySelectorAll('.carousel-expanded-overlay').forEach(overlay => {
+        overlay.classList.remove('active');
+        const content = overlay.querySelector('[id^="expanded-content-"]');
+        if (content) content.innerHTML = '';
+      });
+    }
     section.classList.toggle('show');
   }
 }
@@ -1587,6 +1642,15 @@ function toggleXcleanPortfolio(event) {
   event.stopPropagation();
   const section = document.getElementById('xcleanPortfolioSection');
   if (section) {
+    const isOpen = section.classList.contains('show');
+    if (isOpen) {
+      section.querySelectorAll('video, audio').forEach(el => {
+        el.pause();
+        if (!el.closest('.video-thumbnail-card')) {
+          el.currentTime = 0;
+        }
+      });
+    }
     section.classList.toggle('show');
   }
 }
@@ -1595,6 +1659,15 @@ function toggleIseePortfolio(event) {
   event.stopPropagation();
   const section = document.getElementById('iseeDigitalPortfolioSection');
   if (section) {
+    const isOpen = section.classList.contains('show');
+    if (isOpen) {
+      section.querySelectorAll('video, audio').forEach(el => {
+        el.pause();
+        if (!el.closest('.video-thumbnail-card')) {
+          el.currentTime = 0;
+        }
+      });
+    }
     section.classList.toggle('show');
   }
 }
@@ -1686,6 +1759,12 @@ function openModal(imgSrc) {
 function closeModal() {
   const modal = document.getElementById('imgModal');
   modal.style.display = "none";
+}
+
+function openFullDetail(event, caseStudyName) {
+  event.stopPropagation();
+  stopAllMedia();
+  alert("Detailed case study view for: " + caseStudyName + " (Opening full report modal/page)");
 }
 </script>
 </body>
