@@ -693,7 +693,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 12:01 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 12:17 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1421,7 +1421,7 @@ function updateDynamicTimestamp() {
     const tzName = tzMatch ? tzMatch[1] : 'NZST';
     stampEl.textContent = `Rev: ${year}-${month}-${day} ${hour}:${minute} ${tzName}`;
   } catch (e) {
-    stampEl.textContent = `Rev: 2026-09-03 12:01 NZST`;
+    stampEl.textContent = `Rev: 2026-09-03 12:17 NZST`;
   }
 }
 updateDynamicTimestamp();
@@ -1575,6 +1575,30 @@ function toggleRole(event, cardElement, roleId) {
   }
 }
 
+function toggleDevilBurgerPortfolio(event) {
+  event.stopPropagation();
+  const section = document.getElementById('devilBurgerPortfolioSection');
+  if (section) {
+    section.classList.toggle('show');
+  }
+}
+
+function toggleXcleanPortfolio(event) {
+  event.stopPropagation();
+  const section = document.getElementById('xcleanPortfolioSection');
+  if (section) {
+    section.classList.toggle('show');
+  }
+}
+
+function toggleIseePortfolio(event) {
+  event.stopPropagation();
+  const section = document.getElementById('iseeDigitalPortfolioSection');
+  if (section) {
+    section.classList.toggle('show');
+  }
+}
+
 function playInlineVideo(event, roleKey, videoUrl, videoTitle) {
   event.stopPropagation();
   stopAllMedia();
@@ -1587,13 +1611,7 @@ function playInlineVideo(event, roleKey, videoUrl, videoTitle) {
     titleEl.textContent = videoTitle;
     videoEl.src = videoUrl;
     container.classList.add('active');
-    videoEl.play().then(() => {
-      if (videoEl.requestFullscreen) {
-        videoEl.requestFullscreen().catch(err => console.log("Fullscreen request failed:", err));
-      } else if (videoEl.webkitRequestFullscreen) {
-        videoEl.webkitRequestFullscreen();
-      }
-    }).catch(e => console.log("Autoplay prevented:", e));
+    videoEl.play().catch(e => console.log("Autoplay prevented:", e));
   }
 }
 
@@ -1668,11 +1686,6 @@ function openModal(imgSrc) {
 function closeModal() {
   const modal = document.getElementById('imgModal');
   modal.style.display = "none";
-}
-
-function openFullDetail(event, roleName) {
-  event.stopPropagation();
-  alert("Detailed case study view for " + roleName + " coming soon.");
 }
 </script>
 </body>
