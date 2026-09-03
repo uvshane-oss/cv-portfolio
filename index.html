@@ -742,7 +742,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 15:44 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 15:58 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -805,7 +805,7 @@ li { margin-bottom: 6px; font-size: 13px; }
         <div class="carousel-expanded-overlay" id="expanded-view-role1">
           <div class="expanded-controls-bar">
             <button id="fullscreen-toggle-btn" class="fullscreen-toggle-btn" onclick="toggleFullscreen('expanded-view-role1')">Go Fullscreen</button>
-            <button class="close-expanded-btn" onclick="closeCarouselExpanded('role1')">Close / Minimize</button>
+            <button id="close-expanded-btn" class="close-expanded-btn" onclick="handleExpandedClose('role1')">Close</button>
           </div>
           <div id="expanded-content-role1"></div>
         </div>
@@ -1365,7 +1365,7 @@ function updateDynamicTimestamp() {
     const nzString = `Rev: ${year}-${month}-${day} ${hour}:${minute} NZST`;
     stampEl.textContent = nzString;
   } catch (e) {
-    stampEl.textContent = "Rev: 2026-09-03 15:44 NZST";
+    stampEl.textContent = "Rev: 2026-09-03 15:58 NZST";
   }
 }
 updateDynamicTimestamp();
@@ -1376,7 +1376,6 @@ let currentActiveAudio = null;
 
 function stopAllMedia() {
   document.querySelectorAll('video, audio').forEach(el => {
-    // Do not disrupt media inside currently active expanded overlays or inline players during active viewing
     if (el.closest('.carousel-expanded-overlay.active') || el.closest('.inline-video-player-container.active')) {
       return;
     }
@@ -1394,7 +1393,6 @@ function stopAllMedia() {
 
 // Role toggle logic
 function toggleRole(event, cardElement, roleId) {
-  // Prevent closing when clicking inside content
   if (event.target.closest('.collapsible-content') && !event.target.classList.contains('role-card')) {
     return;
   }
@@ -1481,73 +1479,121 @@ function expandCarouselItem(event, roleKey, type, src, captionText, element) {
     vid.playsInline = true;
     vid.setAttribute('playsinline', '');
     vid.setAttribute('webkit-playsinline', '');
+    vid.style.maxWidth = '100%';
+    vid.style.maxHeight = '350px';
+    vid.style.display = 'block';
+    vid.style.margin = '0 auto';
     contentDiv.appendChild(vid);
-    vid.play().catch(err => console.log("Expanded video autoplay prevented:", err));
-  } else if (type === 'image') {
+  } else {
     const img = document.createElement('img');
     img.src = src;
-    img.alt = captionText;
+    img.style.maxWidth = '100%';
+    img.style.maxHeight = '350px';
+    img.style.objectFit = 'contain';
+    img.style.display = 'block';
+    img.style.margin = '0 auto';
     contentDiv.appendChild(img);
   }
-
   overlay.classList.add('active');
-  overlay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-function closeCarouselExpanded(roleKey) {
+function handleExpandedClose(roleKey) {
   const overlay = document.getElementById(`expanded-view-${roleKey}`);
   const contentDiv = document.getElementById(`expanded-content-${roleKey}`);
+  if (document.fullscreenElement || document.webkitFullscreenElement) {
+    if (document.exitFullscreen) {
+      document.exitFullscreen().catch(() => {});
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
   if (overlay) {
     overlay.classList.remove('active');
   }
   if (contentDiv) {
     contentDiv.innerHTML = '';
   }
-  // Exit fullscreen if active
-  if (document.fullscreenElement) {
-    document.exitFullscreen().catch(() => {});
-  }
 }
 
-// TARGETED FULLSCREEN FIX: Isolated fullscreen toggle without calling stopAllMedia()
-function toggleFullscreen(containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  
-  if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-    if (container.requestFullscreen) {
-      container.requestFullscreen().catch(err => console.log("Fullscreen request failed:", err));
-    } else if (container.webkitRequestFullscreen) {
-      container.webkitRequestFullscreen();
-    }
-  } else {
+function minimizeFullscreen() {
+  if (document.fullscreenElement || document.webkitFullscreenElement) {
     if (document.exitFullscreen) {
-      document.exitFullscreen().catch(err => console.log("Exit fullscreen failed:", err));
+      document.exitFullscreen().catch(() => {});
     } else if (document.webkitExitFullscreen) {
       document.webkitExitFullscreen();
     }
   }
 }
 
-// Audio Card Player Logic
-function toggleAudioCard(cardElement, event) {
-  event.stopPropagation();
-  const audio = cardElement.querySelector('audio');
-  if (!audio) return;
-
-  const isPlaying = cardElement.classList.contains('is-playing');
-  stopAllMedia();
-
-  if (!isPlaying) {
-    cardElement.classList.add('is-playing');
-    audio.play().catch(err => console.log("Audio play prevented:", err));
-    currentActiveAudio = audio;
+function toggleFullscreen(overlayId) {
+  const overlay = document.getElementById(overlayId);
+  if (!overlay) return;
+  
+  if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+    if (overlay.requestFullscreen) {
+      overlay.requestFullscreen().catch(err => console.log(err));
+    } else if (overlay.webkitRequestFullscreen) {
+      overlay.webkitRequestFullscreen();
+    }
+  } else {
+    minimizeFullscreen();
   }
 }
 
-// General Image Lightbox Modal
+document.addEventListener('fullscreenchange', updateFullscreenButton);
+document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+
+function updateFullscreenButton() {
+  const fsBtn = document.getElementById('fullscreen-toggle-btn');
+  const closeBtn = document.getElementById('close-expanded-btn');
+  if (!fsBtn) return;
+  
+  if (document.fullscreenElement || document.webkitFullscreenElement) {
+    fsBtn.textContent = 'Minimize';
+    fsBtn.onclick = minimizeFullscreen;
+    if (closeBtn) closeBtn.style.display = 'none';
+  } else {
+    fsBtn.textContent = 'Go Fullscreen';
+    fsBtn.onclick = function() { toggleFullscreen('expanded-view-role1'); };
+    if (closeBtn) closeBtn.style.display = 'inline-block';
+  }
+}
+
+function closeCarouselExpanded(roleKey) {
+  handleExpandedClose(roleKey);
+}
+
+// Radio Card Audio Playback Logic
+function toggleAudioCard(cardElement, event) {
+  event.stopPropagation();
+  const audioEl = cardElement.querySelector('audio');
+  if (!audioEl) return;
+
+  if (audioEl.paused) {
+    stopAllMedia();
+    audioEl.play().then(() => {
+      cardElement.classList.add('is-playing');
+      currentActiveAudio = audioEl;
+    }).catch(err => console.log("Audio playback error:", err));
+  } else {
+    audioEl.pause();
+    audioEl.currentTime = 0;
+    cardElement.classList.remove('is-playing');
+    if (currentActiveAudio === audioEl) {
+      currentActiveAudio = null;
+    }
+  }
+
+  audioEl.onended = function() {
+    cardElement.classList.remove('is-playing');
+    if (currentActiveAudio === audioEl) {
+      currentActiveAudio = null;
+    }
+  };
+}
+
+// General Modal Functions for Images
 function openModal(imgSrc) {
-  stopAllMedia();
   const modal = document.getElementById('imgModal');
   const modalImg = document.getElementById('modalImg');
   if (modal && modalImg) {
@@ -1563,46 +1609,45 @@ function closeModal() {
   }
 }
 
-// Instore Locations Lightbox Data & Logic
-const instoreLocations = [
-  { src: "BB1758835159986.jpeg", caption: "Outdoor Billboard BB1" },
-  { src: "1758755805584.jpeg", caption: "In-Store Location 1" },
-  { src: "1758755929727.jpeg", caption: "In-Store Location 2" },
-  { src: "1758755954119.jpeg", caption: "In-Store Location 3" },
-  { src: "1758755979137.jpeg", caption: "In-Store Location 4" },
-  { src: "BB1758835290442.jpeg", caption: "Outdoor Billboard BB2" },
-  { src: "1758756024609.jpeg", caption: "In-Store Location 5" },
-  { src: "1758756069198.jpeg", caption: "In-Store Location 6" },
-  { src: "1758756574017.jpeg", caption: "In-Store Location 7" },
-  { src: "1758756639804.jpeg", caption: "In-Store Location 8" },
-  { src: "BB1758835313131.jpeg", caption: "Outdoor Billboard BB3" },
-  { src: "1758756679346.jpeg", caption: "In-Store Location 9" },
-  { src: "1758756712158.jpeg", caption: "In-Store Location 10" },
-  { src: "1758756759188.jpeg", caption: "In-Store Location 11" },
-  { src: "1758756798411.jpeg", caption: "In-Store Location 12" },
-  { src: "BB1758835334807.jpeg", caption: "Outdoor Billboard BB4" },
-  { src: "1758756849533.jpeg", caption: "In-Store Location 13" },
-  { src: "1758756921948.jpeg", caption: "In-Store Location 14" },
-  { src: "1758756956376.jpeg", caption: "In-Store Location 15" },
-  { src: "1758756996703.jpeg", caption: "In-Store Location 16" },
-  { src: "BB1758835159986.jpeg", caption: "Outdoor Billboard BB1" },
-  { src: "1758757029987.jpeg", caption: "In-Store Location 17" },
-  { src: "1758757078499.jpeg", caption: "In-Store Location 18" },
-  { src: "1758757119457.jpeg", caption: "In-Store Location 19" },
-  { src: "1758757157638.jpeg", caption: "In-Store Location 20" }
+// Instore Locations Lightbox Gallery Array & Functions
+const instoreImages = [
+  { src: "BB1758835159986.jpeg", caption: "Outdoor Billboard Location 1" },
+  { src: "1758755805584.jpeg", caption: "In-Store Digital Display Location 1" },
+  { src: "1758755929727.jpeg", caption: "In-Store Digital Display Location 2" },
+  { src: "1758755954119.jpeg", caption: "In-Store Digital Display Location 3" },
+  { src: "1758755979137.jpeg", caption: "In-Store Digital Display Location 4" },
+  { src: "BB1758835290442.jpeg", caption: "Outdoor Billboard Location 2" },
+  { src: "1758756024609.jpeg", caption: "In-Store Digital Display Location 5" },
+  { src: "1758756069198.jpeg", caption: "In-Store Digital Display Location 6" },
+  { src: "1758756574017.jpeg", caption: "In-Store Digital Display Location 7" },
+  { src: "1758756639804.jpeg", caption: "In-Store Digital Display Location 8" },
+  { src: "BB1758835313131.jpeg", caption: "Outdoor Billboard Location 3" },
+  { src: "1758756679346.jpeg", caption: "In-Store Digital Display Location 9" },
+  { src: "1758756712158.jpeg", caption: "In-Store Digital Display Location 10" },
+  { src: "1758756759188.jpeg", caption: "In-Store Digital Display Location 11" },
+  { src: "1758756798411.jpeg", caption: "In-Store Digital Display Location 12" },
+  { src: "BB1758835334807.jpeg", caption: "Outdoor Billboard Location 4" },
+  { src: "1758756849533.jpeg", caption: "In-Store Digital Display Location 13" },
+  { src: "1758756921948.jpeg", caption: "In-Store Digital Display Location 14" },
+  { src: "1758756956376.jpeg", caption: "In-Store Digital Display Location 15" },
+  { src: "1758756996703.jpeg", caption: "In-Store Digital Display Location 16" },
+  { src: "BB1758835159986.jpeg", caption: "Outdoor Billboard Location 1" },
+  { src: "1758757029987.jpeg", caption: "In-Store Digital Display Location 17" },
+  { src: "1758757078499.jpeg", caption: "In-Store Digital Display Location 18" },
+  { src: "1758757119457.jpeg", caption: "In-Store Digital Display Location 19" },
+  { src: "1758757157638.jpeg", caption: "In-Store Digital Display Location 20" }
 ];
 
-let currentInstoreIndex = 0;
+let currentLightboxIndex = 0;
 
 function openInstoreLightbox(index) {
-  stopAllMedia();
-  currentInstoreIndex = index;
+  currentLightboxIndex = index;
   const modal = document.getElementById('instoreLightboxModal');
-  const img = document.getElementById('instoreLightboxImg');
-  const caption = document.getElementById('instoreLightboxCaption');
-  if (modal && img && instoreLocations[index]) {
-    img.src = instoreLocations[index].src;
-    caption.textContent = instoreLocations[index].caption;
+  const imgEl = document.getElementById('instoreLightboxImg');
+  const captionEl = document.getElementById('instoreLightboxCaption');
+  if (modal && imgEl && captionEl) {
+    imgEl.src = instoreImages[index].src;
+    captionEl.textContent = instoreImages[index].caption;
     modal.classList.add('active');
   }
 }
@@ -1614,26 +1659,32 @@ function closeInstoreLightbox() {
   }
 }
 
-function navigateInstoreLightbox(direction, event) {
-  event.stopPropagation();
-  currentInstoreIndex += direction;
-  if (currentInstoreIndex < 0) {
-    currentInstoreIndex = instoreLocations.length - 1;
-  } else if (currentInstoreIndex >= instoreLocations.length) {
-    currentInstoreIndex = 0;
-  }
-  const img = document.getElementById('instoreLightboxImg');
-  const caption = document.getElementById('instoreLightboxCaption');
-  if (img && instoreLocations[currentInstoreIndex]) {
-    img.src = instoreLocations[currentInstoreIndex].src;
-    caption.textContent = instoreLocations[currentInstoreIndex].caption;
-  }
-}
-
 function handleLightboxBackdropClick(event) {
   if (event.target.id === 'instoreLightboxModal') {
     closeInstoreLightbox();
   }
+}
+
+function navigateInstoreLightbox(direction, event) {
+  event.stopPropagation();
+  currentLightboxIndex += direction;
+  if (currentLightboxIndex < 0) {
+    currentLightboxIndex = instoreImages.length - 1;
+  } else if (currentLightboxIndex >= instoreImages.length) {
+    currentLightboxIndex = 0;
+  }
+  const imgEl = document.getElementById('instoreLightboxImg');
+  const captionEl = document.getElementById('instoreLightboxCaption');
+  if (imgEl && captionEl) {
+    imgEl.src = instoreImages[currentLightboxIndex].src;
+    captionEl.textContent = instoreImages[currentLightboxIndex].caption;
+  }
+}
+
+// Detailed Case Study Stub Function
+function openFullDetail(event, caseTitle) {
+  event.stopPropagation();
+  alert(`Loading comprehensive case study and supporting documentation for: ${caseTitle}`);
 }
 </script>
 </body>
