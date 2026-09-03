@@ -744,7 +744,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 16:10 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 16:37 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -777,7 +777,7 @@ li { margin-bottom: 6px; font-size: 13px; }
       <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 8px 0;">Alice & Tim discuss working with Shane (Tap to play inline)</p>
       
       <!-- Inline Embedded Video Player Slot for Role 1 -->
-      <div id="inlinePlayer-role1" class="inline-video-player-container">
+      <div id="inlinePlayer-role1" class="inline-video-player-container" onclick="event.stopPropagation();">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role1')">Close / Stop</button>
         <div id="inlineTitle-role1" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
@@ -804,14 +804,14 @@ li { margin-bottom: 6px; font-size: 13px; }
 
       <div id="devilBurgerPortfolioSection" class="portfolio-sub-section">
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Social Media Advertising</h4>
-        <div class="carousel-expanded-overlay" id="expanded-view-role1">
+        <div class="carousel-expanded-overlay" id="expanded-view-role1" onclick="event.stopPropagation();">
           <div class="expanded-controls-bar">
             <button id="fullscreen-toggle-btn" class="fullscreen-toggle-btn" onclick="toggleFullscreen('role1')">Go Fullscreen</button>
             <button class="close-expanded-btn" onclick="closeCarouselExpanded('role1')">Close / Minimize</button>
           </div>
           <div id="expanded-content-role1"></div>
         </div>
-        <div class="marquee-container" id="marquee-role1">
+        <div class="marquee-container" id="marquee-role1" onclick="event.stopPropagation();">
           <div class="marquee-track">
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1', this)">
               <video src="social media 1.mp4#t=3" poster="social media 1_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
@@ -842,7 +842,7 @@ li { margin-bottom: 6px; font-size: 13px; }
         </div>
 
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Radio produced and voiced by Shane</h4>
-        <div class="radio-grid">
+        <div class="radio-grid" onclick="event.stopPropagation();">
           <div class="radio-card-item" onclick="toggleAudioCard(this, event)">
             <audio preload="none"><source src="Radio DEVILSTAIRCASE_FRIDAY.wav" type="audio/wav">Your browser does not support the audio element.</audio>
             <div class="equalizer-overlay"><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div></div>
@@ -873,7 +873,7 @@ li { margin-bottom: 6px; font-size: 13px; }
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Midway through video wall installation</h4>
         
         <!-- Inline Embedded Video Player Slot for Video Wall -->
-        <div id="inlinePlayer-role1-wall" class="inline-video-player-container">
+        <div id="inlinePlayer-role1-wall" class="inline-video-player-container" onclick="event.stopPropagation();">
           <button class="close-inline-video-btn" onclick="closeInlineVideo('role1-wall')">Close / Stop</button>
           <div id="inlineTitle-role1-wall" class="inline-video-title">Now Playing</div>
           <div class="inline-video-wrapper">
@@ -918,7 +918,7 @@ li { margin-bottom: 6px; font-size: 13px; }
       </ul>
       
       <!-- Inline Embedded Video Player Slot for Role 2 -->
-      <div id="inlinePlayer-role2" class="inline-video-player-container">
+      <div id="inlinePlayer-role2" class="inline-video-player-container" onclick="event.stopPropagation();">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role2')">Close / Stop</button>
         <div id="inlineTitle-role2" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
@@ -989,7 +989,7 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Managed global procurement from Germany, Japan, and China.</li>
       </ul>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Supporting Portfolio</h4>
-      <div class="marquee-container">
+      <div class="marquee-container" onclick="event.stopPropagation();">
         <div class="marquee-track">
           <div class="marquee-item" onclick="openModal('Screen end & projector.jpg')"><img src="Screen end & projector.jpg" alt="Screen end & projector" width="260" height="160"></div>
           <div class="marquee-item" onclick="openModal('Screen side.jpg')"><img src="Screen side.jpg" alt="Screen side" width="260" height="160"></div>
@@ -1025,7 +1025,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 
       <!-- Sample of Instore & Outdoor locations -->
       <h4 style="margin: 20px 0 10px 0; font-size: 15px; color: var(--primary);">Sample of Instore & Outdoor locations</h4>
-      <div class="instore-carousel-wrapper" id="instoreMarquee">
+      <div class="instore-carousel-wrapper" id="instoreMarquee" onclick="event.stopPropagation();">
         <div class="instore-carousel-track" id="instoreCarouselTrack">
           <!-- Alternating Sequence: 1 BB file followed by 4 existing reel files, repeating to cover all items -->
           <!-- Cycle 1 -->
@@ -1210,7 +1210,7 @@ li { margin-bottom: 6px; font-size: 13px; }
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Shorts & Video Showcases:</h4>
       
       <!-- Inline Embedded Video Player Slot for Role 4 -->
-      <div id="inlinePlayer-role4" class="inline-video-player-container">
+      <div id="inlinePlayer-role4" class="inline-video-player-container" onclick="event.stopPropagation();">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role4')">Close / Stop</button>
         <div id="inlineTitle-role4" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
@@ -1261,7 +1261,7 @@ li { margin-bottom: 6px; font-size: 13px; }
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonial : Glen : Franchise Owner discusses working with Shane .</h4>
       
       <!-- Inline Embedded Video Player Slot for Role 5 -->
-      <div id="inlinePlayer-role5" class="inline-video-player-container">
+      <div id="inlinePlayer-role5" class="inline-video-player-container" onclick="event.stopPropagation();">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role5')">Close / Stop</button>
         <div id="inlineTitle-role5" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
@@ -1300,7 +1300,7 @@ li { margin-bottom: 6px; font-size: 13px; }
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonial : Bruce : Sky Regional manager discusses working with Shane .</h4>
       
       <!-- Inline Embedded Video Player Slot for Role 6 -->
-      <div id="inlinePlayer-role6" class="inline-video-player-container">
+      <div id="inlinePlayer-role6" class="inline-video-player-container" onclick="event.stopPropagation();">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role6')">Close / Stop</button>
         <div id="inlineTitle-role6" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
@@ -1338,7 +1338,7 @@ li { margin-bottom: 6px; font-size: 13px; }
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials : Alana & Jenna discuss working with Shane .</h4>
       
       <!-- Inline Embedded Video Player Slot for Role 7 -->
-      <div id="inlinePlayer-role7" class="inline-video-player-container">
+      <div id="inlinePlayer-role7" class="inline-video-player-container" onclick="event.stopPropagation();">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role7')">Close / Stop</button>
         <div id="inlineTitle-role7" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
@@ -1406,7 +1406,7 @@ li { margin-bottom: 6px; font-size: 13px; }
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonial : Mike Regional Manager discusses working with Shane .</h4>
       
       <!-- Inline Embedded Video Player Slot for Role 9 -->
-      <div id="inlinePlayer-role9" class="inline-video-player-container">
+      <div id="inlinePlayer-role9" class="inline-video-player-container" onclick="event.stopPropagation();">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role9')">Close / Stop</button>
         <div id="inlineTitle-role9" class="inline-video-title">Now Playing</div>
         <div class="inline-video-wrapper">
@@ -1475,11 +1475,36 @@ function updateDynamicTimestamp() {
     const tzName = tzMatch ? tzMatch[1] : 'NZST';
     stampEl.textContent = `Rev: ${year}-${month}-${day} ${hour}:${minute} ${tzName}`;
   } catch (e) {
-    stampEl.textContent = `Rev: 2026-09-03 16:10 NZST`;
+    stampEl.textContent = `Rev: 2026-09-03 16:37 NZST`;
   }
 }
 updateDynamicTimestamp();
 setInterval(updateDynamicTimestamp, 60000);
+
+// Explicit Portfolio Toggle Functions with event propagation halt
+function toggleDevilBurgerPortfolio(event) {
+  if (event) event.stopPropagation();
+  const section = document.getElementById('devilBurgerPortfolioSection');
+  if (section) {
+    section.classList.toggle('show');
+  }
+}
+
+function toggleXcleanPortfolio(event) {
+  if (event) event.stopPropagation();
+  const section = document.getElementById('xcleanPortfolioSection');
+  if (section) {
+    section.classList.toggle('show');
+  }
+}
+
+function toggleIseePortfolio(event) {
+  if (event) event.stopPropagation();
+  const section = document.getElementById('iseeDigitalPortfolioSection');
+  if (section) {
+    section.classList.toggle('show');
+  }
+}
 
 // Global Stop Function Refactored for Non-Destructive Suspension
 function stopAllMedia() {
@@ -1614,109 +1639,147 @@ function toggleAudioCard(cardElement, event) {
   }
 }
 
-// Stabilized Expand Marquee Item with Robust Promise Handling
-function expandCarouselItem(event, roleKey, type, sourceFile, titleText, itemEl) {
+// Carousel expansion handler with event propagation isolation
+function expandCarouselItem(event, roleKey, type, src, caption, element) {
   if (event) event.stopPropagation();
-  stopAllMedia();
-
   const overlay = document.getElementById('expanded-view-' + roleKey);
   const contentContainer = document.getElementById('expanded-content-' + roleKey);
   if (!overlay || !contentContainer) return;
 
   contentContainer.innerHTML = '';
-
   if (type === 'video') {
     const vid = document.createElement('video');
-    vid.src = sourceFile;
+    vid.src = src;
     vid.controls = true;
     vid.autoplay = true;
     vid.playsInline = true;
-    vid.setAttribute('playsinline', '');
     vid.setAttribute('webkit-playsinline', '');
-
-    if (itemEl) {
-      const sourceVideo = itemEl.querySelector('video');
-      if (sourceVideo) {
-        const posterAttr = sourceVideo.getAttribute('poster');
-        if (posterAttr) {
-          vid.setAttribute('poster', posterAttr);
-          vid.poster = posterAttr;
-        }
-      }
-    }
-
     contentContainer.appendChild(vid);
-    const playPromise = vid.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(err => console.log("Expanded video play promise catch:", err));
-    }
-  } else if (type === 'image') {
+  } else {
     const img = document.createElement('img');
-    img.src = sourceFile;
-    img.alt = titleText || 'Expanded Asset';
+    img.src = src;
+    img.alt = caption;
     contentContainer.appendChild(img);
   }
-
   overlay.classList.add('active');
-  overlay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function closeCarouselExpanded(roleKey) {
   const overlay = document.getElementById('expanded-view-' + roleKey);
   if (overlay) {
-    if (document.fullscreenElement || document.webkitFullscreenElement) {
-      if (document.exitFullscreen) {
-        document.exitFullscreen().catch(err => console.log("Exit fullscreen error:", err));
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      }
-    }
     overlay.classList.remove('active');
-    const content = overlay.querySelector('[id^="expanded-content-"]');
-    if (content) content.innerHTML = '';
+    const content = document.getElementById('expanded-content-' + roleKey);
+    if (content) {
+      content.querySelectorAll('video').forEach(v => v.pause());
+      content.innerHTML = '';
+    }
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    }
   }
 }
 
-// Stabilized Fullscreen Toggle Handler
 function toggleFullscreen(roleKey) {
-  const overlayContainer = document.getElementById('expanded-view-' + roleKey);
-  const fullscreenBtn = document.getElementById('fullscreen-toggle-btn');
-  if (!overlayContainer) return;
-
+  const overlay = document.getElementById('expanded-view-' + roleKey);
+  if (!overlay) return;
   if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-    const requestPromise = overlayContainer.requestFullscreen ? overlayContainer.requestFullscreen() : (overlayContainer.webkitRequestFullscreen ? overlayContainer.webkitRequestFullscreen() : Promise.resolve());
-    if (requestPromise && requestPromise.catch) {
-      requestPromise.catch(err => console.log("Fullscreen request error:", err));
-    }
-    if (fullscreenBtn) fullscreenBtn.textContent = 'Go Small';
+    if (overlay.requestFullscreen) overlay.requestFullscreen();
+    else if (overlay.webkitRequestFullscreen) overlay.webkitRequestFullscreen();
   } else {
-    const exitPromise = document.exitFullscreen ? document.exitFullscreen() : (document.webkitExitFullscreen ? document.webkitExitFullscreen() : Promise.resolve());
-    if (exitPromise && exitPromise.catch) {
-      exitPromise.catch(err => console.log("Exit fullscreen error:", err));
-    }
-    if (fullscreenBtn) fullscreenBtn.textContent = 'Go Fullscreen';
+    if (document.exitFullscreen) document.exitFullscreen();
+    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
   }
 }
 
-document.addEventListener('fullscreenchange', () => {
-  const fullscreenBtn = document.getElementById('fullscreen-toggle-btn');
-  if (!fullscreenBtn) return;
-  if (!document.fullscreenElement) {
-    fullscreenBtn.textContent = 'Go Fullscreen';
-  } else {
-    fullscreenBtn.textContent = 'Go Small';
+// Lightbox functions for general images
+function openModal(imgSrc) {
+  const modal = document.getElementById('imgModal');
+  const modalImg = document.getElementById('modalImg');
+  if (modal && modalImg) {
+    modalImg.src = imgSrc;
+    modal.style.display = 'flex';
   }
-});
+}
 
-document.addEventListener('webkitfullscreenchange', () => {
-  const fullscreenBtn = document.getElementById('fullscreen-toggle-btn');
-  if (!fullscreenBtn) return;
-  if (!document.webkitFullscreenElement) {
-    fullscreenBtn.textContent = 'Go Fullscreen';
-  } else {
-    fullscreenBtn.textContent = 'Go Small';
+function closeModal() {
+  const modal = document.getElementById('imgModal');
+  if (modal) {
+    modal.style.display = 'none';
   }
-});
+}
+
+// Instore carousel lightbox array and functions
+const instoreImages = [
+  {src: "BB1758835159986.jpeg", caption: "Outdoor Billboard BB1"},
+  {src: "1758755805584.jpeg", caption: "Location 1"},
+  {src: "1758755929727.jpeg", caption: "Location 2"},
+  {src: "1758755954119.jpeg", caption: "Location 3"},
+  {src: "1758755979137.jpeg", caption: "Location 4"},
+  {src: "BB1758835290442.jpeg", caption: "Outdoor Billboard BB2"},
+  {src: "1758756024609.jpeg", caption: "Location 5"},
+  {src: "1758756069198.jpeg", caption: "Location 6"},
+  {src: "1758756574017.jpeg", caption: "Location 7"},
+  {src: "1758756639804.jpeg", caption: "Location 8"},
+  {src: "BB1758835313131.jpeg", caption: "Outdoor Billboard BB3"},
+  {src: "1758756679346.jpeg", caption: "Location 9"},
+  {src: "1758756712158.jpeg", caption: "Location 10"},
+  {src: "1758756759188.jpeg", caption: "Location 11"},
+  {src: "1758756798411.jpeg", caption: "Location 12"},
+  {src: "BB1758835334807.jpeg", caption: "Outdoor Billboard BB4"},
+  {src: "1758756849533.jpeg", caption: "Location 13"},
+  {src: "1758756921948.jpeg", caption: "Location 14"},
+  {src: "1758756956376.jpeg", caption: "Location 15"},
+  {src: "1758756996703.jpeg", caption: "Location 16"},
+  {src: "BB1758835159986.jpeg", caption: "Outdoor Billboard BB1"},
+  {src: "1758757029987.jpeg", caption: "Location 17"},
+  {src: "1758757078499.jpeg", caption: "Location 18"},
+  {src: "1758757119457.jpeg", caption: "Location 19"},
+  {src: "1758757157638.jpeg", caption: "Location 20"}
+];
+let currentInstoreIndex = 0;
+
+function openInstoreLightbox(index) {
+  currentInstoreIndex = index % instoreImages.length;
+  const modal = document.getElementById('instoreLightboxModal');
+  const imgEl = document.getElementById('instoreLightboxImg');
+  const captionEl = document.getElementById('instoreLightboxCaption');
+  if (modal && imgEl) {
+    imgEl.src = instoreImages[currentInstoreIndex].src;
+    if (captionEl) captionEl.textContent = instoreImages[currentInstoreIndex].caption;
+    modal.classList.add('active');
+  }
+}
+
+function closeInstoreLightbox() {
+  const modal = document.getElementById('instoreLightboxModal');
+  if (modal) {
+    modal.classList.remove('active');
+  }
+}
+
+function handleLightboxBackdropClick(event) {
+  if (event.target.id === 'instoreLightboxModal') {
+    closeInstoreLightbox();
+  }
+}
+
+function navigateInstoreLightbox(direction, event) {
+  if (event) event.stopPropagation();
+  currentInstoreIndex = (currentInstoreIndex + direction + instoreImages.length) % instoreImages.length;
+  const imgEl = document.getElementById('instoreLightboxImg');
+  const captionEl = document.getElementById('instoreLightboxCaption');
+  if (imgEl) {
+    imgEl.src = instoreImages[currentInstoreIndex].src;
+    if (captionEl) captionEl.textContent = instoreImages[currentInstoreIndex].caption;
+  }
+}
+
+// Stub for detail link
+function openFullDetail(event, roleName) {
+  if (event) event.stopPropagation();
+  alert('Detailed case study view for: ' + roleName);
+}
 </script>
 </body>
 </html>
