@@ -546,34 +546,67 @@ li { margin-bottom: 6px; font-size: 13px; }
   display: block;
   border-radius: 4px;
 }
-.carousel-control-bar {
+/* Fullscreen styling for expanded overlay container */
+.carousel-expanded-overlay:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+  background: #111;
+  z-index: 99999;
 }
-.close-expanded-btn {
+.carousel-expanded-overlay:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+  background: #111;
+  z-index: 99999;
+}
+.carousel-expanded-overlay:fullscreen video,
+.carousel-expanded-overlay:fullscreen img {
+  max-height: 80vh;
+}
+.carousel-expanded-overlay:-webkit-full-screen video,
+.carousel-expanded-overlay:-webkit-full-screen img {
+  max-height: 80vh;
+}
+
+.expanded-controls-bar {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  gap: 8px;
+  z-index: 99999;
+}
+.close-expanded-btn, .fullscreen-toggle-btn {
   background: var(--accent);
   color: #fff;
   border: none;
-  padding: 5px 10px;
+  padding: 6px 12px;
   font-size: 12px;
+  font-weight: bold;
   border-radius: 4px;
   cursor: pointer;
+  z-index: 99999;
 }
 .fullscreen-toggle-btn {
   background: var(--highlight-blue);
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  font-size: 12px;
-  border-radius: 4px;
-  cursor: pointer;
 }
-.fullscreen-toggle-btn:hover {
-  background: #1e40af;
-}
+
 /* Fullscreen Modal for Images */
 .img-modal {
   display: none;
@@ -709,7 +742,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 13:33 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 14:06 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -770,37 +803,37 @@ li { margin-bottom: 6px; font-size: 13px; }
       <div id="devilBurgerPortfolioSection" class="portfolio-sub-section">
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Social Media Advertising</h4>
         <div class="carousel-expanded-overlay" id="expanded-view-role1">
-          <div class="carousel-control-bar">
-            <button class="fullscreen-toggle-btn" id="fullscreen-toggle-role1" onclick="toggleItemFullscreen('role1')">Go Fullscreen</button>
+          <div class="expanded-controls-bar">
+            <button id="fullscreen-toggle-btn" class="fullscreen-toggle-btn" onclick="toggleFullscreen('role1')">Go Fullscreen</button>
             <button class="close-expanded-btn" onclick="closeCarouselExpanded('role1')">Close / Minimize</button>
           </div>
           <div id="expanded-content-role1"></div>
         </div>
         <div class="marquee-container" id="marquee-role1">
           <div class="marquee-track">
-            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1', this)">
               <video src="social media 1.mp4#t=3" poster="social media 1_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
             </div>
-            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 2.mp4', 'Social Media Campaign 2')">
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 2.mp4', 'Social Media Campaign 2', this)">
               <video src="social media 2.mp4#t=1" poster="social media 2_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
             </div>
-            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 3.mp4', 'Social Media Campaign 3')">
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 3.mp4', 'Social Media Campaign 3', this)">
               <video src="social media 3.mp4#t=1" poster="social media 3_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
             </div>
-            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 4.mp4', 'Social Media Campaign 4')">
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 4.mp4', 'Social Media Campaign 4', this)">
               <video src="social media 4.mp4#t=3" poster="social media 4_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
             </div>
-            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'image', 'social media carosel.jpg', 'Social Media Carousel Assets')">
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'image', 'social media carosel.jpg', 'Social Media Carousel Assets', this)">
               <img src="social media carosel.jpg" alt="Social Media Carousel" width="260" height="160">
             </div>
-            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'image', 'summer promotion.jpg', 'Summer Promotion Artwork')">
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'image', 'summer promotion.jpg', 'Summer Promotion Artwork', this)">
               <img src="summer promotion.jpg" alt="Summer Promo Campaign" width="260" height="160">
             </div>
             <!-- Duplicated loop for smooth infinite scroll -->
-            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1', this)">
               <video src="social media 1.mp4#t=3" poster="social media 1_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
             </div>
-            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 4.mp4', 'Social Media Campaign 4')">
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 4.mp4', 'Social Media Campaign 4', this)">
               <video src="social media 4.mp4#t=3" poster="social media 4_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
             </div>
           </div>
@@ -1440,7 +1473,7 @@ function updateDynamicTimestamp() {
     const tzName = tzMatch ? tzMatch[1] : 'NZST';
     stampEl.textContent = `Rev: ${year}-${month}-${day} ${hour}:${minute} ${tzName}`;
   } catch (e) {
-    stampEl.textContent = `Rev: 2026-09-03 13:33 NZST`;
+    stampEl.textContent = `Rev: 2026-09-03 14:06 NZST`;
   }
 }
 updateDynamicTimestamp();
@@ -1471,6 +1504,157 @@ function stopAllMedia() {
     if (content) content.innerHTML = '';
   });
 }
+
+// Play Inline Video with Strict Mutuality
+function playInlineVideo(event, roleKey, videoSrc, titleText) {
+  if (event) event.stopPropagation();
+  stopAllMedia();
+
+  const container = document.getElementById('inlinePlayer-' + roleKey);
+  const videoEl = document.getElementById('inlineVideo-' + roleKey);
+  const titleEl = document.getElementById('inlineTitle-' + roleKey);
+
+  if (container && videoEl) {
+    if (titleEl) titleEl.textContent = titleText || 'Now Playing';
+    videoEl.src = videoSrc;
+    container.classList.add('active');
+    videoEl.play().catch(err => console.log("Autoplay prevented:", err));
+  }
+}
+
+function closeInlineVideo(roleKey) {
+  const container = document.getElementById('inlinePlayer-' + roleKey);
+  if (container) {
+    container.classList.remove('active');
+    const videoEl = container.querySelector('video');
+    if (videoEl) {
+      videoEl.pause();
+      videoEl.src = '';
+    }
+  }
+}
+
+// Toggle Audio Card with Strict Mutuality
+function toggleAudioCard(cardElement, event) {
+  if (event) event.stopPropagation();
+  const audioEl = cardElement.querySelector('audio');
+  if (!audioEl) return;
+
+  const isPlaying = cardElement.classList.contains('is-playing');
+  stopAllMedia();
+
+  if (!isPlaying) {
+    cardElement.classList.add('is-playing');
+    audioEl.play().catch(err => {
+      console.log("Audio play error:", err);
+      cardElement.classList.remove('is-playing');
+    });
+  }
+}
+
+// Expand Marquee Item (Non-Destructive Poster Preservation & Mutuality)
+function expandCarouselItem(event, roleKey, type, sourceFile, titleText, itemEl) {
+  if (event) event.stopPropagation();
+  stopAllMedia();
+
+  const overlay = document.getElementById('expanded-view-' + roleKey);
+  const contentContainer = document.getElementById('expanded-content-' + roleKey);
+  if (!overlay || !contentContainer) return;
+
+  contentContainer.innerHTML = '';
+
+  if (type === 'video') {
+    const vid = document.createElement('video');
+    vid.src = sourceFile;
+    vid.controls = true;
+    vid.autoplay = true;
+    vid.playsInline = true;
+    vid.setAttribute('playsinline', '');
+    vid.setAttribute('webkit-playsinline', '');
+
+    // Preserve poster attribute from source marquee item if available
+    if (itemEl) {
+      const sourceVideo = itemEl.querySelector('video');
+      if (sourceVideo) {
+        const posterAttr = sourceVideo.getAttribute('poster');
+        if (posterAttr) {
+          vid.setAttribute('poster', posterAttr);
+          vid.poster = posterAttr;
+        }
+      }
+    }
+
+    contentContainer.appendChild(vid);
+    vid.play().catch(err => console.log("Expanded video autoplay prevented:", err));
+  } else if (type === 'image') {
+    const img = document.createElement('img');
+    img.src = sourceFile;
+    img.alt = titleText || 'Expanded Asset';
+    contentContainer.appendChild(img);
+  }
+
+  overlay.classList.add('active');
+  overlay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function closeCarouselExpanded(roleKey) {
+  const overlay = document.getElementById('expanded-view-' + roleKey);
+  if (overlay) {
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
+    overlay.classList.remove('active');
+    const content = overlay.querySelector('[id^="expanded-content-"]');
+    if (content) content.innerHTML = '';
+  }
+}
+
+// Fullscreen Toggle and Persistence Handler for Expanded View
+function toggleFullscreen(roleKey) {
+  const overlayContainer = document.getElementById('expanded-view-' + roleKey);
+  const fullscreenBtn = document.getElementById('fullscreen-toggle-btn');
+  if (!overlayContainer) return;
+
+  if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+    if (overlayContainer.requestFullscreen) {
+      overlayContainer.requestFullscreen();
+    } else if (overlayContainer.webkitRequestFullscreen) {
+      overlayContainer.webkitRequestFullscreen();
+    }
+    if (fullscreenBtn) fullscreenBtn.textContent = 'Go Small';
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+    if (fullscreenBtn) fullscreenBtn.textContent = 'Go Fullscreen';
+  }
+}
+
+document.addEventListener('fullscreenchange', () => {
+  const fullscreenBtn = document.getElementById('fullscreen-toggle-btn');
+  if (!fullscreenBtn) return;
+  if (!document.fullscreenElement) {
+    fullscreenBtn.textContent = 'Go Fullscreen';
+  } else {
+    fullscreenBtn.textContent = 'Go Small';
+  }
+});
+
+document.addEventListener('webkitfullscreenchange', () => {
+  const fullscreenBtn = document.getElementById('fullscreen-toggle-btn');
+  if (!fullscreenBtn) return;
+  if (!document.webkitFullscreenElement) {
+    fullscreenBtn.textContent = 'Go Fullscreen';
+  } else {
+    fullscreenBtn.textContent = 'Go Small';
+  }
+});
 
 // Data array for the 25 alternating instore & outdoor billboard locations carousel
 const instoreImagesData = [
@@ -1581,247 +1765,62 @@ function toggleRole(event, cardElement, roleId) {
       const content = overlay.querySelector('[id^="expanded-content-"]');
       if (content) content.innerHTML = '';
     });
+    targetContent.classList.remove("show");
   } else {
-    stopAllMedia();
-  }
-
-  document.querySelectorAll('.collapsible-content').forEach(content => {
-    if (content !== targetContent) {
-      content.classList.remove('show');
-    }
-  });
-  document.querySelectorAll('.portfolio-sub-section').forEach(sub => {
-    sub.classList.remove('show');
-  });
-  document.querySelectorAll('.portfolio-image-btn').forEach(btn => {
-    btn.classList.remove('pulse-animation');
-  });
-
-  if (!isCurrentlyOpen) {
-    targetContent.classList.add("show");
-    
-    targetContent.querySelectorAll('video').forEach(video => {
-      if (!video.currentTime && video.src && video.src.includes('#t=')) {
-        video.load();
+    document.querySelectorAll('.collapsible-content').forEach(content => {
+      if (content.id !== roleId) {
+        content.querySelectorAll('video, audio').forEach(el => {
+          el.pause();
+          if (!el.closest('.video-thumbnail-card')) {
+            el.currentTime = 0;
+          }
+        });
+        content.querySelectorAll('.radio-card-item').forEach(card => {
+          card.classList.remove('is-playing');
+        });
+        content.querySelectorAll('.inline-video-player-container').forEach(container => {
+          container.classList.remove('active');
+          const vid = container.querySelector('video');
+          if (vid) {
+            vid.pause();
+            vid.src = '';
+          }
+        });
+        content.querySelectorAll('.carousel-expanded-overlay').forEach(overlay => {
+          overlay.classList.remove('active');
+          const contentArea = overlay.querySelector('[id^="expanded-content-"]');
+          if (contentArea) contentArea.innerHTML = '';
+        });
+        content.classList.remove("show");
       }
     });
-    
-    if (roleId === 'role1') {
-      const dbBtn = document.getElementById('devilBurgerPortfolioBtn');
-      if (dbBtn) dbBtn.classList.add('pulse-animation');
-    }
-    if (roleId === 'role4') {
-      const iseeBtn = document.getElementById('iseeDigitalPortfolioBtn');
-      if (iseeBtn) iseeBtn.classList.add('pulse-animation');
-    }
-    if (roleId === 'role2') {
-      const xcleanBtn = document.getElementById('xcleanPortfolioBtn');
-      if (xcleanBtn) xcleanBtn.classList.add('pulse-animation');
-    }
-  } else {
-    targetContent.classList.remove("show");
+    targetContent.classList.add("show");
   }
 }
 
 function toggleDevilBurgerPortfolio(event) {
-  event.stopPropagation();
-  const section = document.getElementById('devilBurgerPortfolioSection');
-  if (section) {
-    const isOpen = section.classList.contains('show');
-    if (isOpen) {
-      section.querySelectorAll('video, audio').forEach(el => {
-        el.pause();
-        if (!el.closest('.video-thumbnail-card')) {
-          el.currentTime = 0;
-        }
-      });
-      section.querySelectorAll('.radio-card-item').forEach(card => {
-        card.classList.remove('is-playing');
-      });
-      section.querySelectorAll('.inline-video-player-container').forEach(container => {
-        container.classList.remove('active');
-        const vid = container.querySelector('video');
-        if (vid) {
-          vid.pause();
-          vid.src = '';
-        }
-      });
-      section.querySelectorAll('.carousel-expanded-overlay').forEach(overlay => {
-        overlay.classList.remove('active');
-        const content = overlay.querySelector('[id^="expanded-content-"]');
-        if (content) content.innerHTML = '';
-      });
-      section.classList.remove('show');
-    } else {
-      section.classList.add('show');
-    }
-  }
+  if (event) event.stopPropagation();
+  const sec = document.getElementById('devilBurgerPortfolioSection');
+  sec.classList.toggle('show');
 }
 
 function toggleXcleanPortfolio(event) {
-  event.stopPropagation();
-  const section = document.getElementById('xcleanPortfolioSection');
-  if (section) {
-    section.classList.toggle('show');
-  }
+  if (event) event.stopPropagation();
+  const sec = document.getElementById('xcleanPortfolioSection');
+  sec.classList.toggle('show');
 }
 
 function toggleIseePortfolio(event) {
-  event.stopPropagation();
-  const section = document.getElementById('iseeDigitalPortfolioSection');
-  if (section) {
-    section.classList.toggle('show');
-  }
+  if (event) event.stopPropagation();
+  const sec = document.getElementById('iseeDigitalPortfolioSection');
+  sec.classList.toggle('show');
 }
 
-function expandCarouselItem(event, roleId, type, source, title) {
-  event.stopPropagation();
-  const overlay = document.getElementById(`expanded-view-${roleId}`);
-  const contentDiv = document.getElementById(`expanded-content-${roleId}`);
-  const toggleBtn = document.getElementById(`fullscreen-toggle-${roleId}`);
-  if (!overlay || !contentDiv) return;
-
-  contentDiv.innerHTML = '';
-  if (type === 'video') {
-    const video = document.createElement('video');
-    video.src = source;
-    video.controls = true;
-    video.autoplay = true;
-    video.playsInline = true;
-    video.setAttribute('webkit-playsinline', '');
-    contentDiv.appendChild(video);
-    if (toggleBtn) toggleBtn.style.display = 'inline-block';
-  } else if (type === 'image') {
-    const img = document.createElement('img');
-    img.src = source;
-    img.alt = title;
-    contentDiv.appendChild(img);
-    if (toggleBtn) toggleBtn.style.display = 'inline-block';
-  }
-
-  if (toggleBtn) {
-    toggleBtn.textContent = "Go Fullscreen";
-  }
-
-  overlay.classList.add('active');
-}
-
-function toggleItemFullscreen(roleId) {
-  const overlay = document.getElementById(`expanded-view-${roleId}`);
-  const toggleBtn = document.getElementById(`fullscreen-toggle-${roleId}`);
-  if (!overlay) return;
-
-  const targetEl = overlay.querySelector('video, img');
-  if (!targetEl) return;
-
-  if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-    if (targetEl.requestFullscreen) {
-      targetEl.requestFullscreen();
-    } else if (targetEl.webkitRequestFullscreen) {
-      targetEl.webkitRequestFullscreen();
-    }
-    if (toggleBtn) toggleBtn.textContent = "Go Small";
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    }
-    if (toggleBtn) toggleBtn.textContent = "Go Fullscreen";
-  }
-}
-
-document.addEventListener('fullscreenchange', handleFullscreenChange);
-document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-
-function handleFullscreenChange() {
-  const activeOverlay = document.querySelector('.carousel-expanded-overlay.active');
-  if (!activeOverlay) return;
-  const roleId = activeOverlay.id.replace('expanded-view-', '');
-  const toggleBtn = document.getElementById(`fullscreen-toggle-${roleId}`);
-  if (!toggleBtn) return;
-
-  if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-    toggleBtn.textContent = "Go Fullscreen";
-  } else {
-    toggleBtn.textContent = "Go Small";
-  }
-}
-
-function closeCarouselExpanded(roleId) {
-  const overlay = document.getElementById(`expanded-view-${roleId}`);
-  if (overlay) {
-    overlay.classList.remove('active');
-    const contentDiv = document.getElementById(`expanded-content-${roleId}`);
-    if (contentDiv) {
-      contentDiv.innerHTML = '';
-    }
-  }
-}
-
-function playInlineVideo(event, roleId, videoSrc, videoTitle) {
-  event.stopPropagation();
-  stopAllMedia();
-  const playerContainer = document.getElementById(`inlinePlayer-${roleId}`);
-  const videoEl = document.getElementById(`inlineVideo-${roleId}`);
-  const titleEl = document.getElementById(`inlineTitle-${roleId}`);
-  if (!playerContainer || !videoEl) return;
-
-  titleEl.textContent = videoTitle;
-  videoEl.src = videoSrc;
-  playerContainer.classList.add('active');
-  videoEl.play().catch(err => console.log("Autoplay blocked or handled by user:", err));
-}
-
-function closeInlineVideo(roleId) {
-  const playerContainer = document.getElementById(`inlinePlayer-${roleId}`);
-  const videoEl = document.getElementById(`inlineVideo-${roleId}`);
-  if (playerContainer) {
-    playerContainer.classList.remove('active');
-  }
-  if (videoEl) {
-    videoEl.pause();
-    videoEl.src = '';
-  }
-}
-
-function toggleAudioCard(cardElement, event) {
-  event.stopPropagation();
-  const audio = cardElement.querySelector('audio');
-  if (!audio) return;
-
-  const isPlaying = cardElement.classList.contains('is-playing');
-
-  document.querySelectorAll('.radio-card-item').forEach(card => {
-    if (card !== cardElement) {
-      card.classList.remove('is-playing');
-      const a = card.querySelector('audio');
-      if (a) {
-        a.pause();
-        a.currentTime = 0;
-      }
-    }
-  });
-
-  if (isPlaying) {
-    audio.pause();
-    cardElement.classList.remove('is-playing');
-  } else {
-    audio.play().then(() => {
-      cardElement.classList.add('is-playing');
-    }).catch(e => console.log("Audio play prevented:", e));
-
-    audio.onended = function() {
-      cardElement.classList.remove('is-playing');
-    };
-  }
-}
-
-function openModal(imgSrc) {
+function openModal(imageSrc) {
   const modal = document.getElementById('imgModal');
   const modalImg = document.getElementById('modalImg');
   modal.style.display = "flex";
-  modalImg.src = imgSrc;
+  modalImg.src = imageSrc;
 }
 
 function closeModal() {
@@ -1829,9 +1828,9 @@ function closeModal() {
   modal.style.display = "none";
 }
 
-function openFullDetail(event, caseName) {
-  event.stopPropagation();
-  alert("Opening full detailed case study for: " + caseName);
+function openFullDetail(event, roleTitle) {
+  if (event) event.stopPropagation();
+  alert("Opening comprehensive detailed case study for: " + roleTitle + "\n(Detailed documentation viewer)");
 }
 </script>
 </body>
