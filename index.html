@@ -742,7 +742,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 14:25 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 14:54 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1473,7 +1473,7 @@ function updateDynamicTimestamp() {
     const tzName = tzMatch ? tzMatch[1] : 'NZST';
     stampEl.textContent = `Rev: ${year}-${month}-${day} ${hour}:${minute} ${tzName}`;
   } catch (e) {
-    stampEl.textContent = `Rev: 2026-09-03 14:25 NZST`;
+    stampEl.textContent = `Rev: 2026-09-03 14:54 NZST`;
   }
 }
 updateDynamicTimestamp();
@@ -1483,7 +1483,8 @@ setInterval(updateDynamicTimestamp, 60000);
 function stopAllMedia() {
   document.querySelectorAll('video, audio').forEach(el => {
     el.pause();
-    if (!el.closest('.video-thumbnail-card')) {
+    // Preserve currentTime for marquee items and video thumbnail cards so posters/preview frames remain intact
+    if (!el.closest('.video-thumbnail-card') && !el.closest('.marquee-item')) {
       el.currentTime = 0;
     }
   });
@@ -1693,144 +1694,107 @@ function openInstoreLightbox(index) {
   const imgEl = document.getElementById('instoreLightboxImg');
   const captionEl = document.getElementById('instoreLightboxCaption');
   
-  imgEl.src = instoreImagesData[currentInstoreIndex].src;
-  captionEl.textContent = instoreImagesData[currentInstoreIndex].caption;
-  modal.classList.add('active');
+  if (modal && imgEl) {
+    const item = instoreImagesData[currentInstoreIndex];
+    imgEl.src = item.src;
+    if (captionEl) captionEl.textContent = item.caption;
+    modal.classList.add('active');
+  }
 }
 
 function closeInstoreLightbox() {
   const modal = document.getElementById('instoreLightboxModal');
-  modal.classList.remove('active');
+  if (modal) modal.classList.remove('active');
 }
 
 function navigateInstoreLightbox(direction, event) {
   if (event) event.stopPropagation();
-  currentInstoreIndex += direction;
-  if (currentInstoreIndex < 0) {
-    currentInstoreIndex = instoreImagesData.length - 1;
-  } else if (currentInstoreIndex >= instoreImagesData.length) {
-    currentInstoreIndex = 0;
-  }
+  currentInstoreIndex = (currentInstoreIndex + direction + instoreImagesData.length) % instoreImagesData.length;
+  const item = instoreImagesData[currentInstoreIndex];
   const imgEl = document.getElementById('instoreLightboxImg');
   const captionEl = document.getElementById('instoreLightboxCaption');
-  imgEl.src = instoreImagesData[currentInstoreIndex].src;
-  captionEl.textContent = instoreImagesData[currentInstoreIndex].caption;
+  if (imgEl) imgEl.src = item.src;
+  if (captionEl) captionEl.textContent = item.caption;
 }
 
 function handleLightboxBackdropClick(event) {
-  if (event.target.id === 'instoreLightboxModal') {
+  if (event.target === event.currentTarget) {
     closeInstoreLightbox();
   }
 }
 
-document.addEventListener('keydown', function(e) {
-  const modal = document.getElementById('instoreLightboxModal');
-  if (modal.classList.contains('active')) {
-    if (e.key === 'Escape') {
-      closeInstoreLightbox();
-    } else if (e.key === 'ArrowLeft') {
-      navigateInstoreLightbox(-1);
-    } else if (e.key === 'ArrowRight') {
-      navigateInstoreLightbox(1);
-    }
-  }
-});
-
-function toggleRole(event, cardElement, roleId) {
-  if (event.target.classList.contains('detail-link') || event.target.closest('.portfolio-btn-container') || event.target.closest('.marquee-container') || event.target.closest('.carousel-expanded-overlay') || event.target.closest('.radio-grid') || event.target.closest('.portfolio-sub-section') || event.target.closest('.inline-video-player-container') || event.target.closest('.instore-carousel-wrapper')) return;
-  
-  const targetContent = document.getElementById(roleId);
-  const isCurrentlyOpen = targetContent.classList.contains("show");
-
-  if (isCurrentlyOpen) {
-    targetContent.querySelectorAll('video, audio').forEach(el => {
-      el.pause();
-      if (!el.closest('.video-thumbnail-card')) {
-        el.currentTime = 0;
-      }
-    });
-    targetContent.querySelectorAll('.radio-card-item').forEach(card => {
-      card.classList.remove('is-playing');
-    });
-    targetContent.querySelectorAll('.inline-video-player-container').forEach(container => {
-      container.classList.remove('active');
-      const vid = container.querySelector('video');
-      if (vid) {
-        vid.pause();
-        vid.src = '';
-      }
-    });
-    targetContent.querySelectorAll('.carousel-expanded-overlay').forEach(overlay => {
-      overlay.classList.remove('active');
-      const content = overlay.querySelector('[id^="expanded-content-"]');
-      if (content) content.innerHTML = '';
-    });
-    targetContent.classList.remove("show");
-  } else {
-    document.querySelectorAll('.collapsible-content').forEach(content => {
-      if (content.id !== roleId) {
-        content.querySelectorAll('video, audio').forEach(el => {
-          el.pause();
-          if (!el.closest('.video-thumbnail-card')) {
-            el.currentTime = 0;
-          }
-        });
-        content.querySelectorAll('.radio-card-item').forEach(card => {
-          card.classList.remove('is-playing');
-        });
-        content.querySelectorAll('.inline-video-player-container').forEach(container => {
-          container.classList.remove('active');
-          const vid = container.querySelector('video');
-          if (vid) {
-            vid.pause();
-            vid.src = '';
-          }
-        });
-        content.querySelectorAll('.carousel-expanded-overlay').forEach(overlay => {
-          overlay.classList.remove('active');
-          const contentArea = overlay.querySelector('[id^="expanded-content-"]');
-          if (contentArea) contentArea.innerHTML = '';
-        });
-        content.classList.remove("show");
-      }
-    });
-    targetContent.classList.add("show");
-  }
-}
-
-function toggleDevilBurgerPortfolio(event) {
-  if (event) event.stopPropagation();
-  const sec = document.getElementById('devilBurgerPortfolioSection');
-  sec.classList.toggle('show');
-}
-
-function toggleXcleanPortfolio(event) {
-  if (event) event.stopPropagation();
-  const sec = document.getElementById('xcleanPortfolioSection');
-  sec.classList.toggle('show');
-}
-
-function toggleIseePortfolio(event) {
-  if (event) event.stopPropagation();
-  const sec = document.getElementById('iseeDigitalPortfolioSection');
-  sec.classList.toggle('show');
-}
-
-function openModal(imageSrc) {
+// General Modal Functions for Images
+function openModal(imgSrc) {
   const modal = document.getElementById('imgModal');
   const modalImg = document.getElementById('modalImg');
-  modal.style.display = "flex";
-  modalImg.src = imageSrc;
+  if (modal && modalImg) {
+    modalImg.src = imgSrc;
+    modal.style.display = 'flex';
+  }
 }
 
 function closeModal() {
   const modal = document.getElementById('imgModal');
-  modal.style.display = "none";
+  if (modal) modal.style.display = 'none';
 }
 
-function openFullDetail(event, roleTitle) {
+// Collapsible Role Toggle Function with Mutuality
+function toggleRole(event, cardEl, roleId) {
+  if (event.target.closest('.collapsible-content') || event.target.closest('.portfolio-sub-section') || event.target.closest('.carousel-expanded-overlay') || event.target.closest('.radio-card-item') || event.target.closest('.video-thumbnail-card') || event.target.closest('.marquee-container') || event.target.closest('.instore-carousel-wrapper') || event.target.closest('.portfolio-image-btn')) {
+    return;
+  }
+
+  stopAllMedia();
+
+  const content = document.getElementById(roleId);
+  const wasShown = content.classList.contains('show');
+
+  document.querySelectorAll('.collapsible-content').forEach(el => {
+    el.classList.remove('show');
+  });
+
+  if (!wasShown) {
+    content.classList.add('show');
+  }
+}
+
+// Portfolio Toggle Functions for Role 1 and Role 4
+function toggleDevilBurgerPortfolio(event) {
   if (event) event.stopPropagation();
-  alert("Opening comprehensive detailed case study for: " + roleTitle + "\n(Detailed documentation viewer)");
+  const section = document.getElementById('devilBurgerPortfolioSection');
+  if (section) {
+    section.classList.toggle('show');
+    if (section.classList.contains('show')) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+}
+
+function toggleXcleanPortfolio(event) {
+  if (event) event.stopPropagation();
+  const section = document.getElementById('xcleanPortfolioSection');
+  if (section) {
+    section.classList.toggle('show');
+    if (section.classList.contains('show')) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+}
+
+function toggleIseePortfolio(event) {
+  if (event) event.stopPropagation();
+  const section = document.getElementById('iseeDigitalPortfolioSection');
+  if (section) {
+    section.classList.toggle('show');
+    if (section.classList.contains('show')) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+}
+
+function openFullDetail(event, caseStudyName) {
+  if (event) event.stopPropagation();
+  alert("Opening full detailed case study for: " + caseStudyName + "\n(Detailed documentation view loaded)");
 }
 </script>
 </body>
