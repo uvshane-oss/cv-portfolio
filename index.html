@@ -693,7 +693,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 12:40 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 12:50 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1421,7 +1421,7 @@ function updateDynamicTimestamp() {
     const tzName = tzMatch ? tzMatch[1] : 'NZST';
     stampEl.textContent = `Rev: ${year}-${month}-${day} ${hour}:${minute} ${tzName}`;
   } catch (e) {
-    stampEl.textContent = `Rev: 2026-09-03 12:40 NZST`;
+    stampEl.textContent = `Rev: 2026-09-03 12:50 NZST`;
   }
 }
 updateDynamicTimestamp();
@@ -1540,7 +1540,6 @@ function toggleRole(event, cardElement, roleId) {
   const isCurrentlyOpen = targetContent.classList.contains("show");
 
   if (isCurrentlyOpen) {
-    // If the role card is being closed, stop all media inside it first
     targetContent.querySelectorAll('video, audio').forEach(el => {
       el.pause();
       if (!el.closest('.video-thumbnail-card')) {
@@ -1650,6 +1649,22 @@ function toggleXcleanPortfolio(event) {
           el.currentTime = 0;
         }
       });
+      section.querySelectorAll('.radio-card-item').forEach(card => {
+        card.classList.remove('is-playing');
+      });
+      section.querySelectorAll('.inline-video-player-container').forEach(container => {
+        container.classList.remove('active');
+        const vid = container.querySelector('video');
+        if (vid) {
+          vid.pause();
+          vid.src = '';
+        }
+      });
+      section.querySelectorAll('.carousel-expanded-overlay').forEach(overlay => {
+        overlay.classList.remove('active');
+        const content = overlay.querySelector('[id^="expanded-content-"]');
+        if (content) content.innerHTML = '';
+      });
     }
     section.classList.toggle('show');
   }
@@ -1667,104 +1682,156 @@ function toggleIseePortfolio(event) {
           el.currentTime = 0;
         }
       });
+      section.querySelectorAll('.radio-card-item').forEach(card => {
+        card.classList.remove('is-playing');
+      });
+      section.querySelectorAll('.inline-video-player-container').forEach(container => {
+        container.classList.remove('active');
+        const vid = container.querySelector('video');
+        if (vid) {
+          vid.pause();
+          vid.src = '';
+        }
+      });
+      section.querySelectorAll('.carousel-expanded-overlay').forEach(overlay => {
+        overlay.classList.remove('active');
+        const content = overlay.querySelector('[id^="expanded-content-"]');
+        if (content) content.innerHTML = '';
+      });
     }
     section.classList.toggle('show');
   }
 }
 
-function playInlineVideo(event, roleKey, videoUrl, videoTitle) {
+function expandCarouselItem(event, roleKey, type, src, titleText) {
   event.stopPropagation();
-  stopAllMedia();
-  
-  const container = document.getElementById('inlinePlayer-' + roleKey);
-  const titleEl = document.getElementById('inlineTitle-' + roleKey);
-  const videoEl = document.getElementById('inlineVideo-' + roleKey);
-  
-  if (container && videoEl) {
-    titleEl.textContent = videoTitle;
-    videoEl.src = videoUrl;
-    container.classList.add('active');
-    videoEl.play().catch(e => console.log("Autoplay prevented:", e));
-  }
-}
-
-function closeInlineVideo(roleKey) {
-  const container = document.getElementById('inlinePlayer-' + roleKey);
-  const videoEl = document.getElementById('inlineVideo-' + roleKey);
-  
-  if (container && videoEl) {
-    videoEl.pause();
-    videoEl.src = '';
-    container.classList.remove('active');
-  }
-}
-
-function expandCarouselItem(event, roleKey, type, sourceFile, titleText) {
-  event.stopPropagation();
-  stopAllMedia();
-  
   const overlay = document.getElementById('expanded-view-' + roleKey);
-  const contentWrapper = document.getElementById('expanded-content-' + roleKey);
-  
-  if (overlay && contentWrapper) {
-    if (type === 'video') {
-      contentWrapper.innerHTML = `
-        <h4 style="color:#fff; margin-top:0; font-size:14px;">${titleText}</h4>
-        <video src="${sourceFile}" controls autoplay playsinline webkit-playsinline style="max-width:100%; max-height:320px; border-radius:4px;"></video>
-      `;
-    } else {
-      contentWrapper.innerHTML = `
-        <h4 style="color:#fff; margin-top:0; font-size:14px;">${titleText}</h4>
-        <img src="${sourceFile}" alt="${titleText}" style="max-width:100%; max-height:320px; object-fit:contain; border-radius:4px; cursor:pointer;" onclick="openModal('${sourceFile}')">
-      `;
-    }
-    overlay.classList.add('active');
+  const contentContainer = document.getElementById('expanded-content-' + roleKey);
+  if (!overlay || !contentContainer) return;
+
+  contentContainer.innerHTML = '';
+  if (type === 'video') {
+    const vid = document.createElement('video');
+    vid.src = src;
+    vid.controls = true;
+    vid.autoplay = true;
+    vid.playsInline = true;
+    vid.setAttribute('webkit-playsinline', '');
+    contentContainer.appendChild(vid);
+  } else if (type === 'image') {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = titleText;
+    contentContainer.appendChild(img);
   }
+  overlay.classList.add('active');
 }
 
 function closeCarouselExpanded(roleKey) {
   const overlay = document.getElementById('expanded-view-' + roleKey);
-  const contentWrapper = document.getElementById('expanded-content-' + roleKey);
-  if (overlay && contentWrapper) {
+  const contentContainer = document.getElementById('expanded-content-' + roleKey);
+  if (overlay) {
     overlay.classList.remove('active');
-    contentWrapper.innerHTML = '';
-    
-    document.querySelectorAll('#marquee-' + roleKey + ' video').forEach(v => {
-      if (!v.paused) v.pause();
-    });
   }
+  if (contentContainer) {
+    const vid = contentContainer.querySelector('video');
+    if (vid) {
+      vid.pause();
+      vid.currentTime = 0;
+    }
+    contentContainer.innerHTML = '';
+  }
+}
+
+function playInlineVideo(event, playerKey, videoUrl, titleText) {
+  event.stopPropagation();
+  stopAllMedia();
+
+  const container = document.getElementById('inlinePlayer-' + playerKey);
+  const vidEl = document.getElementById('inlineVideo-' + playerKey);
+  const titleEl = document.getElementById('inlineTitle-' + playerKey);
+
+  if (!container || !vidEl) return;
+
+  if (titleEl) {
+    titleEl.textContent = titleText || 'Now Playing';
+  }
+
+  container.classList.add('active');
+  vidEl.src = videoUrl;
+  vidEl.play().catch(e => console.log("Autoplay prevented:", e));
+
+  container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function closeInlineVideo(playerKey) {
+  const container = document.getElementById('inlinePlayer-' + playerKey);
+  if (!container) return;
+
+  const vidEl = container.querySelector('video');
+  if (vidEl) {
+    vidEl.pause();
+    vidEl.currentTime = 0;
+    vidEl.src = '';
+  }
+  container.classList.remove('active');
 }
 
 function toggleAudioCard(cardElement, event) {
   event.stopPropagation();
   const audioEl = cardElement.querySelector('audio');
-  const isPlaying = cardElement.classList.contains('is-playing');
-  
-  stopAllMedia();
+  if (!audioEl) return;
 
-  if (!isPlaying && audioEl) {
+  const isPlaying = cardElement.classList.contains('is-playing');
+
+  document.querySelectorAll('.radio-card-item').forEach(card => {
+    if (card !== cardElement) {
+      card.classList.remove('is-playing');
+      const aud = card.querySelector('audio');
+      if (aud) {
+        aud.pause();
+        aud.currentTime = 0;
+      }
+    }
+  });
+
+  if (isPlaying) {
+    cardElement.classList.remove('is-playing');
+    audioEl.pause();
+    audioEl.currentTime = 0;
+  } else {
     cardElement.classList.add('is-playing');
-    audioEl.play().catch(e => console.log("Audio playback error:", e));
+    audioEl.play().catch(e => {
+      console.log("Audio play error:", e);
+      cardElement.classList.remove('is-playing');
+    });
   }
+
+  audioEl.onended = function() {
+    cardElement.classList.remove('is-playing');
+    audioEl.currentTime = 0;
+  };
 }
 
 function openModal(imgSrc) {
-  stopAllMedia();
   const modal = document.getElementById('imgModal');
   const modalImg = document.getElementById('modalImg');
-  modal.style.display = "flex";
-  modalImg.src = imgSrc;
+  if (modal && modalImg) {
+    modalImg.src = imgSrc;
+    modal.style.display = 'flex';
+  }
 }
 
 function closeModal() {
   const modal = document.getElementById('imgModal');
-  modal.style.display = "none";
+  if (modal) {
+    modal.style.display = 'none';
+  }
 }
 
-function openFullDetail(event, caseStudyName) {
+function openFullDetail(event, roleName) {
   event.stopPropagation();
-  stopAllMedia();
-  alert("Detailed case study view for: " + caseStudyName + " (Opening full report modal/page)");
+  alert("Detailed case study view for: " + roleName + " (Full interactive records & metrics documentation).");
 }
 </script>
 </body>
