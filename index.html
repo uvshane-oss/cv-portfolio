@@ -222,7 +222,6 @@ li { margin-bottom: 6px; font-size: 13px; }
   overflow: hidden;
   padding: 8px;
   text-align: center;
-  position: relative;
 }
 .portfolio-img-wrapper img {
   width: 100%;
@@ -547,10 +546,14 @@ li { margin-bottom: 6px; font-size: 13px; }
   display: block;
   border-radius: 4px;
 }
+.carousel-control-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
 .close-expanded-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
   background: var(--accent);
   color: #fff;
   border: none;
@@ -558,6 +561,18 @@ li { margin-bottom: 6px; font-size: 13px; }
   font-size: 12px;
   border-radius: 4px;
   cursor: pointer;
+}
+.fullscreen-toggle-btn {
+  background: var(--highlight-blue);
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.fullscreen-toggle-btn:hover {
+  background: #1e40af;
 }
 /* Fullscreen Modal for Images */
 .img-modal {
@@ -690,32 +705,11 @@ li { margin-bottom: 6px; font-size: 13px; }
 .detail-link:hover {
   color: var(--accent);
 }
-
-/* Fullscreen trigger button overlay for media and images inside carousel/marquee/thumbnails */
-.fullscreen-trigger-btn {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  background: rgba(0, 0, 0, 0.75);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  padding: 4px 8px;
-  font-size: 11px;
-  font-weight: bold;
-  border-radius: 4px;
-  cursor: pointer;
-  z-index: 5;
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-.fullscreen-trigger-btn:hover {
-  background: var(--highlight-blue);
-  border-color: var(--highlight-blue);
-}
 </style>
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 13:08 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 13:33 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -776,43 +770,38 @@ li { margin-bottom: 6px; font-size: 13px; }
       <div id="devilBurgerPortfolioSection" class="portfolio-sub-section">
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Social Media Advertising</h4>
         <div class="carousel-expanded-overlay" id="expanded-view-role1">
-          <button class="close-expanded-btn" onclick="closeCarouselExpanded('role1')">Close / Minimize</button>
+          <div class="carousel-control-bar">
+            <button class="fullscreen-toggle-btn" id="fullscreen-toggle-role1" onclick="toggleItemFullscreen('role1')">Go Fullscreen</button>
+            <button class="close-expanded-btn" onclick="closeCarouselExpanded('role1')">Close / Minimize</button>
+          </div>
           <div id="expanded-content-role1"></div>
         </div>
         <div class="marquee-container" id="marquee-role1">
           <div class="marquee-track">
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
               <video src="social media 1.mp4#t=3" poster="social media 1_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
-              <button class="fullscreen-trigger-btn" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">Full Screen</button>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 2.mp4', 'Social Media Campaign 2')">
               <video src="social media 2.mp4#t=1" poster="social media 2_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
-              <button class="fullscreen-trigger-btn" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 2.mp4', 'Social Media Campaign 2')">Full Screen</button>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 3.mp4', 'Social Media Campaign 3')">
               <video src="social media 3.mp4#t=1" poster="social media 3_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
-              <button class="fullscreen-trigger-btn" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 3.mp4', 'Social Media Campaign 3')">Full Screen</button>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 4.mp4', 'Social Media Campaign 4')">
               <video src="social media 4.mp4#t=3" poster="social media 4_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
-              <button class="fullscreen-trigger-btn" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 4.mp4', 'Social Media Campaign 4')">Full Screen</button>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'image', 'social media carosel.jpg', 'Social Media Carousel Assets')">
               <img src="social media carosel.jpg" alt="Social Media Carousel" width="260" height="160">
-              <button class="fullscreen-trigger-btn" onclick="expandCarouselItem(event, 'role1', 'image', 'social media carosel.jpg', 'Social Media Carousel Assets')">Full Screen</button>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'image', 'summer promotion.jpg', 'Summer Promotion Artwork')">
               <img src="summer promotion.jpg" alt="Summer Promo Campaign" width="260" height="160">
-              <button class="fullscreen-trigger-btn" onclick="expandCarouselItem(event, 'role1', 'image', 'summer promotion.jpg', 'Summer Promotion Artwork')">Full Screen</button>
             </div>
             <!-- Duplicated loop for smooth infinite scroll -->
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
               <video src="social media 1.mp4#t=3" poster="social media 1_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
-              <button class="fullscreen-trigger-btn" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">Full Screen</button>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 4.mp4', 'Social Media Campaign 4')">
               <video src="social media 4.mp4#t=3" poster="social media 4_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
-              <button class="fullscreen-trigger-btn" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 4.mp4', 'Social Media Campaign 4')">Full Screen</button>
             </div>
           </div>
         </div>
@@ -940,7 +929,6 @@ li { margin-bottom: 6px; font-size: 13px; }
         <div class="portfolio-gallery">
           <div class="portfolio-img-wrapper" onclick="openModal('xclean.jpg')">
             <img src="xclean.jpg" alt="XClean Operations" width="260" height="160">
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openModal('xclean.jpg');">Full Screen</button>
           </div>
         </div>
       </div>
@@ -968,13 +956,13 @@ li { margin-bottom: 6px; font-size: 13px; }
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Supporting Portfolio</h4>
       <div class="marquee-container">
         <div class="marquee-track">
-          <div class="marquee-item" onclick="openModal('Screen end & projector.jpg')"><img src="Screen end & projector.jpg" alt="Screen end & projector" width="260" height="160"><button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openModal('Screen end & projector.jpg');">Full Screen</button></div>
-          <div class="marquee-item" onclick="openModal('Screen side.jpg')"><img src="Screen side.jpg" alt="Screen side" width="260" height="160"><button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openModal('Screen side.jpg');">Full Screen</button></div>
-          <div class="marquee-item" onclick="openModal('back of screen.jpg')"><img src="back of screen.jpg" alt="back of screen" width="260" height="160"><button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openModal('back of screen.jpg');">Full Screen</button></div>
-          <div class="marquee-item" onclick="openModal('front on.jpg')"><img src="front on.jpg" alt="front on" width="260" height="160"><button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openModal('front on.jpg');">Full Screen</button></div>
+          <div class="marquee-item" onclick="openModal('Screen end & projector.jpg')"><img src="Screen end & projector.jpg" alt="Screen end & projector" width="260" height="160"></div>
+          <div class="marquee-item" onclick="openModal('Screen side.jpg')"><img src="Screen side.jpg" alt="Screen side" width="260" height="160"></div>
+          <div class="marquee-item" onclick="openModal('back of screen.jpg')"><img src="back of screen.jpg" alt="back of screen" width="260" height="160"></div>
+          <div class="marquee-item" onclick="openModal('front on.jpg')"><img src="front on.jpg" alt="front on" width="260" height="160"></div>
           <!-- Duplicated loop for smooth infinite scroll -->
-          <div class="marquee-item" onclick="openModal('Screen end & projector.jpg')"><img src="Screen end & projector.jpg" alt="Screen end & projector" width="260" height="160"><button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openModal('Screen end & projector.jpg');">Full Screen</button></div>
-          <div class="marquee-item" onclick="openModal('Screen side.jpg')"><img src="Screen side.jpg" alt="Screen side" width="260" height="160"><button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openModal('Screen side.jpg');">Full Screen</button></div>
+          <div class="marquee-item" onclick="openModal('Screen end & projector.jpg')"><img src="Screen end & projector.jpg" alt="Screen end & projector" width="260" height="160"></div>
+          <div class="marquee-item" onclick="openModal('Screen side.jpg')"><img src="Screen side.jpg" alt="Screen side" width="260" height="160"></div>
         </div>
       </div>
       <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'Albatross Centre A/V')">View Full Detailed Case Study &rarr;</span></div>
@@ -1008,214 +996,164 @@ li { margin-bottom: 6px; font-size: 13px; }
           <!-- Cycle 1 -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(0)">
             <div class="instore-img-container"><img src="BB1758835159986.jpeg" alt="Outdoor Billboard BB1"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(0);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(1)">
             <div class="instore-img-container"><img src="1758755805584.jpeg" alt="Location 1"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(1);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(2)">
             <div class="instore-img-container"><img src="1758755929727.jpeg" alt="Location 2"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(2);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(3)">
             <div class="instore-img-container"><img src="1758755954119.jpeg" alt="Location 3"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(3);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(4)">
             <div class="instore-img-container"><img src="1758755979137.jpeg" alt="Location 4"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(4);">Full Screen</button>
           </div>
           <!-- Cycle 2 -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(5)">
             <div class="instore-img-container"><img src="BB1758835290442.jpeg" alt="Outdoor Billboard BB2"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(5);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(6)">
             <div class="instore-img-container"><img src="1758756024609.jpeg" alt="Location 5"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(6);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(7)">
             <div class="instore-img-container"><img src="1758756069198.jpeg" alt="Location 6"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(7);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(8)">
             <div class="instore-img-container"><img src="1758756574017.jpeg" alt="Location 7"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(8);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(9)">
             <div class="instore-img-container"><img src="1758756639804.jpeg" alt="Location 8"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(9);">Full Screen</button>
           </div>
           <!-- Cycle 3 -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(10)">
             <div class="instore-img-container"><img src="BB1758835313131.jpeg" alt="Outdoor Billboard BB3"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(10);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(11)">
             <div class="instore-img-container"><img src="1758756679346.jpeg" alt="Location 9"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(11);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(12)">
             <div class="instore-img-container"><img src="1758756712158.jpeg" alt="Location 10"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(12);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(13)">
             <div class="instore-img-container"><img src="1758756759188.jpeg" alt="Location 11"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(13);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(14)">
             <div class="instore-img-container"><img src="1758756798411.jpeg" alt="Location 12"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(14);">Full Screen</button>
           </div>
           <!-- Cycle 4 -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(15)">
             <div class="instore-img-container"><img src="BB1758835334807.jpeg" alt="Outdoor Billboard BB4"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(15);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(16)">
             <div class="instore-img-container"><img src="1758756849533.jpeg" alt="Location 13"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(16);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(17)">
             <div class="instore-img-container"><img src="1758756921948.jpeg" alt="Location 14"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(17);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(18)">
             <div class="instore-img-container"><img src="1758756956376.jpeg" alt="Location 15"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(18);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(19)">
             <div class="instore-img-container"><img src="1758756996703.jpeg" alt="Location 16"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(19);">Full Screen</button>
           </div>
           <!-- Cycle 5 -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(20)">
             <div class="instore-img-container"><img src="BB1758835159986.jpeg" alt="Outdoor Billboard BB1"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(20);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(21)">
             <div class="instore-img-container"><img src="1758757029987.jpeg" alt="Location 17"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(21);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(22)">
             <div class="instore-img-container"><img src="1758757078499.jpeg" alt="Location 18"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(22);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(23)">
             <div class="instore-img-container"><img src="1758757119457.jpeg" alt="Location 19"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(23);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(24)">
             <div class="instore-img-container"><img src="1758757157638.jpeg" alt="Location 20"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(24);">Full Screen</button>
           </div>
 
           <!-- Duplicated loop for smooth infinite scroll -->
           <!-- Cycle 1 (Dup) -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(0)">
             <div class="instore-img-container"><img src="BB1758835159986.jpeg" alt="Outdoor Billboard BB1"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(0);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(1)">
             <div class="instore-img-container"><img src="1758755805584.jpeg" alt="Location 1"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(1);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(2)">
             <div class="instore-img-container"><img src="1758755929727.jpeg" alt="Location 2"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(2);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(3)">
             <div class="instore-img-container"><img src="1758755954119.jpeg" alt="Location 3"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(3);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(4)">
             <div class="instore-img-container"><img src="1758755979137.jpeg" alt="Location 4"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(4);">Full Screen</button>
           </div>
           <!-- Cycle 2 (Dup) -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(5)">
             <div class="instore-img-container"><img src="BB1758835290442.jpeg" alt="Outdoor Billboard BB2"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(5);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(6)">
             <div class="instore-img-container"><img src="1758756024609.jpeg" alt="Location 5"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(6);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(7)">
             <div class="instore-img-container"><img src="1758756069198.jpeg" alt="Location 6"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(7);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(8)">
             <div class="instore-img-container"><img src="1758756574017.jpeg" alt="Location 7"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(8);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(9)">
             <div class="instore-img-container"><img src="1758756639804.jpeg" alt="Location 8"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(9);">Full Screen</button>
           </div>
           <!-- Cycle 3 (Dup) -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(10)">
             <div class="instore-img-container"><img src="BB1758835313131.jpeg" alt="Outdoor Billboard BB3"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(10);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(11)">
             <div class="instore-img-container"><img src="1758756679346.jpeg" alt="Location 9"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(11);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(12)">
             <div class="instore-img-container"><img src="1758756712158.jpeg" alt="Location 10"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(12);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(13)">
             <div class="instore-img-container"><img src="1758756759188.jpeg" alt="Location 11"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(13);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(14)">
             <div class="instore-img-container"><img src="1758756798411.jpeg" alt="Location 12"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(14);">Full Screen</button>
           </div>
           <!-- Cycle 4 (Dup) -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(15)">
             <div class="instore-img-container"><img src="BB1758835334807.jpeg" alt="Outdoor Billboard BB4"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(15);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(16)">
             <div class="instore-img-container"><img src="1758756849533.jpeg" alt="Location 13"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(16);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(17)">
             <div class="instore-img-container"><img src="1758756921948.jpeg" alt="Location 14"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(17);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(18)">
             <div class="instore-img-container"><img src="1758756956376.jpeg" alt="Location 15"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(18);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(19)">
             <div class="instore-img-container"><img src="1758756996703.jpeg" alt="Location 16"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(19);">Full Screen</button>
           </div>
           <!-- Cycle 5 (Dup) -->
           <div class="instore-thumb-card" onclick="openInstoreLightbox(20)">
             <div class="instore-img-container"><img src="BB1758835159986.jpeg" alt="Outdoor Billboard BB1"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(20);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(21)">
             <div class="instore-img-container"><img src="1758757029987.jpeg" alt="Location 17"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(21);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(22)">
             <div class="instore-img-container"><img src="1758757078499.jpeg" alt="Location 18"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(22);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(23)">
             <div class="instore-img-container"><img src="1758757119457.jpeg" alt="Location 19"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(23);">Full Screen</button>
           </div>
           <div class="instore-thumb-card" onclick="openInstoreLightbox(24)">
             <div class="instore-img-container"><img src="1758757157638.jpeg" alt="Location 20"></div>
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openInstoreLightbox(24);">Full Screen</button>
           </div>
         </div>
       </div>
@@ -1230,7 +1168,6 @@ li { margin-bottom: 6px; font-size: 13px; }
         <div class="portfolio-gallery">
           <div class="portfolio-img-wrapper" onclick="openModal('isee digital logo.jpeg')">
             <img src="isee digital logo.jpeg" alt="ISee Digital Network Asset" width="260" height="160">
-            <button class="fullscreen-trigger-btn" onclick="event.stopPropagation(); openModal('isee digital logo.jpeg');">Full Screen</button>
           </div>
         </div>
       </div>
@@ -1503,7 +1440,7 @@ function updateDynamicTimestamp() {
     const tzName = tzMatch ? tzMatch[1] : 'NZST';
     stampEl.textContent = `Rev: ${year}-${month}-${day} ${hour}:${minute} ${tzName}`;
   } catch (e) {
-    stampEl.textContent = `Rev: 2026-09-03 13:08 NZST`;
+    stampEl.textContent = `Rev: 2026-09-03 13:33 NZST`;
   }
 }
 updateDynamicTimestamp();
@@ -1714,8 +1651,10 @@ function toggleDevilBurgerPortfolio(event) {
         const content = overlay.querySelector('[id^="expanded-content-"]');
         if (content) content.innerHTML = '';
       });
+      section.classList.remove('show');
+    } else {
+      section.classList.add('show');
     }
-    section.classList.toggle('show');
   }
 }
 
@@ -1723,31 +1662,6 @@ function toggleXcleanPortfolio(event) {
   event.stopPropagation();
   const section = document.getElementById('xcleanPortfolioSection');
   if (section) {
-    const isOpen = section.classList.contains('show');
-    if (isOpen) {
-      section.querySelectorAll('video, audio').forEach(el => {
-        el.pause();
-        if (!el.closest('.video-thumbnail-card')) {
-          el.currentTime = 0;
-        }
-      });
-      section.querySelectorAll('.radio-card-item').forEach(card => {
-        card.classList.remove('is-playing');
-      });
-      section.querySelectorAll('.inline-video-player-container').forEach(container => {
-        container.classList.remove('active');
-        const vid = container.querySelector('video');
-        if (vid) {
-          vid.pause();
-          vid.src = '';
-        }
-      });
-      section.querySelectorAll('.carousel-expanded-overlay').forEach(overlay => {
-        overlay.classList.remove('active');
-        const content = overlay.querySelector('[id^="expanded-content-"]');
-        if (content) content.innerHTML = '';
-      });
-    }
     section.classList.toggle('show');
   }
 }
@@ -1756,94 +1670,115 @@ function toggleIseePortfolio(event) {
   event.stopPropagation();
   const section = document.getElementById('iseeDigitalPortfolioSection');
   if (section) {
-    const isOpen = section.classList.contains('show');
-    if (isOpen) {
-      section.querySelectorAll('video, audio').forEach(el => {
-        el.pause();
-        if (!el.closest('.video-thumbnail-card')) {
-          el.currentTime = 0;
-        }
-      });
-      section.querySelectorAll('.radio-card-item').forEach(card => {
-        card.classList.remove('is-playing');
-      });
-      section.querySelectorAll('.inline-video-player-container').forEach(container => {
-        container.classList.remove('active');
-        const vid = container.querySelector('video');
-        if (vid) {
-          vid.pause();
-          vid.src = '';
-        }
-      });
-      section.querySelectorAll('.carousel-expanded-overlay').forEach(overlay => {
-        overlay.classList.remove('active');
-        const content = overlay.querySelector('[id^="expanded-content-"]');
-        if (content) content.innerHTML = '';
-      });
-    }
     section.classList.toggle('show');
   }
 }
 
-function expandCarouselItem(event, roleId, type, sourceUrl, titleText) {
+function expandCarouselItem(event, roleId, type, source, title) {
   event.stopPropagation();
-  const overlay = document.getElementById('expanded-view-' + roleId);
-  const contentContainer = document.getElementById('expanded-content-' + roleId);
-  if (!overlay || !contentContainer) return;
+  const overlay = document.getElementById(`expanded-view-${roleId}`);
+  const contentDiv = document.getElementById(`expanded-content-${roleId}`);
+  const toggleBtn = document.getElementById(`fullscreen-toggle-${roleId}`);
+  if (!overlay || !contentDiv) return;
 
-  contentContainer.innerHTML = '';
-
+  contentDiv.innerHTML = '';
   if (type === 'video') {
-    const videoEl = document.createElement('video');
-    videoEl.src = sourceUrl;
-    videoEl.controls = true;
-    videoEl.autoplay = true;
-    videoEl.setAttribute('playsinline', '');
-    videoEl.setAttribute('webkit-playsinline', '');
-    contentContainer.appendChild(videoEl);
+    const video = document.createElement('video');
+    video.src = source;
+    video.controls = true;
+    video.autoplay = true;
+    video.playsInline = true;
+    video.setAttribute('webkit-playsinline', '');
+    contentDiv.appendChild(video);
+    if (toggleBtn) toggleBtn.style.display = 'inline-block';
   } else if (type === 'image') {
-    const imgEl = document.createElement('img');
-    imgEl.src = sourceUrl;
-    imgEl.alt = titleText;
-    contentContainer.appendChild(imgEl);
+    const img = document.createElement('img');
+    img.src = source;
+    img.alt = title;
+    contentDiv.appendChild(img);
+    if (toggleBtn) toggleBtn.style.display = 'inline-block';
+  }
+
+  if (toggleBtn) {
+    toggleBtn.textContent = "Go Fullscreen";
   }
 
   overlay.classList.add('active');
-  overlay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-function closeCarouselExpanded(roleId) {
-  const overlay = document.getElementById('expanded-view-' + roleId);
-  const contentContainer = document.getElementById('expanded-content-' + roleId);
-  if (overlay) overlay.classList.remove('active');
-  if (contentContainer) {
-    const vid = contentContainer.querySelector('video');
-    if (vid) vid.pause();
-    contentContainer.innerHTML = '';
+function toggleItemFullscreen(roleId) {
+  const overlay = document.getElementById(`expanded-view-${roleId}`);
+  const toggleBtn = document.getElementById(`fullscreen-toggle-${roleId}`);
+  if (!overlay) return;
+
+  const targetEl = overlay.querySelector('video, img');
+  if (!targetEl) return;
+
+  if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+    if (targetEl.requestFullscreen) {
+      targetEl.requestFullscreen();
+    } else if (targetEl.webkitRequestFullscreen) {
+      targetEl.webkitRequestFullscreen();
+    }
+    if (toggleBtn) toggleBtn.textContent = "Go Small";
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+    if (toggleBtn) toggleBtn.textContent = "Go Fullscreen";
   }
 }
 
-function playInlineVideo(event, playerKey, videoSrc, videoTitle) {
+document.addEventListener('fullscreenchange', handleFullscreenChange);
+document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+
+function handleFullscreenChange() {
+  const activeOverlay = document.querySelector('.carousel-expanded-overlay.active');
+  if (!activeOverlay) return;
+  const roleId = activeOverlay.id.replace('expanded-view-', '');
+  const toggleBtn = document.getElementById(`fullscreen-toggle-${roleId}`);
+  if (!toggleBtn) return;
+
+  if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+    toggleBtn.textContent = "Go Fullscreen";
+  } else {
+    toggleBtn.textContent = "Go Small";
+  }
+}
+
+function closeCarouselExpanded(roleId) {
+  const overlay = document.getElementById(`expanded-view-${roleId}`);
+  if (overlay) {
+    overlay.classList.remove('active');
+    const contentDiv = document.getElementById(`expanded-content-${roleId}`);
+    if (contentDiv) {
+      contentDiv.innerHTML = '';
+    }
+  }
+}
+
+function playInlineVideo(event, roleId, videoSrc, videoTitle) {
   event.stopPropagation();
-  const container = document.getElementById('inlinePlayer-' + playerKey);
-  const videoEl = document.getElementById('inlineVideo-' + playerKey);
-  const titleEl = document.getElementById('inlineTitle-' + playerKey);
-
-  if (!container || !videoEl) return;
-
   stopAllMedia();
+  const playerContainer = document.getElementById(`inlinePlayer-${roleId}`);
+  const videoEl = document.getElementById(`inlineVideo-${roleId}`);
+  const titleEl = document.getElementById(`inlineTitle-${roleId}`);
+  if (!playerContainer || !videoEl) return;
 
   titleEl.textContent = videoTitle;
   videoEl.src = videoSrc;
-  container.classList.add('active');
-  videoEl.play().catch(e => console.log("Autoplay blocked:", e));
-  container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  playerContainer.classList.add('active');
+  videoEl.play().catch(err => console.log("Autoplay blocked or handled by user:", err));
 }
 
-function closeInlineVideo(playerKey) {
-  const container = document.getElementById('inlinePlayer-' + playerKey);
-  const videoEl = document.getElementById('inlineVideo-' + playerKey);
-  if (container) container.classList.remove('active');
+function closeInlineVideo(roleId) {
+  const playerContainer = document.getElementById(`inlinePlayer-${roleId}`);
+  const videoEl = document.getElementById(`inlineVideo-${roleId}`);
+  if (playerContainer) {
+    playerContainer.classList.remove('active');
+  }
   if (videoEl) {
     videoEl.pause();
     videoEl.src = '';
@@ -1852,19 +1787,31 @@ function closeInlineVideo(playerKey) {
 
 function toggleAudioCard(cardElement, event) {
   event.stopPropagation();
-  const audioEl = cardElement.querySelector('audio');
-  if (!audioEl) return;
+  const audio = cardElement.querySelector('audio');
+  if (!audio) return;
 
   const isPlaying = cardElement.classList.contains('is-playing');
 
-  stopAllMedia();
+  document.querySelectorAll('.radio-card-item').forEach(card => {
+    if (card !== cardElement) {
+      card.classList.remove('is-playing');
+      const a = card.querySelector('audio');
+      if (a) {
+        a.pause();
+        a.currentTime = 0;
+      }
+    }
+  });
 
-  if (!isPlaying) {
-    audioEl.play().then(() => {
+  if (isPlaying) {
+    audio.pause();
+    cardElement.classList.remove('is-playing');
+  } else {
+    audio.play().then(() => {
       cardElement.classList.add('is-playing');
-    }).catch(e => console.log("Audio play blocked:", e));
+    }).catch(e => console.log("Audio play prevented:", e));
 
-    audioEl.onended = function() {
+    audio.onended = function() {
       cardElement.classList.remove('is-playing');
     };
   }
@@ -1873,19 +1820,18 @@ function toggleAudioCard(cardElement, event) {
 function openModal(imgSrc) {
   const modal = document.getElementById('imgModal');
   const modalImg = document.getElementById('modalImg');
-  if (!modal || !modalImg) return;
+  modal.style.display = "flex";
   modalImg.src = imgSrc;
-  modal.style.display = 'flex';
 }
 
 function closeModal() {
   const modal = document.getElementById('imgModal');
-  if (modal) modal.style.display = 'none';
+  modal.style.display = "none";
 }
 
-function openFullDetail(event, roleName) {
+function openFullDetail(event, caseName) {
   event.stopPropagation();
-  alert("Full detailed case study for " + roleName + " is accessible in your complete portfolio archive.");
+  alert("Opening full detailed case study for: " + caseName);
 }
 </script>
 </body>
