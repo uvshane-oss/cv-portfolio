@@ -523,28 +523,28 @@ li { margin-bottom: 6px; font-size: 13px; }
   100% { height: 32px; }
 }
 
-/* Interactive Carousel Expanded View Modal/Overlay inside components */
+/* Interactive Carousel Expanded View Modal/Overlay refactored to match .inline-video-player-container */
 .carousel-expanded-overlay {
   display: none;
-  position: relative;
   background: #111;
   border: 2px solid var(--highlight-blue);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 15px;
-  margin: 15px 0;
-  text-align: center;
+  margin: 15px auto;
+  max-width: 550px;
+  box-shadow: 0 8px 25px rgba(29, 78, 216, 0.4);
+  position: relative;
   box-sizing: border-box;
+  text-align: center;
 }
 .carousel-expanded-overlay.active {
   display: block;
 }
 .carousel-expanded-overlay video, .carousel-expanded-overlay img {
-  max-width: 100%;
-  max-height: 350px;
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%; border: 0;
   object-fit: contain;
-  margin: 0 auto;
-  display: block;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 /* Fullscreen styling for expanded overlay container */
 .carousel-expanded-overlay:fullscreen {
@@ -575,15 +575,21 @@ li { margin-bottom: 6px; font-size: 13px; }
   background: #111;
   z-index: 99999;
 }
-.carousel-expanded-overlay:fullscreen video,
-.carousel-expanded-overlay:fullscreen img {
-  max-height: 80vh;
-  width: auto;
+.carousel-expanded-overlay:fullscreen .inline-video-wrapper,
+.carousel-expanded-overlay:-webkit-full-screen .inline-video-wrapper {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 0;
+  flex: 1;
 }
+.carousel-expanded-overlay:fullscreen video,
+.carousel-expanded-overlay:fullscreen img,
 .carousel-expanded-overlay:-webkit-full-screen video,
 .carousel-expanded-overlay:-webkit-full-screen img {
-  max-height: 80vh;
+  position: relative;
+  max-height: 85vh;
   width: auto;
+  height: auto;
 }
 
 /* Hide the close button when the carousel expanded overlay is in fullscreen mode */
@@ -593,12 +599,23 @@ li { margin-bottom: 6px; font-size: 13px; }
 }
 
 .expanded-controls-bar {
-  position: absolute;
-  top: 15px;
-  right: 15px;
   display: flex;
-  gap: 8px;
-  z-index: 99999;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 10;
+}
+.expanded-title {
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+  padding-right: 80px;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .close-expanded-btn, .fullscreen-toggle-btn {
   background: var(--accent);
@@ -609,10 +626,11 @@ li { margin-bottom: 6px; font-size: 13px; }
   font-weight: bold;
   border-radius: 4px;
   cursor: pointer;
-  z-index: 99999;
 }
 .fullscreen-toggle-btn {
   background: var(--highlight-blue);
+  margin-left: auto;
+  margin-right: 8px;
 }
 
 /* Fullscreen Modal for Images */
@@ -750,7 +768,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 18:55 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 19:22 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -812,10 +830,13 @@ li { margin-bottom: 6px; font-size: 13px; }
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Social Media Advertising</h4>
         <div class="carousel-expanded-overlay" id="expanded-view-role1" onclick="event.stopPropagation();">
           <div class="expanded-controls-bar">
+            <div id="expanded-title-role1" class="expanded-title">Now Playing</div>
             <button id="fullscreen-toggle-btn" class="fullscreen-toggle-btn" onclick="toggleFullscreen('role1')">Go Fullscreen / Shrink</button>
             <button id="close-expanded-btn" class="close-expanded-btn" onclick="closeCarouselExpanded('role1')">Close</button>
           </div>
-          <div id="expanded-content-role1"></div>
+          <div class="inline-video-wrapper">
+            <div id="expanded-content-role1"></div>
+          </div>
         </div>
         <div class="marquee-container" id="marquee-role1" onclick="event.stopPropagation();">
           <div class="marquee-track">
@@ -1502,6 +1523,10 @@ function closeCarouselExpanded(roleId) {
   if (overlay) {
     overlay.classList.remove('active');
   }
+  const contentContainer = document.getElementById('expanded-content-' + roleId);
+  if (contentContainer) {
+    contentContainer.innerHTML = '';
+  }
   if (document.fullscreenElement || document.webkitFullscreenElement) {
     if (document.exitFullscreen) document.exitFullscreen();
     else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
@@ -1512,12 +1537,15 @@ function expandCarouselItem(event, roleId, type, src, captionText, itemElement) 
   event.stopPropagation();
   const overlay = document.getElementById('expanded-view-' + roleId);
   const contentContainer = document.getElementById('expanded-content-' + roleId);
+  const titleEl = document.getElementById('expanded-title-' + roleId);
   
+  if (titleEl) titleEl.textContent = captionText;
+
   let html = '';
   if (type === 'video') {
-    html = `<video src="${src}" controls autoplay playsinline webkit-playsinline style="max-height: 70vh; width: auto; max-width: 100%; border-radius: 4px;"></video>`;
+    html = `<video src="${src}" controls autoplay playsinline webkit-playsinline></video>`;
   } else {
-    html = `<img src="${src}" alt="${captionText}" style="max-height: 70vh; width: auto; max-width: 100%; border-radius: 4px;">`;
+    html = `<img src="${src}" alt="${captionText}">`;
   }
   contentContainer.innerHTML = html;
   overlay.classList.add('active');
@@ -1609,6 +1637,7 @@ const instoreImages = [
 let currentInstoreIndex = 0;
 
 function openInstoreLightbox(index) {
+  event.stopPropagation();
   currentInstoreIndex = index;
   const modal = document.getElementById('instoreLightbox');
   const img = document.getElementById('instoreLightboxImg');
@@ -1621,15 +1650,15 @@ function closeInstoreLightbox() {
   modal.classList.remove('active');
 }
 
-function nextInstoreLightbox(event) {
-  event.stopPropagation();
-  currentInstoreIndex = (currentInstoreIndex + 1) % instoreImages.length;
-  document.getElementById('instoreLightboxImg').src = instoreImages[currentInstoreIndex];
-}
-
 function prevInstoreLightbox(event) {
   event.stopPropagation();
   currentInstoreIndex = (currentInstoreIndex - 1 + instoreImages.length) % instoreImages.length;
+  document.getElementById('instoreLightboxImg').src = instoreImages[currentInstoreIndex];
+}
+
+function nextInstoreLightbox(event) {
+  event.stopPropagation();
+  currentInstoreIndex = (currentInstoreIndex + 1) % instoreImages.length;
   document.getElementById('instoreLightboxImg').src = instoreImages[currentInstoreIndex];
 }
 
@@ -1658,6 +1687,11 @@ function toggleIseePortfolio(event) {
   if (sec.classList.contains('show')) {
     sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
+}
+
+function openFullDetail(event, roleName) {
+  event.stopPropagation();
+  alert("Opening full detailed case study for: " + roleName);
 }
 </script>
 </body>
