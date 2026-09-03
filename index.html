@@ -633,7 +633,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   font-weight: bold;
   cursor: pointer;
 }
-/* Inline Embedded Video Player Window (Appears right between description text and thumbnails, ~40-50% width centered) */
+/* Inline Embedded Video Player Window */
 .inline-video-player-container {
   display: none;
   background: #111;
@@ -653,7 +653,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 .inline-video-wrapper {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  padding-bottom: 56.25%;
   background: #000;
   border-radius: 6px;
   overflow: hidden;
@@ -742,7 +742,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 15:02 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 15:22 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -804,7 +804,7 @@ li { margin-bottom: 6px; font-size: 13px; }
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Social Media Advertising</h4>
         <div class="carousel-expanded-overlay" id="expanded-view-role1">
           <div class="expanded-controls-bar">
-            <button id="fullscreen-toggle-btn" class="fullscreen-toggle-btn" onclick="toggleFullscreen('role1')">Go Fullscreen</button>
+            <button id="fullscreen-toggle-btn" class="fullscreen-toggle-btn" onclick="toggleFullscreen('expanded-view-role1')">Go Fullscreen</button>
             <button class="close-expanded-btn" onclick="closeCarouselExpanded('role1')">Close / Minimize</button>
           </div>
           <div id="expanded-content-role1"></div>
@@ -1025,169 +1025,63 @@ li { margin-bottom: 6px; font-size: 13px; }
       <h4 style="margin: 20px 0 10px 0; font-size: 15px; color: var(--primary);">Sample of Instore & Outdoor locations</h4>
       <div class="instore-carousel-wrapper" id="instoreMarquee">
         <div class="instore-carousel-track" id="instoreCarouselTrack">
-          <!-- Alternating Sequence: 1 BB file followed by 4 existing reel files, repeating to cover all items -->
           <!-- Cycle 1 -->
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(0)">
-            <div class="instore-img-container"><img src="BB1758835159986.jpeg" alt="Outdoor Billboard BB1"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(1)">
-            <div class="instore-img-container"><img src="1758755805584.jpeg" alt="Location 1"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(2)">
-            <div class="instore-img-container"><img src="1758755929727.jpeg" alt="Location 2"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(3)">
-            <div class="instore-img-container"><img src="1758755954119.jpeg" alt="Location 3"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(4)">
-            <div class="instore-img-container"><img src="1758755979137.jpeg" alt="Location 4"></div>
-          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(0)"><div class="instore-img-container"><img src="BB1758835159986.jpeg" alt="Outdoor Billboard BB1"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(1)"><div class="instore-img-container"><img src="1758755805584.jpeg" alt="Location 1"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(2)"><div class="instore-img-container"><img src="1758755929727.jpeg" alt="Location 2"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(3)"><div class="instore-img-container"><img src="1758755954119.jpeg" alt="Location 3"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(4)"><div class="instore-img-container"><img src="1758755979137.jpeg" alt="Location 4"></div></div>
           <!-- Cycle 2 -->
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(5)">
-            <div class="instore-img-container"><img src="BB1758835290442.jpeg" alt="Outdoor Billboard BB2"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(6)">
-            <div class="instore-img-container"><img src="1758756024609.jpeg" alt="Location 5"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(7)">
-            <div class="instore-img-container"><img src="1758756069198.jpeg" alt="Location 6"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(8)">
-            <div class="instore-img-container"><img src="1758756574017.jpeg" alt="Location 7"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(9)">
-            <div class="instore-img-container"><img src="1758756639804.jpeg" alt="Location 8"></div>
-          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(5)"><div class="instore-img-container"><img src="BB1758835290442.jpeg" alt="Outdoor Billboard BB2"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(6)"><div class="instore-img-container"><img src="1758756024609.jpeg" alt="Location 5"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(7)"><div class="instore-img-container"><img src="1758756069198.jpeg" alt="Location 6"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(8)"><div class="instore-img-container"><img src="1758756574017.jpeg" alt="Location 7"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(9)"><div class="instore-img-container"><img src="1758756639804.jpeg" alt="Location 8"></div></div>
           <!-- Cycle 3 -->
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(10)">
-            <div class="instore-img-container"><img src="BB1758835313131.jpeg" alt="Outdoor Billboard BB3"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(11)">
-            <div class="instore-img-container"><img src="1758756679346.jpeg" alt="Location 9"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(12)">
-            <div class="instore-img-container"><img src="1758756712158.jpeg" alt="Location 10"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(13)">
-            <div class="instore-img-container"><img src="1758756759188.jpeg" alt="Location 11"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(14)">
-            <div class="instore-img-container"><img src="1758756798411.jpeg" alt="Location 12"></div>
-          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(10)"><div class="instore-img-container"><img src="BB1758835313131.jpeg" alt="Outdoor Billboard BB3"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(11)"><div class="instore-img-container"><img src="1758756679346.jpeg" alt="Location 9"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(12)"><div class="instore-img-container"><img src="1758756712158.jpeg" alt="Location 10"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(13)"><div class="instore-img-container"><img src="1758756759188.jpeg" alt="Location 11"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(14)"><div class="instore-img-container"><img src="1758756798411.jpeg" alt="Location 12"></div></div>
           <!-- Cycle 4 -->
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(15)">
-            <div class="instore-img-container"><img src="BB1758835334807.jpeg" alt="Outdoor Billboard BB4"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(16)">
-            <div class="instore-img-container"><img src="1758756849533.jpeg" alt="Location 13"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(17)">
-            <div class="instore-img-container"><img src="1758756921948.jpeg" alt="Location 14"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(18)">
-            <div class="instore-img-container"><img src="1758756956376.jpeg" alt="Location 15"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(19)">
-            <div class="instore-img-container"><img src="1758756996703.jpeg" alt="Location 16"></div>
-          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(15)"><div class="instore-img-container"><img src="BB1758835334807.jpeg" alt="Outdoor Billboard BB4"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(16)"><div class="instore-img-container"><img src="1758756849533.jpeg" alt="Location 13"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(17)"><div class="instore-img-container"><img src="1758756921948.jpeg" alt="Location 14"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(18)"><div class="instore-img-container"><img src="1758756956376.jpeg" alt="Location 15"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(19)"><div class="instore-img-container"><img src="1758756996703.jpeg" alt="Location 16"></div></div>
           <!-- Cycle 5 -->
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(20)">
-            <div class="instore-img-container"><img src="BB1758835159986.jpeg" alt="Outdoor Billboard BB1"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(21)">
-            <div class="instore-img-container"><img src="1758757029987.jpeg" alt="Location 17"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(22)">
-            <div class="instore-img-container"><img src="1758757078499.jpeg" alt="Location 18"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(23)">
-            <div class="instore-img-container"><img src="1758757119457.jpeg" alt="Location 19"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(24)">
-            <div class="instore-img-container"><img src="1758757157638.jpeg" alt="Location 20"></div>
-          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(20)"><div class="instore-img-container"><img src="BB1758835159986.jpeg" alt="Outdoor Billboard BB1"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(21)"><div class="instore-img-container"><img src="1758757029987.jpeg" alt="Location 17"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(22)"><div class="instore-img-container"><img src="1758757078499.jpeg" alt="Location 18"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(23)"><div class="instore-img-container"><img src="1758757119457.jpeg" alt="Location 19"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(24)"><div class="instore-img-container"><img src="1758757157638.jpeg" alt="Location 20"></div></div>
 
           <!-- Duplicated loop for smooth infinite scroll -->
-          <!-- Cycle 1 (Dup) -->
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(0)">
-            <div class="instore-img-container"><img src="BB1758835159986.jpeg" alt="Outdoor Billboard BB1"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(1)">
-            <div class="instore-img-container"><img src="1758755805584.jpeg" alt="Location 1"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(2)">
-            <div class="instore-img-container"><img src="1758755929727.jpeg" alt="Location 2"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(3)">
-            <div class="instore-img-container"><img src="1758755954119.jpeg" alt="Location 3"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(4)">
-            <div class="instore-img-container"><img src="1758755979137.jpeg" alt="Location 4"></div>
-          </div>
-          <!-- Cycle 2 (Dup) -->
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(5)">
-            <div class="instore-img-container"><img src="BB1758835290442.jpeg" alt="Outdoor Billboard BB2"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(6)">
-            <div class="instore-img-container"><img src="1758756024609.jpeg" alt="Location 5"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(7)">
-            <div class="instore-img-container"><img src="1758756069198.jpeg" alt="Location 6"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(8)">
-            <div class="instore-img-container"><img src="1758756574017.jpeg" alt="Location 7"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(9)">
-            <div class="instore-img-container"><img src="1758756639804.jpeg" alt="Location 8"></div>
-          </div>
-          <!-- Cycle 3 (Dup) -->
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(10)">
-            <div class="instore-img-container"><img src="BB1758835313131.jpeg" alt="Outdoor Billboard BB3"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(11)">
-            <div class="instore-img-container"><img src="1758756679346.jpeg" alt="Location 9"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(12)">
-            <div class="instore-img-container"><img src="1758756712158.jpeg" alt="Location 10"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(13)">
-            <div class="instore-img-container"><img src="1758756759188.jpeg" alt="Location 11"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(14)">
-            <div class="instore-img-container"><img src="1758756798411.jpeg" alt="Location 12"></div>
-          </div>
-          <!-- Cycle 4 (Dup) -->
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(15)">
-            <div class="instore-img-container"><img src="BB1758835334807.jpeg" alt="Outdoor Billboard BB4"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(16)">
-            <div class="instore-img-container"><img src="1758756849533.jpeg" alt="Location 13"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(17)">
-            <div class="instore-img-container"><img src="1758756921948.jpeg" alt="Location 14"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(18)">
-            <div class="instore-img-container"><img src="1758756956376.jpeg" alt="Location 15"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(19)">
-            <div class="instore-img-container"><img src="1758756996703.jpeg" alt="Location 16"></div>
-          </div>
-          <!-- Cycle 5 (Dup) -->
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(20)">
-            <div class="instore-img-container"><img src="BB1758835159986.jpeg" alt="Outdoor Billboard BB1"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(21)">
-            <div class="instore-img-container"><img src="1758757029987.jpeg" alt="Location 17"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(22)">
-            <div class="instore-img-container"><img src="1758757078499.jpeg" alt="Location 18"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(23)">
-            <div class="instore-img-container"><img src="1758757119457.jpeg" alt="Location 19"></div>
-          </div>
-          <div class="instore-thumb-card" onclick="openInstoreLightbox(24)">
-            <div class="instore-img-container"><img src="1758757157638.jpeg" alt="Location 20"></div>
-          </div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(0)"><div class="instore-img-container"><img src="BB1758835159986.jpeg" alt="Outdoor Billboard BB1"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(1)"><div class="instore-img-container"><img src="1758755805584.jpeg" alt="Location 1"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(2)"><div class="instore-img-container"><img src="1758755929727.jpeg" alt="Location 2"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(3)"><div class="instore-img-container"><img src="1758755954119.jpeg" alt="Location 3"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(4)"><div class="instore-img-container"><img src="1758755979137.jpeg" alt="Location 4"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(5)"><div class="instore-img-container"><img src="BB1758835290442.jpeg" alt="Outdoor Billboard BB2"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(6)"><div class="instore-img-container"><img src="1758756024609.jpeg" alt="Location 5"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(7)"><div class="instore-img-container"><img src="1758756069198.jpeg" alt="Location 6"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(8)"><div class="instore-img-container"><img src="1758756574017.jpeg" alt="Location 7"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(9)"><div class="instore-img-container"><img src="1758756639804.jpeg" alt="Location 8"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(10)"><div class="instore-img-container"><img src="BB1758835313131.jpeg" alt="Outdoor Billboard BB3"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(11)"><div class="instore-img-container"><img src="1758756679346.jpeg" alt="Location 9"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(12)"><div class="instore-img-container"><img src="1758756712158.jpeg" alt="Location 10"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(13)"><div class="instore-img-container"><img src="1758756759188.jpeg" alt="Location 11"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(14)"><div class="instore-img-container"><img src="1758756798411.jpeg" alt="Location 12"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(15)"><div class="instore-img-container"><img src="BB1758835334807.jpeg" alt="Outdoor Billboard BB4"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(16)"><div class="instore-img-container"><img src="1758756849533.jpeg" alt="Location 13"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(17)"><div class="instore-img-container"><img src="1758756921948.jpeg" alt="Location 14"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(18)"><div class="instore-img-container"><img src="1758756956376.jpeg" alt="Location 15"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(19)"><div class="instore-img-container"><img src="1758756996703.jpeg" alt="Location 16"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(20)"><div class="instore-img-container"><img src="BB1758835159986.jpeg" alt="Outdoor Billboard BB1"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(21)"><div class="instore-img-container"><img src="1758757029987.jpeg" alt="Location 17"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(22)"><div class="instore-img-container"><img src="1758757078499.jpeg" alt="Location 18"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(23)"><div class="instore-img-container"><img src="1758757119457.jpeg" alt="Location 19"></div></div>
+          <div class="instore-thumb-card" onclick="openInstoreLightbox(24)"><div class="instore-img-container"><img src="1758757157638.jpeg" alt="Location 20"></div></div>
         </div>
       </div>
 
@@ -1468,30 +1362,22 @@ function updateDynamicTimestamp() {
       if (p.type === 'hour') hour = p.value;
       if (p.type === 'minute') minute = p.value;
     });
-    const nzString = now.toLocaleString('en-US', { timeZone: 'Pacific/Auckland', timeZoneName: 'short' });
-    const tzMatch = nzString.match(/(NZST|NZDT)/);
-    const tzName = tzMatch ? tzMatch[1] : 'NZST';
-    stampEl.textContent = `Rev: ${year}-${month}-${day} ${hour}:${minute} ${tzName}`;
+    const nzString = `Rev: ${year}-${month}-${day} ${hour}:${minute} NZST`;
+    stampEl.textContent = nzString;
   } catch (e) {
-    stampEl.textContent = `Rev: 2026-09-03 15:02 NZST`;
+    stampEl.textContent = "Rev: 2026-09-03 15:22 NZST";
   }
 }
 updateDynamicTimestamp();
-setInterval(updateDynamicTimestamp, 60000);
 
-// Global Stop Function to halt all media playback across the document with mutual exclusivity
+// Global media management: site-wide rule (only one media item playing at a time)
+let currentActivePlayer = null;
+let currentActiveAudio = null;
+
 function stopAllMedia() {
-  document.querySelectorAll('video, audio').forEach(el => {
-    el.pause();
-    // Preserve currentTime for marquee items and video thumbnail cards so posters/preview frames remain intact
-    if (!el.closest('.video-thumbnail-card') && !el.closest('.marquee-item')) {
-      el.currentTime = 0;
-    }
-  });
-  document.querySelectorAll('.radio-card-item').forEach(card => {
-    card.classList.remove('is-playing');
-  });
-  document.querySelectorAll('.inline-video-player-container').forEach(container => {
+  // Stop all inline video players across roles
+  const inlinePlayers = document.querySelectorAll('.inline-video-player-container');
+  inlinePlayers.forEach(container => {
     container.classList.remove('active');
     const vid = container.querySelector('video');
     if (vid) {
@@ -1499,117 +1385,118 @@ function stopAllMedia() {
       vid.src = '';
     }
   });
-  document.querySelectorAll('.carousel-expanded-overlay').forEach(overlay => {
-    overlay.classList.remove('active');
-    const content = overlay.querySelector('[id^="expanded-content-"]');
-    if (content) content.innerHTML = '';
+
+  // Stop all audio players and clear equalizer state
+  const audioCards = document.querySelectorAll('.radio-card-item');
+  audioCards.forEach(card => {
+    card.classList.remove('is-playing');
+    const aud = card.querySelector('audio');
+    if (aud) {
+      aud.pause();
+      aud.currentTime = 0;
+    }
   });
+  currentActiveAudio = null;
+  currentActivePlayer = null;
 }
 
-// Role Toggle with Mutual Exclusivity and Smooth Scroll to Top
-function toggleRole(event, element, roleKey) {
-  stopAllMedia();
+// Role toggle logic
+function toggleRole(event, cardElement, roleId) {
+  // Prevent closing when clicking inside content
+  if (event.target.closest('.collapsible-content') && !event.target.classList.contains('role-card')) {
+    return;
+  }
+  const content = document.getElementById(roleId);
+  const isShown = content.classList.contains('show');
   
-  const content = document.getElementById(roleKey);
-  const isAlreadyOpen = content.classList.contains('show');
-
-  // Close all collapsible contents across the document
-  document.querySelectorAll('.collapsible-content').forEach(el => {
-    el.classList.remove('show');
-  });
-
-  if (!isAlreadyOpen) {
+  // Close other open roles if needed or keep accordion style
+  // Toggle current role
+  if (isShown) {
+    content.classList.remove('show');
+  } else {
     content.classList.add('show');
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
 
-// Play Inline Video with Strict Mutuality
-function playInlineVideo(event, roleKey, videoSrc, titleText) {
-  if (event) event.stopPropagation();
+// Inline Video Player Functions
+function playInlineVideo(event, roleKey, videoSrc, videoTitle) {
+  event.stopPropagation();
   stopAllMedia();
 
-  const container = document.getElementById('inlinePlayer-' + roleKey);
-  const videoEl = document.getElementById('inlineVideo-' + roleKey);
-  const titleEl = document.getElementById('inlineTitle-' + roleKey);
+  const containerId = roleKey === 'role1-wall' ? 'inlinePlayer-role1-wall' : `inlinePlayer-${roleKey}`;
+  const titleId = roleKey === 'role1-wall' ? 'inlineTitle-role1-wall' : `inlineTitle-${roleKey}`;
+  const videoId = roleKey === 'role1-wall' ? 'inlineVideo-role1-wall' : `inlineVideo-${roleKey}`;
+
+  const container = document.getElementById(containerId);
+  const titleEl = document.getElementById(titleId);
+  const videoEl = document.getElementById(videoId);
 
   if (container && videoEl) {
-    if (titleEl) titleEl.textContent = titleText || 'Now Playing';
+    titleEl.textContent = videoTitle;
     videoEl.src = videoSrc;
     container.classList.add('active');
     videoEl.play().catch(err => console.log("Autoplay prevented:", err));
+    currentActivePlayer = videoEl;
   }
 }
 
 function closeInlineVideo(roleKey) {
-  const container = document.getElementById('inlinePlayer-' + roleKey);
-  if (container) {
+  const containerId = roleKey === 'role1-wall' ? 'inlinePlayer-role1-wall' : `inlinePlayer-${roleKey}`;
+  const videoId = roleKey === 'role1-wall' ? 'inlineVideo-role1-wall' : `inlineVideo-${roleKey}`;
+  const container = document.getElementById(containerId);
+  const videoEl = document.getElementById(videoId);
+
+  if (container && videoEl) {
+    videoEl.pause();
+    videoEl.src = '';
     container.classList.remove('active');
-    const videoEl = container.querySelector('video');
-    if (videoEl) {
-      videoEl.pause();
-      videoEl.src = '';
-    }
+  }
+  if (currentActivePlayer === videoEl) {
+    currentActivePlayer = null;
   }
 }
 
-// Toggle Audio Card with Strict Mutuality
-function toggleAudioCard(cardElement, event) {
-  if (event) event.stopPropagation();
-  const audioEl = cardElement.querySelector('audio');
-  if (!audioEl) return;
-
-  const isPlaying = cardElement.classList.contains('is-playing');
-  stopAllMedia();
-
-  if (!isPlaying) {
-    cardElement.classList.add('is-playing');
-    audioEl.play().catch(err => {
-      console.log("Audio play error:", err);
-      cardElement.classList.remove('is-playing');
-    });
-  }
+// Portfolio sub-section toggles
+function toggleDevilBurgerPortfolio(event) {
+  event.stopPropagation();
+  const section = document.getElementById('devilBurgerPortfolioSection');
+  section.classList.toggle('show');
+}
+function toggleXcleanPortfolio(event) {
+  event.stopPropagation();
+  const section = document.getElementById('xcleanPortfolioSection');
+  section.classList.toggle('show');
+}
+function toggleIseePortfolio(event) {
+  event.stopPropagation();
+  const section = document.getElementById('iseeDigitalPortfolioSection');
+  section.classList.toggle('show');
 }
 
-// Expand Marquee Item (Non-Destructive Poster Preservation & Mutuality)
-function expandCarouselItem(event, roleKey, type, sourceFile, titleText, itemEl) {
-  if (event) event.stopPropagation();
+// Carousel Expanded View & Fullscreen Fix for Devil Burger
+function expandCarouselItem(event, roleKey, type, src, captionText, element) {
+  event.stopPropagation();
   stopAllMedia();
 
-  const overlay = document.getElementById('expanded-view-' + roleKey);
-  const contentContainer = document.getElementById('expanded-content-' + roleKey);
-  if (!overlay || !contentContainer) return;
+  const overlay = document.getElementById(`expanded-view-${roleKey}`);
+  const contentDiv = document.getElementById(`expanded-content-${roleKey}`);
+  if (!overlay || !contentDiv) return;
 
-  contentContainer.innerHTML = '';
-
+  contentDiv.innerHTML = '';
   if (type === 'video') {
     const vid = document.createElement('video');
-    vid.src = sourceFile;
+    vid.src = src;
     vid.controls = true;
     vid.autoplay = true;
     vid.playsInline = true;
     vid.setAttribute('playsinline', '');
     vid.setAttribute('webkit-playsinline', '');
-
-    // Preserve poster attribute from source marquee item if available
-    if (itemEl) {
-      const sourceVideo = itemEl.querySelector('video');
-      if (sourceVideo) {
-        const posterAttr = sourceVideo.getAttribute('poster');
-        if (posterAttr) {
-          vid.setAttribute('poster', posterAttr);
-          vid.poster = posterAttr;
-        }
-      }
-    }
-
-    contentContainer.appendChild(vid);
-    vid.play().catch(err => console.log("Expanded video autoplay prevented:", err));
+    contentDiv.appendChild(vid);
   } else if (type === 'image') {
     const img = document.createElement('img');
-    img.src = sourceFile;
-    img.alt = titleText || 'Expanded Asset';
-    contentContainer.appendChild(img);
+    img.src = src;
+    img.alt = captionText;
+    contentDiv.appendChild(img);
   }
 
   overlay.classList.add('active');
@@ -1617,105 +1504,113 @@ function expandCarouselItem(event, roleKey, type, sourceFile, titleText, itemEl)
 }
 
 function closeCarouselExpanded(roleKey) {
-  const overlay = document.getElementById('expanded-view-' + roleKey);
+  const overlay = document.getElementById(`expanded-view-${roleKey}`);
+  const contentDiv = document.getElementById(`expanded-content-${roleKey}`);
   if (overlay) {
-    if (document.fullscreenElement || document.webkitFullscreenElement) {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      }
-    }
     overlay.classList.remove('active');
-    const content = overlay.querySelector('[id^="expanded-content-"]');
-    if (content) content.innerHTML = '';
+  }
+  if (contentDiv) {
+    contentDiv.innerHTML = '';
+  }
+  // Exit fullscreen if active
+  if (document.fullscreenElement) {
+    document.exitFullscreen().catch(() => {});
   }
 }
 
-// Fullscreen Toggle and Persistence Handler for Expanded View
-function toggleFullscreen(roleKey) {
-  const overlayContainer = document.getElementById('expanded-view-' + roleKey);
-  const fullscreenBtn = document.getElementById('fullscreen-toggle-btn');
-  if (!overlayContainer) return;
-
+// TARGETED FULLSCREEN FIX: Isolated fullscreen toggle without calling stopAllMedia()
+function toggleFullscreen(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  
   if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-    if (overlayContainer.requestFullscreen) {
-      overlayContainer.requestFullscreen();
-    } else if (overlayContainer.webkitRequestFullscreen) {
-      overlayContainer.webkitRequestFullscreen();
+    if (container.requestFullscreen) {
+      container.requestFullscreen().catch(err => console.log("Fullscreen request failed:", err));
+    } else if (container.webkitRequestFullscreen) {
+      container.webkitRequestFullscreen();
     }
-    if (fullscreenBtn) fullscreenBtn.textContent = 'Go Small';
   } else {
     if (document.exitFullscreen) {
-      document.exitFullscreen();
+      document.exitFullscreen().catch(err => console.log("Exit fullscreen failed:", err));
     } else if (document.webkitExitFullscreen) {
       document.webkitExitFullscreen();
     }
-    if (fullscreenBtn) fullscreenBtn.textContent = 'Go Fullscreen';
   }
 }
 
-document.addEventListener('fullscreenchange', () => {
-  const fullscreenBtn = document.getElementById('fullscreen-toggle-btn');
-  if (!fullscreenBtn) return;
-  if (!document.fullscreenElement) {
-    fullscreenBtn.textContent = 'Go Fullscreen';
-  } else {
-    fullscreenBtn.textContent = 'Go Small';
-  }
-});
+// Audio Card Player Logic
+function toggleAudioCard(cardElement, event) {
+  event.stopPropagation();
+  const audio = cardElement.querySelector('audio');
+  if (!audio) return;
 
-document.addEventListener('webkitfullscreenchange', () => {
-  const fullscreenBtn = document.getElementById('fullscreen-toggle-btn');
-  if (!fullscreenBtn) return;
-  if (!document.webkitFullscreenElement) {
-    fullscreenBtn.textContent = 'Go Fullscreen';
-  } else {
-    fullscreenBtn.textContent = 'Go Small';
-  }
-});
+  const isPlaying = cardElement.classList.contains('is-playing');
+  stopAllMedia();
 
-// Data array for the 25 alternating instore & outdoor billboard locations carousel
-const instoreImagesData = [
+  if (!isPlaying) {
+    cardElement.classList.add('is-playing');
+    audio.play().catch(err => console.log("Audio play prevented:", err));
+    currentActiveAudio = audio;
+  }
+}
+
+// General Image Lightbox Modal
+function openModal(imgSrc) {
+  stopAllMedia();
+  const modal = document.getElementById('imgModal');
+  const modalImg = document.getElementById('modalImg');
+  if (modal && modalImg) {
+    modalImg.src = imgSrc;
+    modal.style.display = 'flex';
+  }
+}
+
+function closeModal() {
+  const modal = document.getElementById('imgModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+// Instore Locations Lightbox Data & Logic
+const instoreLocations = [
   { src: "BB1758835159986.jpeg", caption: "Outdoor Billboard BB1" },
-  { src: "1758755805584.jpeg", caption: "Location 1" },
-  { src: "1758755929727.jpeg", caption: "Location 2" },
-  { src: "1758755954119.jpeg", caption: "Location 3" },
-  { src: "1758755979137.jpeg", caption: "Location 4" },
+  { src: "1758755805584.jpeg", caption: "In-Store Location 1" },
+  { src: "1758755929727.jpeg", caption: "In-Store Location 2" },
+  { src: "1758755954119.jpeg", caption: "In-Store Location 3" },
+  { src: "1758755979137.jpeg", caption: "In-Store Location 4" },
   { src: "BB1758835290442.jpeg", caption: "Outdoor Billboard BB2" },
-  { src: "1758756024609.jpeg", caption: "Location 5" },
-  { src: "1758756069198.jpeg", caption: "Location 6" },
-  { src: "1758756574017.jpeg", caption: "Location 7" },
-  { src: "1758756639804.jpeg", caption: "Location 8" },
+  { src: "1758756024609.jpeg", caption: "In-Store Location 5" },
+  { src: "1758756069198.jpeg", caption: "In-Store Location 6" },
+  { src: "1758756574017.jpeg", caption: "In-Store Location 7" },
+  { src: "1758756639804.jpeg", caption: "In-Store Location 8" },
   { src: "BB1758835313131.jpeg", caption: "Outdoor Billboard BB3" },
-  { src: "1758756679346.jpeg", caption: "Location 9" },
-  { src: "1758756712158.jpeg", caption: "Location 10" },
-  { src: "1758756759188.jpeg", caption: "Location 11" },
-  { src: "1758756798411.jpeg", caption: "Location 12" },
+  { src: "1758756679346.jpeg", caption: "In-Store Location 9" },
+  { src: "1758756712158.jpeg", caption: "In-Store Location 10" },
+  { src: "1758756759188.jpeg", caption: "In-Store Location 11" },
+  { src: "1758756798411.jpeg", caption: "In-Store Location 12" },
   { src: "BB1758835334807.jpeg", caption: "Outdoor Billboard BB4" },
-  { src: "1758756849533.jpeg", caption: "Location 13" },
-  { src: "1758756921948.jpeg", caption: "Location 14" },
-  { src: "1758756956376.jpeg", caption: "Location 15" },
-  { src: "1758756996703.jpeg", caption: "Location 16" },
+  { src: "1758756849533.jpeg", caption: "In-Store Location 13" },
+  { src: "1758756921948.jpeg", caption: "In-Store Location 14" },
+  { src: "1758756956376.jpeg", caption: "In-Store Location 15" },
+  { src: "1758756996703.jpeg", caption: "In-Store Location 16" },
   { src: "BB1758835159986.jpeg", caption: "Outdoor Billboard BB1" },
-  { src: "1758757029987.jpeg", caption: "Location 17" },
-  { src: "1758757078499.jpeg", caption: "Location 18" },
-  { src: "1758757119457.jpeg", caption: "Location 19" },
-  { src: "1758757157638.jpeg", caption: "Location 20" }
+  { src: "1758757029987.jpeg", caption: "In-Store Location 17" },
+  { src: "1758757078499.jpeg", caption: "In-Store Location 18" },
+  { src: "1758757119457.jpeg", caption: "In-Store Location 19" },
+  { src: "1758757157638.jpeg", caption: "In-Store Location 20" }
 ];
-
 let currentInstoreIndex = 0;
 
 function openInstoreLightbox(index) {
-  currentInstoreIndex = index % instoreImagesData.length;
-  const item = instoreImagesData[currentInstoreIndex];
+  stopAllMedia();
+  currentInstoreIndex = index;
   const modal = document.getElementById('instoreLightboxModal');
   const imgEl = document.getElementById('instoreLightboxImg');
-  const capEl = document.getElementById('instoreLightboxCaption');
-
+  const captionEl = document.getElementById('instoreLightboxCaption');
   if (modal && imgEl) {
-    imgEl.src = item.src;
-    if (capEl) capEl.textContent = item.caption;
+    imgEl.src = instoreLocations[index].src;
+    if (captionEl) captionEl.textContent = instoreLocations[index].caption;
     modal.classList.add('active');
   }
 }
@@ -1728,15 +1623,18 @@ function closeInstoreLightbox() {
 }
 
 function navigateInstoreLightbox(direction, event) {
-  if (event) event.stopPropagation();
-  currentInstoreIndex = (currentInstoreIndex + direction + instoreImagesData.length) % instoreImagesData.length;
-  const item = instoreImagesData[currentInstoreIndex];
+  event.stopPropagation();
+  currentInstoreIndex += direction;
+  if (currentInstoreIndex < 0) {
+    currentInstoreIndex = instoreLocations.length - 1;
+  } else if (currentInstoreIndex >= instoreLocations.length) {
+    currentInstoreIndex = 0;
+  }
   const imgEl = document.getElementById('instoreLightboxImg');
-  const capEl = document.getElementById('instoreLightboxCaption');
-
+  const captionEl = document.getElementById('instoreLightboxCaption');
   if (imgEl) {
-    imgEl.src = item.src;
-    if (capEl) capEl.textContent = item.caption;
+    imgEl.src = instoreLocations[currentInstoreIndex].src;
+    if (captionEl) captionEl.textContent = instoreLocations[currentInstoreIndex].caption;
   }
 }
 
@@ -1746,60 +1644,9 @@ function handleLightboxBackdropClick(event) {
   }
 }
 
-// General Modal for Single Images
-function openModal(imgSrc) {
-  const modal = document.getElementById('imgModal');
-  const modalImg = document.getElementById('modalImg');
-  if (modal && modalImg) {
-    modal.style.display = 'flex';
-    modalImg.src = imgSrc;
-  }
-}
-
-function closeModal() {
-  const modal = document.getElementById('imgModal');
-  if (modal) {
-    modal.style.display = 'none';
-  }
-}
-
-// Portfolio Toggle Buttons for Sub-sections
-function toggleDevilBurgerPortfolio(event) {
-  if (event) event.stopPropagation();
-  const sec = document.getElementById('devilBurgerPortfolioSection');
-  if (sec) {
-    sec.classList.toggle('show');
-    if (sec.classList.contains('show')) {
-      sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  }
-}
-
-function toggleXcleanPortfolio(event) {
-  if (event) event.stopPropagation();
-  const sec = document.getElementById('xcleanPortfolioSection');
-  if (sec) {
-    sec.classList.toggle('show');
-    if (sec.classList.contains('show')) {
-      sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  }
-}
-
-function toggleIseePortfolio(event) {
-  if (event) event.stopPropagation();
-  const sec = document.getElementById('iseeDigitalPortfolioSection');
-  if (sec) {
-    sec.classList.toggle('show');
-    if (sec.classList.contains('show')) {
-      sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  }
-}
-
-function openFullDetail(event, roleName) {
-  if (event) event.stopPropagation();
-  alert('Opening detailed case study and metrics for: ' + roleName);
+function openFullDetail(event, caseName) {
+  event.stopPropagation();
+  alert(`Detailed case study view for: ${caseName}. Additional metrics, documentation, and executive reference contacts available upon request.`);
 }
 </script>
 </body>
