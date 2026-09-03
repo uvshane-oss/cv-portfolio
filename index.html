@@ -586,6 +586,12 @@ li { margin-bottom: 6px; font-size: 13px; }
   width: auto;
 }
 
+/* Hide the close button when the carousel expanded overlay is in fullscreen mode */
+.carousel-expanded-overlay:fullscreen .close-expanded-btn,
+.carousel-expanded-overlay:-webkit-full-screen .close-expanded-btn {
+  display: none !important;
+}
+
 .expanded-controls-bar {
   position: absolute;
   top: 15px;
@@ -744,7 +750,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 16:56 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 17:50 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -806,8 +812,8 @@ li { margin-bottom: 6px; font-size: 13px; }
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Social Media Advertising</h4>
         <div class="carousel-expanded-overlay" id="expanded-view-role1" onclick="event.stopPropagation();">
           <div class="expanded-controls-bar">
-            <button id="fullscreen-toggle-btn" class="fullscreen-toggle-btn" onclick="toggleFullscreen('role1')">Go Fullscreen</button>
-            <button class="close-expanded-btn" onclick="closeCarouselExpanded('role1')">Minimise</button>
+            <button id="fullscreen-toggle-btn" class="fullscreen-toggle-btn" onclick="toggleFullscreen('role1')">Go Fullscreen / Shrink</button>
+            <button id="close-expanded-btn" class="close-expanded-btn" onclick="closeCarouselExpanded('role1')">Close</button>
           </div>
           <div id="expanded-content-role1"></div>
         </div>
@@ -1415,382 +1421,258 @@ li { margin-bottom: 6px; font-size: 13px; }
       </div>
 
       <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role9', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Michael%20Botting%20Store%20manager%2C%20Area%20manager%20for%20the%20Smiths%20city%20Group.mp4', 'Smiths City Testimonial')">
-          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Michael%20Botting%20Store%20manager%2C%20Area%20manager%20for%20the%20Smiths%20city%20Group.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
+        <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="playInlineVideo(event, 'role9', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Mike%20Regional%20Manager%20at%20Smiths%20City.mp4', 'Smiths City Regional Manager Testimonial')">
+          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Mike%20Regional%20Manager%20at%20Smiths%20City.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
           <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
           <div class="thumbnail-glow-overlay"></div>
         </div>
       </div>
-      <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'Smiths City Regional Management')">View Full Detailed Case Study &rarr;</span></div>
+      <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'Smiths City Area Manager')">View Full Detailed Case Study &rarr;</span></div>
     </div>
   </div>
 
 </div>
 
-<!-- General Fullscreen Modal for Images -->
-<div id="imgModal" class="img-modal" onclick="closeModal()">
-  <span class="img-modal-close">&times;</span>
-  <img id="modalImg" src="" alt="Full Size Image">
+<!-- Image Lightbox Modal -->
+<div id="imageLightbox" class="image-modal-lightbox" onclick="closeModal()">
+  <div class="lightbox-content-wrapper" onclick="event.stopPropagation()">
+    <button class="lightbox-close-btn" onclick="closeModal()">&times;</button>
+    <img id="lightboxImg" src="" alt="Enlarged View">
+  </div>
 </div>
 
-<!-- Lightbox Modal Framework for Instore & Outdoor Locations Carousel -->
-<div id="instoreLightboxModal" class="image-modal-lightbox" onclick="handleLightboxBackdropClick(event)">
-  <div class="lightbox-content-wrapper">
-    <button class="close-lightbox-btn" onclick="closeInstoreLightbox()">&times;</button>
-    <button class="lightbox-nav-btn lightbox-prev" onclick="navigateInstoreLightbox(-1, event)">&#10094;</button>
-    <button class="lightbox-nav-btn lightbox-next" onclick="navigateInstoreLightbox(1, event)">&#10095;</button>
-    <img id="instoreLightboxImg" src="" alt="Expanded Location">
-    <p id="instoreLightboxCaption" class="lightbox-caption"></p>
+<!-- Instore Lightbox Modal with Next/Prev Navigation -->
+<div id="instoreLightbox" class="image-modal-lightbox" onclick="closeInstoreLightbox()">
+  <button class="lightbox-nav-btn lightbox-prev" onclick="prevInstoreLightbox(event)">&#10094;</button>
+  <button class="lightbox-nav-btn lightbox-next" onclick="nextInstoreLightbox(event)">&#10095;</button>
+  <div class="lightbox-content-wrapper" onclick="event.stopPropagation()">
+    <button class="lightbox-close-btn" onclick="closeInstoreLightbox()">&times;</button>
+    <img id="instoreLightboxImg" src="" alt="Instore Location View">
   </div>
 </div>
 
 <script>
-// Dynamic runtime synchronization for New Zealand local time (NZST/NZDT)
-function updateDynamicTimestamp() {
-  const stampEl = document.getElementById('dynamic-revision-stamp');
-  if (!stampEl) return;
-  const now = new Date();
-  const options = {
-    timeZone: 'Pacific/Auckland',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false
-  };
-  try {
-    const formatter = new Intl.DateTimeFormat('en-CA', options);
-    const parts = formatter.formatToParts(now);
-    let year = '', month = '', day = '', hour = '', minute = '';
-    parts.forEach(p => {
-      if (p.type === 'year') year = p.value;
-      if (p.type === 'month') month = p.value;
-      if (p.type === 'day') day = p.value;
-      if (p.type === 'hour') hour = p.value;
-      if (p.type === 'minute') minute = p.value;
-    });
-    const nzString = now.toLocaleString('en-US', { timeZone: 'Pacific/Auckland', timeZoneName: 'short' });
-    const tzMatch = nzString.match(/(NZST|NZDT)/);
-    const tzName = tzMatch ? tzMatch[1] : 'NZST';
-    stampEl.textContent = `Rev: ${year}-${month}-${day} ${hour}:${minute} ${tzName}`;
-  } catch (e) {
-    stampEl.textContent = `Rev: 2026-09-03 16:56 NZST`;
-  }
-}
-updateDynamicTimestamp();
-setInterval(updateDynamicTimestamp, 60000);
-
-// Explicit Portfolio Toggle Functions with event propagation halt
-function toggleDevilBurgerPortfolio(event) {
-  if (event) event.stopPropagation();
-  const section = document.getElementById('devilBurgerPortfolioSection');
-  if (section) {
-    section.classList.toggle('show');
-  }
-}
-
-function toggleXcleanPortfolio(event) {
-  if (event) event.stopPropagation();
-  const section = document.getElementById('xcleanPortfolioSection');
-  if (section) {
-    section.classList.toggle('show');
-  }
-}
-
-function toggleIseePortfolio(event) {
-  if (event) event.stopPropagation();
-  const section = document.getElementById('iseeDigitalPortfolioSection');
-  if (section) {
-    section.classList.toggle('show');
-  }
-}
-
-// Global Stop Function Refactored for Non-Destructive Suspension
-function stopAllMedia() {
-  document.querySelectorAll('video, audio').forEach(el => {
-    // Do not pause or reset active expanded carousel videos currently in active viewing sessions
-    if (el.closest('.carousel-expanded-overlay.active') || el.closest('.inline-video-player-container.active')) {
-      return;
-    }
-    el.pause();
-    if (!el.closest('.video-thumbnail-card') && !el.closest('.marquee-item')) {
-      el.currentTime = 0;
-    }
-  });
-  document.querySelectorAll('.radio-card-item').forEach(card => {
-    card.classList.remove('is-playing');
-  });
-  document.querySelectorAll('.inline-video-player-container').forEach(container => {
-    if (!container.classList.contains('active')) {
-      const vid = container.querySelector('video');
-      if (vid) {
-        vid.pause();
-        vid.src = '';
-      }
-    }
-  });
-  document.querySelectorAll('.carousel-expanded-overlay').forEach(overlay => {
-    if (!overlay.classList.contains('active')) {
-      const content = overlay.querySelector('[id^="expanded-content-"]');
-      if (content) content.innerHTML = '';
-    }
-  });
-}
-
-// Stop media specifically housed within a specific role container
-function stopRoleMedia(roleKey) {
-  const roleEl = document.getElementById(roleKey);
-  if (!roleEl) return;
-  roleEl.querySelectorAll('video, audio').forEach(el => {
-    if (!el.closest('.carousel-expanded-overlay.active') && !el.closest('.inline-video-player-container.active')) {
-      el.pause();
-      if (!el.closest('.video-thumbnail-card') && !el.closest('.marquee-item')) {
-        el.currentTime = 0;
-      }
-    }
-  });
-  roleEl.querySelectorAll('.radio-card-item').forEach(card => {
-    card.classList.remove('is-playing');
-  });
-  const inlineContainer = roleEl.querySelector('.inline-video-player-container');
-  if (inlineContainer) {
-    inlineContainer.classList.remove('active');
-    const vid = inlineContainer.querySelector('video');
-    if (vid) {
-      vid.pause();
-      vid.src = '';
-    }
-  }
-  const expandedOverlay = roleEl.querySelector('.carousel-expanded-overlay');
-  if (expandedOverlay) {
-    expandedOverlay.classList.remove('active');
-    const content = expandedOverlay.querySelector('[id^="expanded-content-"]');
-    if (content) content.innerHTML = '';
-  }
-}
-
-// Role Toggle with Mutual Exclusivity, Media Isolation, and Smooth Scroll to Top
-function toggleRole(event, element, roleKey) {
-  const content = document.getElementById(roleKey);
-  const isAlreadyOpen = content.classList.contains('show');
-
-  // Close all other collapsible contents and stop their media
-  document.querySelectorAll('.collapsible-content').forEach(el => {
-    if (el.id !== roleKey && el.classList.contains('show')) {
-      el.classList.remove('show');
-      stopRoleMedia(el.id);
-    }
-  });
-
-  if (!isAlreadyOpen) {
+function toggleRole(event, cardElement, roleId) {
+  event.stopPropagation();
+  const content = document.getElementById(roleId);
+  const isOpen = content.classList.contains('show');
+  
+  // Close all roles
+  document.querySelectorAll('.collapsible-content').forEach(el => el.classList.remove('show'));
+  
+  if (!isOpen) {
     content.classList.add('show');
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  } else {
-    content.classList.remove('show');
-    stopRoleMedia(roleKey);
+    setTimeout(() => {
+      cardElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 150);
   }
 }
 
-// Play Inline Video with Strict Mutuality
-function playInlineVideo(event, roleKey, videoSrc, titleText) {
-  if (event) event.stopPropagation();
-  stopAllMedia();
-
-  const container = document.getElementById('inlinePlayer-' + roleKey);
-  const videoEl = document.getElementById('inlineVideo-' + roleKey);
-  const titleEl = document.getElementById('inlineTitle-' + roleKey);
-
-  if (container && videoEl) {
-    if (titleEl) titleEl.textContent = titleText || 'Now Playing';
-    videoEl.src = videoSrc;
-    container.classList.add('active');
-    videoEl.play().catch(err => console.log(err));
-  }
-}
-
-function closeInlineVideo(roleKey) {
-  const container = document.getElementById('inlinePlayer-' + roleKey);
-  const videoEl = document.getElementById('inlineVideo-' + roleKey);
-  if (videoEl) {
-    videoEl.pause();
-    videoEl.src = '';
-  }
-  if (container) {
-    container.classList.remove('active');
-  }
-}
-
-// Fullscreen expansion handlers for role media carousel items
-function expandCarouselItem(event, roleKey, mediaType, mediaSrc, captionText, element) {
-  if (event) event.stopPropagation();
-  stopAllMedia();
-
-  const overlay = document.getElementById('expanded-view-' + roleKey);
-  const contentContainer = document.getElementById('expanded-content-' + roleKey);
-  if (!overlay || !contentContainer) return;
-
-  let htmlContent = '';
-  if (mediaType === 'video') {
-    htmlContent = `<video src="${mediaSrc}" controls autoplay playsinline webkit-playsinline style="max-width:100%; max-height:70vh; border-radius:4px; display:block; margin:0 auto;"></video>`;
-  } else {
-    htmlContent = `<img src="${mediaSrc}" alt="${captionText}" style="max-width:100%; max-height:70vh; object-fit:contain; border-radius:4px; display:block; margin:0 auto;">`;
-  }
-  contentContainer.innerHTML = htmlContent;
-  overlay.classList.add('active');
-  overlay.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-function closeCarouselExpanded(roleKey) {
-  const overlay = document.getElementById('expanded-view-' + roleKey);
-  if (overlay) {
-    if (document.fullscreenElement || document.webkitFullscreenElement) {
-      if (document.exitFullscreen) {
-        document.exitFullscreen().catch(err => console.log(err));
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      }
-    }
-    overlay.classList.remove('active');
-    const contentContainer = document.getElementById('expanded-content-' + roleKey);
-    if (contentContainer) {
-      contentContainer.innerHTML = '';
-    }
-  }
-}
-
-function toggleFullscreen(roleKey) {
-  const overlay = document.getElementById('expanded-view-' + roleKey);
-  if (!overlay) return;
-
+function toggleFullscreen(roleId) {
+  const overlay = document.getElementById('expanded-view-' + roleId);
+  const btn = overlay.querySelector('.fullscreen-toggle-btn');
   if (!document.fullscreenElement && !document.webkitFullscreenElement) {
     if (overlay.requestFullscreen) {
-      overlay.requestFullscreen().catch(err => console.log(err));
+      overlay.requestFullscreen();
     } else if (overlay.webkitRequestFullscreen) {
       overlay.webkitRequestFullscreen();
     }
   } else {
     if (document.exitFullscreen) {
-      document.exitFullscreen().catch(err => console.log(err));
+      document.exitFullscreen();
     } else if (document.webkitExitFullscreen) {
       document.webkitExitFullscreen();
     }
   }
 }
 
-// Audio card toggle playback
-function toggleAudioCard(cardEl, event) {
-  if (event) event.stopPropagation();
-  const audio = cardEl.querySelector('audio');
-  if (!audio) return;
+document.addEventListener('fullscreenchange', updateFullscreenButtonLabels);
+document.addEventListener('webkitfullscreenchange', updateFullscreenButtonLabels);
 
-  const isPlaying = cardEl.classList.contains('is-playing');
-  stopAllMedia();
+function updateFullscreenButtonLabels() {
+  const isFs = document.fullscreenElement || document.webkitFullscreenElement;
+  const toggleBtn = document.getElementById('fullscreen-toggle-btn');
+  if (toggleBtn) {
+    toggleBtn.textContent = isFs ? 'Shrink' : 'Go Fullscreen / Shrink';
+  }
+}
+
+function closeCarouselExpanded(roleId) {
+  const overlay = document.getElementById('expanded-view-' + roleId);
+  if (overlay) {
+    overlay.classList.remove('active');
+  }
+  if (document.fullscreenElement || document.webkitFullscreenElement) {
+    if (document.exitFullscreen) document.exitFullscreen();
+    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+  }
+}
+
+function expandCarouselItem(event, roleId, type, src, captionText, itemElement) {
+  event.stopPropagation();
+  const overlay = document.getElementById('expanded-view-' + roleId);
+  const contentContainer = document.getElementById('expanded-content-' + roleId);
+  
+  let html = '';
+  if (type === 'video') {
+    html = `<video src="${src}" controls autoplay playsinline webkit-playsinline style="max-height: 70vh; width: auto; max-width: 100%; border-radius: 4px;"></video>`;
+  } else {
+    html = `<img src="${src}" alt="${captionText}" style="max-height: 70vh; width: auto; max-width: 100%; border-radius: 4px;">`;
+  }
+  contentContainer.innerHTML = html;
+  overlay.classList.add('active');
+  overlay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function playInlineVideo(event, roleKey, videoSrc, titleText) {
+  event.stopPropagation();
+  closeAllInlineVideos();
+  const playerContainer = document.getElementById('inlinePlayer-' + roleKey);
+  const videoEl = document.getElementById('inlineVideo-' + roleKey);
+  const titleEl = document.getElementById('inlineTitle-' + roleKey);
+  
+  if (playerContainer && videoEl) {
+    if (titleEl) titleEl.textContent = titleText;
+    videoEl.src = videoSrc;
+    playerContainer.classList.add('active');
+    videoEl.play().catch(e => console.log("Autoplay prevented:", e));
+    playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function closeInlineVideo(roleKey) {
+  const playerContainer = document.getElementById('inlinePlayer-' + roleKey);
+  const videoEl = document.getElementById('inlineVideo-' + roleKey);
+  if (videoEl) {
+    videoEl.pause();
+    videoEl.src = '';
+  }
+  if (playerContainer) {
+    playerContainer.classList.remove('active');
+  }
+}
+
+function closeAllInlineVideos() {
+  document.querySelectorAll('.inline-video-player-container').forEach(container => {
+    container.classList.remove('active');
+  });
+  document.querySelectorAll('.inline-video-wrapper video').forEach(vid => {
+    vid.pause();
+    vid.src = '';
+  });
+}
+
+function toggleAudioCard(cardElement, event) {
+  event.stopPropagation();
+  const audio = cardElement.querySelector('audio');
+  const isPlaying = cardElement.classList.contains('is-playing');
+  
+  // Pause all other audio
+  document.querySelectorAll('.radio-card-item').forEach(item => {
+    item.classList.remove('is-playing');
+    const a = item.querySelector('audio');
+    if (a) {
+      a.pause();
+      a.currentTime = 0;
+    }
+  });
 
   if (!isPlaying) {
-    audio.currentTime = 0;
-    audio.play().then(() => {
-      cardEl.classList.add('is-playing');
-    }).catch(err => console.log(err));
+    cardElement.classList.add('is-playing');
+    audio.play().catch(e => console.log("Audio play blocked:", e));
     audio.onended = () => {
-      cardEl.classList.remove('is-playing');
+      cardElement.classList.remove('is-playing');
     };
   }
 }
 
-// General Modal for Single Images
 function openModal(imgSrc) {
-  const modal = document.getElementById('imgModal');
-  const modalImg = document.getElementById('modalImg');
-  if (modal && modalImg) {
-    modalImg.src = imgSrc;
-    modal.style.display = 'flex';
-  }
+  const modal = document.getElementById('imageLightbox');
+  const img = document.getElementById('lightboxImg');
+  img.src = imgSrc;
+  modal.classList.add('active');
 }
 
 function closeModal() {
-  const modal = document.getElementById('imgModal');
-  if (modal) {
-    modal.style.display = 'none';
-  }
+  const modal = document.getElementById('imageLightbox');
+  modal.classList.remove('active');
 }
 
-// Instore Lightbox Array and Functions
+// Instore lightboxes array
 const instoreImages = [
-  { src: 'BB1758835159986.jpeg', caption: 'Outdoor Billboard BB1' },
-  { src: '1758755805584.jpeg', caption: 'Location 1' },
-  { src: '1758755929727.jpeg', caption: 'Location 2' },
-  { src: '1758755954119.jpeg', caption: 'Location 3' },
-  { src: '1758755979137.jpeg', caption: 'Location 4' },
-  { src: 'BB1758835290442.jpeg', caption: 'Outdoor Billboard BB2' },
-  { src: '1758756024609.jpeg', caption: 'Location 5' },
-  { src: '1758756069198.jpeg', caption: 'Location 6' },
-  { src: '1758756574017.jpeg', caption: 'Location 7' },
-  { src: '1758756639804.jpeg', caption: 'Location 8' },
-  { src: 'BB1758835313131.jpeg', caption: 'Outdoor Billboard BB3' },
-  { src: '1758756679346.jpeg', caption: 'Location 9' },
-  { src: '1758756712158.jpeg', caption: 'Location 10' },
-  { src: '1758756759188.jpeg', caption: 'Location 11' },
-  { src: '1758756798411.jpeg', caption: 'Location 12' },
-  { src: 'BB1758835334807.jpeg', caption: 'Outdoor Billboard BB4' },
-  { src: '1758756849533.jpeg', caption: 'Location 13' },
-  { src: '1758756921948.jpeg', caption: 'Location 14' },
-  { src: '1758756956376.jpeg', caption: 'Location 15' },
-  { src: '1758756996703.jpeg', caption: 'Location 16' },
-  { src: 'BB1758835159986.jpeg', caption: 'Outdoor Billboard BB1' },
-  { src: '1758757029987.jpeg', caption: 'Location 17' },
-  { src: '1758757078499.jpeg', caption: 'Location 18' },
-  { src: '1758757119457.jpeg', caption: 'Location 19' },
-  { src: '1758757157638.jpeg', caption: 'Location 20' }
+  "BB1758835159986.jpeg", "1758755805584.jpeg", "1758755929727.jpeg", "1758755954119.jpeg", "1758755979137.jpeg",
+  "BB1758835290442.jpeg", "1758756024609.jpeg", "1758756069198.jpeg", "1758756574017.jpeg", "1758756639804.jpeg",
+  "BB1758835313131.jpeg", "1758756679346.jpeg", "1758756712158.jpeg", "1758756759188.jpeg", "1758756798411.jpeg",
+  "BB1758835334807.jpeg", "1758756849533.jpeg", "1758756921948.jpeg", "1758756956376.jpeg", "1758756996703.jpeg",
+  "BB1758835159986.jpeg", "1758757029987.jpeg", "1758757078499.jpeg", "1758757119457.jpeg", "1758757157638.jpeg"
 ];
-
 let currentInstoreIndex = 0;
 
 function openInstoreLightbox(index) {
   currentInstoreIndex = index;
-  const modal = document.getElementById('instoreLightboxModal');
-  const imgEl = document.getElementById('instoreLightboxImg');
-  const capEl = document.getElementById('instoreLightboxCaption');
-  if (modal && imgEl) {
-    imgEl.src = instoreImages[index].src;
-    if (capEl) capEl.textContent = instoreImages[index].caption;
-    modal.classList.add('active');
-  }
+  const modal = document.getElementById('instoreLightbox');
+  const img = document.getElementById('instoreLightboxImg');
+  img.src = instoreImages[currentInstoreIndex];
+  modal.classList.add('active');
 }
 
 function closeInstoreLightbox() {
-  const modal = document.getElementById('instoreLightboxModal');
-  if (modal) {
-    modal.classList.remove('active');
+  const modal = document.getElementById('instoreLightbox');
+  modal.classList.remove('active');
+}
+
+function nextInstoreLightbox(event) {
+  event.stopPropagation();
+  currentInstoreIndex = (currentInstoreIndex + 1) % instoreImages.length;
+  document.getElementById('instoreLightboxImg').src = instoreImages[currentInstoreIndex];
+}
+
+function prevInstoreLightbox(event) {
+  event.stopPropagation();
+  currentInstoreIndex = (currentInstoreIndex - 1 + instoreImages.length) % instoreImages.length;
+  document.getElementById('instoreLightboxImg').src = instoreImages[currentInstoreIndex];
+}
+
+function toggleDevilBurgerPortfolio(event) {
+  event.stopPropagation();
+  const sec = document.getElementById('devilBurgerPortfolioSection');
+  sec.classList.toggle('show');
+  if (sec.classList.contains('show')) {
+    sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 }
 
-function handleLightboxBackdropClick(event) {
-  if (event.target.id === 'instoreLightboxModal') {
-    closeInstoreLightbox();
+function toggleXcleanPortfolio(event) {
+  event.stopPropagation();
+  const sec = document.getElementById('xcleanPortfolioSection');
+  sec.classList.toggle('show');
+  if (sec.classList.contains('show')) {
+    sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 }
 
-function navigateInstoreLightbox(direction, event) {
-  if (event) event.stopPropagation();
-  currentInstoreIndex += direction;
-  if (currentInstoreIndex < 0) {
-    currentInstoreIndex = instoreImages.length - 1;
-  } else if (currentInstoreIndex >= instoreImages.length) {
-    currentInstoreIndex = 0;
-  }
-  const imgEl = document.getElementById('instoreLightboxImg');
-  const capEl = document.getElementById('instoreLightboxCaption');
-  if (imgEl) {
-    imgEl.src = instoreImages[currentInstoreIndex].src;
-    if (capEl) capEl.textContent = instoreImages[currentInstoreIndex].caption;
+function toggleIseePortfolio(event) {
+  event.stopPropagation();
+  const sec = document.getElementById('iseeDigitalPortfolioSection');
+  sec.classList.toggle('show');
+  if (sec.classList.contains('show')) {
+    sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 }
 
-function openFullDetail(event, caseTitle) {
-  if (event) event.stopPropagation();
-  alert('Detailed case study view for: ' + caseTitle + '\nFull documentation and metrics available upon request.');
+function openFullDetail(event, roleName) {
+  event.stopPropagation();
+  alert("Opening full detailed case study for: " + roleName);
 }
+
+window.addEventListener('DOMContentLoaded', () => {
+  const dbBtn = document.getElementById('devilBurgerPortfolioBtn');
+  if (dbBtn) dbBtn.classList.add('pulse-animation');
+  const xcBtn = document.getElementById('xcleanPortfolioBtn');
+  if (xcBtn) xcBtn.classList.add('pulse-animation');
+  const iseeBtn = document.getElementById('iseeDigitalPortfolioBtn');
+  if (iseeBtn) iseeBtn.classList.add('pulse-animation');
+});
 </script>
 </body>
 </html>
