@@ -744,7 +744,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 16:37 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 16:56 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -807,7 +807,7 @@ li { margin-bottom: 6px; font-size: 13px; }
         <div class="carousel-expanded-overlay" id="expanded-view-role1" onclick="event.stopPropagation();">
           <div class="expanded-controls-bar">
             <button id="fullscreen-toggle-btn" class="fullscreen-toggle-btn" onclick="toggleFullscreen('role1')">Go Fullscreen</button>
-            <button class="close-expanded-btn" onclick="closeCarouselExpanded('role1')">Close / Minimize</button>
+            <button class="close-expanded-btn" onclick="closeCarouselExpanded('role1')">Minimise</button>
           </div>
           <div id="expanded-content-role1"></div>
         </div>
@@ -1475,7 +1475,7 @@ function updateDynamicTimestamp() {
     const tzName = tzMatch ? tzMatch[1] : 'NZST';
     stampEl.textContent = `Rev: ${year}-${month}-${day} ${hour}:${minute} ${tzName}`;
   } catch (e) {
-    stampEl.textContent = `Rev: 2026-09-03 16:37 NZST`;
+    stampEl.textContent = `Rev: 2026-09-03 16:56 NZST`;
   }
 }
 updateDynamicTimestamp();
@@ -1605,77 +1605,56 @@ function playInlineVideo(event, roleKey, videoSrc, titleText) {
     if (titleEl) titleEl.textContent = titleText || 'Now Playing';
     videoEl.src = videoSrc;
     container.classList.add('active');
-    videoEl.play().catch(err => console.log("Autoplay prevented:", err));
+    videoEl.play().catch(err => console.log(err));
   }
 }
 
 function closeInlineVideo(roleKey) {
   const container = document.getElementById('inlinePlayer-' + roleKey);
+  const videoEl = document.getElementById('inlineVideo-' + roleKey);
+  if (videoEl) {
+    videoEl.pause();
+    videoEl.src = '';
+  }
   if (container) {
     container.classList.remove('active');
-    const videoEl = container.querySelector('video');
-    if (videoEl) {
-      videoEl.pause();
-      videoEl.src = '';
-    }
   }
 }
 
-// Toggle Audio Card with Strict Mutuality
-function toggleAudioCard(cardElement, event) {
+// Fullscreen expansion handlers for role media carousel items
+function expandCarouselItem(event, roleKey, mediaType, mediaSrc, captionText, element) {
   if (event) event.stopPropagation();
-  const audioEl = cardElement.querySelector('audio');
-  if (!audioEl) return;
-
-  const isPlaying = cardElement.classList.contains('is-playing');
   stopAllMedia();
 
-  if (!isPlaying) {
-    cardElement.classList.add('is-playing');
-    audioEl.play().catch(err => {
-      console.log("Audio play error:", err);
-      cardElement.classList.remove('is-playing');
-    });
-  }
-}
-
-// Carousel expansion handler with event propagation isolation
-function expandCarouselItem(event, roleKey, type, src, caption, element) {
-  if (event) event.stopPropagation();
   const overlay = document.getElementById('expanded-view-' + roleKey);
   const contentContainer = document.getElementById('expanded-content-' + roleKey);
   if (!overlay || !contentContainer) return;
 
-  contentContainer.innerHTML = '';
-  if (type === 'video') {
-    const vid = document.createElement('video');
-    vid.src = src;
-    vid.controls = true;
-    vid.autoplay = true;
-    vid.playsInline = true;
-    vid.setAttribute('webkit-playsinline', '');
-    contentContainer.appendChild(vid);
+  let htmlContent = '';
+  if (mediaType === 'video') {
+    htmlContent = `<video src="${mediaSrc}" controls autoplay playsinline webkit-playsinline style="max-width:100%; max-height:70vh; border-radius:4px; display:block; margin:0 auto;"></video>`;
   } else {
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = caption;
-    contentContainer.appendChild(img);
+    htmlContent = `<img src="${mediaSrc}" alt="${captionText}" style="max-width:100%; max-height:70vh; object-fit:contain; border-radius:4px; display:block; margin:0 auto;">`;
   }
+  contentContainer.innerHTML = htmlContent;
   overlay.classList.add('active');
+  overlay.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function closeCarouselExpanded(roleKey) {
   const overlay = document.getElementById('expanded-view-' + roleKey);
   if (overlay) {
-    overlay.classList.remove('active');
-    const content = document.getElementById('expanded-content-' + roleKey);
-    if (content) {
-      content.querySelectorAll('video').forEach(v => v.pause());
-      content.innerHTML = '';
-    }
     if (document.fullscreenElement || document.webkitFullscreenElement) {
-      if (document.exitFullscreen) document.exitFullscreen();
-      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(err => console.log(err));
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
+    overlay.classList.remove('active');
+    const contentContainer = document.getElementById('expanded-content-' + roleKey);
+    if (contentContainer) {
+      contentContainer.innerHTML = '';
     }
   }
 }
@@ -1683,16 +1662,43 @@ function closeCarouselExpanded(roleKey) {
 function toggleFullscreen(roleKey) {
   const overlay = document.getElementById('expanded-view-' + roleKey);
   if (!overlay) return;
+
   if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-    if (overlay.requestFullscreen) overlay.requestFullscreen();
-    else if (overlay.webkitRequestFullscreen) overlay.webkitRequestFullscreen();
+    if (overlay.requestFullscreen) {
+      overlay.requestFullscreen().catch(err => console.log(err));
+    } else if (overlay.webkitRequestFullscreen) {
+      overlay.webkitRequestFullscreen();
+    }
   } else {
-    if (document.exitFullscreen) document.exitFullscreen();
-    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    if (document.exitFullscreen) {
+      document.exitFullscreen().catch(err => console.log(err));
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
   }
 }
 
-// Lightbox functions for general images
+// Audio card toggle playback
+function toggleAudioCard(cardEl, event) {
+  if (event) event.stopPropagation();
+  const audio = cardEl.querySelector('audio');
+  if (!audio) return;
+
+  const isPlaying = cardEl.classList.contains('is-playing');
+  stopAllMedia();
+
+  if (!isPlaying) {
+    audio.currentTime = 0;
+    audio.play().then(() => {
+      cardEl.classList.add('is-playing');
+    }).catch(err => console.log(err));
+    audio.onended = () => {
+      cardEl.classList.remove('is-playing');
+    };
+  }
+}
+
+// General Modal for Single Images
 function openModal(imgSrc) {
   const modal = document.getElementById('imgModal');
   const modalImg = document.getElementById('modalImg');
@@ -1709,44 +1715,45 @@ function closeModal() {
   }
 }
 
-// Instore carousel lightbox array and functions
+// Instore Lightbox Array and Functions
 const instoreImages = [
-  {src: "BB1758835159986.jpeg", caption: "Outdoor Billboard BB1"},
-  {src: "1758755805584.jpeg", caption: "Location 1"},
-  {src: "1758755929727.jpeg", caption: "Location 2"},
-  {src: "1758755954119.jpeg", caption: "Location 3"},
-  {src: "1758755979137.jpeg", caption: "Location 4"},
-  {src: "BB1758835290442.jpeg", caption: "Outdoor Billboard BB2"},
-  {src: "1758756024609.jpeg", caption: "Location 5"},
-  {src: "1758756069198.jpeg", caption: "Location 6"},
-  {src: "1758756574017.jpeg", caption: "Location 7"},
-  {src: "1758756639804.jpeg", caption: "Location 8"},
-  {src: "BB1758835313131.jpeg", caption: "Outdoor Billboard BB3"},
-  {src: "1758756679346.jpeg", caption: "Location 9"},
-  {src: "1758756712158.jpeg", caption: "Location 10"},
-  {src: "1758756759188.jpeg", caption: "Location 11"},
-  {src: "1758756798411.jpeg", caption: "Location 12"},
-  {src: "BB1758835334807.jpeg", caption: "Outdoor Billboard BB4"},
-  {src: "1758756849533.jpeg", caption: "Location 13"},
-  {src: "1758756921948.jpeg", caption: "Location 14"},
-  {src: "1758756956376.jpeg", caption: "Location 15"},
-  {src: "1758756996703.jpeg", caption: "Location 16"},
-  {src: "BB1758835159986.jpeg", caption: "Outdoor Billboard BB1"},
-  {src: "1758757029987.jpeg", caption: "Location 17"},
-  {src: "1758757078499.jpeg", caption: "Location 18"},
-  {src: "1758757119457.jpeg", caption: "Location 19"},
-  {src: "1758757157638.jpeg", caption: "Location 20"}
+  { src: 'BB1758835159986.jpeg', caption: 'Outdoor Billboard BB1' },
+  { src: '1758755805584.jpeg', caption: 'Location 1' },
+  { src: '1758755929727.jpeg', caption: 'Location 2' },
+  { src: '1758755954119.jpeg', caption: 'Location 3' },
+  { src: '1758755979137.jpeg', caption: 'Location 4' },
+  { src: 'BB1758835290442.jpeg', caption: 'Outdoor Billboard BB2' },
+  { src: '1758756024609.jpeg', caption: 'Location 5' },
+  { src: '1758756069198.jpeg', caption: 'Location 6' },
+  { src: '1758756574017.jpeg', caption: 'Location 7' },
+  { src: '1758756639804.jpeg', caption: 'Location 8' },
+  { src: 'BB1758835313131.jpeg', caption: 'Outdoor Billboard BB3' },
+  { src: '1758756679346.jpeg', caption: 'Location 9' },
+  { src: '1758756712158.jpeg', caption: 'Location 10' },
+  { src: '1758756759188.jpeg', caption: 'Location 11' },
+  { src: '1758756798411.jpeg', caption: 'Location 12' },
+  { src: 'BB1758835334807.jpeg', caption: 'Outdoor Billboard BB4' },
+  { src: '1758756849533.jpeg', caption: 'Location 13' },
+  { src: '1758756921948.jpeg', caption: 'Location 14' },
+  { src: '1758756956376.jpeg', caption: 'Location 15' },
+  { src: '1758756996703.jpeg', caption: 'Location 16' },
+  { src: 'BB1758835159986.jpeg', caption: 'Outdoor Billboard BB1' },
+  { src: '1758757029987.jpeg', caption: 'Location 17' },
+  { src: '1758757078499.jpeg', caption: 'Location 18' },
+  { src: '1758757119457.jpeg', caption: 'Location 19' },
+  { src: '1758757157638.jpeg', caption: 'Location 20' }
 ];
+
 let currentInstoreIndex = 0;
 
 function openInstoreLightbox(index) {
-  currentInstoreIndex = index % instoreImages.length;
+  currentInstoreIndex = index;
   const modal = document.getElementById('instoreLightboxModal');
   const imgEl = document.getElementById('instoreLightboxImg');
-  const captionEl = document.getElementById('instoreLightboxCaption');
+  const capEl = document.getElementById('instoreLightboxCaption');
   if (modal && imgEl) {
-    imgEl.src = instoreImages[currentInstoreIndex].src;
-    if (captionEl) captionEl.textContent = instoreImages[currentInstoreIndex].caption;
+    imgEl.src = instoreImages[index].src;
+    if (capEl) capEl.textContent = instoreImages[index].caption;
     modal.classList.add('active');
   }
 }
@@ -1766,19 +1773,23 @@ function handleLightboxBackdropClick(event) {
 
 function navigateInstoreLightbox(direction, event) {
   if (event) event.stopPropagation();
-  currentInstoreIndex = (currentInstoreIndex + direction + instoreImages.length) % instoreImages.length;
+  currentInstoreIndex += direction;
+  if (currentInstoreIndex < 0) {
+    currentInstoreIndex = instoreImages.length - 1;
+  } else if (currentInstoreIndex >= instoreImages.length) {
+    currentInstoreIndex = 0;
+  }
   const imgEl = document.getElementById('instoreLightboxImg');
-  const captionEl = document.getElementById('instoreLightboxCaption');
+  const capEl = document.getElementById('instoreLightboxCaption');
   if (imgEl) {
     imgEl.src = instoreImages[currentInstoreIndex].src;
-    if (captionEl) captionEl.textContent = instoreImages[currentInstoreIndex].caption;
+    if (capEl) capEl.textContent = instoreImages[currentInstoreIndex].caption;
   }
 }
 
-// Stub for detail link
-function openFullDetail(event, roleName) {
+function openFullDetail(event, caseTitle) {
   if (event) event.stopPropagation();
-  alert('Detailed case study view for: ' + roleName);
+  alert('Detailed case study view for: ' + caseTitle + '\nFull documentation and metrics available upon request.');
 }
 </script>
 </body>
