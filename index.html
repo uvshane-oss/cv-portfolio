@@ -742,7 +742,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 15:22 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 15:44 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1365,7 +1365,7 @@ function updateDynamicTimestamp() {
     const nzString = `Rev: ${year}-${month}-${day} ${hour}:${minute} NZST`;
     stampEl.textContent = nzString;
   } catch (e) {
-    stampEl.textContent = "Rev: 2026-09-03 15:22 NZST";
+    stampEl.textContent = "Rev: 2026-09-03 15:44 NZST";
   }
 }
 updateDynamicTimestamp();
@@ -1375,26 +1375,18 @@ let currentActivePlayer = null;
 let currentActiveAudio = null;
 
 function stopAllMedia() {
-  // Stop all inline video players across roles
-  const inlinePlayers = document.querySelectorAll('.inline-video-player-container');
-  inlinePlayers.forEach(container => {
-    container.classList.remove('active');
-    const vid = container.querySelector('video');
-    if (vid) {
-      vid.pause();
-      vid.src = '';
+  document.querySelectorAll('video, audio').forEach(el => {
+    // Do not disrupt media inside currently active expanded overlays or inline players during active viewing
+    if (el.closest('.carousel-expanded-overlay.active') || el.closest('.inline-video-player-container.active')) {
+      return;
+    }
+    el.pause();
+    if (!el.closest('.video-thumbnail-card') && !el.closest('.marquee-item')) {
+      el.currentTime = 0;
     }
   });
-
-  // Stop all audio players and clear equalizer state
-  const audioCards = document.querySelectorAll('.radio-card-item');
-  audioCards.forEach(card => {
+  document.querySelectorAll('.radio-card-item').forEach(card => {
     card.classList.remove('is-playing');
-    const aud = card.querySelector('audio');
-    if (aud) {
-      aud.pause();
-      aud.currentTime = 0;
-    }
   });
   currentActiveAudio = null;
   currentActivePlayer = null;
@@ -1409,8 +1401,6 @@ function toggleRole(event, cardElement, roleId) {
   const content = document.getElementById(roleId);
   const isShown = content.classList.contains('show');
   
-  // Close other open roles if needed or keep accordion style
-  // Toggle current role
   if (isShown) {
     content.classList.remove('show');
   } else {
@@ -1492,6 +1482,7 @@ function expandCarouselItem(event, roleKey, type, src, captionText, element) {
     vid.setAttribute('playsinline', '');
     vid.setAttribute('webkit-playsinline', '');
     contentDiv.appendChild(vid);
+    vid.play().catch(err => console.log("Expanded video autoplay prevented:", err));
   } else if (type === 'image') {
     const img = document.createElement('img');
     img.src = src;
@@ -1600,17 +1591,18 @@ const instoreLocations = [
   { src: "1758757119457.jpeg", caption: "In-Store Location 19" },
   { src: "1758757157638.jpeg", caption: "In-Store Location 20" }
 ];
+
 let currentInstoreIndex = 0;
 
 function openInstoreLightbox(index) {
   stopAllMedia();
   currentInstoreIndex = index;
   const modal = document.getElementById('instoreLightboxModal');
-  const imgEl = document.getElementById('instoreLightboxImg');
-  const captionEl = document.getElementById('instoreLightboxCaption');
-  if (modal && imgEl) {
-    imgEl.src = instoreLocations[index].src;
-    if (captionEl) captionEl.textContent = instoreLocations[index].caption;
+  const img = document.getElementById('instoreLightboxImg');
+  const caption = document.getElementById('instoreLightboxCaption');
+  if (modal && img && instoreLocations[index]) {
+    img.src = instoreLocations[index].src;
+    caption.textContent = instoreLocations[index].caption;
     modal.classList.add('active');
   }
 }
@@ -1630,11 +1622,11 @@ function navigateInstoreLightbox(direction, event) {
   } else if (currentInstoreIndex >= instoreLocations.length) {
     currentInstoreIndex = 0;
   }
-  const imgEl = document.getElementById('instoreLightboxImg');
-  const captionEl = document.getElementById('instoreLightboxCaption');
-  if (imgEl) {
-    imgEl.src = instoreLocations[currentInstoreIndex].src;
-    if (captionEl) captionEl.textContent = instoreLocations[currentInstoreIndex].caption;
+  const img = document.getElementById('instoreLightboxImg');
+  const caption = document.getElementById('instoreLightboxCaption');
+  if (img && instoreLocations[currentInstoreIndex]) {
+    img.src = instoreLocations[currentInstoreIndex].src;
+    caption.textContent = instoreLocations[currentInstoreIndex].caption;
   }
 }
 
@@ -1642,11 +1634,6 @@ function handleLightboxBackdropClick(event) {
   if (event.target.id === 'instoreLightboxModal') {
     closeInstoreLightbox();
   }
-}
-
-function openFullDetail(event, caseName) {
-  event.stopPropagation();
-  alert(`Detailed case study view for: ${caseName}. Additional metrics, documentation, and executive reference contacts available upon request.`);
 }
 </script>
 </body>
