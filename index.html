@@ -263,6 +263,11 @@ li { margin-bottom: 6px; font-size: 13px; }
   box-sizing: border-box;
   cursor: pointer;
   position: relative;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+.marquee-item.active, .marquee-item.is-playing {
+  border-color: var(--highlight-blue);
 }
 .marquee-item img, .marquee-item video {
   width: 100%;
@@ -768,7 +773,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-04 06:35 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-04 06:48 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1497,6 +1502,9 @@ function closeAbovePortfolioMedia(element) {
     const content = overlay.querySelector('.inline-video-wrapper > div');
     if (content) content.innerHTML = '';
   });
+  collapsibleParent.querySelectorAll('.marquee-item').forEach(item => {
+    item.classList.remove('is-playing', 'active');
+  });
   if (document.fullscreenElement || document.webkitFullscreenElement) {
     if (document.exitFullscreen) document.exitFullscreen();
     else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
@@ -1523,6 +1531,9 @@ function closePortfolioMedia(sectionElement) {
     overlay.classList.remove('active');
     const content = overlay.querySelector('.inline-video-wrapper > div');
     if (content) content.innerHTML = '';
+  });
+  sectionElement.querySelectorAll('.marquee-item').forEach(item => {
+    item.classList.remove('is-playing', 'active');
   });
   if (document.fullscreenElement || document.webkitFullscreenElement) {
     if (document.exitFullscreen) document.exitFullscreen();
@@ -1615,134 +1626,70 @@ function toggleRole(event, cardElement, roleId) {
   }
 }
 
-// Global state-management helper functions for role1
-function haltRole1Audio() {
-  const role1Content = document.getElementById('role1');
-  if (!role1Content) return;
-  role1Content.querySelectorAll('.radio-card-item').forEach(card => {
-    card.classList.remove('is-playing');
-    const audio = card.querySelector('audio');
-    if (audio) {
-      audio.pause();
-      audio.currentTime = 0;
-    }
-  });
-}
-
-function closeRole1Wall() {
-  closeInlineVideo('role1-wall');
-}
-
-function closeRole1Carousel() {
-  closeCarouselExpanded('role1');
-}
-
-function closeInlineVideo(playerId) {
-  const container = document.getElementById('inlinePlayer-' + playerId);
-  if (container) {
-    container.classList.remove('active');
-    const video = container.querySelector('video');
-    if (video) {
-      video.pause();
-      video.removeAttribute('src');
-      video.load();
-    }
-  }
-}
-
-function closeCarouselExpanded(roleKey) {
-  const overlay = document.getElementById('expanded-view-' + roleKey);
-  if (overlay) {
-    overlay.classList.remove('active');
-    const contentDiv = document.getElementById('expanded-content-' + roleKey);
-    if (contentDiv) {
-      const activeVideo = contentDiv.querySelector('video');
-      if (activeVideo) {
-        activeVideo.pause();
-        activeVideo.currentTime = 0;
-      }
-      contentDiv.innerHTML = '';
-    }
-    if (document.fullscreenElement || document.webkitFullscreenElement) {
-      if (document.exitFullscreen) document.exitFullscreen();
-      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-    }
-  }
-}
-
-function playInlineVideo(event, playerId, videoSrc, videoTitle) {
+function playInlineVideo(event, roleKey, videoSrc, titleText) {
   event.stopPropagation();
+  closeInlineVideo(roleKey);
   
-  // Enforce mutual exclusivity for role1 targets
-  if (playerId === 'role1' || playerId === 'role1-wall') {
-    haltRole1Audio();
-    closeRole1Carousel();
-    if (playerId === 'role1') {
-      closeRole1Wall();
-    } else if (playerId === 'role1-wall') {
-      closeInlineVideo('role1');
-    }
-  }
-
-  const container = document.getElementById('inlinePlayer-' + playerId);
-  const video = document.getElementById('inlineVideo-' + playerId);
-  const title = document.getElementById('inlineTitle-' + playerId);
-  
-  if (container && video && title) {
-    title.innerText = videoTitle;
-    video.src = videoSrc;
-    container.classList.add('active');
-    video.play().catch(e => console.log("Auto-play prevented:", e));
-    container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-}
-
-function toggleAudioCard(cardElement, event) {
-  event.stopPropagation();
-  
-  // Enforce mutual exclusivity when toggling audio
-  closeInlineVideo('role1');
-  closeInlineVideo('role1-wall');
-  closeCarouselExpanded('role1');
-
-  const audio = cardElement.querySelector('audio');
-  const isPlaying = cardElement.classList.contains('is-playing');
-  
-  // Pause all other audio cards inside role1
-  const role1Content = document.getElementById('role1');
-  if (role1Content) {
-    role1Content.querySelectorAll('.radio-card-item').forEach(card => {
-      card.classList.remove('is-playing');
-      const aud = card.querySelector('audio');
-      if (aud) {
-        aud.pause();
-        aud.currentTime = 0;
-      }
+  const roleContent = document.getElementById(roleKey) || document.getElementById('role1');
+  if (roleContent) {
+    roleContent.querySelectorAll('audio').forEach(a => { a.pause(); a.currentTime = 0; });
+    roleContent.querySelectorAll('.radio-card-item').forEach(c => c.classList.remove('is-playing'));
+    roleContent.querySelectorAll('.carousel-expanded-overlay').forEach(o => {
+      o.classList.remove('active');
+      const wrap = o.querySelector('.inline-video-wrapper > div');
+      if (wrap) wrap.innerHTML = '';
     });
+    roleContent.querySelectorAll('.marquee-item').forEach(item => item.classList.remove('is-playing', 'active'));
   }
 
-  if (!isPlaying && audio) {
-    cardElement.classList.add('is-playing');
-    audio.play().catch(e => console.log("Audio play prevented:", e));
+  const playerContainer = document.getElementById('inlinePlayer-' + roleKey);
+  const videoElem = document.getElementById('inlineVideo-' + roleKey);
+  const titleElem = document.getElementById('inlineTitle-' + roleKey);
+
+  if (playerContainer && videoElem) {
+    if (titleElem) titleElem.textContent = titleText || 'Now Playing';
+    videoElem.src = videoSrc;
+    playerContainer.classList.add('active');
+    videoElem.play().catch(e => console.log("Autoplay prevented:", e));
+    playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 }
 
-function expandCarouselItem(event, roleKey, type, src, titleText, itemElement) {
+function closeInlineVideo(roleKey) {
+  const playerContainer = document.getElementById('inlinePlayer-' + roleKey);
+  const videoElem = document.getElementById('inlineVideo-' + roleKey);
+  if (videoElem) {
+    videoElem.pause();
+    videoElem.currentTime = 0;
+    videoElem.src = '';
+  }
+  if (playerContainer) {
+    playerContainer.classList.remove('active');
+  }
+}
+
+function expandCarouselItem(event, roleKey, type, src, titleText, thumbElement) {
   event.stopPropagation();
+  closeInlineVideo(roleKey);
   
-  // Enforce mutual exclusivity when expanding carousel item
-  closeInlineVideo('role1');
-  closeInlineVideo('role1-wall');
-  haltRole1Audio();
+  const roleContent = document.getElementById(roleKey) || document.getElementById('role1');
+  if (roleContent) {
+    roleContent.querySelectorAll('audio').forEach(a => { a.pause(); a.currentTime = 0; });
+    roleContent.querySelectorAll('.radio-card-item').forEach(c => c.classList.remove('is-playing'));
+    roleContent.querySelectorAll('.marquee-item').forEach(item => item.classList.remove('is-playing', 'active'));
+  }
+
+  if (thumbElement) {
+    thumbElement.classList.add('is-playing', 'active');
+  }
 
   const overlay = document.getElementById('expanded-view-' + roleKey);
-  const contentDiv = document.getElementById('expanded-content-' + roleKey);
-  const titleDiv = document.getElementById('expanded-title-' + roleKey);
-  
-  if (overlay && contentDiv && titleDiv) {
-    titleDiv.innerText = titleText;
-    contentDiv.innerHTML = '';
-    
+  const titleElem = document.getElementById('expanded-title-' + roleKey);
+  const contentElem = document.getElementById('expanded-content-' + roleKey);
+
+  if (overlay && contentElem) {
+    if (titleElem) titleElem.textContent = titleText || 'Now Playing';
+    contentElem.innerHTML = '';
     if (type === 'video') {
       const vid = document.createElement('video');
       vid.src = src;
@@ -1750,29 +1697,47 @@ function expandCarouselItem(event, roleKey, type, src, titleText, itemElement) {
       vid.autoplay = true;
       vid.playsInline = true;
       vid.setAttribute('webkit-playsinline', '');
-      contentDiv.appendChild(vid);
-      vid.play().catch(e => console.log("Carousel video play prevented:", e));
+      contentElem.appendChild(vid);
     } else if (type === 'image') {
       const img = document.createElement('img');
       img.src = src;
       img.alt = titleText;
-      contentDiv.appendChild(img);
+      contentElem.appendChild(img);
     }
-    
     overlay.classList.add('active');
     overlay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function closeCarouselExpanded(roleKey) {
+  const overlay = document.getElementById('expanded-view-' + roleKey);
+  if (overlay) {
+    overlay.classList.remove('active');
+    const contentElem = document.getElementById('expanded-content-' + roleKey);
+    if (contentElem) {
+      const vids = contentElem.querySelectorAll('video');
+      vids.forEach(v => { v.pause(); v.currentTime = 0; });
+      contentElem.innerHTML = '';
+    }
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    }
+  }
+  const roleContent = document.getElementById(roleKey) || document.getElementById('role1');
+  if (roleContent) {
+    roleContent.querySelectorAll('.marquee-item').forEach(item => {
+      item.classList.remove('is-playing', 'active');
+    });
   }
 }
 
 function toggleFullscreen(roleKey) {
   const overlay = document.getElementById('expanded-view-' + roleKey);
   if (!overlay) return;
-  
   if (!document.fullscreenElement && !document.webkitFullscreenElement) {
     if (overlay.requestFullscreen) {
-      overlay.requestFullscreen().catch(err => {
-        alert(`Error attempting to enable fullscreen: ${err.message} (${err.name})`);
-      });
+      overlay.requestFullscreen();
     } else if (overlay.webkitRequestFullscreen) {
       overlay.webkitRequestFullscreen();
     }
@@ -1783,6 +1748,45 @@ function toggleFullscreen(roleKey) {
       document.webkitExitFullscreen();
     }
   }
+}
+
+function toggleAudioCard(card, event) {
+  event.stopPropagation();
+  const audio = card.querySelector('audio');
+  if (!audio) return;
+
+  document.querySelectorAll('audio').forEach(a => {
+    if (a !== audio) {
+      a.pause();
+      a.currentTime = 0;
+    }
+  });
+  document.querySelectorAll('.radio-card-item').forEach(c => {
+    if (c !== card) {
+      c.classList.remove('is-playing');
+    }
+  });
+  document.querySelectorAll('.inline-video-player-container').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.carousel-expanded-overlay').forEach(o => {
+    o.classList.remove('active');
+    const wrap = o.querySelector('.inline-video-wrapper > div');
+    if (wrap) wrap.innerHTML = '';
+  });
+  document.querySelectorAll('.marquee-item').forEach(item => item.classList.remove('is-playing', 'active'));
+
+  if (audio.paused) {
+    audio.play().then(() => {
+      card.classList.add('is-playing');
+    }).catch(e => console.log("Audio play error:", e));
+  } else {
+    audio.pause();
+    audio.currentTime = 0;
+    card.classList.remove('is-playing');
+  }
+
+  audio.onended = function() {
+    card.classList.remove('is-playing');
+  };
 }
 
 function openModal(imgSrc) {
@@ -1801,7 +1805,6 @@ function closeModal() {
   }
 }
 
-// Instore Lightbox Gallery Array & Navigation
 const instoreImages = [
   "BB1758835159986.jpeg", "1758755805584.jpeg", "1758755929727.jpeg", "1758755954119.jpeg", "1758755979137.jpeg",
   "BB1758835290442.jpeg", "1758756024609.jpeg", "1758756069198.jpeg", "1758756574017.jpeg", "1758756639804.jpeg",
@@ -1814,9 +1817,9 @@ let currentInstoreIndex = 0;
 function openInstoreLightbox(index) {
   currentInstoreIndex = index;
   const modal = document.getElementById('instoreLightbox');
-  const img = document.getElementById('instoreLightboxImg');
-  if (modal && img) {
-    img.src = instoreImages[currentInstoreIndex];
+  const modalImg = document.getElementById('instoreLightboxImg');
+  if (modal && modalImg) {
+    modalImg.src = instoreImages[index % instoreImages.length];
     modal.classList.add('active');
   }
 }
@@ -1831,24 +1834,24 @@ function closeInstoreLightbox() {
 function prevInstoreLightbox(event) {
   event.stopPropagation();
   currentInstoreIndex = (currentInstoreIndex - 1 + instoreImages.length) % instoreImages.length;
-  const img = document.getElementById('instoreLightboxImg');
-  if (img) {
-    img.src = instoreImages[currentInstoreIndex];
+  const modalImg = document.getElementById('instoreLightboxImg');
+  if (modalImg) {
+    modalImg.src = instoreImages[currentInstoreIndex];
   }
 }
 
 function nextInstoreLightbox(event) {
   event.stopPropagation();
   currentInstoreIndex = (currentInstoreIndex + 1) % instoreImages.length;
-  const img = document.getElementById('instoreLightboxImg');
-  if (img) {
-    img.src = instoreImages[currentInstoreIndex];
+  const modalImg = document.getElementById('instoreLightboxImg');
+  if (modalImg) {
+    modalImg.src = instoreImages[currentInstoreIndex];
   }
 }
 
-function openFullDetail(event, roleTitle) {
+function openFullDetail(event, roleName) {
   event.stopPropagation();
-  alert("Opening full detailed case study for: " + roleTitle);
+  alert("Detailed case study view for " + roleName + " is available upon request.");
 }
 </script>
 </body>
