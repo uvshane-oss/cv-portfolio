@@ -742,7 +742,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 14:06 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 14:25 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1434,7 +1434,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 <!-- Lightbox Modal Framework for Instore & Outdoor Locations Carousel -->
 <div id="instoreLightboxModal" class="image-modal-lightbox" onclick="handleLightboxBackdropClick(event)">
   <div class="lightbox-content-wrapper">
-    <button class="lightbox-close-btn" onclick="closeInstoreLightbox()">&times;</button>
+    <button class="close-lightbox-btn" onclick="closeInstoreLightbox()">&times;</button>
     <button class="lightbox-nav-btn lightbox-prev" onclick="navigateInstoreLightbox(-1, event)">&#10094;</button>
     <button class="lightbox-nav-btn lightbox-next" onclick="navigateInstoreLightbox(1, event)">&#10095;</button>
     <img id="instoreLightboxImg" src="" alt="Expanded Location">
@@ -1473,7 +1473,7 @@ function updateDynamicTimestamp() {
     const tzName = tzMatch ? tzMatch[1] : 'NZST';
     stampEl.textContent = `Rev: ${year}-${month}-${day} ${hour}:${minute} ${tzName}`;
   } catch (e) {
-    stampEl.textContent = `Rev: 2026-09-03 14:06 NZST`;
+    stampEl.textContent = `Rev: 2026-09-03 14:25 NZST`;
   }
 }
 updateDynamicTimestamp();
