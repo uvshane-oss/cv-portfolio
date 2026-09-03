@@ -523,24 +523,29 @@ li { margin-bottom: 6px; font-size: 13px; }
   100% { height: 32px; }
 }
 
-/* Interactive Carousel Expanded View Modal/Overlay inside components - Refactored to match .inline-video-player-container */
+/* Interactive Carousel Expanded View Modal/Overlay inside components */
 .carousel-expanded-overlay {
   display: none;
+  position: relative;
   background: #111;
   border: 2px solid var(--highlight-blue);
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 15px;
-  margin: 15px auto;
-  max-width: 550px;
-  box-shadow: 0 8px 25px rgba(29, 78, 216, 0.4);
-  position: relative;
-  box-sizing: border-box;
+  margin: 15px 0;
   text-align: center;
+  box-sizing: border-box;
 }
 .carousel-expanded-overlay.active {
   display: block;
 }
-
+.carousel-expanded-overlay video, .carousel-expanded-overlay img {
+  max-width: 100%;
+  max-height: 350px;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+  border-radius: 4px;
+}
 /* Fullscreen styling for expanded overlay container */
 .carousel-expanded-overlay:fullscreen {
   width: 100vw;
@@ -570,24 +575,32 @@ li { margin-bottom: 6px; font-size: 13px; }
   background: #111;
   z-index: 99999;
 }
-.carousel-expanded-overlay:fullscreen .inline-video-wrapper,
-.carousel-expanded-overlay:-webkit-full-screen .inline-video-wrapper {
-  width: 80vw;
-  height: 80vh;
-  padding-bottom: 0;
-  flex: 1;
+.carousel-expanded-overlay:fullscreen video,
+.carousel-expanded-overlay:fullscreen img {
+  max-height: 80vh;
+  width: auto;
+}
+.carousel-expanded-overlay:-webkit-full-screen video,
+.carousel-expanded-overlay:-webkit-full-screen img {
+  max-height: 80vh;
+  width: auto;
 }
 
 /* Hide the close button when the carousel expanded overlay is in fullscreen mode */
-.carousel-expanded-overlay:fullscreen .close-inline-video-btn,
-.carousel-expanded-overlay:-webkit-full-screen .close-inline-video-btn {
+.carousel-expanded-overlay:fullscreen .close-expanded-btn,
+.carousel-expanded-overlay:-webkit-full-screen .close-expanded-btn {
   display: none !important;
 }
 
-.close-expanded-btn, .close-inline-video-btn {
+.expanded-controls-bar {
   position: absolute;
-  top: 10px;
+  top: 15px;
   right: 15px;
+  display: flex;
+  gap: 8px;
+  z-index: 99999;
+}
+.close-expanded-btn, .fullscreen-toggle-btn {
   background: var(--accent);
   color: #fff;
   border: none;
@@ -596,18 +609,10 @@ li { margin-bottom: 6px; font-size: 13px; }
   font-weight: bold;
   border-radius: 4px;
   cursor: pointer;
-  z-index: 10;
+  z-index: 99999;
 }
 .fullscreen-toggle-btn {
   background: var(--highlight-blue);
-  color: #fff;
-  border: none;
-  padding: 6px 12px;
-  font-size: 12px;
-  font-weight: bold;
-  border-radius: 4px;
-  cursor: pointer;
-  z-index: 10;
 }
 
 /* Fullscreen Modal for Images */
@@ -636,7 +641,7 @@ li { margin-bottom: 6px; font-size: 13px; }
   font-weight: bold;
   cursor: pointer;
 }
-/* Inline Embedded Video Player Window */
+/* Inline Embedded Video Player Window (Appears right between description text and thumbnails, ~40-50% width centered) */
 .inline-video-player-container {
   display: none;
   background: #111;
@@ -661,10 +666,24 @@ li { margin-bottom: 6px; font-size: 13px; }
   border-radius: 6px;
   overflow: hidden;
 }
-.inline-video-wrapper video, .inline-video-wrapper img {
+.inline-video-wrapper video {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%; border: 0;
   object-fit: contain;
+}
+.close-inline-video-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 10;
 }
 .inline-video-title {
   color: #fff;
@@ -731,7 +750,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 18:45 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 18:55 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -792,14 +811,11 @@ li { margin-bottom: 6px; font-size: 13px; }
       <div id="devilBurgerPortfolioSection" class="portfolio-sub-section">
         <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Social Media Advertising</h4>
         <div class="carousel-expanded-overlay" id="expanded-view-role1" onclick="event.stopPropagation();">
-          <button class="close-inline-video-btn" onclick="closeCarouselExpanded('role1')">Close</button>
-          <div style="position: absolute; top: 10px; right: 80px;">
-            <button id="fullscreen-toggle-btn" class="fullscreen-toggle-btn" onclick="toggleFullscreen('role1')">Fullscreen</button>
+          <div class="expanded-controls-bar">
+            <button id="fullscreen-toggle-btn" class="fullscreen-toggle-btn" onclick="toggleFullscreen('role1')">Go Fullscreen / Shrink</button>
+            <button id="close-expanded-btn" class="close-expanded-btn" onclick="closeCarouselExpanded('role1')">Close</button>
           </div>
-          <div id="expanded-title-role1" class="inline-video-title">Now Playing</div>
-          <div class="inline-video-wrapper">
-            <div id="expanded-content-role1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
-          </div>
+          <div id="expanded-content-role1"></div>
         </div>
         <div class="marquee-container" id="marquee-role1" onclick="event.stopPropagation();">
           <div class="marquee-track">
@@ -1477,7 +1493,7 @@ function updateFullscreenButtonLabels() {
   const isFs = document.fullscreenElement || document.webkitFullscreenElement;
   const toggleBtn = document.getElementById('fullscreen-toggle-btn');
   if (toggleBtn) {
-    toggleBtn.textContent = isFs ? 'Shrink' : 'Fullscreen';
+    toggleBtn.textContent = isFs ? 'Shrink' : 'Go Fullscreen / Shrink';
   }
 }
 
@@ -1496,15 +1512,12 @@ function expandCarouselItem(event, roleId, type, src, captionText, itemElement) 
   event.stopPropagation();
   const overlay = document.getElementById('expanded-view-' + roleId);
   const contentContainer = document.getElementById('expanded-content-' + roleId);
-  const titleEl = document.getElementById('expanded-title-' + roleId);
-  
-  if (titleEl) titleEl.textContent = captionText;
   
   let html = '';
   if (type === 'video') {
-    html = `<video src="${src}" controls autoplay playsinline webkit-playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;"></video>`;
+    html = `<video src="${src}" controls autoplay playsinline webkit-playsinline style="max-height: 70vh; width: auto; max-width: 100%; border-radius: 4px;"></video>`;
   } else {
-    html = `<img src="${src}" alt="${captionText}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;">`;
+    html = `<img src="${src}" alt="${captionText}" style="max-height: 70vh; width: auto; max-width: 100%; border-radius: 4px;">`;
   }
   contentContainer.innerHTML = html;
   overlay.classList.add('active');
@@ -1593,7 +1606,6 @@ const instoreImages = [
   "BB1758835334807.jpeg", "1758756849533.jpeg", "1758756921948.jpeg", "1758756956376.jpeg", "1758756996703.jpeg",
   "BB1758835159986.jpeg", "1758757029987.jpeg", "1758757078499.jpeg", "1758757119457.jpeg", "1758757157638.jpeg"
 ];
-
 let currentInstoreIndex = 0;
 
 function openInstoreLightbox(index) {
@@ -1621,9 +1633,31 @@ function prevInstoreLightbox(event) {
   document.getElementById('instoreLightboxImg').src = instoreImages[currentInstoreIndex];
 }
 
-function openFullDetail(event, roleTitle) {
+function toggleDevilBurgerPortfolio(event) {
   event.stopPropagation();
-  alert("Detailed case study view for: " + roleTitle + "\n\nFull comprehensive documentation and metrics archive available upon executive request.");
+  const sec = document.getElementById('devilBurgerPortfolioSection');
+  sec.classList.toggle('show');
+  if (sec.classList.contains('show')) {
+    sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function toggleXcleanPortfolio(event) {
+  event.stopPropagation();
+  const sec = document.getElementById('xcleanPortfolioSection');
+  sec.classList.toggle('show');
+  if (sec.classList.contains('show')) {
+    sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function toggleIseePortfolio(event) {
+  event.stopPropagation();
+  const sec = document.getElementById('iseeDigitalPortfolioSection');
+  sec.classList.toggle('show');
+  if (sec.classList.contains('show')) {
+    sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 }
 </script>
 </body>
