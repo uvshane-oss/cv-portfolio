@@ -768,7 +768,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 19:22 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 19:41 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1634,10 +1634,10 @@ const instoreImages = [
   "BB1758835334807.jpeg", "1758756849533.jpeg", "1758756921948.jpeg", "1758756956376.jpeg", "1758756996703.jpeg",
   "BB1758835159986.jpeg", "1758757029987.jpeg", "1758757078499.jpeg", "1758757119457.jpeg", "1758757157638.jpeg"
 ];
+
 let currentInstoreIndex = 0;
 
 function openInstoreLightbox(index) {
-  event.stopPropagation();
   currentInstoreIndex = index;
   const modal = document.getElementById('instoreLightbox');
   const img = document.getElementById('instoreLightboxImg');
@@ -1650,48 +1650,41 @@ function closeInstoreLightbox() {
   modal.classList.remove('active');
 }
 
-function prevInstoreLightbox(event) {
-  event.stopPropagation();
-  currentInstoreIndex = (currentInstoreIndex - 1 + instoreImages.length) % instoreImages.length;
-  document.getElementById('instoreLightboxImg').src = instoreImages[currentInstoreIndex];
-}
-
 function nextInstoreLightbox(event) {
   event.stopPropagation();
   currentInstoreIndex = (currentInstoreIndex + 1) % instoreImages.length;
-  document.getElementById('instoreLightboxImg').src = instoreImages[currentInstoreIndex];
+  const img = document.getElementById('instoreLightboxImg');
+  img.src = instoreImages[currentInstoreIndex];
+}
+
+function prevInstoreLightbox(event) {
+  event.stopPropagation();
+  currentInstoreIndex = (currentInstoreIndex - 1 + instoreImages.length) % instoreImages.length;
+  const img = document.getElementById('instoreLightboxImg');
+  img.src = instoreImages[currentInstoreIndex];
 }
 
 function toggleDevilBurgerPortfolio(event) {
   event.stopPropagation();
-  const sec = document.getElementById('devilBurgerPortfolioSection');
-  sec.classList.toggle('show');
-  if (sec.classList.contains('show')) {
-    sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
+  const section = document.getElementById('devilBurgerPortfolioSection');
+  section.classList.toggle('show');
 }
 
 function toggleXcleanPortfolio(event) {
   event.stopPropagation();
-  const sec = document.getElementById('xcleanPortfolioSection');
-  sec.classList.toggle('show');
-  if (sec.classList.contains('show')) {
-    sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
+  const section = document.getElementById('xcleanPortfolioSection');
+  section.classList.toggle('show');
 }
 
 function toggleIseePortfolio(event) {
   event.stopPropagation();
-  const sec = document.getElementById('iseeDigitalPortfolioSection');
-  sec.classList.toggle('show');
-  if (sec.classList.contains('show')) {
-    sec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
+  const section = document.getElementById('iseeDigitalPortfolioSection');
+  section.classList.toggle('show');
 }
 
 function openFullDetail(event, roleName) {
   event.stopPropagation();
-  alert("Opening full detailed case study for: " + roleName);
+  alert("Detailed case study view for " + roleName + " is currently loaded in interactive production mode.");
 }
 </script>
 </body>
