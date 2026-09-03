@@ -693,7 +693,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 08:52 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-03 12:01 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -760,29 +760,29 @@ li { margin-bottom: 6px; font-size: 13px; }
         <div class="marquee-container" id="marquee-role1">
           <div class="marquee-track">
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
-              <video src="social media 1.mp4#t=3" preload="metadata" muted loop playsinline webkit-playsinline></video>
+              <video src="social media 1.mp4#t=3" poster="social media 1_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 2.mp4', 'Social Media Campaign 2')">
-              <video src="social media 2.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
+              <video src="social media 2.mp4#t=1" poster="social media 2_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 3.mp4', 'Social Media Campaign 3')">
-              <video src="social media 3.mp4#t=1" preload="metadata" muted loop playsinline webkit-playsinline></video>
+              <video src="social media 3.mp4#t=1" poster="social media 3_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 4.mp4', 'Social Media Campaign 4')">
-              <video src="social media 4.mp4#t=3" preload="metadata" muted loop playsinline webkit-playsinline></video>
+              <video src="social media 4.mp4#t=3" poster="social media 4_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'image', 'social media carosel.jpg', 'Social Media Carousel Assets')">
               <img src="social media carosel.jpg" alt="Social Media Carousel" width="260" height="160">
             </div>
-            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'image', '$10 Tuesday for summer .jpg', 'Summer Promotion Artwork')">
-              <img src="$10 Tuesday for summer .jpg" alt="Summer Promo Campaign" width="260" height="160">
+            <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'image', 'summer promotion.jpg', 'Summer Promotion Artwork')">
+              <img src="summer promotion.jpg" alt="Summer Promo Campaign" width="260" height="160">
             </div>
             <!-- Duplicated loop for smooth infinite scroll -->
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 1.mp4', 'Social Media Campaign 1')">
-              <video src="social media 1.mp4#t=3" preload="metadata" muted loop playsinline webkit-playsinline></video>
+              <video src="social media 1.mp4#t=3" poster="social media 1_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
             </div>
             <div class="marquee-item" onclick="expandCarouselItem(event, 'role1', 'video', 'social media 4.mp4', 'Social Media Campaign 4')">
-              <video src="social media 4.mp4#t=3" preload="metadata" muted loop playsinline webkit-playsinline></video>
+              <video src="social media 4.mp4#t=3" poster="social media 4_thumb.jpg" preload="metadata" muted loop playsinline webkit-playsinline></video>
             </div>
           </div>
         </div>
@@ -1421,7 +1421,7 @@ function updateDynamicTimestamp() {
     const tzName = tzMatch ? tzMatch[1] : 'NZST';
     stampEl.textContent = `Rev: ${year}-${month}-${day} ${hour}:${minute} ${tzName}`;
   } catch (e) {
-    stampEl.textContent = `Rev: 2026-09-03 08:52 NZST`;
+    stampEl.textContent = `Rev: 2026-09-03 12:01 NZST`;
   }
 }
 updateDynamicTimestamp();
@@ -1555,7 +1555,6 @@ function toggleRole(event, cardElement, roleId) {
     targetContent.classList.add("show");
     
     targetContent.querySelectorAll('video').forEach(video => {
-      // Retain preview timestamps (#t=...) natively without resetting head to 0
       if (!video.currentTime && video.src && video.src.includes('#t=')) {
         video.load();
       }
@@ -1588,7 +1587,13 @@ function playInlineVideo(event, roleKey, videoUrl, videoTitle) {
     titleEl.textContent = videoTitle;
     videoEl.src = videoUrl;
     container.classList.add('active');
-    videoEl.play().catch(e => console.log("Autoplay prevented:", e));
+    videoEl.play().then(() => {
+      if (videoEl.requestFullscreen) {
+        videoEl.requestFullscreen().catch(err => console.log("Fullscreen request failed:", err));
+      } else if (videoEl.webkitRequestFullscreen) {
+        videoEl.webkitRequestFullscreen();
+      }
+    }).catch(e => console.log("Autoplay prevented:", e));
   }
 }
 
@@ -1619,7 +1624,7 @@ function expandCarouselItem(event, roleKey, type, sourceFile, titleText) {
     } else {
       contentWrapper.innerHTML = `
         <h4 style="color:#fff; margin-top:0; font-size:14px;">${titleText}</h4>
-        <img src="${sourceFile}" alt="${titleText}" style="max-width:100%; max-height:320px; object-fit:contain; border-radius:4px;">
+        <img src="${sourceFile}" alt="${titleText}" style="max-width:100%; max-height:320px; object-fit:contain; border-radius:4px; cursor:pointer;" onclick="openModal('${sourceFile}')">
       `;
     }
     overlay.classList.add('active');
@@ -1633,7 +1638,6 @@ function closeCarouselExpanded(roleKey) {
     overlay.classList.remove('active');
     contentWrapper.innerHTML = '';
     
-    // Refresh marquee videos to ensure preview timestamp state is preserved without jumping back to 0
     document.querySelectorAll('#marquee-' + roleKey + ' video').forEach(v => {
       if (!v.paused) v.pause();
     });
@@ -1668,49 +1672,8 @@ function closeModal() {
 
 function openFullDetail(event, roleName) {
   event.stopPropagation();
-  stopAllMedia();
-  alert("Opening detailed case study for: " + roleName);
-}
-
-function toggleDevilBurgerPortfolio(event) {
-  event.stopPropagation();
-  // Aggressively halt all ongoing media playback (testimonials, active players, marquee expansions) at the very beginning of execution
-  stopAllMedia();
-  
-  const section = document.getElementById('devilBurgerPortfolioSection');
-  const isOpen = section.classList.contains('show');
-  
-  if (isOpen) {
-    // If the portfolio section is currently open and about to be closed, aggressively tear down nested portfolio media elements
-    section.querySelectorAll('video, audio').forEach(el => {
-      el.pause();
-      el.currentTime = 0;
-    });
-    const expandedOverlay = document.getElementById('expanded-view-role1');
-    if (expandedOverlay) {
-      expandedOverlay.classList.remove('active');
-      const content = expandedOverlay.querySelector('#expanded-content-role1');
-      if (content) content.innerHTML = '';
-    }
-  }
-  
-  section.classList.toggle('show');
-}
-
-function toggleXcleanPortfolio(event) {
-  event.stopPropagation();
-  stopAllMedia();
-  const section = document.getElementById('xcleanPortfolioSection');
-  section.classList.toggle('show');
-}
-
-function toggleIseePortfolio(event) {
-  event.stopPropagation();
-  stopAllMedia();
-  const section = document.getElementById('iseeDigitalPortfolioSection');
-  section.classList.toggle('show');
+  alert("Detailed case study view for " + roleName + " coming soon.");
 }
 </script>
 </body>
 </html>
-```
