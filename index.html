@@ -965,16 +965,30 @@ li { margin-bottom: 6px; font-size: 13px; }
   justify-self: stretch;
 }
 
-@media(max-width: 600px) {
+@media(max-width: 700px) {
   #role4 .isee-video-grid {
+    display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 6px;
+    width: 100%;
+    align-items: start;
+  }
+
+  #role4 .isee-video-grid .video-thumbnail-card {
+    min-width: 0;
+    width: 100%;
+    grid-column: auto;
+    justify-self: stretch;
   }
 
   #role4 .isee-video-grid .video-thumbnail-card:nth-child(3) {
     grid-column: auto;
     width: 100%;
     justify-self: stretch;
+  }
+
+  #role4 .isee-video-grid .video-thumbnail-card > div[style*="video testimonial overlay.png"] {
+    background-size: 88% auto !important;
   }
 }
 
@@ -1048,7 +1062,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-05 09:09 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-05 09:28 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
