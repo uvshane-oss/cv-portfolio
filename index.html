@@ -631,6 +631,17 @@ li { margin-bottom: 6px; font-size: 13px; }
   display: none !important;
 }
 
+/* Keep a clear, persistent Shrink control visible while carousel media is fullscreen. */
+.carousel-expanded-overlay:fullscreen .fullscreen-toggle-btn,
+.carousel-expanded-overlay:-webkit-full-screen .fullscreen-toggle-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 2147483647;
+  margin: 0;
+  display: block !important;
+}
+
 .expanded-controls-bar {
   display: flex;
   justify-content: space-between;
@@ -814,7 +825,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-04 13:24 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-04 13:32 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1856,26 +1867,27 @@ function closeCarouselExpanded(roleKey) {
   }
 }
 
+function updateFullscreenToggleButton() {
+  const button = document.getElementById('fullscreen-toggle-btn');
+  if (!button) return;
+  button.textContent = (document.fullscreenElement || document.webkitFullscreenElement) ? 'Shrink' : 'Go Fullscreen / Shrink';
+}
+
 function toggleFullscreen(roleKey) {
   const overlay = document.getElementById('expanded-view-' + roleKey);
   const contentWrapper = document.getElementById('expanded-content-' + roleKey);
   if (!overlay || !contentWrapper) return;
-  const media = contentWrapper.querySelector('video, img');
-  if (!media) return;
   if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-    if (media.requestFullscreen) {
-      media.requestFullscreen();
-    } else if (media.webkitRequestFullscreen) {
-      media.webkitRequestFullscreen();
-    }
+    if (overlay.requestFullscreen) overlay.requestFullscreen();
+    else if (overlay.webkitRequestFullscreen) overlay.webkitRequestFullscreen();
   } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    }
+    if (document.exitFullscreen) document.exitFullscreen();
+    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
   }
 }
+
+document.addEventListener('fullscreenchange', updateFullscreenToggleButton);
+document.addEventListener('webkitfullscreenchange', updateFullscreenToggleButton);
 
 function toggleAudioCard(cardElement, event) {
   event.stopPropagation();
