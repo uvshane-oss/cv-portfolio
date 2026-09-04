@@ -797,11 +797,24 @@ li { margin-bottom: 6px; font-size: 13px; }
 .detail-link:hover {
   color: var(--accent);
 }
+
+/* Match dedicated carousel fullscreen behaviour to the browser's native media fullscreen sizing on mobile. */
+#expanded-content-role1 > video:fullscreen,
+#expanded-content-role1 > img:fullscreen,
+#expanded-content-role1 > video:-webkit-full-screen,
+#expanded-content-role1 > img:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  object-fit: contain;
+  background: #000;
+}
 </style>
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-04 13:18 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-04 13:24 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1845,12 +1858,15 @@ function closeCarouselExpanded(roleKey) {
 
 function toggleFullscreen(roleKey) {
   const overlay = document.getElementById('expanded-view-' + roleKey);
-  if (!overlay) return;
+  const contentWrapper = document.getElementById('expanded-content-' + roleKey);
+  if (!overlay || !contentWrapper) return;
+  const media = contentWrapper.querySelector('video, img');
+  if (!media) return;
   if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-    if (overlay.requestFullscreen) {
-      overlay.requestFullscreen();
-    } else if (overlay.webkitRequestFullscreen) {
-      overlay.webkitRequestFullscreen();
+    if (media.requestFullscreen) {
+      media.requestFullscreen();
+    } else if (media.webkitRequestFullscreen) {
+      media.webkitRequestFullscreen();
     }
   } else {
     if (document.exitFullscreen) {
