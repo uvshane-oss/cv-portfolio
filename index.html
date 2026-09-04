@@ -795,6 +795,88 @@ li { margin-bottom: 6px; font-size: 13px; }
 }
 
 
+/* XClean National Sales (Role 2): persistent mixed-orientation video showcase */
+#role2 .xclean-testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+  align-items: start;
+}
+
+#role2 .xclean-video-item {
+  min-width: 0;
+}
+
+#role2 .xclean-video-label {
+  margin: 0 0 6px 0;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--primary);
+  text-align: center;
+}
+
+#role2 .xclean-testimonial-grid .video-thumbnail-card {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  padding-bottom: 0;
+  background: transparent;
+}
+
+#role2 .xclean-testimonial-grid .video-thumbnail-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: transparent;
+}
+
+#role2 .xclean-covid-block {
+  margin-top: 18px;
+}
+
+#role2 .xclean-covid-preview {
+  width: min(100%, 560px);
+  margin: 8px auto 0;
+}
+
+#role2 .xclean-covid-preview .video-thumbnail-card {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding-bottom: 0;
+  background: #000;
+}
+
+#role2 .xclean-covid-preview .video-thumbnail-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+
+@media(max-width: 600px) {
+  #role2 .xclean-testimonial-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #role2 .xclean-testimonial-grid .xclean-video-item:nth-child(3) {
+    grid-column: 1 / -1;
+    width: calc((100% - 10px) / 2);
+    justify-self: center;
+  }
+}
+
+@media(max-width: 420px) {
+  #role2 .xclean-testimonial-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #role2 .xclean-testimonial-grid .xclean-video-item:nth-child(3) {
+    grid-column: auto;
+    width: 100%;
+  }
+}
+
 /* ISee Digital multilingual testimonial previews: three equal portrait cards */
 #role4 .isee-video-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -876,7 +958,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-04 13:32 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-05 06:28 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1070,31 +1152,42 @@ li { margin-bottom: 6px; font-size: 13px; }
         </div>
       </div>
 
-      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials : Glen : A Franchise Owner & Deb: A Sales Rep discuss working with Shane .</h4>
-      <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Glen%20Hackell%20owner%20of%20XClean%202015.mp4', 'Glen - Franchise Owner Testimonial')">
-          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Glen%20Hackell%20owner%20of%20XClean%202015.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
-          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
-          <div class="thumbnail-glow-overlay"></div>
+      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials</h4>
+      <div class="xclean-testimonial-grid">
+        <div class="xclean-video-item">
+          <div class="xclean-video-label">Glen: A Franchise Owner</div>
+          <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Glen%20Hackell%20owner%20of%20XClean%202015.mp4', 'Glen: A Franchise Owner')">
+            <video class="xclean-preview-video" data-preview-time="1" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Glen%20Hackell%20owner%20of%20XClean%202015.mp4#t=1" preload="auto" muted playsinline webkit-playsinline></video>
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
+            <div class="thumbnail-glow-overlay"></div>
+          </div>
         </div>
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Deb%20Crump%20talks%20about%20he%20experience%20working%20with%20Shane.mp4', 'Deb - Rep Testimonial')">
-          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Deb%20Crump%20talks%20about%20he%20experience%20working%20with%20Shane.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
-          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
-          <div class="thumbnail-glow-overlay"></div>
+        <div class="xclean-video-item">
+          <div class="xclean-video-label">Deb: A Sales Rep</div>
+          <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Deb%20Crump%20talks%20about%20he%20experience%20working%20with%20Shane.mp4', 'Deb: A Sales Rep')">
+            <video class="xclean-preview-video" data-preview-time="1" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Deb%20Crump%20talks%20about%20he%20experience%20working%20with%20Shane.mp4#t=1" preload="auto" muted playsinline webkit-playsinline></video>
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
+            <div class="thumbnail-glow-overlay"></div>
+          </div>
+        </div>
+        <div class="xclean-video-item">
+          <div class="xclean-video-label">Clients</div>
+          <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/September%201%2C%202021.mp4', 'Clients')">
+            <video class="xclean-preview-video" data-preview-time="1" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/September%201%2C%202021.mp4#t=1" preload="auto" muted playsinline webkit-playsinline></video>
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
+            <div class="thumbnail-glow-overlay"></div>
+          </div>
         </div>
       </div>
 
-      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Client Testimonials & COVID Communications</h4>
-      <div class="video-grid">
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/September%201%2C%202021.mp4', 'September 1, 2021')">
-          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/September%201%2C%202021.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
-          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
-          <div class="thumbnail-glow-overlay"></div>
-        </div>
-        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/X%20Clean%20covid%20crisis.mp4', 'XClean COVID Crisis Campaign')">
-          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/X%20Clean%20covid%20crisis.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
-          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
-          <div class="thumbnail-glow-overlay"></div>
+      <div class="xclean-covid-block">
+        <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">The COVID Crisis</h4>
+        <div class="xclean-covid-preview">
+          <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/X%20Clean%20covid%20crisis.mp4', 'The COVID Crisis')">
+            <video class="xclean-preview-video" data-preview-time="1" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/X%20Clean%20covid%20crisis.mp4#t=1" preload="auto" muted playsinline webkit-playsinline></video>
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
+            <div class="thumbnail-glow-overlay"></div>
+          </div>
         </div>
       </div>
 
@@ -1821,6 +1914,28 @@ function pauseAllMedia(exceptionContainer = null) {
   });
 }
 
+function preserveXcleanPreviewFrames() {
+  document.querySelectorAll('#role2 .xclean-preview-video').forEach(video => {
+    const previewTime = Number(video.dataset.previewTime || 1);
+    const setPreviewFrame = () => {
+      try {
+        video.pause();
+        if (Number.isFinite(video.duration) && video.duration > 0) {
+          video.currentTime = Math.min(previewTime, Math.max(0, video.duration - 0.05));
+        } else {
+          video.currentTime = previewTime;
+        }
+      } catch (e) {
+        // Browser may defer seeking until metadata is ready; loadedmetadata will retry.
+      }
+    };
+    if (video.readyState >= 1) setPreviewFrame();
+    else video.addEventListener('loadedmetadata', setPreviewFrame, { once: true });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', preserveXcleanPreviewFrames);
+
 function playInlineVideo(event, roleKey, videoSrc, titleText) {
   event.stopPropagation();
   pauseAllMedia();
@@ -1835,6 +1950,7 @@ function playInlineVideo(event, roleKey, videoSrc, titleText) {
     videoElem.play().catch(e => console.log("Autoplay prevented:", e));
   }
   playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  if (roleKey === 'role2') preserveXcleanPreviewFrames();
 }
 
 function closeInlineVideo(roleKey) {
@@ -1848,6 +1964,7 @@ function closeInlineVideo(roleKey) {
   if (playerContainer) {
     playerContainer.classList.remove('active');
   }
+  if (roleKey === 'role2') preserveXcleanPreviewFrames();
 }
 
 function expandCarouselItem(event, roleKey, type, mediaSrc, titleText, itemElement) {
