@@ -773,7 +773,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-04 12:49 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-04 07:37 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1661,135 +1661,112 @@ function pauseAllMedia(exceptionContainer = null) {
     if (!exceptionContainer || !exceptionContainer.contains(video)) {
       video.pause();
       video.currentTime = 0;
+      // Persist poster attribute reference explicitly across browsers
+      if (video.hasAttribute('poster')) {
+        const posterUrl = video.getAttribute('poster');
+        video.load();
+        video.poster = posterUrl;
+      }
+    }
+  });
+  document.querySelectorAll('.marquee-item').forEach(item => {
+    if (!exceptionContainer || !exceptionContainer.contains(item)) {
+      item.classList.remove('is-playing', 'active');
     }
   });
 }
 
 function playInlineVideo(event, roleKey, videoSrc, titleText) {
   event.stopPropagation();
-  const container = document.getElementById('inlinePlayer-' + roleKey);
-  const video = document.getElementById('inlineVideo-' + roleKey);
-  const title = document.getElementById('inlineTitle-' + roleKey);
-  if (!container || !video) return;
-
-  pauseAllMedia(container);
-
-  title.textContent = titleText;
-  video.src = videoSrc;
-  container.classList.add('active');
-  video.play().catch(e => console.log("Auto-play prevented:", e));
-  container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  pauseAllMedia();
+  const playerContainer = document.getElementById('inlinePlayer-' + roleKey);
+  const videoElem = document.getElementById('inlineVideo-' + roleKey);
+  const titleElem = document.getElementById('inlineTitle-' + roleKey);
+  
+  if (titleElem) titleElem.innerText = titleText;
+  if (videoElem) {
+    videoElem.src = videoSrc;
+    playerContainer.classList.add('active');
+    videoElem.play().catch(e => console.log("Autoplay prevented:", e));
+  }
+  playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function closeInlineVideo(roleKey) {
-  const container = document.getElementById('inlinePlayer-' + roleKey);
-  const video = document.getElementById('inlineVideo-' + roleKey);
-  if (video) {
-    video.pause();
-    video.currentTime = 0;
+  const playerContainer = document.getElementById('inlinePlayer-' + roleKey);
+  const videoElem = document.getElementById('inlineVideo-' + roleKey);
+  if (videoElem) {
+    videoElem.pause();
+    videoElem.currentTime = 0;
+    videoElem.src = '';
   }
-  if (container) {
-    container.classList.remove('active');
-  }
-}
-
-function toggleAudioCard(card, event) {
-  event.stopPropagation();
-  const audio = card.querySelector('audio');
-  const isPlaying = card.classList.contains('is-playing');
-
-  pauseAllMedia(card);
-
-  if (!isPlaying) {
-    audio.play().then(() => {
-      card.classList.add('is-playing');
-    }).catch(e => console.log("Audio play failed:", e));
-  } else {
-    audio.pause();
-    audio.currentTime = 0;
-    card.classList.remove('is-playing');
+  if (playerContainer) {
+    playerContainer.classList.remove('active');
   }
 }
 
-function openModal(imgSrc) {
-  const lightbox = document.getElementById('imageLightbox');
-  const img = document.getElementById('lightboxImg');
-  img.src = imgSrc;
-  lightbox.classList.add('active');
-}
-
-function closeModal() {
-  const lightbox = document.getElementById('imageLightbox');
-  lightbox.classList.remove('active');
-  document.getElementById('lightboxImg').src = '';
-}
-
-const instoreImages = [
-  "BB1758835159986.jpeg", "1758755805584.jpeg", "1758755929727.jpeg", "1758755954119.jpeg", "1758755979137.jpeg",
-  "BB1758835290442.jpeg", "1758756024609.jpeg", "1758756069198.jpeg", "1758756574017.jpeg", "1758756639804.jpeg",
-  "BB1758835313131.jpeg", "1758756679346.jpeg", "1758756712158.jpeg", "1758756759188.jpeg", "1758756798411.jpeg",
-  "BB1758835334807.jpeg", "1758756849533.jpeg", "1758756921948.jpeg", "1758756956376.jpeg", "1758756996703.jpeg",
-  "BB1758835159986.jpeg", "1758757029987.jpeg", "1758757078499.jpeg", "1758757119457.jpeg", "1758757157638.jpeg"
-];
-let currentInstoreIndex = 0;
-
-function openInstoreLightbox(index) {
-  currentInstoreIndex = index % instoreImages.length;
-  const lightbox = document.getElementById('instoreLightbox');
-  const img = document.getElementById('instoreLightboxImg');
-  img.src = instoreImages[currentInstoreIndex];
-  lightbox.classList.add('active');
-}
-
-function closeInstoreLightbox() {
-  const lightbox = document.getElementById('instoreLightbox');
-  lightbox.classList.remove('active');
-}
-
-function nextInstoreLightbox(event) {
+function expandCarouselItem(event, roleKey, type, mediaSrc, titleText, itemElement) {
   event.stopPropagation();
-  currentInstoreIndex = (currentInstoreIndex + 1) % instoreImages.length;
-  document.getElementById('instoreLightboxImg').src = instoreImages[currentInstoreIndex];
-}
-
-function prevInstoreLightbox(event) {
-  event.stopPropagation();
-  currentInstoreIndex = (currentInstoreIndex - 1 + instoreImages.length) % instoreImages.length;
-  document.getElementById('instoreLightboxImg').src = instoreImages[currentInstoreIndex];
-}
-
-function expandCarouselItem(event, roleKey, type, src, titleText, itemElement) {
-  event.stopPropagation();
-  const overlay = document.getElementById('expanded-view-' + roleKey);
-  const title = document.getElementById('expanded-title-' + roleKey);
-  const content = document.getElementById('expanded-content-' + roleKey);
+  pauseAllMedia();
   
-  pauseAllMedia(overlay);
-
-  document.querySelectorAll('.marquee-item').forEach(el => el.classList.remove('is-playing', 'active'));
-  if (itemElement) itemElement.classList.add('is-playing');
-
-  title.textContent = titleText;
-  if (type === 'video') {
-    content.innerHTML = `<video src="${src}" controls autoplay playsinline webkit-playsinline style="width:100%; height:100%; object-fit:contain; border-radius:6px;"></video>`;
-  } else {
-    content.innerHTML = `<img src="${src}" alt="${titleText}" style="width:100%; height:100%; object-fit:contain; border-radius:6px;">`;
+  document.querySelectorAll('#marquee-' + roleKey + ' .marquee-item').forEach(item => {
+    item.classList.remove('active', 'is-playing');
+  });
+  if (itemElement) {
+    itemElement.classList.add('active', 'is-playing');
   }
-  overlay.classList.add('active');
-  overlay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  const overlay = document.getElementById('expanded-view-' + roleKey);
+  const titleElem = document.getElementById('expanded-title-' + roleKey);
+  const contentWrapper = document.getElementById('expanded-content-' + roleKey);
+  
+  if (titleElem) titleElem.innerText = titleText;
+  if (contentWrapper) {
+    if (type === 'video') {
+      contentWrapper.innerHTML = `<video src="${mediaSrc}" controls autoplay playsinline webkit-playsinline></video>`;
+    } else {
+      contentWrapper.innerHTML = `<img src="${mediaSrc}" alt="${titleText}">`;
+    }
+  }
+  if (overlay) {
+    overlay.classList.add('active');
+    overlay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 }
 
 function closeCarouselExpanded(roleKey) {
   const overlay = document.getElementById('expanded-view-' + roleKey);
   if (overlay) {
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    }
     overlay.classList.remove('active');
-    const content = overlay.querySelector('.inline-video-wrapper > div');
-    if (content) content.innerHTML = '';
+    const contentWrapper = document.getElementById('expanded-content-' + roleKey);
+    if (contentWrapper) {
+      const vid = contentWrapper.querySelector('video');
+      if (vid) {
+        vid.pause();
+        vid.currentTime = 0;
+      }
+      contentWrapper.innerHTML = '';
+    }
   }
-  document.querySelectorAll('.marquee-item').forEach(el => el.classList.remove('is-playing', 'active'));
-  if (document.fullscreenElement || document.webkitFullscreenElement) {
-    if (document.exitFullscreen) document.exitFullscreen();
-    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+  const marqueeContainer = document.getElementById('marquee-' + roleKey);
+  if (marqueeContainer) {
+    marqueeContainer.querySelectorAll('.marquee-item').forEach(item => {
+      item.classList.remove('active', 'is-playing');
+      const v = item.querySelector('video');
+      if (v) {
+        v.pause();
+        v.currentTime = 0;
+        if (v.hasAttribute('poster')) {
+          const pUrl = v.getAttribute('poster');
+          v.load();
+          v.poster = pUrl;
+        }
+      }
+    });
   }
 }
 
@@ -1811,9 +1788,83 @@ function toggleFullscreen(roleKey) {
   }
 }
 
-function openFullDetail(event, roleName) {
+function toggleAudioCard(cardElement, event) {
   event.stopPropagation();
-  alert("Detailed case study view for " + roleName + " is accessible via portfolio expansion assets.");
+  const audioElem = cardElement.querySelector('audio');
+  const isPlaying = cardElement.classList.contains('is-playing');
+  
+  pauseAllMedia();
+
+  if (!isPlaying && audioElem) {
+    audioElem.play().then(() => {
+      cardElement.classList.add('is-playing');
+    }).catch(e => console.log("Audio playback error:", e));
+  }
+}
+
+// Lightbox functions
+function openModal(imgSrc) {
+  pauseAllMedia();
+  const lightbox = document.getElementById('imageLightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  if (lightbox && lightboxImg) {
+    lightboxImg.src = imgSrc;
+    lightbox.classList.add('active');
+  }
+}
+
+function closeModal() {
+  const lightbox = document.getElementById('imageLightbox');
+  if (lightbox) {
+    lightbox.classList.remove('active');
+  }
+}
+
+// Instore Carousel Images Array for Lightbox
+const instoreImages = [
+  "BB1758835159986.jpeg", "1758755805584.jpeg", "1758755929727.jpeg", "1758755954119.jpeg", "1758755979137.jpeg",
+  "BB1758835290442.jpeg", "1758756024609.jpeg", "1758756069198.jpeg", "1758756574017.jpeg", "1758756639804.jpeg",
+  "BB1758835313131.jpeg", "1758756679346.jpeg", "1758756712158.jpeg", "1758756759188.jpeg", "1758756798411.jpeg",
+  "BB1758835334807.jpeg", "1758756849533.jpeg", "1758756921948.jpeg", "1758756956376.jpeg", "1758756996703.jpeg",
+  "BB1758835159986.jpeg", "1758757029987.jpeg", "1758757078499.jpeg", "1758757119457.jpeg", "1758757157638.jpeg"
+];
+let currentInstoreIndex = 0;
+
+function openInstoreLightbox(index) {
+  pauseAllMedia();
+  currentInstoreIndex = index % instoreImages.length;
+  const lightbox = document.getElementById('instoreLightbox');
+  const lightboxImg = document.getElementById('instoreLightboxImg');
+  if (lightbox && lightboxImg) {
+    lightboxImg.src = instoreImages[currentInstoreIndex];
+    lightbox.classList.add('active');
+  }
+}
+
+function closeInstoreLightbox() {
+  const lightbox = document.getElementById('instoreLightbox');
+  if (lightbox) {
+    lightbox.classList.remove('active');
+  }
+}
+
+function prevInstoreLightbox(event) {
+  event.stopPropagation();
+  currentInstoreIndex = (currentInstoreIndex - 1 + instoreImages.length) % instoreImages.length;
+  const lightboxImg = document.getElementById('instoreLightboxImg');
+  if (lightboxImg) lightboxImg.src = instoreImages[currentInstoreIndex];
+}
+
+function nextInstoreLightbox(event) {
+  event.stopPropagation();
+  currentInstoreIndex = (currentInstoreIndex + 1) % instoreImages.length;
+  const lightboxImg = document.getElementById('instoreLightboxImg');
+  if (lightboxImg) lightboxImg.src = instoreImages[currentInstoreIndex];
+}
+
+function openFullDetail(event, caseTitle) {
+  event.stopPropagation();
+  alert("Opening full detailed case study for: " + caseTitle);
 }
 </script>
 </body>
