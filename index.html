@@ -1062,7 +1062,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-05 09:39 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-05 10:03 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1884,6 +1884,20 @@ function closePortfolioMedia(sectionElement) {
   }
 }
 
+function restoreDevilBurgerCarouselPreviews() {
+  const marquee = document.getElementById('marquee-role1');
+  if (!marquee) return;
+
+  marquee.querySelectorAll('.marquee-item video').forEach(video => {
+    video.pause();
+    const posterUrl = video.getAttribute('poster');
+    if (posterUrl) {
+      video.poster = posterUrl;
+      video.load();
+    }
+  });
+}
+
 function toggleDevilBurgerPortfolio(event) {
   event.stopPropagation();
   const section = document.getElementById('devilBurgerPortfolioSection');
@@ -1895,6 +1909,7 @@ function toggleDevilBurgerPortfolio(event) {
     if (btn) btn.classList.add('pulse-animation');
   } else {
     closeAbovePortfolioMedia(btn);
+    restoreDevilBurgerCarouselPreviews();
     section.classList.add('show');
     if (btn) btn.classList.remove('pulse-animation');
     section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
