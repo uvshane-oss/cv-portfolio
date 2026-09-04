@@ -147,6 +147,34 @@ h2.section-title {
   border-top: 2px dashed var(--border-color);
   cursor: default;
 }
+
+/* Role Overview Panel */
+.role-overview {
+  margin: 0 0 16px 0;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--highlight-blue);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.role-overview h4 {
+  margin: 0 0 7px 0;
+  font-size: 14px;
+  color: var(--primary);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+.role-overview p {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  color: var(--text-main);
+}
+.role-overview p:last-child { margin-bottom: 0; }
+@media(min-width: 768px) {
+  .role-overview { padding: 14px 16px; }
+  .role-overview p { font-size: 14px; }
+}
 .collapsible-content.show { display: block; }
 
 /* Portfolio Collapsible Sub-Section */
@@ -773,7 +801,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-04 13:05 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-04 13:18 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -791,6 +819,11 @@ li { margin-bottom: 6px; font-size: 13px; }
     <div class="role-summary-highlight">Digital Projects Completed, providing Operational Consulting across owner's other business</div>
     <div id="role1" class="collapsible-content">
       <img src="image1.png" alt="Devil Burger Logo" class="role-logo">
+      <div class="role-overview">
+        <h4>Role Overview</h4>
+        <p>Supported the owner across several business interests, managing feasibility studies, diversification initiatives, resource consents, council applications, HR processes and systems development.</p>
+        <p>In parallel, led Devil Burger’s digital projects from concept to deployment, working with staff, management and external developers to deliver efficient, fit-for-purpose solutions. Created additional revenue streams by utilising a fixed cost centre across multiple entities. Delivered strong commercial value, improved operational efficiency and lifted sales performance through targeted marketing, radio activity and digital media.</p>
+      </div>
       <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
       <ul>
         <li>Delivered full in-store digital transformation across menus, hardware, and POS sync.</li>
@@ -933,6 +966,11 @@ li { margin-bottom: 6px; font-size: 13px; }
     <div class="role-summary-highlight">Company selling cleaning chemicals into industry, agriculture and hospitality sectors</div>
     <div id="role2" class="collapsible-content">
       <img src="xclean.jpg" alt="XClean Logo" class="role-logo">
+      <div class="role-overview">
+        <h4>Role Overview</h4>
+        <p>Brought back into XClean to rebuild the business nationally after major legacy issues, taking full responsibility for restoring territories, rebuilding customer trust and re-establishing coverage across all regional centres. This was a commission-only, results-driven role — out early every morning, meeting customers face-to-face, knocking on gates and doors, and coaching staff directly in the field to stabilise performance and rebuild the brand.</p>
+        <p>Oversaw product formulation, global sourcing, importation and industry approvals while driving significant personal sales activity and developing new regional teams. Rebuilt the fleet myself — painting vans, installing custom shelving and redeploying assets — while delivering practical operational improvements. Engineered high-impact campaigns, including a COVID crisis response that generated $500k in 14 days, returning the business to commercial stability and national momentum.</p>
+      </div>
       <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
       <ul>
         <li>Asked to return to rebuild the business after prior involvement.</li>
@@ -1011,6 +1049,11 @@ li { margin-bottom: 6px; font-size: 13px; }
     <div class="role-summary-highlight">Project : Build a bespoke A/V theater without alteration to heritage site</div>
     <div id="role3" class="collapsible-content">
       <img src="albatross logo.png" alt="Albatross Centre Logo" class="role-logo">
+      <div class="role-overview">
+        <h4>Role Overview</h4>
+        <p>Engaged to design and deliver a bespoke A/V theatre inside a protected heritage site, directly because of my reputation from ISee Digital for making difficult technical projects work. The brief was extreme: project a 2.4-metre wingspan albatross sideways onto a wall only 2 metres tall, from just a few metres away, with no structural changes allowed.</p>
+        <p>Led the full technical build, including optical engineering, global procurement, custom fabrication and leased overnight workshop access from 6pm to 5am for a month to machine brackets, build framing, weld and calibrate the system. Coordinated international suppliers to produce specialised components and delivered a fully integrated, heritage-compliant A/V environment on time and under budget — a solution they had previously been told was not available or possible.</p>
+      </div>
       <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
       <ul>
         <li>Built a bespoke A/V theater without alteration to heritage site.</li>
@@ -1043,6 +1086,11 @@ li { margin-bottom: 6px; font-size: 13px; }
     <div class="role-summary-highlight">Indoor and Outdoor digital billboards marketing company wanted bigger network. Secured national digital billboard and retail network footprint across New Zealand.</div>
     <div id="role4" class="collapsible-content">
       <img src="isee digital logo.jpeg" alt="ISee Digital Logo" class="role-logo">
+      <div class="role-overview">
+        <h4>Role Overview</h4>
+        <p>Brought into ISee Digital because I had a reputation for closing deals on the first visit. The job was simple on paper but hard in reality — not many salespeople can cold call, create desire, build urgency and close a $20,000 lease in 15 minutes. I regularly convinced small business owners to take on hardware and installation costs for something they’d never considered, in return for advertising space and a profit share. My best time from first contact to full installation was 20 minutes.</p>
+        <p>These deployments were spread across the entire country, and regional centres like Greymouth or Kaitaia might only get a handful of screens, so every site had to be chosen perfectly. A lot of planning went into deciding where we needed to be seen in each town, because returning to a site could mean hours of travel and wasted cost. Managed all site acquisition, geo-testing, resource consents, commercial agreements and hardware procurement, then completed most of the physical installation myself. Delivered a full national network ahead of schedule and under budget.</p>
+      </div>
       <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
       <ul>
         <li>Secured 32 billboard sites across the North Island.</li>
@@ -1278,6 +1326,11 @@ li { margin-bottom: 6px; font-size: 13px; }
     <div class="role-summary-highlight">Company selling cleaning chemicals into industry, agriculture and hospitality sectors</div>
     <div id="role5" class="collapsible-content">
       <img src="xclean.jpg" alt="XClean Logo" class="role-logo">
+      <div class="role-overview">
+        <h4>Role Overview</h4>
+        <p>Approached by XClean due to my reputation as a high-activity sales hunter and brought in to build territories and drive national sales growth. This was a commission-only, results-driven role — out early, knocking on gates and doors, training new commission-only teams and driving high-conversion cold-calling across regional centers.</p>
+        <p>Managed product issues and crisis communications, including the “payout” collapse and the fraudulent “Teatmate” product failures, supporting clients with integrity and ensuring they received accurate advice and best-practice guidance. During the downturn, I backed the owner’s decision to maintain and manage the existing client database I had built, allowing the business to retain revenue without staffing cost. Delivered strong personal sales activity while building a cohesive national team and stabilising performance across all regions.</p>
+      </div>
       <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
       <ul>
         <li>Expanded operations from single staff member to training 12-person team.</li>
@@ -1319,6 +1372,11 @@ li { margin-bottom: 6px; font-size: 13px; }
     <div class="role-summary-highlight">High-volume direct marketing operations – Door knocking</div>
     <div id="role6" class="collapsible-content">
       <img src="Integrate logo.png" alt="Integrate Group Logo" class="role-logo">
+      <div class="role-overview">
+        <h4>Role Overview</h4>
+        <p>Led high-volume direct sales operations for Integrate Group/Sky across Southland and Otago, working six nights a week in commission-only door-knocking environments. Hard, physical work — cold streets, doors closing fast, and only seconds to get people to engage. At $100 per activation, I regularly produced 30 contracts in strong weeks.</p>
+        <p>Closing had to be done with integrity — Sky’s strict five-month claw-back meant any cancellation wiped out the commission, so every activation had to be sold correctly and delivered exactly as promised. Cancellations were kept to a negligible level. Built and led a team, managed burnout, trained staff and coordinated installations and referrals while consistently outperforming larger population centres.</p>
+      </div>
       <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
       <ul>
         <li>Outperformed larger population centres by activation totals and averages.</li>
@@ -1358,6 +1416,11 @@ li { margin-bottom: 6px; font-size: 13px; }
     <div class="role-summary-highlight">Turn around role to maximize on the new opportunity's</div>
     <div id="role7" class="collapsible-content">
       <img src="mobilefone solutions logo.png" alt="Mobilefone Solutions Logo" class="role-logo">
+      <div class="role-overview">
+        <h4>Role Overview</h4>
+        <p>Approached to maximise a new market opportunity and rebuild the Vodafone franchise model, taking full responsibility for store operations, sales performance and strategic growth. Built the team from one staff member to four and established an additional outbound sales team of four, operating as a player-coach and consistently ranking among national top performers for new business acquisition and customer retention. Increased monthly turnover from $30k to well over $100k through strong retail execution, high-conversion outbound activity and targeted in-store promotions.</p>
+        <p>Delivered a complete store fit-out, redesigning layout, merchandising and customer flow to lift engagement and sales. Launched compelling finance offers, orchestrated off-site promotional campaigns and executed full-stack sales and marketing — including product sourcing, offer development and creation of print and radio-ready advertising assets. Developed a proprietary line of mobile accessories to improve margin and brand differentiation, and secured exclusive handsets through strategic partnerships outside Vodafone’s Brightpoint supply channel. Conducted comprehensive sales training programs to lift capability, consistency and customer service standards.</p>
+      </div>
       <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
       <ul>
         <li>Turned around branch to maximize new market opportunities.</li>
@@ -1401,6 +1464,11 @@ li { margin-bottom: 6px; font-size: 13px; }
     <div class="role-summary-highlight">Turn around role to reinvigorate the category across the brand</div>
     <div id="role8" class="collapsible-content">
       <img src="h&J logo.png" alt="H&J Smith Logo" class="role-logo">
+      <div class="role-overview">
+        <h4>Role Overview</h4>
+        <p>Approached by H&J Smith due to my industry reputation and profile built during my Smiths City tenure, and brought in to reinvigorate the appliance category across multiple stores. This was a full turnaround role — lifting sales performance, redesigning stock and delivery systems, and restoring customer engagement. Delivered high-touch service and expert product knowledge while breaking multiple sales records, including lifting the best day ever by more than 30%.</p>
+        <p>Introduced new brands, rationalised under-performing lines and launched a comprehensive product-knowledge training program that strengthened capability across all categories. Redesigned warehousing, delivery systems and stock management — clearing dead stock, streamlining inventory and boosting productivity. Developed non-negotiable sales standards and implemented a robust sales training program. Executed a loss-prevention initiative that uncovered significant internal theft, resulting in successful prosecution. Redeveloped the Invercargill showroom and rolled out new layouts and promotional campaigns to Balclutha, Queenstown and Blenheim, driving category growth across the brand.</p>
+      </div>
       <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
       <ul>
         <li>Reinvigorated category across the brand via turnaround role.</li>
@@ -1420,6 +1488,11 @@ li { margin-bottom: 6px; font-size: 13px; }
     <div class="role-summary-highlight">Multi-store regional leadership through corporate restructuring and receivership turnaround.</div>
     <div id="role9" class="collapsible-content">
       <img src="smiths city logo.png" alt="Smiths City Logo" class="role-logo">
+      <div class="role-overview">
+        <h4>Role Overview</h4>
+        <p>Approached internally as a high-performing salesperson and progressed rapidly through multiple leadership roles across Invercargill, Gore, Queenstown, Canterbury and Timaru. Managed multi-store operations during major corporate restructuring and receivership, rebuilding locations, integrating newly purchased stores and driving regional promotions across the South Island.</p>
+        <p>Delivered strong personal sales performance, produced large volumes of advertising, refreshed and rebuilt under-performing sites, and led appliance stock management across multiple stores and a distribution centre. Played a core role in acquisitions and new-store launches, developed non-negotiable standards later adopted nationally, and contributed to the successful scheme-of-arrangement that enabled the group to trade out of receivership.</p>
+      </div>
       <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
       <ul>
         <li>Increased turnover, profitability, location growth, and off-site promotions.</li>
