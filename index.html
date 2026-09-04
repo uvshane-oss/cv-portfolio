@@ -773,7 +773,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </head>
 <body>
 <div class="container">
-  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-04 07:37 NZST</div>
+  <div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-04 12:25 NZST</div>
 
   <div class="cv-header">
     <h1>Shane Soper</h1>
@@ -1435,9 +1435,18 @@ li { margin-bottom: 6px; font-size: 13px; }
         <li>Active role in meeting Scheme-of-arrangement.</li>
         <li>2001 group successfully traded out of receivership.</li>
       </ul>
-      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonial : Mike Regional Manager discusses working with Shane .</h4>
+      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials : Michael Botting & Mike Regional Manager</h4>
       
-      <!-- Inline Embedded Video Player Slot for Role 9 -->
+      <!-- Inline Embedded Video Player Slot for Role 9 Botting -->
+      <div id="inlinePlayer-role9-botting" class="inline-video-player-container" onclick="event.stopPropagation();">
+        <button class="close-inline-video-btn" onclick="closeInlineVideo('role9-botting')">Close / Stop</button>
+        <div id="inlineTitle-role9-botting" class="inline-video-title">Now Playing</div>
+        <div class="inline-video-wrapper">
+          <video id="inlineVideo-role9-botting" controls playsinline webkit-playsinline></video>
+        </div>
+      </div>
+
+      <!-- Inline Embedded Video Player Slot for Role 9 Mike -->
       <div id="inlinePlayer-role9" class="inline-video-player-container" onclick="event.stopPropagation();">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role9')">Close / Stop</button>
         <div id="inlineTitle-role9" class="inline-video-title">Now Playing</div>
@@ -1447,7 +1456,12 @@ li { margin-bottom: 6px; font-size: 13px; }
       </div>
 
       <div class="video-grid">
-        <div class="video-thumbnail-card" style="grid-column: 1 / -1;" onclick="playInlineVideo(event, 'role9', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Mike%20Regional%20Manager%20at%20Smiths%20City.mp4', 'Smiths City Regional Manager Testimonial')">
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role9-botting', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Michael%20Botting%20Store%20manager%2C%20Area%20manager%20for%20the%20Smiths%20city%20Group.mp4', 'Michael Botting - Store & Area Manager Testimonial')">
+          <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Michael%20Botting%20Store%20manager%2C%20Area%20manager%20for%20the%20Smiths%20city%20Group.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
+          <div class="thumbnail-glow-overlay"></div>
+        </div>
+        <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role9', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Mike%20Regional%20Manager%20at%20Smiths%20City.mp4', 'Smiths City Regional Manager Testimonial')">
           <video src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Mike%20Regional%20Manager%20at%20Smiths%20City.mp4#t=1" preload="metadata" muted playsinline webkit-playsinline></video>
           <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
           <div class="thumbnail-glow-overlay"></div>
@@ -1541,154 +1555,63 @@ function closePortfolioMedia(sectionElement) {
   }
 }
 
-function toggleDevilBurgerPortfolio(event) {
-  event.stopPropagation();
-  const section = document.getElementById('devilBurgerPortfolioSection');
-  const btn = document.getElementById('devilBurgerPortfolioBtn');
-  const isOpen = section.classList.contains('show');
-  if (isOpen) {
-    closePortfolioMedia(section);
-    section.classList.remove('show');
-    if (btn) btn.classList.add('pulse-animation');
-  } else {
-    closeAbovePortfolioMedia(btn);
-    section.classList.add('show');
-    if (btn) btn.classList.remove('pulse-animation');
-    section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-}
-
-function toggleXcleanPortfolio(event) {
-  event.stopPropagation();
-  const section = document.getElementById('xcleanPortfolioSection');
-  const btn = document.getElementById('xcleanPortfolioBtn');
-  const isOpen = section.classList.contains('show');
-  if (isOpen) {
-    closePortfolioMedia(section);
-    section.classList.remove('show');
-    if (btn) btn.classList.add('pulse-animation');
-  } else {
-    closeAbovePortfolioMedia(btn);
-    section.classList.add('show');
-    if (btn) btn.classList.remove('pulse-animation');
-    section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-}
-
-function toggleIseePortfolio(event) {
-  event.stopPropagation();
-  const section = document.getElementById('iseeDigitalPortfolioSection');
-  const btn = document.getElementById('iseeDigitalPortfolioBtn');
-  const isOpen = section.classList.contains('show');
-  if (isOpen) {
-    closePortfolioMedia(section);
-    section.classList.remove('show');
-    if (btn) btn.classList.add('pulse-animation');
-  } else {
-    closeAbovePortfolioMedia(btn);
-    section.classList.add('show');
-    if (btn) btn.classList.remove('pulse-animation');
-    section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-}
-
 function toggleRole(event, cardElement, roleId) {
-  event.stopPropagation();
+  if (event.target.tagName === 'A' || event.target.tagName === 'SPAN' && event.target.classList.contains('detail-link')) {
+    return;
+  }
   const content = document.getElementById(roleId);
   const isOpen = content.classList.contains('show');
   
-  document.querySelectorAll('.collapsible-content.show').forEach(el => {
-    if(el.id !== roleId) {
-      el.classList.remove('show');
-      closePortfolioMedia(el);
-      const parentCard = el.closest('.role-card');
-      if(parentCard) {
-        const pBtn = parentCard.querySelector('.portfolio-image-btn');
-        const pSec = parentCard.querySelector('.portfolio-sub-section');
-        if(pSec) pSec.classList.remove('show');
-        if(pBtn) pBtn.classList.add('pulse-animation');
-      }
-    }
+  document.querySelectorAll('.collapsible-content').forEach(item => {
+    item.classList.remove('show');
+    closeAbovePortfolioMedia(item);
   });
-
-  if (isOpen) {
-    content.classList.remove('show');
-    closePortfolioMedia(content);
-    const pBtn = cardElement.querySelector('.portfolio-image-btn');
-    const pSec = cardElement.querySelector('.portfolio-sub-section');
-    if(pSec) pSec.classList.remove('show');
-    if(pBtn) pBtn.classList.add('pulse-animation');
-  } else {
+  
+  if (!isOpen) {
     content.classList.add('show');
-    const pBtn = cardElement.querySelector('.portfolio-image-btn');
-    if(pBtn) pBtn.classList.remove('pulse-animation');
-    cardElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const btnId = roleId === 'role1' ? 'devilBurgerPortfolioBtn' : (roleId === 'role2' ? 'xcleanPortfolioBtn' : (roleId === 'role4' ? 'iseeDigitalPortfolioBtn' : null));
+    if (btnId) {
+      const btn = document.getElementById(btnId);
+      if (btn) btn.classList.add('pulse-animation');
+    }
   }
-}
-
-function pauseAllMedia(exceptionContainer = null) {
-  document.querySelectorAll('audio').forEach(audio => {
-    if (!exceptionContainer || !exceptionContainer.contains(audio)) {
-      audio.pause();
-      audio.currentTime = 0;
-      const card = audio.closest('.radio-card-item');
-      if (card) card.classList.remove('is-playing');
-    }
-  });
-  document.querySelectorAll('.inline-video-player-container').forEach(container => {
-    if (!exceptionContainer || !exceptionContainer.contains(container)) {
-      container.classList.remove('active');
-      const vid = container.querySelector('video');
-      if (vid) {
-        vid.pause();
-        vid.currentTime = 0;
-      }
-    }
-  });
-  document.querySelectorAll('.carousel-expanded-overlay').forEach(overlay => {
-    if (!exceptionContainer || !exceptionContainer.contains(overlay)) {
-      overlay.classList.remove('active');
-      const content = overlay.querySelector('.inline-video-wrapper > div');
-      if (content) content.innerHTML = '';
-    }
-  });
-  document.querySelectorAll('.video-grid video').forEach(video => {
-    if (!exceptionContainer || !exceptionContainer.contains(video)) {
-      video.pause();
-    }
-  });
-  document.querySelectorAll('.marquee-item video').forEach(video => {
-    if (!exceptionContainer || !exceptionContainer.contains(video)) {
-      video.pause();
-      video.currentTime = 0;
-      // Persist poster attribute reference explicitly across browsers
-      if (video.hasAttribute('poster')) {
-        const posterUrl = video.getAttribute('poster');
-        video.load();
-        video.poster = posterUrl;
-      }
-    }
-  });
-  document.querySelectorAll('.marquee-item').forEach(item => {
-    if (!exceptionContainer || !exceptionContainer.contains(item)) {
-      item.classList.remove('is-playing', 'active');
-    }
-  });
-}
-
-function playInlineVideo(event, roleKey, videoSrc, titleText) {
   event.stopPropagation();
-  pauseAllMedia();
+}
+
+function playInlineVideo(event, roleKey, videoSrc, videoTitle) {
+  event.stopPropagation();
   const playerContainer = document.getElementById('inlinePlayer-' + roleKey);
   const videoElem = document.getElementById('inlineVideo-' + roleKey);
   const titleElem = document.getElementById('inlineTitle-' + roleKey);
   
-  if (titleElem) titleElem.innerText = titleText;
-  if (videoElem) {
-    videoElem.src = videoSrc;
-    playerContainer.classList.add('active');
-    videoElem.play().catch(e => console.log("Autoplay prevented:", e));
+  if (!playerContainer || !videoElem) return;
+  
+  const parentCard = playerContainer.closest('.collapsible-content');
+  if (parentCard) {
+    parentCard.querySelectorAll('.inline-video-player-container').forEach(container => {
+      if (container.id !== 'inlinePlayer-' + roleKey) {
+        container.classList.remove('active');
+        const v = container.querySelector('video');
+        if (v) { v.pause(); v.currentTime = 0; }
+      }
+    });
+    parentCard.querySelectorAll('.carousel-expanded-overlay').forEach(overlay => {
+      overlay.classList.remove('active');
+      const c = overlay.querySelector('.inline-video-wrapper > div');
+      if (c) c.innerHTML = '';
+    });
+    parentCard.querySelectorAll('.radio-card-item').forEach(card => {
+      card.classList.remove('is-playing');
+      const a = card.querySelector('audio');
+      if (a) { a.pause(); a.currentTime = 0; }
+    });
   }
+  
+  if (titleElem) titleElem.textContent = videoTitle;
+  videoElem.src = videoSrc;
+  playerContainer.classList.add('active');
+  videoElem.play().catch(err => console.log("Autoplay prevented:", err));
+  
   playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
@@ -1698,84 +1621,158 @@ function closeInlineVideo(roleKey) {
   if (videoElem) {
     videoElem.pause();
     videoElem.currentTime = 0;
-    videoElem.src = '';
   }
   if (playerContainer) {
     playerContainer.classList.remove('active');
   }
 }
 
-function expandCarouselItem(event, roleKey, type, mediaSrc, titleText, itemElement) {
+function toggleAudioCard(cardElement, event) {
   event.stopPropagation();
-  pauseAllMedia();
+  const audioElem = cardElement.querySelector('audio');
+  const parentCollapsible = cardElement.closest('.collapsible-content');
   
-  document.querySelectorAll('#marquee-' + roleKey + ' .marquee-item').forEach(item => {
-    item.classList.remove('active', 'is-playing');
-  });
-  if (itemElement) {
-    itemElement.classList.add('active', 'is-playing');
+  if (parentCollapsible) {
+    parentCollapsible.querySelectorAll('.radio-card-item').forEach(item => {
+      if (item !== cardElement) {
+        item.classList.remove('is-playing');
+        const a = item.querySelector('audio');
+        if (a) { a.pause(); a.currentTime = 0; }
+      }
+    });
+    parentCollapsible.querySelectorAll('.inline-video-player-container').forEach(container => {
+      container.classList.remove('active');
+      const v = container.querySelector('video');
+      if (v) { v.pause(); v.currentTime = 0; }
+    });
+    parentCollapsible.querySelectorAll('.carousel-expanded-overlay').forEach(overlay => {
+      overlay.classList.remove('active');
+      const content = overlay.querySelector('.inline-video-wrapper > div');
+      if (content) content.innerHTML = '';
+    });
   }
+  
+  if (audioElem.paused) {
+    audioElem.play().then(() => {
+      cardElement.classList.add('is-playing');
+    }).catch(err => {
+      console.log("Audio play blocked or failed:", err);
+    });
+  } else {
+    audioElem.pause();
+    audioElem.currentTime = 0;
+    cardElement.classList.remove('is-playing');
+  }
+  
+  audioElem.onended = function() {
+    cardElement.classList.remove('is-playing');
+  };
+}
 
+function toggleDevilBurgerPortfolio(event) {
+  event.stopPropagation();
+  const section = document.getElementById('devilBurgerPortfolioSection');
+  const btn = document.getElementById('devilBurgerPortfolioBtn');
+  if (section.classList.contains('show')) {
+    section.classList.remove('show');
+    closePortfolioMedia(section);
+    if (btn) btn.classList.add('pulse-animation');
+  } else {
+    section.classList.add('show');
+    if (btn) btn.classList.remove('pulse-animation');
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function toggleXcleanPortfolio(event) {
+  event.stopPropagation();
+  const section = document.getElementById('xcleanPortfolioSection');
+  const btn = document.getElementById('xcleanPortfolioBtn');
+  if (section.classList.contains('show')) {
+    section.classList.remove('show');
+    closePortfolioMedia(section);
+    if (btn) btn.classList.add('pulse-animation');
+  } else {
+    section.classList.add('show');
+    if (btn) btn.classList.remove('pulse-animation');
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function toggleIseePortfolio(event) {
+  event.stopPropagation();
+  const section = document.getElementById('iseeDigitalPortfolioSection');
+  const btn = document.getElementById('iseeDigitalPortfolioBtn');
+  if (section.classList.contains('show')) {
+    section.classList.remove('show');
+    closePortfolioMedia(section);
+    if (btn) btn.classList.add('pulse-animation');
+  } else {
+    section.classList.add('show');
+    if (btn) btn.classList.remove('pulse-animation');
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function expandCarouselItem(event, roleKey, type, src, title, itemElement) {
+  event.stopPropagation();
   const overlay = document.getElementById('expanded-view-' + roleKey);
+  const contentContainer = document.getElementById('expanded-content-' + roleKey);
   const titleElem = document.getElementById('expanded-title-' + roleKey);
-  const contentWrapper = document.getElementById('expanded-content-' + roleKey);
   
-  if (titleElem) titleElem.innerText = titleText;
-  if (contentWrapper) {
-    if (type === 'video') {
-      contentWrapper.innerHTML = `<video src="${mediaSrc}" controls autoplay playsinline webkit-playsinline></video>`;
-    } else {
-      contentWrapper.innerHTML = `<img src="${mediaSrc}" alt="${titleText}">`;
-    }
+  const parentCollapsible = itemElement.closest('.collapsible-content');
+  if (parentCollapsible) {
+    parentCollapsible.querySelectorAll('.inline-video-player-container').forEach(container => {
+      container.classList.remove('active');
+      const v = container.querySelector('video');
+      if (v) { v.pause(); v.currentTime = 0; }
+    });
+    parentCollapsible.querySelectorAll('.radio-card-item').forEach(card => {
+      card.classList.remove('is-playing');
+      const a = card.querySelector('audio');
+      if (a) { a.pause(); a.currentTime = 0; }
+    });
+    parentCollapsible.querySelectorAll('.marquee-item').forEach(mi => mi.classList.remove('is-playing', 'active'));
   }
-  if (overlay) {
-    overlay.classList.add('active');
-    overlay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  
+  itemElement.classList.add('is-playing', 'active');
+  if (titleElem) titleElem.textContent = title;
+  
+  if (type === 'video') {
+    contentContainer.innerHTML = '<video src="' + src + '" controls autoplay playsinline webkit-playsinline style="width:100%; height:100%; object-fit:contain;"></video>';
+  } else if (type === 'image') {
+    contentContainer.innerHTML = '<img src="' + src + '" alt="' + title + '" style="width:100%; height:100%; object-fit:contain;">';
   }
+  
+  overlay.classList.add('active');
+  overlay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function closeCarouselExpanded(roleKey) {
   const overlay = document.getElementById('expanded-view-' + roleKey);
-  if (overlay) {
-    if (document.fullscreenElement || document.webkitFullscreenElement) {
-      if (document.exitFullscreen) document.exitFullscreen();
-      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-    }
-    overlay.classList.remove('active');
-    const contentWrapper = document.getElementById('expanded-content-' + roleKey);
-    if (contentWrapper) {
-      const vid = contentWrapper.querySelector('video');
-      if (vid) {
-        vid.pause();
-        vid.currentTime = 0;
-      }
-      contentWrapper.innerHTML = '';
-    }
+  const contentContainer = document.getElementById('expanded-content-' + roleKey);
+  
+  if (document.fullscreenElement || document.webkitFullscreenElement) {
+    if (document.exitFullscreen) document.exitFullscreen();
+    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
   }
-  const marqueeContainer = document.getElementById('marquee-' + roleKey);
-  if (marqueeContainer) {
-    marqueeContainer.querySelectorAll('.marquee-item').forEach(item => {
-      item.classList.remove('active', 'is-playing');
-      const v = item.querySelector('video');
-      if (v) {
-        v.pause();
-        v.currentTime = 0;
-        if (v.hasAttribute('poster')) {
-          const pUrl = v.getAttribute('poster');
-          v.load();
-          v.poster = pUrl;
-        }
-      }
-    });
+  
+  const parentCollapsible = overlay.closest('.collapsible-content');
+  if (parentCollapsible) {
+    parentCollapsible.querySelectorAll('.marquee-item').forEach(mi => mi.classList.remove('is-playing', 'active'));
   }
+  
+  contentContainer.innerHTML = '';
+  overlay.classList.remove('active');
 }
 
 function toggleFullscreen(roleKey) {
   const overlay = document.getElementById('expanded-view-' + roleKey);
   if (!overlay) return;
+  
   if (!document.fullscreenElement && !document.webkitFullscreenElement) {
     if (overlay.requestFullscreen) {
-      overlay.requestFullscreen();
+      overlay.requestFullscreen().catch(err => console.log("Fullscreen error:", err));
     } else if (overlay.webkitRequestFullscreen) {
       overlay.webkitRequestFullscreen();
     }
@@ -1788,83 +1785,79 @@ function toggleFullscreen(roleKey) {
   }
 }
 
-function toggleAudioCard(cardElement, event) {
-  event.stopPropagation();
-  const audioElem = cardElement.querySelector('audio');
-  const isPlaying = cardElement.classList.contains('is-playing');
-  
-  pauseAllMedia();
-
-  if (!isPlaying && audioElem) {
-    audioElem.play().then(() => {
-      cardElement.classList.add('is-playing');
-    }).catch(e => console.log("Audio playback error:", e));
-  }
-}
-
-// Lightbox functions
 function openModal(imgSrc) {
-  pauseAllMedia();
-  const lightbox = document.getElementById('imageLightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
-  if (lightbox && lightboxImg) {
-    lightboxImg.src = imgSrc;
-    lightbox.classList.add('active');
-  }
+  const modal = document.getElementById('imageLightbox');
+  const modalImg = document.getElementById('lightboxImg');
+  modalImg.src = imgSrc;
+  modal.classList.add('active');
 }
 
 function closeModal() {
-  const lightbox = document.getElementById('imageLightbox');
-  if (lightbox) {
-    lightbox.classList.remove('active');
-  }
+  const modal = document.getElementById('imageLightbox');
+  modal.classList.remove('active');
 }
 
-// Instore Carousel Images Array for Lightbox
+/* Instore Lightbox Array and Functions */
 const instoreImages = [
-  "BB1758835159986.jpeg", "1758755805584.jpeg", "1758755929727.jpeg", "1758755954119.jpeg", "1758755979137.jpeg",
-  "BB1758835290442.jpeg", "1758756024609.jpeg", "1758756069198.jpeg", "1758756574017.jpeg", "1758756639804.jpeg",
-  "BB1758835313131.jpeg", "1758756679346.jpeg", "1758756712158.jpeg", "1758756759188.jpeg", "1758756798411.jpeg",
-  "BB1758835334807.jpeg", "1758756849533.jpeg", "1758756921948.jpeg", "1758756956376.jpeg", "1758756996703.jpeg",
-  "BB1758835159986.jpeg", "1758757029987.jpeg", "1758757078499.jpeg", "1758757119457.jpeg", "1758757157638.jpeg"
+  { src: "BB1758835159986.jpeg", caption: "Outdoor Billboard BB1" },
+  { src: "1758755805584.jpeg", caption: "Location 1" },
+  { src: "1758755929727.jpeg", caption: "Location 2" },
+  { src: "1758755954119.jpeg", caption: "Location 3" },
+  { src: "1758755979137.jpeg", caption: "Location 4" },
+  { src: "BB1758835290442.jpeg", caption: "Outdoor Billboard BB2" },
+  { src: "1758756024609.jpeg", caption: "Location 5" },
+  { src: "1758756069198.jpeg", caption: "Location 6" },
+  { src: "1758756574017.jpeg", caption: "Location 7" },
+  { src: "1758756639804.jpeg", caption: "Location 8" },
+  { src: "BB1758835313131.jpeg", caption: "Outdoor Billboard BB3" },
+  { src: "1758756679346.jpeg", caption: "Location 9" },
+  { src: "1758756712158.jpeg", caption: "Location 10" },
+  { src: "1758756759188.jpeg", caption: "Location 11" },
+  { src: "1758756798411.jpeg", caption: "Location 12" },
+  { src: "BB1758835334807.jpeg", caption: "Outdoor Billboard BB4" },
+  { src: "1758756849533.jpeg", caption: "Location 13" },
+  { src: "1758756921948.jpeg", caption: "Location 14" },
+  { src: "1758756956376.jpeg", caption: "Location 15" },
+  { src: "1758756996703.jpeg", caption: "Location 16" },
+  { src: "BB1758835159986.jpeg", caption: "Outdoor Billboard BB1" },
+  { src: "1758757029987.jpeg", caption: "Location 17" },
+  { src: "1758757078499.jpeg", caption: "Location 18" },
+  { src: "1758757119457.jpeg", caption: "Location 19" },
+  { src: "1758757157638.jpeg", caption: "Location 20" }
 ];
+
 let currentInstoreIndex = 0;
 
 function openInstoreLightbox(index) {
-  pauseAllMedia();
   currentInstoreIndex = index % instoreImages.length;
-  const lightbox = document.getElementById('instoreLightbox');
-  const lightboxImg = document.getElementById('instoreLightboxImg');
-  if (lightbox && lightboxImg) {
-    lightboxImg.src = instoreImages[currentInstoreIndex];
-    lightbox.classList.add('active');
-  }
+  const modal = document.getElementById('instoreLightbox');
+  const imgElem = document.getElementById('instoreLightboxImg');
+  imgElem.src = instoreImages[currentInstoreIndex].src;
+  modal.classList.add('active');
 }
 
 function closeInstoreLightbox() {
-  const lightbox = document.getElementById('instoreLightbox');
-  if (lightbox) {
-    lightbox.classList.remove('active');
-  }
+  const modal = document.getElementById('instoreLightbox');
+  modal.classList.remove('active');
 }
 
 function prevInstoreLightbox(event) {
   event.stopPropagation();
   currentInstoreIndex = (currentInstoreIndex - 1 + instoreImages.length) % instoreImages.length;
-  const lightboxImg = document.getElementById('instoreLightboxImg');
-  if (lightboxImg) lightboxImg.src = instoreImages[currentInstoreIndex];
+  const imgElem = document.getElementById('instoreLightboxImg');
+  imgElem.src = instoreImages[currentInstoreIndex].src;
 }
 
 function nextInstoreLightbox(event) {
   event.stopPropagation();
   currentInstoreIndex = (currentInstoreIndex + 1) % instoreImages.length;
-  const lightboxImg = document.getElementById('instoreLightboxImg');
-  if (lightboxImg) lightboxImg.src = instoreImages[currentInstoreIndex];
+  const imgElem = document.getElementById('instoreLightboxImg');
+  imgElem.src = instoreImages[currentInstoreIndex].src;
 }
 
-function openFullDetail(event, caseTitle) {
+function openFullDetail(event, roleName) {
   event.stopPropagation();
-  alert("Opening full detailed case study for: " + caseTitle);
+  alert("Opening detailed case study and deployment records for: " + roleName);
 }
 </script>
 </body>
