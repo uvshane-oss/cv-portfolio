@@ -1765,7 +1765,6 @@ li { margin-bottom: 6px; font-size: 13px; }
   }
 }
 </style>
-
 <style id="mobile-role-header-architecture-v1">
 /* Recruiter-first role header hierarchy:
    date -> company -> role -> capability.
@@ -1814,6 +1813,67 @@ li { margin-bottom: 6px; font-size: 13px; }
   }
 }
 </style>
+<style id="testimonial-clean-standard-v1">
+.role-card h4.testimonial-heading,
+.role-card .testimonial-heading{
+  margin:15px 0 5px 0 !important;
+  font-size:15px !important;
+  line-height:1.25 !important;
+  color:var(--primary) !important;
+  font-weight:700 !important;
+}
+.role-card .testimonial-person-label{
+  display:block !important;
+  margin:0 0 8px 0 !important;
+  font-size:13px !important;
+  line-height:1.35 !important;
+  color:var(--text-muted) !important;
+  font-weight:600 !important;
+}
+</style>
+<style id="testimonial-frame-labels-v4">
+.role-card .video-grid{align-items:start !important}
+.role-card .testimonial-labelled-column{min-width:0 !important}
+.role-card .testimonial-frame-label{
+ display:block !important;width:100% !important;margin:0 0 6px 0 !important;padding:0 !important;
+ color:var(--primary) !important;font-size:13px !important;line-height:1.25 !important;
+ font-weight:700 !important;text-align:center !important;
+}
+.role-card .testimonial-labelled-column > .video-thumbnail-card{width:100% !important}
+</style>
+
+<style id="mobile-contact-header-v1">
+.mobile-contact-clean{display:none}
+@media(max-width:700px){
+  .desktop-contact-original{display:none !important}
+  .mobile-contact-clean{
+    display:block !important;
+    width:100% !important;
+    margin:8px auto 0 !important;
+    text-align:center !important;
+    color:var(--text-muted) !important;
+  }
+  .mobile-contact-primary,
+  .mobile-contact-dob{
+    display:block !important;
+    width:100% !important;
+    text-align:center !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+  .mobile-contact-primary{
+    font-size:13px !important;
+    line-height:1.35 !important;
+    white-space:nowrap !important;
+  }
+  .mobile-contact-dob{
+    margin-top:4px !important;
+    font-size:13px !important;
+    line-height:1.25 !important;
+    white-space:nowrap !important;
+  }
+}
+</style>
 </head>
 <body>
 <div class="container">
@@ -1821,7 +1881,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div class="cv-header">
 <h1>Shane Soper</h1>
 <p>153 East Road, Ascot, Invercargill, Southland, New Zealand</p>
-<p>📧 uvshane@gmail.com  |  📞 020 4085 4362  |  D.O.B 24/4/1974</p>
+<p class="desktop-contact-original">📧 uvshane@gmail.com  |  📞 020 4085 4362  |  D.O.B 24/4/1974</p><div class="mobile-contact-clean"><div class="mobile-contact-primary">✉️ uvshane@gmail.com  |  ☎ 020 4085 4362</div><div class="mobile-contact-dob">D.O.B 24/4/1974</div></div>
 </div>
 <h2 class="section-title">Professional Career History &amp; Portfolio</h2>
 <p style="font-size: 13px; color: var(--text-muted); margin-top: -10px; margin-bottom: 20px;">Tap any role below to view details, media, and campaign highlights.</p>
@@ -1935,8 +1995,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 </div>
 </details>
 </div>
-<h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials : Alice &amp; Tim discuss working with Shane</h4>
-<p style="font-size: 13px; color: var(--text-muted); margin: 0 0 8px 0;">Alice &amp; Tim discuss working with Shane (Tap to play inline)</p>
+<h4 class="testimonial-heading" style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Watch Video Testimonials</h4>
 <!-- Inline Embedded Video Player Slot for Role 1 -->
 <div class="inline-video-player-container" id="inlinePlayer-role1" onclick="event.stopPropagation();">
 <button class="close-inline-video-btn" onclick="closeInlineVideo('role1')">Close / Stop</button>
@@ -1946,16 +2005,14 @@ li { margin-bottom: 6px; font-size: 13px; }
 </div>
 </div>
 <div class="video-grid">
-<div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role1', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Alice%20GM%20Devil%20Burger.mp4', 'Alice &amp; Tim Testimonial - Devil Burger')">
+<div class="testimonial-labelled-column"><div class="testimonial-frame-label">Alice: General Manager</div><div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role1', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Alice%20GM%20Devil%20Burger.mp4', 'Alice &amp; Tim Testimonial - Devil Burger')">
 <video muted="" playsinline="" preload="metadata" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Alice%20GM%20Devil%20Burger.mp4#t=1" webkit-playsinline=""></video>
-<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
 <div class="thumbnail-glow-overlay"></div>
-</div>
-<div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role1', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Tim%20Smellie%20_%20Owner%20Devil%20Burger%20Invercargill.mp4', 'Devil Burger Team Testimonial 2')">
+</div></div>
+<div class="testimonial-labelled-column"><div class="testimonial-frame-label">Tim: Owner</div><div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role1', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Tim%20Smellie%20_%20Owner%20Devil%20Burger%20Invercargill.mp4', 'Devil Burger Team Testimonial 2')">
 <video muted="" playsinline="" preload="metadata" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Tim%20Smellie%20_%20Owner%20Devil%20Burger%20Invercargill.mp4#t=1" webkit-playsinline=""></video>
-<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
 <div class="thumbnail-glow-overlay"></div>
-</div>
+</div></div>
 </div>
 <div class="portfolio-btn-container">
 <img alt="Devil Burger Portfolio" class="portfolio-image-btn" id="devilBurgerPortfolioBtn" onclick="toggleDevilBurgerPortfolio(event)" src="DB portfolio.png"/>
@@ -2041,7 +2098,6 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div class="video-grid">
 <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role1-wall', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Install%20day%20%20-%20midway%20through.mp4', 'Video Wall Installation Progress')" style="grid-column: 1 / -1;">
 <video muted="" playsinline="" preload="metadata" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Install%20day%20%20-%20midway%20through.mp4#t=1" webkit-playsinline=""></video>
-<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
 <div class="thumbnail-glow-overlay"></div>
 </div>
 </div>
@@ -2169,13 +2225,12 @@ li { margin-bottom: 6px; font-size: 13px; }
 <video controls="" id="inlineVideo-role2" playsinline="" webkit-playsinline=""></video>
 </div>
 </div>
-<h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials</h4>
+<h4 class="testimonial-heading" style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Watch Video Testimonials</h4>
 <div class="xclean-testimonial-grid">
 <div class="xclean-video-item">
 <div class="xclean-video-label">Glen: A Franchise Owner</div>
 <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Glen%20Hackell%20owner%20of%20XClean%202015.mp4', 'Glen: A Franchise Owner')">
 <video class="xclean-preview-video" muted="" playsinline="" preload="metadata" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Glen%20Hackell%20owner%20of%20XClean%202015.mp4#t=1" webkit-playsinline=""></video>
-<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
 <div class="thumbnail-glow-overlay"></div>
 </div>
 </div>
@@ -2183,7 +2238,6 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div class="xclean-video-label">Deb: A Sales Rep</div>
 <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Deb%20Crump%20talks%20about%20he%20experience%20working%20with%20Shane.mp4', 'Deb: A Sales Rep')">
 <video class="xclean-preview-video" muted="" playsinline="" preload="metadata" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Deb%20Crump%20talks%20about%20he%20experience%20working%20with%20Shane.mp4#t=1" webkit-playsinline=""></video>
-<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
 <div class="thumbnail-glow-overlay"></div>
 </div>
 </div>
@@ -2191,7 +2245,6 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div class="xclean-video-label">Clients</div>
 <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/September%201%2C%202021.mp4', 'Clients')">
 <video class="xclean-preview-video" muted="" playsinline="" preload="metadata" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/September%201%2C%202021.mp4#t=1" webkit-playsinline=""></video>
-<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
 <div class="thumbnail-glow-overlay"></div>
 </div>
 </div>
@@ -2201,7 +2254,6 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div class="xclean-covid-preview">
 <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role2', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/X%20Clean%20covid%20crisis.mp4', 'The COVID Crisis')">
 <video class="xclean-preview-video" muted="" playsinline="" preload="metadata" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/X%20Clean%20covid%20crisis.mp4#t=1" webkit-playsinline=""></video>
-<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
 <div class="thumbnail-glow-overlay"></div>
 </div>
 </div>
@@ -2594,17 +2646,14 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div class="video-grid isee-video-grid">
 <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role4', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Video%20testimonial%202.mp4', 'ISee Digital Short Showcase 1')">
 <video muted="" playsinline="" preload="metadata" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Video%20testimonial%202.mp4#t=1" webkit-playsinline=""></video>
-<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
 <div class="thumbnail-glow-overlay"></div>
 </div>
 <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role4', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Video%20testimonial%203.mp4', 'ISee Digital Short Showcase 2')">
 <video muted="" playsinline="" preload="metadata" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Video%20testimonial%203.mp4#t=1" webkit-playsinline=""></video>
-<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
 <div class="thumbnail-glow-overlay"></div>
 </div>
 <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role4', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Video%20testimonial%204.mp4', 'ISee Digital Feature Showcase')">
 <video muted="" playsinline="" preload="metadata" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Video%20testimonial%204.mp4#t=1" webkit-playsinline=""></video>
-<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
 <div class="thumbnail-glow-overlay"></div>
 </div>
 </div>
@@ -2663,7 +2712,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div class="xclean13-subpoint"><strong>Protected Trust Through Transparent Advice</strong><p>He provided accurate best-practice guidance and information about possible recourse, prioritising customer welfare, relationships and his own credibility during a damaging product failure.</p></div>
 </div></details>
 </div>
-<h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonial</h4>
+<h4 class="testimonial-heading" style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Watch Video Testimonial</h4>
 <!-- Inline Embedded Video Player Slot for Role 5 -->
 <div class="inline-video-player-container" id="inlinePlayer-role5" onclick="event.stopPropagation();">
 <button class="close-inline-video-btn" onclick="closeInlineVideo('role5')">Close / Stop</button>
@@ -2676,7 +2725,6 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div class="xclean-video-label">Glen: A Franchise Owner</div>
 <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role5', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Glen%20Hackell%20owner%20of%20XClean%202015.mp4', 'Glen: A Franchise Owner')">
 <video class="xclean-preview-video" muted="" playsinline="" preload="metadata" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Glen%20Hackell%20owner%20of%20XClean%202015.mp4#t=1" webkit-playsinline=""></video>
-<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
 <div class="thumbnail-glow-overlay"></div>
 </div>
 </div>
@@ -2724,7 +2772,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div class="sky-subpoint"><strong>Cross-Industry Problem Solving</strong><p>The additional assignments reflected confidence in Shane beyond a conventional sales-management remit: he applied commercial and operational problem-solving in unrelated industries while maintaining responsibility for his core Sky commitments.</p></div>
 </div></details>
 </div>
-<h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonial : Bruce : Sky Regional manager discusses working with Shane .</h4>
+<h4 class="testimonial-heading" style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Watch Video Testimonial</h4><div class="testimonial-person-label">Bruce — Sky Regional Manager</div>
 <!-- Inline Embedded Video Player Slot for Role 6 -->
 <div class="inline-video-player-container" id="inlinePlayer-role6" onclick="event.stopPropagation();">
 <button class="close-inline-video-btn" onclick="closeInlineVideo('role6')">Close / Stop</button>
@@ -2736,7 +2784,6 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div class="video-grid">
 <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role6', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Bruce%20Cushen%20Sales%20Manager%20at%20Sky%20Television.mp4', 'Integrate Group / Sky Testimonial')">
 <video muted="" playsinline="" preload="metadata" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Bruce%20Cushen%20Sales%20Manager%20at%20Sky%20Television.mp4#t=1" webkit-playsinline=""></video>
-<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
 <div class="thumbnail-glow-overlay"></div>
 </div>
 </div>
@@ -2792,7 +2839,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div class="vodafone-refined-point"><strong>Strong Performance Within a Constrained Franchise</strong><p>The store developed <strong>strong retail turnover and greater operating independence</strong> than the emerging centrally controlled model preferred. Group management restricted replication of the approach, while Shane maintained business relationships as the wider ownership and franchise structure changed.</p></div>
 </div></details>
 </div>
-<h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials : Alana &amp; Jenna discuss working with Shane .</h4>
+<h4 class="testimonial-heading" style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Watch Video Testimonials</h4>
 <!-- Inline Embedded Video Player Slot for Role 7 -->
 <div class="inline-video-player-container" id="inlinePlayer-role7" onclick="event.stopPropagation();">
 <button class="close-inline-video-btn" onclick="closeInlineVideo('role7')">Close / Stop</button>
@@ -2802,16 +2849,14 @@ li { margin-bottom: 6px; font-size: 13px; }
 </div>
 </div>
 <div class="video-grid">
-<div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role7', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Alana%20Talks%20On%20Her%20Time%20Working%20With%20Shane%20(1).mp4', 'Mobilefone Solutions Testimonial 1')">
+<div class="testimonial-labelled-column"><div class="testimonial-frame-label">Alana</div><div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role7', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Alana%20Talks%20On%20Her%20Time%20Working%20With%20Shane%20(1).mp4', 'Mobilefone Solutions Testimonial 1')">
 <video muted="" playsinline="" preload="metadata" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Alana%20Talks%20On%20Her%20Time%20Working%20With%20Shane%20(1).mp4#t=1" webkit-playsinline=""></video>
-<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
 <div class="thumbnail-glow-overlay"></div>
-</div>
-<div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role7', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Jenna%20speaks%20on%20her%20time%20working%20for%20Shane.mp4', 'Mobilefone Solutions Testimonial 2')">
+</div></div>
+<div class="testimonial-labelled-column"><div class="testimonial-frame-label">Jenna</div><div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role7', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Jenna%20speaks%20on%20her%20time%20working%20for%20Shane.mp4', 'Mobilefone Solutions Testimonial 2')">
 <video muted="" playsinline="" preload="metadata" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Jenna%20speaks%20on%20her%20time%20working%20for%20Shane.mp4#t=1" webkit-playsinline=""></video>
-<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
 <div class="thumbnail-glow-overlay"></div>
-</div>
+</div></div>
 </div>
 <div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'Mobilefone Solutions')">View Full Detailed Case Study →</span></div>
 </div>
@@ -2916,7 +2961,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div class="smith-refined-point"><strong>Group Traded Out of Receivership · 2001</strong><p>Contributed to the wider recovery effort that saw the group <strong>successfully trade out of receivership in 2001</strong>.</p></div>
 </div></details>
 </div>
-<h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonial<br/><span style="display:inline-block;margin-top:3px;"><strong>Michael Botting</strong> — <strong>Former Store Manager &amp; Area Manager, Smiths City Group</strong></span></h4>
+<h4 class="testimonial-heading" style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Watch Video Testimonial</h4><div class="testimonial-person-label" style="display:inline-block;margin-top:3px;"><strong>Michael Botting</strong> — <strong>Former Store Manager &amp; Area Manager, Smiths City Group</strong></div>
 <!-- Inline Embedded Video Player Slot for Role 9 -->
 <div class="inline-video-player-container" id="inlinePlayer-role9" onclick="event.stopPropagation();">
 <button class="close-inline-video-btn" onclick="closeInlineVideo('role9')">Close / Stop</button>
@@ -2928,7 +2973,6 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div class="video-grid">
 <div class="video-thumbnail-card" onclick="playInlineVideo(event, 'role9', 'https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Michael%20Botting%20Store%20manager%2C%20Area%20manager%20for%20the%20Smiths%20city%20Group.mp4', 'Michael Botting - Smiths City Store Manager &amp; Area Manager Testimonial')" style="grid-column: 1 / -1;">
 <video muted="" playsinline="" preload="metadata" src="https://pub-9b01fbca006e410db3e4a3eff8551c2b.r2.dev/Michael%20Botting%20Store%20manager%2C%20Area%20manager%20for%20the%20Smiths%20city%20Group.mp4#t=1" webkit-playsinline=""></video>
-<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('video testimonial overlay.png') no-repeat center center; background-size: contain; pointer-events: none; z-index: 2;"></div>
 <div class="thumbnail-glow-overlay"></div>
 </div>
 </div>
