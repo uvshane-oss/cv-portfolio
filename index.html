@@ -1671,7 +1671,6 @@ li { margin-bottom: 6px; font-size: 13px; }
   }
 }
 </style>
-
 <style id="universal-key-highlights-v2">
 /* Canonical Key Highlights component.
    Visual precedent: Devil Burger.
@@ -1766,6 +1765,55 @@ li { margin-bottom: 6px; font-size: 13px; }
   }
 }
 </style>
+
+<style id="mobile-role-header-architecture-v1">
+/* Recruiter-first role header hierarchy:
+   date -> company -> role -> capability.
+   Scope is strictly role-card headers. */
+.role-card .role-company-name{
+  margin:0.20rem 0 0.10rem 0 !important;
+  color:#4b5563 !important;
+  font-size:0.82rem !important;
+  line-height:1.12 !important;
+  font-weight:800 !important;
+  letter-spacing:0.045em !important;
+  text-transform:uppercase !important;
+}
+.role-card .main-role-title{
+  margin-top:0 !important;
+  margin-bottom:0.12rem !important;
+  font-size:1.48rem !important;
+  line-height:1.12 !important;
+  font-weight:700 !important;
+}
+.role-card .role-summary-highlight{
+  margin-top:0.18rem !important;
+  font-size:0.98rem !important;
+  line-height:1.12 !important;
+  font-weight:700 !important;
+  white-space:nowrap !important;
+  overflow:visible !important;
+  text-overflow:clip !important;
+  letter-spacing:0 !important;
+}
+
+@media(max-width:700px){
+  .role-card .role-company-name{
+    font-size:0.78rem !important;
+    line-height:1.08 !important;
+    white-space:nowrap !important;
+  }
+  .role-card .main-role-title{
+    font-size:1.30rem !important;
+    line-height:1.10 !important;
+  }
+  .role-card .role-summary-highlight{
+    font-size:0.88rem !important;
+    line-height:1.08 !important;
+    white-space:nowrap !important;
+  }
+}
+</style>
 </head>
 <body>
 <div class="container">
@@ -1780,8 +1828,8 @@ li { margin-bottom: 6px; font-size: 13px; }
 <!-- ROLE 1: Devil Burger -->
 <div class="role-card" onclick="toggleRole(event, this, 'role1')">
 <div class="role-meta">2023–2025</div>
-<div class="main-role-title">Operations Manager – Devil Burger</div>
-<div class="role-summary-highlight">Sales Growth · Commercial Turnaround · Operations</div>
+<div class="role-company-name">DEVIL BURGER</div><div class="main-role-title">Operations Manager</div>
+<div class="role-summary-highlight">Sales Growth · Turnaround · Operations</div>
 <div class="collapsible-content" id="role1">
 <img alt="Devil Burger Logo" class="role-logo" src="image1.png"/>
 <div class="role-overview db-role-overview">
@@ -2003,8 +2051,8 @@ li { margin-bottom: 6px; font-size: 13px; }
 <!-- ROLE 2: XClean National Sales Manager (2018-2022) -->
 <div class="role-card" onclick="toggleRole(event, this, 'role2')">
 <div class="role-meta">2018–2022</div>
-<div class="main-role-title role-mobile-single-line">National Sales Manager – XClean</div>
-<div class="role-summary-highlight role-mobile-single-line xclean-capline">B2B Sales · Sales Growth · Team Leadership</div>
+<div class="role-company-name">XCLEAN</div><div class="main-role-title role-mobile-single-line">National Sales Manager</div>
+<div class="role-summary-highlight role-mobile-single-line xclean-capline">B2B Sales · Growth · Leadership</div>
 <div class="collapsible-content" id="role2">
 <img alt="XClean Logo" class="role-logo" src="xclean.jpg"/>
 <div class="role-overview xclean-role-overview">
@@ -2176,8 +2224,8 @@ li { margin-bottom: 6px; font-size: 13px; }
 <!-- ROLE 3: Royal Albatross Centre -->
 <div class="role-card" onclick="toggleRole(event, this, 'role3')">
 <div class="role-meta">2017</div>
-<div class="main-role-title albatross-mobile-title">Bespoke Project Sales – Royal Albatross Centre</div>
-<div class="role-summary-highlight albatross-mobile-capline">Consultative Sales · Solution Design · Project Delivery</div>
+<div class="role-company-name">ROYAL ALBATROSS CENTRE</div><div class="main-role-title albatross-mobile-title">Bespoke Project Sales</div>
+<div class="role-summary-highlight albatross-mobile-capline">Consultative Sales · Solutions · Delivery</div>
 <div class="collapsible-content" id="role3">
 <img alt="Albatross Centre Logo" class="role-logo" src="albatross logo.png"/>
 <div class="role-overview albatross-role-overview">
@@ -2281,8 +2329,8 @@ li { margin-bottom: 6px; font-size: 13px; }
 <!-- ROLE 4: ISee Digital -->
 <div class="role-card" onclick="toggleRole(event, this, 'role4')">
 <div class="role-meta">2015–2017</div>
-<div class="main-role-title isee-mobile-title">Site Acquisition Manager – ISee Digital</div>
-<div class="role-summary-highlight isee-mobile-capline">B2B Sales · Network Growth · Commercial Delivery</div>
+<div class="role-company-name">ISEE DIGITAL</div><div class="main-role-title isee-mobile-title">Site Acquisition Manager</div>
+<div class="role-summary-highlight isee-mobile-capline">B2B Sales · Network Growth · Delivery</div>
 <div class="collapsible-content" id="role4">
 <img alt="ISee Digital Logo" class="role-logo" src="isee digital logo.jpeg"/>
 <div class="role-overview isee-role-overview">
@@ -2578,8 +2626,8 @@ li { margin-bottom: 6px; font-size: 13px; }
 <!-- ROLE 5: XClean Growth Phase (2013-2015) -->
 <div class="role-card" onclick="toggleRole(event, this, 'role5')">
 <div class="role-meta">2013–2015</div>
-<div class="main-role-title">Sales Manager – XClean</div>
-<div class="role-summary-highlight">Frontline Sales · Team Growth · Customer Recovery</div>
+<div class="role-company-name">XCLEAN</div><div class="main-role-title">Sales Manager</div>
+<div class="role-summary-highlight">Frontline Sales · Team Growth · Retention</div>
 <div class="collapsible-content" id="role5">
 <img alt="XClean Logo" class="role-logo" src="xclean.jpg"/>
 <div class="role-overview">
@@ -2637,8 +2685,8 @@ li { margin-bottom: 6px; font-size: 13px; }
 <!-- ROLE 6: Regional Sales Manager – Integrate Group / Sky (2007-2014) -->
 <div class="role-card" onclick="toggleRole(event, this, 'role6')">
 <div class="role-meta">2007–2014</div>
-<div class="main-role-title">Regional Sales Manager – Integrate Group / Sky</div>
-<div class="role-summary-highlight">Direct Sales · Team Leadership · Regional Growth</div>
+<div class="role-company-name">INTEGRATE GROUP / SKY</div><div class="main-role-title">Regional Sales Manager</div>
+<div class="role-summary-highlight">Direct Sales · Leadership · Regional Growth</div>
 <div class="collapsible-content" id="role6">
 <img alt="Integrate Group Logo" class="role-logo" src="Integrate logo.png"/>
 <div class="role-overview">
@@ -2697,8 +2745,8 @@ li { margin-bottom: 6px; font-size: 13px; }
 <!-- ROLE 7: Mobilefone Solutions (2002-2006) -->
 <div class="role-card" onclick="toggleRole(event, this, 'role7')">
 <div class="role-meta">2002–2006</div>
-<div class="main-role-title">Manager (Vodafone Franchise) – Mobilefone Solutions</div>
-<div class="role-summary-highlight">Retail Sales · Sales Growth · Team Performance</div>
+<div class="role-company-name">MOBILEFONE SOLUTIONS</div><div class="main-role-title">Manager — Vodafone Franchise</div>
+<div class="role-summary-highlight">Retail Sales · Growth · Team Performance</div>
 <div class="collapsible-content" id="role7">
 <img alt="Mobilefone Solutions Logo" class="role-logo" src="mobilefone solutions logo.png"/>
 <div class="role-overview">
@@ -2771,7 +2819,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 <!-- ROLE 8: H&J Smith (2001-2002) -->
 <div class="role-card" onclick="toggleRole(event, this, 'role8')">
 <div class="role-meta">2001–2002</div>
-<div class="main-role-title">Department Manager – H&amp;J Smith</div>
+<div class="role-company-name">H&amp;J SMITH</div><div class="main-role-title">Department Manager</div>
 <div class="role-summary-highlight">Sales Growth · Multi-Store · Operations</div>
 <div class="collapsible-content" id="role8">
 <img alt="H&amp;J Smith Logo" class="role-logo" src="h&amp;J logo.png"/>
@@ -2813,8 +2861,8 @@ li { margin-bottom: 6px; font-size: 13px; }
 <!-- ROLE 9: Smiths City / Powerstore (1992-2001) -->
 <div class="role-card" onclick="toggleRole(event, this, 'role9')">
 <div class="role-meta">1992–2001</div>
-<div class="main-role-title">Area &amp; Branch Manager – Smiths City / Powerstore</div>
-<div class="role-summary-highlight">Sales Growth · Multi-Store Leadership · Turnaround</div>
+<div class="role-company-name">SMITHS CITY / POWERSTORE</div><div class="main-role-title">Area &amp; Branch Manager</div>
+<div class="role-summary-highlight">Sales Growth · Multi-Store · Turnaround</div>
 <div class="collapsible-content" id="role9">
 <img alt="Smiths City Logo" class="role-logo" src="smiths city logo.png"/>
 <div class="role-overview">
@@ -3902,7 +3950,6 @@ function wireSmithRefined(){
 document.addEventListener('DOMContentLoaded',wireSmithRefined);
 })();
 </script>
-
 <script id="universal-key-highlights-behaviour-v2">
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.universal-key-highlight-list').forEach(function (list) {
