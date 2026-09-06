@@ -1373,6 +1373,267 @@ li { margin-bottom: 6px; font-size: 13px; }
   .role-summary-lines{gap:1px}
 }
 
+
+/* === WORKING COPY: Devil Burger approved layered recruiter structure === */
+#role1 .db-role-overview .db-overview-toggle{
+  border:0;
+  background:transparent;
+  padding:0;
+  margin-left:4px;
+  color:var(--highlight-blue);
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+}
+#role1 .db-overview-story{
+  display:none;
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid var(--border-color);
+}
+#role1 .db-overview-story.show{display:block}
+#role1 .db-group-list{display:block;margin:0 0 14px;padding:0}
+#role1 .db-group{
+  border:1px solid var(--border-color);
+  border-radius:6px;
+  background:#fff;
+  margin:0 0 8px;
+  padding:0;
+  overflow:hidden;
+}
+#role1 .db-group::before{display:none}
+#role1 .db-group > summary{
+  padding:11px 38px 11px 13px;
+  font-weight:700;
+  font-size:14px;
+  line-height:1.3;
+  color:var(--primary);
+  position:relative;
+}
+#role1 .db-group > summary::after{
+  content:'+';
+  position:absolute;
+  right:13px;
+  top:7px;
+  color:var(--highlight-blue);
+  font-size:20px;
+  font-weight:700;
+}
+#role1 .db-group[open] > summary::after{content:'−'}
+#role1 .db-group-content{
+  border-top:1px solid var(--border-color);
+  padding:2px 13px 7px;
+  background:#fafbfc;
+}
+#role1 .db-subpoint{
+  padding:10px 0 8px;
+  border-bottom:1px solid #e7eaee;
+}
+#role1 .db-subpoint:last-child{border-bottom:0}
+#role1 .db-subpoint-title{
+  position:relative;
+  padding-left:17px;
+  margin:0 0 5px;
+  font-size:13.5px;
+  line-height:1.35;
+  font-weight:700;
+  color:var(--text-main);
+}
+#role1 .db-subpoint-title::before{
+  content:'•';
+  position:absolute;
+  left:1px;
+  color:var(--primary);
+}
+#role1 .db-subpoint p{
+  margin:0 0 0 17px;
+  padding:0;
+  font-size:13px;
+  line-height:1.55;
+  color:var(--text-muted);
+}
+@media(min-width:768px){
+  #role1 .db-group > summary{font-size:15px}
+  #role1 .db-subpoint-title{font-size:14px}
+}
+
+
+/* === XClean role refinement: mobile-safe navigation + layered evidence === */
+#role2 .xclean-overview-toggle{
+  border:0;background:transparent;padding:0;margin-left:4px;color:var(--highlight-blue);
+  font:inherit;font-weight:700;cursor:pointer;
+}
+#role2 .xclean-overview-story{
+  display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border-color);
+}
+#role2 .xclean-overview-story.show{display:block}
+#role2 .xclean-group-list{display:block;margin:0 0 14px;padding:0}
+#role2 .xclean-group{
+  border:1px solid var(--border-color);border-radius:6px;background:#fff;margin:0 0 8px;
+  padding:0;overflow:hidden;
+}
+#role2 .xclean-group::before{display:none}
+#role2 .xclean-group > summary{
+  padding:11px 38px 11px 13px;font-weight:700;font-size:14px;line-height:1.3;
+  color:var(--primary);position:relative;white-space:nowrap;
+}
+#role2 .xclean-group > summary::after{
+  content:'+';position:absolute;right:13px;top:7px;color:var(--highlight-blue);
+  font-size:20px;font-weight:700;
+}
+#role2 .xclean-group[open] > summary::after{content:'−'}
+#role2 .xclean-group-content{
+  border-top:1px solid var(--border-color);padding:2px 13px 7px;background:#fafbfc;
+}
+#role2 .xclean-subpoint{padding:10px 0 8px;border-bottom:1px solid #e7eaee}
+#role2 .xclean-subpoint:last-child{border-bottom:0}
+#role2 .xclean-subpoint-title{
+  position:relative;padding-left:17px;margin:0 0 5px;font-size:13.5px;line-height:1.35;
+  font-weight:700;color:var(--text-main);
+}
+#role2 .xclean-subpoint-title::before{content:'•';position:absolute;left:1px;color:var(--primary)}
+#role2 .xclean-subpoint p{margin:0 0 0 17px;padding:0;font-size:13px;line-height:1.55;color:var(--text-muted)}
+@media(max-width:767px){
+  .role-mobile-single-line{white-space:nowrap!important}
+  #role2 .main-role-title{font-size:16px!important}
+  #role2 .xclean-capline{font-size:10px!important;letter-spacing:-0.15px}
+  #role2 .xclean-group > summary{font-size:12.5px!important;letter-spacing:-0.1px}
+}
+@media(min-width:768px){
+  #role2 .xclean-group > summary{font-size:15px}
+  #role2 .xclean-subpoint-title{font-size:14px}
+}
+
+
+/* === Royal Albatross Centre refinement === */
+#role3 .albatross-overview-toggle{
+  border:0;background:transparent;padding:0;margin-left:4px;color:var(--highlight-blue);
+  font:inherit;font-weight:700;cursor:pointer;
+}
+#role3 .albatross-overview-story{
+  display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border-color);
+}
+#role3 .albatross-overview-story.show{display:block}
+#role3 .albatross-subpoint{padding:9px 0 8px;border-bottom:1px solid #e7eaee}
+#role3 .albatross-subpoint:last-child{border-bottom:0}
+#role3 .albatross-subpoint > strong{
+  display:block;position:relative;padding-left:17px;margin-bottom:5px;
+  font-size:13.5px;line-height:1.35;color:var(--text-main);
+}
+#role3 .albatross-subpoint > strong::before{
+  content:'•';position:absolute;left:1px;color:var(--primary);
+}
+#role3 .albatross-subpoint p{margin:0 0 0 17px}
+@media(max-width:767px){
+  .albatross-mobile-title,.albatross-mobile-capline{white-space:nowrap!important}
+  .albatross-mobile-title{font-size:14.5px!important;letter-spacing:-.15px}
+  .albatross-mobile-capline{font-size:9.5px!important;letter-spacing:-.25px}
+  #role3 .albatross-highlight > summary{
+    white-space:nowrap!important;font-size:12.5px!important;letter-spacing:-.1px
+  }
+}
+
+
+/* === ISee Digital role refinement === */
+#role4 .isee-overview-toggle{
+  border:0;background:transparent;padding:0;margin-left:4px;color:var(--highlight-blue);
+  font:inherit;font-weight:700;cursor:pointer;
+}
+#role4 .isee-overview-story{
+  display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border-color);
+}
+#role4 .isee-overview-story.show{display:block}
+#role4 .isee-subpoint{padding:9px 0 8px;border-bottom:1px solid #e7eaee}
+#role4 .isee-subpoint:last-child{border-bottom:0}
+#role4 .isee-subpoint > strong{
+  display:block;position:relative;padding-left:17px;margin-bottom:5px;
+  font-size:13.5px;line-height:1.35;color:var(--text-main);
+}
+#role4 .isee-subpoint > strong::before{content:'•';position:absolute;left:1px;color:var(--primary)}
+#role4 .isee-subpoint p{margin:0 0 0 17px}
+@media(max-width:767px){
+  .isee-mobile-title,.isee-mobile-capline{white-space:nowrap!important}
+  .isee-mobile-title{font-size:15px!important;letter-spacing:-.15px}
+  .isee-mobile-capline{font-size:9.8px!important;letter-spacing:-.2px}
+  #role4 .isee-highlight > summary{white-space:nowrap!important;font-size:12.5px!important;letter-spacing:-.1px}
+}
+
+</style>
+
+<style>
+/* ISee Digital — nested context disclosure for in-store deployment story */
+.isee-instore-story {
+  margin: 8px 0 16px;
+  border-left: 3px solid var(--highlight-blue);
+  padding-left: 12px;
+}
+.isee-instore-story .isee-subpoint {
+  border-left: 0;
+  padding-left: 0;
+}
+.isee-flow-context {
+  margin: 8px 0 12px;
+  padding: 0;
+}
+.isee-flow-context > summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--highlight-blue);
+  list-style: none;
+  width: fit-content;
+}
+.isee-flow-context > summary::-webkit-details-marker { display: none; }
+.isee-flow-context > summary span::after { content: " ›"; }
+.isee-flow-context[open] > summary span::after { content: " ×"; }
+.isee-flow-context-body { margin-top: 9px; }
+.isee-flow-context-body p { margin: 0 0 9px; }
+</style>
+
+<style>
+.xclean13-subpoint{padding:9px 0;border-bottom:1px solid rgba(0,0,0,.08)} .xclean13-subpoint:last-child{border-bottom:0}
+.xclean13-subpoint>strong{display:block;margin-bottom:4px}.xclean13-subpoint p{margin:0}
+.xclean13-overview-toggle{color:var(--highlight-blue);font-weight:700;cursor:pointer;white-space:nowrap}
+.xclean13-overview-more{display:none;margin-top:10px}.xclean13-overview-more.show{display:block}
+@media(max-width:600px){.role-card:has(#role5) .main-role-title,.role-card:has(#role5) .role-summary-highlight,#role5 .xclean13-highlight>summary{white-space:nowrap}}
+</style>
+<style>
+.sky-subpoint{padding:9px 0;border-bottom:1px solid rgba(0,0,0,.08)}.sky-subpoint:last-child{border-bottom:0}
+.sky-subpoint>strong{display:block;margin-bottom:4px}.sky-subpoint p{margin:0}
+.sky-overview-toggle{color:var(--highlight-blue);font-weight:700;cursor:pointer;white-space:nowrap}
+.sky-overview-more{display:none;margin-top:10px}.sky-overview-more.show{display:block}
+@media(max-width:600px){.role-card:has(#role6) .main-role-title,.role-card:has(#role6) .role-summary-highlight,#role6 .sky-highlight>summary{white-space:nowrap}}
+</style>
+<style>
+#role7 .vodafone-refined-point{padding:9px 0;border-bottom:1px solid rgba(0,0,0,.08)}
+#role7 .vodafone-refined-point:last-child{border-bottom:0}
+#role7 .vodafone-refined-point>strong{display:block;margin-bottom:4px}
+#role7 .vodafone-refined-point p{margin:0}
+#role7 .vodafone-refined-overview-toggle{color:var(--highlight-blue);font-weight:700;cursor:pointer;white-space:nowrap}
+#role7 .vodafone-refined-overview-more{display:none;margin-top:10px}
+#role7 .vodafone-refined-overview-more.show{display:block}
+@media(max-width:600px){
+  #role7 .vodafone-refined-highlight>summary{white-space:nowrap}
+}
+</style>
+<style>
+#role8 .hj-refined-point{padding:9px 0;border-bottom:1px solid rgba(0,0,0,.08)}
+#role8 .hj-refined-point:last-child{border-bottom:0}
+#role8 .hj-refined-point>strong{display:block;margin-bottom:4px}
+#role8 .hj-refined-point p{margin:0}
+#role8 .hj-refined-overview-toggle{color:var(--highlight-blue);font-weight:700;cursor:pointer;white-space:nowrap}
+#role8 .hj-refined-overview-more{display:none;margin-top:10px}
+#role8 .hj-refined-overview-more.show{display:block}
+@media(max-width:600px){#role8 .hj-refined-highlight>summary{white-space:nowrap}}
+</style>
+<style>
+#role9 .smith-refined-point{padding:9px 0;border-bottom:1px solid rgba(0,0,0,.08)}
+#role9 .smith-refined-point:last-child{border-bottom:0}
+#role9 .smith-refined-point>strong{display:block;margin-bottom:4px}
+#role9 .smith-refined-point p{margin:0}
+#role9 .smith-refined-overview-toggle{color:var(--highlight-blue);font-weight:700;cursor:pointer;white-space:nowrap}
+#role9 .smith-refined-overview-more{display:none;margin-top:10px}
+#role9 .smith-refined-overview-more.show{display:block}
+@media(max-width:600px){#role9 .smith-refined-highlight>summary{white-space:nowrap}}
 </style>
 </head>
 <body>
@@ -1392,28 +1653,121 @@ li { margin-bottom: 6px; font-size: 13px; }
   <div class="role-card" onclick="toggleRole(event, this, 'role1')">
     <div class="role-meta">2023–2025</div>
     <div class="main-role-title">Operations Manager – Devil Burger</div>
-    <div class="role-summary-highlight">Commercial Operations · Sales Growth · Margin Improvement · Business Development</div>
+    <div class="role-summary-highlight">Business Turnaround · Operations · Commercial Growth · Team Leadership</div>
     <div id="role1" class="collapsible-content">
       <img src="image1.png" alt="Devil Burger Logo" class="role-logo">
-      <div class="role-overview">
+
+      <div class="role-overview db-role-overview">
         <h4>Role Overview</h4>
-        <p>As Operations Manager, Shane was tasked with identifying commercial and operational opportunities inside an established business operating under tight budget constraints. He treated each improvement as an individual project: identify the problem, establish the commercial benefit, find the most economical way to deliver it, and ensure the result could be sustained by the business.</p>
-        <p>His remit extended beyond day-to-day operations into sales growth, margin protection, pricing, promotions, systems, new revenue channels and confidential support across the owner’s wider business interests. Where external consultants, agencies or conventional solutions would have made an improvement unaffordable, Shane developed practical in-house alternatives and used increased turnover, savings and efficiencies to help fund the next stage of improvement.</p>
+        <p>As Operations Manager, Shane identified and delivered commercially justified improvements across an established multi-channel hospitality business operating under tight capital constraints. His remit covered revenue growth, pricing, margin optimisation, promotions, systems improvement and new revenue channels. He developed cost-effective solutions where conventional consultants, agencies or technology implementations were commercially unviable, while providing trusted operational and commercial support across the owner’s wider business interests. <button class="db-overview-toggle" type="button" onclick="toggleDbOverview(event, this)">› Expand</button></p>
+
+        <div class="db-overview-story">
+          <p>Working within a business where available capital was limited, Shane approached improvement as a series of commercially accountable projects. He identified the problem or opportunity, established the potential commercial benefit, determined the most economical way to deliver it, and ensured the resulting solution could be sustained by the business.</p>
+          <p>His remit extended well beyond day-to-day operations. He worked across sales growth, margin protection, pricing, promotions, systems and development of new revenue channels, while also supporting the owner on confidential matters and opportunities across wider business interests.</p>
+          <p>Where conventional consultants, agencies or off-the-shelf solutions would have made an improvement unaffordable, Shane researched and developed practical alternatives internally. Rather than treating lack of capital as a barrier, he used increased turnover, savings and operating efficiencies generated from earlier initiatives to help fund subsequent improvements.</p>
+          <p>This created a progressive improvement programme in which individual projects delivered both an immediate commercial benefit and helped create the capacity for the next stage of development.</p>
+        </div>
       </div>
+
       <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
-      <div class="db-highlight-list">
-        <details class="db-highlight"><summary>Identified &amp; Delivered Operational Efficiencies</summary><p>Broke the wider modernisation programme into individual projects, identifying where outdated or disconnected processes were costing time, money or management visibility. Each improvement had to justify its cost and deliver a practical commercial benefit.</p></details>
-        <details class="db-highlight"><summary>Built a Self-Funding Business Improvement Programme</summary><p>With little capital available, prioritised improvements by commercial return. Increased sales, savings and efficiencies helped fund the hardware, software and interconnecting services required for subsequent projects rather than relying on a large transformation budget.</p></details>
-        <details class="db-highlight"><summary>Generated Revenue to Fund Business Improvement</summary><p>Developed marketing and promotional activity internally to avoid additional agency and consultancy costs while generating income to fund further improvements. Major promotional activity achieved approximately <strong>5× normal promotional turnover</strong>.</p></details>
-        <details class="db-highlight"><summary>Reduced Implementation Costs Through Resourceful Project Delivery</summary><p>Recognised that conventional external consultants and systems integration would price the business out of achieving the required modernisation. Researched, sourced, negotiated, configured and connected solutions internally, engaging external suppliers only where necessary.</p></details>
-        <details class="db-highlight"><summary>Improved Management Visibility &amp; Commercial Control</summary><p>Integrated previously disconnected sales and ordering processes so <strong>every sale was recorded</strong>, prepared delivery orders were accounted for, and product failures, refunds and chargebacks could be identified and monitored.</p></details>
-        <details class="db-highlight"><summary>Improved Pricing Agility &amp; Speed to Market</summary><p>Replaced fragmented pricing processes with centralised control, allowing a pricing or product change to be made <strong>once</strong> and reflected across in-store and online channels within seconds.</p></details>
-        <details class="db-highlight"><summary>Identified &amp; Captured Margin Improvement Opportunities</summary><p>Reviewed retail pricing, food costs, channel commissions and previously unmonitored losses. Where the existing delivery platform was taking approximately <strong>30% commission</strong>, channel pricing was adjusted to protect the commercial viability of those sales.</p></details>
-        <details class="db-highlight"><summary>Identified New Revenue &amp; Margin Opportunities</summary><p>Having grown a single delivery platform to <strong>five-figure weekly sales</strong>, recognised that proven online demand could be leveraged across additional channels. Investigated expansion across <strong>three delivery platforms</strong>, creating the potential to multiply online revenue rather than relying on one provider. In parallel, developed a Devil Burger-owned direct-ordering strategy using white-label ordering and third-party delivery, designed to reduce commission dependency and potentially retain an additional <strong>20–30% margin</strong> on direct sales.</p></details>
-        <details class="db-highlight"><summary>Reduced Capital Cost Without Compromising the Commercial Outcome</summary><p>When an optimal commercial digital menu-wall solution was approximately <strong>$20,000</strong>, developed an alternative using second-hand televisions sourced for approximately <strong>$500</strong>, substantially cheaper mounting hardware obtained through contacts, and an internally developed menu solution.</p></details>
-        <details class="db-highlight"><summary>Created Sustainable, Turnkey Operating Solutions</summary><p>Designed improvements so the business could operate them without ongoing dependence on Shane or expensive external support. A previously cumbersome menu and pricing process could be completed in approximately <strong>five minutes</strong>, with instructions left for future staff and management.</p></details>
-        <details class="db-highlight"><summary>Evaluated Business Growth &amp; Investment Opportunities</summary><p>Entrusted by the owner to investigate as many as <strong>five additional commercial opportunities</strong>, including potential acquisitions, importation, new-brand development and businesses involving significant compliance, regulatory approval and ongoing monitoring.</p></details>
-        <details class="db-highlight"><summary>Provided Trusted Multi-Business Operational Support</summary><p>Worked directly with the owner on confidential and commercially sensitive matters while providing operational direction, commercial problem-solving and support across the owner’s existing business interests.</p></details>
+      <div class="db-highlight-list db-group-list">
+
+        <details class="db-highlight db-group">
+          <summary>Revenue Growth &amp; Channel Expansion</summary>
+          <div class="db-group-content">
+            <div class="db-subpoint">
+              <div class="db-subpoint-title">5× Promotional Product Turnover · 50–100% Period Sales Growth</div>
+              <p>Developed marketing and promotional activity internally to avoid additional agency and consultancy costs while generating income to fund further improvements. Major promotional activity achieved approximately <strong>5× normal turnover on the promoted product</strong>, while <strong>total sales across the promotional period increased by approximately 50–100%</strong>.</p>
+            </div>
+            <div class="db-subpoint">
+              <div class="db-subpoint-title">Five-Figure Weekly Delivery Sales</div>
+              <p>Grew a single delivery platform to <strong>five-figure weekly sales</strong>, establishing proven online demand and a strong commercial base for further channel expansion.</p>
+            </div>
+            <div class="db-subpoint">
+              <div class="db-subpoint-title">Multi-Channel Expansion</div>
+              <p>Recognised that proven online demand could be leveraged across additional channels and investigated expansion across <strong>three delivery platforms</strong>, creating the potential to multiply online revenue rather than relying on one provider.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="db-highlight db-group">
+          <summary>Margin &amp; Commercial Performance</summary>
+          <div class="db-group-content">
+            <div class="db-subpoint">
+              <div class="db-subpoint-title">Margin Optimisation &amp; Loss Control</div>
+              <p>Reviewed retail pricing, food costs and previously unmonitored losses to identify where margin was being eroded and where commercially practical changes could improve performance.</p>
+            </div>
+            <div class="db-subpoint">
+              <div class="db-subpoint-title">30% Delivery Commission Response</div>
+              <p>Identified that the existing delivery platform was taking approximately <strong>30% commission</strong> and adjusted channel pricing to protect the commercial viability of those sales.</p>
+            </div>
+            <div class="db-subpoint">
+              <div class="db-subpoint-title">Direct Ordering — 20–30% Margin Opportunity</div>
+              <p>Developed a Devil Burger-owned direct-ordering strategy using white-label ordering and third-party delivery, designed to reduce commission dependency and potentially retain an additional <strong>20–30% margin</strong> on direct sales.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="db-highlight db-group">
+          <summary>Business Improvement &amp; Operational Efficiency</summary>
+          <div class="db-group-content">
+            <div class="db-subpoint">
+              <div class="db-subpoint-title">Operational Improvement Programme</div>
+              <p>Broke the wider modernisation programme into individual projects, identifying where outdated or disconnected processes were costing time, money or management visibility. Each improvement had to justify its cost and deliver a practical commercial benefit.</p>
+            </div>
+            <div class="db-subpoint">
+              <div class="db-subpoint-title">Self-Funding Business Improvement</div>
+              <p>With little capital available, prioritised improvements by commercial return. Increased sales, savings and efficiencies helped fund the hardware, software and interconnecting services required for subsequent projects rather than relying on a large transformation budget.</p>
+            </div>
+            <div class="db-subpoint">
+              <div class="db-subpoint-title">Sustainable Turnkey Solutions</div>
+              <p>Designed improvements so the business could operate them without ongoing dependence on Shane or expensive external support, with practical instructions and processes left for future staff and management.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="db-highlight db-group">
+          <summary>Systems, Pricing &amp; Commercial Control</summary>
+          <div class="db-group-content">
+            <div class="db-subpoint">
+              <div class="db-subpoint-title">Management Visibility &amp; Sales Control</div>
+              <p>Integrated previously disconnected sales and ordering processes so <strong>every sale was recorded</strong>, prepared delivery orders were accounted for, and product failures, refunds and chargebacks could be identified and monitored.</p>
+            </div>
+            <div class="db-subpoint">
+              <div class="db-subpoint-title">Centralised Pricing — Updates in ~5 Minutes</div>
+              <p>Replaced fragmented pricing processes with centralised control, allowing a pricing or product change to be made <strong>once</strong> and reflected across in-store and online channels within seconds. A previously cumbersome menu and pricing process could be completed in approximately <strong>five minutes</strong>.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="db-highlight db-group">
+          <summary>Cost-Effective Project Delivery</summary>
+          <div class="db-group-content">
+            <div class="db-subpoint">
+              <div class="db-subpoint-title">~$20k Digital Menu Solution Re-Engineered</div>
+              <p>When an optimal commercial digital menu-wall solution was approximately <strong>$20,000</strong>, developed an alternative using second-hand televisions sourced for approximately <strong>$500</strong>, substantially cheaper mounting hardware obtained through contacts, and an internally developed menu solution.</p>
+            </div>
+            <div class="db-subpoint">
+              <div class="db-subpoint-title">In-House Integration Reduced External Costs</div>
+              <p>Recognised that conventional external consultants and systems integration would price the business out of achieving the required modernisation. Researched, sourced, negotiated, configured and connected solutions internally, engaging external suppliers only where necessary.</p>
+            </div>
+          </div>
+        </details>
+
+        <details class="db-highlight db-group">
+          <summary>Business Development &amp; Owner Support</summary>
+          <div class="db-group-content">
+            <div class="db-subpoint">
+              <div class="db-subpoint-title">Commercial Due Diligence — Up to Five Opportunities</div>
+              <p>Entrusted by the owner to investigate as many as <strong>five additional commercial opportunities</strong>, including potential acquisitions, importation, new-brand development and businesses involving significant compliance, regulatory approval and ongoing monitoring.</p>
+            </div>
+            <div class="db-subpoint">
+              <div class="db-subpoint-title">Confidential Multi-Business Support</div>
+              <p>Worked directly with the owner on confidential and commercially sensitive matters while providing operational direction, commercial problem-solving and support across the owner’s existing business interests.</p>
+            </div>
+          </div>
+        </details>
+
       </div>
 
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials : Alice & Tim discuss working with Shane</h4>
@@ -1542,148 +1896,126 @@ li { margin-bottom: 6px; font-size: 13px; }
   <!-- ROLE 2: XClean National Sales Manager (2018-2022) -->
   <div class="role-card" onclick="toggleRole(event, this, 'role2')">
     <div class="role-meta">2018–2022</div>
-    <div class="main-role-title">National Sales Manager – XClean</div>
-    <div class="role-summary-highlight">National sales turnaround · People leadership · Product development · Marketing · Commercial operations</div>
+    <div class="main-role-title role-mobile-single-line">National Sales Manager – XClean</div>
+    <div class="role-summary-highlight role-mobile-single-line xclean-capline">Sales Turnaround · B2B Sales · People Leadership · Product Development · Marketing</div>
     <div id="role2" class="collapsible-content">
       <img src="xclean.jpg" alt="XClean Logo" class="role-logo">
-      <div class="role-overview">
+
+      <div class="role-overview xclean-role-overview">
         <h4>Role Overview</h4>
-        <p>Returned to XClean to lead a <strong>full-scale national turnaround from a zero-staff starting point</strong> after major legacy issues had damaged territories, customer confidence and market momentum. The intended long-term arrangement included a <strong>planned equity stake under a 10-year sell-off strategy</strong>. Shane combined high-activity personal selling with hands-on people leadership, rebuilding regional coverage, recruiting and coaching salespeople in the field, restoring customer relationships and creating the commercial activity required to move the business forward.</p>
-        <p>Although National Sales Manager was the primary role, Shane's remit also extended across <strong>product development, HR and marketing</strong>. He became involved wherever an issue affected growth — customer trials, product formulation, new brands, global sourcing, importation, industry approvals, social media marketing, fleet deployment and crisis response. His approach was consistently commercial: identify what was preventing sales or service delivery, solve it quickly, equip the team to execute, and remain personally accountable for results.</p>
+        <p>Returned to XClean to lead a national commercial rebuild from a zero-staff starting point in a market where previous iterations of the business had left significant reputational damage. Shane rebuilt regional coverage and field teams while remaining heavily active in frontline sales himself — cold calling, opening doors and closing B2B and direct-to-customer business across agriculture, industry and hospitality. His remit expanded across product development, marketing, HR, sourcing and operational issues affecting growth. <button class="xclean-overview-toggle" type="button" onclick="toggleXcleanOverview(event, this)">› Expand</button></p>
+        <div class="xclean-overview-story">
+          <p>In some territories Shane was not introducing an unknown brand; he was approaching customers who already had reasons to distrust it. Previous customer experiences included poor sales practices, products recommended for the wrong applications, unrealistic performance expectations and inconsistent fulfilment and service.</p>
+          <p>The rebuild therefore required two things at once: generate substantial new commercial activity and restore credibility. Shane's approach was practical — recommend the right product for the application, demonstrate it working in front of the customer, set realistic expectations, deliver what was promised and remain accountable after the sale.</p>
+          <p>The intended long-term arrangement included a <strong>planned equity stake under a 10-year sell-off strategy</strong>. Although National Sales Manager was the primary role, Shane became involved wherever an issue affected growth, including customer trials, product formulation, new brands, global sourcing, importation, industry approvals, social media marketing, fleet deployment and crisis response.</p>
+        </div>
       </div>
-      <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
-      <div class="xclean-highlight-list">
 
-        <details class="xclean-highlight"><summary>Rebuilt National Sales Coverage &amp; Market Presence</summary>
-          <div class="xclean-highlight-evidence">
-            <p>Returned to XClean specifically to help rebuild the business after earlier legacy issues had disrupted territories and market confidence. Re-established sales activity across regional centres and expanded operations from no active staff to <strong>8 separate regions and 20+ personnel</strong>.</p>
-            <ul>
-              <li>Rebuilt regional sales coverage rather than inheriting an established national team.</li>
-              <li>Worked directly in territories to re-establish face-to-face customer contact.</li>
-              <li>Combined national responsibility with personal field selling rather than managing remotely.</li>
-            </ul>
+      <h4 style="margin:0 0 8px 0;font-size:15px;color:var(--primary);">Key Highlights:</h4>
+      <div class="xclean-highlight-list xclean-group-list">
+
+        <details class="xclean-highlight xclean-group">
+          <summary>National Sales Turnaround</summary>
+          <div class="xclean-group-content">
+            <div class="xclean-subpoint">
+              <div class="xclean-subpoint-title">Zero Staff → 8 Regions &amp; 20+ Personnel</div>
+              <p>Returned to help rebuild national sales coverage after legacy issues had disrupted territories, customer confidence and market momentum. Expanded operations from no active staff to <strong>8 separate regions and 20+ personnel</strong>, building coverage rather than inheriting an established national team.</p>
+            </div>
+            <div class="xclean-subpoint">
+              <div class="xclean-subpoint-title">Rebuilt Trust in a Damaged Brand</div>
+              <p>Previous iterations of XClean had left a <strong>poor reputation in parts of the market</strong>. Shane therefore frequently entered sales conversations facing existing scepticism and negative prior experiences. He rebuilt credibility through correct product selection, live proof, realistic expectations, reliable fulfilment and accountable after-sale service.</p>
+            </div>
           </div>
         </details>
 
-        <details class="xclean-highlight"><summary>Built, Coached &amp; Mobilised High-Activity Sales Teams</summary>
-          <div class="xclean-highlight-evidence">
-            <p>Built regional capability by recruiting and coaching people in the same environment in which they were expected to perform. Shane worked alongside sales staff in vans, on farms and in regional centres, demonstrating prospecting, cold calling, customer conversations and conversion in real situations.</p>
-            <ul>
-              <li>Developed new regional teams while continuing to carry personal sales responsibility.</li>
-              <li>Used practical field coaching to establish expectations and selling standards.</li>
-              <li>Created a culture based on activity, accountability and direct customer contact.</li>
-            </ul>
+        <details class="xclean-highlight xclean-group">
+          <summary>New Business &amp; Account Growth</summary>
+          <div class="xclean-group-content">
+            <div class="xclean-subpoint">
+              <div class="xclean-subpoint-title">Relentless Prospecting &amp; Cold Calling</div>
+              <p>Shane remained heavily active in frontline new-business acquisition, continually hunting for opportunities rather than relying on inbound leads or an inherited customer list. He cold called across <strong>agriculture, industry and hospitality</strong>, selling directly to farmers and end users while also building relationships with larger commercial organisations.</p>
+            </div>
+            <div class="xclean-subpoint">
+              <div class="xclean-subpoint-title">Under 3 Minutes to Demonstrate Value</div>
+              <p>This was <strong>demonstration-led rather than brochure-led selling</strong>. The opening window was often less than three minutes, requiring Shane to establish relevance, identify a practical problem and get a product visibly working while the initial greeting and conversation were still underway.</p>
+            </div>
+            <div class="xclean-subpoint">
+              <div class="xclean-subpoint-title">Objection Handling &amp; Customer Acquisition</div>
+              <p>Cold approaches often began with scepticism — sometimes toward the salesperson, sometimes toward the XClean name itself. Shane had to overcome objections quickly, prove the product in the customer's own environment and convert an unplanned interruption into a genuine first sale and new commercial relationship.</p>
+            </div>
+            <div class="xclean-subpoint">
+              <div class="xclean-subpoint-title">First Sale → ~$3k Repeat Business</div>
+              <p>The first transaction was the entry point, not the end goal. When a customer was sold correctly using Shane's developed process — right product, realistic expectation, demonstrated result and proper follow-up — a return visit within <strong>five weeks</strong> could readily produce approximately <strong>$3,000 in sales</strong>.</p>
+            </div>
+            <div class="xclean-subpoint">
+              <div class="xclean-subpoint-title">$100 Transactions → Six-Figure Annual Accounts</div>
+              <p>The selling environment ranged from individual transactions of around <strong>$100</strong> through to relationships capable of developing into <strong>six-figure annual business</strong>. Shane therefore worked the full customer lifecycle: prospect, win, retain, service and grow the account.</p>
+            </div>
           </div>
         </details>
 
-        <details class="xclean-highlight"><summary>Delivered Strong Personal Commercial Performance</summary>
-          <div class="xclean-highlight-evidence">
-            <p>Remained an active salesperson while leading the national rebuild, with Shane's own activity recorded as contributing approximately <strong>$550,000 gross profit per annum</strong>. The role remained highly results-driven and required consistent prospecting and conversion rather than relying on existing account traffic.</p>
-            <ul>
-              <li>Maintained direct personal responsibility for generating new business.</li>
-              <li>Used cold calling and face-to-face selling across regional markets.</li>
-              <li>Led from the front so sales expectations were demonstrated, not simply instructed.</li>
-            </ul>
+        <details class="xclean-highlight xclean-group">
+          <summary>Sales Leadership &amp; Training</summary>
+          <div class="xclean-group-content">
+            <div class="xclean-subpoint">
+              <div class="xclean-subpoint-title">~$550k Annual Personal Gross Profit</div>
+              <p>Alongside national management responsibilities, Shane's own sales activity contributed approximately <strong>$550,000 gross profit per annum</strong>. He continued prospecting, opening accounts and closing business while simultaneously recruiting, coaching and leading the wider sales operation.</p>
+            </div>
+            <div class="xclean-subpoint">
+              <div class="xclean-subpoint-title">Training Happened in the Territory</div>
+              <p>Shane's sales training did not occur primarily in a boardroom. He worked beside representatives in vans, on farms and at customer sites, demonstrating cold calling, product presentation, objection handling, closing, follow-up and account development in live commercial situations.</p>
+            </div>
+            <div class="xclean-subpoint">
+              <div class="xclean-subpoint-title">~$6k Typical Field-Training Day</div>
+              <p>Where approximately <strong>$3,000 in weekly sales</strong> represented the level a salesperson needed to remain commercially viable, a typical single day of Shane's live field training would generate around <strong>$6,000 in sales</strong>. The purpose was to prove that opportunity existed in the representative's own territory and show a process they could reproduce themselves.</p>
+            </div>
+            <div class="xclean-subpoint">
+              <div class="xclean-subpoint-title">Exceptional ~$40k Day — A Clear Outlier</div>
+              <p>On one exceptional day — <strong>a clear outlier rather than a typical result</strong> — Shane entered a region he had never previously worked and generated approximately <strong>$40,000 across 10–15 sales within a 10–15 km radius</strong>. The result provided an unusually strong demonstration of what disciplined prospecting, live product proof and closing could achieve.</p>
+            </div>
           </div>
         </details>
 
-        <details class="xclean-highlight"><summary>Restored Customer Confidence &amp; Brand Reputation</summary>
-          <div class="xclean-highlight-evidence">
-            <p>A central part of the rebuild was restoring confidence after significant legacy issues. Shane leveraged established client relationships, returned to former customers personally and used <strong>on-farm trials</strong> to demonstrate products in the environment where they actually had to perform. This helped re-establish XClean as a credible supplier through visible service, practical proof, accurate advice and consistent follow-through.</p>
-            <ul>
-              <li>Re-engaged former and existing customers face-to-face in affected territories.</li>
-              <li>Used on-farm trials and practical demonstrations to rebuild confidence and drive growth.</li>
-              <li>Used service and training to strengthen relationships after the sale.</li>
-              <li>Focused on rebuilding trust as a prerequisite for sustainable sales growth.</li>
-            </ul>
+        <details class="xclean-highlight xclean-group">
+          <summary>Customer Retention &amp; Growth</summary>
+          <div class="xclean-group-content">
+            <div class="xclean-subpoint">
+              <div class="xclean-subpoint-title">Correct Selling Built Repeat Customers</div>
+              <p>Retention began at the first sale. Shane focused on matching the product to the actual application, setting realistic expectations and following through after purchase so customers received the result they had been promised rather than being oversold.</p>
+            </div>
+            <div class="xclean-subpoint">
+              <div class="xclean-subpoint-title">On-Farm Training Strengthened Accounts</div>
+              <p>Delivered <strong>free on-farm training</strong> across multiple regions, helping customers use products correctly and giving salespeople a practical service-led reason to remain engaged, protect the relationship and identify further opportunities within the account.</p>
+            </div>
+            <div class="xclean-subpoint">
+              <div class="xclean-subpoint-title">Account Management &amp; Development</div>
+              <p>Once customers had been won, Shane treated ongoing contact, service and product knowledge as part of the sales process — protecting accounts from churn while developing additional requirements and increasing the long-term commercial value of the relationship.</p>
+            </div>
           </div>
         </details>
 
-        <details class="xclean-highlight"><summary>Turned Product Knowledge Into a Sales &amp; Retention Tool</summary>
-          <div class="xclean-highlight-evidence">
-            <p>Sales were supported by practical product knowledge rather than a simple transactional pitch. Shane delivered <strong>free on-farm training</strong> across multiple regions, helping customers understand correct product use and giving salespeople a stronger service-led reason to maintain ongoing customer relationships.</p>
-            <ul>
-              <li>Used customer education to strengthen credibility and retention.</li>
-              <li>Supported sales teams with real-world product and application knowledge.</li>
-              <li>Connected after-sale support with future account development.</li>
-            </ul>
+        <details class="xclean-highlight xclean-group">
+          <summary>Product &amp; Market Development</summary>
+          <div class="xclean-group-content">
+            <div class="xclean-subpoint"><div class="xclean-subpoint-title">Developed New Products &amp; Brands</div><p>Used frontline customer knowledge to broaden the portfolio, developing products and brands including <strong>XChem, Shed Shield, Miraculous Mineral Mover and Surface Shield</strong>.</p></div>
+            <div class="xclean-subpoint"><div class="xclean-subpoint-title">BOVIS Market Response — New Sanitiser</div><p>Developed a <strong>sanitiser formulated for the BOVIS outbreak</strong>, connecting an emerging agricultural requirement with a new commercial product opportunity.</p></div>
+            <div class="xclean-subpoint"><div class="xclean-subpoint-title">Global Sourcing, Importation &amp; Approvals</div><p>Worked across product formulation, global manufacturer sourcing, importation and industry approvals required to bring new products into the commercial offer.</p></div>
+            <div class="xclean-subpoint"><div class="xclean-subpoint-title">Marketing Connected to Frontline Sales</div><p>Led <strong>social media marketing</strong> and used direct customer knowledge to connect product development, promotional activity and field execution rather than treating marketing and sales as separate functions.</p></div>
           </div>
         </details>
 
-        <details class="xclean-highlight"><summary>Expanded Operational Capacity to Support Sales Growth</summary>
-          <div class="xclean-highlight-evidence">
-            <p>Where operational limitations could slow the sales rebuild, Shane became directly involved in removing them. He introduced and deployed <strong>sign-written vans with custom shelving</strong> so representatives could carry a broader product range into their territories, increasing mobile selling capability and supporting higher sales.</p>
-            <ul>
-              <li>Personally painted, prepared and deployed vehicles to support expanding territories.</li>
-              <li>Built custom shelving to increase the range of products available to sell from each vehicle.</li>
-              <li>Turned fleet assets into visible mobile sales and service tools rather than simple transport.</li>
-              <li>Treated operational readiness as part of the sales-growth job, not somebody else's problem.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="xclean-highlight"><summary>Developed New Products, Brands &amp; Revenue Opportunities</summary>
-          <div class="xclean-highlight-evidence">
-            <p>Used customer contact and market knowledge to help strengthen the product portfolio and reduce reliance on existing lines. Shane's product-development remit included formulation, brand development, global manufacturer sourcing, importation and industry approvals, linking market demand directly to products the sales team could take back to customers.</p>
-            <ul>
-              <li>Developed new products and brands including <strong>XChem, Shed Shield, Miraculous Mineral Mover and Surface Shield</strong>.</li>
-              <li>Developed a <strong>sanitiser formulated for the BOVIS outbreak</strong>, responding to an emerging agricultural need.</li>
-              <li>Oversaw product formulation and sourced manufacturers globally.</li>
-              <li>Managed importation and industry-approval requirements.</li>
-              <li>Used new products to broaden the commercial offer and strengthen business resilience.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="xclean-highlight"><summary>Integrated Marketing With Frontline Sales Execution</summary>
-          <div class="xclean-highlight-evidence">
-            <p>Shane's remit included marketing as well as sales management. He led <strong>social media marketing</strong> and connected promotional activity with what salespeople were seeing in the field, allowing customer needs, product opportunities and campaigns to reinforce one another rather than operating as separate functions.</p>
-            <ul>
-              <li>Led social media marketing alongside national sales responsibilities.</li>
-              <li>Used frontline customer knowledge to inform promotional activity.</li>
-              <li>Connected product development, marketing and field sales around commercial opportunities.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="xclean-highlight"><summary>Created High-Impact Revenue Campaigns Under Pressure</summary>
-          <div class="xclean-highlight-evidence">
-            <p>During the COVID disruption, Shane developed and executed a rapid-response commercial campaign that generated approximately <strong>$500,000 in 14 days</strong>. The response converted an extraordinary market disruption into immediate sales activity at a time when normal selling conditions had changed dramatically.</p>
-            <ul>
-              <li>Recognised a fast-moving market need and responded commercially.</li>
-              <li>Moved from opportunity identification to campaign execution quickly.</li>
-              <li>Generated substantial short-period turnover during a major external disruption.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="xclean-highlight"><summary>Led Through Disruption, Realignment &amp; Commercial Uncertainty</summary>
-          <div class="xclean-highlight-evidence">
-            <p>Maintained sales leadership through COVID disruption and wider franchise/business realignment. As franchisees increasingly prioritised sanitiser sales over the established core business, Shane saw the risk of strategic misalignment and had to adapt territories, customer contact, team activity and commercial priorities as conditions changed.</p>
-            <ul>
-              <li>Continued managing national sales activity through rapidly changing market conditions.</li>
-              <li>Adjusted field execution as access to customers and regions changed.</li>
-              <li>Recognised the risk of short-term COVID demand pulling attention away from the core business.</li>
-              <li>Kept focus on revenue, customer relationships and team continuity during uncertainty.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="xclean-highlight"><summary>Managed Organisational Change &amp; Leadership Transition</summary>
-          <div class="xclean-highlight-evidence">
-            <p>As the business moved toward a franchise model, Shane raised concerns that selling franchise areas prematurely — without sufficiently enforcing the established goals, expectations and operating process — could compromise the organisation. When the strategic direction proceeded, he professionally honoured the structured exit requirements and supported the transition.</p>
-            <ul>
-              <li>Transitioned responsibility for trained, high-performing sales representatives to newly appointed franchisees.</li>
-              <li>Continued in a reduced role to meet obligations around forecast manufacturing and support franchisees through final transactions.</li>
-              <li>Maintained continuity despite disagreeing with aspects of the strategic direction.</li>
-              <li>Identified the risk of poorly vetted franchise owners failing to follow the established <strong>“Process”</strong>.</li>
-              <li>Supported an orderly handover rather than walking away when the ownership structure changed.</li>
-            </ul>
+        <details class="xclean-highlight xclean-group">
+          <summary>Crisis &amp; Change Leadership</summary>
+          <div class="xclean-group-content">
+            <div class="xclean-subpoint"><div class="xclean-subpoint-title">~$500k Revenue in 14 Days — COVID Response</div><p>During COVID disruption, developed and executed a rapid-response commercial campaign that generated approximately <strong>$500,000 in 14 days</strong>, moving quickly from identifying an extraordinary market need to commercial execution.</p></div>
+            <div class="xclean-subpoint"><div class="xclean-subpoint-title">Kept the Core Business in View</div><p>Adapted territories, customer contact, team activity and commercial priorities through COVID while recognising the strategic risk of exceptional short-term sanitiser demand pulling attention away from the established core business.</p></div>
+            <div class="xclean-subpoint"><div class="xclean-subpoint-title">Franchise Transition &amp; Structured Handover</div><p>Supported an orderly transition toward the franchise model, transferring trained representatives to franchisees and continuing in a reduced role to support manufacturing forecasts and final transactions despite concerns about aspects of the strategic direction.</p></div>
+            <div class="xclean-subpoint"><div class="xclean-subpoint-title">Built Mobile Sales Infrastructure</div><p>Introduced and deployed <strong>sign-written vans with custom shelving</strong> so representatives could carry a broader range into expanding territories. Shane personally helped prepare and deploy vehicles, treating operational readiness as part of sales execution.</p></div>
           </div>
         </details>
 
       </div>
-      
+
       <!-- Inline Embedded Video Player Slot for Role 2 -->
       <div id="inlinePlayer-role2" class="inline-video-player-container" onclick="event.stopPropagation();">
         <button class="close-inline-video-btn" onclick="closeInlineVideo('role2')">Close / Stop</button>
@@ -1753,151 +2085,100 @@ li { margin-bottom: 6px; font-size: 13px; }
   <!-- ROLE 3: Royal Albatross Centre -->
   <div class="role-card" onclick="toggleRole(event, this, 'role3')">
     <div class="role-meta">2017</div>
-    <div class="main-role-title">Consultative Sales &amp; Bespoke Project Delivery – Royal Albatross Centre</div>
-    <div class="role-summary-highlight role-summary-lines">
-  <span>Complex High-Value Sales</span>
-  <span>Bespoke Project Delivery · End-to-End Accountability</span>
-</div>
+    <div class="main-role-title albatross-mobile-title">Bespoke Project Sales – Royal Albatross Centre</div>
+    <div class="role-summary-highlight albatross-mobile-capline">Consultative Sales · Solution Design · Global Sourcing · Project Delivery</div>
+
     <div id="role3" class="collapsible-content">
       <img src="albatross logo.png" alt="Albatross Centre Logo" class="role-logo">
-      <div class="role-overview">
+
+      <div class="role-overview albatross-role-overview">
         <h4>Role Overview</h4>
-        <p>The Royal Albatross Centre had a clear vision for the visitor experience it wanted, but the physical and heritage constraints meant there was <strong>no off-the-shelf solution available</strong>. Shane approached the opportunity first as a senior salesperson: understand exactly what the customer was trying to achieve, qualify whether the requirement and investment were genuine, investigate whether a complete solution could actually be delivered, and never make a commitment until he was confident he could see it through.</p>
-        <p>Repeated consultation with stakeholders confirmed they were serious enough to justify deep investigation. Conventional suppliers and manufacturers could not provide what was required, and some overseas manufacturers were initially concerned that such an unusual project would ever proceed. Shane studied the requirements, developed the solution, investigated custom fabrication and built an international supply path involving components sourced directly from <strong>Germany</strong> and specialist items built and assembled in <strong>Japan</strong> before shipment to New Zealand. Only once he was satisfied the project was achievable did he return with a <strong>six-figure commercial proposal</strong>, requiring approximately <strong>$60,000 upfront to commence</strong>, together with his commitment that he would see the complete solution through.</p>
+        <p>Shane qualified and closed a complex six-figure project where the Royal Albatross Centre's required visitor experience could not be delivered from any standard product range. He translated the customer's vision and heritage-site constraints into a commercially viable bespoke solution, secured approximately <strong>$60,000 upfront</strong>, built a specialist international supply path and took personal accountability for delivering what he had sold. <button class="albatross-overview-toggle" type="button" onclick="toggleAlbatrossOverview(event, this)">› Expand</button></p>
+        <div class="albatross-overview-story">
+          <p>The customer had a clear vision for the visitor experience it wanted, but the physical and heritage constraints meant there was <strong>no off-the-shelf solution available</strong>. Shane approached the opportunity first as a senior salesperson: understand exactly what the customer was trying to achieve, qualify whether the requirement and investment were genuine, investigate whether a complete solution could actually be delivered, and never make a commitment until he was confident he could see it through.</p>
+          <p>Repeated consultation confirmed the stakeholders were serious enough to justify deep investigation. Conventional suppliers and manufacturers could not provide the complete outcome, so Shane worked backwards from the customer's requirement, investigated custom fabrication and developed a supply path involving components sourced directly from <strong>Germany</strong> and specialist items built and assembled in <strong>Japan</strong> before shipment to New Zealand.</p>
+          <p>Only after establishing that the project was genuinely achievable did he return with a <strong>six-figure commercial proposal</strong> requiring approximately <strong>$60,000 upfront to commence</strong>. His commitment extended beyond closing the sale: he accepted responsibility for coordinating the design, sourcing, fabrication, assembly and delivery required to turn the promise into the finished visitor experience.</p>
+        </div>
       </div>
 
-      <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
-      <div class="albatross-highlight-list">
+      <h4 style="margin:0 0 8px 0;font-size:15px;color:var(--primary);">Key Highlights:</h4>
+      <div class="albatross-highlight-list albatross-refined-list">
 
-        <details class="albatross-highlight"><summary>Qualified a Complex High-Value Sales Opportunity</summary>
+        <details class="albatross-highlight">
+          <summary>Complex Sales Qualification</summary>
           <div class="albatross-highlight-evidence">
-            <p>The customer knew the experience it wanted to create, but the request sat well outside a conventional product sale. Shane used repeated consultation to establish the true requirement, the constraints, the stakeholders' seriousness and whether they were prepared to fund a complete solution before committing substantial time to investigation.</p>
-            <ul>
-              <li>Separated a genuine high-value project from an aspirational enquiry before committing resources.</li>
-              <li>Established that the customer wanted a complete outcome rather than a compromise built around whatever happened to be available.</li>
-              <li>Treated technical investigation as part of qualifying and developing the sale.</li>
-            </ul>
+            <div class="albatross-subpoint">
+              <strong>Qualified a Genuine High-Value Opportunity</strong>
+              <p>Used repeated stakeholder consultation to separate a serious, fundable project from an aspirational enquiry before committing substantial time and resources to investigation.</p>
+            </div>
+            <div class="albatross-subpoint">
+              <strong>Sold the Outcome, Not the Catalogue</strong>
+              <p>Established that the customer wanted a complete visitor-experience outcome rather than a compromise based on whatever standard equipment happened to be available.</p>
+            </div>
+            <div class="albatross-subpoint">
+              <strong>Built Confidence Before Asking for Commitment</strong>
+              <p>Used consultation to refine requirements, test assumptions and establish stakeholder commitment, returning with a proposal only when he had evidence that the promise could be fulfilled.</p>
+            </div>
           </div>
         </details>
 
-        <details class="albatross-highlight"><summary>Turned Customer Requirements Into a Commercial Solution</summary>
+        <details class="albatross-highlight">
+          <summary>Bespoke Solution Development</summary>
           <div class="albatross-highlight-evidence">
-            <p>The brief involved a protected heritage environment and an unusually demanding visual outcome. Rather than beginning with a catalogue, Shane worked backwards from what the customer needed the finished experience to do and then determined what equipment, fabrication, sourcing and installation would be required to achieve it.</p>
-            <ul>
-              <li>Maintained focus on the customer's intended outcome rather than forcing the requirement into an existing product.</li>
-              <li>Translated physical, heritage and performance constraints into a complete project scope.</li>
-              <li>Developed the commercial proposition around the actual cost of delivering the result.</li>
-            </ul>
+            <div class="albatross-subpoint">
+              <strong>Turned “Not Available” Into a Deliverable Solution</strong>
+              <p>When conventional suppliers could not provide the required solution, Shane did not treat “not available off the shelf” as “not possible”. He identified what would need to be designed, sourced, modified or custom-built.</p>
+            </div>
+            <div class="albatross-subpoint">
+              <strong>Translated Constraints Into Project Scope</strong>
+              <p>Worked backwards from the required visitor experience and the protected heritage environment to determine the equipment, fabrication, sourcing and installation needed to achieve it.</p>
+            </div>
+            <div class="albatross-subpoint">
+              <strong>Learned Beyond Existing Experience</strong>
+              <p>With no formal engineering qualification or previous project of this type, Shane studied the technical requirements, hired access to an engineering workshop and developed sufficient practical understanding to scope a workable solution rather than allowing his existing knowledge to limit the customer's outcome.</p>
+            </div>
           </div>
         </details>
 
-        <details class="albatross-highlight"><summary>Converted “Not Available” Into a Deliverable Proposition</summary>
+        <details class="albatross-highlight">
+          <summary>Global Specialist Sourcing</summary>
           <div class="albatross-highlight-evidence">
-            <p>Repeated attempts to source conventional quotations and materials established that no standard product or complete supplier solution existed. Shane did not treat “not available off the shelf” as meaning “not possible”. He investigated what would have to be designed, sourced, modified or custom-built to make the customer's requirement achievable.</p>
-            <ul>
-              <li>Continued investigating after normal supply channels reached their limits.</li>
-              <li>Challenged suppliers whose thinking remained constrained by solutions they had built before.</li>
-              <li>Converted an unusual requirement into a practical delivery pathway.</li>
-            </ul>
+            <div class="albatross-subpoint">
+              <strong>Built an International Supply Path</strong>
+              <p>Worked directly with specialist overseas manufacturers when normal distribution channels reached their limits, sourcing components directly from <strong>Germany</strong> and arranging specialist items to be built and assembled in <strong>Japan</strong> before shipment to New Zealand.</p>
+            </div>
+            <div class="albatross-subpoint">
+              <strong>Integrated Multiple Specialist Dependencies</strong>
+              <p>Coordinated custom manufacture, international procurement, fabrication and logistics into a single delivery pathway despite initial manufacturer concern that such an unusual project would actually proceed.</p>
+            </div>
           </div>
         </details>
 
-        <details class="albatross-highlight"><summary>Built Stakeholder Confidence Through Consultative Selling</summary>
+        <details class="albatross-highlight">
+          <summary>Commercial Pricing &amp; Close</summary>
           <div class="albatross-highlight-evidence">
-            <p>The project developed through repeated consultation rather than a single quotation. Shane used those discussions to refine the requirement, test assumptions, establish the customer's level of commitment and keep stakeholders informed as the complexity and likely investment became clearer.</p>
-            <ul>
-              <li>Used consultation to progressively qualify both the solution and the customer's commitment.</li>
-              <li>Did not promise an outcome simply to secure the sale.</li>
-              <li>Returned with a proposal only after his investigation gave him confidence that the promise could be fulfilled.</li>
-            </ul>
+            <div class="albatross-subpoint">
+              <strong>Six-Figure Bespoke Proposal</strong>
+              <p>Priced the complete outcome realistically, allowing for specialist components, custom fabrication, international sourcing, project risk and the responsibility involved rather than under-pricing the work simply to secure the sale.</p>
+            </div>
+            <div class="albatross-subpoint">
+              <strong>~$60k Upfront Commitment</strong>
+              <p>Secured approximately <strong>$60,000 upfront simply to commence</strong> a project for which there was no standard product precedent, demonstrating both stakeholder confidence and Shane's ability to close a complex high-value proposition.</p>
+            </div>
           </div>
         </details>
 
-        <details class="albatross-highlight"><summary>Undertook Deep Investigation Before Making a Commitment</summary>
+        <details class="albatross-highlight">
+          <summary>End-to-End Accountability</summary>
           <div class="albatross-highlight-evidence">
-            <p>Because the only reason to proceed was to provide the complete solution, Shane carried out substantially more investigation than a normal sales process would require. He worked through sourcing, engineering, fabrication, logistics and installation questions until he understood what the project would take and was personally convinced it was achievable.</p>
-            <ul>
-              <li>Investigated feasibility before asking the customer for a major financial commitment.</li>
-              <li>Identified risks and dependencies across multiple suppliers and countries.</li>
-              <li>Built confidence through evidence and preparation rather than optimism.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="albatross-highlight"><summary>Developed a Bespoke Solution Where No Standard Product Existed</summary>
-          <div class="albatross-highlight-evidence">
-            <p>No part of the required complete solution was available as a straightforward off-the-shelf package. When external channels continued reverting to familiar designs, Shane sat down and learned what the project required, developed the design and explored how custom components could actually be produced.</p>
-            <ul>
-              <li>Worked from the required outcome rather than from available stock.</li>
-              <li>Developed custom solutions for components that could not simply be purchased.</li>
-              <li>Preserved the customer's requirement instead of reducing the brief to fit conventional products.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="albatross-highlight"><summary>Built an International Specialist Supply Chain</summary>
-          <div class="albatross-highlight-evidence">
-            <p>The eventual solution required specialist international coordination. Components had to be purchased directly from <strong>Germany</strong>, while other items needed to be specially built and assembled in <strong>Japan</strong> before dispatch to New Zealand.</p>
-            <ul>
-              <li>Worked directly with overseas manufacturers where normal distribution channels could not provide the required solution.</li>
-              <li>Overcame initial manufacturer concern about whether such an unusual project would genuinely proceed.</li>
-              <li>Coordinated specialist components across multiple countries into one deliverable project.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="albatross-highlight"><summary>Demonstrated Initiative Beyond Existing Knowledge &amp; Experience</summary>
-          <div class="albatross-highlight-evidence">
-            <p>Shane had <strong>no formal engineering qualification or previous experience delivering a project of this type</strong>. His earlier aptitude included placing first in engineering at high school before his career moved into retail and sales. Faced with a project conventional channels could not solve, he learned what was required rather than using the limits of his existing experience as the limit of the customer's solution.</p>
-            <ul>
-              <li>Studied the technical requirements until he understood what needed to be built.</li>
-              <li>Hired access to an engineering workshop and used the available workshop time to explore fabrication of required components.</li>
-              <li>Developed sufficient practical understanding to confidently scope and price the complete project.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="albatross-highlight"><summary>Priced Complexity, Risk &amp; Delivery Realistically</summary>
-          <div class="albatross-highlight-evidence">
-            <p>Once the investigation established what delivery would genuinely require, Shane did not under-price the project simply to win it. He returned with a <strong>six-figure price</strong> reflecting the specialist components, fabrication, international sourcing, project risk and responsibility involved.</p>
-            <ul>
-              <li>Priced the complete outcome rather than presenting an artificially low entry price.</li>
-              <li>Allowed for the realities of custom manufacture and international procurement.</li>
-              <li>Was prepared to put a substantial price in front of the customer because he could explain what it would take to deliver.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="albatross-highlight"><summary>Secured Significant Customer Commitment Before Commencement</summary>
-          <div class="albatross-highlight-evidence">
-            <p>The project required approximately <strong>$60,000 upfront simply to commence</strong>. By the time Shane asked for that commitment, the consultation and investigation had established both the seriousness of the customer's requirement and his confidence that the solution could be delivered.</p>
-            <ul>
-              <li>Secured substantial upfront commitment for a bespoke project with no standard product precedent.</li>
-              <li>Linked customer commitment to a clearly investigated delivery plan.</li>
-              <li>Demonstrated the confidence required to close a high-value, non-standard sale.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="albatross-highlight"><summary>Took Personal Accountability for End-to-End Delivery</summary>
-          <div class="albatross-highlight-evidence">
-            <p>Shane's commitment was not limited to making the sale. Once satisfied the project was achievable, he promised the stakeholders he would <strong>see the complete solution through</strong> and accepted responsibility for coordinating the design, sourcing, fabrication, assembly and final delivery required to honour that promise.</p>
-            <ul>
-              <li>Owned the outcome from customer consultation through to implementation.</li>
-              <li>Accepted responsibility for integrating multiple custom and international elements.</li>
-              <li>Used technical initiative in service of delivering the commercial promise.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="albatross-highlight"><summary>Delivered the Solution That Had Been Sold</summary>
-          <div class="albatross-highlight-evidence">
-            <p>The project ultimately required custom optical, fabrication and installation work inside a protected heritage site. Shane coordinated the specialist components and practical build required to turn the agreed concept into the finished visitor experience without compromising the site's constraints.</p>
-            <ul>
-              <li>Delivered a bespoke A/V environment where no complete off-the-shelf solution existed.</li>
-              <li>Worked within the heritage-site constraints rather than requiring the customer to alter the site around the technology.</li>
-              <li>Completed the commercial cycle: understand the requirement, qualify it, solve it, price it, secure commitment and deliver what was promised.</li>
-            </ul>
+            <div class="albatross-subpoint">
+              <strong>Personally Owned What Was Sold</strong>
+              <p>Once satisfied the project was achievable, Shane committed to seeing the complete solution through and accepted responsibility for coordinating the design, sourcing, fabrication, assembly and final delivery required to honour that promise.</p>
+            </div>
+            <div class="albatross-subpoint">
+              <strong>Commercial Promise → Delivered Outcome</strong>
+              <p>Completed the full cycle: understand the requirement, qualify the opportunity, investigate feasibility, develop the solution, price the risk, secure commitment and deliver the bespoke A/V environment within the protected heritage site's constraints.</p>
+            </div>
           </div>
         </details>
 
@@ -1920,151 +2201,95 @@ li { margin-bottom: 6px; font-size: 13px; }
   <!-- ROLE 4: ISee Digital -->
   <div class="role-card" onclick="toggleRole(event, this, 'role4')">
     <div class="role-meta">2015–2017</div>
-    <div class="main-role-title">Site Acquisition Manager – ISee Digital</div>
-    <div class="role-summary-highlight">High-conversion B2B sales · National network growth · Commercial negotiation · Site acquisition · End-to-end execution</div>
+    <div class="main-role-title isee-mobile-title">Site Acquisition Manager – ISee Digital</div>
+    <div class="role-summary-highlight isee-mobile-capline">B2B Sales · Site Acquisition · Negotiation · Network Growth · Delivery</div>
     <div id="role4" class="collapsible-content">
       <img src="isee digital logo.jpeg" alt="ISee Digital Logo" class="role-logo">
-      <div class="role-overview">
+
+      <div class="role-overview isee-role-overview">
         <h4>Role Overview</h4>
-        <p>Brought into ISee Digital because of Shane's reputation for <strong>high-conversion, first-visit selling</strong>. The commercial challenge was to rapidly build a national indoor and outdoor advertising footprint by approaching businesses that had often never considered the proposition, creating value quickly, negotiating mutually beneficial agreements and securing commitment without the benefit of a long sales cycle.</p>
-        <p>The role became much broader than simply signing sites. Shane had to identify the right locations, judge commercial value, negotiate revenue-share and lease arrangements, work through geo-testing and resource-consent requirements, coordinate procurement and then ensure the network was actually deployed. The commissioned network was being built as a <strong>national commercial asset, with the expectation that it would ultimately be purchased in its entirety by a competitor</strong>. His strongest results came from combining <strong>sales judgement with ownership of execution</strong>: win the right agreement, build useful network coverage, solve whatever stood between the agreement and activation, and avoid wasting time or capital on poorly chosen sites.</p>
+        <p>Recruited for Shane's reputation for <strong>high-conversion, first-visit B2B selling</strong>, he helped build ISee Digital's national indoor and outdoor advertising footprint by cold-approaching business owners, creating value around an unfamiliar proposition and securing commercially useful sites quickly. His responsibility extended beyond the signature: site selection, revenue-share and lease negotiation, regulatory feasibility, procurement and deployment all had to convert individual agreements into a functioning national commercial asset. <button class="isee-overview-toggle" type="button" onclick="toggleISeeOverview(event, this)">› Expand</button></p>
+        <div class="isee-overview-story">
+          <p>The commercial model depended on repeatedly converting individual local business decisions into national network coverage. Shane was expected to identify locations worth pursuing, get directly in front of decision-makers and create enough value and confidence to secure agreement without relying on a long sales cycle or established demand.</p>
+          <p>He ultimately secured <strong>2,000+ retail locations and 32 North Island billboard sites</strong>. Site acquisition was only valuable if the location strengthened the wider network and could actually be activated, so Shane also worked through geographic planning, geo-testing, resource-consent requirements, commercial terms, hardware procurement and installation.</p>
+          <p>The commissioned footprint was intended to become a <strong>national commercial asset for an eventual whole-network sale to a competitor</strong>. Shane's approach therefore combined aggressive acquisition with commercial judgement and delivery accountability: win the right agreement, place the network where it had value, solve whatever prevented activation and avoid wasting capital on poor locations.</p>
+        </div>
       </div>
-      <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
-      <div class="isee-highlight-list">
 
-        <details class="isee-highlight"><summary>Converted Cold Prospects Into High-Value Commercial Agreements</summary>
+      <h4 style="margin:0 0 8px 0;font-size:15px;color:var(--primary);">Key Highlights:</h4>
+      <div class="isee-highlight-list isee-refined-list">
+
+        <details class="isee-highlight">
+          <summary>High-Conversion B2B Sales</summary>
           <div class="isee-highlight-evidence">
-            <p>Shane was recruited because of his ability to create a commercial conversation quickly and close business on the first visit. He regularly approached owners who had never considered the proposition and converted a cold introduction into an agreement involving meaningful hardware and installation commitment.</p>
-            <ul>
-              <li>Sold directly to independent business owners in fast, face-to-face conversations.</li>
-              <li>Created desire and urgency around an unfamiliar proposition rather than responding to existing demand.</li>
-              <li>Could close agreements involving approximately <strong>$20,000</strong> of commitment in very short sales cycles.</li>
-              <li>Best recorded progression from first contact to full installation was approximately <strong>20 minutes</strong>.</li>
-            </ul>
+            <div class="isee-subpoint"><strong>Cold Prospect → First-Visit Agreement</strong><p>Approached independent business owners who had often never considered the proposition, created a commercial conversation from a cold introduction and regularly secured commitment on the first visit.</p></div>
+            <div class="isee-instore-story">
+              <div class="isee-subpoint isee-flow-summary">
+                <strong>Redesigned In-Store Deployment</strong>
+                <p><strong>5-site cluster within 1,000m:</strong> previously multiple agents canvassed target areas over <strong>2–3 weeks</strong>, followed by separately booked installation contractors. Shane replaced the fragmented model.</p>
+              </div>
+              <details class="isee-flow-context">
+                <summary><span>Full context</span></summary>
+                <div class="isee-flow-context-body">
+                  <p>ISee Digital's owner had already tried several approaches to solving the in-store site-acquisition challenge. The established model used multiple contracted agents to canvass target areas, commonly taking approximately <strong>2–3 weeks</strong> to establish the required locations. Installation was then booked separately through independent contractors, adding another hand-off before the sites could become operational.</p>
+                  <p>Shane began working <strong>new, previously uncanvassed territories</strong> and initially worked within that established process. He found the contractor-dependent model frustrating because the hand-offs restricted how quickly a signed location could become part of the live network.</p>
+                  <p>He replaced that fragmented flow by taking personal control of <strong>prospecting, qualification, agreement and installation</strong>. For the targeted in-store model, a useful local cluster was approximately <strong>five locations within a 1,000-metre area</strong>. In suitable territories, Shane could prospect, secure and deploy that cluster in <strong>a morning</strong>.</p>
+                  <p>At its fastest, a completely cold prospect went from first introduction through agreement and completed installation to a live network location in approximately <strong>20 minutes</strong>. The result demonstrated the operating principle behind Shane's approach: <strong>control the process, remove the hand-offs and control the outcome</strong>.</p>
+                </div>
+              </details>
+              <div class="isee-subpoint isee-flow-summary">
+                <strong>Took Control of the Full Sales Flow</strong>
+                <p>Shane personally handled <strong>prospecting → qualification → agreement → installation</strong>, turning suitable 5-site cluster deployments into <strong>a morning's work</strong>, with his fastest individual cold prospect becoming a live site in <strong>~20 minutes</strong>.</p>
+              </div>
+            </div>
+            <div class="isee-subpoint"><strong>Adapted the Pitch Across Cultures</strong><p>When language barriers limited a conventional presentation, harvested multilingual video referrals from customers already won and combined culturally matched social proof with simple hand-drawn explanations to continue securing first-visit agreements.</p></div>
           </div>
         </details>
 
-        <details class="isee-highlight"><summary>Built a National Commercial Network From Individual Deals</summary>
+        <details class="isee-highlight">
+          <summary>National Network Growth</summary>
           <div class="isee-highlight-evidence">
-            <p>Individual site agreements were not isolated sales; collectively they created the national footprint the business needed. Shane secured <strong>2,000+ retail locations</strong> and <strong>32 North Island billboard sites</strong>, turning repeated local negotiations into scalable national commercial coverage. The network itself was being developed as a <strong>commercial asset with an intended future whole-network sale</strong>.</p>
-            <ul>
-              <li>Built network presence across metropolitan and regional New Zealand.</li>
-              <li>Maintained deal momentum while working across widely separated markets.</li>
-              <li>Connected individual site acquisition decisions to the value of the overall advertising network.</li>
-            </ul>
+            <div class="isee-subpoint"><strong>2,000+ Retail Sites &amp; 32 Billboards</strong><p>Turned repeated local negotiations into scalable national coverage, securing <strong>2,000+ retail locations</strong> and <strong>32 North Island billboard sites</strong> across metropolitan and regional New Zealand.</p></div>
+            <div class="isee-subpoint"><strong>Built a Saleable Commercial Asset</strong><p>Understood that each individual agreement contributed to a larger commissioned network being developed as a commercial asset with the expectation of an eventual whole-network sale.</p></div>
+            <div class="isee-subpoint"><strong>Indoor &amp; Outdoor Coverage Worked Together</strong><p>Canvassed businesses around billboard locations to create complementary in-store digital coverage capable of mirroring outdoor advertising and strengthening geographic reach.</p></div>
           </div>
         </details>
 
-        <details class="isee-highlight"><summary>Negotiated Mutually Beneficial Revenue &amp; Site Agreements</summary>
+        <details class="isee-highlight">
+          <summary>Commercial Site Acquisition</summary>
           <div class="isee-highlight-evidence">
-            <p>The proposition required business owners to accept equipment and installation in return for advertising value and a share of commercial upside. Shane negotiated the lease and <strong>revenue-share agreements</strong> needed to make sites attractive to owners while remaining commercially viable for ISee Digital.</p>
-            <ul>
-              <li>Balanced the interests of site owners with the economics of the network.</li>
-              <li>Negotiated agreements directly with decision-makers.</li>
-              <li>Sold value rather than relying on price alone.</li>
-            </ul>
+            <div class="isee-subpoint"><strong>First-Visit Acquisition · Below-Budget Leases</strong><p>Shane cold-approached property and business owners, explained the outdoor billboard concept and negotiated the commercial terms required to secure strategically valuable locations. With a budget allowance of approximately <strong>$20,000 per site per annum</strong>, Shane typically secured leases for around <strong>$12,000–$14,000 p.a.</strong>, with many negotiated as low as <strong>$6,000–$7,000 p.a.</strong> Agreements were commonly secured on the <strong>first visit</strong>, subject to regulatory approval, allowing viable locations to progress toward installation and operation.</p></div>
+            <div class="isee-subpoint"><strong>Six-Figure Co-Ownership → Multi-Site Expansion</strong><p>Where a site owner controlled other commercially valuable locations, Shane could develop the initial conversation into a <strong>six-figure-per-site co-ownership agreement</strong>. A multi-site arrangement could secure several priority locations through one commercial relationship, accelerating network expansion, reducing repeated acquisition and lease costs, and helping overcome the capital constraints of building the billboard network solely with company funding.</p></div>
+            <div class="isee-subpoint"><strong>Selected for Impact, Not Convenience</strong><p>Regional centres could justify only a limited number of screens, so Shane planned where the network needed to be seen and assessed locations for commercial value rather than accepting whichever sites were easiest to secure.</p></div>
+            <div class="isee-subpoint"><strong>Negotiated Revenue-Share &amp; Lease Terms</strong><p>Negotiated directly with decision-makers to create mutually beneficial <strong>revenue-share and lease agreements</strong>, balancing the site owner's incentive with the economics of the wider network.</p></div>
+            <div class="isee-subpoint"><strong>Protected Capital From Poor Site Decisions</strong><p>Factored travel, installation, servicing and opportunity cost into acquisition decisions so apparently easy wins did not become expensive, low-value locations.</p></div>
           </div>
         </details>
 
-        <details class="isee-highlight"><summary>Selected Sites for Commercial Impact, Not Just Availability</summary>
+        <details class="isee-highlight">
+          <summary>Regulatory &amp; Stakeholder Delivery</summary>
           <div class="isee-highlight-evidence">
-            <p>Regional centres could justify only a small number of screens, making site selection critical. Shane planned where the network needed to be seen in each town and assessed locations for commercial value rather than simply accepting whichever sites were easiest to secure. For the in-store network he also <strong>canvassed businesses around billboard locations</strong>, creating complementary indoor coverage where screens could mirror billboard advertising.</p>
-            <ul>
-              <li>Used geographic and market judgement to prioritise high-value locations.</li>
-              <li>Recognised that a poor site decision could create significant travel, installation and opportunity cost.</li>
-              <li>Balanced network coverage with the practical economics of servicing regional locations.</li>
-            </ul>
+            <div class="isee-subpoint"><strong>Geo-Testing &amp; Resource Consents</strong><p>Worked through <strong>geo-testing and resource-consent requirements</strong> as part of commercial site acquisition, reducing the risk of signing attractive locations that could not practically proceed.</p></div>
+            <div class="isee-subpoint"><strong>NZTA &amp; MAF Stakeholder Requirements</strong><p>Attended meetings alongside the ISee Digital owner with <strong>NZTA and MAF</strong> around time-critical public-information advertising requirements, including communications following the <strong>Kaikōura earthquake</strong> and an invasive-species eradication awareness campaign.</p></div>
+            <div class="isee-subpoint"><strong>~120 Screens Deployed in ~10 Days</strong><p>Helped translate urgent campaign requirements into network expansion, supporting deployment of approximately <strong>120 screens in roughly 10 days</strong> where existing billboard coverage was insufficient.</p></div>
           </div>
         </details>
 
-        <details class="isee-highlight"><summary>Adapted the Sales Process to Different Customers &amp; Cultures</summary>
+        <details class="isee-highlight">
+          <summary>Procurement &amp; National Rollout</summary>
           <div class="isee-highlight-evidence">
-            <p>When language differences made a conventional sales presentation difficult, Shane changed the process rather than abandoning the opportunity. He harvested video referrals from customers he had already closed and built a library of testimonials in customers' own languages.</p>
-            <ul>
-              <li>Used culturally matched video proof during live sales conversations.</li>
-              <li>Combined testimonials with clear hand-drawn explanations when verbal communication was limited.</li>
-              <li>Used previous customers to build trust with new prospects from similar communities.</li>
-              <li>Continued securing first-visit agreements despite significant communication barriers.</li>
-            </ul>
+            <div class="isee-subpoint"><strong>2,000+ Device Rollout</strong><p>Managed requirements for <strong>2,000+ single-board computers, screens, brackets and cabling</strong>, connecting procurement volumes directly to the sites being sold and deployed.</p></div>
+            <div class="isee-subpoint"><strong>Ahead of Schedule &amp; Under Budget</strong><p>Completed the national installation programme <strong>ahead of schedule and under budget</strong>, coordinating the relationship between sales pace, hardware availability, travel and deployment.</p></div>
+            <div class="isee-subpoint"><strong>Removed Delivery Bottlenecks Personally</strong><p>Completed the majority of physical installation himself where additional installers would have slowed rollout or increased cost. The hands-on work was a means of protecting the commercial result, not the purpose of the role.</p></div>
           </div>
         </details>
 
-        <details class="isee-highlight"><summary>Converted Urgent Stakeholder Requirements Into Rapid Deployment</summary>
+        <details class="isee-highlight">
+          <summary>End-to-End Commercial Ownership</summary>
           <div class="isee-highlight-evidence">
-            <p>Shane attended meetings alongside the ISee Digital owner with <strong>NZTA and MAF</strong> when advertising contracts were secured for time-critical public-information requirements. These included communications around disruption following the <strong>Kaikōura earthquake</strong> and an <strong>invasive-species eradication awareness campaign</strong> affecting the main-highway corridor around the northern South Island.</p>
-            <ul>
-              <li>Participated directly in stakeholder meetings around urgent advertising requirements.</li>
-              <li>Recognised that areas without suitable billboard coverage could be supported through an expanded in-store digital footprint.</li>
-              <li>Helped translate two specific campaign requirements into an urgent network-expansion response.</li>
-              <li>Supported deployment of approximately <strong>120 screens</strong> in roughly <strong>10 days</strong> to provide the required campaign coverage.</li>
-              <li>Combined stakeholder understanding, commercial opportunity and rapid execution against an external deadline.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="isee-highlight"><summary>Navigated Regulatory Requirements to Keep Projects Moving</summary>
-          <div class="isee-highlight-evidence">
-            <p>Securing a commercially attractive site was only useful if it could actually be activated. Shane worked through <strong>geo-testing and resource-consent approvals</strong> as part of moving billboard opportunities from agreement to operational site.</p>
-            <ul>
-              <li>Integrated regulatory feasibility into site-acquisition decisions.</li>
-              <li>Worked through approval requirements rather than handing off the commercial problem.</li>
-              <li>Reduced the risk of signing locations that could not practically proceed.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="isee-highlight"><summary>Managed Commercial Commitments Through to Activation</summary>
-          <div class="isee-highlight-evidence">
-            <p>Shane did not regard a signed agreement as the end of the sale. He remained responsible for the steps required to turn agreements into operating advertising locations, coordinating site requirements, hardware and deployment across the national footprint.</p>
-            <ul>
-              <li>Owned the path from prospecting and negotiation through to activation.</li>
-              <li>Kept commercial promises connected to practical delivery.</li>
-              <li>Reduced hand-off risk by staying involved after the agreement was signed.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="isee-highlight"><summary>Controlled Procurement Across a Large-Scale Rollout</summary>
-          <div class="isee-highlight-evidence">
-            <p>The in-store network required procurement and coordination at scale. Shane managed requirements covering <strong>2,000+ single-board computers, screens, brackets and cabling</strong> needed to convert the sales footprint into a functioning network.</p>
-            <ul>
-              <li>Connected procurement volumes directly to deployment requirements.</li>
-              <li>Coordinated multiple hardware components across a large national rollout.</li>
-              <li>Maintained focus on cost and practical suitability rather than technology for its own sake.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="isee-highlight"><summary>Delivered National Expansion Ahead of Schedule &amp; Under Budget</summary>
-          <div class="isee-highlight-evidence">
-            <p>The commercial value of the network depended on getting secured locations operating. Shane completed the national installation programme <strong>ahead of schedule and under budget</strong>, converting the acquired footprint into usable advertising inventory.</p>
-            <ul>
-              <li>Managed the relationship between sales pace, procurement and deployment.</li>
-              <li>Prioritised efficient travel and installation planning across regional centres.</li>
-              <li>Delivered the network without allowing execution costs to erode the commercial result.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="isee-highlight"><summary>Used Hands-On Capability to Protect the Commercial Outcome</summary>
-          <div class="isee-highlight-evidence">
-            <p>Where relying on additional installers would have slowed deployment or increased cost, Shane completed the majority of physical installation himself. The installation work was not the purpose of his role; it was a practical means of ensuring the sites he had sold became operational quickly and economically.</p>
-            <ul>
-              <li>Removed delivery bottlenecks rather than waiting for another function to solve them.</li>
-              <li>Used practical capability to protect project timing and budget.</li>
-              <li>Stayed accountable for the commercial result beyond the point of sale.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="isee-highlight"><summary>Created Commercial Infrastructure With Continuing Value</summary>
-          <div class="isee-highlight-evidence">
-            <p>ISee Digital ultimately lacked the advertising-sales capacity to monetise the entire network as originally intended and the network was later sold in smaller pieces. Shane subsequently had multiple points of contact supporting new owners and stakeholders whose operations were successfully continuing when his earlier career record was prepared.</p>
-            <ul>
-              <li>The later ownership change did not remove the underlying utility of the deployed network.</li>
-              <li>Provided knowledge and support to stakeholders after the original ISee structure changed.</li>
-              <li>Demonstrated that his contribution extended beyond acquiring sites to creating practical, transferable operating infrastructure.</li>
-            </ul>
+            <div class="isee-subpoint"><strong>Agreement → Operating Advertising Site</strong><p>Did not treat a signed agreement as the end of the sale. Stayed accountable through site requirements, hardware, approvals and deployment until the acquired location became usable advertising inventory.</p></div>
+            <div class="isee-subpoint"><strong>Sales Judgement Connected to Execution</strong><p>Combined prospecting, negotiation, geographic judgement, procurement and practical delivery so sales activity created operating infrastructure rather than a collection of unfulfilled agreements.</p></div>
+            <div class="isee-subpoint"><strong>Infrastructure Retained Continuing Value</strong><p>Although ISee Digital later lacked the advertising-sales capacity to monetise the entire network as originally intended and the network was sold in smaller pieces, Shane later supported new owners and stakeholders whose operations continued using infrastructure he had helped create.</p></div>
           </div>
         </details>
 
@@ -2292,137 +2517,41 @@ li { margin-bottom: 6px; font-size: 13px; }
   <div class="role-card" onclick="toggleRole(event, this, 'role5')">
     <div class="role-meta">2013–2015</div>
     <div class="main-role-title">Sales Manager – XClean</div>
-    <div class="role-summary-highlight">Company selling cleaning chemicals into industry, agriculture and hospitality sectors</div>
+    <div class="role-summary-highlight">Frontline Sales · Team Growth · Customer Recovery</div>
     <div id="role5" class="collapsible-content">
       <img src="xclean.jpg" alt="XClean Logo" class="role-logo">
       <div class="role-overview">
         <h4>Role Overview</h4>
-        <p>Joined XClean in a <strong>results-driven national sales role</strong> and quickly established a record-breaking regional sales performance. Shane combined high-activity cold calling with deep product knowledge, existing industry relationships and hands-on on-farm trials to create a sales process that could be taught, repeated and deployed into new territories.</p>
-        <p>The role expanded from personal selling into <strong>sales-team development, customer recovery, brand rebuilding, training, promotions and crisis management</strong>. Shane was often selling into a market where previous company failures had damaged trust, so commercial growth depended on confronting problems directly, educating customers and proving product performance rather than simply pushing for an order.</p>
+        <p>Joined XClean in a frontline sales role and quickly established <strong>record-breaking regional performance</strong>, combining cold prospecting, practical product trials and direct customer engagement across agriculture, industry and hospitality. Shane then turned that field-tested approach into a repeatable sales model used to rebuild damaged customer trust, develop commission-only sales teams and expand into new territories. <span class="xclean13-overview-toggle" role="button" tabindex="0">› Expand</span></p>
+        <div class="xclean13-overview-more">
+          <p>XClean entered parts of the market carrying serious legacy issues, including counterfeit sales, theft and undelivered goods. Shane's sales approach therefore depended on confronting difficult history directly, proving product performance in real operating environments and rebuilding credibility through visible follow-through.</p>
+          <p>As the role broadened, he moved beyond personal selling into field coaching, customer education, promotions, territory development and crisis response. When market conditions deteriorated, he also advocated for diversification and later supported a lower-cost strategy focused on protecting and servicing the customer base already built.</p>
+        </div>
       </div>
       <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
       <div class="xclean13-highlight-list">
-
-        <details class="xclean13-highlight"><summary>Delivered Record-Breaking Personal Sales Performance</summary>
-          <div class="xclean13-highlight-evidence">
-            <p>Shane sold directly in the region and <strong>broke sales records</strong>, using disciplined activity, product knowledge and direct customer engagement to generate results in a commission-driven environment.</p>
-            <ul>
-              <li>Carried personal responsibility for generating and closing new business.</li>
-              <li>Led from the front before being expected to teach the process to others.</li>
-              <li>Built credibility internally through demonstrated sales performance.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="xclean13-highlight"><summary>Built a Repeatable High-Conversion Sales Process</summary>
-          <div class="xclean13-highlight-evidence">
-            <p>Shane developed and executed a cold-calling approach that consistently converted prospects, could <strong>empty sales vehicles in single visits</strong> and improved the productivity of territory coverage.</p>
-            <ul>
-              <li>Combined prospecting, demonstration, education and closing into a practical field-sales process.</li>
-              <li>Used territory planning to maximise productive customer contact.</li>
-              <li>Turned his own selling method into a process that could be demonstrated to new representatives.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="xclean13-highlight"><summary>Used Customer Insight &amp; Product Trials to Strengthen Sales</summary>
-          <div class="xclean13-highlight-evidence">
-            <p>Rather than relying only on product literature, Shane leveraged previous client relationships and built hands-on product knowledge through <strong>on-farm trials</strong>. This gave him practical evidence he could use in customer conversations and training.</p>
-            <ul>
-              <li>Tested products in the environments where customers actually used them.</li>
-              <li>Converted practical product knowledge into stronger sales credibility.</li>
-              <li>Used existing relationships to reopen conversations and accelerate market re-entry.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="xclean13-highlight"><summary>Rebuilt Customer Trust After Serious Legacy Issues</summary>
-          <div class="xclean13-highlight-evidence">
-            <p>XClean entered territories carrying damage from earlier issues including <strong>counterfeit sales, theft and undelivered goods</strong>. Shane confronted those problems directly, using personal credibility, product expertise and visible follow-through to re-engage former customers and rebuild confidence.</p>
-            <ul>
-              <li>Did not avoid difficult conversations about previous failures.</li>
-              <li>Re-engaged former clients whose confidence had been damaged.</li>
-              <li>Treated trust recovery as a prerequisite for sustainable sales growth.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="xclean13-highlight"><summary>Turned Customer Education Into Retention &amp; Referral Growth</summary>
-          <div class="xclean13-highlight-evidence">
-            <p>Shane identified that incorrect product use was contributing to poor outcomes and, in some cases, <strong>staff injuries</strong>. He initiated free group training across multiple farms, educating workers on correct use while strengthening customer relationships.</p>
-            <ul>
-              <li>Delivered free on-site group training across multiple farms.</li>
-              <li>Used education to reduce misuse and improve customer outcomes.</li>
-              <li>Built trust that generated referrals and timely repeat orders.</li>
-              <li>Connected after-sale support directly to account retention and growth.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="xclean13-highlight"><summary>Built, Trained &amp; Deployed Commission-Only Sales Teams</summary>
-          <div class="xclean13-highlight-evidence">
-            <p>As the sales model expanded, Shane trained representatives selected by franchisees — many with <strong>little or no previous sales experience</strong> — and deployed commission-only teams into multiple regions.</p>
-            <ul>
-              <li>Built capability across <strong>Southland, Otago, Northland, Waikato, Canterbury and the West Coast</strong>.</li>
-              <li>Coached representatives in the field rather than relying only on classroom instruction.</li>
-              <li>Transferred a proven personal sales process into new territories and new people.</li>
-              <li>Created accountability in a performance-based remuneration environment.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="xclean13-highlight"><summary>Created Demand Through Promotions &amp; Industry Events</summary>
-          <div class="xclean13-highlight-evidence">
-            <p>Shane supported market development beyond direct cold calling by spearheading brand promotions at <strong>field days and industry events</strong>, using industry visibility to generate leads and create additional sales conversations.</p>
-            <ul>
-              <li>Connected promotional activity with frontline lead generation.</li>
-              <li>Used industry events to broaden brand awareness.</li>
-              <li>Supported territory sales with activity that created new prospect flow.</li>
-            </ul>
-          </div>
-        </details>
-
-<details class="xclean13-highlight"><summary>Identified Strategic Risk &amp; Advocated for Diversification</summary>
-          <div class="xclean13-highlight-evidence">
-            <p>When the dairy industry collapsed, Shane recognised the concentration risk and <strong>advocated for diversification</strong>. Management chose a different path, introducing an externally manufactured teat-conditioning product that had not been sufficiently vetted and later contributed to further business and brand problems.</p>
-            <ul>
-              <li>Looked beyond immediate sales activity to the resilience of the wider business.</li>
-              <li>Raised the need to diversify when core-market conditions deteriorated.</li>
-              <li>Demonstrated commercial judgement even where the final strategic decision sat elsewhere.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="xclean13-highlight"><summary>Protected Customer Relationships During Product Crisis</summary>
-          <div class="xclean13-highlight-evidence">
-            <p>When the externally supplied <strong>“Teatmate”</strong> product failed to meet XClean or ACVM expectations and customers had been misled by fraudulent claims, Shane handled difficult customer communications with integrity.</p>
-            <ul>
-              <li>Supported affected clients rather than distancing himself from the problem.</li>
-              <li>Provided accurate best-practice guidance and information about possible recourse.</li>
-              <li>Prioritised customer trust and responsible advice during a damaging product failure.</li>
-              <li>Protected his own credibility by being transparent about what had gone wrong.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="xclean13-highlight"><summary>Combined Sales Leadership With Commercial Accountability</summary>
-          <div class="xclean13-highlight-evidence">
-            <p>Across the role, Shane moved from record-breaking personal sales into team development, customer education, brand recovery, promotions and crisis response. The common thread was commercial accountability: <strong>win business, build people, protect customer relationships and deal with problems rather than pass them on</strong>.</p>
-          </div>
-        </details>
-
-        <details class="xclean13-highlight"><summary>Protected Revenue by Supporting a Lower-Cost Customer Retention Strategy</summary>
-          <div class="xclean13-highlight-evidence">
-            <p>During the downturn, Shane supported the owner's decision to <strong>continue servicing and managing the existing customer database Shane had built</strong>, rather than carrying sales staffing costs that the reduced market could no longer justify.</p>
-            <ul>
-              <li>Recognised that the customer base already created had continuing commercial value.</li>
-              <li>Supported a practical shift from aggressive expansion to protecting and servicing existing revenue.</li>
-              <li>Helped the business retain customer relationships and revenue without the same ongoing staffing cost.</li>
-              <li>Adapted his commercial approach to the conditions facing the business rather than pursuing growth at any cost.</li>
-            </ul>
-          </div>
-        </details>
-
+        <details class="xclean13-highlight"><summary>Frontline Sales Performance</summary><div class="xclean13-highlight-evidence">
+          <div class="xclean13-subpoint"><strong>Record-Breaking Regional Sales</strong><p>Shane carried personal responsibility for generating and closing new business and quickly <strong>broke regional sales records</strong> in a commission-driven environment, establishing credibility through demonstrated frontline performance.</p></div>
+          <div class="xclean13-subpoint"><strong>Repeatable High-Conversion Sales Process</strong><p>He combined cold prospecting, demonstration, education and closing into a practical field-sales method that could <strong>empty sales vehicles in single visits</strong>, improve territory productivity and later be demonstrated to new representatives.</p></div>
+          <div class="xclean13-subpoint"><strong>Product Trials Built Sales Credibility</strong><p>Rather than relying only on literature, Shane used existing industry relationships and <strong>hands-on on-farm trials</strong> to understand products in real operating environments and convert that knowledge into stronger customer conversations.</p></div>
+        </div></details>
+        <details class="xclean13-highlight"><summary>Trust &amp; Account Growth</summary><div class="xclean13-highlight-evidence">
+          <div class="xclean13-subpoint"><strong>Rebuilt Trust After Legacy Failures</strong><p>XClean entered territories carrying damage from <strong>counterfeit sales, theft and undelivered goods</strong>. Shane addressed those issues directly, re-engaged former clients and used personal credibility, product knowledge and follow-through to rebuild confidence.</p></div>
+          <div class="xclean13-subpoint"><strong>Education → Retention &amp; Referrals</strong><p>After identifying incorrect product use contributing to poor outcomes and, in some cases, <strong>staff injuries</strong>, Shane initiated free on-site group training across multiple farms. Better product use strengthened relationships, generated referrals and supported timely repeat orders.</p></div>
+        </div></details>
+        <details class="xclean13-highlight"><summary>Team &amp; Territory Expansion</summary><div class="xclean13-highlight-evidence">
+          <div class="xclean13-subpoint"><strong>Built Commission-Only Sales Capability</strong><p>Shane trained representatives selected by franchisees — many with <strong>little or no previous sales experience</strong> — using live field coaching to transfer his proven sales process into new people and territories.</p></div>
+          <div class="xclean13-subpoint"><strong>Expanded Across Six Regions</strong><p>Built and deployed sales capability across <strong>Southland, Otago, Northland, Waikato, Canterbury and the West Coast</strong>, creating accountability within a performance-based remuneration model.</p></div>
+          <div class="xclean13-subpoint"><strong>Promotions Created Prospect Flow</strong><p>Spearheaded brand promotions at <strong>field days and industry events</strong>, connecting wider market visibility directly with lead generation and frontline sales activity.</p></div>
+        </div></details>
+        <details class="xclean13-highlight"><summary>Commercial Judgement</summary><div class="xclean13-highlight-evidence">
+          <div class="xclean13-subpoint"><strong>Identified Concentration Risk</strong><p>When the dairy industry collapsed, Shane recognised the exposure created by dependence on the core market and <strong>advocated for diversification</strong>. The final strategic decision sat with management, which instead introduced an externally manufactured teat-conditioning product.</p></div>
+          <div class="xclean13-subpoint"><strong>Protected Revenue Through Retention</strong><p>During the downturn, Shane supported the owner's decision to continue servicing and managing the <strong>existing customer database Shane had built</strong> rather than carrying sales staffing costs the reduced market could no longer justify — shifting from aggressive expansion to protecting established revenue.</p></div>
+        </div></details>
+        <details class="xclean13-highlight"><summary>Crisis &amp; Customer Protection</summary><div class="xclean13-highlight-evidence">
+          <div class="xclean13-subpoint"><strong>Handled the Teatmate Product Crisis</strong><p>When the externally supplied <strong>“Teatmate”</strong> product failed to meet XClean or ACVM expectations and customers had been misled by fraudulent claims, Shane dealt directly with affected clients rather than distancing himself from the problem.</p></div>
+          <div class="xclean13-subpoint"><strong>Protected Trust Through Transparent Advice</strong><p>He provided accurate best-practice guidance and information about possible recourse, prioritising customer welfare, relationships and his own credibility during a damaging product failure.</p></div>
+        </div></details>
       </div>
 
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonial</h4>
@@ -2451,130 +2580,47 @@ li { margin-bottom: 6px; font-size: 13px; }
   <div class="role-card" onclick="toggleRole(event, this, 'role6')">
     <div class="role-meta">2007–2014</div>
     <div class="main-role-title">Regional Sales Manager – Integrate Group / Sky</div>
-    <div class="role-summary-highlight">High-performance direct sales · Team leadership · Customer retention · Territory management · Sales integrity</div>
+    <div class="role-summary-highlight">Direct Sales · Team Leadership · Regional Growth</div>
     <div id="role6" class="collapsible-content">
       <img src="Integrate logo.png" alt="Integrate Group Logo" class="role-logo">
       <div class="role-overview">
         <h4>Role Overview</h4>
-        <p>Led high-volume direct sales operations for Integrate Group/Sky across <strong>Southland and Otago</strong> in one of the most demanding forms of frontline selling: commission-only, face-to-face prospecting where Shane had only seconds to earn a customer's attention, establish relevance and create enough trust to progress the conversation.</p>
-        <p>The real measure was not simply getting a signature. Sky operated a strict <strong>five-month claw-back</strong>, meaning a cancellation could remove the commission entirely. Shane therefore built his performance around selling the right solution, setting expectations accurately and ensuring the customer received what had been promised. Alongside strong personal production, he built and led the regional team, recruited and trained representatives, managed territories, coordinated installations and referrals, and consistently delivered results that competed with or exceeded much larger population centres. <strong>His accountability extended to whether the people he recruited stayed, performed and produced sales that survived the claw-back period</strong> — team quality mattered as much as headline activation volume.</p>
+        <p>Led Sky's commission-only direct-sales operation across <strong>Southland and Otago</strong>, remaining a high-volume frontline seller while building the regional team from <strong>1 to 8 representatives</strong>. Shane's operation generated <strong>6,000+ new subscribers annually</strong> and competed with or outperformed much larger population centres, while Sky's strict five-month claw-back made sales quality and customer retention as important as activation volume. <span class="sky-overview-toggle" role="button" tabindex="0">› Expand</span></p>
+        <div class="sky-overview-more">
+          <p>The role operated in one of the most demanding frontline sales environments: commission-only, face-to-face prospecting where Shane had seconds to earn attention, establish relevance and create enough trust to progress a cold doorstep conversation.</p>
+          <p>The commercial test extended well beyond the signature. A cancellation inside Sky's <strong>five-month claw-back</strong> could remove the commission entirely, so Shane built his approach around matching the right solution, setting expectations accurately and keeping the sales promise connected to installation and delivery.</p>
+          <p>His regional accountability included personal production, recruitment, field training, representative sustainability, territory deployment, installations and referrals. Team quality mattered as much as headline volume: short-tenure representatives whose sales later cancelled created recruitment, training and claw-back costs rather than durable growth.</p>
+        </div>
       </div>
       <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
       <div class="sky-highlight-list">
+        <details class="sky-highlight"><summary>Frontline Sales Performance</summary><div class="sky-highlight-evidence">
+          <div class="sky-subpoint"><strong>~30 Personal Contracts in Strong Weeks</strong><p>While carrying regional leadership responsibility, Shane remained personally productive, regularly producing approximately <strong>30 contracts himself in strong weeks</strong> in a commission-only environment where every result began with direct prospecting.</p></div>
+          <div class="sky-subpoint"><strong>Built Trust in Seconds</strong><p>Door-to-door selling gave Shane only moments to earn attention and establish relevance. He learned to read customers quickly, adapt the conversation to different household requirements and convert cold introductions into productive sales discussions without allowing rejection to affect the next interaction.</p></div>
+          <div class="sky-subpoint"><strong>Six Evenings a Week in Territory</strong><p>Worked across Southland and Otago six evenings a week and led from the same frontline environment he expected his representatives to perform in, generating results from the allocated suburb or deployment area.</p></div>
+        </div></details>
 
-        <details class="sky-highlight"><summary>Delivered High-Volume Personal Sales Performance</summary>
-          <div class="sky-highlight-evidence">
-            <p>Shane remained personally productive while carrying regional leadership responsibility. In strong weeks he regularly produced approximately <strong>30 contracts</strong> himself, in a commission-only environment where every result began with direct prospecting.</p>
-            <ul>
-              <li>Worked six evenings a week across Southland and Otago.</li>
-              <li>Generated sales from the <strong>allocated territory</strong>; representatives were responsible for producing results from the suburb or area they had been deployed into.</li>
-              <li>Led the team from the same frontline sales environment he expected them to perform in.</li>
-            </ul>
-          </div>
-        </details>
+        <details class="sky-highlight"><summary>Revenue Quality &amp; Retention</summary><div class="sky-highlight-evidence">
+          <div class="sky-subpoint"><strong>Five-Month Claw-Back · Negligible Cancellations</strong><p>Because a cancellation inside Sky's <strong>five-month claw-back</strong> could wipe out the commission, Shane treated retention as part of the original sale: understand the requirement, sell the appropriate solution, explain it accurately and ensure delivery matched the promise. His cancellations remained at a <strong>negligible level</strong>.</p></div>
+          <div class="sky-subpoint"><strong>Sale → Installation → Retention</strong><p>Shane remained involved from signed agreement through installation, coordinating fulfilment rather than treating it as somebody else's problem. Post-sale follow-through protected customer expectations, reduced avoidable cancellations and supported referrals.</p></div>
+        </div></details>
 
-        <details class="sky-highlight"><summary>Built Trust &amp; Relevance in Seconds</summary>
-          <div class="sky-highlight-evidence">
-            <p>Door-to-door sales allowed very little time to establish a conversation. Shane learned to read customers quickly, communicate value clearly and determine whether there was a genuine opportunity without relying on a lengthy sales process.</p>
-            <ul>
-              <li>Converted cold doorstep introductions into productive sales conversations.</li>
-              <li>Adapted his approach rapidly to different people and household requirements.</li>
-              <li>Developed resilience without allowing rejection to reduce the quality of the next customer interaction.</li>
-            </ul>
-          </div>
-        </details>
+        <details class="sky-highlight"><summary>Regional Growth at Scale</summary><div class="sky-highlight-evidence">
+          <div class="sky-subpoint"><strong>6,000+ New Subscribers Annually</strong><p>The regional operation consistently generated more than <strong>6,000 new subscribers per annum</strong>, sustaining substantial recurring customer acquisition over multiple years rather than through isolated campaigns.</p></div>
+          <div class="sky-subpoint"><strong>Outperformed Larger Population Centres</strong><p>Despite operating from Southland and Otago, Shane's operation consistently competed strongly on <strong>activation totals and averages</strong> and outperformed larger population centres on key sales measures.</p></div>
+          <div class="sky-subpoint"><strong>Territory Discipline Maximised Opportunity</strong><p>Shane planned regional coverage around available households, travel time and productive selling hours. Referrals were harvested within the representative's allocated suburb or territory, ensuring the team fully worked the opportunity it had been deployed to capture.</p></div>
+        </div></details>
 
-        <details class="sky-highlight"><summary>Protected Revenue Through Accurate, Ethical Selling</summary>
-          <div class="sky-highlight-evidence">
-            <p>Sky's <strong>five-month claw-back</strong> meant a sale that cancelled could wipe out the commission. Shane therefore treated retention as part of the original sale: understand the customer's requirement, sell the appropriate solution, explain it accurately and ensure delivery matched the promise.</p>
-            <ul>
-              <li>Maintained cancellations at a negligible level.</li>
-              <li>Avoided short-term selling that created downstream customer or revenue problems.</li>
-              <li>Linked sales quality directly to long-term commercial value.</li>
-            </ul>
-          </div>
-        </details>
+        <details class="sky-highlight"><summary>Team Leadership &amp; Development</summary><div class="sky-highlight-evidence">
+          <div class="sky-subpoint"><strong>Built the Team From 1 → 8</strong><p>Shane recruited, onboarded and trained a commission-only regional team from <strong>one to eight members</strong>, coaching representatives in live direct-selling conditions rather than relying only on theory.</p></div>
+          <div class="sky-subpoint"><strong>Accountable for Sustainable Performance</strong><p>His responsibility extended beyond recruitment and contract count to whether representatives stayed, performed and produced sales that survived claw-back. He managed burnout, representative retention and the commercial cost of short-tenure reps whose sales did not stick.</p></div>
+          <div class="sky-subpoint"><strong>Led From the Front</strong><p>Performance expectations were grounded in Shane's own frontline activity, giving him practical credibility when coaching representatives on prospecting, conversion, territory discipline and sales quality.</p></div>
+        </div></details>
 
-        <details class="sky-highlight"><summary>Outperformed Larger Markets From a Smaller Region</summary>
-          <div class="sky-highlight-evidence">
-            <p>Despite operating from Southland and Otago rather than one of New Zealand's largest population centres, Shane's operation consistently competed strongly on both <strong>activation totals and averages</strong>.</p>
-            <ul>
-              <li>Outperformed larger population centres on key sales measures.</li>
-              <li>Demonstrated that disciplined activity, conversion and territory management could overcome a smaller addressable market.</li>
-              <li>Built regional performance around execution rather than accepting geography as a limitation.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="sky-highlight"><summary>Generated Sustained Subscriber Growth at Scale</summary>
-          <div class="sky-highlight-evidence">
-            <p>The regional operation consistently drove more than <strong>6,000 new subscribers per annum</strong>, turning repeated individual doorstep conversations into substantial recurring customer acquisition for Sky.</p>
-            <ul>
-              <li>Maintained volume over an extended multi-year period rather than through isolated campaigns.</li>
-              <li>Balanced personal production with responsibility for overall regional output.</li>
-              <li>Converted high sales activity into measurable subscriber growth.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="sky-highlight"><summary>Built &amp; Led a Performance-Based Sales Team</summary>
-          <div class="sky-highlight-evidence">
-            <p>Shane grew the team from <strong>one to eight members</strong> and was accountable not only for recruiting and generating sales, but for whether his representatives became sustainable performers. In a commission-only environment, a rep who lasted only a few months — particularly if the sales they wrote later cancelled — created a commercial problem rather than a successful recruitment result.</p>
-            <ul>
-              <li>Recruited, onboarded and trained new representatives.</li>
-              <li>Coached people in the realities of direct selling rather than only teaching theory.</li>
-              <li>Managed burnout and representative retention in a demanding sales model.</li>
-              <li>Monitored the quality and durability of team sales, not simply the number of contracts written.</li>
-              <li>Recognised that short-tenure representatives with non-sticking sales created recruitment, training and claw-back costs.</li>
-              <li>Created performance expectations grounded in his own frontline activity.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="sky-highlight"><summary>Managed Territories for Maximum Sales Opportunity</summary>
-          <div class="sky-highlight-evidence">
-            <p>With representatives working across Southland and Otago, territory planning was a commercial discipline. Shane coordinated where and when the team worked so available households, travel time and sales effort were used productively.</p>
-            <ul>
-              <li>Planned regional coverage rather than allowing representatives to work territories randomly.</li>
-              <li>Balanced travel requirements with productive selling time.</li>
-              <li>Used territory management to support consistent regional output.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="sky-highlight"><summary>Turned Completed Sales Into Referral Opportunities</summary>
-          <div class="sky-highlight-evidence">
-            <p>Shane treated an activation as the beginning of a customer relationship rather than the end of the sales conversation. Referrals could be harvested, but they only counted if they remained <strong>inside the representative's allocated suburb or territory</strong>. The discipline was to maximise the opportunity available within the area deployed, not to chase sales outside it.</p>
-            <ul>
-              <li>Used satisfied customers to identify additional opportunities within the allocated territory.</li>
-              <li>Kept referral activity inside the defined suburb or deployment area.</li>
-              <li>Managed representatives to fully work the territory they had been allocated.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="sky-highlight"><summary>Maintained Leadership Accountability Beyond the Initial Sale</summary>
-          <div class="sky-highlight-evidence">
-            <p>Shane remained involved in the practical path from signed agreement to installation. This protected customer expectations, reduced avoidable cancellations and ensured the commercial value of the sale was actually realised.</p>
-            <ul>
-              <li>Coordinated installation workflows rather than treating fulfilment as somebody else's problem.</li>
-              <li>Used post-sale follow-through to support retention and referrals.</li>
-              <li>Kept sales promises connected to delivery.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="sky-highlight"><summary>Earned Trust to Take On Wider Commercial Assignments</summary>
-          <div class="sky-highlight-evidence">
-            <p>Shane's performance and ability to operate independently meant he was encouraged to undertake secondary fixed-term <strong>crisis and turnaround assignments</strong> in meat processing, distribution and automotive environments, provided those assignments did not interfere with required sales road trips.</p>
-            <ul>
-              <li>Demonstrates confidence in Shane beyond the boundaries of a conventional sales role.</li>
-              <li>Applied commercial and operational problem-solving across unrelated industries.</li>
-              <li>Maintained responsibility for his core Sky commitments while taking on additional assignments.</li>
-            </ul>
-          </div>
-        </details>
-
+        <details class="sky-highlight"><summary>Commercial Trust &amp; Assignments</summary><div class="sky-highlight-evidence">
+          <div class="sky-subpoint"><strong>Trusted Beyond the Core Sales Role</strong><p>Shane's performance and ability to operate independently led to secondary fixed-term <strong>crisis and turnaround assignments</strong> in meat processing, distribution and automotive environments, provided they did not interfere with required Sky sales road trips.</p></div>
+          <div class="sky-subpoint"><strong>Cross-Industry Problem Solving</strong><p>The additional assignments reflected confidence in Shane beyond a conventional sales-management remit: he applied commercial and operational problem-solving in unrelated industries while maintaining responsibility for his core Sky commitments.</p></div>
+        </div></details>
       </div>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonial : Bruce : Sky Regional manager discusses working with Shane .</h4>
       
@@ -2601,128 +2647,56 @@ li { margin-bottom: 6px; font-size: 13px; }
   <div class="role-card" onclick="toggleRole(event, this, 'role7')">
     <div class="role-meta">2002–2006</div>
     <div class="main-role-title">Manager (Vodafone Franchise) – Mobilefone Solutions</div>
-    <div class="role-summary-highlight">Retail sales leadership · Team performance · Commercial growth · Product &amp; margin development · Marketing</div>
+    <div class="role-summary-highlight">Retail Sales · Team Performance · Margin Growth</div>
     <div id="role7" class="collapsible-content">
       <img src="mobilefone solutions logo.png" alt="Mobilefone Solutions Logo" class="role-logo">
       <div class="role-overview">
-        <h4>Role Overview</h4>
-        <p>Managed a Mobilefone Solutions Vodafone franchise with responsibility for <strong>retail performance, people leadership and commercial growth</strong>. Shane treated the store as a sales business rather than simply a place to transact Vodafone products: improve the customer journey, create reasons to buy, train the team to convert opportunity and continually look for additional products, offers and channels that could grow turnover and margin.</p>
-        <p>His remit extended from store operations into outbound sales, finance offers, promotions, off-site campaigns, product sourcing, supplier partnerships and advertising. The common thread was commercial: <strong>create demand, improve the offer, equip people to sell it and protect the profitability of the business</strong>. Strong retail turnover ultimately gave the store a level of independence within a franchise group that expected Vodafone to move toward a more centrally controlled corporate model.</p>
-      </div>
+<h4>Role Overview</h4>
+<p>Managed a Mobilefone Solutions Vodafone franchise as a commercially driven retail sales business, combining <strong>frontline leadership, team development, promotions, product sourcing and margin growth</strong>. Shane expanded the offer beyond the standard channel, created new reasons for customers to buy and connected product, pricing, marketing and sales execution to drive a <strong>significant increase in turnover</strong>. <span class="vodafone-refined-overview-toggle" role="button" tabindex="0">› Expand</span></p>
+<div class="vodafone-refined-overview-more">
+<p>His remit extended from store operations into outbound sales, finance offers, off-site campaigns, proprietary accessory development, supplier partnerships and print/radio-ready advertising. Shane treated each part of the retail model as commercially connected: improve the offer, create demand, equip people to sell it and protect margin.</p>
+<p>Strong retail performance ultimately gave the store greater operating independence within a franchise group that expected Vodafone to move toward a more centrally controlled corporate model. Group management restricted replication of the approach as the wider ownership and franchise structure changed, and the group was ultimately absorbed into Vodafone's corporate structure.</p>
+</div>
+</div>
       <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
       <div class="vodafone-highlight-list">
+<details class="vodafone-refined-highlight">
+<summary>Retail Sales &amp; Team Performance</summary>
+<div class="vodafone-refined-evidence">
+<div class="vodafone-refined-point"><strong>Significant Turnover Growth</strong><p>Shane managed the store around measurable sales performance, combining frontline selling, team expectations, promotions and customer experience to achieve and sustain a <strong>significant increase in turnover</strong>.</p></div>
+<div class="vodafone-refined-point"><strong>National-Level Player-Coach</strong><p>He led the outbound sales team as a <strong>player-coach</strong>, maintaining his own sales credibility while coaching others and consistently ranking among national top performers for <strong>new-business acquisition and customer retention</strong>.</p></div>
+<div class="vodafone-refined-point"><strong>Built Repeatable Sales Capability</strong><p>Shane conducted comprehensive sales training connecting product knowledge, sales technique and customer-service standards, improving staff capability and consistency rather than relying only on experienced recruits.</p></div>
+</div></details>
 
-        <details class="vodafone-highlight"><summary>Built a High-Performance Retail Sales Operation</summary>
-          <div class="vodafone-highlight-evidence">
-            <p>Shane managed the store around measurable sales performance, combining frontline selling, team expectations, promotions and customer experience to achieve and sustain a <strong>significant increase in turnover</strong>.</p>
-            <ul>
-              <li>Managed retail performance as a commercial outcome rather than an administrative function.</li>
-              <li>Used sales initiatives and team performance management to drive sustained growth.</li>
-              <li>Stayed personally connected to the sales floor while carrying management responsibility.</li>
-            </ul>
-          </div>
-        </details>
+<details class="vodafone-refined-highlight">
+<summary>Demand Generation &amp; Marketing</summary>
+<div class="vodafone-refined-evidence">
+<div class="vodafone-refined-point"><strong>Created Offers That Generated Demand</strong><p>Rather than relying only on standard network promotions, Shane designed and launched <strong>finance offers and in-store campaigns</strong> around customer affordability and purchasing behaviour.</p></div>
+<div class="vodafone-refined-point"><strong>Expanded Sales Beyond the Store</strong><p>He orchestrated <strong>off-site promotional campaigns</strong> to create opportunities beyond normal retail foot traffic, increasing brand visibility while directly supporting new-business acquisition.</p></div>
+<div class="vodafone-refined-point"><strong>Produced Sales-Ready Advertising</strong><p>Shane produced <strong>print and radio-ready advertising assets</strong>, reducing the gap between identifying a commercial opportunity, creating the promotion and taking it to market.</p></div>
+</div></details>
 
-        <details class="vodafone-highlight"><summary>Designed the Customer Environment to Support Sales</summary>
-          <div class="vodafone-highlight-evidence">
-            <p>Shane spearheaded the complete store fit-out, overseeing <strong>layout, merchandising and operational setup</strong> with the customer journey and sales flow in mind.</p>
-            <ul>
-              <li>Connected physical store design with how customers discovered and purchased products.</li>
-              <li>Used merchandising to make the retail offer easier to understand and sell.</li>
-              <li>Treated operational setup as part of the sales strategy.</li>
-            </ul>
-          </div>
-        </details>
+<details class="vodafone-refined-highlight">
+<summary>Product &amp; Margin Development</summary>
+<div class="vodafone-refined-evidence">
+<div class="vodafone-refined-point"><strong>Developed a Proprietary Accessories Range</strong><p>Shane sourced and developed proprietary lines including <strong>hands-free kits, Bluetooth dongles, data cables, faceplates and clip-on cameras</strong>, improving product choice, differentiation and commercial margin.</p></div>
+<div class="vodafone-refined-point"><strong>Built Alternative Supplier Partnerships</strong><p>Where the normal Vodafone Brightpoint supply channel limited the handset offer, Shane built relationships with <strong>accredited New Zealand brands</strong> to secure exclusive handsets outside the standard channel and strengthen the store's competitive position.</p></div>
+<div class="vodafone-refined-point"><strong>Connected the Full Commercial Chain</strong><p>He worked across the complete chain: <strong>source the product → develop the offer → create the marketing → equip the team to sell it</strong>, connecting sourcing decisions directly to margin and customer demand.</p></div>
+</div></details>
 
-        <details class="vodafone-highlight"><summary>Created Offers &amp; Promotions That Generated Demand</summary>
-          <div class="vodafone-highlight-evidence">
-            <p>Rather than relying only on standard network promotions, Shane designed and launched <strong>finance offers and in-store campaigns</strong> to give customers additional reasons to buy and to stimulate retail activity.</p>
-            <ul>
-              <li>Developed commercial offers around customer affordability and purchasing behaviour.</li>
-              <li>Used promotions to increase engagement and retail sales.</li>
-              <li>Connected offer design directly with frontline sales execution.</li>
-            </ul>
-          </div>
-        </details>
+<details class="vodafone-refined-highlight">
+<summary>Retail Experience &amp; Execution</summary>
+<div class="vodafone-refined-evidence">
+<div class="vodafone-refined-point"><strong>Designed the Store Around the Sale</strong><p>Shane spearheaded the complete store fit-out, overseeing <strong>layout, merchandising and operational setup</strong> with the customer journey and sales flow in mind.</p></div>
+<div class="vodafone-refined-point"><strong>Turned Operations Into Sales Support</strong><p>He treated merchandising and operational setup as part of the sales strategy, making the retail offer easier for customers to understand and easier for the team to sell.</p></div>
+</div></details>
 
-        <details class="vodafone-highlight"><summary>Led From the Front as a Player-Coach</summary>
-          <div class="vodafone-highlight-evidence">
-            <p>Shane led the outbound sales team as a <strong>player-coach</strong>, maintaining his own sales credibility while coaching others and consistently ranking among national top performers for <strong>new-business acquisition and customer retention</strong>.</p>
-            <ul>
-              <li>Demonstrated the sales behaviours expected from the team.</li>
-              <li>Balanced personal production with responsibility for other people's performance.</li>
-              <li>Focused on customer retention as well as acquisition.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="vodafone-highlight"><summary>Built Sales Capability Through Structured Training</summary>
-          <div class="vodafone-highlight-evidence">
-            <p>Shane conducted comprehensive sales training to improve staff capability, customer-service standards and consistency of performance.</p>
-            <ul>
-              <li>Upskilled staff rather than relying only on recruiting experienced sellers.</li>
-              <li>Connected product knowledge, sales technique and customer service.</li>
-              <li>Used training as a lever for repeatable team performance.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="vodafone-highlight"><summary>Expanded Market Reach Beyond the Store</summary>
-          <div class="vodafone-highlight-evidence">
-            <p>Shane orchestrated <strong>off-site promotional campaigns</strong> to take the brand and sales proposition into new environments, increase visibility and reach customer segments that would not necessarily walk into the store unaided.</p>
-            <ul>
-              <li>Created sales opportunities outside normal retail foot traffic.</li>
-              <li>Used promotional activity to expand brand presence.</li>
-              <li>Connected marketing activity with direct new-business acquisition.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="vodafone-highlight"><summary>Developed Proprietary Products to Improve Margin &amp; Differentiation</summary>
-          <div class="vodafone-highlight-evidence">
-            <p>Shane identified an opportunity to improve both product choice and commercial margin by sourcing and developing a <strong>proprietary accessories range</strong> rather than relying entirely on standard channel products.</p>
-            <ul>
-              <li>Developed lines including hands-free kits, Bluetooth dongles, data cables, faceplates and clip-on cameras.</li>
-              <li>Used product development to differentiate the retail offer.</li>
-              <li>Connected sourcing decisions directly to margin improvement and customer choice.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="vodafone-highlight"><summary>Built Supplier Partnerships to Expand the Commercial Offer</summary>
-          <div class="vodafone-highlight-evidence">
-            <p>Where the normal Vodafone Brightpoint supply channel limited the available handset offer, Shane built relationships with <strong>accredited New Zealand brands</strong> to secure exclusive handsets outside that standard channel.</p>
-            <ul>
-              <li>Looked beyond the default supply route when it constrained the sales opportunity.</li>
-              <li>Developed supplier relationships that created additional product choice.</li>
-              <li>Used differentiated handsets to strengthen the store's competitive position.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="vodafone-highlight"><summary>Connected Product, Pricing, Marketing &amp; Sales Execution</summary>
-          <div class="vodafone-highlight-evidence">
-            <p>Shane worked across the complete commercial chain: <strong>source the product, develop the offer, create the marketing and equip the team to sell it</strong>. He also produced print and radio-ready advertising assets rather than treating marketing as separate from sales.</p>
-            <ul>
-              <li>Connected sourcing and offer development with customer-facing promotion.</li>
-              <li>Created advertising material suitable for print and radio campaigns.</li>
-              <li>Reduced the gap between identifying a commercial opportunity and taking it to market.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="vodafone-highlight"><summary>Created Strong Performance Within a Constrained Franchise Model</summary>
-          <div class="vodafone-highlight-evidence">
-            <p>The wider group expected Vodafone to move toward a corporate-run model. Shane's store developed <strong>strong retail turnover and greater operating independence</strong> than the emerging model preferred, and group management restricted replication of the approach.</p>
-            <ul>
-              <li>Demonstrated that the local operating model could generate strong commercial performance.</li>
-              <li>Continued business relationships even as the wider ownership and franchise structure changed.</li>
-              <li>The group was ultimately absorbed into Vodafone's corporate structure, while the earlier retail model was not replicated across the group.</li>
-            </ul>
-          </div>
-        </details>
-
-      </div>
+<details class="vodafone-refined-highlight">
+<summary>Commercial Independence</summary>
+<div class="vodafone-refined-evidence">
+<div class="vodafone-refined-point"><strong>Strong Performance Within a Constrained Franchise</strong><p>The store developed <strong>strong retail turnover and greater operating independence</strong> than the emerging centrally controlled model preferred. Group management restricted replication of the approach, while Shane maintained business relationships as the wider ownership and franchise structure changed.</p></div>
+</div></details>
+</div>
       <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonials : Alana & Jenna discuss working with Shane .</h4>
       
       <!-- Inline Embedded Video Player Slot for Role 7 -->
@@ -2754,128 +2728,46 @@ li { margin-bottom: 6px; font-size: 13px; }
   <div class="role-card" onclick="toggleRole(event, this, 'role8')">
     <div class="role-meta">2001–2002</div>
     <div class="main-role-title">Department Manager – H&J Smith</div>
-    <div class="role-summary-highlight">Sales leadership · People development · Category strategy · Operational improvement · Multi-store execution</div>
+    <div class="role-summary-highlight">Sales Growth · Operations · Multi-Store</div>
     <div id="role8" class="collapsible-content">
       <img src="h&J logo.png" alt="H&J Smith Logo" class="role-logo">
       <div class="role-overview">
-        <h4>Role Overview</h4>
-        <p>Joined H&amp;J Smith as Appliance Department Manager with a brief that quickly extended beyond day-to-day department supervision into <strong>sales growth, people development, category improvement and operational change across multiple stores</strong>. Shane brought the sales discipline and operating standards developed through his earlier retail leadership experience into a new environment, increasing sales and setting new records while improving how staff were trained, products were ranged and stock moved through the business.</p>
-        <p>His approach connected the customer-facing and operational sides of retail: <strong>better product knowledge, a stronger sales process, more relevant product ranges, cleaner inventory, better delivery systems and promotional activity that created demand</strong>. He also identified weaknesses that were costing the business money, including significant historic internal theft, and developed practical systems to address them. Successful initiatives were subsequently carried into stores in Balclutha, Queenstown and Blenheim.</p>
-      </div>
+<h4>Role Overview</h4>
+<p>Joined H&amp;J Smith as Appliance Department Manager and quickly broadened the role into <strong>sales growth, people development, category improvement and operational change</strong>. Shane increased sales and set new records while strengthening sales standards, product knowledge, range decisions, inventory control and fulfilment; successful initiatives were then carried into <strong>Balclutha, Queenstown and Blenheim</strong>. <span class="hj-refined-overview-toggle" role="button" tabindex="0">› Expand</span></p>
+<div class="hj-refined-overview-more">
+<p>Shane connected the customer-facing and operational sides of retail: stronger product knowledge and a more disciplined sales process improved customer engagement, while better product ranging, cleaner inventory, warehousing and delivery systems strengthened the commercial platform behind the sale.</p>
+<p>He also identified weaknesses directly costing the business money, including significant historic internal theft, and developed practical controls that uncovered the source and led to successful prosecution. The wider pattern was consistent: identify the constraint, improve the operating method and then take successful initiatives into other stores.</p>
+</div>
+</div>
       <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
       <div class="hj-highlight-list">
+<details class="hj-refined-highlight"><summary>Sales Growth &amp; Sales Standards</summary><div class="hj-refined-evidence">
+<div class="hj-refined-point"><strong>Increased Sales &amp; Set New Records</strong><p>Shane led sales and customer engagement through frontline leadership, stronger team capability and deliberate promotional activity, <strong>increasing sales and setting new records</strong>.</p></div>
+<div class="hj-refined-point"><strong>Built Non-Negotiable Sales Standards</strong><p>He developed <strong>non-negotiable standards for the sales process</strong> and supported them with structured sales training, creating a clearer and more consistent way for staff to engage customers and convert opportunities.</p></div>
+<div class="hj-refined-point"><strong>Turned Product Knowledge Into a Sales Advantage</strong><p>Shane launched comprehensive <strong>product-knowledge training across brands and categories</strong>, helping staff explain differences, match products to customer requirements and sell with greater confidence and credibility.</p></div>
+</div></details>
 
-        <details class="hj-highlight"><summary>Increased Sales &amp; Set New Performance Records</summary>
-          <div class="hj-highlight-evidence">
-            <p>Shane led sales and customer engagement across multiple stores, <strong>increasing sales and setting new records</strong> through a combination of frontline sales leadership, stronger team capability and deliberate promotional activity.</p>
-            <ul>
-              <li>Kept commercial performance at the centre of department management.</li>
-              <li>Combined customer engagement with measurable sales outcomes.</li>
-              <li>Designed promotional campaigns that went on to break multiple sales records.</li>
-            </ul>
-          </div>
-        </details>
+<details class="hj-refined-highlight"><summary>Category &amp; Promotional Growth</summary><div class="hj-refined-evidence">
+<div class="hj-refined-point"><strong>Improved the Product Mix</strong><p>Working with the product buyer, Shane helped <strong>introduce new brands and rationalise under-performing lines</strong>, connecting frontline customer insight with commercial buying decisions.</p></div>
+<div class="hj-refined-point"><strong>Promotions Broke Multiple Sales Records</strong><p>He designed and executed promotional campaigns that <strong>broke multiple sales records</strong>, using promotions to create urgency, customer engagement and measurable turnover rather than visibility alone.</p></div>
+<div class="hj-refined-point"><strong>Recognised the Need for Business-Model Evolution</strong><p>Shane continued to identify opportunities beyond the immediate department brief and became increasingly concerned that the traditional retail model was <strong>not evolving quickly enough to meet a changing market</strong>. He developed and tested new initiatives where he had the authority to do so, but broader deployment required organisational support that was not always achieved. Shane ultimately recognised that without more significant commercial evolution, the business faced increasing <strong>long-term viability risk</strong>.</p></div>
+</div></details>
 
-        <details class="hj-highlight"><summary>Built a Consistent, High-Standard Sales Process</summary>
-          <div class="hj-highlight-evidence">
-            <p>Shane developed <strong>non-negotiable standards for the sales process</strong> and supported them with a structured sales-training programme, giving staff a clearer and more consistent way to engage customers and convert opportunities.</p>
-            <ul>
-              <li>Established clear expectations for how customers should be approached and served.</li>
-              <li>Used training to make strong sales behaviours repeatable across the team.</li>
-              <li>Connected customer-service standards directly with commercial performance.</li>
-            </ul>
-          </div>
-        </details>
+<details class="hj-refined-highlight"><summary>Operations &amp; Inventory Improvement</summary><div class="hj-refined-evidence">
+<div class="hj-refined-point"><strong>Redesigned Warehousing, Delivery &amp; Stock</strong><p>Shane redesigned <strong>warehousing, delivery systems and stock management</strong>, clearing dead stock that tied up space and capital while improving inventory handling and fulfilment.</p></div>
+<div class="hj-refined-point"><strong>Redeveloped the Invercargill Showroom</strong><p>He redeveloped the <strong>Invercargill showroom</strong>, aligning merchandising and the physical environment with the stronger product, sales and operating standards being introduced.</p></div>
+</div></details>
 
-        <details class="hj-highlight"><summary>Turned Product Knowledge Into a Sales Advantage</summary>
-          <div class="hj-highlight-evidence">
-            <p>Shane launched a comprehensive <strong>product-knowledge training campaign across brands and categories</strong>, helping staff move beyond basic product descriptions and sell with greater confidence and credibility.</p>
-            <ul>
-              <li>Raised product knowledge across a broad appliance and home-product environment.</li>
-              <li>Equipped staff to explain differences and match products to customer requirements.</li>
-              <li>Combined technical product understanding with high-touch customer service.</li>
-            </ul>
-          </div>
-        </details>
+<details class="hj-refined-highlight"><summary>Loss Prevention &amp; Asset Protection</summary><div class="hj-refined-evidence">
+<div class="hj-refined-point"><strong>Identified &amp; Stopped Significant Internal Loss</strong><p>Shane created and executed a <strong>loss-prevention programme</strong> that uncovered a history of significant internal theft. He developed controls capable of identifying the source and followed the issue through to a <strong>successful prosecution</strong>.</p></div>
+<div class="hj-refined-point"><strong>Converted Unexplained Loss Into a Controlled Problem</strong><p>Rather than accepting unexplained shrinkage as normal, he treated it as an operational problem requiring evidence, controls and a concrete commercial outcome, protecting business assets and reducing ongoing exposure.</p></div>
+</div></details>
 
-        <details class="hj-highlight"><summary>Improved Product Mix Through Commercial Category Decisions</summary>
-          <div class="hj-highlight-evidence">
-            <p>Working with the product buyer, Shane helped <strong>introduce new brands and rationalise under-performing lines</strong>, using sales-floor insight to improve the relevance and productivity of the product range.</p>
-            <ul>
-              <li>Identified products and brands that were not earning their place in the range.</li>
-              <li>Supported the introduction of new commercial opportunities.</li>
-              <li>Connected customer feedback and frontline sales knowledge with buying decisions.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="hj-highlight"><summary>Redesigned Stock, Warehousing &amp; Delivery Operations</summary>
-          <div class="hj-highlight-evidence">
-            <p>Shane looked beyond the showroom and redesigned <strong>warehousing, delivery systems and stock management</strong>, clearing dead stock and improving the productivity of inventory and fulfilment.</p>
-            <ul>
-              <li>Identified and cleared stock that was tying up space and capital.</li>
-              <li>Streamlined inventory handling and delivery processes.</li>
-              <li>Connected back-of-house efficiency with a better customer and sales outcome.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="hj-highlight"><summary>Identified &amp; Stopped Significant Internal Loss</summary>
-          <div class="hj-highlight-evidence">
-            <p>Shane created and executed a <strong>loss-prevention programme</strong> that uncovered a history of significant internal theft. The investigation resulted in successful prosecution.</p>
-            <ul>
-              <li>Recognised that unexplained loss required a structured response rather than acceptance as normal shrinkage.</li>
-              <li>Developed controls capable of identifying the source of the problem.</li>
-              <li>Protected business assets by following the issue through to a concrete outcome.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="hj-highlight"><summary>Redeveloped the Retail Environment to Improve Execution</summary>
-          <div class="hj-highlight-evidence">
-            <p>Shane redeveloped the <strong>Invercargill showroom</strong>, aligning the physical environment with the improved product, sales and operational standards being introduced.</p>
-            <ul>
-              <li>Used showroom presentation as part of the customer and sales experience.</li>
-              <li>Connected merchandising and physical layout with the wider commercial improvement programme.</li>
-              <li>Created an operating approach that could be taken beyond the original department.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="hj-highlight"><summary>Scaled Successful Initiatives Across Multiple Stores</summary>
-          <div class="hj-highlight-evidence">
-            <p>The work was not confined to Invercargill. Shane rolled initiatives into new stores in <strong>Balclutha, Queenstown and Blenheim</strong>, demonstrating an ability to translate local improvements into repeatable multi-site execution.</p>
-            <ul>
-              <li>Supported consistency across geographically separate stores.</li>
-              <li>Transferred sales, operational and showroom improvements into new locations.</li>
-              <li>Applied practical implementation rather than leaving successful ideas at concept stage.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="hj-highlight"><summary>Created Promotional Activity That Converted Into Sales</summary>
-          <div class="hj-highlight-evidence">
-            <p>Shane designed and executed new promotional campaigns that <strong>broke multiple sales records</strong>, using promotions as a commercial tool to create urgency, customer engagement and measurable turnover.</p>
-            <ul>
-              <li>Developed campaign ideas rather than relying only on routine retail activity.</li>
-              <li>Connected promotion design with frontline team execution.</li>
-              <li>Measured success through sales performance rather than visibility alone.</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="hj-highlight"><summary>Identified Growth Opportunities Beyond the Immediate Brief</summary>
-          <div class="hj-highlight-evidence">
-            <p>Shane continued to identify and launch <strong>new opportunities and initiatives</strong> beyond the immediate department brief. Not every idea received the organisational buy-in required for full deployment, but the work demonstrates a consistent habit of looking for ways to improve sales, operations and the wider commercial model.</p>
-            <ul>
-              <li>Proactively identified opportunities rather than waiting for formal projects to be assigned.</li>
-              <li>Tested and launched initiatives where authority and support allowed.</li>
-              <li>Recognised that scaling improvement requires organisational buy-in as well as a strong idea.</li>
-            </ul>
-          </div>
-        </details>
-
-      </div>
+<details class="hj-refined-highlight"><summary>Multi-Store Execution</summary><div class="hj-refined-evidence">
+<div class="hj-refined-point"><strong>Scaled Successful Initiatives Across Four Locations</strong><p>The work moved beyond Invercargill into <strong>Balclutha, Queenstown and Blenheim</strong>, transferring sales, operational and showroom improvements into geographically separate stores through practical implementation.</p></div>
+<div class="hj-refined-point"><strong>Turned Local Improvement Into Repeatable Execution</strong><p>Shane demonstrated that successful initiatives could be carried beyond the original department, supporting consistency across stores rather than leaving improvements as one-off local wins.</p></div>
+</div></details>
+</div>
     </div>
   </div>
 
@@ -2883,14 +2775,17 @@ li { margin-bottom: 6px; font-size: 13px; }
   <div class="role-card" onclick="toggleRole(event, this, 'role9')">
     <div class="role-meta">1992–2001</div>
     <div class="main-role-title">Area & Branch Manager – Smiths City / Powerstore</div>
-    <div class="role-summary-highlight">Multi-store regional leadership through corporate restructuring and receivership turnaround.</div>
+    <div class="role-summary-highlight">Regional Leadership · Acquisitions · Turnaround</div>
     <div id="role9" class="collapsible-content">
       <img src="smiths city logo.png" alt="Smiths City Logo" class="role-logo">
       <div class="role-overview">
-        <h4>Role Overview</h4>
-        <p>Approached internally as a high-performing salesperson and progressed rapidly through multiple leadership roles across Invercargill, Gore, Queenstown, Canterbury and Timaru. Managed multi-store operations during major corporate restructuring and receivership, rebuilding locations, integrating newly purchased stores and driving regional promotions across the South Island.</p>
-        <p>Delivered strong personal sales performance, produced large volumes of advertising, refreshed and rebuilt under-performing sites, and led appliance stock management across multiple stores and a distribution centre. Played a core role in acquisitions and new-store launches, developed non-negotiable standards later adopted nationally, and contributed to the successful scheme-of-arrangement that enabled the group to trade out of receivership.</p>
-      </div>
+<h4>Role Overview</h4>
+<p>Progressed from high-performing salesperson to <strong>Branch and Area Manager</strong> across a nine-year career spanning multiple South Island markets. Shane led stores through acquisitions, new-site launches, corporate restructuring and receivership, combining frontline sales credibility with <strong>multi-store leadership, operational rebuilds and regional commercial execution</strong>. <span class="smith-refined-overview-toggle" role="button" tabindex="0">› Expand</span></p>
+<div class="smith-refined-overview-more">
+<p>Shane delivered strong personal sales performance while taking on increasingly complex operational responsibility across Invercargill, Gore, Queenstown, Wanaka, Alexandra, Roxburgh, Canterbury and Timaru. He refreshed under-performing locations, produced large volumes of advertising, managed appliance stock across multiple stores and a distribution centre, and helped integrate newly purchased businesses.</p>
+<p>He was active in the acquisition of <strong>seven South Island businesses</strong>, played a core role in launching <strong>10 new stores</strong>, developed non-negotiable standards later implemented nationally and contributed to the Scheme of Arrangement that enabled the group to <strong>trade successfully out of receivership in 2001</strong>.</p>
+</div>
+</div>
 
       <div class="smiths-record-launch" onclick="event.stopPropagation();">
         <div class="eyebrow">Expanded Career Record</div>
@@ -2899,21 +2794,48 @@ li { margin-bottom: 6px; font-size: 13px; }
         <button class="smiths-record-btn" onclick="openSmithsRecord(event)">Explore the Smiths City / Powerstore Career Record →</button>
       </div>
       <h4 style="margin: 0 0 8px 0; font-size: 15px; color: var(--primary);">Key Highlights:</h4>
-      <ul>
-        <li>Increased turnover, profitability, location growth, and off-site promotions.</li>
-        <li>Progressed from salesperson to store manager and area manager.</li>
-        <li>Delivered annual personal sales approaching $X Million</li>
-        <li>Managed locations across Invercargill, Gore.</li>
-        <li>Managed locations across Queenstown, Wanaka, Alexandra, Roxburgh.</li>
-        <li>Managed locations across Canterbury, 3 x Christchurch stores, Timaru.</li>
-        <li>Achieved personal best individual daily sales of $86,000.</li>
-        <li>Active in the acquisition - 7 businesses across the South Island.</li>
-        <li>Developed non-negotiable standards, later implemented nationally.</li>
-        <li>Played a core role in launching 10 new stores.</li>
-        <li>Active role in meeting Scheme-of-arrangement.</li>
-        <li>2001 group successfully traded out of receivership.</li>
-      </ul>
-      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonial : Michael Botting Store Manager, Area Manager for the Smiths City Group discusses working with Shane .</h4>
+      <div class="smith-refined-highlight-list">
+<details class="smith-refined-highlight"><summary>Sales Performance &amp; Progression</summary><div class="smith-refined-evidence">
+<div class="smith-refined-point"><strong>Storeman → Sales → Branch &amp; Area Leadership</strong><p>Shane joined Smiths City while still at school, initially working during school holidays before progressing into approximately <strong>60-hour working weeks</strong>. He worked largely independently across <strong>three satellite bulk-store locations</strong>, managing goods in and out, then returned to the retail floor and sold across the entire store. He quickly began outperforming established full-time salespeople and, within approximately <strong>90 days</strong>, was already filling vacancies and assuming responsibilities beyond his formal position. That progression ultimately developed into <strong>department, branch and multi-store area leadership</strong>.</p></div>
+<div class="smith-refined-point"><strong>Consistent $100K Club Performer</strong><p>Shane was a <strong>regular member of Smiths City’s $100K Club</strong>, repeatedly achieving <strong>$100,000+ in personal sales in a month</strong> and receiving formal recognition from senior management in Christchurch. His performance became sufficiently consistent that on occasion <strong>two recognition letters were placed in the same envelope</strong>.</p></div>
+<div class="smith-refined-point"><strong>Turnover, Profitability &amp; Location Growth</strong><p>Increased turnover and profitability, supported location growth and drove off-site promotions as his responsibility expanded beyond individual sales into wider commercial performance.</p></div>
+</div></details>
+
+<details class="smith-refined-highlight"><summary>Multi-Store Regional Leadership</summary><div class="smith-refined-evidence">
+<div class="smith-refined-point"><strong>Led Across Multiple South Island Markets</strong><p>Managed locations across <strong>Invercargill and Gore; Queenstown, Wanaka, Alexandra and Roxburgh; and three Christchurch stores plus Timaru</strong>, adapting execution to different markets while maintaining regional standards.</p></div>
+<div class="smith-refined-point"><strong>Appliance Turnover Multiplied</strong><p>Led <strong>eight appliance staff across Invercargill and Gore</strong>. Turnover <strong>nearly tripled and subsequently approximately doubled again</strong>, with appliance floor space first doubled and later roughly tripled to accommodate the growth.</p></div>
+<div class="smith-refined-point"><strong>Beat the Larger Christchurch Operation</strong><p>While running <strong>Wairakei Road and Palms Mall simultaneously</strong>, Shane operated with advertising support equivalent to only about <strong>7% of Moorhouse Avenue’s advertising budget</strong>, yet his operation subsequently beat Moorhouse for total sales. On one promotional day, Shane’s <strong>five-person team</strong> beat the roughly <strong>15-person Moorhouse team by nearly 2:1</strong>.</p></div>
+<div class="smith-refined-point"><strong>Regional Promotion &amp; Advertising</strong><p>Produced large volumes of advertising and used regional and off-site promotional activity to manufacture demand rather than relying only on normal store traffic.</p></div>
+</div></details>
+
+<details class="smith-refined-highlight"><summary>Acquisitions &amp; New-Store Growth</summary><div class="smith-refined-evidence">
+<div class="smith-refined-point"><strong>Active in 7 South Island Acquisitions</strong><p>Played an active role in the acquisition and integration of <strong>seven businesses across the South Island</strong>, helping convert purchased businesses into operating parts of the wider group.</p></div>
+<div class="smith-refined-point"><strong>Central Otago Acquisition &amp; Integration</strong><p>Responsibility extended into the acquisition and integration of <strong>four Central Electric stores plus the large “Scott Base” warehouse</strong>, including assessment, valuation and purchase input, staffing decisions, fit-out, rebranding, stock allocation, merchandising, training and launch.</p></div>
+<div class="smith-refined-point"><strong>Core Role in 10 New-Store Launches</strong><p>Played a core role in launching <strong>10 new stores</strong>, translating acquisition and growth plans into functioning retail locations.</p></div>
+<div class="smith-refined-point"><strong>Rebuilt &amp; Integrated Locations</strong><p>Refreshed and rebuilt under-performing or newly acquired sites, connecting physical execution, stock, people and commercial standards rather than treating a launch as simply opening the doors.</p></div>
+</div></details>
+
+<details class="smith-refined-highlight"><summary>Turnaround &amp; Commercial Judgement</summary><div class="smith-refined-evidence">
+<div class="smith-refined-point"><strong>Timaru · Closure Brief → Viable Store</strong><p>Sent to Timaru under a <strong>confidential instruction to prepare the store for closure</strong>, Shane assessed the operation and formed a different view: the team and market could be made viable. He rebuilt the business category-by-category. In his <strong>first month</strong>, computers alone generated approximately <strong>$100,000 in sales</strong>, with approximately <strong>another $100,000 across the remainder of the store</strong>. The store remained open and the existing staff kept their jobs.</p></div>
+<div class="smith-refined-point"><strong>Destination Promotions · Seven-Figure Weekends</strong><p>In the difficult Queenstown market, Shane created destination-style <strong>Bedding Expos, Tenting Expos, Technology Expos and furniture clearances</strong> to manufacture reasons for customers to visit and buy. Major promotional weekends produced <strong>seven-figure sales</strong>.</p></div>
+<div class="smith-refined-point"><strong>Product &amp; Margin Judgement</strong><p>Shane backed approximately <strong>$4,000 Onkyo home-theatre systems</strong> with exceptional margins and recalls selling them at volumes comparable with other stores’ roughly <strong>$400 Aiwa systems</strong>. Products and categories he championed locally were subsequently adopted through centralised buying.</p></div>
+<div class="smith-refined-point"><strong>$80K Dead Stock → Commercial Reality</strong><p>Shane challenged inventory that carried value on paper but lacked realistic saleability, including an approximately <strong>$80,000 dead-stock example</strong>. His approach focused on the commercially realisable value of stock and the action required to turn stagnant inventory back into cash and productive floor space.</p></div>
+<div class="smith-refined-point"><strong>Trusted Where Execution Mattered</strong><p>The wider record includes the <strong>Greymouth launch, Riccarton dead-stock/department turnaround and other short-notice assignments</strong>, showing a repeated pattern: Shane was sent into situations where the company needed somebody to assess the problem, take ownership and get the operation working.</p></div>
+</div></details>
+
+<details class="smith-refined-highlight"><summary>Operations &amp; National Standards</summary><div class="smith-refined-evidence">
+<div class="smith-refined-point"><strong>Standards Later Implemented Nationally</strong><p>Developed <strong>non-negotiable operating standards</strong> through practical management experience and senior-management discussion; the approach was subsequently implemented nationally.</p></div>
+<div class="smith-refined-point"><strong>Multi-Store Inventory Accountability</strong><p>Led appliance stock management across multiple stores and a distribution centre, connecting inventory discipline with store availability, working capital and sales execution.</p></div>
+<div class="smith-refined-point"><strong>Connected Store Rebuilds to Commercial Execution</strong><p>Across relocations, acquisitions, launches and under-performing sites, Shane connected fit-out, merchandising, inventory, staffing, training, promotion and sales execution so operational work translated into commercial performance.</p></div>
+</div></details>
+
+<details class="smith-refined-highlight"><summary>Receivership &amp; Commercial Recovery</summary><div class="smith-refined-evidence">
+<div class="smith-refined-point"><strong>Leadership Through Corporate Restructuring</strong><p>Managed stores and regional responsibilities through <strong>major internal growth, acquisitions, receivership and the Scheme of Arrangement</strong>, maintaining strong commercial execution while the wider business navigated significant financial and organisational change.</p></div>
+<div class="smith-refined-point"><strong>Core Role in the Scheme of Arrangement</strong><p>Played an active role in meeting the requirements of the <strong>Scheme of Arrangement</strong>, contributing operationally to the recovery process rather than standing outside it.</p></div>
+<div class="smith-refined-point"><strong>Group Traded Out of Receivership · 2001</strong><p>Contributed to the wider recovery effort that saw the group <strong>successfully trade out of receivership in 2001</strong>.</p></div>
+</div></details>
+</div>
+      <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Video Testimonial<br><span style="display:inline-block;margin-top:3px;"><strong>Michael Botting</strong> — <strong>Former Store Manager &amp; Area Manager, Smiths City Group</strong></span></h4>
       
       <!-- Inline Embedded Video Player Slot for Role 9 -->
       <div id="inlinePlayer-role9" class="inline-video-player-container" onclick="event.stopPropagation();">
@@ -3709,22 +3631,42 @@ function openFullDetail(event, caseTitle) {
 
 <script>
 (function(){
- function wireXClean13(){
-  document.querySelectorAll('.xclean13-highlight').forEach(function(item){
-   if(item.dataset.accordionWired==='1') return;
-   item.dataset.accordionWired='1';
-   item.addEventListener('click',function(e){e.stopPropagation();});
-   var s=item.querySelector('summary');
-   if(s) s.addEventListener('click',function(e){
-    e.preventDefault();e.stopPropagation();
-    var was=item.open;
-    document.querySelectorAll('.xclean13-highlight[open]').forEach(function(o){if(o!==item)o.open=false;});
-    item.open=!was;
-   });
-  });
- }
- document.addEventListener('DOMContentLoaded',wireXClean13);
- document.addEventListener('click',function(){setTimeout(wireXClean13,0);},true);
+  function wireXClean13(){
+    document.querySelectorAll('#role5 .xclean13-highlight').forEach(function(item){
+      if(item.dataset.accordionWired==='1') return;
+      item.dataset.accordionWired='1';
+      item.addEventListener('click', function(e){ e.stopPropagation(); });
+      var summary=item.querySelector('summary');
+      if(summary){
+        summary.addEventListener('click', function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          var wasOpen=item.open;
+          document.querySelectorAll('#role5 .xclean13-highlight[open]').forEach(function(other){
+            if(other!==item) other.open=false;
+          });
+          item.open=!wasOpen;
+        });
+      }
+    });
+
+    document.querySelectorAll('#role5 .xclean13-overview-toggle').forEach(function(btn){
+      if(btn.dataset.overviewWired==='1') return;
+      btn.dataset.overviewWired='1';
+      function toggle(e){
+        e.preventDefault(); e.stopPropagation();
+        var box=btn.closest('.role-overview').querySelector('.xclean13-overview-more');
+        if(!box) return;
+        var open=box.classList.toggle('show');
+        btn.textContent=open ? '× Close' : '› Expand';
+      }
+      btn.addEventListener('click',toggle);
+      btn.addEventListener('keydown',function(e){
+        if(e.key==='Enter'||e.key===' '){ toggle(e); }
+      });
+    });
+  }
+  document.addEventListener('DOMContentLoaded',wireXClean13);
 })();
 </script>
 
@@ -3794,5 +3736,172 @@ function openFullDetail(event, caseTitle) {
 })();
 </script>
 
+
+<script>
+function toggleDbOverview(event, button){
+  event.preventDefault();
+  event.stopPropagation();
+  var overview = button.closest('.db-role-overview');
+  if(!overview) return;
+  var story = overview.querySelector('.db-overview-story');
+  if(!story) return;
+  var isOpen = story.classList.toggle('show');
+  button.textContent = isOpen ? '⌃ Close' : '› Expand';
+}
+</script>
+
+
+<script>
+function toggleXcleanOverview(event, button){
+  event.preventDefault();
+  event.stopPropagation();
+  var overview = button.closest('.xclean-role-overview');
+  if(!overview) return;
+  var story = overview.querySelector('.xclean-overview-story');
+  if(!story) return;
+  var isOpen = story.classList.toggle('show');
+  button.textContent = isOpen ? '⌃ Close' : '› Expand';
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('#role2 .xclean-group').forEach(function(group){
+    group.addEventListener('toggle', function(){
+      if(this.open){
+        document.querySelectorAll('#role2 .xclean-group').forEach(function(other){
+          if(other !== group) other.open = false;
+        });
+      }
+    });
+  });
+});
+</script>
+
+
+<script>
+function toggleAlbatrossOverview(event, button){
+  event.preventDefault();
+  event.stopPropagation();
+  var overview = button.closest('.albatross-role-overview');
+  if(!overview) return;
+  var story = overview.querySelector('.albatross-overview-story');
+  if(!story) return;
+  var open = story.classList.toggle('show');
+  button.textContent = open ? '⌃ Close' : '› Expand';
+}
+</script>
+
+
+<script>
+function toggleISeeOverview(event, button){
+  event.preventDefault();
+  event.stopPropagation();
+  var overview=button.closest('.isee-role-overview');
+  if(!overview) return;
+  var story=overview.querySelector('.isee-overview-story');
+  if(!story) return;
+  var open=story.classList.toggle('show');
+  button.textContent=open ? '⌃ Close' : '› Expand';
+}
+</script>
+
+
+<script>
+(function(){function wireSkyOverview(){document.querySelectorAll('#role6 .sky-overview-toggle').forEach(function(btn){if(btn.dataset.wired==='1')return;btn.dataset.wired='1';function t(e){e.preventDefault();e.stopPropagation();var b=btn.closest('.role-overview').querySelector('.sky-overview-more');var o=b.classList.toggle('show');btn.textContent=o?'× Close':'› Expand'}btn.addEventListener('click',t);btn.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){t(e)}})})}document.addEventListener('DOMContentLoaded',wireSkyOverview)})();
+</script>
+<script>
+(function(){
+function wireVodafoneRefined(){
+  document.querySelectorAll('#role7 .vodafone-refined-highlight').forEach(function(item){
+    if(item.dataset.refinedVodafone==='1') return;
+    item.dataset.refinedVodafone='1';
+    item.addEventListener('click',function(e){e.stopPropagation();});
+    var summary=item.querySelector(':scope > summary');
+    if(summary) summary.addEventListener('click',function(e){
+      e.preventDefault(); e.stopPropagation();
+      var wasOpen=item.open;
+      document.querySelectorAll('#role7 .vodafone-refined-highlight[open]').forEach(function(other){
+        if(other!==item) other.open=false;
+      });
+      item.open=!wasOpen;
+    });
+  });
+  document.querySelectorAll('#role7 .vodafone-refined-overview-toggle').forEach(function(btn){
+    if(btn.dataset.refinedVodafone==='1') return;
+    btn.dataset.refinedVodafone='1';
+    function toggle(e){
+      e.preventDefault(); e.stopPropagation();
+      var box=btn.closest('.role-overview').querySelector('.vodafone-refined-overview-more');
+      var open=box.classList.toggle('show');
+      btn.textContent=open?'× Close':'› Expand';
+    }
+    btn.addEventListener('click',toggle);
+    btn.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' ')toggle(e);});
+  });
+}
+document.addEventListener('DOMContentLoaded',wireVodafoneRefined);
+})();
+</script>
+<script>
+(function(){
+function wireHJRefined(){
+ document.querySelectorAll('#role8 .hj-refined-highlight').forEach(function(item){
+  if(item.dataset.hjRefined==='1')return;
+  item.dataset.hjRefined='1';
+  item.addEventListener('click',function(e){e.stopPropagation();});
+  var summary=item.querySelector(':scope > summary');
+  if(summary)summary.addEventListener('click',function(e){
+   e.preventDefault();e.stopPropagation();
+   var was=item.open;
+   document.querySelectorAll('#role8 .hj-refined-highlight[open]').forEach(function(other){if(other!==item)other.open=false;});
+   item.open=!was;
+  });
+ });
+ document.querySelectorAll('#role8 .hj-refined-overview-toggle').forEach(function(btn){
+  if(btn.dataset.hjRefined==='1')return;
+  btn.dataset.hjRefined='1';
+  function toggle(e){
+   e.preventDefault();e.stopPropagation();
+   var box=btn.closest('.role-overview').querySelector('.hj-refined-overview-more');
+   var open=box.classList.toggle('show');
+   btn.textContent=open?'× Close':'› Expand';
+  }
+  btn.addEventListener('click',toggle);
+  btn.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' ')toggle(e);});
+ });
+}
+document.addEventListener('DOMContentLoaded',wireHJRefined);
+})();
+</script>
+<script>
+(function(){
+function wireSmithRefined(){
+ document.querySelectorAll('#role9 .smith-refined-highlight').forEach(function(item){
+  if(item.dataset.smithRefined==='1')return;
+  item.dataset.smithRefined='1';
+  item.addEventListener('click',function(e){e.stopPropagation();});
+  var summary=item.querySelector(':scope > summary');
+  if(summary)summary.addEventListener('click',function(e){
+   e.preventDefault();e.stopPropagation();
+   var was=item.open;
+   document.querySelectorAll('#role9 .smith-refined-highlight[open]').forEach(function(other){if(other!==item)other.open=false;});
+   item.open=!was;
+  });
+ });
+ document.querySelectorAll('#role9 .smith-refined-overview-toggle').forEach(function(btn){
+  if(btn.dataset.smithRefined==='1')return;
+  btn.dataset.smithRefined='1';
+  function toggle(e){
+   e.preventDefault();e.stopPropagation();
+   var box=btn.closest('.role-overview').querySelector('.smith-refined-overview-more');
+   var open=box.classList.toggle('show');
+   btn.textContent=open?'× Close':'› Expand';
+  }
+  btn.addEventListener('click',toggle);
+  btn.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' ')toggle(e);});
+ });
+}
+document.addEventListener('DOMContentLoaded',wireSmithRefined);
+})();
+</script>
 </body>
 </html>
