@@ -2373,12 +2373,12 @@ li { margin-bottom: 6px; font-size: 13px; }
 <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">Supporting Portfolio</h4>
 <div class="marquee-container" onclick="event.stopPropagation();">
 <div class="marquee-track">
-<div class="marquee-item" onclick="openModal('Screen end &amp; projector.jpg')"><img alt="Screen end &amp; projector" height="160" src="Screen end &amp; projector.jpg" width="260"/></div>
-<div class="marquee-item" onclick="openModal('Screen side.jpg')"><img alt="Screen side" height="160" src="Screen side.jpg" width="260"/></div>
-<div class="marquee-item" onclick="openModal('back of screen.jpg')"><img alt="back of screen" height="160" src="back of screen.jpg" width="260"/></div>
-<div class="marquee-item" onclick="openModal('front on.jpg')"><img alt="front on" height="160" src="front on.jpg" width="260"/></div>
-<div class="marquee-item" onclick="openModal('Screen end &amp; projector.jpg')"><img alt="Screen end &amp; projector" height="160" src="Screen end &amp; projector.jpg" width="260"/></div>
-<div class="marquee-item" onclick="openModal('Screen side.jpg')"><img alt="Screen side" height="160" src="Screen side.jpg" width="260"/></div>
+<div class="marquee-item" onclick="openAlbatrossLightbox(0)"><img alt="Screen end &amp; projector" height="160" src="Screen end &amp; projector.jpg" width="260"/></div>
+<div class="marquee-item" onclick="openAlbatrossLightbox(1)"><img alt="Screen side" height="160" src="Screen side.jpg" width="260"/></div>
+<div class="marquee-item" onclick="openAlbatrossLightbox(2)"><img alt="back of screen" height="160" src="back of screen.jpg" width="260"/></div>
+<div class="marquee-item" onclick="openAlbatrossLightbox(3)"><img alt="front on" height="160" src="front on.jpg" width="260"/></div>
+<div class="marquee-item" onclick="openAlbatrossLightbox(0)"><img alt="Screen end &amp; projector" height="160" src="Screen end &amp; projector.jpg" width="260"/></div>
+<div class="marquee-item" onclick="openAlbatrossLightbox(1)"><img alt="Screen side" height="160" src="Screen side.jpg" width="260"/></div>
 </div>
 </div>
 </div>
@@ -2997,7 +2997,14 @@ li { margin-bottom: 6px; font-size: 13px; }
 </div>
 </div>
 <!-- Image Lightbox Modal -->
-<div class="image-modal-lightbox" id="imageLightbox" onclick="closeModal()">
+<div class="image-modal-lightbox" id="albatrossLightbox" onclick="closeAlbatrossLightbox()">
+<button aria-label="Previous image" class="lightbox-nav-btn lightbox-prev" onclick="prevAlbatrossLightbox(event)" title="Previous image">❮</button>
+<button aria-label="Next image" class="lightbox-nav-btn lightbox-next" onclick="nextAlbatrossLightbox(event)" title="Next image">❯</button>
+<div class="lightbox-content-wrapper" onclick="event.stopPropagation()">
+<button aria-label="Close image" class="close-inline-video-btn" onclick="closeAlbatrossLightbox()" style="top:-40px; right:0;">×</button>
+<img alt="Royal Albatross project view" id="albatrossLightboxImg" src=""/>
+</div>
+</div><div class="image-modal-lightbox" id="imageLightbox" onclick="closeModal()">
 <div class="lightbox-content-wrapper" onclick="event.stopPropagation()">
 <button class="close-inline-video-btn" onclick="closeModal()" style="top:-40px; right:0;">×</button>
 <img alt="Enlarged View" id="lightboxImg" src=""/>
@@ -3005,8 +3012,8 @@ li { margin-bottom: 6px; font-size: 13px; }
 </div>
 <!-- Instore Lightbox Modal with Next/Prev Navigation -->
 <div class="image-modal-lightbox" id="instoreLightbox" onclick="closeInstoreLightbox()">
-<button class="lightbox-nav-btn lightbox-prev" onclick="prevInstoreLightbox(event)">❮</button>
-<button class="lightbox-nav-btn lightbox-next" onclick="nextInstoreLightbox(event)">❯</button>
+<button aria-label="Previous image" class="lightbox-nav-btn lightbox-prev" onclick="prevInstoreLightbox(event)" title="Previous image">❮</button>
+<button aria-label="Next image" class="lightbox-nav-btn lightbox-next" onclick="nextInstoreLightbox(event)" title="Next image">❯</button>
 <div class="lightbox-content-wrapper" onclick="event.stopPropagation()">
 <button class="close-inline-video-btn" onclick="closeInstoreLightbox()" style="top:-40px; right:0;">×</button>
 <img alt="Instore Location View" id="instoreLightboxImg" src=""/>
@@ -4026,5 +4033,69 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
-</body>
+<script id="albatross-isee-image-navigation-v1">
+const albatrossImages = ['Screen end & projector.jpg', 'Screen side.jpg', 'back of screen.jpg', 'front on.jpg'];
+let currentAlbatrossIndex = 0;
+
+function openAlbatrossLightbox(index) {
+  pauseAllMedia();
+  currentAlbatrossIndex = ((index % albatrossImages.length) + albatrossImages.length) % albatrossImages.length;
+  const lightbox = document.getElementById('albatrossLightbox');
+  const img = document.getElementById('albatrossLightboxImg');
+  if (lightbox && img) {
+    img.src = albatrossImages[currentAlbatrossIndex];
+    lightbox.classList.add('active');
+  }
+}
+
+function closeAlbatrossLightbox() {
+  const lightbox = document.getElementById('albatrossLightbox');
+  if (lightbox) lightbox.classList.remove('active');
+}
+
+function prevAlbatrossLightbox(event) {
+  if (event) event.stopPropagation();
+  currentAlbatrossIndex = (currentAlbatrossIndex - 1 + albatrossImages.length) % albatrossImages.length;
+  const img = document.getElementById('albatrossLightboxImg');
+  if (img) img.src = albatrossImages[currentAlbatrossIndex];
+}
+
+function nextAlbatrossLightbox(event) {
+  if (event) event.stopPropagation();
+  currentAlbatrossIndex = (currentAlbatrossIndex + 1) % albatrossImages.length;
+  const img = document.getElementById('albatrossLightboxImg');
+  if (img) img.src = albatrossImages[currentAlbatrossIndex];
+}
+
+// Keyboard navigation is active only while one of the two still-image lightboxes is open.
+document.addEventListener('keydown', function(event) {
+  const alb = document.getElementById('albatrossLightbox');
+  const iseeBox = document.getElementById('instoreLightbox');
+
+  if (alb && alb.classList.contains('active')) {
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      prevAlbatrossLightbox(event);
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      nextAlbatrossLightbox(event);
+    } else if (event.key === 'Escape') {
+      closeAlbatrossLightbox();
+    }
+    return;
+  }
+
+  if (iseeBox && iseeBox.classList.contains('active')) {
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      prevInstoreLightbox(event);
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      nextInstoreLightbox(event);
+    } else if (event.key === 'Escape') {
+      closeInstoreLightbox();
+    }
+  }
+});
+</script></body>
 </html>
