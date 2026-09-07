@@ -1974,6 +1974,40 @@ li { margin-bottom: 6px; font-size: 13px; }
  .xclean-lightbox-prev{left:4px}.xclean-lightbox-next{right:4px}
  .xclean-lightbox-close{top:8px;right:8px;width:42px;height:42px}
 }
+</style><style id="xclean-expanded-ai-notice-v1">
+.xclean-lightbox-important-note{
+ display:none;
+ position:absolute;
+ top:0;
+ left:50%;
+ transform:translateX(-50%);
+ z-index:10055;
+ width:min(92%,900px);
+ box-sizing:border-box;
+ padding:10px 14px;
+ border-radius:0 0 7px 7px;
+ background:rgba(0,0,0,.82);
+ color:#fff;
+ font-size:12px;
+ font-weight:400;
+ line-height:1.45;
+ text-align:left;
+ box-shadow:0 2px 10px rgba(0,0,0,.35);
+ pointer-events:none;
+}
+.xclean-lightbox-important-note strong{font-weight:800}
+.xclean-lightbox-important-note.show{display:block}
+.xclean-lightbox-stage{position:relative}
+@media(max-width:600px){
+ .xclean-lightbox-important-note{
+  top:0;
+  width:94%;
+  padding:8px 10px;
+  font-size:10.5px;
+  line-height:1.35;
+  border-radius:0 0 6px 6px;
+ }
+}
 </style></head>
 <body>
 <div class="container">
@@ -4270,7 +4304,7 @@ function setXcleanFleetSlide(event,index){if(event)event.stopPropagation();xclea
 </script><div aria-hidden="true" class="xclean-lightbox" id="xcleanLightbox" onclick="closeXcleanLightbox(event)">
 <button aria-label="Close enlarged image" class="xclean-lightbox-close" onclick="closeXcleanLightbox(event)" type="button">×</button>
 <button aria-label="Previous image" class="xclean-lightbox-nav xclean-lightbox-prev" onclick="prevXcleanLightbox(event)" title="Previous image" type="button">‹</button>
-<div class="xclean-lightbox-stage" onclick="event.stopPropagation()">
+<div class="xclean-lightbox-stage" onclick="event.stopPropagation()"><div class="xclean-lightbox-important-note" id="xcleanLightboxImportantNote"><strong>Image note:</strong> Unfortunately, the original high-resolution photographs have been lost or deleted. The surviving low-resolution archive thumbnails have been retained in the bottom corner of these high-resolution AI reconstructions, preserving the original photographic reference alongside the clearer representation.</div>
 <img alt="Expanded XClean portfolio image" id="xcleanLightboxImage"/>
 <div class="xclean-lightbox-caption" id="xcleanLightboxCaption"></div>
 </div>
@@ -4296,6 +4330,8 @@ function renderXcleanLightbox(){
  document.getElementById('xcleanLightboxImage').src=item.src;
  document.getElementById('xcleanLightboxImage').alt=item.caption;
  document.getElementById('xcleanLightboxCaption').textContent=item.caption;
+ const importantNote=document.getElementById('xcleanLightboxImportantNote');
+ if(importantNote) importantNote.classList.toggle('show',xcleanLightboxGroup==='covid');
 }
 function openXcleanLightbox(event,group,index){
  if(event)event.stopPropagation();
