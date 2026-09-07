@@ -1922,6 +1922,23 @@ li { margin-bottom: 6px; font-size: 13px; }
   #albatrossLightbox > .lightbox-next,
   #instoreLightbox > .lightbox-next { right: max(8px, env(safe-area-inset-right)) !important; }
 }
+</style><style id="xclean-covid-dispenser-carousel-v1">
+#xcleanCovidDispenserSection{margin:4px 0 24px;padding:16px;background:#f8fafc;border:1px solid #d7dee8;border-radius:8px}
+#xcleanCovidDispenserSection h4{margin:0 0 8px;color:var(--primary);font-size:16px}
+.xclean-covid-dispenser-copy,.xclean-covid-image-note{margin:0 0 12px;font-size:13px;line-height:1.55;color:var(--text-main)}
+.xclean-covid-image-note{color:var(--text-muted);font-size:12px}
+.xclean-covid-carousel{position:relative;display:flex;align-items:center;gap:8px;margin-top:12px}
+.xclean-covid-viewport{overflow:hidden;flex:1;min-width:0;border-radius:7px;background:#111}
+.xclean-covid-track{display:flex;transition:transform .35s ease;will-change:transform}
+.xclean-covid-slide{flex:0 0 100%;margin:0;min-width:100%;background:#111;text-align:center}
+.xclean-covid-slide img{display:block;width:100%;height:420px;object-fit:contain;background:#111}
+.xclean-covid-slide figcaption{padding:8px 10px;color:#fff;font-size:13px;font-weight:700;background:#1b1b1b}
+.xclean-covid-nav{flex:0 0 44px;width:44px;height:56px;border:1px solid #b8c2d0;border-radius:7px;background:#fff;color:var(--highlight-blue);font-size:30px;line-height:1;cursor:pointer}
+.xclean-covid-nav:hover{border-color:var(--highlight-blue);background:#eef4ff}
+.xclean-covid-dots{display:flex;justify-content:center;gap:7px;margin-top:10px}
+.xclean-covid-dots button{width:9px;height:9px;padding:0;border:0;border-radius:50%;background:#aab4c2;cursor:pointer}
+.xclean-covid-dots button.active{background:var(--highlight-blue)}
+@media(max-width:600px){#xcleanCovidDispenserSection{padding:12px}.xclean-covid-slide img{height:330px}.xclean-covid-nav{flex-basis:36px;width:36px;height:50px;font-size:26px}}
 </style></head>
 <body>
 <div class="container">
@@ -2309,7 +2326,27 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div class="portfolio-btn-container">
 <img alt="XClean Portfolio" class="portfolio-image-btn" id="xcleanPortfolioBtn" onclick="toggleXcleanPortfolio(event)" src="xclean portfolio-4.png"/>
 </div>
-<div class="portfolio-sub-section" id="xcleanPortfolioSection">
+<div class="portfolio-sub-section" id="xcleanPortfolioSection"><div class="xclean-covid-dispenser-section" id="xcleanCovidDispenserSection">
+<h4>COVID-19 Sanitiser Dispenser Rollout</h4>
+<p class="xclean-covid-dispenser-copy">During the COVID-19 response, Shane designed and manufactured practical sanitiser dispensers for high-volume sanitiser customers that needed a simple, reliable way to dispense the product. The units were supplied free to qualifying customers purchasing high volumes of sanitiser, supporting deployment across major retail and service environments including The Warehouse, Kmart, Hunting &amp; Fishing, PAK'nSAVE, BP and Four Square supermarkets.</p>
+<p class="xclean-covid-image-note"><strong>Image note:</strong> Unfortunately, the original high-resolution photographs have been lost or deleted. The surviving low-resolution archive thumbnails have been retained in the bottom corner of these high-resolution AI reconstructions, preserving the original photographic reference alongside the clearer representation.</p>
+<div aria-label="XClean COVID-19 sanitiser dispenser installations" class="xclean-covid-carousel">
+<button aria-label="Previous dispenser image" class="xclean-covid-nav xclean-covid-prev" onclick="moveXcleanCovidCarousel(event,-1)" type="button">‹</button>
+<div class="xclean-covid-viewport"><div class="xclean-covid-track" id="xcleanCovidTrack">
+<figure class="xclean-covid-slide"><img alt="AI reconstruction of XClean sanitiser dispenser installation at Hunting and Fishing, with archive thumbnail inset" src="Sanitiser hunting and fishing.png"/><figcaption>Hunting &amp; Fishing</figcaption></figure>
+<figure class="xclean-covid-slide"><img alt="AI reconstruction of XClean sanitiser dispenser installation at Kmart, with archive thumbnail inset" src="sanitiser kmart.png"/><figcaption>Kmart</figcaption></figure>
+<figure class="xclean-covid-slide"><img alt="AI reconstruction of XClean sanitiser dispenser installation at PAK'nSAVE, with archive thumbnail inset" src="sanitiser pack n save.png"/><figcaption>PAK'nSAVE</figcaption></figure>
+<figure class="xclean-covid-slide"><img alt="AI reconstruction of XClean sanitiser dispenser installation at The Warehouse, with archive thumbnail inset" src="sanitiser the warehouse.png"/><figcaption>The Warehouse</figcaption></figure>
+</div></div>
+<button aria-label="Next dispenser image" class="xclean-covid-nav xclean-covid-next" onclick="moveXcleanCovidCarousel(event,1)" type="button">›</button>
+</div>
+<div class="xclean-covid-dots" id="xcleanCovidDots">
+<button aria-label="Show image 1" class="active" onclick="setXcleanCovidSlide(event,0)" type="button"></button>
+<button aria-label="Show image 2" onclick="setXcleanCovidSlide(event,1)" type="button"></button>
+<button aria-label="Show image 3" onclick="setXcleanCovidSlide(event,2)" type="button"></button>
+<button aria-label="Show image 4" onclick="setXcleanCovidSlide(event,3)" type="button"></button>
+</div>
+</div>
 <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">XClean Extended Portfolio &amp; Campaign Assets</h4>
 <p style="font-size: 13px; color: var(--text-muted); margin: 0 0 10px 0;">Additional documentation, fleet deployment visuals, and formulation records.</p>
 <div class="portfolio-gallery">
@@ -2318,7 +2355,6 @@ li { margin-bottom: 6px; font-size: 13px; }
 </div>
 </div>
 </div>
-<div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'XClean National Sales')">View Full Detailed Case Study →</span></div>
 </div>
 </div>
 <!-- ROLE 3: Royal Albatross Centre -->
@@ -2717,7 +2753,6 @@ li { margin-bottom: 6px; font-size: 13px; }
 </div>
 </div>
 </div>
-<div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'ISee Digital Network')">View Full Detailed Case Study →</span></div>
 </div>
 </div>
 <!-- ROLE 5: XClean Growth Phase (2013-2015) -->
@@ -2906,7 +2941,6 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div class="thumbnail-glow-overlay"></div>
 </div></div>
 </div>
-<div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'Mobilefone Solutions')">View Full Detailed Case Study →</span></div>
 </div>
 </div>
 <!-- ROLE 8: H&J Smith (2001-2002) -->
@@ -3023,7 +3057,6 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div class="thumbnail-glow-overlay"></div>
 </div>
 </div>
-<div class="detail-link-container"><span class="detail-link" onclick="openFullDetail(event, 'Smiths City Area Manager')">View Full Detailed Case Study →</span></div>
 </div>
 </div>
 </div>
@@ -3174,6 +3207,7 @@ function toggleXcleanPortfolio(event) {
     if (btn) btn.classList.remove('pulse-animation');
     section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
+  syncXcleanPortfolioPulse();
 }
 
 function toggleIseePortfolio(event) {
@@ -3224,7 +3258,7 @@ function toggleRole(event, cardElement, roleId) {
     const pBtn = cardElement.querySelector('.portfolio-image-btn');
     const pSec = cardElement.querySelector('.portfolio-sub-section');
     if(pBtn) {
-      if(roleId === 'role1' && (!pSec || !pSec.classList.contains('show'))) {
+      if((roleId === 'role1' || roleId === 'role2') && (!pSec || !pSec.classList.contains('show'))) {
         pBtn.classList.add('pulse-animation');
       } else {
         pBtn.classList.remove('pulse-animation');
@@ -3697,10 +3731,6 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&document.getElementById('smithsRecordModal')?.classList.contains('active')) smithsNavigateBack();
 });
 
-function openFullDetail(event, caseTitle) {
-  event.stopPropagation();
-  alert("Opening full detailed case study for: " + caseTitle);
-}
 </script>
 <script>
 (function(){
@@ -4159,5 +4189,19 @@ document.addEventListener('keydown', function(event) {
     }
   }
 });
+</script><script id="xclean-covid-dispenser-carousel-behaviour-v1">
+let xcleanCovidSlideIndex=0;
+function renderXcleanCovidCarousel(){
+ const track=document.getElementById('xcleanCovidTrack'); if(!track)return;
+ track.style.transform='translateX(-'+(xcleanCovidSlideIndex*100)+'%)';
+ document.querySelectorAll('#xcleanCovidDots button').forEach((d,i)=>d.classList.toggle('active',i===xcleanCovidSlideIndex));
+}
+function moveXcleanCovidCarousel(event,delta){if(event)event.stopPropagation();xcleanCovidSlideIndex=(xcleanCovidSlideIndex+delta+4)%4;renderXcleanCovidCarousel();}
+function setXcleanCovidSlide(event,index){if(event)event.stopPropagation();xcleanCovidSlideIndex=index;renderXcleanCovidCarousel();}
+function syncXcleanPortfolioPulse(){
+ const btn=document.getElementById('xcleanPortfolioBtn'),section=document.getElementById('xcleanPortfolioSection'),role=document.getElementById('role2');
+ if(!btn||!section||!role)return;
+ btn.classList.toggle('pulse-animation',role.classList.contains('show')&&!section.classList.contains('show'));
+}
 </script></body>
 </html>
