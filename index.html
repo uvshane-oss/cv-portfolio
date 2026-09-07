@@ -1879,6 +1879,49 @@ li { margin-bottom: 6px; font-size: 13px; }
 #role7 .vodafone-integrated-subpoint>strong{display:block!important;position:relative!important;padding-left:17px!important;margin:0 0 5px!important;font-size:13.5px!important;line-height:1.35!important;color:var(--text-main)!important}
 #role7 .vodafone-integrated-subpoint>strong:before{content:'•'!important;position:absolute!important;left:1px!important;color:var(--primary)!important}
 #role7 .vodafone-integrated-subpoint p{margin:0 0 0 17px!important;padding:0!important;font-size:13px!important;line-height:1.55!important;color:var(--text-muted)!important}
+</style><style id="still-image-lightbox-navigation-v2">
+/* Still-image gallery navigation: visible on PC and mobile.
+   Scoped only to Royal Albatross and ISee Digital lightboxes. */
+#albatrossLightbox > .lightbox-nav-btn,
+#instoreLightbox > .lightbox-nav-btn {
+  position: fixed !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 2105 !important;
+  width: 52px !important;
+  height: 64px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(0,0,0,.72) !important;
+  color: #fff !important;
+  border: 2px solid rgba(255,255,255,.78) !important;
+  border-radius: 8px !important;
+  font-size: 32px !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+#albatrossLightbox > .lightbox-prev,
+#instoreLightbox > .lightbox-prev { left: max(14px, env(safe-area-inset-left)) !important; }
+#albatrossLightbox > .lightbox-next,
+#instoreLightbox > .lightbox-next { right: max(14px, env(safe-area-inset-right)) !important; }
+
+@media (max-width: 768px) {
+  #albatrossLightbox > .lightbox-nav-btn,
+  #instoreLightbox > .lightbox-nav-btn {
+    width: 46px !important;
+    height: 58px !important;
+    font-size: 29px !important;
+  }
+  #albatrossLightbox > .lightbox-prev,
+  #instoreLightbox > .lightbox-prev { left: max(8px, env(safe-area-inset-left)) !important; }
+  #albatrossLightbox > .lightbox-next,
+  #instoreLightbox > .lightbox-next { right: max(8px, env(safe-area-inset-right)) !important; }
+}
 </style></head>
 <body>
 <div class="container">
@@ -2998,8 +3041,8 @@ li { margin-bottom: 6px; font-size: 13px; }
 </div>
 <!-- Image Lightbox Modal -->
 <div class="image-modal-lightbox" id="albatrossLightbox" onclick="closeAlbatrossLightbox()">
-<button aria-label="Previous image" class="lightbox-nav-btn lightbox-prev" onclick="prevAlbatrossLightbox(event)" title="Previous image">❮</button>
-<button aria-label="Next image" class="lightbox-nav-btn lightbox-next" onclick="nextAlbatrossLightbox(event)" title="Next image">❯</button>
+<button aria-label="Previous image" class="lightbox-nav-btn lightbox-prev" onclick="prevAlbatrossLightbox(event)" title="Previous image">‹</button>
+<button aria-label="Next image" class="lightbox-nav-btn lightbox-next" onclick="nextAlbatrossLightbox(event)" title="Next image">›</button>
 <div class="lightbox-content-wrapper" onclick="event.stopPropagation()">
 <button aria-label="Close image" class="close-inline-video-btn" onclick="closeAlbatrossLightbox()" style="top:-40px; right:0;">×</button>
 <img alt="Royal Albatross project view" id="albatrossLightboxImg" src=""/>
@@ -3012,8 +3055,8 @@ li { margin-bottom: 6px; font-size: 13px; }
 </div>
 <!-- Instore Lightbox Modal with Next/Prev Navigation -->
 <div class="image-modal-lightbox" id="instoreLightbox" onclick="closeInstoreLightbox()">
-<button aria-label="Previous image" class="lightbox-nav-btn lightbox-prev" onclick="prevInstoreLightbox(event)" title="Previous image">❮</button>
-<button aria-label="Next image" class="lightbox-nav-btn lightbox-next" onclick="nextInstoreLightbox(event)" title="Next image">❯</button>
+<button aria-label="Previous image" class="lightbox-nav-btn lightbox-prev" onclick="prevInstoreLightbox(event)" title="Previous image">‹</button>
+<button aria-label="Next image" class="lightbox-nav-btn lightbox-next" onclick="nextInstoreLightbox(event)" title="Next image">›</button>
 <div class="lightbox-content-wrapper" onclick="event.stopPropagation()">
 <button class="close-inline-video-btn" onclick="closeInstoreLightbox()" style="top:-40px; right:0;">×</button>
 <img alt="Instore Location View" id="instoreLightboxImg" src=""/>
