@@ -4466,7 +4466,7 @@ function openXcleanLightbox(event,group,index){
 function closeXcleanLightbox(event){
  if(event)event.stopPropagation();
  const lb=document.getElementById('xcleanLightbox');lb.classList.remove('show');lb.setAttribute('aria-hidden','true');
- document.body.style.overflow='';
+ document.body.style.overflow=''; if(window.unlockCvScroll) window.unlockCvScroll();
 }
 function prevXcleanLightbox(event){
  if(event)event.stopPropagation();
@@ -4580,7 +4580,7 @@ function toggleXcleanCompactContext(event, button){
    sessionStorage.setItem('shaneCvSoundWanted',soundWanted?'yes':'no');
    gate.style.display='none';
    welcome.style.display='';
-   document.body.style.overflow='hidden';
+   document.body.style.overflow='hidden'; /* intro only; View My CV restores it */
    // Until Shane's real recording is supplied, both modes retain the speech-bubble sequence.
    // The YES branch is explicitly reserved for synchronized recorded audio.
    runBubbleSequence();
@@ -4602,6 +4602,50 @@ function toggleXcleanCompactContext(event, button){
 
  yes.addEventListener('click',function(){enterIntro(true);});
  no.addEventListener('click',function(){enterIntro(false);});
+})();
+</script><script id="cv-scroll-lock-safety-v1">
+(function(){
+  function unlockCvScroll(){
+    document.documentElement.style.overflow = '';
+    document.documentElement.style.overflowY = '';
+    document.body.style.overflow = ''; if(window.unlockCvScroll) window.unlockCvScroll();
+    document.body.style.overflowY = '';
+    document.body.classList.remove('cv-welcome-open','no-scroll','modal-open');
+  }
+
+  // Expose for all welcome/loading handlers.
+  window.unlockCvScroll = unlockCvScroll;
+
+  // Safety net: once neither loading gate nor welcome overlay is visibly blocking the CV,
+  // scrolling must always be restored.
+  const observer = new MutationObserver(function(){
+    const gate = document.getElementById('cvLoadingGate');
+    const welcome = document.getElementById('cvWelcomeOverlay');
+    const gateVisible = gate && getComputedStyle(gate).display !== 'none';
+    const welcomeVisible = welcome && getComputedStyle(welcome).display !== 'none';
+    if(!gateVisible && !welcomeVisible) unlockCvScroll();
+  });
+  observer.observe(document.documentElement,{attributes:true,subtree:true,attributeFilter:['style','class','hidden']});
+
+  window.addEventListener('pageshow',function(){
+    const gate=document.getElementById('cvLoadingGate');
+    const welcome=document.getElementById('cvWelcomeOverlay');
+    if((!gate || getComputedStyle(gate).display==='none') &&
+       (!welcome || getComputedStyle(welcome).display==='none')) unlockCvScroll();
+  });
+})();
+</script><script id="cv-view-button-scrollfix-v1">
+(function(){
+ const btn=document.getElementById('cvWelcomeClose');
+ if(!btn) return;
+ btn.addEventListener('click',function(){
+   setTimeout(function(){
+     const welcome=document.getElementById('cvWelcomeOverlay');
+     if(welcome) welcome.style.display='none';
+     if(window.unlockCvScroll) window.unlockCvScroll();
+     else { document.body.style.overflow=''; document.documentElement.style.overflow=''; }
+   },0);
+ },true);
 })();
 </script></body>
 </html>
