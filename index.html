@@ -1939,6 +1939,22 @@ li { margin-bottom: 6px; font-size: 13px; }
 .xclean-covid-dots button{width:9px;height:9px;padding:0;border:0;border-radius:50%;background:#aab4c2;cursor:pointer}
 .xclean-covid-dots button.active{background:var(--highlight-blue)}
 @media(max-width:600px){#xcleanCovidDispenserSection{padding:12px}.xclean-covid-slide img{height:330px}.xclean-covid-nav{flex-basis:36px;width:36px;height:50px;font-size:26px}}
+</style><style id="xclean-fleet-build-carousel-v1">
+#xcleanFleetBuildSection{margin:18px 0 24px;padding:16px;background:#f8fafc;border:1px solid #d7dee8;border-radius:8px}
+#xcleanFleetBuildSection h4{margin:0 0 8px;color:var(--primary);font-size:16px}
+.xclean-fleet-copy{margin:0 0 12px;font-size:13px;line-height:1.55;color:var(--text-main)}
+.xclean-fleet-carousel{position:relative;display:flex;align-items:center;gap:8px;margin-top:12px}
+.xclean-fleet-viewport{overflow:hidden;flex:1;min-width:0;border-radius:7px;background:#111}
+.xclean-fleet-track{display:flex;transition:transform .35s ease;will-change:transform}
+.xclean-fleet-slide{flex:0 0 100%;margin:0;min-width:100%;background:#111;text-align:center}
+.xclean-fleet-slide img{display:block;width:100%;height:420px;object-fit:contain;background:#111}
+.xclean-fleet-slide figcaption{padding:8px 10px;color:#fff;font-size:13px;font-weight:700;background:#1b1b1b}
+.xclean-fleet-nav{flex:0 0 44px;width:44px;height:56px;border:1px solid #b8c2d0;border-radius:7px;background:#fff;color:var(--highlight-blue);font-size:30px;line-height:1;cursor:pointer}
+.xclean-fleet-nav:hover{border-color:var(--highlight-blue);background:#eef4ff}
+.xclean-fleet-dots{display:flex;justify-content:center;gap:7px;margin-top:10px}
+.xclean-fleet-dots button{width:9px;height:9px;padding:0;border:0;border-radius:50%;background:#aab4c2;cursor:pointer}
+.xclean-fleet-dots button.active{background:var(--highlight-blue)}
+@media(max-width:600px){#xcleanFleetBuildSection{padding:12px}.xclean-fleet-slide img{height:330px}.xclean-fleet-nav{flex-basis:36px;width:36px;height:50px;font-size:26px}}
 </style></head>
 <body>
 <div class="container">
@@ -2345,6 +2361,26 @@ li { margin-bottom: 6px; font-size: 13px; }
 <button aria-label="Show image 2" onclick="setXcleanCovidSlide(event,1)" type="button"></button>
 <button aria-label="Show image 3" onclick="setXcleanCovidSlide(event,2)" type="button"></button>
 <button aria-label="Show image 4" onclick="setXcleanCovidSlide(event,3)" type="button"></button>
+</div>
+</div><div class="xclean-fleet-build-section" id="xcleanFleetBuildSection">
+<h4>National Fleet Build &amp; Brand Execution</h4>
+<p class="xclean-fleet-copy">Shane developed the practical vehicle fit-out and presentation standard himself, including building the cabinetry, painting the vehicles and arranging/sign-writing the branded fleet presentation. He then replicated the approach across the fleet nationally.</p>
+<p class="xclean-fleet-copy">Commercial quotes were obtained initially, but the owners did not see sufficient value in upgrading the fleet and approved only one vehicle so the result could be assessed. Convinced of the operational and presentation benefit, Shane completed the wider fleet upgrade in his own personal time. During evenings and weekends, he ran shuttle swaps with product — exchanging a fitted-out vehicle loaded with stock for an empty vehicle, then repeating the process until the fleet had been upgraded. He delivered the wider fleet upgrade for no more than the cost that had been approved from the commercial quote to complete the original single trial vehicle.</p>
+<div aria-label="XClean fleet build and field execution examples" class="xclean-fleet-carousel">
+<button aria-label="Previous XClean fleet image" class="xclean-fleet-nav xclean-fleet-prev" onclick="moveXcleanFleetCarousel(event,-1)" type="button">‹</button>
+<div class="xclean-fleet-viewport"><div class="xclean-fleet-track" id="xcleanFleetTrack">
+<figure class="xclean-fleet-slide"><img alt="Cabinetry Shane built for XClean vehicles" src="xcvCabinetry Shane Build for all vehicles .jpeg"/><figcaption>Fleet Cabinetry — Built by Shane</figcaption></figure>
+<figure class="xclean-fleet-slide"><img alt="XClean vehicle painted and sign-written as part of Shane's fleet standard" src="xcvShane painted the vehicles and sign-write them 1 .jpg"/><figcaption>Vehicle Paint &amp; Sign-Writing</figcaption></figure>
+<figure class="xclean-fleet-slide"><img alt="Additional XClean sign-written fleet vehicle" src="xcvShane painted the vehicles and sign-write them 2.jpg"/><figcaption>National Fleet Presentation</figcaption></figure>
+<figure class="xclean-fleet-slide"><img alt="XClean Surface Shield demonstration showing the clean treated area" src="xcvShanes Surface shield see the clean spot .jpg"/><figcaption>Surface Shield — Visible Clean Area</figcaption></figure>
+</div></div>
+<button aria-label="Next XClean fleet image" class="xclean-fleet-nav xclean-fleet-next" onclick="moveXcleanFleetCarousel(event,1)" type="button">›</button>
+</div>
+<div class="xclean-fleet-dots" id="xcleanFleetDots">
+<button aria-label="Show image 1" class="active" onclick="setXcleanFleetSlide(event,0)" type="button"></button>
+<button aria-label="Show image 2" onclick="setXcleanFleetSlide(event,1)" type="button"></button>
+<button aria-label="Show image 3" onclick="setXcleanFleetSlide(event,2)" type="button"></button>
+<button aria-label="Show image 4" onclick="setXcleanFleetSlide(event,3)" type="button"></button>
 </div>
 </div>
 <h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">XClean Extended Portfolio &amp; Campaign Assets</h4>
@@ -4203,5 +4239,14 @@ function syncXcleanPortfolioPulse(){
  if(!btn||!section||!role)return;
  btn.classList.toggle('pulse-animation',role.classList.contains('show')&&!section.classList.contains('show'));
 }
+</script><script id="xclean-fleet-build-carousel-behaviour-v1">
+let xcleanFleetSlideIndex=0;
+function renderXcleanFleetCarousel(){
+ const track=document.getElementById('xcleanFleetTrack'); if(!track)return;
+ track.style.transform='translateX(-'+(xcleanFleetSlideIndex*100)+'%)';
+ document.querySelectorAll('#xcleanFleetDots button').forEach((d,i)=>d.classList.toggle('active',i===xcleanFleetSlideIndex));
+}
+function moveXcleanFleetCarousel(event,delta){if(event)event.stopPropagation();xcleanFleetSlideIndex=(xcleanFleetSlideIndex+delta+4)%4;renderXcleanFleetCarousel();}
+function setXcleanFleetSlide(event,index){if(event)event.stopPropagation();xcleanFleetSlideIndex=index;renderXcleanFleetCarousel();}
 </script></body>
 </html>
