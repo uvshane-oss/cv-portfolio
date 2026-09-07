@@ -1955,6 +1955,25 @@ li { margin-bottom: 6px; font-size: 13px; }
 .xclean-fleet-dots button{width:9px;height:9px;padding:0;border:0;border-radius:50%;background:#aab4c2;cursor:pointer}
 .xclean-fleet-dots button.active{background:var(--highlight-blue)}
 @media(max-width:600px){#xcleanFleetBuildSection{padding:12px}.xclean-fleet-slide img{height:330px}.xclean-fleet-nav{flex-basis:36px;width:36px;height:50px;font-size:26px}}
+</style><style id="xclean-portfolio-lightbox-navigation-v1">
+#xcleanCovidDispenserSection .xclean-covid-slide img,
+#xcleanFleetBuildSection .xclean-fleet-slide img{cursor:zoom-in}
+.xclean-lightbox{display:none;position:fixed;inset:0;z-index:10050;background:rgba(0,0,0,.94);align-items:center;justify-content:center;padding:22px 72px}
+.xclean-lightbox.show{display:flex}
+.xclean-lightbox-stage{max-width:min(1100px,92vw);max-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.xclean-lightbox-stage img{display:block;max-width:100%;max-height:82vh;object-fit:contain;box-shadow:0 8px 30px rgba(0,0,0,.45)}
+.xclean-lightbox-caption{color:#fff;text-align:center;font-size:14px;font-weight:700;padding-top:10px}
+.xclean-lightbox-close{position:fixed;top:14px;right:18px;z-index:10053;width:46px;height:46px;border:0;border-radius:50%;background:rgba(255,255,255,.94);color:#111;font-size:32px;line-height:1;cursor:pointer}
+.xclean-lightbox-nav{position:fixed;top:50%;transform:translateY(-50%);z-index:10053;width:52px;height:70px;border:0;border-radius:8px;background:rgba(255,255,255,.94);color:#1d4ed8;font-size:40px;line-height:1;cursor:pointer}
+.xclean-lightbox-prev{left:14px}.xclean-lightbox-next{right:14px}
+@media(max-width:600px){
+ .xclean-lightbox{padding:58px 46px 32px}
+ .xclean-lightbox-stage{max-width:100%;max-height:90vh}
+ .xclean-lightbox-stage img{max-height:76vh}
+ .xclean-lightbox-nav{width:38px;height:58px;font-size:32px}
+ .xclean-lightbox-prev{left:4px}.xclean-lightbox-next{right:4px}
+ .xclean-lightbox-close{top:8px;right:8px;width:42px;height:42px}
+}
 </style></head>
 <body>
 <div class="container">
@@ -2349,10 +2368,10 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div aria-label="XClean COVID-19 sanitiser dispenser installations" class="xclean-covid-carousel">
 <button aria-label="Previous dispenser image" class="xclean-covid-nav xclean-covid-prev" onclick="moveXcleanCovidCarousel(event,-1)" type="button">‹</button>
 <div class="xclean-covid-viewport"><div class="xclean-covid-track" id="xcleanCovidTrack">
-<figure class="xclean-covid-slide"><img alt="AI reconstruction of XClean sanitiser dispenser installation at Hunting and Fishing, with archive thumbnail inset" src="Sanitiser hunting and fishing.png"/><figcaption>Hunting &amp; Fishing</figcaption></figure>
-<figure class="xclean-covid-slide"><img alt="AI reconstruction of XClean sanitiser dispenser installation at Kmart, with archive thumbnail inset" src="sanitiser kmart.png"/><figcaption>Kmart</figcaption></figure>
-<figure class="xclean-covid-slide"><img alt="AI reconstruction of XClean sanitiser dispenser installation at PAK'nSAVE, with archive thumbnail inset" src="sanitiser pack n save.png"/><figcaption>PAK'nSAVE</figcaption></figure>
-<figure class="xclean-covid-slide"><img alt="AI reconstruction of XClean sanitiser dispenser installation at The Warehouse, with archive thumbnail inset" src="sanitiser the warehouse.png"/><figcaption>The Warehouse</figcaption></figure>
+<figure class="xclean-covid-slide"><img alt="AI reconstruction of XClean sanitiser dispenser installation at Hunting and Fishing, with archive thumbnail inset" onclick="openXcleanLightbox(event,'covid',0)" onkeydown="if(event.key==='Enter'||event.key===' ')openXcleanLightbox(event,'covid',0)" role="button" src="Sanitiser hunting and fishing.png" tabindex="0" title="Click to enlarge"/><figcaption>Hunting &amp; Fishing</figcaption></figure>
+<figure class="xclean-covid-slide"><img alt="AI reconstruction of XClean sanitiser dispenser installation at Kmart, with archive thumbnail inset" onclick="openXcleanLightbox(event,'covid',1)" onkeydown="if(event.key==='Enter'||event.key===' ')openXcleanLightbox(event,'covid',1)" role="button" src="sanitiser kmart.png" tabindex="0" title="Click to enlarge"/><figcaption>Kmart</figcaption></figure>
+<figure class="xclean-covid-slide"><img alt="AI reconstruction of XClean sanitiser dispenser installation at PAK'nSAVE, with archive thumbnail inset" onclick="openXcleanLightbox(event,'covid',2)" onkeydown="if(event.key==='Enter'||event.key===' ')openXcleanLightbox(event,'covid',2)" role="button" src="sanitiser pack n save.png" tabindex="0" title="Click to enlarge"/><figcaption>PAK'nSAVE</figcaption></figure>
+<figure class="xclean-covid-slide"><img alt="AI reconstruction of XClean sanitiser dispenser installation at The Warehouse, with archive thumbnail inset" onclick="openXcleanLightbox(event,'covid',3)" onkeydown="if(event.key==='Enter'||event.key===' ')openXcleanLightbox(event,'covid',3)" role="button" src="sanitiser the warehouse.png" tabindex="0" title="Click to enlarge"/><figcaption>The Warehouse</figcaption></figure>
 </div></div>
 <button aria-label="Next dispenser image" class="xclean-covid-nav xclean-covid-next" onclick="moveXcleanCovidCarousel(event,1)" type="button">›</button>
 </div>
@@ -2369,10 +2388,10 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div aria-label="XClean fleet build and field execution examples" class="xclean-fleet-carousel">
 <button aria-label="Previous XClean fleet image" class="xclean-fleet-nav xclean-fleet-prev" onclick="moveXcleanFleetCarousel(event,-1)" type="button">‹</button>
 <div class="xclean-fleet-viewport"><div class="xclean-fleet-track" id="xcleanFleetTrack">
-<figure class="xclean-fleet-slide"><img alt="Cabinetry Shane built for XClean vehicles" src="xcvCabinetry Shane Build for all vehicles .jpeg"/><figcaption>Fleet Cabinetry — Built by Shane</figcaption></figure>
-<figure class="xclean-fleet-slide"><img alt="XClean vehicle painted and sign-written as part of Shane's fleet standard" src="xcvShane painted the vehicles and sign-write them 1 .jpg"/><figcaption>Vehicle Paint &amp; Sign-Writing</figcaption></figure>
-<figure class="xclean-fleet-slide"><img alt="Additional XClean sign-written fleet vehicle" src="xcvShane painted the vehicles and sign-write them 2.jpg"/><figcaption>National Fleet Presentation</figcaption></figure>
-<figure class="xclean-fleet-slide"><img alt="XClean Surface Shield demonstration showing the clean treated area" src="xcvShanes Surface shield see the clean spot .jpg"/><figcaption>Surface Shield — Visible Clean Area</figcaption></figure>
+<figure class="xclean-fleet-slide"><img alt="Cabinetry Shane built for XClean vehicles" onclick="openXcleanLightbox(event,'fleet',0)" onkeydown="if(event.key==='Enter'||event.key===' ')openXcleanLightbox(event,'fleet',0)" role="button" src="xcvCabinetry Shane Build for all vehicles .jpeg" tabindex="0" title="Click to enlarge"/><figcaption>Fleet Cabinetry — Built by Shane</figcaption></figure>
+<figure class="xclean-fleet-slide"><img alt="XClean vehicle painted and sign-written as part of Shane's fleet standard" onclick="openXcleanLightbox(event,'fleet',1)" onkeydown="if(event.key==='Enter'||event.key===' ')openXcleanLightbox(event,'fleet',1)" role="button" src="xcvShane painted the vehicles and sign-write them 1 .jpg" tabindex="0" title="Click to enlarge"/><figcaption>Vehicle Paint &amp; Sign-Writing</figcaption></figure>
+<figure class="xclean-fleet-slide"><img alt="Additional XClean sign-written fleet vehicle" onclick="openXcleanLightbox(event,'fleet',2)" onkeydown="if(event.key==='Enter'||event.key===' ')openXcleanLightbox(event,'fleet',2)" role="button" src="xcvShane painted the vehicles and sign-write them 2.jpg" tabindex="0" title="Click to enlarge"/><figcaption>National Fleet Presentation</figcaption></figure>
+<figure class="xclean-fleet-slide"><img alt="XClean Surface Shield demonstration showing the clean treated area" onclick="openXcleanLightbox(event,'fleet',3)" onkeydown="if(event.key==='Enter'||event.key===' ')openXcleanLightbox(event,'fleet',3)" role="button" src="xcvShanes Surface shield see the clean spot .jpg" tabindex="0" title="Click to enlarge"/><figcaption>Surface Shield — Visible Clean Area</figcaption></figure>
 </div></div>
 <button aria-label="Next XClean fleet image" class="xclean-fleet-nav xclean-fleet-next" onclick="moveXcleanFleetCarousel(event,1)" type="button">›</button>
 </div>
@@ -4248,5 +4267,63 @@ function renderXcleanFleetCarousel(){
 }
 function moveXcleanFleetCarousel(event,delta){if(event)event.stopPropagation();xcleanFleetSlideIndex=(xcleanFleetSlideIndex+delta+4)%4;renderXcleanFleetCarousel();}
 function setXcleanFleetSlide(event,index){if(event)event.stopPropagation();xcleanFleetSlideIndex=index;renderXcleanFleetCarousel();}
+</script><div aria-hidden="true" class="xclean-lightbox" id="xcleanLightbox" onclick="closeXcleanLightbox(event)">
+<button aria-label="Close enlarged image" class="xclean-lightbox-close" onclick="closeXcleanLightbox(event)" type="button">×</button>
+<button aria-label="Previous image" class="xclean-lightbox-nav xclean-lightbox-prev" onclick="prevXcleanLightbox(event)" title="Previous image" type="button">‹</button>
+<div class="xclean-lightbox-stage" onclick="event.stopPropagation()">
+<img alt="Expanded XClean portfolio image" id="xcleanLightboxImage"/>
+<div class="xclean-lightbox-caption" id="xcleanLightboxCaption"></div>
+</div>
+<button aria-label="Next image" class="xclean-lightbox-nav xclean-lightbox-next" onclick="nextXcleanLightbox(event)" title="Next image" type="button">›</button>
+</div><script id="xclean-portfolio-lightbox-behaviour-v1">
+const xcleanLightboxGroups={
+ covid:[
+  {src:'Sanitiser hunting and fishing.png',caption:'Hunting & Fishing'},
+  {src:'sanitiser kmart.png',caption:'Kmart'},
+  {src:'sanitiser pack n save.png',caption:"PAK'nSAVE"},
+  {src:'sanitiser the warehouse.png',caption:'The Warehouse'}
+ ],
+ fleet:[
+  {src:'xcvCabinetry Shane Build for all vehicles .jpeg',caption:'Fleet Cabinetry — Built by Shane'},
+  {src:'xcvShane painted the vehicles and sign-write them 1 .jpg',caption:'Vehicle Paint & Sign-Writing'},
+  {src:'xcvShane painted the vehicles and sign-write them 2.jpg',caption:'National Fleet Presentation'},
+  {src:'xcvShanes Surface shield see the clean spot .jpg',caption:'Surface Shield — Visible Clean Area'}
+ ]
+};
+let xcleanLightboxGroup='covid',xcleanLightboxIndex=0;
+function renderXcleanLightbox(){
+ const item=xcleanLightboxGroups[xcleanLightboxGroup][xcleanLightboxIndex];
+ document.getElementById('xcleanLightboxImage').src=item.src;
+ document.getElementById('xcleanLightboxImage').alt=item.caption;
+ document.getElementById('xcleanLightboxCaption').textContent=item.caption;
+}
+function openXcleanLightbox(event,group,index){
+ if(event)event.stopPropagation();
+ xcleanLightboxGroup=group;xcleanLightboxIndex=index;renderXcleanLightbox();
+ const lb=document.getElementById('xcleanLightbox');lb.classList.add('show');lb.setAttribute('aria-hidden','false');
+ document.body.style.overflow='hidden';
+}
+function closeXcleanLightbox(event){
+ if(event)event.stopPropagation();
+ const lb=document.getElementById('xcleanLightbox');lb.classList.remove('show');lb.setAttribute('aria-hidden','true');
+ document.body.style.overflow='';
+}
+function prevXcleanLightbox(event){
+ if(event)event.stopPropagation();
+ const n=xcleanLightboxGroups[xcleanLightboxGroup].length;
+ xcleanLightboxIndex=(xcleanLightboxIndex-1+n)%n;renderXcleanLightbox();
+}
+function nextXcleanLightbox(event){
+ if(event)event.stopPropagation();
+ const n=xcleanLightboxGroups[xcleanLightboxGroup].length;
+ xcleanLightboxIndex=(xcleanLightboxIndex+1)%n;renderXcleanLightbox();
+}
+document.addEventListener('keydown',function(event){
+ const lb=document.getElementById('xcleanLightbox');
+ if(!lb||!lb.classList.contains('show'))return;
+ if(event.key==='Escape')closeXcleanLightbox(event);
+ else if(event.key==='ArrowLeft')prevXcleanLightbox(event);
+ else if(event.key==='ArrowRight')nextXcleanLightbox(event);
+});
 </script></body>
 </html>
