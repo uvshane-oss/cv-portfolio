@@ -3156,6 +3156,7 @@ function toggleDevilBurgerPortfolio(event) {
     if (btn) btn.classList.remove('pulse-animation');
     section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
+  syncDevilBurgerPortfolioPulse();
 }
 
 function toggleXcleanPortfolio(event) {
@@ -3221,9 +3222,27 @@ function toggleRole(event, cardElement, roleId) {
   } else {
     content.classList.add('show');
     const pBtn = cardElement.querySelector('.portfolio-image-btn');
-    if(pBtn) pBtn.classList.remove('pulse-animation');
+    const pSec = cardElement.querySelector('.portfolio-sub-section');
+    if(pBtn) {
+      if(roleId === 'role1' && (!pSec || !pSec.classList.contains('show'))) {
+        pBtn.classList.add('pulse-animation');
+      } else {
+        pBtn.classList.remove('pulse-animation');
+      }
+    }
     cardElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+}
+
+function syncDevilBurgerPortfolioPulse() {
+  const btn = document.getElementById('devilBurgerPortfolioBtn');
+  const section = document.getElementById('devilBurgerPortfolioSection');
+  const role = document.getElementById('role1');
+  if (!btn || !section || !role) return;
+  btn.classList.toggle(
+    'pulse-animation',
+    role.classList.contains('show') && !section.classList.contains('show')
+  );
 }
 
 function pauseAllMedia(exceptionContainer = null) {
