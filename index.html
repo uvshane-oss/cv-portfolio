@@ -1978,34 +1978,32 @@ li { margin-bottom: 6px; font-size: 13px; }
 .xclean-lightbox-important-note{
  display:none;
  position:absolute;
- top:0;
+ top:14px;
  left:50%;
  transform:translateX(-50%);
  z-index:10055;
- width:min(92%,900px);
- box-sizing:border-box;
- padding:10px 14px;
- border-radius:0 0 7px 7px;
- background:rgba(0,0,0,.82);
- color:#fff;
- font-size:12px;
- font-weight:400;
- line-height:1.45;
- text-align:left;
- box-shadow:0 2px 10px rgba(0,0,0,.35);
+ padding:8px 14px;
+ border-radius:6px;
+ background:rgba(255,255,255,.96);
+ color:#b91c1c;
+ font-size:13px;
+ font-weight:800;
+ letter-spacing:.02em;
+ text-transform:uppercase;
+ box-shadow:0 2px 10px rgba(0,0,0,.28);
+ white-space:nowrap;
  pointer-events:none;
 }
-.xclean-lightbox-important-note strong{font-weight:800}
 .xclean-lightbox-important-note.show{display:block}
 .xclean-lightbox-stage{position:relative}
 @media(max-width:600px){
  .xclean-lightbox-important-note{
-  top:0;
-  width:94%;
-  padding:8px 10px;
-  font-size:10.5px;
-  line-height:1.35;
-  border-radius:0 0 6px 6px;
+  top:6px;
+  max-width:calc(100vw - 110px);
+  font-size:11px;
+  padding:7px 10px;
+  white-space:normal;
+  text-align:center;
  }
 }
 </style></head>
@@ -2244,7 +2242,7 @@ li { margin-bottom: 6px; font-size: 13px; }
 <div class="role-company-name">XCLEAN</div><div class="main-role-title role-mobile-single-line">National Sales Manager</div>
 <div class="role-summary-highlight role-mobile-single-line xclean-capline">B2B Sales · Growth · Leadership</div>
 <div class="collapsible-content" id="role2">
-
+<img alt="XClean Logo" class="role-logo" src="xclean.jpg"/>
 <div class="role-overview xclean-role-overview">
 <h4>Role Overview</h4>
 <p>Returned to XClean to lead a national commercial rebuild from a zero-staff starting point in a market where previous iterations of the business had left significant reputational damage. Shane rebuilt regional coverage and field teams while remaining heavily active in frontline sales himself — cold calling, opening doors and closing B2B and direct-to-customer business across agriculture, industry and hospitality. His remit expanded across product development, marketing, HR, sourcing and operational issues affecting growth. <button class="xclean-overview-toggle" onclick="toggleXcleanOverview(event, this)" type="button">› Expand</button></p>
@@ -2436,8 +2434,8 @@ li { margin-bottom: 6px; font-size: 13px; }
 <button aria-label="Show image 4" onclick="setXcleanFleetSlide(event,3)" type="button"></button>
 </div>
 </div>
-
-
+<h4 style="margin: 15px 0 8px 0; font-size: 15px; color: var(--primary);">XClean Extended Portfolio &amp; Campaign Assets</h4>
+<p style="font-size: 13px; color: var(--text-muted); margin: 0 0 10px 0;">Additional documentation, fleet deployment visuals, and formulation records.</p>
 <div class="portfolio-gallery">
 <div class="portfolio-img-wrapper" onclick="openModal('xclean.jpg')">
 <img alt="XClean Operations" height="160" src="xclean.jpg" width="260"/>
@@ -4304,7 +4302,7 @@ function setXcleanFleetSlide(event,index){if(event)event.stopPropagation();xclea
 </script><div aria-hidden="true" class="xclean-lightbox" id="xcleanLightbox" onclick="closeXcleanLightbox(event)">
 <button aria-label="Close enlarged image" class="xclean-lightbox-close" onclick="closeXcleanLightbox(event)" type="button">×</button>
 <button aria-label="Previous image" class="xclean-lightbox-nav xclean-lightbox-prev" onclick="prevXcleanLightbox(event)" title="Previous image" type="button">‹</button>
-<div class="xclean-lightbox-stage" onclick="event.stopPropagation()"><div class="xclean-lightbox-important-note" id="xcleanLightboxImportantNote"><strong>Image note:</strong> Unfortunately, the original high-resolution photographs have been lost or deleted. The surviving low-resolution archive thumbnails have been retained in the bottom corner of these high-resolution AI reconstructions, preserving the original photographic reference alongside the clearer representation.</div>
+<div class="xclean-lightbox-stage" onclick="event.stopPropagation()"><div class="xclean-lightbox-important-note" id="xcleanLightboxImportantNote">* IMPORTANT NOTE ABOVE</div>
 <img alt="Expanded XClean portfolio image" id="xcleanLightboxImage"/>
 <div class="xclean-lightbox-caption" id="xcleanLightboxCaption"></div>
 </div>
