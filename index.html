@@ -2120,7 +2120,7 @@ body.cv-welcome-open{overflow:hidden}
 <div class="cv-loading-title">SHANE SOPER'S CV IS LOADING</div>
 <div class="cv-countdown" id="cvCountdown">3</div>
 <div class="cv-sound-choice" hidden="" id="cvSoundChoice">
-<div class="cv-sound-question">Do you want it with sound?</div>
+<div class="cv-sound-question">You're busy — I just want 12 seconds to say hello.<br>Would you like sound?</div>
 <div class="cv-sound-buttons">
 <button id="cvSoundYes" type="button">Yes 🔊</button>
 <button id="cvSoundNo" type="button">No</button>
@@ -4564,12 +4564,15 @@ function toggleXcleanCompactContext(event, button){
    gate.hidden=true;gate.style.display='none';
    welcome.hidden=false;welcome.style.display='flex';welcome.style.visibility='visible';welcome.style.opacity='1';
    lock();startFrames();
+   /* Speech-bubble text always runs, whether sound is YES or NO. */
+   bubbles();
+
    if(withSound){
-     line.textContent='';line.classList.remove('typing');voice.currentTime=0;
+     voice.currentTime=0;
      const p=voice.play();
-     if(p&&p.catch)p.catch(()=>bubbles());
+     if(p&&p.catch)p.catch(function(){ /* Text is already running as fallback. */ });
    }else{
-     voice.pause();voice.currentTime=0;bubbles();
+     voice.pause();voice.currentTime=0;
    }
  }
  yes.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();enter(true);});
