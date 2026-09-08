@@ -2283,7 +2283,7 @@ body.cv-welcome-open{overflow:hidden}
 </div>
 </div>
 <div class="container">
-<div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-09 10:35 NZST</div>
+<div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-09 11:20 NZST</div>
 <div class="cv-header">
 <h1>Shane Soper</h1>
 <p>153 East Road, Ascot, Invercargill, Southland, New Zealand</p>
@@ -4737,9 +4737,10 @@ function toggleXcleanCompactContext(event, button){
 
   var API_BASE = "https://shane-cv-tracker-api.uvshane.workers.dev";
   var TRACK_PARAM = "track";
-  var UPDATE_INTERVAL_MS = 15000;
-  var EVENT_FLUSH_DELAY_MS = 3000;
-  var FETCH_TIMEOUT_MS = 5000;
+  var FLUSH_INTERVAL_MS = 60000;
+  var FETCH_TIMEOUT_MS = 3000;
+  var MAX_PENDING_EVENTS = 75;
+  var MAX_CONSECUTIVE_FAILURES = 3;
   var trackingCode = "";
   var visitId = null;
   var visitorId = "";
@@ -4748,10 +4749,13 @@ function toggleXcleanCompactContext(event, button){
   var maxScroll = 0;
   var lastActiveTick = Date.now();
   var started = false;
-  var interactionTrackingInstalled = false;
+  var disabled = false;
+  var flushInFlight = false;
+  var flushTimer = null;
+  var consecutiveFailures = 0;
   var sentEvents = Object.create(null);
   var pendingEvents = [];
-  var eventFlushTimer = null;
+  var scrollQueued = false;
 
   try {
     trackingCode = new URLSearchParams(window.location.search).get(TRACK_PARAM) || "";
@@ -4788,25 +4792,49 @@ function toggleXcleanCompactContext(event, button){
     return "desktop";
   }
 
-  function safeFetch(path, options) {
+  function noteFailure() {
+    consecutiveFailures += 1;
+    if (consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
+      disabled = true;
+      if (flushTimer) {
+        window.clearTimeout(flushTimer);
+        flushTimer = null;
+      }
+    }
+  }
+
+  function noteSuccess() {
+    consecutiveFailures = 0;
+  }
+
+  function safeFetch(path, options, allowKeepalive) {
+    if (disabled) return Promise.resolve(null);
     var controller = null;
     var timeoutId = null;
+    var requestOptions = Object.assign({}, options || {});
     try {
-      if (typeof AbortController !== "undefined" && !(options && options.keepalive)) {
+      if (allowKeepalive) {
+        requestOptions.keepalive = true;
+      } else if (typeof AbortController !== "undefined") {
         controller = new AbortController();
-        options = Object.assign({}, options || {}, { signal: controller.signal, priority: "low" });
+        requestOptions.signal = controller.signal;
         timeoutId = window.setTimeout(function () {
           try { controller.abort(); } catch (e) {}
         }, FETCH_TIMEOUT_MS);
-      } else {
-        options = Object.assign({}, options || {}, { priority: "low" });
       }
-      return fetch(API_BASE + path, options).catch(function () { return null; }).then(function (response) {
+      return fetch(API_BASE + path, requestOptions).then(function (response) {
         if (timeoutId) window.clearTimeout(timeoutId);
+        if (response && response.ok) noteSuccess();
+        else noteFailure();
         return response;
+      }).catch(function () {
+        if (timeoutId) window.clearTimeout(timeoutId);
+        noteFailure();
+        return null;
       });
     } catch (e) {
       if (timeoutId) window.clearTimeout(timeoutId);
+      noteFailure();
       return Promise.resolve(null);
     }
   }
@@ -4816,16 +4844,15 @@ function toggleXcleanCompactContext(event, button){
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
-      keepalive: !!keepalive,
       cache: "no-store",
       credentials: "omit"
-    });
+    }, !!keepalive);
   }
 
-  function runWhenIdle(fn, timeout) {
+  function runWhenIdle(fn) {
     try {
       if (typeof window.requestIdleCallback === "function") {
-        window.requestIdleCallback(function () { fn(); }, { timeout: timeout || 2000 });
+        window.requestIdleCallback(function () { fn(); }, { timeout: 5000 });
       } else {
         window.setTimeout(fn, 0);
       }
@@ -4834,7 +4861,8 @@ function toggleXcleanCompactContext(event, button){
     }
   }
 
-  function updateScroll() {
+  function updateScrollNow() {
+    scrollQueued = false;
     try {
       var doc = document.documentElement;
       var body = document.body;
@@ -4849,64 +4877,33 @@ function toggleXcleanCompactContext(event, button){
     } catch (e) {}
   }
 
+  function queueScrollMeasurement() {
+    if (scrollQueued) return;
+    scrollQueued = true;
+    if (typeof window.requestAnimationFrame === "function") {
+      window.requestAnimationFrame(updateScrollNow);
+    } else {
+      window.setTimeout(updateScrollNow, 50);
+    }
+  }
+
   function countActiveTime() {
     var now = Date.now();
     if (!document.hidden) {
-      var elapsed = Math.max(0, Math.min(30, Math.floor((now - lastActiveTick) / 1000)));
+      var elapsed = Math.max(0, Math.min(65, Math.floor((now - lastActiveTick) / 1000)));
       activeSeconds += elapsed;
     }
     lastActiveTick = now;
   }
 
-  function sendUpdate(keepalive) {
-    if (!visitId) return;
-    countActiveTime();
-    updateScroll();
-    var send = function () {
-      jsonPost("/visit/update", {
-        visit_id: visitId,
-        active_seconds: activeSeconds,
-        max_scroll: maxScroll
-      }, keepalive);
-    };
-    if (keepalive) send();
-    else runWhenIdle(send, 2000);
-  }
-
   function queueEvent(eventType, section, item, value) {
+    if (disabled || pendingEvents.length >= MAX_PENDING_EVENTS) return;
     pendingEvents.push({
       event_type: eventType,
       section: section || null,
       item: item || null,
       value: value == null ? null : String(value).slice(0, 250)
     });
-    scheduleEventFlush();
-  }
-
-  function flushEventQueue(keepalive) {
-    if (!visitId || !pendingEvents.length) return;
-    var events = pendingEvents.splice(0, pendingEvents.length);
-    events.forEach(function (eventData) {
-      var send = function () {
-        jsonPost("/event", {
-          visit_id: visitId,
-          event_type: eventData.event_type,
-          section: eventData.section,
-          item: eventData.item,
-          value: eventData.value
-        }, keepalive);
-      };
-      if (keepalive) send();
-      else runWhenIdle(send, 2000);
-    });
-  }
-
-  function scheduleEventFlush() {
-    if (eventFlushTimer) return;
-    eventFlushTimer = window.setTimeout(function () {
-      eventFlushTimer = null;
-      flushEventQueue(false);
-    }, EVENT_FLUSH_DELAY_MS);
   }
 
   function eventOnce(key, eventType, section, item, value) {
@@ -4920,9 +4917,6 @@ function toggleXcleanCompactContext(event, button){
   }
 
   function installInteractionTracking() {
-    if (interactionTrackingInstalled) return;
-    interactionTrackingInstalled = true;
-
     document.addEventListener("toggle", function (ev) {
       var el = ev.target;
       if (!el || el.tagName !== "DETAILS" || !el.open) return;
@@ -4954,56 +4948,119 @@ function toggleXcleanCompactContext(event, button){
     }, true);
   }
 
-  function beginVisit() {
-    if (started) return;
-    started = true;
+  function scheduleFlush() {
+    if (disabled || !visitId || flushTimer) return;
+    flushTimer = window.setTimeout(function () {
+      flushTimer = null;
+      flush(false);
+    }, FLUSH_INTERVAL_MS);
+  }
 
+  function sendQueuedEventsSequentially(events, index) {
+    if (disabled || index >= events.length) return Promise.resolve();
+    var eventData = events[index];
+    return jsonPost("/event", {
+      visit_id: visitId,
+      event_type: eventData.event_type,
+      section: eventData.section,
+      item: eventData.item,
+      value: eventData.value
+    }, false).then(function (response) {
+      if (!response || !response.ok || disabled) return;
+      return sendQueuedEventsSequentially(events, index + 1);
+    });
+  }
+
+  function flush(keepalive) {
+    if (disabled || !visitId || flushInFlight) return;
+    flushInFlight = true;
+    countActiveTime();
+    updateScrollNow();
+
+    var updateBody = {
+      visit_id: visitId,
+      active_seconds: activeSeconds,
+      max_scroll: maxScroll
+    };
+
+    if (keepalive) {
+      jsonPost("/visit/update", updateBody, true);
+      flushInFlight = false;
+      return;
+    }
+
+    var events = pendingEvents.splice(0, pendingEvents.length);
+    jsonPost("/visit/update", updateBody, false).then(function (response) {
+      if (!response || !response.ok || disabled) return;
+      return sendQueuedEventsSequentially(events, 0);
+    }).then(function () {
+      flushInFlight = false;
+      if (!disabled) scheduleFlush();
+    }).catch(function () {
+      flushInFlight = false;
+      if (!disabled) scheduleFlush();
+    });
+  }
+
+  function beginVisit() {
+    if (started || disabled) return;
+    started = true;
     runWhenIdle(function () {
+      if (disabled) return;
       jsonPost("/track/" + encodeURIComponent(trackingCode), {
         visitor_id: visitorId,
         session_id: sessionId,
         device_type: deviceType()
       }, false).then(function (response) {
-        if (!response || !response.ok) return null;
+        if (!response || !response.ok) {
+          disabled = true;
+          return null;
+        }
         return response.json().catch(function () { return null; });
       }).then(function (data) {
-        if (!data || !data.visit_id) return;
+        if (disabled || !data || !data.visit_id) {
+          disabled = true;
+          return;
+        }
         visitId = Number(data.visit_id);
         if (!Number.isFinite(visitId) || visitId <= 0) {
           visitId = null;
+          disabled = true;
           return;
         }
-        updateScroll();
-        flushEventQueue(false);
-        window.setInterval(function () { sendUpdate(false); }, UPDATE_INTERVAL_MS);
-      }).catch(function () {});
-    }, 2500);
+        updateScrollNow();
+        scheduleFlush();
+      }).catch(function () {
+        disabled = true;
+      });
+    });
   }
 
   function startAfterPageLoad() {
-    if (document.readyState === "complete") {
-      window.setTimeout(beginVisit, 250);
-    } else {
-      window.addEventListener("load", function () {
-        window.setTimeout(beginVisit, 250);
-      }, { once: true });
-    }
+    var start = function () {
+      window.setTimeout(beginVisit, 1000);
+    };
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
   }
 
   installInteractionTracking();
-  updateScroll();
-  window.addEventListener("scroll", updateScroll, { passive: true });
+  queueScrollMeasurement();
+  window.addEventListener("scroll", queueScrollMeasurement, { passive: true });
+
   document.addEventListener("visibilitychange", function () {
+    countActiveTime();
     if (document.hidden) {
-      sendUpdate(true);
-      flushEventQueue(true);
+      flush(true);
     } else {
       lastActiveTick = Date.now();
+      scheduleFlush();
     }
   });
+
   window.addEventListener("pagehide", function () {
-    sendUpdate(true);
-    flushEventQueue(true);
+    countActiveTime();
+    flush(true);
   });
 
   startAfterPageLoad();
