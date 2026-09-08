@@ -4535,15 +4535,20 @@ function toggleXcleanCompactContext(event, button){
    frameTimers.push(setTimeout(()=>setFrame(4),9600));
 
    /* Final sequence. */
-   frameTimers.push(setTimeout(()=>setFrame(5),12000));
-   frameTimers.push(setTimeout(()=>setFrame(6),12200));
-   frameTimers.push(setTimeout(()=>setFrame(7),12400));
+   /* Image 5 gets +1 second: it now remains until 13.0s. */
+   frameTimers.push(setTimeout(()=>setFrame(5),13000));
+
+   /* Image 6 gets +1 second: it remains until 14.2s. */
+   frameTimers.push(setTimeout(()=>setFrame(6),14200));
+
+   /* Continue the final fast sequence. */
+   frameTimers.push(setTimeout(()=>setFrame(7),14400));
 
    /* Last image plays for 0.2s, then Shane is removed from the Welcome screen. */
    frameTimers.push(setTimeout(()=>{
      avatar.style.display='none';
      avatar.removeAttribute('src');
-   },12600));
+   },14600));
  }
  function bubbles(){
    let si=0,ci=0; line.textContent='';
