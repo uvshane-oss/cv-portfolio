@@ -2115,9 +2115,53 @@ body.cv-welcome-open{overflow:hidden}
 #cvShaneVoice{display:none}
 @media(max-width:700px){.cv-shane-avatar{width:112px;height:190px;left:4px;bottom:0;object-fit:contain;object-position:left bottom}}
 </style>
-<style id="cv-final-bubble-fade-v1">
-.cv-speech-bubble{
-  transition:opacity .35s ease, visibility .35s ease;
+<style id="cv-shane-cover-large-nobubble-v23">
+/* Welcome: static Shane cover photo, no speech bubble. Use the available space. */
+.cv-welcome-content{
+  grid-template-columns:42% 58%;
+}
+.cv-intro-visual{
+  padding:0;
+  overflow:hidden;
+  align-items:stretch;
+  justify-content:center;
+  background:#eef2f6;
+}
+.cv-shane-avatar{
+  position:relative;
+  inset:auto;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+}
+.cv-welcome-scroll{
+  padding:30px 34px 24px;
+}
+
+@media(max-width:700px){
+  .cv-welcome-content{display:block;}
+  .cv-intro-visual{
+    min-height:clamp(300px,42vh,440px);
+    height:clamp(300px,42vh,440px);
+    padding:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .cv-shane-avatar{
+    position:relative;
+    left:auto;
+    bottom:auto;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    object-position:center center;
+  }
+  .cv-welcome-scroll{
+    padding:18px 20px 14px;
+  }
 }
 </style>
 </head>
@@ -2128,8 +2172,8 @@ body.cv-welcome-open{overflow:hidden}
 </div></div>
 </div><div aria-labelledby="cvWelcomeTitle" aria-modal="true" class="cv-welcome-overlay" id="cvWelcomeOverlay" role="dialog" style="display:none">
 <div class="cv-welcome-panel"><h2 class="cv-welcome-sr-only" id="cvWelcomeTitle">Welcome to Shane Soper's CV</h2>
-<div class="cv-welcome-content"><div aria-label="Video introduction placeholder" class="cv-intro-visual"><img alt="Shane Soper welcome" class="cv-shane-avatar" id="cvShaneAvatar" src="shane cover.png"/>
-<div class="cv-speech-bubble"><span class="cv-speech-label">VIDEO INTRO PLACEHOLDER</span><strong id="cvSpeechLine"></strong></div>
+<div class="cv-welcome-content"><div class="cv-intro-visual"><img alt="Shane Soper welcome" class="cv-shane-avatar" id="cvShaneAvatar" src="shane cover.png"/>
+
 </div><div class="cv-welcome-scroll">
 <p><strong>I can sell. I can lead. I can bring the best out of people — but I'm just as comfortable rolling my sleeves up and doing the job alongside them.</strong></p>
 <p>I've always been a player-coach. I'd rather work shoulder-to-shoulder, show people what works and recognise what they're doing well. <strong>“Try this” has always worked better for me than “get in my office.”</strong></p>
@@ -4506,50 +4550,66 @@ function toggleXcleanCompactContext(event, button){
 }
 </script><script id="cv-loading-sound-flow-v2">
 (function(){
- const gate=document.getElementById('cvLoadingGate'), count=document.getElementById('cvCountdown'),
- welcome=document.getElementById('cvWelcomeOverlay'), close=document.getElementById('cvWelcomeClose'),
- line=document.getElementById('cvSpeechLine'), avatar=document.getElementById('cvShaneAvatar');
- if(!gate||!count||!welcome||!close||!line||!avatar)return;
+ const gate=document.getElementById('cvLoadingGate'),
+       count=document.getElementById('cvCountdown'),
+       welcome=document.getElementById('cvWelcomeOverlay'),
+       close=document.getElementById('cvWelcomeClose'),
+       avatar=document.getElementById('cvShaneAvatar');
+ if(!gate||!count||!welcome||!close||!avatar)return;
 
- const statements=["Hello and welcome.", "I'm Shane.", "After 30 years of being shoulder tapped, I've finally made a CV.", "It's in bullet points that expand out.", "So as little or as much data as you like.", "Have fun and I'll see you real soon."];
- const avitar4='shane cover.png';
- const preload=new Image();preload.src=encodeURI(avitar4);
+ const cover='shane cover.png';
+ const preload=new Image();
+ preload.src=encodeURI(cover);
 
- function lock(){document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden';}
- function unlock(){document.documentElement.style.overflow='';document.body.style.overflow='';document.body.classList.remove('cv-welcome-open','no-scroll','modal-open');}
- function bubbles(){
-   let si=0,ci=0;line.textContent='';
-   const typeDelay=31,holdDelay=1150,clearDelay=260;
-   function next(){
-     if(si>=statements.length){
-       line.classList.remove('typing');
-       const bubble=line.closest('.cv-speech-bubble');
-       if(bubble){
-         setTimeout(()=>{
-           bubble.style.opacity='0';
-           bubble.style.visibility='hidden';
-           bubble.style.pointerEvents='none';
-         },1150);
-       }
-       return;
-     }
-     const t=statements[si];line.classList.add('typing');
-     const currentTypeDelay=si>=3?41:typeDelay;
-     if(ci<t.length){line.textContent=t.slice(0,++ci);setTimeout(next,currentTypeDelay);}
-     else{line.classList.remove('typing');setTimeout(()=>{line.textContent='';ci=0;si++;setTimeout(next,clearDelay);},holdDelay);}
-   }next();
+ function lock(){
+   document.documentElement.style.overflow='hidden';
+   document.body.style.overflow='hidden';
+ }
+ function unlock(){
+   document.documentElement.style.overflow='';
+   document.body.style.overflow='';
+   document.body.classList.remove('cv-welcome-open','no-scroll','modal-open');
  }
  function enter(){
-   gate.hidden=true;gate.style.display='none';
-   welcome.hidden=false;welcome.style.display='flex';welcome.style.visibility='visible';welcome.style.opacity='1';
-   avatar.style.display='block';avatar.src=encodeURI(avitar4);
-   lock();bubbles();
+   gate.hidden=true;
+   gate.style.display='none';
+   welcome.hidden=false;
+   welcome.style.display='flex';
+   welcome.style.visibility='visible';
+   welcome.style.opacity='1';
+   avatar.style.display='block';
+   avatar.src=encodeURI(cover);
+   lock();
  }
- close.addEventListener('click',()=>{welcome.hidden=true;welcome.style.display='none';unlock();},true);
- gate.hidden=false;gate.style.display='flex';welcome.hidden=true;welcome.style.display='none';lock();
- let n=3;count.hidden=false;count.textContent='3';
- const tick=setInterval(()=>{n--;count.textContent=String(n);count.style.animation='none';void count.offsetWidth;count.style.animation='';
- if(n===0){clearInterval(tick);setTimeout(()=>{count.hidden=true;enter();},350);}},700);
+ close.addEventListener('click',()=>{
+   welcome.hidden=true;
+   welcome.style.display='none';
+   unlock();
+ },true);
+
+ gate.hidden=false;
+ gate.style.display='flex';
+ welcome.hidden=true;
+ welcome.style.display='none';
+ lock();
+
+ let n=3;
+ count.hidden=false;
+ count.textContent='3';
+ const tick=setInterval(()=>{
+   n--;
+   count.textContent=String(n);
+   count.style.animation='none';
+   void count.offsetWidth;
+   count.style.animation='';
+   if(n===0){
+     clearInterval(tick);
+     setTimeout(()=>{
+       count.hidden=true;
+       enter();
+     },350);
+   }
+ },700);
 })();
 </script><script id="cv-avatar-path-bootstrap-v1">
 (function(){
