@@ -4579,7 +4579,7 @@ function toggleXcleanCompactContext(event, button){
  gate.hidden=false;gate.style.display='flex';welcome.hidden=true;welcome.style.display='none';lock();
  let n=3;count.hidden=false;count.textContent='3';choice.hidden=true;
  const tick=setInterval(()=>{n--;count.textContent=String(n);count.style.animation='none';void count.offsetWidth;count.style.animation='';
- if(n===0){clearInterval(tick);setTimeout(()=>{count.hidden=true;choice.hidden=false;},500);}},700);
+ if(n===0){clearInterval(tick);setTimeout(()=>{count.hidden=true;choice.hidden=false;},350);}},700);
 })();
 </script><script id="cv-avatar-path-bootstrap-v1">
 (function(){
