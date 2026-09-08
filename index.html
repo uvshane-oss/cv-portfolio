@@ -4714,5 +4714,192 @@ function toggleXcleanCompactContext(event, button){
  const a=document.getElementById('cvShaneAvatar');
  if(a) a.src=encodeURI('shane cover.png');
 })();
+</script><script id="cv-application-tracker-v1">
+(function () {
+  "use strict";
+
+  var API_BASE = "https://shane-cv-tracker-api.uvshane.workers.dev";
+  var TRACK_PARAM = "track";
+  var UPDATE_INTERVAL_MS = 15000;
+  var trackingCode = "";
+  var visitId = null;
+  var visitorId = "";
+  var sessionId = "";
+  var activeSeconds = 0;
+  var maxScroll = 0;
+  var lastActiveTick = Date.now();
+  var started = false;
+  var sentEvents = Object.create(null);
+
+  try {
+    trackingCode = new URLSearchParams(window.location.search).get(TRACK_PARAM) || "";
+  } catch (e) {
+    return;
+  }
+
+  if (!/^[A-Za-z0-9_-]{6,128}$/.test(trackingCode)) return;
+
+  function randomId(prefix) {
+    try {
+      var bytes = new Uint8Array(16);
+      crypto.getRandomValues(bytes);
+      return prefix + Array.prototype.map.call(bytes, function (b) {
+        return b.toString(16).padStart(2, "0");
+      }).join("");
+    } catch (e) {
+      return prefix + Date.now().toString(36) + Math.random().toString(36).slice(2);
+    }
+  }
+
+  try {
+    visitorId = localStorage.getItem("shane_cv_visitor_id") || randomId("v_");
+    localStorage.setItem("shane_cv_visitor_id", visitorId);
+  } catch (e) {
+    visitorId = randomId("v_");
+  }
+  sessionId = randomId("s_");
+
+  function deviceType() {
+    var ua = navigator.userAgent || "";
+    if (/tablet|ipad/i.test(ua)) return "tablet";
+    if (/mobile|iphone|android/i.test(ua)) return "mobile";
+    return "desktop";
+  }
+
+  function safeFetch(path, options) {
+    try {
+      return fetch(API_BASE + path, options).catch(function () { return null; });
+    } catch (e) {
+      return Promise.resolve(null);
+    }
+  }
+
+  function jsonPost(path, body, keepalive) {
+    return safeFetch(path, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      keepalive: !!keepalive
+    });
+  }
+
+  function updateScroll() {
+    try {
+      var doc = document.documentElement;
+      var body = document.body;
+      var scrollTop = window.pageYOffset || doc.scrollTop || body.scrollTop || 0;
+      var scrollHeight = Math.max(doc.scrollHeight, body.scrollHeight, doc.clientHeight);
+      var viewport = window.innerHeight || doc.clientHeight || 0;
+      var available = Math.max(1, scrollHeight - viewport);
+      var pct = Math.round((scrollTop / available) * 100);
+      if (!Number.isFinite(pct)) pct = 0;
+      pct = Math.max(0, Math.min(100, pct));
+      if (pct > maxScroll) maxScroll = pct;
+    } catch (e) {}
+  }
+
+  function countActiveTime() {
+    var now = Date.now();
+    if (!document.hidden) {
+      var elapsed = Math.max(0, Math.min(30, Math.floor((now - lastActiveTick) / 1000)));
+      activeSeconds += elapsed;
+    }
+    lastActiveTick = now;
+  }
+
+  function sendUpdate(keepalive) {
+    if (!visitId) return;
+    countActiveTime();
+    updateScroll();
+    jsonPost("/visit/update", {
+      visit_id: visitId,
+      active_seconds: activeSeconds,
+      max_scroll: maxScroll
+    }, keepalive);
+  }
+
+  function eventOnce(key, eventType, section, item, value) {
+    if (!visitId || sentEvents[key]) return;
+    sentEvents[key] = true;
+    jsonPost("/event", {
+      visit_id: visitId,
+      event_type: eventType,
+      section: section || null,
+      item: item || null,
+      value: value == null ? null : String(value).slice(0, 250)
+    }, false);
+  }
+
+  function textOf(el) {
+    return ((el && el.textContent) || "").replace(/\s+/g, " ").trim().slice(0, 160);
+  }
+
+  function installInteractionTracking() {
+    document.addEventListener("toggle", function (ev) {
+      var el = ev.target;
+      if (!el || el.tagName !== "DETAILS" || !el.open) return;
+      var label = textOf(el.querySelector("summary"));
+      eventOnce("details:" + label, "open_detail", "cv", label, "opened");
+    }, true);
+
+    document.addEventListener("click", function (ev) {
+      var role = ev.target && ev.target.closest ? ev.target.closest(".role-card") : null;
+      if (role) {
+        var roleLabel = textOf(role.querySelector("h3, h2, .role-title, .role-header")) || textOf(role).slice(0, 100);
+        eventOnce("role:" + roleLabel, "open_role", "career", roleLabel, "clicked");
+      }
+      var link = ev.target && ev.target.closest ? ev.target.closest("a[href]") : null;
+      if (link) {
+        var href = link.getAttribute("href") || "";
+        if (/^(https?:|mailto:|tel:)/i.test(href)) {
+          var label = textOf(link) || href.slice(0, 120);
+          eventOnce("link:" + href, "open_link", "cv", label, href.slice(0, 250));
+        }
+      }
+    }, true);
+
+    document.addEventListener("play", function (ev) {
+      var media = ev.target;
+      if (!media || (media.tagName !== "VIDEO" && media.tagName !== "AUDIO")) return;
+      var src = media.currentSrc || media.getAttribute("src") || "media";
+      eventOnce("media:" + src, "play_media", "portfolio", media.tagName.toLowerCase(), src.slice(0, 250));
+    }, true);
+  }
+
+  function start() {
+    if (started) return;
+    started = true;
+    jsonPost("/track/" + encodeURIComponent(trackingCode), {
+      visitor_id: visitorId,
+      session_id: sessionId,
+      device_type: deviceType()
+    }, false).then(function (response) {
+      if (!response || !response.ok) return null;
+      return response.json().catch(function () { return null; });
+    }).then(function (data) {
+      if (!data || !data.visit_id) return;
+      visitId = Number(data.visit_id);
+      if (!Number.isFinite(visitId) || visitId <= 0) {
+        visitId = null;
+        return;
+      }
+      installInteractionTracking();
+      updateScroll();
+      window.addEventListener("scroll", updateScroll, { passive: true });
+      window.setInterval(function () { sendUpdate(false); }, UPDATE_INTERVAL_MS);
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) sendUpdate(true);
+        else lastActiveTick = Date.now();
+      });
+      window.addEventListener("pagehide", function () { sendUpdate(true); });
+    }).catch(function () {});
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start, { once: true });
+  } else {
+    start();
+  }
+})();
 </script></body>
 </html>
