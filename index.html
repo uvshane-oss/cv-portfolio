@@ -4515,10 +4515,7 @@ function toggleXcleanCompactContext(event, button){
  if(!gate||!count||!choice||!yes||!no||!welcome||!close||!line||!avatar||!voice)return;
 
  const frames=["avitarpoping in.png", "avitarhello.png", "avitar[yapping.png", "avitar[3.png", "Avitar4.png", "avitar[call me.png", "avitar[7.png", "avitar[8.png"];
- const statements=["Hello.","I'm Shane Soper.","Welcome — and thanks for coming for a look.",
- "After 30 years of being shoulder tapped...","I've finally had to make a CV.",
- "You can have a little, you can have a lot...","Everything drops down if you want more detail.",
- "Have fun — and I’ll hear from you soon."];
+ const statements=["Hello and welcome.", "I'm Shane.", "After 30 years of being shoulder tapped, I've finally made a CV.", "It's in bullet points that expand out.", "So as little or as much data as you like.", "Have fun and I'll see you real soon."];
  frames.forEach(src=>{const p=new Image();p.src=encodeURI(src);});
  let frameTimers=[];
 
