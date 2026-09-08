@@ -2109,6 +2109,11 @@ body.cv-welcome-open{overflow:hidden}
 .cv-sound-buttons button{min-width:120px;padding:13px 18px;border-radius:8px;border:1px solid #cbd5e1;background:#fff;font-weight:900;font-size:15px;cursor:pointer}
 .cv-sound-buttons button:first-child{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
 @media(max-width:700px){.cv-countdown{font-size:76px}.cv-sound-question{font-size:21px}.cv-sound-buttons button{min-width:105px}}
+</style><style id="cv-avatar-audio-v12">
+.cv-shane-avatar{position:absolute;left:0;bottom:0;width:100%;height:100%;object-fit:contain;object-position:left bottom;z-index:1}
+.cv-speech-bubble{z-index:3}
+#cvShaneVoice{display:none}
+@media(max-width:700px){.cv-shane-avatar{width:112px;height:190px;left:4px;bottom:0;object-fit:contain;object-position:left bottom}}
 </style></head>
 <body><div aria-live="polite" class="cv-loading-gate" id="cvLoadingGate">
 <div class="cv-loading-card">
@@ -2124,17 +2129,9 @@ body.cv-welcome-open{overflow:hidden}
 </div>
 </div><div aria-labelledby="cvWelcomeTitle" aria-modal="true" class="cv-welcome-overlay" id="cvWelcomeOverlay" role="dialog" style="display:none">
 <div class="cv-welcome-panel"><h2 class="cv-welcome-sr-only" id="cvWelcomeTitle">Welcome to Shane Soper's CV</h2>
-<div class="cv-welcome-content"><div aria-label="Video introduction placeholder" class="cv-intro-visual">
-<div aria-hidden="true" class="cv-stick-person">
-<div class="cv-stick-head"></div>
-<div class="cv-stick-body"></div>
-<div class="cv-stick-arm cv-stick-arm-left"></div>
-<div class="cv-stick-arm cv-stick-arm-right"></div>
-<div class="cv-stick-leg cv-stick-leg-left"></div>
-<div class="cv-stick-leg cv-stick-leg-right"></div>
-</div>
+<div class="cv-welcome-content"><div aria-label="Video introduction placeholder" class="cv-intro-visual"><img alt="Shane Soper welcome" class="cv-shane-avatar" id="cvShaneAvatar" src="avitarpoping in.png"/>
 <div class="cv-speech-bubble"><span class="cv-speech-label">VIDEO INTRO PLACEHOLDER</span><strong id="cvSpeechLine"></strong></div>
-</div><div class="cv-welcome-scroll">
+<audio id="cvShaneVoice" preload="auto"><source src="AvitarVoice 260908_083247.m4a" type="audio/mp4"/></audio></div><div class="cv-welcome-scroll">
 <p><strong>I can sell. I can lead. I can bring the best out of people — but I'm just as comfortable rolling my sleeves up and doing the job alongside them.</strong></p>
 <p>I've always been a player-coach. I'd rather work shoulder-to-shoulder, show people what works and recognise what they're doing well. <strong>“Try this” has always worked better for me than “get in my office.”</strong></p>
 <p>Business is much the same. Find the pain point, think it through and get on with solving it. <strong>A good solution doesn't have to cost a million dollars — but it just might generate it.</strong></p>
@@ -4508,144 +4505,70 @@ function toggleXcleanCompactContext(event, button){
   }
   return false;
 }
-</script><script id="cv-welcome-overlay-behaviour-v1">
+</script><script id="cv-loading-sound-flow-v2">
 (function(){
-  const overlay=document.getElementById('cvWelcomeOverlay');
-  const closeButton=document.getElementById('cvWelcomeClose');
-  if(!overlay || !closeButton) return;
+ const gate=document.getElementById('cvLoadingGate'), count=document.getElementById('cvCountdown'),
+ choice=document.getElementById('cvSoundChoice'), yes=document.getElementById('cvSoundYes'),
+ no=document.getElementById('cvSoundNo'), welcome=document.getElementById('cvWelcomeOverlay'),
+ close=document.getElementById('cvWelcomeClose'), line=document.getElementById('cvSpeechLine'),
+ avatar=document.getElementById('cvShaneAvatar'), voice=document.getElementById('cvShaneVoice');
+ if(!gate||!count||!choice||!yes||!no||!welcome||!close||!line||!avatar||!voice)return;
 
-  function closeWelcome(event){
-    if(event){event.preventDefault();event.stopPropagation();}
-    overlay.hidden=true;
-    document.body.classList.remove('cv-welcome-open');
-    try{sessionStorage.setItem('shaneCvWelcomeSeen','1');}catch(e){}
-    window.scrollTo({top:0,left:0,behavior:'instant'});
-  }
+ const frames=["avitarpoping in.png", "avitarhello.png", "avitar[yapping.png", "avitar[3.png", "avitar[call me.png", "avitar[7.png", "avitar[8.png"];
+ const statements=["Hello.","I'm Shane Soper.","Welcome — and thanks for coming for a look.",
+ "After 30 years of being shoulder tapped...","I've finally had to make a CV.",
+ "You can have a little, you can have a lot...","Everything drops down if you want more detail.",
+ "Have fun — and I’ll hear from you soon."];
+ frames.forEach(src=>{const p=new Image();p.src=encodeURI(src);});
+ let frameTimers=[];
 
-  let seen=false;
-  try{seen=sessionStorage.getItem('shaneCvWelcomeSeen')==='1';}catch(e){}
-  if(seen){
-    overlay.hidden=true;
-  }else{
-    document.body.classList.add('cv-welcome-open');
-    setTimeout(function(){closeButton.focus({preventScroll:true});},0);
-  }
-
-  closeButton.addEventListener('click',closeWelcome);
-})();
-</script><script id="cv-loading-sound-flow-v1">
-(function(){
- const gate=document.getElementById('cvLoadingGate');
- const count=document.getElementById('cvCountdown');
- const choice=document.getElementById('cvSoundChoice');
- const yes=document.getElementById('cvSoundYes');
- const no=document.getElementById('cvSoundNo');
- const welcome=document.getElementById('cvWelcomeOverlay');
- const line=document.getElementById('cvSpeechLine');
- if(!gate||!count||!choice||!yes||!no||!welcome||!line) return;
-
- const statements=[
-   "Hello.",
-   "I'm Shane Soper.",
-   "Welcome — and thanks for coming for a look.",
-   "After 30 years of being shoulder tapped...",
-   "I've finally had to make a CV.",
-   "You can have a little, you can have a lot...",
-   "Everything drops down if you want more detail.",
-   "Have fun — and I’ll hear from you soon."
- ];
-
- function runBubbleSequence(){
-   let si=0, ci=0;
-   const typeDelay=48, holdDelay=1150, clearDelay=260;
+ function lock(){document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden';}
+ function unlock(){document.documentElement.style.overflow='';document.body.style.overflow='';document.body.classList.remove('cv-welcome-open','no-scroll','modal-open');}
+ function clearFrames(){frameTimers.forEach(clearTimeout);frameTimers=[];}
+ function setFrame(i){if(frames[i])avatar.src=encodeURI(frames[i]);}
+ function startFrames(){
+   clearFrames(); setFrame(0);
+   /* Images 1–5 cover the first 12 seconds. */
+   [2400,4800,7200,9600].forEach((ms,k)=>frameTimers.push(setTimeout(()=>setFrame(k+1),ms)));
+   /* Then image 6 and 7 at 0.2-second intervals. */
+   frameTimers.push(setTimeout(()=>setFrame(5),12000));
+   frameTimers.push(setTimeout(()=>setFrame(6),12200));
+ }
+ function bubbles(){
+   let si=0,ci=0; line.textContent='';
+   const typeDelay=48,holdDelay=1150,clearDelay=260;
    function next(){
      if(si>=statements.length){line.classList.remove('typing');return;}
-     const text=statements[si];
-     line.classList.add('typing');
-     if(ci<text.length){
-       line.textContent=text.slice(0,++ci);
-       setTimeout(next,typeDelay);
-     } else {
-       line.classList.remove('typing');
-       setTimeout(function(){
-         line.textContent=""; ci=0; si++;
-         setTimeout(next,clearDelay);
-       },holdDelay);
-     }
-   }
-   next();
+     const t=statements[si]; line.classList.add('typing');
+     if(ci<t.length){line.textContent=t.slice(0,++ci);setTimeout(next,typeDelay);}
+     else{line.classList.remove('typing');setTimeout(()=>{line.textContent='';ci=0;si++;setTimeout(next,clearDelay);},holdDelay);}
+   } next();
  }
-
- function enterIntro(soundWanted){
-   sessionStorage.setItem('shaneCvSoundWanted',soundWanted?'yes':'no');
-   gate.style.display='none';
-   welcome.style.display='';
-   document.body.style.overflow='hidden'; /* intro only; View My CV restores it */
-   // Until Shane's real recording is supplied, both modes retain the speech-bubble sequence.
-   // The YES branch is explicitly reserved for synchronized recorded audio.
-   runBubbleSequence();
- }
-
- let n=3;
- const tick=setInterval(function(){
-   n--;
-   count.textContent=String(n);
-   count.style.animation='none'; void count.offsetWidth; count.style.animation='';
-   if(n===0){
-     clearInterval(tick);
-     setTimeout(function(){
-       count.hidden=true;
-       choice.hidden=false;
-     },500);
+ function enter(withSound){
+   gate.hidden=true;gate.style.display='none';
+   welcome.hidden=false;welcome.style.display='flex';welcome.style.visibility='visible';welcome.style.opacity='1';
+   lock();startFrames();
+   if(withSound){
+     line.textContent='';line.classList.remove('typing');voice.currentTime=0;
+     const p=voice.play();
+     if(p&&p.catch)p.catch(()=>bubbles());
+   }else{
+     voice.pause();voice.currentTime=0;bubbles();
    }
- },700);
+ }
+ yes.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();enter(true);});
+ no.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();enter(false);});
+ close.addEventListener('click',()=>{voice.pause();clearFrames();welcome.hidden=true;welcome.style.display='none';unlock();},true);
 
- yes.addEventListener('click',function(){enterIntro(true);});
- no.addEventListener('click',function(){enterIntro(false);});
+ gate.hidden=false;gate.style.display='flex';welcome.hidden=true;welcome.style.display='none';lock();
+ let n=3;count.hidden=false;count.textContent='3';choice.hidden=true;
+ const tick=setInterval(()=>{n--;count.textContent=String(n);count.style.animation='none';void count.offsetWidth;count.style.animation='';
+ if(n===0){clearInterval(tick);setTimeout(()=>{count.hidden=true;choice.hidden=false;},500);}},700);
 })();
-</script><script id="cv-scroll-lock-safety-v1">
+</script><script id="cv-avatar-path-bootstrap-v1">
 (function(){
-  function unlockCvScroll(){
-    document.documentElement.style.overflow = '';
-    document.documentElement.style.overflowY = '';
-    document.body.style.overflow = ''; if(window.unlockCvScroll) window.unlockCvScroll();
-    document.body.style.overflowY = '';
-    document.body.classList.remove('cv-welcome-open','no-scroll','modal-open');
-  }
-
-  // Expose for all welcome/loading handlers.
-  window.unlockCvScroll = unlockCvScroll;
-
-  // Safety net: once neither loading gate nor welcome overlay is visibly blocking the CV,
-  // scrolling must always be restored.
-  const observer = new MutationObserver(function(){
-    const gate = document.getElementById('cvLoadingGate');
-    const welcome = document.getElementById('cvWelcomeOverlay');
-    const gateVisible = gate && getComputedStyle(gate).display !== 'none';
-    const welcomeVisible = welcome && getComputedStyle(welcome).display !== 'none';
-    if(!gateVisible && !welcomeVisible) unlockCvScroll();
-  });
-  observer.observe(document.documentElement,{attributes:true,subtree:true,attributeFilter:['style','class','hidden']});
-
-  window.addEventListener('pageshow',function(){
-    const gate=document.getElementById('cvLoadingGate');
-    const welcome=document.getElementById('cvWelcomeOverlay');
-    if((!gate || getComputedStyle(gate).display==='none') &&
-       (!welcome || getComputedStyle(welcome).display==='none')) unlockCvScroll();
-  });
-})();
-</script><script id="cv-view-button-scrollfix-v1">
-(function(){
- const btn=document.getElementById('cvWelcomeClose');
- if(!btn) return;
- btn.addEventListener('click',function(){
-   setTimeout(function(){
-     const welcome=document.getElementById('cvWelcomeOverlay');
-     if(welcome) welcome.style.display='none';
-     if(window.unlockCvScroll) window.unlockCvScroll();
-     else { document.body.style.overflow=''; document.documentElement.style.overflow=''; }
-   },0);
- },true);
+ const a=document.getElementById('cvShaneAvatar');
+ if(a) a.src=encodeURI('avitarpoping in.png');
 })();
 </script></body>
 </html>
