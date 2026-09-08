@@ -4514,7 +4514,7 @@ function toggleXcleanCompactContext(event, button){
  avatar=document.getElementById('cvShaneAvatar'), voice=document.getElementById('cvShaneVoice');
  if(!gate||!count||!choice||!yes||!no||!welcome||!close||!line||!avatar||!voice)return;
 
- const frames=["avitarpoping in.png", "avitarhello.png", "avitar[yapping.png", "avitar[3.png", "avitar[call me.png", "avitar[7.png", "avitar[8.png"];
+ const frames=["avitarpoping in.png", "avitarhello.png", "avitar[yapping.png", "avitar[3.png", "Avitar4.png", "avitar[call me.png", "avitar[7.png", "avitar[8.png"];
  const statements=["Hello.","I'm Shane Soper.","Welcome — and thanks for coming for a look.",
  "After 30 years of being shoulder tapped...","I've finally had to make a CV.",
  "You can have a little, you can have a lot...","Everything drops down if you want more detail.",
@@ -4527,12 +4527,23 @@ function toggleXcleanCompactContext(event, button){
  function clearFrames(){frameTimers.forEach(clearTimeout);frameTimers=[];}
  function setFrame(i){if(frames[i])avatar.src=encodeURI(frames[i]);}
  function startFrames(){
-   clearFrames(); setFrame(0);
-   /* Images 1–5 cover the first 12 seconds. */
-   [2400,4800,7200,9600].forEach((ms,k)=>frameTimers.push(setTimeout(()=>setFrame(k+1),ms)));
-   /* Then image 6 and 7 at 0.2-second intervals. */
+   clearFrames(); avatar.style.display='block'; setFrame(0);
+   /* Main sequence: images 1–5 occupy the first 12 seconds. */
+   frameTimers.push(setTimeout(()=>setFrame(1),2400));
+   frameTimers.push(setTimeout(()=>setFrame(2),4800));
+   frameTimers.push(setTimeout(()=>setFrame(3),7200));
+   frameTimers.push(setTimeout(()=>setFrame(4),9600));
+
+   /* Final sequence. */
    frameTimers.push(setTimeout(()=>setFrame(5),12000));
    frameTimers.push(setTimeout(()=>setFrame(6),12200));
+   frameTimers.push(setTimeout(()=>setFrame(7),12400));
+
+   /* Last image plays for 0.2s, then Shane is removed from the Welcome screen. */
+   frameTimers.push(setTimeout(()=>{
+     avatar.style.display='none';
+     avatar.removeAttribute('src');
+   },12600));
  }
  function bubbles(){
    let si=0,ci=0; line.textContent='';
