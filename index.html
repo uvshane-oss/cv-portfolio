@@ -4549,7 +4549,8 @@ function toggleXcleanCompactContext(event, button){
  }
  function bubbles(){
    let si=0,ci=0; line.textContent='';
-   const typeDelay=48,holdDelay=1150,clearDelay=260;
+   /* First 3 bubbles are now 35% faster than their prior 48ms speed: 31ms/character. */
+   const typeDelay=31,holdDelay=1150,clearDelay=260;
    function next(){
      if(si>=statements.length){line.classList.remove('typing');return;}
      const t=statements[si]; line.classList.add('typing');
