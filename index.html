@@ -2164,23 +2164,121 @@ body.cv-welcome-open{overflow:hidden}
   }
 }
 </style>
+
+<style id="cv-welcome-commercial-operator-v26">
+/* v26 Welcome-only architecture. Existing CV content/functionality remains untouched. */
+@media (min-width:701px){
+  .cv-welcome-overlay{
+    align-items:flex-start;
+    padding-top:clamp(48px,7vh,82px);
+    padding-bottom:24px;
+  }
+  .cv-welcome-panel{
+    width:min(1060px,calc(100% - 48px));
+    max-height:calc(100dvh - clamp(48px,7vh,82px) - 24px);
+  }
+}
+.cv-welcome-header{
+  flex:0 0 auto;
+  padding:20px 30px 17px;
+  text-align:center;
+  background:#fff;
+  border-bottom:1px solid #e2e8f0;
+}
+.cv-welcome-heading{
+  color:var(--primary);
+  font-size:clamp(20px,2.15vw,29px);
+  line-height:1.12;
+  font-weight:850;
+  letter-spacing:.018em;
+}
+.cv-welcome-capabilities{
+  margin-top:7px;
+  color:var(--highlight-blue);
+  font-size:13px;
+  line-height:1.35;
+  font-weight:700;
+  letter-spacing:.025em;
+}
+.cv-welcome-content{
+  grid-template-columns:42% 58%;
+  min-height:0;
+  overflow-y:auto;
+}
+.cv-intro-visual{
+  min-height:0;
+  background:#eef2f6;
+}
+.cv-shane-avatar{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+}
+.cv-welcome-scroll{
+  padding:24px 32px 22px;
+  align-self:start;
+}
+.cv-welcome-scroll p{
+  margin:0 0 12px;
+  color:#2f3b47;
+  font-size:13.5px;
+  line-height:1.52;
+}
+.cv-commercial-quote{
+  margin:18px 0 19px;
+  padding:13px 16px;
+  border-left:4px solid var(--highlight-blue);
+  background:#f7f9fc;
+  color:var(--primary);
+  font-size:15.5px;
+  line-height:1.45;
+  font-weight:800;
+}
+@media (max-height:760px) and (min-width:701px){
+  .cv-welcome-overlay{padding-top:18px;padding-bottom:18px;}
+  .cv-welcome-panel{max-height:calc(100dvh - 36px);}
+  .cv-welcome-header{padding-top:14px;padding-bottom:12px;}
+  .cv-welcome-scroll{padding-top:18px;padding-bottom:18px;}
+}
+@media (max-width:700px){
+  .cv-welcome-overlay{padding:0;align-items:stretch;}
+  .cv-welcome-panel{width:100%;height:100dvh;max-height:100dvh;border-radius:0;}
+  .cv-welcome-header{padding:17px 18px 14px;}
+  .cv-welcome-heading{font-size:clamp(20px,6vw,26px);line-height:1.14;letter-spacing:.01em;}
+  .cv-welcome-capabilities{margin-top:7px;font-size:12.5px;line-height:1.4;}
+  .cv-welcome-content{display:block;min-height:0;overflow-y:auto;}
+  .cv-intro-visual{
+    height:clamp(260px,38vh,360px);
+    min-height:clamp(260px,38vh,360px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+  }
+  .cv-shane-avatar{width:100%;height:100%;object-fit:contain;object-position:center center;}
+  .cv-welcome-scroll{padding:19px 20px 16px;}
+  .cv-welcome-scroll p{font-size:14px;line-height:1.55;margin-bottom:13px;}
+  .cv-commercial-quote{margin:18px 0;padding:13px 14px;font-size:15px;line-height:1.45;}
+  .cv-welcome-close{flex:0 0 auto;width:100%;padding:15px 16px;font-size:14px;}
+}
+@media (max-width:380px){
+  .cv-welcome-header{padding-left:15px;padding-right:15px;}
+  .cv-welcome-heading{font-size:20px;}
+  .cv-welcome-capabilities{font-size:12px;}
+  .cv-welcome-scroll{padding-left:17px;padding-right:17px;}
+}
+</style>
 </head>
 <body><div aria-live="polite" class="cv-loading-gate" id="cvLoadingGate">
 <div class="cv-loading-card">
 <div class="cv-loading-title">SHANE SOPER'S CV IS LOADING</div>
 <div class="cv-countdown" id="cvCountdown">3</div>
 </div></div>
-</div><div aria-labelledby="cvWelcomeTitle" aria-modal="true" class="cv-welcome-overlay" id="cvWelcomeOverlay" role="dialog" style="display:none">
-<div class="cv-welcome-panel"><h2 class="cv-welcome-sr-only" id="cvWelcomeTitle">Welcome to Shane Soper's CV</h2>
+<div aria-labelledby="cvWelcomeTitle" aria-modal="true" class="cv-welcome-overlay" id="cvWelcomeOverlay" role="dialog" style="display:none">
+<div class="cv-welcome-panel"><h2 class="cv-welcome-sr-only" id="cvWelcomeTitle">Welcome to Shane Soper's CV</h2><div class="cv-welcome-header"><div class="cv-welcome-heading">COMMERCIAL OPERATOR. SALES LEADER. PROBLEM SOLVER.</div><div class="cv-welcome-capabilities">Growth · Commercial Strategy · Financial Judgement · Operations · Execution</div></div>
 <div class="cv-welcome-content"><div class="cv-intro-visual"><img alt="Shane Soper welcome" class="cv-shane-avatar" id="cvShaneAvatar" src="shane cover.png"/>
-
-</div><div class="cv-welcome-scroll">
-<p>I can sell. I can lead. I can bring the best out of people — but I'm just as comfortable rolling my sleeves up and doing the job alongside them.</p>
-<p>I've always been a player-coach. I'd rather work shoulder-to-shoulder, show people what works and recognise what they're doing well. “Try this” has always worked better for me than “get in my office.”</p>
-<p>Business is much the same. Find the pain point, think it through and get on with solving it. <strong>A good solution doesn't have to cost a million dollars — but it just might generate it.</strong></p>
-<p>My roles have often overlapped, and while there has been another milestone to hit, problem to solve or improvement to make, I've remained fully engaged. After completing what I'd been brought into Devil Burger to achieve, I decided that if I didn't deliberately make time for a proper break, I probably never would. I used that time to achieve some personal goals and spend valuable time with my family and my mum before she passed.</p>
-<p>Now I'm ready to get back in the trenches with a good team. Leading or following isn't the important part — put me where I can contribute, set some worthwhile goals, and let's get on with achieving them.</p>
-</div></div>
+</div><div class="cv-welcome-scroll"><p>I can sell. I can lead. I can bring the best out of people — but I'm just as comfortable rolling my sleeves up and doing the job alongside them.</p><p>I’m a commercial operator with a documented record of dominating in retail, cold calling and key account management. I’m a true hunter — I can find the opportunity, open the door, win the business and grow the account. Beyond sales, I’ve grown revenue and teams, managed margins and costs, developed new markets and taken difficult projects from idea through to delivery.</p><p>I've always been a player-coach. I'd rather work shoulder-to-shoulder, show people what works and recognise what they're doing well. “Try this” has always worked better for me than “get in my office.”</p><p>Business is much the same. Find the pain point, understand the numbers, work out what makes commercial sense and get on with solving it. I’m as comfortable working through margins, costs and commercial decisions as I am turning the solution into something that actually works.</p><blockquote class="cv-commercial-quote">“A good solution doesn't have to cost a million dollars — but it just might generate it.”</blockquote><p>My roles overlap, and being driven — setting targets, cracking inefficiencies and removing pain points — has kept me fully engaged for decades. After delivering on Devil Burger's success, I deliberately took a proper break and used that time to achieve some personal goals, spend valuable time with my family and my mum before she passed.</p><p>Now I'm ready to get back in the trenches with a good team. Leading or following isn't the important part — put me where I can contribute, set some worthwhile goals, and let's get on with achieving them.</p></div></div>
 <button class="cv-welcome-close" id="cvWelcomeClose" type="button">View My CV →</button>
 </div>
 </div>
