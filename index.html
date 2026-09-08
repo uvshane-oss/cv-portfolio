@@ -4553,7 +4553,9 @@ function toggleXcleanCompactContext(event, button){
    function next(){
      if(si>=statements.length){line.classList.remove('typing');return;}
      const t=statements[si]; line.classList.add('typing');
-     if(ci<t.length){line.textContent=t.slice(0,++ci);setTimeout(next,typeDelay);}
+     /* Bubbles 4–6 type a further 15% faster: 48ms -> 41ms per character. */
+     const currentTypeDelay = si >= 3 ? 41 : typeDelay;
+     if(ci<t.length){line.textContent=t.slice(0,++ci);setTimeout(next,currentTypeDelay);}
      else{line.classList.remove('typing');setTimeout(()=>{line.textContent='';ci=0;si++;setTimeout(next,clearDelay);},holdDelay);}
    } next();
  }
