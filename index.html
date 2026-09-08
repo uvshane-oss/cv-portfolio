@@ -2283,7 +2283,7 @@ body.cv-welcome-open{overflow:hidden}
 </div>
 </div>
 <div class="container">
-<div class="revision-stamp" id="dynamic-revision-stamp">SANDBOX MOCKUP · Smiths supplemental popup</div>
+<div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-09 10:13 NZST</div>
 <div class="cv-header">
 <h1>Shane Soper</h1>
 <p>153 East Road, Ascot, Invercargill, Southland, New Zealand</p>
@@ -3683,16 +3683,33 @@ function pauseAllMedia(exceptionContainer = null) {
 function playInlineVideo(event, roleKey, videoSrc, titleText) {
   event.stopPropagation();
   pauseAllMedia();
+
   const playerContainer = document.getElementById('inlinePlayer-' + roleKey);
   const videoElem = document.getElementById('inlineVideo-' + roleKey);
   const titleElem = document.getElementById('inlineTitle-' + roleKey);
-  
-  if (titleElem) titleElem.innerText = titleText;
-  if (videoElem) {
-    videoElem.src = videoSrc;
-    playerContainer.classList.add('active');
-    videoElem.play().catch(e => console.log("Autoplay prevented:", e));
+
+  if (!playerContainer || !videoElem) {
+    console.warn('Inline video player unavailable for:', roleKey);
+    return;
   }
+
+  if (titleElem) titleElem.innerText = titleText;
+
+  // Re-establish the selected media resource after the global close/reset pass.
+  // This preserves the existing one-media-at-a-time rules while avoiding stale
+  // HTMLMediaElement source state when a shared inline player is reused.
+  videoElem.pause();
+  videoElem.removeAttribute('src');
+  videoElem.load();
+  videoElem.src = videoSrc;
+  videoElem.load();
+
+  playerContainer.classList.add('active');
+  const playPromise = videoElem.play();
+  if (playPromise && typeof playPromise.catch === 'function') {
+    playPromise.catch(e => console.log("Autoplay prevented:", e));
+  }
+
   playerContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
