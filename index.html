@@ -2104,16 +2104,19 @@ body.cv-welcome-open{overflow:hidden}
  .cv-welcome-actions button{flex:1;min-width:0}
 }
 </style><style id="cv-loading-sound-gate-v1">
-.cv-loading-gate{position:fixed;inset:0;z-index:1000000;background:#f5f6f8;display:flex;align-items:center;justify-content:center;padding:20px}
-.cv-loading-card{text-align:center;width:min(520px,92vw)}
-.cv-loading-title{font-size:13px;letter-spacing:.16em;font-weight:900;color:#475569;margin-bottom:22px}
-.cv-countdown{font-size:92px;line-height:1;font-weight:900;color:#1d4ed8;animation:cvCountPulse .6s ease}
-@keyframes cvCountPulse{0%{transform:scale(.7);opacity:.25}100%{transform:scale(1);opacity:1}}
-.cv-sound-question{font-size:25px;font-weight:900;color:#1f2937;margin-bottom:18px}
-.cv-sound-buttons{display:flex;justify-content:center;gap:12px}
-.cv-sound-buttons button{min-width:120px;padding:13px 18px;border-radius:8px;border:1px solid #cbd5e1;background:#fff;font-weight:900;font-size:15px;cursor:pointer}
-.cv-sound-buttons button:first-child{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
-@media(max-width:700px){.cv-countdown{font-size:76px}.cv-sound-question{font-size:21px}.cv-sound-buttons button{min-width:105px}}
+/* SSS HQ V15 SANDBOX — 10-second branded preload window. Background coordinate system: 1672x941. */
+html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
+.cv-loading-gate{position:fixed;inset:0;z-index:1000000;display:block;overflow:hidden;background:#07111d url('wide_cinematic_interior_scene_modern_luxury_offic.png') 50% 50%/cover no-repeat;padding:0}
+.cv-loading-gate[hidden]{display:none!important}
+.sss-hq-live{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.sss-hq-logo{position:absolute;display:block;width:var(--hq-logo-w);height:var(--hq-logo-h);left:var(--hq-logo-x);top:var(--hq-logo-y);object-fit:contain;object-position:center;filter:drop-shadow(0 0 calc(10px * var(--hq-scale)) rgba(67,150,255,.24))}
+.cv-countdown{position:absolute;left:var(--hq-count-x);top:var(--hq-count-y);transform:translate(-50%,-50%);font-family:Arial,Helvetica,sans-serif;font-size:var(--hq-count-size);line-height:1;font-weight:700;color:#f3f8ff;text-align:center;min-width:1em;text-shadow:0 0 calc(8px * var(--hq-scale)) rgba(95,171,255,.55),0 0 calc(18px * var(--hq-scale)) rgba(30,101,190,.28)}
+.cv-countdown.hq-tick{animation:sssHqCountPulse .42s ease-out}
+@keyframes sssHqCountPulse{0%{opacity:.48;transform:translate(-50%,-50%) scale(.94)}100%{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.sss-hq-dot{position:absolute;width:var(--hq-dot-d);height:var(--hq-dot-d);top:var(--hq-dot-top);border-radius:50%;background:#eaf4ff;box-shadow:0 0 calc(5px * var(--hq-scale)) rgba(95,171,255,.72);opacity:.28;animation:sssHqDot 1.05s ease-in-out infinite}
+.sss-hq-dot:nth-child(1){left:var(--hq-dot-x1);animation-delay:0s}.sss-hq-dot:nth-child(2){left:var(--hq-dot-x2);animation-delay:.16s}.sss-hq-dot:nth-child(3){left:var(--hq-dot-x3);animation-delay:.32s}.sss-hq-dot:nth-child(4){left:var(--hq-dot-x4);animation-delay:.48s}
+@keyframes sssHqDot{0%,70%,100%{opacity:.24}35%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.cv-countdown.hq-tick,.sss-hq-dot{animation:none}.sss-hq-dot{opacity:.75}}
 </style><style id="cv-avatar-audio-v12">
 .cv-shane-avatar{position:absolute;left:0;bottom:0;width:100%;height:100%;object-fit:contain;object-position:left bottom;z-index:1}
 .cv-speech-bubble{z-index:3}
@@ -2275,10 +2278,11 @@ body.cv-welcome-open{overflow:hidden}
 }
 </style>
 </head>
-<body><div aria-live="polite" class="cv-loading-gate" id="cvLoadingGate">
-<div class="cv-loading-card">
-<div class="cv-loading-title">SHANE SOPER'S CV IS LOADING</div>
-<div class="cv-countdown" id="cvCountdown">3</div>
+<body><div aria-live="polite" aria-label="Shane Soper CV loading" class="cv-loading-gate" id="cvLoadingGate">
+<div class="sss-hq-live" id="sssHqLive" aria-hidden="true">
+<img class="sss-hq-logo" id="sssHqLogo" src="ChatGPT Image Sep 10, 2026, 05_49_56 AM(1).png" alt=""/>
+<div class="cv-countdown" id="cvCountdown">10</div>
+<div class="sss-hq-dots" id="sssHqDots"><span class="sss-hq-dot"></span><span class="sss-hq-dot"></span><span class="sss-hq-dot"></span><span class="sss-hq-dot"></span></div>
 </div></div>
 <div aria-labelledby="cvWelcomeTitle" aria-modal="true" class="cv-welcome-overlay" id="cvWelcomeOverlay" role="dialog" style="display:none">
 <div class="cv-welcome-panel"><h2 class="cv-welcome-sr-only" id="cvWelcomeTitle">Welcome to Shane Soper's CV</h2><div class="cv-welcome-header"><div class="cv-welcome-heading">COMMERCIAL OPERATOR. SALES LEADER. PROBLEM SOLVER.</div><div class="cv-welcome-capabilities">Growth · Commercial Strategy · Financial Judgement · Operations · Execution</div></div>
@@ -4670,66 +4674,52 @@ function toggleXcleanCompactContext(event, button){
 }
 </script><script id="cv-loading-sound-flow-v2">
 (function(){
- const gate=document.getElementById('cvLoadingGate'),
-       count=document.getElementById('cvCountdown'),
-       welcome=document.getElementById('cvWelcomeOverlay'),
-       close=document.getElementById('cvWelcomeClose'),
-       avatar=document.getElementById('cvShaneAvatar');
+ "use strict";
+ const gate=document.getElementById('cvLoadingGate'),count=document.getElementById('cvCountdown'),welcome=document.getElementById('cvWelcomeOverlay'),close=document.getElementById('cvWelcomeClose'),avatar=document.getElementById('cvShaneAvatar');
  if(!gate||!count||!welcome||!close||!avatar)return;
-
- const cover='shane cover.png';
- const preload=new Image();
- preload.src=encodeURI(cover);
-
- function lock(){
-   document.documentElement.style.overflow='hidden';
-   document.body.style.overflow='hidden';
+ const cover='shane cover.png', SW=1672, SH=941;
+ /* V15 bounded preload manifest: first-view Shane image, HQ background, then lightweight CV thumbnails/previews only. Heavy audio/video remains on demand. */
+ const preloadManifest=[
+   cover,
+   'wide_cinematic_interior_scene_modern_luxury_offic.png',
+   'image1.png',
+   'Alice GM Devil Burger thumb.png',
+   'Tim Smellie _ Owner Devil Burger Invercargill thumb.png',
+   'DB portfolio.png',
+   'devil-burger-social-1-thumb.png',
+   'devil-burger-social-2-thumb.png',
+   'devil-burger-social-3-thumb.png',
+   'devil-burger-social-4-thumb.png',
+   'social media carosel.jpg',
+   'summer promotion.jpg',
+   'Install day - midway through thumb.png',
+   'Glen Hackell owner of XClean 2015 thumb.png',
+   'Deb Crump talks about he experience working with Shane thumb.png',
+   'September 1, 2021 thumb.png',
+   'X Clean covid crisis thumb.png',
+   'xclean portfolio-4.png'
+ ];
+ const preloadCache=[];
+ preloadManifest.forEach((src)=>{const img=new Image();img.decoding='async';img.src=encodeURI(src);preloadCache.push(img);});
+ function lock(){document.documentElement.classList.add('sss-hq-active');document.body.classList.add('sss-hq-active');document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden';}
+ function unlock(){document.documentElement.classList.remove('sss-hq-active');document.body.classList.remove('sss-hq-active');document.documentElement.style.overflow='';document.body.style.overflow='';document.body.classList.remove('cv-welcome-open','no-scroll','modal-open');}
+ function registerGeometry(){
+   const vw=innerWidth,vh=innerHeight,s=Math.max(vw/SW,vh/SH),rw=SW*s,rh=SH*s,ox=(vw-rw)/2,oy=(vh-rh)/2,st=gate.style;
+   const px=(v)=>v+'px'; st.setProperty('--hq-scale',String(s));
+   st.setProperty('--hq-logo-x',px(ox+616*s));st.setProperty('--hq-logo-y',px(oy+38*s));st.setProperty('--hq-logo-w',px(440*s));st.setProperty('--hq-logo-h',px(220*s));
+   st.setProperty('--hq-count-x',px(ox+840*s));st.setProperty('--hq-count-y',px(oy+447*s));st.setProperty('--hq-count-size',px(103*s));
+   st.setProperty('--hq-dot-d',px(5*s));st.setProperty('--hq-dot-top',px(oy+(539-2.5)*s));
+   [1015,1027,1039,1051].forEach((x,i)=>st.setProperty('--hq-dot-x'+(i+1),px(ox+x*s)));
  }
- function unlock(){
-   document.documentElement.style.overflow='';
-   document.body.style.overflow='';
-   document.body.classList.remove('cv-welcome-open','no-scroll','modal-open');
- }
+ let raf=0; function onResize(){cancelAnimationFrame(raf);raf=requestAnimationFrame(registerGeometry)}
  function enter(){
-   gate.hidden=true;
-   gate.style.display='none';
-   welcome.hidden=false;
-   welcome.style.display='flex';
-   welcome.style.visibility='visible';
-   welcome.style.opacity='1';
-   avatar.style.display='block';
-   avatar.src=encodeURI(cover);
-   lock();
+   clearInterval(tick);removeEventListener('resize',onResize);gate.hidden=true;gate.style.display='none';
+   welcome.hidden=false;welcome.style.display='flex';welcome.style.visibility='visible';welcome.style.opacity='1';avatar.style.display='block';avatar.src=encodeURI(cover);lock();
  }
- close.addEventListener('click',()=>{
-   welcome.hidden=true;
-   welcome.style.display='none';
-   unlock();
- },true);
-
- gate.hidden=false;
- gate.style.display='flex';
- welcome.hidden=true;
- welcome.style.display='none';
- lock();
-
- let n=3;
- count.hidden=false;
- count.textContent='3';
- const tick=setInterval(()=>{
-   n--;
-   count.textContent=String(n);
-   count.style.animation='none';
-   void count.offsetWidth;
-   count.style.animation='';
-   if(n===0){
-     clearInterval(tick);
-     setTimeout(()=>{
-       count.hidden=true;
-       enter();
-     },350);
-   }
- },700);
+ close.addEventListener('click',()=>{welcome.hidden=true;welcome.style.display='none';unlock();},true);
+ gate.hidden=false;gate.style.display='block';welcome.hidden=true;welcome.style.display='none';lock();registerGeometry();addEventListener('resize',onResize,{passive:true});
+ let n=10;count.hidden=false;count.textContent='10';
+ const tick=setInterval(()=>{n--;if(n<1){clearInterval(tick);setTimeout(()=>{count.hidden=true;enter();},180);return;}count.textContent=String(n);count.classList.remove('hq-tick');void count.offsetWidth;count.classList.add('hq-tick');},1000);
 })();
 </script><script id="cv-avatar-path-bootstrap-v1">
 (function(){
