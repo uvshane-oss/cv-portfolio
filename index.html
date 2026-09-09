@@ -4746,351 +4746,337 @@ function toggleXcleanCompactContext(event, button){
   const legacyTrack = (params.get("track") || "").trim();
   const identifier = publicRef || legacyTrack;
   const identifierKind = publicRef ? "ref" : (legacyTrack ? "track" : "");
-  if (!identifier || !/^[A-Za-z0-9_-]{2,128}$/.test(identifier)) return;
+  const hasTrackedIdentifier = !!(identifier && /^[A-Za-z0-9_-]{2,128}$/.test(identifier));
 
   const VISITOR_KEY = "shane_cv_visitor_v1";
-  const visitorId = (() => {
+  const roleNames = {
+    role1:"Devil Burger", role2:"XCLEAN", role3:"Albatross",
+    role4:"ISee Digital", role5:"XCLEAN", role6:"SKY",
+    role7:"Vodafone", role8:"H&J Smith", role9:"Smiths City"
+  };
+
+  let visitId = null, started = false, disabled = false;
+  let activeSeconds = 0, maxScroll = 0, lastTick = performance.now(), visible = !document.hidden;
+  const active = new Map();
+  const mediaState = new WeakMap();
+  const pending = [];
+  const roleOpenState = new Map();
+
+  const visitorId = hasTrackedIdentifier ? (() => {
     try {
       let v = localStorage.getItem(VISITOR_KEY);
       if (!v) {
-        v = (crypto.randomUUID ? crypto.randomUUID() : "v-" + Date.now() + "-" + Math.random().toString(36).slice(2));
+        v = crypto.randomUUID ? crypto.randomUUID() : "v-"+Date.now()+"-"+Math.random().toString(36).slice(2);
         localStorage.setItem(VISITOR_KEY, v);
       }
       return v;
-    } catch (_) {
-      return "v-" + Date.now() + "-" + Math.random().toString(36).slice(2);
-    }
-  })();
-  const sessionId = (crypto.randomUUID ? crypto.randomUUID() : "s-" + Date.now() + "-" + Math.random().toString(36).slice(2));
+    } catch (_) { return "v-"+Date.now()+"-"+Math.random().toString(36).slice(2); }
+  })() : "";
+  const sessionId = hasTrackedIdentifier ? (crypto.randomUUID ? crypto.randomUUID() : "s-"+Date.now()+"-"+Math.random().toString(36).slice(2)) : "";
   const deviceType = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? "mobile" : "desktop";
 
-  let visitId = null, applicationId = null, started = false, disabled = false;
-  let activeSeconds = 0, maxScroll = 0, lastTick = performance.now(), visible = !document.hidden;
-  const queuedEvents = [];
-  const timers = new Map();
-  const mediaTimers = new WeakMap();
+  function clean(v, max=240) { return String(v || "").replace(/\s+/g," ").trim().slice(0,max); }
+  function post(path, body) {
+    if (disabled) return Promise.reject(new Error("tracking disabled"));
+    const c = new AbortController(), t = setTimeout(()=>c.abort(),4500);
+    return fetch(API_BASE+path,{
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(body), signal:c.signal, keepalive:true
+    }).then(r=>{ if(!r.ok) throw new Error("HTTP "+r.status); return r.json().catch(()=>({})); })
+      .finally(()=>clearTimeout(t));
+  }
+  function roleContent(el) {
+    if (!el || !el.closest) return null;
+    const card = el.closest(".role-card");
+    return card ? card.querySelector(".collapsible-content[id]") : null;
+  }
+  function roleName(el) {
+    const c = roleContent(el);
+    if (c && roleNames[c.id]) return roleNames[c.id];
+    return "CV";
+  }
+  function visibleText(el) { return el ? clean(el.textContent,160) : ""; }
 
-  const roleNames = {
-    role1: "Devil Burger",
-    role2: "XCLEAN",
-    role3: "Albatross",
-    role4: "ISee Digital",
-    role5: "XCLEAN",
-    role6: "SKY",
-    role7: "Vodafone",
-    role8: "H&J Smith",
-    role9: "Smiths City"
-  };
+  function semanticLabel(el) {
+    if (!el || !el.closest) return "";
 
-  function safeFetch(url, options) {
-    if (disabled) return Promise.reject(new Error("tracker disabled"));
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 4500);
-    return fetch(url, Object.assign({signal: controller.signal, keepalive: true}, options || {}))
-      .finally(() => clearTimeout(timeout))
-      .catch(err => { throw err; });
-  }
-  function jsonPost(path, body) {
-    return safeFetch(API_BASE + path, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(body)
-    }).then(r => {
-      if (!r.ok) throw new Error("HTTP " + r.status);
-      return r.json().catch(() => ({}));
-    });
-  }
-  function clean(s) {
-    return String(s || "").replace(/\s+/g, " ").trim().slice(0, 240);
-  }
-  function roleCard(el) { return el && el.closest ? el.closest(".role-card") : null; }
-  function roleIdFor(el) {
-    const card = roleCard(el);
-    if (!card) return "";
-    const content = card.querySelector(".collapsible-content[id]");
-    return content ? content.id : "";
-  }
-  function roleFor(el) {
-    const id = roleIdFor(el);
-    if (roleNames[id]) return roleNames[id];
-    const card = roleCard(el);
-    if (!card) return "CV";
-    const title = card.querySelector(".main-role-title");
-    return clean(title ? title.textContent : "CV");
-  }
-  function labelFor(el) {
-    if (!el) return "";
-    const summary = el.matches && el.matches("summary") ? el : (el.closest && el.closest("details") ? el.closest("details").querySelector("summary") : null);
-    if (summary) return clean(summary.textContent);
-    const radio = el.closest && el.closest(".radio-card-item");
-    if (radio) {
-      const t = radio.querySelector(".radio-title");
-      if (t) return clean(t.textContent);
+    const details = el.matches("details") ? el : el.closest("details");
+    if (details) {
+      const s = details.querySelector(":scope > summary") || details.querySelector("summary");
+      if (s) return visibleText(s);
     }
-    const xitem = el.closest && el.closest(".xclean-video-item");
+
+    const labelledCol = el.closest(".testimonial-labelled-column");
+    if (labelledCol) {
+      const l = labelledCol.querySelector(".testimonial-frame-label");
+      if (l) return visibleText(l);
+    }
+
+    const xitem = el.closest(".xclean-video-item");
     if (xitem) {
       const l = xitem.querySelector(".xclean-video-label");
-      if (l) return clean(l.textContent);
+      if (l) return visibleText(l);
     }
-    const card = el.closest && el.closest(".video-thumbnail-card");
+
+    const radio = el.closest(".radio-card-item");
+    if (radio) {
+      const l = radio.querySelector(".radio-title");
+      if (l) return visibleText(l);
+    }
+
+    const carousel = el.closest(".marquee-item,.instore-thumb-card");
+    if (carousel) {
+      const onclick = carousel.getAttribute("onclick") || "";
+      const quoted = [...onclick.matchAll(/'([^']*)'/g)].map(x=>x[1]);
+      if (quoted.length >= 4 && quoted[3]) return clean(quoted[3],160);
+      const img = carousel.querySelector("img[alt]");
+      if (img && img.alt) return clean(img.alt,160);
+      const cap = carousel.querySelector(".marquee-caption,.instore-thumb-caption");
+      if (cap) return visibleText(cap);
+    }
+
+    const card = el.closest(".video-thumbnail-card");
     if (card) {
-      const labelled = card.closest(".xclean-video-item");
-      if (labelled) {
-        const l = labelled.querySelector(".xclean-video-label");
-        if (l) return clean(l.textContent);
-      }
       const img = card.querySelector("img[alt]");
-      if (img && img.alt) return clean(img.alt);
+      if (img && img.alt && !/^video$/i.test(img.alt.trim())) return clean(img.alt,160);
     }
-    const img = el.closest && el.closest("img[alt]");
-    if (img && img.alt) return clean(img.alt);
+
+    const pbtn = el.closest(".portfolio-image-btn");
+    if (pbtn) {
+      const role = roleName(pbtn);
+      const section = pbtn.closest(".role-card") && pbtn.closest(".role-card").querySelector(".portfolio-sub-section h4");
+      if (section) return visibleText(section);
+      if (pbtn.alt) return clean(pbtn.alt,160);
+      return role+" Portfolio";
+    }
+
+    const img = el.closest("img[alt]");
+    if (img && img.alt) return clean(img.alt,160);
+
     const aria = el.getAttribute && (el.getAttribute("aria-label") || el.getAttribute("title"));
-    if (aria) return clean(aria);
-    const txt = clean(el.textContent);
-    return txt && txt.length <= 120 ? txt : "";
+    return aria ? clean(aria,160) : "";
   }
-  function eventPayload(eventType, role, item, value) {
-    return {
-      visit_id: visitId,
-      event_type: eventType,
-      section: clean(role || "CV"),
-      item: clean(item || ""),
-      value: value == null ? "" : clean(value)
-    };
+
+  function emit(type, role, item, value) {
+    if (!hasTrackedIdentifier) return;
+    const body = {visit_id:visitId,event_type:type,section:clean(role||"CV"),item:clean(item||""),value:value==null?"":clean(value)};
+    if (!visitId) { pending.push(body); return; }
+    post("/event",body).catch(()=>{});
   }
-  function sendEvent(eventType, role, item, value) {
-    const e = eventPayload(eventType, role, item, value);
-    if (!visitId) { queuedEvents.push(e); return; }
-    e.visit_id = visitId;
-    jsonPost("/event", e).catch(() => {});
-  }
-  function flushQueue() {
+  function flushPending() {
     if (!visitId) return;
-    while (queuedEvents.length) {
-      const e = queuedEvents.shift();
-      e.visit_id = visitId;
-      jsonPost("/event", e).catch(() => {});
+    while (pending.length) {
+      const e=pending.shift(); e.visit_id=visitId; post("/event",e).catch(()=>{});
     }
   }
-  function startTimer(key, role, interaction, item) {
-    if (!key || timers.has(key)) return;
-    timers.set(key, {role, interaction, item, ms: 0, at: performance.now(), running: visible});
+
+  // Completed interactions are emitted once, with duration in value.
+  // Prefix in value lets the current dashboard present the human interaction without schema changes.
+  function begin(key, role, interaction, item) {
+    if (!key || active.has(key)) return;
+    active.set(key,{role,interaction,item,ms:0,at:performance.now(),running:visible});
   }
-  function tickTimer(t, now) {
-    if (t.running) { t.ms += Math.max(0, now - t.at); t.at = now; }
+  function accumulate(t, now) {
+    if (t.running) { t.ms += Math.max(0,now-t.at); t.at=now; }
   }
-  function pauseTimers() {
-    const now = performance.now();
-    timers.forEach(t => { tickTimer(t, now); t.running = false; });
+  function finish(key) {
+    const t=active.get(key); if(!t) return;
+    accumulate(t,performance.now()); active.delete(key);
+    const sec=Math.max(0,Math.round(t.ms/1000));
+    emit("linger",t.role,t.item,t.interaction+"|"+sec);
   }
-  function resumeTimers() {
-    const now = performance.now();
-    timers.forEach(t => { t.at = now; t.running = true; });
+  function finishInside(root) {
+    [...active.keys()].forEach(k=>{ if(k && k.nodeType && root.contains(k)) finish(k); });
   }
-  function stopTimer(key) {
-    const t = timers.get(key);
-    if (!t) return;
-    tickTimer(t, performance.now());
-    timers.delete(key);
-    const sec = Math.round(t.ms / 1000);
-    if (sec > 0) sendEvent("linger", t.role, t.item, String(sec));
+  function pauseAllTimers() {
+    const now=performance.now();
+    active.forEach(t=>{accumulate(t,now);t.running=false;});
+    document.querySelectorAll("video,audio").forEach(m=>{
+      const t=mediaState.get(m); if(t && t.running){t.ms+=Math.max(0,now-t.at);t.running=false;}
+    });
   }
-  function stopTimersUnder(el) {
-    [...timers.keys()].forEach(k => {
-      if (k && k.nodeType && el.contains(k)) stopTimer(k);
+  function resumeAllTimers() {
+    const now=performance.now();
+    active.forEach(t=>{t.at=now;t.running=true;});
+    document.querySelectorAll("video,audio").forEach(m=>{
+      const t=mediaState.get(m); if(t && !m.paused){t.at=now;t.running=true;}
     });
   }
 
-  function beginVisit() {
-    if (started) return;
-    started = true;
-    const body = {
-      visitor_id: visitorId,
-      session_id: sessionId,
-      device_type: deviceType,
-      browser: navigator.userAgent
-    };
-    body[identifierKind === "ref" ? "public_ref" : "tracking_code"] = identifier;
-    jsonPost("/track/" + encodeURIComponent(identifier), body).then(data => {
-      visitId = data.visit_id || data.visitId || null;
-      applicationId = data.application_id || data.applicationId || null;
-      flushQueue();
-    }).catch(() => { disabled = true; });
+  function startVisit() {
+    if (!hasTrackedIdentifier || started) return;
+    started=true;
+    const body={visitor_id:visitorId,session_id:sessionId,device_type:deviceType,browser:navigator.userAgent};
+    body[identifierKind==="ref"?"public_ref":"tracking_code"]=identifier;
+    post("/track/"+encodeURIComponent(identifier),body).then(d=>{
+      visitId=d.visit_id||d.visitId||null; flushPending();
+    }).catch(()=>{disabled=true;});
   }
-
   function updateVisit(finalUpdate) {
-    if (!visitId || disabled) return;
-    const now = performance.now();
-    if (visible) activeSeconds += Math.max(0, (now - lastTick) / 1000);
-    lastTick = now;
-    const body = {
-      visit_id: visitId,
-      active_seconds: Math.round(activeSeconds),
-      max_scroll: Math.round(maxScroll)
-    };
-    if (finalUpdate && navigator.sendBeacon) {
-      try {
-        navigator.sendBeacon(API_BASE + "/visit/update", new Blob([JSON.stringify(body)], {type:"application/json"}));
-        return;
-      } catch (_) {}
+    if(!hasTrackedIdentifier||!visitId||disabled)return;
+    const now=performance.now();
+    if(visible) activeSeconds+=Math.max(0,(now-lastTick)/1000);
+    lastTick=now;
+    const body={visit_id:visitId,active_seconds:Math.round(activeSeconds),max_scroll:Math.round(maxScroll)};
+    if(finalUpdate && navigator.sendBeacon){
+      try{navigator.sendBeacon(API_BASE+"/visit/update",new Blob([JSON.stringify(body)],{type:"application/json"}));return;}catch(_){}
     }
-    jsonPost("/visit/update", body).catch(() => {});
+    post("/visit/update",body).catch(()=>{});
   }
 
-  function scrollMeasure() {
-    const doc = document.documentElement;
-    const denom = Math.max(1, doc.scrollHeight - innerHeight);
-    maxScroll = Math.max(maxScroll, Math.min(100, (scrollY / denom) * 100));
+  function syncRoleStates() {
+    document.querySelectorAll(".collapsible-content[id]").forEach(c=>roleOpenState.set(c.id,c.classList.contains("show")));
   }
 
-  document.addEventListener("click", function(e) {
-    const target = e.target;
-    if (!target || !target.closest) return;
+  if(hasTrackedIdentifier) document.addEventListener("click",function(e){
+    const target=e.target;
+    if(!target||!target.closest)return;
+    const role=roleName(target);
 
-    const role = roleFor(target);
-
-    const summary = target.closest("summary");
-    if (summary && summary.closest(".role-card")) {
-      const details = summary.closest("details");
-      const item = labelFor(summary);
-      setTimeout(() => {
-        if (details.open) {
-          sendEvent("expanded", role, item, "");
-          startTimer(details, role, "Viewed", item);
-        } else {
-          stopTimer(details);
-        }
-      }, 0);
+    const summary=target.closest("summary");
+    if(summary && summary.closest(".role-card")){
+      const d=summary.closest("details"), label=semanticLabel(summary);
+      setTimeout(()=>{
+        if(d.open) begin(d,role,"Viewed",label);
+        else finish(d);
+      },0);
       return;
     }
 
-    const card = target.closest(".role-card");
-    if (card && !target.closest("button,a,video,audio,summary,.portfolio-sub-section,.inline-video-player-container,.carousel-expanded-overlay")) {
-      const content = card.querySelector(".collapsible-content");
-      if (content) {
-        setTimeout(() => {
-          if (content.classList.contains("show")) {
-            const r = roleFor(card);
-            sendEvent("open_role", r, "Overview", "");
-            startTimer(content, r, "Viewed", "Overview");
-          } else {
-            stopTimersUnder(content);
-            stopTimer(content);
-          }
-        }, 0);
+    const card=target.closest(".role-card");
+    if(card && !target.closest("button,a,video,audio,summary,.portfolio-sub-section,.inline-video-player-container,.carousel-expanded-overlay")){
+      const c=card.querySelector(".collapsible-content[id]");
+      if(c){
+        const was=roleOpenState.get(c.id)===true;
+        setTimeout(()=>{
+          const isOpen=c.classList.contains("show");
+          if(!was && isOpen) begin(c,roleName(card),"Viewed","Overview");
+          if(was && !isOpen){ finishInside(c); finish(c); }
+          roleOpenState.set(c.id,isOpen);
+          // toggleRole can close other roles; reconcile them without generating false opens.
+          document.querySelectorAll(".collapsible-content[id]").forEach(other=>{
+            const nowOpen=other.classList.contains("show"), prev=roleOpenState.get(other.id)===true;
+            if(prev && !nowOpen){ finishInside(other); finish(other); }
+            roleOpenState.set(other.id,nowOpen);
+          });
+        },0);
       }
     }
 
-    const portfolioButton = target.closest(".portfolio-image-btn,.smiths-record-btn");
-    if (portfolioButton) {
-      const item = labelFor(portfolioButton) || "Supporting Portfolio";
-      sendEvent("portfolio", role, item, "");
+    const pbtn=target.closest(".portfolio-image-btn");
+    if(pbtn){
+      const label=semanticLabel(pbtn)||"Portfolio";
+      setTimeout(()=>{
+        const c=roleContent(pbtn), section=c&&c.querySelector(".portfolio-sub-section");
+        if(section && section.classList.contains("show")) begin(section,role,"Portfolio",label);
+        else if(section) finish(section);
+      },0);
     }
 
-    const radio = target.closest(".radio-card-item");
-    if (radio) sendEvent("played", role, labelFor(radio) || "Radio", "");
-
-    const image = target.closest(".marquee-item,.instore-thumb-card,.portfolio-img-wrapper");
-    if (image) sendEvent("viewed", role, labelFor(image) || "Portfolio item", "");
-
-    const external = target.closest("a[href]");
-    if (external && /^https?:/i.test(external.href) && external.host !== location.host) {
-      sendEvent("external_link", role, clean(external.textContent) || external.hostname, "");
+    const item=target.closest(".marquee-item,.instore-thumb-card,.portfolio-img-wrapper");
+    if(item){
+      const label=semanticLabel(item);
+      if(label) begin(item,role,"Viewed",label);
     }
-  }, true);
+  },true);
 
-  document.addEventListener("play", function(e) {
-    const media = e.target;
-    if (!(media instanceof HTMLMediaElement)) return;
-    const role = roleFor(media);
-    let item = labelFor(media);
-    if (!item) {
-      const player = media.closest(".inline-video-player-container,.carousel-expanded-overlay");
-      const title = player && player.querySelector(".inline-video-title,.expanded-title");
-      item = clean(title ? title.textContent : "");
+  if(hasTrackedIdentifier) document.addEventListener("play",function(e){
+    const m=e.target;
+    if(!(m instanceof HTMLMediaElement))return;
+    let label=semanticLabel(m);
+    const player=m.closest(".inline-video-player-container,.carousel-expanded-overlay");
+    if((!label||/^video$|^media$/i.test(label)) && player){
+      const title=player.querySelector(".inline-video-title,.expanded-title");
+      if(title && !/^now playing$/i.test(visibleText(title))) label=visibleText(title);
     }
-    if (!item || item.toLowerCase() === "video") item = "Media";
-    sendEvent("played", role, item, "");
-    mediaTimers.set(media, {role, item, at: performance.now(), ms: 0, running: visible});
-  }, true);
-
-  function finishMedia(media, send) {
-    const t = mediaTimers.get(media);
-    if (!t) return;
-    if (t.running) t.ms += Math.max(0, performance.now() - t.at);
-    mediaTimers.delete(media);
-    const sec = Math.round(t.ms / 1000);
-    if (send && sec > 0) sendEvent("linger", t.role, t.item, String(sec));
-  }
-  document.addEventListener("pause", e => {
-    if (e.target instanceof HTMLMediaElement) finishMedia(e.target, true);
-  }, true);
-  document.addEventListener("ended", e => {
-    if (e.target instanceof HTMLMediaElement) finishMedia(e.target, true);
-  }, true);
-
-  document.addEventListener("visibilitychange", function() {
-    const now = performance.now();
-    if (document.hidden) {
-      if (visible) activeSeconds += Math.max(0, (now - lastTick) / 1000);
-      visible = false; lastTick = now; pauseTimers();
-      mediaTimers.forEach && mediaTimers.forEach(() => {});
-      updateVisit(false);
-    } else {
-      visible = true; lastTick = now; resumeTimers();
-      // Media elements that remain playing resume their timing naturally via timeupdate/play.
-      document.querySelectorAll("video,audio").forEach(m => {
-        const t = mediaTimers.get(m);
-        if (t && !m.paused) { t.at = performance.now(); t.running = true; }
+    if(!label){
+      // Resolve the currently playing source back to the authored thumbnail/card label.
+      const src=decodeURIComponent((m.currentSrc||m.src||"").split("/").pop()||"");
+      document.querySelectorAll(".video-thumbnail-card,.marquee-item").forEach(card=>{
+        if(label)return;
+        const oc=decodeURIComponent(card.getAttribute("onclick")||"");
+        if(src && oc.includes(src)) label=semanticLabel(card);
       });
     }
-  });
+    if(!label) label="Media";
+    let t=mediaState.get(m);
+    if(!t){t={role:roleName(m),item:label,ms:0,at:performance.now(),running:visible};mediaState.set(m,t);}
+    else {t.role=roleName(m);t.item=label;t.at=performance.now();t.running=visible;}
+  },true);
 
-  addEventListener("scroll", scrollMeasure, {passive:true});
-  setInterval(() => updateVisit(false), 30000);
-  addEventListener("pagehide", function() {
-    [...timers.keys()].forEach(stopTimer);
-    document.querySelectorAll("video,audio").forEach(m => finishMedia(m, true));
-    updateVisit(true);
-  });
+  function finishMedia(m){
+    const t=mediaState.get(m); if(!t)return;
+    if(t.running)t.ms+=Math.max(0,performance.now()-t.at);
+    mediaState.delete(m);
+    const sec=Math.max(0,Math.round(t.ms/1000));
+    emit("linger",t.role,t.item,"Played|"+sec);
+  }
+  if(hasTrackedIdentifier) document.addEventListener("pause",e=>{if(e.target instanceof HTMLMediaElement)finishMedia(e.target);},true);
+  if(hasTrackedIdentifier) document.addEventListener("ended",e=>{if(e.target instanceof HTMLMediaElement)finishMedia(e.target);},true);
 
-  function addFeedbackUI() {
-    if (document.getElementById("cvTechnicalFeedback")) return;
-    const host = document.querySelector(".container") || document.body;
-    const box = document.createElement("section");
-    box.id = "cvTechnicalFeedback";
-    box.setAttribute("aria-label", "Technical feedback");
-    box.style.cssText = "margin:28px 0 4px;padding:14px;border-top:1px solid #e5e7eb;text-align:center;font:12px/1.45 Arial,sans-serif;color:#667085;";
-    box.innerHTML =
-      '<div style="font-weight:700;color:#475467;margin-bottom:4px">Something not working as expected?</div>' +
-      '<div>If you noticed a broken link, video or anything else that did not work properly, I would appreciate you letting me know.</div>' +
-      '<button type="button" id="cvFeedbackOpen" style="margin:8px 0 0;border:0;background:none;color:#1d4ed8;text-decoration:underline;cursor:pointer;font:inherit">Leave feedback</button>' +
-      '<div id="cvFeedbackForm" hidden style="max-width:520px;margin:10px auto 0">' +
-      '<textarea id="cvFeedbackMessage" rows="3" maxlength="1200" placeholder="Describe the problem" style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:5px;font:13px Arial,sans-serif"></textarea>' +
-      '<button type="button" id="cvFeedbackSend" style="margin-top:7px;padding:7px 12px;border:0;border-radius:4px;background:#2c3e50;color:#fff;cursor:pointer">Send feedback</button>' +
-      '<span id="cvFeedbackStatus" style="margin-left:8px"></span></div>' +
-      '<div style="margin-top:10px;font-size:10.5px;color:#98a2b3">This CV uses visit analytics, including basic browser and network information, to understand engagement and help maintain the site.</div>';
+  if(hasTrackedIdentifier) document.addEventListener("visibilitychange",function(){
+    const now=performance.now();
+    if(document.hidden){
+      if(visible)activeSeconds+=Math.max(0,(now-lastTick)/1000);
+      visible=false;lastTick=now;pauseAllTimers();updateVisit(false);
+    }else{
+      visible=true;lastTick=now;resumeAllTimers();
+    }
+  });
+  if(hasTrackedIdentifier) addEventListener("scroll",()=>{
+    const d=document.documentElement,den=Math.max(1,d.scrollHeight-innerHeight);
+    maxScroll=Math.max(maxScroll,Math.min(100,(scrollY/den)*100));
+  },{passive:true});
+  if(hasTrackedIdentifier) setInterval(()=>updateVisit(false),30000);
+
+  function addFeedback(){
+    if(document.getElementById("cvTechnicalFeedback"))return;
+    const host=document.querySelector(".container")||document.body;
+    const box=document.createElement("section");
+    box.id="cvTechnicalFeedback";
+    box.setAttribute("aria-label","Feedback");
+    box.style.cssText="margin:30px 0 4px;padding:18px 10px 8px;border-top:1px solid #e5e7eb;text-align:center;font:12px/1.5 Arial,sans-serif;color:#667085";
+    box.innerHTML=
+      '<div style="font-size:14px;font-weight:700;color:#344054;margin-bottom:5px">Your time and opinion are valuable to me.</div>'+
+      '<div>If you spotted something that could be done better or needs improving, I’d genuinely appreciate you letting me know.</div>'+
+      '<button type="button" id="cvFeedbackOpen" style="margin:8px 0 0;border:0;background:none;color:#1d4ed8;text-decoration:underline;cursor:pointer;font:inherit;font-weight:700">Please give me your feedback here</button>'+
+      '<div id="cvFeedbackForm" hidden style="max-width:520px;margin:11px auto 0">'+
+      '<textarea id="cvFeedbackMessage" rows="3" maxlength="1200" placeholder="Your feedback" style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:5px;font:13px Arial,sans-serif"></textarea>'+
+      '<div><button type="button" id="cvFeedbackSend" style="margin-top:7px;padding:7px 13px;border:0;border-radius:4px;background:#2c3e50;color:#fff;cursor:pointer">Send Feedback</button>'+
+      '<span id="cvFeedbackStatus" role="status" style="margin-left:8px"></span></div></div>'+
+      '<div style="max-width:690px;margin:13px auto 0;font-size:10.5px;line-height:1.45;color:#98a2b3">This CV uses basic visit analytics to understand how it is being viewed and to help improve the experience. This may include interactions with sections and media, time spent viewing items, browser/device information and basic network information.</div>';
     host.appendChild(box);
-    const open = box.querySelector("#cvFeedbackOpen"), form = box.querySelector("#cvFeedbackForm");
-    open.addEventListener("click", () => { form.hidden = !form.hidden; });
-    box.querySelector("#cvFeedbackSend").addEventListener("click", function() {
-      const msg = clean(box.querySelector("#cvFeedbackMessage").value);
-      const status = box.querySelector("#cvFeedbackStatus");
-      if (!msg) { status.textContent = "Please enter a message."; return; }
-      if (!visitId) { status.textContent = "Feedback is unavailable right now."; return; }
-      this.disabled = true; status.textContent = "Sending…";
-      jsonPost("/feedback", {visit_id: visitId, message: msg, page_url: location.href, browser: navigator.userAgent})
-        .then(() => { status.textContent = "Thank you."; box.querySelector("#cvFeedbackMessage").value = ""; sendEvent("feedback", "CV", "Technical feedback", "submitted"); })
-        .catch(() => { status.textContent = "Could not send. Please try again."; })
-        .finally(() => { this.disabled = false; });
+    const form=box.querySelector("#cvFeedbackForm");
+    box.querySelector("#cvFeedbackOpen").addEventListener("click",()=>{form.hidden=!form.hidden;});
+    box.querySelector("#cvFeedbackSend").addEventListener("click",function(){
+      const message=clean(box.querySelector("#cvFeedbackMessage").value,1200);
+      const status=box.querySelector("#cvFeedbackStatus");
+      if(!message){status.textContent="Please enter your feedback.";return;}
+      if(!hasTrackedIdentifier){status.textContent="Feedback submission is available when this CV is opened through a recruiter or application link.";return;}
+      if(!visitId){status.textContent="Feedback is unavailable right now.";return;}
+      this.disabled=true;status.textContent="Sending…";
+      post("/feedback",{visit_id:visitId,message,page_url:location.href,browser:navigator.userAgent})
+        .then(()=>{status.textContent="Thank you — your feedback is appreciated.";box.querySelector("#cvFeedbackMessage").value="";})
+        .catch(()=>{status.textContent="Could not send. Please try again.";})
+        .finally(()=>{this.disabled=false;});
     });
   }
 
-  if (document.readyState === "complete") {
-    setTimeout(() => { beginVisit(); addFeedbackUI(); }, 600);
-  } else {
-    addEventListener("load", () => setTimeout(() => { beginVisit(); addFeedbackUI(); }, 600), {once:true});
+  if(hasTrackedIdentifier) addEventListener("pagehide",function(){
+    [...active.keys()].forEach(finish);
+    document.querySelectorAll("video,audio").forEach(finishMedia);
+    updateVisit(true);
+  });
+
+  function boot(){
+    addFeedback();
+    if(hasTrackedIdentifier){
+      syncRoleStates();
+      startVisit();
+    }
   }
+  if(document.readyState==="complete")setTimeout(boot,500);
+  else addEventListener("load",()=>setTimeout(boot,500),{once:true});
 })();
 </script></body>
 </html>
