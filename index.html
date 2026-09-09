@@ -4740,335 +4740,357 @@ function toggleXcleanCompactContext(event, button){
 (function () {
   "use strict";
 
-  var API_BASE = "https://shane-cv-tracker-api.uvshane.workers.dev";
-  var TRACK_PARAM = "track";
-  var FLUSH_INTERVAL_MS = 60000;
-  var FETCH_TIMEOUT_MS = 3000;
-  var MAX_PENDING_EVENTS = 75;
-  var MAX_CONSECUTIVE_FAILURES = 3;
-  var trackingCode = "";
-  var visitId = null;
-  var visitorId = "";
-  var sessionId = "";
-  var activeSeconds = 0;
-  var maxScroll = 0;
-  var lastActiveTick = Date.now();
-  var started = false;
-  var disabled = false;
-  var flushInFlight = false;
-  var flushTimer = null;
-  var consecutiveFailures = 0;
-  var sentEvents = Object.create(null);
-  var pendingEvents = [];
-  var scrollQueued = false;
+  const API_BASE = "https://shane-cv-tracker-api.uvshane.workers.dev";
+  const params = new URLSearchParams(location.search);
+  const publicRef = (params.get("ref") || "").trim();
+  const legacyTrack = (params.get("track") || "").trim();
+  const identifier = publicRef || legacyTrack;
+  const identifierKind = publicRef ? "ref" : (legacyTrack ? "track" : "");
+  if (!identifier || !/^[A-Za-z0-9_-]{2,128}$/.test(identifier)) return;
 
-  try {
-    trackingCode = new URLSearchParams(window.location.search).get(TRACK_PARAM) || "";
-  } catch (e) {
-    return;
-  }
-
-  if (!/^[A-Za-z0-9_-]{6,128}$/.test(trackingCode)) return;
-
-  function randomId(prefix) {
+  const VISITOR_KEY = "shane_cv_visitor_v1";
+  const visitorId = (() => {
     try {
-      var bytes = new Uint8Array(16);
-      crypto.getRandomValues(bytes);
-      return prefix + Array.prototype.map.call(bytes, function (b) {
-        return b.toString(16).padStart(2, "0");
-      }).join("");
-    } catch (e) {
-      return prefix + Date.now().toString(36) + Math.random().toString(36).slice(2);
-    }
-  }
-
-  try {
-    visitorId = localStorage.getItem("shane_cv_visitor_id") || randomId("v_");
-    localStorage.setItem("shane_cv_visitor_id", visitorId);
-  } catch (e) {
-    visitorId = randomId("v_");
-  }
-  sessionId = randomId("s_");
-
-  function deviceType() {
-    var ua = navigator.userAgent || "";
-    if (/tablet|ipad/i.test(ua)) return "tablet";
-    if (/mobile|iphone|android/i.test(ua)) return "mobile";
-    return "desktop";
-  }
-
-  function noteFailure() {
-    consecutiveFailures += 1;
-    if (consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
-      disabled = true;
-      if (flushTimer) {
-        window.clearTimeout(flushTimer);
-        flushTimer = null;
+      let v = localStorage.getItem(VISITOR_KEY);
+      if (!v) {
+        v = (crypto.randomUUID ? crypto.randomUUID() : "v-" + Date.now() + "-" + Math.random().toString(36).slice(2));
+        localStorage.setItem(VISITOR_KEY, v);
       }
+      return v;
+    } catch (_) {
+      return "v-" + Date.now() + "-" + Math.random().toString(36).slice(2);
     }
-  }
+  })();
+  const sessionId = (crypto.randomUUID ? crypto.randomUUID() : "s-" + Date.now() + "-" + Math.random().toString(36).slice(2));
+  const deviceType = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? "mobile" : "desktop";
 
-  function noteSuccess() {
-    consecutiveFailures = 0;
-  }
+  let visitId = null, applicationId = null, started = false, disabled = false;
+  let activeSeconds = 0, maxScroll = 0, lastTick = performance.now(), visible = !document.hidden;
+  const queuedEvents = [];
+  const timers = new Map();
+  const mediaTimers = new WeakMap();
 
-  function safeFetch(path, options, allowKeepalive) {
-    if (disabled) return Promise.resolve(null);
-    var controller = null;
-    var timeoutId = null;
-    var requestOptions = Object.assign({}, options || {});
-    try {
-      if (allowKeepalive) {
-        requestOptions.keepalive = true;
-      } else if (typeof AbortController !== "undefined") {
-        controller = new AbortController();
-        requestOptions.signal = controller.signal;
-        timeoutId = window.setTimeout(function () {
-          try { controller.abort(); } catch (e) {}
-        }, FETCH_TIMEOUT_MS);
-      }
-      return fetch(API_BASE + path, requestOptions).then(function (response) {
-        if (timeoutId) window.clearTimeout(timeoutId);
-        if (response && response.ok) noteSuccess();
-        else noteFailure();
-        return response;
-      }).catch(function () {
-        if (timeoutId) window.clearTimeout(timeoutId);
-        noteFailure();
-        return null;
-      });
-    } catch (e) {
-      if (timeoutId) window.clearTimeout(timeoutId);
-      noteFailure();
-      return Promise.resolve(null);
-    }
-  }
+  const roleNames = {
+    role1: "Devil Burger",
+    role2: "XCLEAN",
+    role3: "Albatross",
+    role4: "ISee Digital",
+    role5: "XCLEAN",
+    role6: "SKY",
+    role7: "Vodafone",
+    role8: "H&J Smith",
+    role9: "Smiths City"
+  };
 
-  function jsonPost(path, body, keepalive) {
-    return safeFetch(path, {
+  function safeFetch(url, options) {
+    if (disabled) return Promise.reject(new Error("tracker disabled"));
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 4500);
+    return fetch(url, Object.assign({signal: controller.signal, keepalive: true}, options || {}))
+      .finally(() => clearTimeout(timeout))
+      .catch(err => { throw err; });
+  }
+  function jsonPost(path, body) {
+    return safeFetch(API_BASE + path, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-      cache: "no-store",
-      credentials: "omit"
-    }, !!keepalive);
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(body)
+    }).then(r => {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json().catch(() => ({}));
+    });
   }
-
-  function runWhenIdle(fn) {
-    try {
-      if (typeof window.requestIdleCallback === "function") {
-        window.requestIdleCallback(function () { fn(); }, { timeout: 5000 });
-      } else {
-        window.setTimeout(fn, 0);
+  function clean(s) {
+    return String(s || "").replace(/\s+/g, " ").trim().slice(0, 240);
+  }
+  function roleCard(el) { return el && el.closest ? el.closest(".role-card") : null; }
+  function roleIdFor(el) {
+    const card = roleCard(el);
+    if (!card) return "";
+    const content = card.querySelector(".collapsible-content[id]");
+    return content ? content.id : "";
+  }
+  function roleFor(el) {
+    const id = roleIdFor(el);
+    if (roleNames[id]) return roleNames[id];
+    const card = roleCard(el);
+    if (!card) return "CV";
+    const title = card.querySelector(".main-role-title");
+    return clean(title ? title.textContent : "CV");
+  }
+  function labelFor(el) {
+    if (!el) return "";
+    const summary = el.matches && el.matches("summary") ? el : (el.closest && el.closest("details") ? el.closest("details").querySelector("summary") : null);
+    if (summary) return clean(summary.textContent);
+    const radio = el.closest && el.closest(".radio-card-item");
+    if (radio) {
+      const t = radio.querySelector(".radio-title");
+      if (t) return clean(t.textContent);
+    }
+    const xitem = el.closest && el.closest(".xclean-video-item");
+    if (xitem) {
+      const l = xitem.querySelector(".xclean-video-label");
+      if (l) return clean(l.textContent);
+    }
+    const card = el.closest && el.closest(".video-thumbnail-card");
+    if (card) {
+      const labelled = card.closest(".xclean-video-item");
+      if (labelled) {
+        const l = labelled.querySelector(".xclean-video-label");
+        if (l) return clean(l.textContent);
       }
-    } catch (e) {
-      window.setTimeout(fn, 0);
+      const img = card.querySelector("img[alt]");
+      if (img && img.alt) return clean(img.alt);
     }
+    const img = el.closest && el.closest("img[alt]");
+    if (img && img.alt) return clean(img.alt);
+    const aria = el.getAttribute && (el.getAttribute("aria-label") || el.getAttribute("title"));
+    if (aria) return clean(aria);
+    const txt = clean(el.textContent);
+    return txt && txt.length <= 120 ? txt : "";
   }
-
-  function updateScrollNow() {
-    scrollQueued = false;
-    try {
-      var doc = document.documentElement;
-      var body = document.body;
-      var scrollTop = window.pageYOffset || doc.scrollTop || body.scrollTop || 0;
-      var scrollHeight = Math.max(doc.scrollHeight, body.scrollHeight, doc.clientHeight);
-      var viewport = window.innerHeight || doc.clientHeight || 0;
-      var available = Math.max(1, scrollHeight - viewport);
-      var pct = Math.round((scrollTop / available) * 100);
-      if (!Number.isFinite(pct)) pct = 0;
-      pct = Math.max(0, Math.min(100, pct));
-      if (pct > maxScroll) maxScroll = pct;
-    } catch (e) {}
-  }
-
-  function queueScrollMeasurement() {
-    if (scrollQueued) return;
-    scrollQueued = true;
-    if (typeof window.requestAnimationFrame === "function") {
-      window.requestAnimationFrame(updateScrollNow);
-    } else {
-      window.setTimeout(updateScrollNow, 50);
-    }
-  }
-
-  function countActiveTime() {
-    var now = Date.now();
-    if (!document.hidden) {
-      var elapsed = Math.max(0, Math.min(65, Math.floor((now - lastActiveTick) / 1000)));
-      activeSeconds += elapsed;
-    }
-    lastActiveTick = now;
-  }
-
-  function queueEvent(eventType, section, item, value) {
-    if (disabled || pendingEvents.length >= MAX_PENDING_EVENTS) return;
-    pendingEvents.push({
+  function eventPayload(eventType, role, item, value) {
+    return {
+      visit_id: visitId,
       event_type: eventType,
-      section: section || null,
-      item: item || null,
-      value: value == null ? null : String(value).slice(0, 250)
-    });
-  }
-
-  function eventOnce(key, eventType, section, item, value) {
-    if (sentEvents[key]) return;
-    sentEvents[key] = true;
-    queueEvent(eventType, section, item, value);
-  }
-
-  function textOf(el) {
-    return ((el && el.textContent) || "").replace(/\s+/g, " ").trim().slice(0, 160);
-  }
-
-  function installInteractionTracking() {
-    document.addEventListener("toggle", function (ev) {
-      var el = ev.target;
-      if (!el || el.tagName !== "DETAILS" || !el.open) return;
-      var label = textOf(el.querySelector("summary"));
-      eventOnce("details:" + label, "open_detail", "cv", label, "opened");
-    }, true);
-
-    document.addEventListener("click", function (ev) {
-      var role = ev.target && ev.target.closest ? ev.target.closest(".role-card") : null;
-      if (role) {
-        var roleLabel = textOf(role.querySelector("h3, h2, .role-title, .role-header")) || textOf(role).slice(0, 100);
-        eventOnce("role:" + roleLabel, "open_role", "career", roleLabel, "clicked");
-      }
-      var link = ev.target && ev.target.closest ? ev.target.closest("a[href]") : null;
-      if (link) {
-        var href = link.getAttribute("href") || "";
-        if (/^(https?:|mailto:|tel:)/i.test(href)) {
-          var label = textOf(link) || href.slice(0, 120);
-          eventOnce("link:" + href, "open_link", "cv", label, href.slice(0, 250));
-        }
-      }
-    }, true);
-
-    document.addEventListener("play", function (ev) {
-      var media = ev.target;
-      if (!media || (media.tagName !== "VIDEO" && media.tagName !== "AUDIO")) return;
-      var src = media.currentSrc || media.getAttribute("src") || "media";
-      eventOnce("media:" + src, "play_media", "portfolio", media.tagName.toLowerCase(), src.slice(0, 250));
-    }, true);
-  }
-
-  function scheduleFlush() {
-    if (disabled || !visitId || flushTimer) return;
-    flushTimer = window.setTimeout(function () {
-      flushTimer = null;
-      flush(false);
-    }, FLUSH_INTERVAL_MS);
-  }
-
-  function sendQueuedEventsSequentially(events, index) {
-    if (disabled || index >= events.length) return Promise.resolve();
-    var eventData = events[index];
-    return jsonPost("/event", {
-      visit_id: visitId,
-      event_type: eventData.event_type,
-      section: eventData.section,
-      item: eventData.item,
-      value: eventData.value
-    }, false).then(function (response) {
-      if (!response || !response.ok || disabled) return;
-      return sendQueuedEventsSequentially(events, index + 1);
-    });
-  }
-
-  function flush(keepalive) {
-    if (disabled || !visitId || flushInFlight) return;
-    flushInFlight = true;
-    countActiveTime();
-    updateScrollNow();
-
-    var updateBody = {
-      visit_id: visitId,
-      active_seconds: activeSeconds,
-      max_scroll: maxScroll
+      section: clean(role || "CV"),
+      item: clean(item || ""),
+      value: value == null ? "" : clean(value)
     };
-
-    if (keepalive) {
-      jsonPost("/visit/update", updateBody, true);
-      flushInFlight = false;
-      return;
+  }
+  function sendEvent(eventType, role, item, value) {
+    const e = eventPayload(eventType, role, item, value);
+    if (!visitId) { queuedEvents.push(e); return; }
+    e.visit_id = visitId;
+    jsonPost("/event", e).catch(() => {});
+  }
+  function flushQueue() {
+    if (!visitId) return;
+    while (queuedEvents.length) {
+      const e = queuedEvents.shift();
+      e.visit_id = visitId;
+      jsonPost("/event", e).catch(() => {});
     }
-
-    var events = pendingEvents.splice(0, pendingEvents.length);
-    jsonPost("/visit/update", updateBody, false).then(function (response) {
-      if (!response || !response.ok || disabled) return;
-      return sendQueuedEventsSequentially(events, 0);
-    }).then(function () {
-      flushInFlight = false;
-      if (!disabled) scheduleFlush();
-    }).catch(function () {
-      flushInFlight = false;
-      if (!disabled) scheduleFlush();
+  }
+  function startTimer(key, role, interaction, item) {
+    if (!key || timers.has(key)) return;
+    timers.set(key, {role, interaction, item, ms: 0, at: performance.now(), running: visible});
+  }
+  function tickTimer(t, now) {
+    if (t.running) { t.ms += Math.max(0, now - t.at); t.at = now; }
+  }
+  function pauseTimers() {
+    const now = performance.now();
+    timers.forEach(t => { tickTimer(t, now); t.running = false; });
+  }
+  function resumeTimers() {
+    const now = performance.now();
+    timers.forEach(t => { t.at = now; t.running = true; });
+  }
+  function stopTimer(key) {
+    const t = timers.get(key);
+    if (!t) return;
+    tickTimer(t, performance.now());
+    timers.delete(key);
+    const sec = Math.round(t.ms / 1000);
+    if (sec > 0) sendEvent("linger", t.role, t.item, String(sec));
+  }
+  function stopTimersUnder(el) {
+    [...timers.keys()].forEach(k => {
+      if (k && k.nodeType && el.contains(k)) stopTimer(k);
     });
   }
 
   function beginVisit() {
-    if (started || disabled) return;
+    if (started) return;
     started = true;
-    runWhenIdle(function () {
-      if (disabled) return;
-      jsonPost("/track/" + encodeURIComponent(trackingCode), {
-        visitor_id: visitorId,
-        session_id: sessionId,
-        device_type: deviceType()
-      }, false).then(function (response) {
-        if (!response || !response.ok) {
-          disabled = true;
-          return null;
-        }
-        return response.json().catch(function () { return null; });
-      }).then(function (data) {
-        if (disabled || !data || !data.visit_id) {
-          disabled = true;
-          return;
-        }
-        visitId = Number(data.visit_id);
-        if (!Number.isFinite(visitId) || visitId <= 0) {
-          visitId = null;
-          disabled = true;
-          return;
-        }
-        updateScrollNow();
-        scheduleFlush();
-      }).catch(function () {
-        disabled = true;
-      });
-    });
-  }
-
-  function startAfterPageLoad() {
-    var start = function () {
-      window.setTimeout(beginVisit, 1000);
+    const body = {
+      visitor_id: visitorId,
+      session_id: sessionId,
+      device_type: deviceType,
+      browser: navigator.userAgent
     };
-    if (document.readyState === "complete") start();
-    else window.addEventListener("load", start, { once: true });
+    body[identifierKind === "ref" ? "public_ref" : "tracking_code"] = identifier;
+    jsonPost("/track/" + encodeURIComponent(identifier), body).then(data => {
+      visitId = data.visit_id || data.visitId || null;
+      applicationId = data.application_id || data.applicationId || null;
+      flushQueue();
+    }).catch(() => { disabled = true; });
   }
 
-  installInteractionTracking();
-  queueScrollMeasurement();
-  window.addEventListener("scroll", queueScrollMeasurement, { passive: true });
+  function updateVisit(finalUpdate) {
+    if (!visitId || disabled) return;
+    const now = performance.now();
+    if (visible) activeSeconds += Math.max(0, (now - lastTick) / 1000);
+    lastTick = now;
+    const body = {
+      visit_id: visitId,
+      active_seconds: Math.round(activeSeconds),
+      max_scroll: Math.round(maxScroll)
+    };
+    if (finalUpdate && navigator.sendBeacon) {
+      try {
+        navigator.sendBeacon(API_BASE + "/visit/update", new Blob([JSON.stringify(body)], {type:"application/json"}));
+        return;
+      } catch (_) {}
+    }
+    jsonPost("/visit/update", body).catch(() => {});
+  }
 
-  document.addEventListener("visibilitychange", function () {
-    countActiveTime();
+  function scrollMeasure() {
+    const doc = document.documentElement;
+    const denom = Math.max(1, doc.scrollHeight - innerHeight);
+    maxScroll = Math.max(maxScroll, Math.min(100, (scrollY / denom) * 100));
+  }
+
+  document.addEventListener("click", function(e) {
+    const target = e.target;
+    if (!target || !target.closest) return;
+
+    const role = roleFor(target);
+
+    const summary = target.closest("summary");
+    if (summary && summary.closest(".role-card")) {
+      const details = summary.closest("details");
+      const item = labelFor(summary);
+      setTimeout(() => {
+        if (details.open) {
+          sendEvent("expanded", role, item, "");
+          startTimer(details, role, "Viewed", item);
+        } else {
+          stopTimer(details);
+        }
+      }, 0);
+      return;
+    }
+
+    const card = target.closest(".role-card");
+    if (card && !target.closest("button,a,video,audio,summary,.portfolio-sub-section,.inline-video-player-container,.carousel-expanded-overlay")) {
+      const content = card.querySelector(".collapsible-content");
+      if (content) {
+        setTimeout(() => {
+          if (content.classList.contains("show")) {
+            const r = roleFor(card);
+            sendEvent("open_role", r, "Overview", "");
+            startTimer(content, r, "Viewed", "Overview");
+          } else {
+            stopTimersUnder(content);
+            stopTimer(content);
+          }
+        }, 0);
+      }
+    }
+
+    const portfolioButton = target.closest(".portfolio-image-btn,.smiths-record-btn");
+    if (portfolioButton) {
+      const item = labelFor(portfolioButton) || "Supporting Portfolio";
+      sendEvent("portfolio", role, item, "");
+    }
+
+    const radio = target.closest(".radio-card-item");
+    if (radio) sendEvent("played", role, labelFor(radio) || "Radio", "");
+
+    const image = target.closest(".marquee-item,.instore-thumb-card,.portfolio-img-wrapper");
+    if (image) sendEvent("viewed", role, labelFor(image) || "Portfolio item", "");
+
+    const external = target.closest("a[href]");
+    if (external && /^https?:/i.test(external.href) && external.host !== location.host) {
+      sendEvent("external_link", role, clean(external.textContent) || external.hostname, "");
+    }
+  }, true);
+
+  document.addEventListener("play", function(e) {
+    const media = e.target;
+    if (!(media instanceof HTMLMediaElement)) return;
+    const role = roleFor(media);
+    let item = labelFor(media);
+    if (!item) {
+      const player = media.closest(".inline-video-player-container,.carousel-expanded-overlay");
+      const title = player && player.querySelector(".inline-video-title,.expanded-title");
+      item = clean(title ? title.textContent : "");
+    }
+    if (!item || item.toLowerCase() === "video") item = "Media";
+    sendEvent("played", role, item, "");
+    mediaTimers.set(media, {role, item, at: performance.now(), ms: 0, running: visible});
+  }, true);
+
+  function finishMedia(media, send) {
+    const t = mediaTimers.get(media);
+    if (!t) return;
+    if (t.running) t.ms += Math.max(0, performance.now() - t.at);
+    mediaTimers.delete(media);
+    const sec = Math.round(t.ms / 1000);
+    if (send && sec > 0) sendEvent("linger", t.role, t.item, String(sec));
+  }
+  document.addEventListener("pause", e => {
+    if (e.target instanceof HTMLMediaElement) finishMedia(e.target, true);
+  }, true);
+  document.addEventListener("ended", e => {
+    if (e.target instanceof HTMLMediaElement) finishMedia(e.target, true);
+  }, true);
+
+  document.addEventListener("visibilitychange", function() {
+    const now = performance.now();
     if (document.hidden) {
-      flush(true);
+      if (visible) activeSeconds += Math.max(0, (now - lastTick) / 1000);
+      visible = false; lastTick = now; pauseTimers();
+      mediaTimers.forEach && mediaTimers.forEach(() => {});
+      updateVisit(false);
     } else {
-      lastActiveTick = Date.now();
-      scheduleFlush();
+      visible = true; lastTick = now; resumeTimers();
+      // Media elements that remain playing resume their timing naturally via timeupdate/play.
+      document.querySelectorAll("video,audio").forEach(m => {
+        const t = mediaTimers.get(m);
+        if (t && !m.paused) { t.at = performance.now(); t.running = true; }
+      });
     }
   });
 
-  window.addEventListener("pagehide", function () {
-    countActiveTime();
-    flush(true);
+  addEventListener("scroll", scrollMeasure, {passive:true});
+  setInterval(() => updateVisit(false), 30000);
+  addEventListener("pagehide", function() {
+    [...timers.keys()].forEach(stopTimer);
+    document.querySelectorAll("video,audio").forEach(m => finishMedia(m, true));
+    updateVisit(true);
   });
 
-  startAfterPageLoad();
+  function addFeedbackUI() {
+    if (document.getElementById("cvTechnicalFeedback")) return;
+    const host = document.querySelector(".container") || document.body;
+    const box = document.createElement("section");
+    box.id = "cvTechnicalFeedback";
+    box.setAttribute("aria-label", "Technical feedback");
+    box.style.cssText = "margin:28px 0 4px;padding:14px;border-top:1px solid #e5e7eb;text-align:center;font:12px/1.45 Arial,sans-serif;color:#667085;";
+    box.innerHTML =
+      '<div style="font-weight:700;color:#475467;margin-bottom:4px">Something not working as expected?</div>' +
+      '<div>If you noticed a broken link, video or anything else that did not work properly, I would appreciate you letting me know.</div>' +
+      '<button type="button" id="cvFeedbackOpen" style="margin:8px 0 0;border:0;background:none;color:#1d4ed8;text-decoration:underline;cursor:pointer;font:inherit">Leave feedback</button>' +
+      '<div id="cvFeedbackForm" hidden style="max-width:520px;margin:10px auto 0">' +
+      '<textarea id="cvFeedbackMessage" rows="3" maxlength="1200" placeholder="Describe the problem" style="width:100%;box-sizing:border-box;padding:9px;border:1px solid #cbd5e1;border-radius:5px;font:13px Arial,sans-serif"></textarea>' +
+      '<button type="button" id="cvFeedbackSend" style="margin-top:7px;padding:7px 12px;border:0;border-radius:4px;background:#2c3e50;color:#fff;cursor:pointer">Send feedback</button>' +
+      '<span id="cvFeedbackStatus" style="margin-left:8px"></span></div>' +
+      '<div style="margin-top:10px;font-size:10.5px;color:#98a2b3">This CV uses visit analytics, including basic browser and network information, to understand engagement and help maintain the site.</div>';
+    host.appendChild(box);
+    const open = box.querySelector("#cvFeedbackOpen"), form = box.querySelector("#cvFeedbackForm");
+    open.addEventListener("click", () => { form.hidden = !form.hidden; });
+    box.querySelector("#cvFeedbackSend").addEventListener("click", function() {
+      const msg = clean(box.querySelector("#cvFeedbackMessage").value);
+      const status = box.querySelector("#cvFeedbackStatus");
+      if (!msg) { status.textContent = "Please enter a message."; return; }
+      if (!visitId) { status.textContent = "Feedback is unavailable right now."; return; }
+      this.disabled = true; status.textContent = "Sending…";
+      jsonPost("/feedback", {visit_id: visitId, message: msg, page_url: location.href, browser: navigator.userAgent})
+        .then(() => { status.textContent = "Thank you."; box.querySelector("#cvFeedbackMessage").value = ""; sendEvent("feedback", "CV", "Technical feedback", "submitted"); })
+        .catch(() => { status.textContent = "Could not send. Please try again."; })
+        .finally(() => { this.disabled = false; });
+    });
+  }
+
+  if (document.readyState === "complete") {
+    setTimeout(() => { beginVisit(); addFeedbackUI(); }, 600);
+  } else {
+    addEventListener("load", () => setTimeout(() => { beginVisit(); addFeedbackUI(); }, 600), {once:true});
+  }
 })();
 </script></body>
 </html>
