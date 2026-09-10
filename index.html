@@ -1,12 +1,12 @@
+<!DOCTYPE html>
 <!--
 SSS BUILD PROVENANCE
-Implementation: V30.3
-Master Architect Directive: V34
-Built: 2026-09-10 21:29 NZST
+Implementation: V30.6 — NEW WELCOME 2 CLEAN MANUAL-START BUILD
+Governing Master: V36 + approved Supervisor Change Order
+Built: 2026-09-10 22:16 NZST
 Status: SANDBOX — NOT PRODUCTION
+Baseline SHA256: 93e0072889a4237bc4a3a927ef22712c7ac6a62bbeff25708b5095ca8dd70ca3
 -->
-<!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -3186,133 +3186,421 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 </style>
 
 
-<style id="sss-v30-3-narrative-component-isolation">
-/* V30.3 / Master V34 — CSS owns geometry; JS owns playback. */
 
-#cvWelcomeOverlay .cv-welcome-scroll{
-  display:flex!important;
-  flex-direction:column!important;
-  position:relative!important;
-  min-width:0!important;
-  min-height:0!important;
-  padding:0!important;
-  overflow:hidden!important;
-}
 
-/* Timer/control component participates in normal flow. */
-#cvWelcomeOverlay .v303-control-region{
-  display:block!important;
-  position:relative!important;
-  flex:0 0 66px!important;
-  min-height:66px!important;
-  width:100%!important;
-  overflow:hidden!important;
-  box-sizing:border-box!important;
-}
-#cvWelcomeOverlay .v303-control-region > .v198-control-strip{
-  display:grid!important;
-  visibility:visible!important;
-  opacity:1!important;
-  position:relative!important;
-  inset:auto!important;
-  left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
-  width:auto!important;
-  height:58px!important;
-  margin:8px clamp(18px,3vw,42px) 0!important;
-  grid-template-columns:minmax(0,1fr) auto!important;
-  grid-template-rows:38px 4px!important;
-  column-gap:12px!important;
-  row-gap:6px!important;
-  align-items:center!important;
-  z-index:20!important;
-}
 
-/* Dedicated coordinate system for all seven existing narrative states. */
-#cvWelcomeOverlay .v303-narrative-stage{
-  display:block!important;
-  position:relative!important;
-  flex:1 1 auto!important;
-  min-width:0!important;
-  min-height:0!important;
-  width:100%!important;
-  overflow:hidden!important;
-  box-sizing:border-box!important;
-}
-#cvWelcomeOverlay .v303-narrative-stage > p,
-#cvWelcomeOverlay .v303-narrative-stage > blockquote.cv-commercial-quote{
-  position:absolute!important;
-  left:50%!important;
-  top:50%;
-  width:min(92%,760px)!important;
-  margin:0!important;
-  opacity:0;
-  visibility:hidden;
-  transform:translate(-50%,-50%)!important;
-  box-sizing:border-box!important;
-}
-#cvWelcomeOverlay .v303-narrative-stage > .v19-active{
-  display:block!important;
-  visibility:visible!important;
-  opacity:1!important;
-}
-#cvWelcomeOverlay .v303-narrative-stage > blockquote.cv-commercial-quote.v19-active{
+<style id="sss-welcome2-clean-manual-start-v30-6">
+/* NEW WELCOME 2 — clean, isolated, manual-start engineering build. */
+#sssWelcome2.sssWelcome2-root{
+  position:fixed!important;
   inset:0!important;
-  left:0!important;
-  top:0!important;
+  z-index:2147482500!important;
+  display:none;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:clamp(14px,2.2vw,28px)!important;
+  margin:0!important;
+  box-sizing:border-box!important;
+  overflow:auto!important;
+  background:
+    radial-gradient(circle at 74% 28%,rgba(45,92,119,.12),transparent 34%),
+    linear-gradient(180deg,#111820 0%,#0a1117 100%)!important;
+  color:#17252d!important;
+  font-family:Arial,Helvetica,sans-serif!important;
+}
+#sssWelcome2[hidden]{display:none!important}
+
+#sssWelcome2 .sssWelcome2-shell{
+  width:min(1160px,calc(100vw - 36px))!important;
+  height:min(760px,calc(100dvh - 36px))!important;
+  min-height:590px!important;
+  display:grid!important;
+  grid-template-rows:auto minmax(0,1fr) auto!important;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+  border:1px solid rgba(156,181,197,.42)!important;
+  border-radius:7px!important;
+  background:#101820!important;
+  box-shadow:0 22px 70px rgba(0,0,0,.42)!important;
+}
+
+#sssWelcome2 .sssWelcome2-header{
+  min-width:0!important;
+  padding:25px clamp(28px,4vw,48px) 19px!important;
+  box-sizing:border-box!important;
+  background:
+    linear-gradient(90deg,rgba(32,47,58,.98),rgba(13,23,30,.98)),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 1px,transparent 1px 4px)!important;
+  border-bottom:1px solid rgba(116,151,173,.35)!important;
+  text-align:center!important;
+}
+#sssWelcome2 .sssWelcome2-title{
+  display:block!important;
+  margin:0!important;
+  padding:0!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  font-size:clamp(22px,2.05vw,31px)!important;
+  line-height:1.08!important;
+  font-weight:900!important;
+  letter-spacing:.012em!important;
+  color:#f4f4f1!important;
+}
+#sssWelcome2 .sssWelcome2-rule{
+  height:2px!important;
+  width:100%!important;
+  margin:13px 0 10px!important;
+  background:linear-gradient(90deg,#4d93b8 0 38%,rgba(77,147,184,.22) 78%,transparent 100%)!important;
+}
+#sssWelcome2 .sssWelcome2-capabilities{
+  white-space:nowrap!important;
+  font-size:clamp(11px,1.05vw,14px)!important;
+  line-height:1.2!important;
+  font-weight:700!important;
+  color:#d8e1e6!important;
+}
+
+#sssWelcome2 .sssWelcome2-main{
+  min-width:0!important;
+  min-height:0!important;
+  display:grid!important;
+  grid-template-columns:36% 64%!important;
+  overflow:hidden!important;
+}
+#sssWelcome2 .sssWelcome2-portraitPane{
+  min-width:0!important;
+  min-height:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:clamp(22px,3vw,34px)!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.025),transparent 42%),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.014) 0 1px,transparent 1px 4px),
+    #101820!important;
+}
+#sssWelcome2 .sssWelcome2-portraitFrame{
+  position:relative!important;
   width:100%!important;
   height:100%!important;
+  max-width:365px!important;
+  max-height:520px!important;
+  min-height:390px!important;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+  border:1px solid rgba(144,169,185,.22)!important;
+  background:#1b2730!important;
+}
+#sssWelcome2 .sssWelcome2-portrait{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  margin:0!important;
+  object-fit:cover!important;
+  object-position:center 18%!important;
   transform:none!important;
-  border:0!important;
-  padding:0!important;
-  background:transparent!important;
+  filter:none!important;
+}
+#sssWelcome2 .sssWelcome2-identity{
+  position:absolute!important;
+  left:0!important;
+  bottom:0!important;
+  display:flex!important;
+  align-items:stretch!important;
+  max-width:86%!important;
+  padding:8px 14px 9px 0!important;
+  box-sizing:border-box!important;
+  background:linear-gradient(90deg,rgba(7,18,27,.96),rgba(7,18,27,.88) 78%,rgba(7,18,27,0))!important;
+}
+#sssWelcome2 .sssWelcome2-identityLine{
+  flex:0 0 3px!important;
+  width:3px!important;
+  margin-right:10px!important;
+  background:#58a3ca!important;
+}
+#sssWelcome2 .sssWelcome2-identityText{min-width:0!important}
+#sssWelcome2 .sssWelcome2-identityEyebrow{
+  font-size:10px!important;
+  line-height:1.1!important;
+  font-weight:800!important;
+  letter-spacing:.16em!important;
+  color:#a8d0e5!important;
+  white-space:nowrap!important;
+}
+#sssWelcome2 .sssWelcome2-identityName{
+  margin-top:4px!important;
+  font-size:18px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  letter-spacing:.025em!important;
+  color:#fff!important;
+  white-space:nowrap!important;
 }
 
-/* Mobile uses the exact same internal component. */
-@media(max-width:700px){
-  #cvWelcomeOverlay .v303-control-region{
-    flex-basis:62px!important;
-    min-height:62px!important;
-  }
-  #cvWelcomeOverlay .v303-control-region > .v198-control-strip{
-    height:54px!important;
-    margin:8px 12px 0!important;
-    grid-template-columns:minmax(0,1fr) auto!important;
-    grid-template-rows:34px 3px!important;
-    column-gap:8px!important;
-    row-gap:5px!important;
-  }
-  #cvWelcomeOverlay .v303-narrative-stage > p{
-    width:calc(100% - 34px)!important;
-    max-width:760px!important;
-  }
+#sssWelcome2 .sssWelcome2-storyPane{
+  min-width:0!important;
+  min-height:0!important;
+  display:grid!important;
+  grid-template-rows:72px minmax(0,1fr)!important;
+  overflow:hidden!important;
+  background:
+    repeating-linear-gradient(0deg,rgba(47,87,109,.028) 0 1px,transparent 1px 3px),
+    linear-gradient(135deg,#e5eaed 0%,#d8e0e4 55%,#e3e8eb 100%)!important;
+  border-left:1px solid rgba(80,111,129,.24)!important;
+}
+#sssWelcome2 .sssWelcome2-playback{
+  min-width:0!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  grid-template-rows:42px 4px!important;
+  column-gap:12px!important;
+  row-gap:7px!important;
+  align-items:center!important;
+  padding:11px clamp(22px,3vw,36px) 8px!important;
+  box-sizing:border-box!important;
+}
+#sssWelcome2 .sssWelcome2-timer{
+  min-width:0!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  font-size:18px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  letter-spacing:.045em!important;
+  color:#31586e!important;
+}
+#sssWelcome2 .sssWelcome2-action{
+  width:104px!important;
+  min-width:104px!important;
+  height:32px!important;
+  margin:0!important;
+  padding:0 10px!important;
+  border:1px solid rgba(76,112,132,.35)!important;
+  border-radius:4px!important;
+  background:rgba(255,255,255,.74)!important;
+  color:#21465d!important;
+  font-size:10px!important;
+  font-weight:900!important;
+  letter-spacing:.055em!important;
+  cursor:pointer!important;
+}
+#sssWelcome2 .sssWelcome2-progress{
+  grid-column:1/-1!important;
+  height:4px!important;
+  overflow:hidden!important;
+  background:rgba(43,84,108,.14)!important;
+}
+#sssWelcome2 .sssWelcome2-progressFill{
+  display:block!important;
+  width:0%;
+  height:100%!important;
+  background:#4d93b8!important;
+}
 
-  /* Preserve V30.2 mobile portrait look without transform-created geometry. */
-  #cvWelcomeOverlay .cv-shane-avatar,
-  #cvWelcomeOverlay #cvShaneAvatar{
-    inset:5% 5% 5% 5%!important;
-    width:90%!important;
-    height:90%!important;
+#sssWelcome2 .sssWelcome2-viewport{
+  min-width:0!important;
+  min-height:0!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  grid-template-rows:1fr!important;
+  place-items:center!important;
+  overflow:hidden!important;
+  padding:26px clamp(34px,5vw,62px) 34px!important;
+  box-sizing:border-box!important;
+}
+#sssWelcome2 .sssWelcome2-slide{
+  grid-column:1!important;
+  grid-row:1!important;
+  width:min(100%,760px)!important;
+  max-width:760px!important;
+  max-height:100%!important;
+  overflow:auto!important;
+  margin:0!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  color:#17252d!important;
+  font-size:clamp(17px,1.28vw,21px)!important;
+  line-height:1.55!important;
+  font-weight:500!important;
+  text-align:left!important;
+  box-sizing:border-box!important;
+}
+#sssWelcome2 .sssWelcome2-slide--active{
+  visibility:visible!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+}
+#sssWelcome2 .sssWelcome2-slide--quote{
+  text-align:center!important;
+  font-size:clamp(22px,2.1vw,34px)!important;
+  line-height:1.4!important;
+  font-weight:850!important;
+  letter-spacing:.018em!important;
+}
+#sssWelcome2 .sssWelcome2-word{
+  visibility:visible;
+  opacity:1;
+  color:inherit;
+}
+#sssWelcome2.sssWelcome2-running .sssWelcome2-slide--active .sssWelcome2-word{
+  visibility:hidden;
+}
+#sssWelcome2.sssWelcome2-running .sssWelcome2-slide--active .sssWelcome2-word.sssWelcome2-word--visible{
+  visibility:visible;
+}
+
+#sssWelcome2 .sssWelcome2-footer{
+  min-width:0!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:10px!important;
+  padding:10px 16px!important;
+  box-sizing:border-box!important;
+  background:#08131b!important;
+  border-top:1px solid rgba(143,174,194,.24)!important;
+}
+#sssWelcome2 .sssWelcome2-footerLeft{
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+}
+#sssWelcome2 .sssWelcome2-footerButton{
+  min-width:54px!important;
+  min-height:40px!important;
+  margin:0!important;
+  padding:.55rem .78rem!important;
+  border:1px solid rgba(160,190,207,.38)!important;
+  border-radius:5px!important;
+  background:#0a1b25!important;
+  color:#edf4f8!important;
+  font-size:.82rem!important;
+  cursor:pointer!important;
+}
+#sssWelcome2 .sssWelcome2-footerButton:disabled{
+  opacity:.42!important;
+  cursor:default!important;
+}
+#sssWelcome2 .sssWelcome2-viewCv{
+  min-width:145px!important;
+  min-height:40px!important;
+  margin:0 0 0 auto!important;
+  padding:.55rem 1.15rem!important;
+  border:1px solid rgba(88,151,187,.34)!important;
+  border-radius:0!important;
+  background:linear-gradient(180deg,#14527a,#0e3e5f)!important;
+  color:#fff!important;
+  font-size:.86rem!important;
+  font-weight:900!important;
+  letter-spacing:.02em!important;
+  cursor:pointer!important;
+}
+
+@media (max-width:700px){
+  #sssWelcome2.sssWelcome2-root{
+    padding:0!important;
+    align-items:stretch!important;
+    justify-content:stretch!important;
+    overflow:hidden!important;
+  }
+  #sssWelcome2 .sssWelcome2-shell{
+    width:100vw!important;
+    height:100dvh!important;
+    min-height:0!important;
+    border:0!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+  }
+  #sssWelcome2 .sssWelcome2-header{
+    padding:23px 22px 17px!important;
+  }
+  #sssWelcome2 .sssWelcome2-title{
+    font-size:clamp(16px,4.3vw,20px)!important;
+    letter-spacing:0!important;
+  }
+  #sssWelcome2 .sssWelcome2-rule{margin:12px 0 10px!important}
+  #sssWelcome2 .sssWelcome2-capabilities{
+    font-size:clamp(10px,3vw,13px)!important;
+  }
+  #sssWelcome2 .sssWelcome2-main{
+    grid-template-columns:1fr!important;
+    grid-template-rows:minmax(250px,38%) minmax(0,1fr)!important;
+  }
+  #sssWelcome2 .sssWelcome2-portraitPane{
+    padding:20px clamp(26px,8vw,58px) 18px!important;
+  }
+  #sssWelcome2 .sssWelcome2-portraitFrame{
+    width:100%!important;
     max-width:none!important;
+    height:100%!important;
+    min-height:0!important;
     max-height:none!important;
-    margin:0!important;
-    object-fit:cover!important;
+  }
+  #sssWelcome2 .sssWelcome2-portrait{
     object-position:center 29%!important;
-    transform:none!important;
+  }
+  #sssWelcome2 .sssWelcome2-identity{
+    max-width:90%!important;
+    padding:9px 15px 10px 0!important;
+  }
+  #sssWelcome2 .sssWelcome2-identityEyebrow{font-size:10px!important}
+  #sssWelcome2 .sssWelcome2-identityName{font-size:17px!important}
+  #sssWelcome2 .sssWelcome2-storyPane{
+    grid-template-rows:66px minmax(0,1fr)!important;
+    border-left:0!important;
+    border-top:1px solid rgba(80,111,129,.24)!important;
+  }
+  #sssWelcome2 .sssWelcome2-playback{
+    grid-template-rows:38px 3px!important;
+    padding:9px 20px 8px!important;
+  }
+  #sssWelcome2 .sssWelcome2-timer{
+    font-size:15px!important;
+  }
+  #sssWelcome2 .sssWelcome2-action{
+    width:92px!important;
+    min-width:92px!important;
+    height:34px!important;
+    font-size:10px!important;
+  }
+  #sssWelcome2 .sssWelcome2-progress{height:3px!important}
+  #sssWelcome2 .sssWelcome2-viewport{
+    padding:16px 22px 20px!important;
+  }
+  #sssWelcome2 .sssWelcome2-slide{
+    width:100%!important;
+    max-width:none!important;
+    font-size:14px!important;
+    line-height:1.48!important;
+  }
+  #sssWelcome2 .sssWelcome2-slide--quote{
+    font-size:20px!important;
+    line-height:1.42!important;
+  }
+  #sssWelcome2 .sssWelcome2-footer{
+    padding:10px 18px!important;
+    gap:8px!important;
+  }
+  #sssWelcome2 .sssWelcome2-footerButton{
+    min-height:44px!important;
+    min-width:54px!important;
+  }
+  #sssWelcome2 .sssWelcome2-viewCv{
+    min-height:44px!important;
+    min-width:138px!important;
   }
 }
-@media(max-width:420px){
-  #cvWelcomeOverlay .v303-control-region > .v198-control-strip{
-    margin-left:10px!important;
-    margin-right:10px!important;
-  }
-}
-
-/* Desktop: retain scale, only small upward finishing movement. */
-@media(min-width:701px){
-  #cvWelcomeOverlay .cv-shane-avatar,
-  #cvWelcomeOverlay #cvShaneAvatar{
-    object-position:center 18%!important;
-  }
+@media (max-width:380px){
+  #sssWelcome2 .sssWelcome2-header{padding-left:15px!important;padding-right:15px!important}
+  #sssWelcome2 .sssWelcome2-capabilities{font-size:9.5px!important}
+  #sssWelcome2 .sssWelcome2-portraitPane{padding-left:22px!important;padding-right:22px!important}
+  #sssWelcome2 .sssWelcome2-playback{padding-left:13px!important;padding-right:13px!important}
+  #sssWelcome2 .sssWelcome2-viewport{padding-left:17px!important;padding-right:17px!important}
+  #sssWelcome2 .sssWelcome2-footer{padding-left:12px!important;padding-right:12px!important}
+  #sssWelcome2 .sssWelcome2-viewCv{min-width:126px!important;padding-left:.8rem!important;padding-right:.8rem!important}
 }
 </style>
 
@@ -3323,15 +3611,52 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="cv-countdown" id="cvCountdown">10</div>
 <div class="sss-hq-dots" id="sssHqDots"><span class="sss-hq-dot"></span><span class="sss-hq-dot"></span><span class="sss-hq-dot"></span><span class="sss-hq-dot"></span></div>
 </div></div>
-<div aria-labelledby="cvWelcomeTitle" aria-modal="true" class="cv-welcome-overlay" id="cvWelcomeOverlay" role="dialog" style="display:none">
-<div class="cv-welcome-panel"><h2 class="cv-welcome-sr-only" id="cvWelcomeTitle">Welcome to Shane Soper's CV</h2><div class="cv-welcome-header"><div class="cv-welcome-heading">COMMERCIAL OPERATOR. SALES LEADER. PROBLEM SOLVER.</div><div class="cv-welcome-capabilities">Growth · Commercial Strategy · Financial Judgement · Operations · Execution</div></div>
-<div class="cv-welcome-content"><div class="cv-intro-visual"><img alt="Shane Soper welcome" class="cv-shane-avatar" id="cvShaneAvatar" src="shane cover.png"/>
-</div><div class="cv-welcome-scroll"><p>I can sell. I can lead. I can bring the best out of people — but I'm just as comfortable rolling my sleeves up and doing the job alongside them.</p><p>I’m a commercial operator with a documented record of dominating in retail, cold calling and key account management. I’m a true hunter — I can find the opportunity, open the door, win the business and grow the account. Beyond sales, I’ve grown revenue and teams, managed margins and costs, developed new markets and taken difficult projects from idea through to delivery.</p><p>I've always been a player-coach. I'd rather work shoulder-to-shoulder, show people what works and recognise what they're doing well. “Try this” has always worked better for me than “get in my office.”</p><p>Business is much the same. Find the pain point, understand the numbers, work out what makes commercial sense and get on with solving it. I’m as comfortable working through margins, costs and commercial decisions as I am turning the solution into something that actually works.</p><blockquote class="cv-commercial-quote">“A good solution doesn't have to cost a million dollars — but it just might generate it.”</blockquote><p>My roles overlap, and being driven — setting targets, cracking inefficiencies and removing pain points — has kept me fully engaged for decades. After delivering on Devil Burger's success, I deliberately took a proper break and used that time to achieve some personal goals, spend valuable time with my family and my mum before she passed.</p><p>Now I'm ready to get back in the trenches with a good team. Leading or following isn't the important part — put me where I can contribute, set some worthwhile goals, and let's get on with achieving them.</p></div></div>
-<button class="cv-welcome-close" id="cvWelcomeClose" type="button">View My CV →</button>
-</div>
+<div id="sssWelcome2" class="sssWelcome2-root" role="dialog" aria-modal="true" aria-labelledby="sssWelcome2Title" hidden style="display:none">
+  <div class="sssWelcome2-shell">
+    <header class="sssWelcome2-header">
+      <h2 id="sssWelcome2Title" class="sssWelcome2-title">COMMERCIAL OPERATOR. SALES LEADER. PROBLEM SOLVER.</h2>
+      <div class="sssWelcome2-rule" aria-hidden="true"></div>
+      <div class="sssWelcome2-capabilities">Growth · Commercial Strategy · Financial Judgement · Operations · Execution</div>
+    </header>
+
+    <main class="sssWelcome2-main">
+      <section class="sssWelcome2-portraitPane" aria-label="About Shane Soper">
+        <div class="sssWelcome2-portraitFrame">
+          <img id="sssWelcome2Portrait" class="sssWelcome2-portrait" src="shane cover.png" alt="Shane Soper welcome"/>
+          <div class="sssWelcome2-identity">
+            <span class="sssWelcome2-identityLine" aria-hidden="true"></span>
+            <div class="sssWelcome2-identityText">
+              <div class="sssWelcome2-identityEyebrow">ABOUT / WELCOME</div>
+              <div class="sssWelcome2-identityName">SHANE SOPER</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sssWelcome2-storyPane" aria-label="Welcome narrative">
+        <div class="sssWelcome2-playback">
+          <div id="sssWelcome2Timer" class="sssWelcome2-timer">READY TO START</div>
+          <button id="sssWelcome2Action" class="sssWelcome2-action" type="button">START →</button>
+          <div class="sssWelcome2-progress" aria-hidden="true"><span id="sssWelcome2Progress" class="sssWelcome2-progressFill"></span></div>
+        </div>
+
+        <div id="sssWelcome2Viewport" class="sssWelcome2-viewport" aria-live="polite" aria-atomic="false">
+          <section class="sssWelcome2-slide sssWelcome2-slide--active" data-sss-welcome2-slide="1" aria-hidden="false"><div class="sssWelcome2-copy"><span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">can</span> <span class="sssWelcome2-word">sell.</span> <span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">can</span> <span class="sssWelcome2-word">lead.</span> <span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">can</span> <span class="sssWelcome2-word">bring</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">best</span> <span class="sssWelcome2-word">out</span> <span class="sssWelcome2-word">of</span> <span class="sssWelcome2-word">people</span> <span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">but</span> <span class="sssWelcome2-word">I'm</span> <span class="sssWelcome2-word">just</span> <span class="sssWelcome2-word">as</span> <span class="sssWelcome2-word">comfortable</span> <span class="sssWelcome2-word">rolling</span> <span class="sssWelcome2-word">my</span> <span class="sssWelcome2-word">sleeves</span> <span class="sssWelcome2-word">up</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">doing</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">job</span> <span class="sssWelcome2-word">alongside</span> <span class="sssWelcome2-word">them.</span></div></section><section class="sssWelcome2-slide" data-sss-welcome2-slide="2" aria-hidden="true"><div class="sssWelcome2-copy"><span class="sssWelcome2-word">I’m</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">commercial</span> <span class="sssWelcome2-word">operator</span> <span class="sssWelcome2-word">with</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">documented</span> <span class="sssWelcome2-word">record</span> <span class="sssWelcome2-word">of</span> <span class="sssWelcome2-word">dominating</span> <span class="sssWelcome2-word">in</span> <span class="sssWelcome2-word">retail,</span> <span class="sssWelcome2-word">cold</span> <span class="sssWelcome2-word">calling</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">key</span> <span class="sssWelcome2-word">account</span> <span class="sssWelcome2-word">management.</span> <span class="sssWelcome2-word">I’m</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">true</span> <span class="sssWelcome2-word">hunter</span> <span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">can</span> <span class="sssWelcome2-word">find</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">opportunity,</span> <span class="sssWelcome2-word">open</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">door,</span> <span class="sssWelcome2-word">win</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">business</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">grow</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">account.</span> <span class="sssWelcome2-word">Beyond</span> <span class="sssWelcome2-word">sales,</span> <span class="sssWelcome2-word">I’ve</span> <span class="sssWelcome2-word">grown</span> <span class="sssWelcome2-word">revenue</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">teams,</span> <span class="sssWelcome2-word">managed</span> <span class="sssWelcome2-word">margins</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">costs,</span> <span class="sssWelcome2-word">developed</span> <span class="sssWelcome2-word">new</span> <span class="sssWelcome2-word">markets</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">taken</span> <span class="sssWelcome2-word">difficult</span> <span class="sssWelcome2-word">projects</span> <span class="sssWelcome2-word">from</span> <span class="sssWelcome2-word">idea</span> <span class="sssWelcome2-word">through</span> <span class="sssWelcome2-word">to</span> <span class="sssWelcome2-word">delivery.</span></div></section><section class="sssWelcome2-slide" data-sss-welcome2-slide="3" aria-hidden="true"><div class="sssWelcome2-copy"><span class="sssWelcome2-word">I've</span> <span class="sssWelcome2-word">always</span> <span class="sssWelcome2-word">been</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">player-coach.</span> <span class="sssWelcome2-word">I'd</span> <span class="sssWelcome2-word">rather</span> <span class="sssWelcome2-word">work</span> <span class="sssWelcome2-word">shoulder-to-shoulder,</span> <span class="sssWelcome2-word">show</span> <span class="sssWelcome2-word">people</span> <span class="sssWelcome2-word">what</span> <span class="sssWelcome2-word">works</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">recognise</span> <span class="sssWelcome2-word">what</span> <span class="sssWelcome2-word">they're</span> <span class="sssWelcome2-word">doing</span> <span class="sssWelcome2-word">well.</span> <span class="sssWelcome2-word">“Try</span> <span class="sssWelcome2-word">this”</span> <span class="sssWelcome2-word">has</span> <span class="sssWelcome2-word">always</span> <span class="sssWelcome2-word">worked</span> <span class="sssWelcome2-word">better</span> <span class="sssWelcome2-word">for</span> <span class="sssWelcome2-word">me</span> <span class="sssWelcome2-word">than</span> <span class="sssWelcome2-word">“get</span> <span class="sssWelcome2-word">in</span> <span class="sssWelcome2-word">my</span> <span class="sssWelcome2-word">office.”</span></div></section><section class="sssWelcome2-slide" data-sss-welcome2-slide="4" aria-hidden="true"><div class="sssWelcome2-copy"><span class="sssWelcome2-word">Business</span> <span class="sssWelcome2-word">is</span> <span class="sssWelcome2-word">much</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">same.</span> <span class="sssWelcome2-word">Find</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">pain</span> <span class="sssWelcome2-word">point,</span> <span class="sssWelcome2-word">understand</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">numbers,</span> <span class="sssWelcome2-word">work</span> <span class="sssWelcome2-word">out</span> <span class="sssWelcome2-word">what</span> <span class="sssWelcome2-word">makes</span> <span class="sssWelcome2-word">commercial</span> <span class="sssWelcome2-word">sense</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">get</span> <span class="sssWelcome2-word">on</span> <span class="sssWelcome2-word">with</span> <span class="sssWelcome2-word">solving</span> <span class="sssWelcome2-word">it.</span> <span class="sssWelcome2-word">I’m</span> <span class="sssWelcome2-word">as</span> <span class="sssWelcome2-word">comfortable</span> <span class="sssWelcome2-word">working</span> <span class="sssWelcome2-word">through</span> <span class="sssWelcome2-word">margins,</span> <span class="sssWelcome2-word">costs</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">commercial</span> <span class="sssWelcome2-word">decisions</span> <span class="sssWelcome2-word">as</span> <span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">am</span> <span class="sssWelcome2-word">turning</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">solution</span> <span class="sssWelcome2-word">into</span> <span class="sssWelcome2-word">something</span> <span class="sssWelcome2-word">that</span> <span class="sssWelcome2-word">actually</span> <span class="sssWelcome2-word">works.</span></div></section><section class="sssWelcome2-slide sssWelcome2-slide--quote" data-sss-welcome2-slide="5" aria-hidden="true"><div class="sssWelcome2-copy"><span class="sssWelcome2-word">“A</span> <span class="sssWelcome2-word">good</span> <span class="sssWelcome2-word">solution</span> <span class="sssWelcome2-word">doesn't</span> <span class="sssWelcome2-word">have</span> <span class="sssWelcome2-word">to</span> <span class="sssWelcome2-word">cost</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">million</span> <span class="sssWelcome2-word">dollars</span> <span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">but</span> <span class="sssWelcome2-word">it</span> <span class="sssWelcome2-word">just</span> <span class="sssWelcome2-word">might</span> <span class="sssWelcome2-word">generate</span> <span class="sssWelcome2-word">it.”</span></div></section><section class="sssWelcome2-slide" data-sss-welcome2-slide="6" aria-hidden="true"><div class="sssWelcome2-copy"><span class="sssWelcome2-word">My</span> <span class="sssWelcome2-word">roles</span> <span class="sssWelcome2-word">overlap,</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">being</span> <span class="sssWelcome2-word">driven</span> <span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">setting</span> <span class="sssWelcome2-word">targets,</span> <span class="sssWelcome2-word">cracking</span> <span class="sssWelcome2-word">inefficiencies</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">removing</span> <span class="sssWelcome2-word">pain</span> <span class="sssWelcome2-word">points</span> <span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">has</span> <span class="sssWelcome2-word">kept</span> <span class="sssWelcome2-word">me</span> <span class="sssWelcome2-word">fully</span> <span class="sssWelcome2-word">engaged</span> <span class="sssWelcome2-word">for</span> <span class="sssWelcome2-word">decades.</span> <span class="sssWelcome2-word">After</span> <span class="sssWelcome2-word">delivering</span> <span class="sssWelcome2-word">on</span> <span class="sssWelcome2-word">Devil</span> <span class="sssWelcome2-word">Burger's</span> <span class="sssWelcome2-word">success,</span> <span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">deliberately</span> <span class="sssWelcome2-word">took</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">proper</span> <span class="sssWelcome2-word">break</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">used</span> <span class="sssWelcome2-word">that</span> <span class="sssWelcome2-word">time</span> <span class="sssWelcome2-word">to</span> <span class="sssWelcome2-word">achieve</span> <span class="sssWelcome2-word">some</span> <span class="sssWelcome2-word">personal</span> <span class="sssWelcome2-word">goals,</span> <span class="sssWelcome2-word">spend</span> <span class="sssWelcome2-word">valuable</span> <span class="sssWelcome2-word">time</span> <span class="sssWelcome2-word">with</span> <span class="sssWelcome2-word">my</span> <span class="sssWelcome2-word">family</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">my</span> <span class="sssWelcome2-word">mum</span> <span class="sssWelcome2-word">before</span> <span class="sssWelcome2-word">she</span> <span class="sssWelcome2-word">passed.</span></div></section><section class="sssWelcome2-slide" data-sss-welcome2-slide="7" aria-hidden="true"><div class="sssWelcome2-copy"><span class="sssWelcome2-word">Now</span> <span class="sssWelcome2-word">I'm</span> <span class="sssWelcome2-word">ready</span> <span class="sssWelcome2-word">to</span> <span class="sssWelcome2-word">get</span> <span class="sssWelcome2-word">back</span> <span class="sssWelcome2-word">in</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">trenches</span> <span class="sssWelcome2-word">with</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">good</span> <span class="sssWelcome2-word">team.</span> <span class="sssWelcome2-word">Leading</span> <span class="sssWelcome2-word">or</span> <span class="sssWelcome2-word">following</span> <span class="sssWelcome2-word">isn't</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">important</span> <span class="sssWelcome2-word">part</span> <span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">put</span> <span class="sssWelcome2-word">me</span> <span class="sssWelcome2-word">where</span> <span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">can</span> <span class="sssWelcome2-word">contribute,</span> <span class="sssWelcome2-word">set</span> <span class="sssWelcome2-word">some</span> <span class="sssWelcome2-word">worthwhile</span> <span class="sssWelcome2-word">goals,</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">let's</span> <span class="sssWelcome2-word">get</span> <span class="sssWelcome2-word">on</span> <span class="sssWelcome2-word">with</span> <span class="sssWelcome2-word">achieving</span> <span class="sssWelcome2-word">them.</span></div></section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="sssWelcome2-footer">
+      <div class="sssWelcome2-footerLeft">
+        <button id="sssWelcome2Back" class="sssWelcome2-footerButton" type="button" disabled>Back</button>
+        <button id="sssWelcome2Pause" class="sssWelcome2-footerButton" type="button" disabled>Pause</button>
+      </div>
+      <button id="sssWelcome2ViewCV" class="sssWelcome2-viewCv" type="button">View My CV →</button>
+    </footer>
+  </div>
 </div>
 <div class="container">
-<div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-10 21:29 NZST</div>
+<div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-10 22:16 NZST</div>
 <div class="cv-header">
 <h1>Shane Soper</h1>
 <p>153 East Road, Ascot, Invercargill, Southland, New Zealand</p>
@@ -5747,7 +6072,7 @@ function toggleXcleanCompactContext(event, button){
   }
   return false;
 }
-</script><script id="cv-welcome-narrative-v19-9">
+</script><script type="application/x-sss-disabled" id="cv-welcome-narrative-v19-9">
 (()=>{
 "use strict";
 
@@ -5767,17 +6092,8 @@ const avatar=document.getElementById("cvShaneAvatar");
 if(!overlay||!host||!header||!heading||!capabilities||!closeBtn||!visual||!avatar)return;
 
 const sourceNodes=[...host.children].filter(el=>el.matches("p, blockquote.cv-commercial-quote"));
-if(sourceNodes.length!==7){console.error("V30.3 BUILD FAIL: expected seven narrative states.");return}
-
-/* V30.3: build the stable presentation structure ONCE before activation. */
-const controlRegion=document.createElement("div");
-controlRegion.className="v303-control-region";
-const narrativeStage=document.createElement("div");
-narrativeStage.className="v303-narrative-stage";
-host.append(controlRegion,narrativeStage);
-sourceNodes.forEach(node=>narrativeStage.appendChild(node));
-
-const originalParent=narrativeStage;
+if(sourceNodes.length!==7){console.error("V30.4 BUILD FAIL: expected seven direct-child narrative states.");return}
+const originalParent=host;
 const states=sourceNodes.map((el,index)=>({el,index,isQuote:el.matches("blockquote.cv-commercial-quote"),text:el.textContent.trim()}));
 const originalQuoteHTML=new Map(states.filter(s=>s.isQuote).map(s=>[s.el,s.el.innerHTML]));
 
@@ -5917,7 +6233,7 @@ function buildReserved(el,text){
  }
  return chars;
 }
-function placeNormal(el){el.style.top="50%"}
+function placeNormal(el){el.style.top="var(--v304-narrative-center, 55%)"}
 function prepareNormal(st){
  hideAllStates();
  const el=st.el;el.classList.add("v19-active");
@@ -5925,7 +6241,23 @@ function prepareNormal(st){
  const chars=buildReserved(el,st.text);placeNormal(el);void el.getBoundingClientRect();return chars;
 }
 function visibleCount(chars){return chars.reduce((n,c)=>n+(c.classList.contains("v195-visible")?1:0),0)}
-function renderGuard(chars){return chars.length>0&&visibleCount(chars)>=chars.length}
+function renderGuard(chars){
+ const classPass=chars.length>0&&visibleCount(chars)>=chars.length;
+ if(!classPass)return false;
+ const active=states[current]?.el;
+ if(!active||!active.classList.contains("v19-active"))return false;
+ const hr=host.getBoundingClientRect(),ar=active.getBoundingClientRect();
+ if(hr.width<=0||hr.height<=0||ar.width<=0||ar.height<=0)return false;
+ const reserve=parseFloat(getComputedStyle(host).getPropertyValue("--v304-control-reserve"))||64;
+ const safeTop=hr.top+reserve,safeBottom=hr.bottom;
+ if(!(ar.bottom>safeTop&&ar.top<safeBottom))return false;
+ return chars.some(c=>{
+  if(!c.classList.contains("v195-visible"))return false;
+  const cs=getComputedStyle(c);
+  if(cs.display==="none"||cs.visibility==="hidden"||Number(cs.opacity)===0||cs.color==="transparent")return false;
+  return [...c.getClientRects()].some(r=>r.width>0&&r.height>0&&r.bottom>safeTop&&r.top<safeBottom&&r.right>hr.left&&r.left<hr.right);
+ });
+}
 
 function ensureStrip(){
  if(strip)return;
@@ -5934,7 +6266,7 @@ function ensureStrip(){
  actionBtn=document.createElement("button");actionBtn.type="button";actionBtn.className="v198-action";actionBtn.textContent="SKIP →";
  const track=document.createElement("div");track.className="v198-track";
  fill=document.createElement("span");fill.className="v198-fill";track.appendChild(fill);
- strip.append(timerLabel,actionBtn,track);controlRegion.appendChild(strip);
+ strip.append(timerLabel,actionBtn,track);host.appendChild(strip);
  actionBtn.addEventListener("click",()=>{
   if(phase==="reveal")finishCurrentNow();
   else if(phase==="complete")advanceOne();
@@ -6044,7 +6376,7 @@ function portraitAssetCheck(){
 }
 function activate(){
  ensureIdentity();ensureStrip();initBottomControls();
- if(!parentInvariant()){console.error("V30.3 BUILD FAIL: narrative stage parent invariant changed.");return}
+ if(!parentInvariant()){console.error("V30.4 BUILD FAIL: narrative direct-child host invariant changed.");return}
  portraitAssetCheck(); /* Report asset failure, but do not destroy functional-engine testability. */
  requestAnimationFrame(()=>requestAnimationFrame(fitHeader));
  runState(0);
@@ -6063,7 +6395,7 @@ addEventListener("resize",()=>{
 </script><script id="cv-loading-sound-flow-v2">
 (function(){
  "use strict";
- const gate=document.getElementById('cvLoadingGate'),count=document.getElementById('cvCountdown'),welcome=document.getElementById('cvWelcomeOverlay'),close=document.getElementById('cvWelcomeClose'),avatar=document.getElementById('cvShaneAvatar');
+ const gate=document.getElementById('cvLoadingGate'),count=document.getElementById('cvCountdown'),welcome=document.getElementById('sssWelcome2'),close=document.getElementById('sssWelcome2ViewCV'),avatar=document.getElementById('sssWelcome2Portrait');
  if(!gate||!count||!welcome||!close||!avatar)return;
  const cover='shane cover.png', SW=1672, SH=941;
  /* V15 bounded preload manifest: first-view Shane image, HQ background, then lightweight CV thumbnails/previews only. Heavy audio/video remains on demand. */
@@ -6109,7 +6441,7 @@ addEventListener("resize",()=>{
  let n=10;count.hidden=false;count.textContent='10';
  const tick=setInterval(()=>{n--;if(n<1){clearInterval(tick);setTimeout(()=>{count.hidden=true;enter();},180);return;}count.textContent=String(n);count.classList.remove('hq-tick');void count.offsetWidth;count.classList.add('hq-tick');},1000);
 })();
-</script><script id="cv-avatar-path-bootstrap-v1">
+</script><script type="application/x-sss-disabled" id="cv-avatar-path-bootstrap-v1">
 (function(){
  const a=document.getElementById('cvShaneAvatar');
  if(a) a.src=encodeURI('shane cover.png');
@@ -6458,29 +6790,438 @@ addEventListener("resize",()=>{
 })();
 </script>
 
-<script id="sss-v30-3-acceptance-harness">
+
+
+<script type="application/x-sss-disabled" id="sss-v30-5-isolated-narrative-controller">
 (function(){
  "use strict";
- function rect(el){const r=el.getBoundingClientRect();return {top:r.top,bottom:r.bottom,left:r.left,right:r.right,width:r.width,height:r.height}}
- function inspect(label){
-   const root=document.getElementById("cvWelcomeOverlay");
-   const host=root&&root.querySelector(".cv-welcome-scroll");
-   const cr=host&&host.querySelector(".v303-control-region");
-   const ns=host&&host.querySelector(".v303-narrative-stage");
-   const strip=cr&&cr.querySelector(".v198-control-strip");
-   const active=ns&&ns.querySelector(".v19-active");
-   if(!host||!cr||!ns||!strip||!active)return;
-   const H=rect(host),C=rect(cr),N=rect(ns),S=rect(strip),A=rect(active);
-   const pass=C.width>0&&C.height>0&&N.width>0&&N.height>0&&
-     C.bottom<=N.top+1&&S.top>=C.top-1&&S.bottom<=C.bottom+1&&
-     A.top>=N.top-1&&A.bottom<=N.bottom+1;
-   console[pass?"info":"error"]("V30.3 COMPONENT ASSERT",label,{pass,host:H,control:C,stage:N,strip:S,active:A});
- }
+
+ const EXPECTED=["I can sell. I can lead. I can bring the best out of people — but I'm just as comfortable rolling my sleeves up and doing the job alongside them.", "I’m a commercial operator with a documented record of dominating in retail, cold calling and key account management. I’m a true hunter — I can find the opportunity, open the door, win the business and grow the account. Beyond sales, I’ve grown revenue and teams, managed margins and costs, developed new markets and taken difficult projects from idea through to delivery.", "I've always been a player-coach. I'd rather work shoulder-to-shoulder, show people what works and recognise what they're doing well. “Try this” has always worked better for me than “get in my office.”", "Business is much the same. Find the pain point, understand the numbers, work out what makes commercial sense and get on with solving it. I’m as comfortable working through margins, costs and commercial decisions as I am turning the solution into something that actually works.", "“A good solution doesn't have to cost a million dollars — but it just might generate it.”", "My roles overlap, and being driven — setting targets, cracking inefficiencies and removing pain points — has kept me fully engaged for decades. After delivering on Devil Burger's success, I deliberately took a proper break and used that time to achieve some personal goals, spend valuable time with my family and my mum before she passed.", "Now I'm ready to get back in the trenches with a good team. Leading or following isn't the important part — put me where I can contribute, set some worthwhile goals, and let's get on with achieving them."];
+ const TOTALS=[9000, 17000, 8000, 11000, 4000, 13000, 10000];
+ const REVEAL_WPM=238*1.30;
+
  const overlay=document.getElementById("cvWelcomeOverlay");
- if(overlay)overlay.addEventListener("animationstart",e=>{
-   if(e.animationName==="v18WelcomeSignal")requestAnimationFrame(()=>requestAnimationFrame(()=>inspect("activation")));
+ const host=overlay?.querySelector(".cv-welcome-scroll");
+ const viewport=host?.querySelector(".sssNarrativeViewport");
+ const slides=viewport?[...viewport.querySelectorAll(".sssNarrativeSlide")]:[];
+ const timer=host?.querySelector(".sssPlaybackTimer");
+ const action=host?.querySelector(".sssPlaybackAction");
+ const fill=host?.querySelector(".sssPlaybackFill");
+ const back=document.querySelector("#cvWelcomeOverlay .sssBottomBack");
+ const pause=document.querySelector("#cvWelcomeOverlay .sssBottomPause");
+ const close=document.getElementById("cvWelcomeClose");
+ if(!overlay||!host||!viewport||!timer||!action||!fill||!back||!pause||!close)return;
+
+ let started=false,current=0,elapsed=0,lastTs=0,paused=false,phase="idle",raf=0;
+ let lastVisibleCount=0,lastRect=null;
+
+ function norm(s){return s.replace(/\s+/g," ").trim()}
+ function wordsOf(slide){return [...slide.querySelectorAll(".sssNarrativeWord")]}
+ function isVisibleElement(el){
+   const cs=getComputedStyle(el),r=el.getBoundingClientRect();
+   return cs.display!=="none"&&cs.visibility!=="hidden"&&Number(cs.opacity)>0&&r.width>0&&r.height>0;
+ }
+ function ancestorPaintCheck(el){
+   for(let n=el;n&&n!==document.documentElement;n=n.parentElement){
+     const cs=getComputedStyle(n),r=n.getBoundingClientRect();
+     if(cs.display==="none"||cs.visibility==="hidden"||Number(cs.opacity)===0||r.width<=0||r.height<=0)return false;
+     if(n===overlay)break;
+   }
+   return true;
+ }
+ function animationHazards(el){
+   const bad=new Set(["opacity","visibility","transform","clip-path","color"]);
+   const found=[];
+   for(const a of el.getAnimations?.()||[]){
+     try{
+       const frames=a.effect?.getKeyframes?.()||[];
+       const keys=new Set(frames.flatMap(f=>Object.keys(f)));
+       if([...bad].some(k=>keys.has(k)))found.push([...keys].filter(k=>bad.has(k)));
+     }catch(_e){}
+   }
+   return found;
+ }
+ function preflight(){
+   const failures=[];
+   if(slides.length!==7)failures.push("slide-count");
+   slides.forEach((s,i)=>{
+     if(norm(s.dataset.sssText||"")!==norm(EXPECTED[i]||""))failures.push("text-"+(i+1));
+   });
+   if(host.querySelectorAll(".sssPlaybackTimer").length!==1)failures.push("timer-count");
+   if(host.querySelectorAll(".sssPlaybackAction").length!==1)failures.push("action-count");
+   if(host.querySelectorAll(".sssPlaybackTrack").length!==1)failures.push("track-count");
+
+   const vr=viewport.getBoundingClientRect();
+   if(vr.width<=0||vr.height<=0)failures.push("viewport-rect");
+
+   slides.forEach((s,i)=>{
+     const r=s.getBoundingClientRect(),cs=getComputedStyle(s);
+     if(r.width<=0||r.height<=0)failures.push("slide-rect-"+(i+1));
+     if(parseFloat(cs.fontSize)<=0)failures.push("font-"+(i+1));
+     if(cs.lineHeight!=="normal"&&parseFloat(cs.lineHeight)<=0)failures.push("line-"+(i+1));
+     const w=wordsOf(s)[0],wr=w?.getBoundingClientRect();
+     if(!w||!wr||wr.width<=0||wr.height<=0)failures.push("reserved-word-"+(i+1));
+   });
+
+   const hazards=[overlay,host,viewport,...slides].flatMap(animationHazards);
+   if(hazards.length)console.warn("V30.5 PREFLIGHT animation/transition review:",hazards);
+
+   if(!ancestorPaintCheck(viewport))failures.push("ancestor-paint");
+   if(failures.length){
+     console.error("V30.5 PREFLIGHT FAIL",failures);
+     timer.textContent="PLAYBACK CHECK REQUIRED";
+     action.textContent="CHECK";
+     action.disabled=true;
+     return false;
+   }
+   console.info("V30.5 PREFLIGHT PASS",{slides:7,viewport:[vr.width,vr.height]});
+   return true;
+ }
+
+ function total(){return TOTALS[current]}
+ function wordRevealDuration(){
+   const n=wordsOf(slides[current]).length;
+   const historical=n/REVEAL_WPM*60000;
+   const hold=current===4?1500:2200;
+   return Math.max(700,Math.min(total()-1000,Math.min(historical,total()-hold)));
+ }
+ function setWords(count){
+   const ws=wordsOf(slides[current]);
+   const n=Math.max(0,Math.min(count,ws.length));
+   ws.forEach((w,i)=>w.classList.toggle("sssWordVisible",i<n));
+   return n;
+ }
+ function visibleWordPainted(){
+   const s=slides[current],vr=viewport.getBoundingClientRect();
+   return wordsOf(s).some(w=>{
+     if(!w.classList.contains("sssWordVisible"))return false;
+     const cs=getComputedStyle(w);
+     if(cs.visibility==="hidden"||cs.display==="none"||Number(cs.opacity)===0||cs.color==="transparent")return false;
+     return [...w.getClientRects()].some(r=>r.width>0&&r.height>0&&r.bottom>vr.top&&r.top<vr.bottom&&r.right>vr.left&&r.left<vr.right);
+   });
+ }
+ function geometryStable(){
+   const r=slides[current].getBoundingClientRect();
+   if(!lastRect){lastRect={top:r.top,bottom:r.bottom,left:r.left,right:r.right};return true}
+   return Math.abs(r.top-lastRect.top)<=1&&Math.abs(r.bottom-lastRect.bottom)<=1;
+ }
+
+ function showSlide(index,resetElapsed=true){
+   current=Math.max(0,Math.min(index,slides.length-1));
+   slides.forEach((s,i)=>s.classList.toggle("sssIsActive",i===current));
+   slides.forEach((s,i)=>{if(i!==current)wordsOf(s).forEach(w=>w.classList.remove("sssWordVisible"))});
+   if(resetElapsed)elapsed=0;
+   setWords(0);
+   phase="reveal";lastVisibleCount=0;lastRect=null;
+   back.disabled=current===0;
+   pause.disabled=false;
+   action.disabled=false;
+   action.textContent="SKIP →";
+   lastTs=performance.now();
+   updateUI();
+ }
+
+ function updateUI(){
+   const rem=Math.max(0,total()-elapsed);
+   timer.textContent=(current===slides.length-1&&rem<=0)
+     ?"READY TO CONTINUE"
+     :"NEXT SLIDE IN "+String(Math.max(0,Math.ceil(rem/1000))).padStart(2,"0")+"s";
+   fill.style.width=((total()-rem)/total()*100).toFixed(2)+"%";
+ }
+
+ function completeReveal(){
+   const count=setWords(wordsOf(slides[current]).length);
+   lastVisibleCount=count;
+   phase="complete";
+   if(!visibleWordPainted()){
+     console.error("V30.5 RENDER FAIL: words marked visible but no painted word rectangle.");
+     action.textContent="RENDER ERROR";
+     action.disabled=true;
+     pause.disabled=true;
+     return false;
+   }
+   action.textContent=current===slides.length-1?"GO TO CV →":"NEXT →";
+   return true;
+ }
+
+ function tick(ts){
+   if(!started)return;
+   if(!lastTs)lastTs=ts;
+   const dt=Math.min(100,Math.max(0,ts-lastTs));
+   lastTs=ts;
+   if(!paused){
+     elapsed=Math.min(total(),elapsed+dt);
+     if(phase==="reveal"){
+       const ws=wordsOf(slides[current]);
+       const rd=wordRevealDuration();
+       const n=Math.min(ws.length,Math.floor((elapsed/rd)*ws.length));
+       if(n!==lastVisibleCount){
+         setWords(n);
+         if(n>0&&!visibleWordPainted())console.error("V30.5 VISIBLE-WORD ASSERT FAIL",{state:current+1,count:n});
+         if(n>0&&!geometryStable())console.error("V30.5 GEOMETRY MOVED DURING REVEAL",{state:current+1,count:n});
+         lastVisibleCount=n;
+       }
+       if(n>=ws.length)completeReveal();
+     }
+     updateUI();
+     if(elapsed>=total()){
+       if(phase==="reveal"&&!completeReveal())return;
+       if(current<slides.length-1){
+         showSlide(current+1,true);
+       }else{
+         phase="terminal";
+         timer.textContent="READY TO CONTINUE";
+         action.textContent="GO TO CV →";
+         fill.style.width="100%";
+       }
+     }
+   }
+   raf=requestAnimationFrame(tick);
+ }
+
+ function setPaused(v){
+   paused=!!v;
+   pause.textContent=paused?"Play":"Pause";
+   lastTs=performance.now();
+ }
+ action.addEventListener("click",()=>{
+   if(phase==="reveal"){completeReveal();return}
+   if(phase==="complete"){showSlide(current+1,true);return}
+   if(phase==="terminal")close.click();
  });
- addEventListener("resize",()=>requestAnimationFrame(()=>inspect("resize")),{passive:true});
+ back.addEventListener("click",()=>{if(current>0)showSlide(current-1,true)});
+ pause.addEventListener("click",()=>setPaused(!paused));
+
+ function activateOnce(source){
+   if(started)return;
+   const cs=getComputedStyle(overlay);
+   if(overlay.hidden||cs.display==="none"||cs.visibility==="hidden")return;
+   if(!preflight())return;
+   started=true;
+   console.info("V30.5 START",source);
+   showSlide(0,true);
+   raf=requestAnimationFrame(tick);
+   setTimeout(()=>{
+     if(!started)return;
+     const first=wordsOf(slides[current])[0];
+     const r=first?.getBoundingClientRect();
+     console.info("V30.5 FIRST RESERVED WORD RECT",r&&{width:r.width,height:r.height});
+   },100);
+ }
+
+ overlay.addEventListener("animationstart",e=>{
+   if(e.animationName==="v18WelcomeSignal")requestAnimationFrame(()=>requestAnimationFrame(()=>activateOnce("v18WelcomeSignal")));
+ });
+
+ /* Bounded activation fallbacks: no polling, no observer. */
+ setTimeout(()=>activateOnce("post-HQ-10.6s"),10600);
+ setTimeout(()=>activateOnce("post-HQ-12s"),12000);
+ addEventListener("focus",()=>activateOnce("window-focus"),{passive:true});
+ document.addEventListener("visibilitychange",()=>{if(!document.hidden)activateOnce("visibilitychange")},{passive:true});
+})();
+</script>
+
+
+<script id="sss-welcome2-clean-manual-controller-v30-6">
+(function(){
+  "use strict";
+
+  const TOTALS=[9000, 17000, 8000, 11000, 4000, 13000, 10000];
+  const REVEAL_WPM=238*1.30;
+
+  const root=document.getElementById("sssWelcome2");
+  if(!root)return;
+
+  const slides=[...root.querySelectorAll(".sssWelcome2-slide")];
+  const timer=root.querySelector("#sssWelcome2Timer");
+  const action=root.querySelector("#sssWelcome2Action");
+  const progress=root.querySelector("#sssWelcome2Progress");
+  const back=root.querySelector("#sssWelcome2Back");
+  const pause=root.querySelector("#sssWelcome2Pause");
+  const viewCv=root.querySelector("#sssWelcome2ViewCV");
+  const viewport=root.querySelector("#sssWelcome2Viewport");
+
+  if(slides.length!==7||!timer||!action||!progress||!back||!pause||!viewCv||!viewport){
+    console.error("WELCOME2 INIT FAIL: required static elements are missing.");
+    return;
+  }
+
+  let phase="idle";
+  let current=0;
+  let elapsed=0;
+  let frameId=0;
+  let lastTs=0;
+  let userPaused=false;
+  let visibleWords=0;
+
+  const words=(index=current)=>[...slides[index].querySelectorAll(".sssWelcome2-word")];
+
+  function setActive(index){
+    current=Math.max(0,Math.min(index,slides.length-1));
+    slides.forEach((slide,i)=>{
+      const active=i===current;
+      slide.classList.toggle("sssWelcome2-slide--active",active);
+      slide.setAttribute("aria-hidden",active?"false":"true");
+    });
+    back.disabled=(phase==="idle"||current===0);
+  }
+
+  function showAll(index=current){
+    words(index).forEach(w=>w.classList.add("sssWelcome2-word--visible"));
+    visibleWords=words(index).length;
+  }
+
+  function hideAll(index=current){
+    words(index).forEach(w=>w.classList.remove("sssWelcome2-word--visible"));
+    visibleWords=0;
+  }
+
+  function revealDuration(){
+    const n=words().length;
+    const historical=(n/REVEAL_WPM)*60000;
+    const minimumHold=current===4?700:1800;
+    return Math.max(650,Math.min(historical,TOTALS[current]-minimumHold));
+  }
+
+  function updateClock(){
+    if(phase==="idle"){
+      timer.textContent="READY TO START";
+      progress.style.width="0%";
+      action.textContent="START →";
+      return;
+    }
+    if(phase==="terminal"){
+      timer.textContent="READY TO CONTINUE";
+      progress.style.width="100%";
+      action.textContent="GO TO CV →";
+      return;
+    }
+    const remaining=Math.max(0,TOTALS[current]-elapsed);
+    timer.textContent="NEXT SLIDE IN "+String(Math.max(0,Math.ceil(remaining/1000))).padStart(2,"0")+"s";
+    progress.style.width=((elapsed/TOTALS[current])*100).toFixed(2)+"%";
+  }
+
+  function startSlide(index){
+    setActive(index);
+    elapsed=0;
+    lastTs=performance.now();
+    phase="revealing";
+    userPaused=false;
+    pause.disabled=false;
+    pause.textContent="Pause";
+    back.disabled=current===0;
+    root.classList.add("sssWelcome2-running");
+    hideAll();
+    action.textContent="SKIP →";
+    updateClock();
+  }
+
+  function completeReveal(){
+    showAll();
+    phase="complete";
+    action.textContent=current===slides.length-1?"GO TO CV →":"NEXT →";
+  }
+
+  function nextSlide(){
+    if(current>=slides.length-1){
+      phase="terminal";
+      root.classList.remove("sssWelcome2-running");
+      showAll();
+      updateClock();
+      return;
+    }
+    startSlide(current+1);
+  }
+
+  function goBack(){
+    if(phase==="idle"||current===0)return;
+    startSlide(current-1);
+  }
+
+  function setUserPaused(value){
+    if(phase==="idle"||phase==="terminal")return;
+    userPaused=!!value;
+    pause.textContent=userPaused?"Play":"Pause";
+    lastTs=performance.now();
+  }
+
+  function tick(ts){
+    frameId=requestAnimationFrame(tick);
+    if(phase==="idle"||phase==="terminal"||userPaused||document.hidden){
+      lastTs=ts;
+      return;
+    }
+
+    const dt=Math.min(100,Math.max(0,ts-lastTs));
+    lastTs=ts;
+    elapsed=Math.min(TOTALS[current],elapsed+dt);
+
+    if(phase==="revealing"){
+      const ws=words();
+      const rd=revealDuration();
+      const target=Math.min(ws.length,Math.floor((elapsed/rd)*ws.length));
+      if(target!==visibleWords){
+        for(let i=visibleWords;i<target;i++)ws[i]?.classList.add("sssWelcome2-word--visible");
+        visibleWords=target;
+      }
+      if(visibleWords>=ws.length)completeReveal();
+    }
+
+    updateClock();
+
+    if(elapsed>=TOTALS[current]){
+      if(phase==="revealing")completeReveal();
+      if(current<slides.length-1)nextSlide();
+      else{
+        phase="terminal";
+        root.classList.remove("sssWelcome2-running");
+        showAll();
+        updateClock();
+      }
+    }
+  }
+
+  action.addEventListener("click",()=>{
+    if(phase==="idle"){
+      startSlide(0);
+      if(!frameId)frameId=requestAnimationFrame(tick);
+      return;
+    }
+    if(phase==="revealing"){
+      completeReveal();
+      return;
+    }
+    if(phase==="complete"){
+      if(current===slides.length-1){
+        phase="terminal";
+        root.classList.remove("sssWelcome2-running");
+        showAll();
+        updateClock();
+      }else nextSlide();
+      return;
+    }
+    if(phase==="terminal")viewCv.click();
+  });
+
+  back.addEventListener("click",goBack);
+  pause.addEventListener("click",()=>setUserPaused(!userPaused));
+
+  document.addEventListener("visibilitychange",()=>{
+    lastTs=performance.now();
+  },{passive:true});
+
+  /* Manual-start engineering baseline.
+     State 1 is deliberately visible before START so a renderer failure can never
+     present an empty recruiter-facing narrative panel. */
+  setActive(0);
+  root.classList.remove("sssWelcome2-running");
+  showAll(0);
+  phase="idle";
+  timer.textContent="READY TO START";
+  action.textContent="START →";
+  progress.style.width="0%";
+  back.disabled=true;
+  pause.disabled=true;
 })();
 </script>
 
