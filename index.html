@@ -140,6 +140,53 @@ h2.section-title {
 @media(min-width: 768px) {
   .role-summary { font-size: 15px; }
 }
+
+/* SSS V17 — locked recruiter front-card hierarchy: role → achievements → capability */
+.role-front-highlights {
+  display: grid;
+  gap: 4px;
+  margin: 8px 0 2px 0;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  border-left: 3px solid var(--highlight-blue);
+  border-radius: 4px;
+  background: rgba(29, 78, 216, 0.035);
+}
+.role-front-highlight {
+  min-width: 0;
+  font-size: 13px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--text-main);
+  overflow-wrap: anywhere;
+}
+.role-front-capability {
+  margin: 7px 0 0 0;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: var(--highlight-blue);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.role-card:has(> .collapsible-content.show) > .role-front-highlights,
+.role-card:has(> .collapsible-content.show) > .role-front-capability {
+  display: none;
+}
+@media(min-width: 768px) {
+  .role-front-highlights {
+    gap: 5px;
+    margin-top: 9px;
+    padding: 9px 12px;
+  }
+  .role-front-highlight {
+    font-size: 14px;
+  }
+  .role-front-capability {
+    margin-top: 8px;
+    font-size: 13.5px;
+  }
+}
+
 /* Collapsible Content */
 .collapsible-content {
   display: none;
@@ -2304,7 +2351,11 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role1')">
 <div class="role-meta">2023–2025</div>
 <div class="role-company-name">DEVIL BURGER</div><div class="main-role-title">Operations Manager</div>
-<div class="role-summary-highlight">Sales Growth · Turnaround · Operations</div>
+<div class="role-front-highlights" aria-label="Role achievements">
+<div class="role-front-highlight">5× Promo Turnover</div>
+<div class="role-front-highlight">Created New Income Streams</div>
+</div>
+<div class="role-summary-highlight role-front-capability">Commercial Growth · Marketing · Operations</div>
 <div class="collapsible-content" id="role1">
 <img alt="Devil Burger Logo" class="role-logo" src="image1.png"/>
 <div class="role-overview db-role-overview">
@@ -2523,7 +2574,11 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role2')">
 <div class="role-meta">2018–2022</div>
 <div class="role-company-name">XCLEAN</div><div class="main-role-title role-mobile-single-line">National Sales Manager</div>
-<div class="role-summary-highlight role-mobile-single-line xclean-capline">B2B Sales · Growth · Leadership</div>
+<div class="role-front-highlights" aria-label="Role achievements">
+<div class="role-front-highlight">Rebuilt Company Reputation Through National Cold Calling</div>
+<div class="role-front-highlight">Personal $550K GP p.a. while Building 8-Region Team</div>
+</div>
+<div class="role-summary-highlight role-mobile-single-line xclean-capline role-front-capability">National Sales · Business Development · Team Leadership</div>
 <div class="collapsible-content" id="role2">
 <div class="role-overview xclean-role-overview">
 <h4>Role Overview</h4>
@@ -2721,7 +2776,11 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role3')">
 <div class="role-meta">2017</div>
 <div class="role-company-name">ROYAL ALBATROSS CENTRE</div><div class="main-role-title albatross-mobile-title">Bespoke Project Sales</div>
-<div class="role-summary-highlight albatross-mobile-capline">Consultative Sales · Solutions · Delivery</div>
+<div class="role-front-highlights" aria-label="Role achievements">
+<div class="role-front-highlight">Closed Six-Figure Project That Only Existed on Paper</div>
+<div class="role-front-highlight">Delivered a Solution Every Competitor Walked Away From</div>
+</div>
+<div class="role-summary-highlight albatross-mobile-capline role-front-capability">Complex Sales · Problem Solving · End-to-End Delivery</div>
 <div class="collapsible-content" id="role3">
 <img alt="Albatross Centre Logo" class="role-logo" src="albatross logo.png"/>
 <div class="role-overview albatross-role-overview">
@@ -2826,7 +2885,11 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role4')">
 <div class="role-meta">2015–2017</div>
 <div class="role-company-name">ISEE DIGITAL</div><div class="main-role-title isee-mobile-title">Site Acquisition Manager</div>
-<div class="role-summary-highlight isee-mobile-capline">B2B Sales · Network Growth · Delivery</div>
+<div class="role-front-highlights" aria-label="Role achievements">
+<div class="role-front-highlight">Delivered National B2B Network Under Budget</div>
+<div class="role-front-highlight">2,000+ Individual Leases for 8-Figure Infrastructure</div>
+</div>
+<div class="role-summary-highlight isee-mobile-capline role-front-capability">B2B Acquisition · Commercial Negotiation · National Delivery</div>
 <div class="collapsible-content" id="role4">
 <img alt="ISee Digital Logo" class="role-logo" src="isee digital logo.jpeg"/>
 <div class="role-overview isee-role-overview">
@@ -3119,7 +3182,11 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role5')">
 <div class="role-meta">2013–2015</div>
 <div class="role-company-name">XCLEAN</div><div class="main-role-title">Sales Manager</div>
-<div class="role-summary-highlight">Frontline Sales · Team Growth · Retention</div>
+<div class="role-front-highlights" aria-label="Role achievements">
+<div class="role-front-highlight">Built a Cold-Prospecting + Demonstration + Closing Sales Process</div>
+<div class="role-front-highlight">Turned Personal Sales Success into Teams across 6 Regions</div>
+</div>
+<div class="role-summary-highlight role-front-capability">Cold Sales · Sales Systems · Team Development</div>
 <div class="collapsible-content" id="role5">
 <img alt="XClean Logo" class="role-logo" src="xclean.jpg"/>
 <div class="role-overview">
@@ -3177,7 +3244,11 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role6')">
 <div class="role-meta">2007–2014</div>
 <div class="role-company-name">INTEGRATE GROUP / SKY</div><div class="main-role-title">Regional Sales Manager</div>
-<div class="role-summary-highlight">Direct Sales · Leadership · Regional Growth</div>
+<div class="role-front-highlights" aria-label="Role achievements">
+<div class="role-front-highlight">Cold Calling to Deliver 6,000+ New Subscribers a Year</div>
+<div class="role-front-highlight">Recruiting · Onboarding · Coaching · Team Growth From 1 to 8</div>
+</div>
+<div class="role-summary-highlight role-front-capability">Customer Acquisition · Sales Leadership · Team Building</div>
 <div class="collapsible-content" id="role6">
 <img alt="Integrate Group Logo" class="role-logo" src="Integrate logo.png"/>
 <div class="role-overview">
@@ -3236,7 +3307,11 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role7')">
 <div class="role-meta">2002–2006</div>
 <div class="role-company-name">MOBILEFONE SOLUTIONS</div><div class="main-role-title">Manager — Vodafone Franchise</div>
-<div class="role-summary-highlight">Retail Sales · Growth · Team Performance</div>
+<div class="role-front-highlights" aria-label="Role achievements">
+<div class="role-front-highlight">4× Monthly Turnover while Growing From 1 to 8 Staff</div>
+<div class="role-front-highlight">National Recognition for Outbound Sales</div>
+</div>
+<div class="role-summary-highlight role-front-capability">Retail Growth · Outbound Sales · People Leadership</div>
 <div class="collapsible-content" id="role7">
 <img alt="Mobilefone Solutions Logo" class="role-logo" src="mobilefone solutions logo.png"/>
 <div class="role-overview">
@@ -3307,7 +3382,11 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role8')">
 <div class="role-meta">2001–2002</div>
 <div class="role-company-name">H&amp;J SMITH</div><div class="main-role-title">Department Manager</div>
-<div class="role-summary-highlight">Sales Growth · Multi-Store · Operations</div>
+<div class="role-front-highlights" aria-label="Role achievements">
+<div class="role-front-highlight">Set Sales Records</div>
+<div class="role-front-highlight">Initiatives Rolled Out Multi-Store</div>
+</div>
+<div class="role-summary-highlight role-front-capability">Sales Performance · Operational Improvement · Multi-Store Impact</div>
 <div class="collapsible-content" id="role8">
 <img alt="H&amp;J Smith Logo" class="role-logo" src="h&amp;J logo.png"/>
 <div class="role-overview">
@@ -3349,7 +3428,11 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role9')">
 <div class="role-meta">1992–2001</div>
 <div class="role-company-name">SMITHS CITY / POWERSTORE</div><div class="main-role-title">Area &amp; Branch Manager</div>
-<div class="role-summary-highlight">Sales Growth · Multi-Store · Turnaround</div>
+<div class="role-front-highlights" aria-label="Role achievements">
+<div class="role-front-highlight">$100K+ Monthly Personal Sales during Multi-Store Leadership</div>
+<div class="role-front-highlight">Orchestrated Off-Site Promotions & Opened Additional Stores</div>
+</div>
+<div class="role-summary-highlight role-front-capability">High-Value Sales · Promotions · Multi-Store Leadership</div>
 <div class="collapsible-content" id="role9">
 <img alt="Smiths City Logo" class="role-logo" src="smiths city logo.png"/>
 <div class="role-overview">
