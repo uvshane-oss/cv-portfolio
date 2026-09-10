@@ -2611,6 +2611,132 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 }
 </style>
 
+
+<style id="sss-v19-8-functional-repair">
+/* FUNCTIONAL BUILD: portrait/nameplate deliberately deferred. */
+#cvWelcomeOverlay .cv-shane-avatar,
+#cvWelcomeOverlay #cvShaneAvatar{
+  visibility:hidden!important;
+}
+#cvWelcomeOverlay .cv-intro-visual::after{
+  content:none!important;
+  display:none!important;
+}
+#cvWelcomeOverlay .cv-welcome-scroll::before{
+  content:none!important;
+  display:none!important;
+}
+
+/* Grey header: primary one physical line; secondary one line or JS hides it. */
+#cvWelcomeOverlay .cv-welcome-heading,
+#cvWelcomeOverlay .cv-welcome-capabilities{
+  white-space:nowrap!important;
+  text-wrap:nowrap!important;
+  max-width:none!important;
+  width:max-content;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  overflow:visible!important;
+}
+
+/* Original V19.5 narrative host remains the parent of every paragraph/quote. */
+#cvWelcomeOverlay .cv-welcome-scroll{
+  position:relative!important;
+  overflow:hidden!important;
+}
+
+/* Fixed reserved strip; it does not own/re-parent narrative nodes. */
+#cvWelcomeOverlay .v198-control-strip{
+  position:absolute!important;
+  z-index:40!important;
+  left:clamp(18px,3vw,42px)!important;
+  right:clamp(18px,3vw,42px)!important;
+  top:10px!important;
+  height:42px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  grid-template-rows:30px 2px!important;
+  column-gap:12px!important;
+  row-gap:5px!important;
+  align-items:center!important;
+  color:#405866!important;
+  font-size:9px!important;
+  font-weight:850!important;
+  letter-spacing:.105em!important;
+  text-transform:uppercase!important;
+  pointer-events:auto!important;
+}
+#cvWelcomeOverlay .v198-timer{
+  white-space:nowrap!important;
+  font-variant-numeric:tabular-nums!important;
+}
+#cvWelcomeOverlay .v198-action{
+  box-sizing:border-box!important;
+  width:112px!important;
+  min-width:112px!important;
+  height:28px!important;
+  min-height:28px!important;
+  margin:0!important;
+  padding:0 8px!important;
+  border:1px solid rgba(48,91,117,.34)!important;
+  border-radius:4px!important;
+  background:rgba(255,255,255,.66)!important;
+  color:#17384d!important;
+  font-size:9px!important;
+  font-weight:900!important;
+  letter-spacing:.09em!important;
+  white-space:nowrap!important;
+}
+#cvWelcomeOverlay .v198-track{
+  grid-column:1/-1!important;
+  height:2px!important;
+  overflow:hidden!important;
+  background:rgba(49,84,104,.14)!important;
+}
+#cvWelcomeOverlay .v198-fill{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  transform-origin:left center!important;
+  background:rgba(37,101,142,.70)!important;
+}
+
+/* Simplified bottom controls. No bottom Skip/Next. */
+#cvWelcomeOverlay .v19-control-group{
+  display:grid!important;
+  grid-template-columns:auto auto 1fr auto!important;
+  align-items:center!important;
+  gap:8px!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:9px clamp(13px,1.8vw,22px)!important;
+  box-sizing:border-box!important;
+}
+#cvWelcomeOverlay .v19-control-group .v19-back{grid-column:1!important}
+#cvWelcomeOverlay .v19-control-group .v19-pause{grid-column:2!important}
+#cvWelcomeOverlay .v19-control-group #cvWelcomeClose{
+  grid-column:4!important;
+  width:auto!important;
+  min-width:165px!important;
+  margin:0!important;
+  padding:10px 16px!important;
+}
+@media(max-width:700px){
+  #cvWelcomeOverlay .v198-control-strip{
+    left:13px!important;right:13px!important;top:7px!important;height:36px!important;
+    grid-template-rows:26px 1px!important;column-gap:7px!important;font-size:7.5px!important;
+  }
+  #cvWelcomeOverlay .v198-action{
+    width:92px!important;min-width:92px!important;height:25px!important;min-height:25px!important;
+    font-size:7.5px!important;padding:0 5px!important;
+  }
+  #cvWelcomeOverlay .v19-control-group{padding:6px 8px!important;gap:5px!important}
+  #cvWelcomeOverlay .v19-control-group button{min-height:32px!important;padding:6px 8px!important;font-size:9px!important}
+  #cvWelcomeOverlay .v19-control-group #cvWelcomeClose{min-width:128px!important;padding:7px 9px!important;font-size:9px!important}
+}
+</style>
+
 </head>
 <body><div aria-live="polite" aria-label="Shane Soper CV loading" class="cv-loading-gate" id="cvLoadingGate">
 <div class="sss-hq-live" id="sssHqLive" aria-hidden="true">
@@ -5042,414 +5168,321 @@ function toggleXcleanCompactContext(event, button){
   }
   return false;
 }
-</script><script id="cv-welcome-narrative-v19-5">
+</script><script id="cv-welcome-narrative-v19-8">
 (()=>{
 "use strict";
 
 const READ_WPM=238;
 const REVEAL_WPM=READ_WPM*1.30;
-const COMFORT_MULTIPLIER=1.10;
+const ALLOW=[6000,8000,4000,4000,4000,4000];
 
 const overlay=document.getElementById("cvWelcomeOverlay");
 const host=overlay?.querySelector(".cv-welcome-scroll");
+const header=overlay?.querySelector(".cv-welcome-header");
+const heading=overlay?.querySelector(".cv-welcome-heading");
+const capabilities=overlay?.querySelector(".cv-welcome-capabilities");
 const closeBtn=document.getElementById("cvWelcomeClose");
-if(!overlay||!host||!closeBtn) return;
+if(!overlay||!host||!header||!heading||!capabilities||!closeBtn)return;
 
 const sourceNodes=[...host.children].filter(el=>el.matches("p, blockquote.cv-commercial-quote"));
-if(!sourceNodes.length) return;
-
-const states=sourceNodes.map((el,index)=>({
-  el,index,isQuote:el.matches("blockquote.cv-commercial-quote"),
-  text:el.textContent.trim()
-}));
+if(!sourceNodes.length)return;
+const originalParent=host;
+const states=sourceNodes.map((el,index)=>({el,index,isQuote:el.matches("blockquote.cv-commercial-quote"),text:el.textContent.trim()}));
 const originalQuoteHTML=new Map(states.filter(s=>s.isQuote).map(s=>[s.el,s.el.innerHTML]));
 
-let current=0;
-let generation=0;
-let paused=false;
-let phase="idle"; // idle | reveal | complete | transition | terminal
-let skipRequested=false;
-let activeWait=null;
-let activeFrame=0;
-let comfortTimer=0;
-let runPromise=null;
-let controls=null,backBtn=null,pauseBtn=null,skipBtn=null,progressBtn=null;
-let controlsInitialized=false;
+let current=0,generation=0,paused=false,phase="idle",skipRequested=false;
+let activeWait=null,clock=null,clockRAF=0,resizeRAF=0;
+let controlsReady=false,backBtn=null,pauseBtn=null,strip=null,timerLabel=null,actionBtn=null,fill=null;
 
 const wordCount=t=>Math.max(1,t.trim().split(/\s+/).filter(Boolean).length);
-const researchReadingMs=t=>wordCount(t)/READ_WPM*60000;
-const comfortReadingMs=t=>researchReadingMs(t)*COMFORT_MULTIPLIER;
 const revealMs=t=>wordCount(t)/REVEAL_WPM*60000;
 const reducedMotion=()=>matchMedia("(prefers-reduced-motion: reduce)").matches;
-const escapeHTML=t=>t.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const normalOrdinal=st=>{
+ let n=0;
+ for(const s of states){if(!s.isQuote)n++;if(s===st)return s.isQuote?-1:n-1}
+ return -1;
+};
+function stripReserve(){
+ const mobile=innerWidth<=700;
+ return mobile?52:64;
+}
+function stageCenterY(){
+ const reserve=stripReserve();
+ return reserve+(Math.max(0,host.clientHeight-reserve)/2);
+}
+function fitOneLine(el,preferred,min,ls0,lsMin){
+ el.style.display="block";el.style.whiteSpace="nowrap";el.style.fontSize=preferred+"px";el.style.letterSpacing=ls0+"px";
+ const safe=Math.max(1,header.clientWidth-24);
+ let fs=preferred;
+ while(fs>min&&el.scrollWidth>safe){fs=Math.max(min,fs-.25);el.style.fontSize=fs+"px"}
+ let ls=ls0;
+ while(el.scrollWidth>safe&&ls>lsMin){ls=Math.max(lsMin,ls-.05);el.style.letterSpacing=ls+"px"}
+ return el.scrollWidth<=safe;
+}
+function fitHeader(){
+ const mobile=innerWidth<=700;
+ fitOneLine(heading,mobile?20:34,mobile?9.5:18,mobile?.1:.65,mobile?-.35:-.15);
+ capabilities.style.display="block";
+ if(!fitOneLine(capabilities,mobile?10.5:14,mobile?7.5:9,mobile?.05:.2,mobile?-.35:-.15)){
+   capabilities.style.display="none";
+ }
+}
 
-function clearComfort(){
-  if(comfortTimer){clearTimeout(comfortTimer);comfortTimer=0}
-  progressBtn?.classList.remove("v19-comfort-cue");
-}
 function clearWait(){
-  if(!activeWait)return;
-  clearTimeout(activeWait.id);
-  const resolve=activeWait.resolve;
-  activeWait=null;
-  resolve?.();
-}
-function cancelCurrent(){
-  generation++;
-  clearComfort();
-  clearWait();
-  if(activeFrame) cancelAnimationFrame(activeFrame);
-  activeFrame=0;
-  skipRequested=false;
+ if(!activeWait)return;
+ clearTimeout(activeWait.id);
+ const r=activeWait.resolve;activeWait=null;r?.();
 }
 function wait(ms,g){
-  return new Promise(resolve=>{
-    if(g!==generation){resolve();return}
-    const record={
-      remaining:Math.max(0,ms),
-      started:performance.now(),
-      resolve,
-      id:0
-    };
-    record.id=setTimeout(()=>{
-      if(activeWait===record) activeWait=null;
-      resolve();
-    },record.remaining);
-    activeWait=record;
-    if(paused){
-      clearTimeout(record.id);
-      record.remaining=ms;
-    }
-  });
+ return new Promise(resolve=>{
+  if(g!==generation){resolve();return}
+  const rec={remaining:Math.max(0,ms),started:performance.now(),resolve,id:0};
+  rec.id=setTimeout(()=>{if(activeWait===rec)activeWait=null;resolve()},rec.remaining);
+  activeWait=rec;
+  if(paused)clearTimeout(rec.id);
+ });
 }
-function pauseActiveWait(){
-  if(!activeWait)return;
-  clearTimeout(activeWait.id);
-  activeWait.remaining=Math.max(0,activeWait.remaining-(performance.now()-activeWait.started));
+function pauseWait(){
+ if(!activeWait)return;
+ clearTimeout(activeWait.id);
+ activeWait.remaining=Math.max(0,activeWait.remaining-(performance.now()-activeWait.started));
 }
-function resumeActiveWait(){
-  if(!activeWait)return;
-  activeWait.started=performance.now();
-  activeWait.id=setTimeout(()=>{
-    const resolve=activeWait?.resolve;
-    activeWait=null;
-    resolve?.();
-  },activeWait.remaining);
+function resumeWait(){
+ if(!activeWait)return;
+ activeWait.started=performance.now();
+ activeWait.id=setTimeout(()=>{const r=activeWait?.resolve;activeWait=null;r?.()},activeWait.remaining);
 }
-function setPaused(value){
-  if(paused===value)return;
-  paused=value;
-  if(paused){
-    pauseActiveWait();
-    pauseBtn.textContent="Play";
-  }else{
-    resumeActiveWait();
-    pauseBtn.textContent="Pause";
-  }
+function stopClock(){
+ if(clockRAF)cancelAnimationFrame(clockRAF);
+ clockRAF=0;clock=null;
 }
+function cancelCurrent(){
+ generation++;clearWait();stopClock();skipRequested=false;
+}
+function setPaused(v){
+ if(paused===v)return;
+ paused=v;
+ if(v){
+  pauseWait();
+  if(clock&&!clock.paused){clock.remaining=Math.max(0,clock.deadline-performance.now());clock.paused=true}
+  pauseBtn.textContent="Play";
+ }else{
+  resumeWait();
+  if(clock&&clock.paused){clock.deadline=performance.now()+clock.remaining;clock.paused=false;tickClock()}
+  pauseBtn.textContent="Pause";
+ }
+}
+
 function hideAllStates(){
-  states.forEach(s=>{
-    s.el.classList.remove("v19-active");
-    s.el.style.transition="";
-    s.el.style.top="";
-    s.el.style.opacity="";
-    s.el.style.visibility="";
-    if(s.isQuote && originalQuoteHTML.has(s.el)) s.el.innerHTML=originalQuoteHTML.get(s.el);
-  });
-}
-function setControlsForActive(){
-  controls.classList.remove("v19-final");
-  progressBtn.hidden=true;
-  progressBtn?.classList.remove("v19-comfort-cue");
-  backBtn.disabled=current===0;
-  pauseBtn.disabled=false;
-  skipBtn.disabled=false;
-  closeBtn.style.display="";
-}
-function setControlsForComplete(isFinal){
-  phase=isFinal?"terminal":"complete";
-  pauseBtn.disabled=true;
-  skipBtn.disabled=true;
-  progressBtn.hidden=false;
-  progressBtn.textContent=isFinal?"Go to CV →":"Next";
-  progressBtn.dataset.mode=isFinal?"cv":"next";
-  if(isFinal){
-    controls.classList.add("v19-final");
-    backBtn.disabled=current===0;
-  }else{
-    controls.classList.remove("v19-final");
-    closeBtn.style.display="";
-  }
-}
-function armComfortCue(st,g){
-  clearComfort();
-  const delay=comfortReadingMs(st.text);
-  comfortTimer=setTimeout(()=>{
-    if(g===generation && (phase==="complete"||phase==="terminal") && !progressBtn.hidden){
-      progressBtn.classList.add("v19-comfort-cue");
-    }
-  },delay);
-}
-function boxCenterY(){
-  const r=host.getBoundingClientRect();
-  return r.height/2;
-}
-function placeNormalAtFinalCenter(el){
-  /* V19.5: final vertical center is established BEFORE character 1 and remains fixed. */
-  el.style.top=boxCenterY()+"px";
+ states.forEach(st=>{
+  st.el.classList.remove("v19-active");
+  st.el.style.transition="";
+  st.el.style.top="";
+  st.el.style.opacity="";
+  st.el.style.visibility="";
+  if(st.isQuote&&originalQuoteHTML.has(st.el))st.el.innerHTML=originalQuoteHTML.get(st.el);
+ });
 }
 function sentenceSegments(text){
-  if(typeof Intl!=="undefined" && Intl.Segmenter){
-    try{
-      const seg=new Intl.Segmenter(undefined,{granularity:"sentence"});
-      const parts=[...seg.segment(text)].map(x=>x.segment.trim()).filter(Boolean);
-      if(parts.length)return parts;
-    }catch(_){}
-  }
-  /* Conservative fallback: split only after .!? followed by whitespace/end. */
-  const parts=(text.match(/[^.!?]+(?:[.!?]+(?=\s|$)|$)/g)||[])
-    .map(x=>x.trim())
-    .filter(Boolean);
-  return parts.length?parts:[text];
+ if(typeof Intl!=="undefined"&&Intl.Segmenter){
+  try{
+   const seg=new Intl.Segmenter(undefined,{granularity:"sentence"});
+   const parts=[...seg.segment(text)].map(x=>x.segment.trim()).filter(Boolean);
+   if(parts.length)return parts;
+  }catch(_){}
+ }
+ const parts=(text.match(/[^.!?]+(?:[.!?]+(?=\s|$)|$)/g)||[]).map(x=>x.trim()).filter(Boolean);
+ return parts.length?parts:[text];
 }
-function appendReservedToken(line,token,chars){
-  if(/^\s+$/.test(token)){
-    for(const ch of token){
-      const c=document.createElement("span");
-      c.className="v195-char";
-      c.textContent=ch;
-      line.appendChild(c);
-      chars.push(c);
-    }
-    return;
-  }
-  const wrapper=document.createElement("span");
-  wrapper.className="v195-token";
-  for(const ch of token){
-    const c=document.createElement("span");
-    c.className="v195-char";
-    c.textContent=ch;
-    wrapper.appendChild(c);
-    chars.push(c);
-  }
-  line.appendChild(wrapper);
+function appendToken(line,token,chars){
+ if(/^\s+$/.test(token)){
+  for(const ch of token){const c=document.createElement("span");c.className="v195-char";c.textContent=ch;line.appendChild(c);chars.push(c)}
+  return;
+ }
+ const w=document.createElement("span");w.className="v195-token";
+ for(const ch of token){const c=document.createElement("span");c.className="v195-char";c.textContent=ch;w.appendChild(c);chars.push(c)}
+ line.appendChild(w);
 }
-function buildReservedSentenceLayout(el,text){
-  const sentences=sentenceSegments(text);
-  const chars=[];
-  el.textContent="";
-  sentences.forEach(sentence=>{
-    const line=document.createElement("span");
-    line.className="v195-sentence";
-    const tokens=sentence.split(/(\s+)/).filter(Boolean);
-    tokens.forEach(token=>appendReservedToken(line,token,chars));
-    el.appendChild(line);
-  });
-  return {sentences,chars};
+function buildReserved(el,text){
+ const chars=[];el.textContent="";
+ for(const sentence of sentenceSegments(text)){
+  const line=document.createElement("span");line.className="v195-sentence";
+  sentence.split(/(\s+)/).filter(Boolean).forEach(t=>appendToken(line,t,chars));
+  el.appendChild(line);
+ }
+ return chars;
+}
+function placeNormal(el){
+ el.style.top=stageCenterY()+"px";
 }
 function prepareNormal(st){
-  hideAllStates();
-  const el=st.el;
-  el.classList.add("v19-active");
-  el.style.visibility="visible";
-  el.style.opacity="1";
-  el.style.transition="none";
-
-  /* COMPLETE final sentence-broken layout exists before character 1. */
-  const reserved=buildReservedSentenceLayout(el,st.text);
-
-  /* Lock final Y before reveal. Hidden chars still reserve the complete geometry. */
-  placeNormalAtFinalCenter(el);
-
-  /* Force the browser to resolve final wrapping/height now. */
-  const fullRect=el.getBoundingClientRect();
-  const hostRect=host.getBoundingClientRect();
-  const textCenterY=(fullRect.top+fullRect.bottom)/2;
-  const boxCenterAbs=(hostRect.top+hostRect.bottom)/2;
-
-  return {
-    el,
-    reserved,
-    measuredHeight:fullRect.height,
-    anchorY:parseFloat(el.style.top)||0,
-    centerError:textCenterY-boxCenterAbs
-  };
+ hideAllStates();
+ const el=st.el;
+ el.classList.add("v19-active");
+ el.style.visibility="visible";el.style.opacity="1";el.style.transition="none";
+ const chars=buildReserved(el,st.text);
+ placeNormal(el);
+ void el.getBoundingClientRect();
+ return chars;
 }
-async function completeState(st,g){
-  if(g!==generation)return;
-  const isFinal=st.index===states.length-1;
-  setControlsForComplete(isFinal);
-  armComfortCue(st,g);
+function visibleCount(chars){return chars.reduce((n,c)=>n+(c.classList.contains("v195-visible")?1:0),0)}
+function renderGuard(chars){
+ return chars.length>0&&visibleCount(chars)>=chars.length;
 }
+
+function ensureStrip(){
+ if(strip)return;
+ strip=document.createElement("div");strip.className="v198-control-strip";
+ timerLabel=document.createElement("div");timerLabel.className="v198-timer";timerLabel.textContent="NEXT SLIDE IN --";
+ actionBtn=document.createElement("button");actionBtn.type="button";actionBtn.className="v198-action";actionBtn.textContent="SKIP →";
+ const track=document.createElement("div");track.className="v198-track";
+ fill=document.createElement("span");fill.className="v198-fill";track.appendChild(fill);
+ strip.append(timerLabel,actionBtn,track);
+ host.appendChild(strip); /* strip only; narrative nodes remain original children of host */
+ actionBtn.addEventListener("click",()=>{
+  if(phase==="reveal")finishCurrentNow();
+  else if(phase==="complete")advanceOne();
+  else if(phase==="terminal")closeBtn.click();
+ });
+}
+function initBottomControls(){
+ if(controlsReady)return;controlsReady=true;
+ const parent=closeBtn.parentElement;
+ const controls=document.createElement("div");controls.className="v19-control-group";
+ parent.insertBefore(controls,closeBtn);
+ const make=(text,cls)=>{const b=document.createElement("button");b.type="button";b.className=`v19-secondary ${cls}`;b.textContent=text;return b};
+ backBtn=make("Back","v19-back");pauseBtn=make("Pause","v19-pause");
+ controls.append(backBtn,pauseBtn,closeBtn);
+ backBtn.addEventListener("click",previousState);
+ pauseBtn.addEventListener("click",()=>setPaused(!paused));
+}
+
+function setRevealState(){
+ phase="reveal";actionBtn.textContent="SKIP →";actionBtn.disabled=false;pauseBtn.disabled=false;
+}
+function setCompleteState(chars){
+ if(!renderGuard(chars)){
+  phase="error";actionBtn.textContent="REVEAL ERROR";actionBtn.disabled=true;pauseBtn.disabled=true;
+  console.error("V19.8 BUILD FAIL: completion guard failed; NEXT forbidden.");
+  return false;
+ }
+ phase="complete";actionBtn.textContent="NEXT →";actionBtn.disabled=false;pauseBtn.disabled=false;
+ return true;
+}
+function clockTotal(st){
+ if(st.isQuote)return 1140+4000;
+ const ord=normalOrdinal(st);
+ return revealMs(st.text)+(ALLOW[ord]??4000);
+}
+function startClock(st,g){
+ stopClock();
+ const total=clockTotal(st);
+ clock={st,g,total,remaining:total,deadline:performance.now()+total,paused:false};
+ tickClock();
+}
+function tickClock(){
+ if(!clock||clock.paused)return;
+ const c=clock;
+ if(c.g!==generation){stopClock();return}
+ const rem=Math.max(0,c.deadline-performance.now());
+ c.remaining=rem;
+ timerLabel.textContent=`NEXT SLIDE IN ${String(Math.ceil(rem/1000)).padStart(2,"0")}s`;
+ fill.style.transform=`scaleX(${c.total?rem/c.total:0})`;
+ if(rem<=0){stopClock();deadline(c.st,c.g);return}
+ clockRAF=requestAnimationFrame(tickClock);
+}
+function deadline(st,g){
+ if(g!==generation)return;
+ if(st.isQuote){advanceOne(true);return}
+ const ord=normalOrdinal(st);
+ if(ord>=0&&ord<5){advanceOne(true);return}
+ if(ord===5){
+  phase="terminal";timerLabel.textContent="READY TO CONTINUE";actionBtn.textContent="GO TO CV →";
+  actionBtn.disabled=false;pauseBtn.disabled=true;
+ }
+}
+
 async function runNormal(st,g){
-  phase="reveal";
-  setControlsForActive();
-  const prepared=prepareNormal(st);
-  const el=prepared.el;
-  const chars=prepared.reserved.chars;
-
-  if(reducedMotion()){
-    chars.forEach(c=>c.classList.add("v195-visible"));
-    await completeState(st,g);
-    return;
-  }
-
-  const totalReveal=revealMs(st.text);
-  const step=totalReveal/Math.max(1,chars.length);
-
-  for(let i=0;i<chars.length;i++){
-    if(g!==generation)return;
-    while(paused && g===generation) await new Promise(r=>setTimeout(r,30));
-    if(skipRequested){
-      skipRequested=false;
-      for(let j=i;j<chars.length;j++) chars[j].classList.add("v195-visible");
-      await completeState(st,g);
-      return;
-    }
-    chars[i].classList.add("v195-visible");
-    await wait(step,g);
-  }
-
+ setRevealState();
+ const chars=prepareNormal(st);
+ if(!chars.length){
+  phase="error";actionBtn.textContent="REVEAL ERROR";actionBtn.disabled=true;
+  console.error("V19.8 BUILD FAIL: expected character count is zero.");
+  return;
+ }
+ if(reducedMotion()){
+  chars.forEach(c=>c.classList.add("v195-visible"));
+  setCompleteState(chars);return;
+ }
+ const step=revealMs(st.text)/chars.length;
+ for(let i=0;i<chars.length;i++){
   if(g!==generation)return;
-  await completeState(st,g);
+  while(paused&&g===generation)await new Promise(r=>setTimeout(r,30));
+  if(skipRequested){
+   skipRequested=false;
+   for(let j=i;j<chars.length;j++)chars[j].classList.add("v195-visible");
+   setCompleteState(chars);return;
+  }
+  chars[i].classList.add("v195-visible");
+  await wait(step,g);
+ }
+ if(g===generation)setCompleteState(chars);
 }
 async function runQuote(st,g){
-  phase="reveal";
-  setControlsForActive();
-  hideAllStates();
-  const el=st.el;
-  el.classList.add("v19-active");
-  el.style.opacity="1";
-  el.style.visibility="visible";
-  el.innerHTML=`<span class="v19-qpart v19-qtop">A good solution doesn't have to cost</span><span class="v19-qpart v19-qcentre">A MILLION DOLLARS</span><span class="v19-qpart v19-qbottom">— but it just might generate it.</span>`;
-
-  const top=el.querySelector(".v19-qtop");
-  const centre=el.querySelector(".v19-qcentre");
-  const bottom=el.querySelector(".v19-qbottom");
-  top.style.opacity="0";
-  centre.style.opacity="0";
-
-  const finishQuote=async()=>{
-    top.style.transition="";
-    centre.style.transition="";
-    bottom.style.transition="";
-    top.style.opacity="1";
-    centre.style.opacity="1";
-    bottom.classList.add("v19-qdone");
-    await completeState(st,g);
-  };
-
-  if(reducedMotion()||skipRequested){
-    skipRequested=false;
-    await finishQuote();
-    return;
-  }
-
-  top.style.transition="opacity .22s ease";
-  top.style.opacity="1";
-  await wait(360,g);
-  if(g!==generation)return;
-  if(skipRequested){skipRequested=false;await finishQuote();return}
-
-  centre.style.transition="opacity .25s ease";
-  centre.style.opacity="1";
-  await wait(300,g);
-  if(g!==generation)return;
-  if(skipRequested){skipRequested=false;await finishQuote();return}
-
-  bottom.style.transition="transform .48s cubic-bezier(.2,.72,.25,1),opacity .48s ease";
-  bottom.classList.add("v19-qdone");
-  await wait(480,g);
-  if(g!==generation)return;
-  await completeState(st,g);
+ setRevealState();hideAllStates();
+ const el=st.el;el.classList.add("v19-active");el.style.opacity="1";el.style.visibility="visible";
+ el.innerHTML=`<span class="v19-qpart v19-qtop">A good solution doesn't have to cost</span><span class="v19-qpart v19-qcentre">A MILLION DOLLARS</span><span class="v19-qpart v19-qbottom">— but it just might generate it.</span>`;
+ const top=el.querySelector(".v19-qtop"),centre=el.querySelector(".v19-qcentre"),bottom=el.querySelector(".v19-qbottom");
+ top.style.opacity="0";centre.style.opacity="0";
+ const finish=()=>{top.style.opacity="1";centre.style.opacity="1";bottom.classList.add("v19-qdone");phase="complete";actionBtn.textContent="NEXT →";actionBtn.disabled=false};
+ if(reducedMotion()||skipRequested){skipRequested=false;finish();return}
+ top.style.transition="opacity .22s ease";top.style.opacity="1";await wait(360,g);
+ if(g!==generation)return;if(skipRequested){skipRequested=false;finish();return}
+ centre.style.transition="opacity .25s ease";centre.style.opacity="1";await wait(300,g);
+ if(g!==generation)return;if(skipRequested){skipRequested=false;finish();return}
+ bottom.style.transition="transform .48s cubic-bezier(.2,.72,.25,1),opacity .48s ease";bottom.classList.add("v19-qdone");await wait(480,g);
+ if(g===generation)finish();
 }
 function runState(index){
-  cancelCurrent();
-  setPaused(false);
-  current=Math.max(0,Math.min(index,states.length-1));
-  const g=generation;
-  const st=states[current];
-  runPromise=st.isQuote?runQuote(st,g):runNormal(st,g);
+ cancelCurrent();setPaused(false);
+ current=Math.max(0,Math.min(index,states.length-1));
+ backBtn.disabled=current===0;
+ const g=generation,st=states[current];
+ startClock(st,g);
+ st.isQuote?runQuote(st,g):runNormal(st,g);
 }
-function nextState(){
-  if(phase!=="complete")return;
-  if(current<states.length-1) runState(current+1);
-}
-function previousState(){
-  if(current<=0)return;
-  runState(current-1);
-}
+function advanceOne(){if(current<states.length-1)runState(current+1)}
+function previousState(){if(current>0)runState(current-1)}
 function finishCurrentNow(){
-  if(phase!=="reveal")return;
-  skipRequested=true;
-  clearWait();
-}
-function goToCV(){
-  /* Preserve and invoke the proven V18 #cvWelcomeClose handoff. */
-  closeBtn.click();
+ if(phase!=="reveal")return;
+ skipRequested=true;clearWait();
 }
 
-/* Controls are created ONLY after the proven V18 Welcome activation signal. */
-function initControlsOnce(){
-  if(controlsInitialized)return;
-  controlsInitialized=true;
-  const parent=closeBtn.parentElement;
-  controls=document.createElement("div");
-  controls.className="v19-control-group";
-  parent.insertBefore(controls,closeBtn);
-
-  const makeButton=(text,cls)=>{
-    const b=document.createElement("button");
-    b.type="button";
-    b.className=`v19-secondary ${cls||""}`.trim();
-    b.textContent=text;
-    return b;
-  };
-
-  backBtn=makeButton("Back","v19-back");
-  pauseBtn=makeButton("Pause","v19-pause");
-  skipBtn=makeButton("Skip","v19-skip");
-  progressBtn=makeButton("Next","v19-progress");
-  progressBtn.hidden=true;
-
-  /* Move the original #cvWelcomeClose element only now; its protected listener remains attached. */
-  controls.append(backBtn,pauseBtn,skipBtn,progressBtn,closeBtn);
-
-  backBtn.addEventListener("click",previousState);
-  pauseBtn.addEventListener("click",()=>setPaused(!paused));
-  skipBtn.addEventListener("click",finishCurrentNow);
-  progressBtn.addEventListener("click",()=>{
-    clearComfort();
-    if(progressBtn.dataset.mode==="cv") goToCV();
-    else nextState();
-  });
+function parentInvariant(){
+ return sourceNodes.every(n=>n.parentElement===originalParent);
 }
-/* V19.5: reserved full layout naturally reflows at the new width; recenter once per frame. */
-let resizeFrame=0;
-addEventListener("resize",()=>{
-  if(resizeFrame)cancelAnimationFrame(resizeFrame);
-  resizeFrame=requestAnimationFrame(()=>{
-    resizeFrame=0;
-    const st=states[current];
-    if(st && !st.isQuote && (phase==="reveal"||phase==="complete"||phase==="terminal")){
-      placeNormalAtFinalCenter(st.el);
-      void st.el.getBoundingClientRect();
-    }
-  });
-},{passive:true});
-
-/* PROVEN V18 STARTUP CONTRACT: primary and only Welcome narrative activation path. */
-function activateFromV18Signal(){
-  initControlsOnce();
-  runState(0);
+function activate(){
+ ensureStrip();initBottomControls();fitHeader();
+ if(!parentInvariant()){
+  console.error("V19.8 BUILD FAIL: narrative DOM parent changed.");
+  return;
+ }
+ runState(0);
 }
-overlay.addEventListener("animationstart",(e)=>{
-  if(e.animationName==="v18WelcomeSignal") activateFromV18Signal();
+
+/* Proven V18 startup contract retained. */
+overlay.addEventListener("animationstart",e=>{
+ if(e.animationName==="v18WelcomeSignal")activate();
 });
 closeBtn.addEventListener("click",cancelCurrent,{capture:true});
-document.addEventListener("keydown",(e)=>{
-  if(e.key==="Escape"&&!overlay.hidden) cancelCurrent();
-});
+addEventListener("resize",()=>{
+ if(resizeRAF)cancelAnimationFrame(resizeRAF);
+ resizeRAF=requestAnimationFrame(()=>{
+  resizeRAF=0;fitHeader();
+  const st=states[current];
+  if(st&&!st.isQuote&&(phase==="reveal"||phase==="complete"||phase==="terminal"))placeNormal(st.el);
+ });
+},{passive:true});
 })();
 </script><script id="cv-loading-sound-flow-v2">
 (function(){
