@@ -2612,63 +2612,112 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 </style>
 
 
-<style id="sss-v19-8-functional-repair">
-/* FUNCTIONAL BUILD: portrait/nameplate deliberately deferred. */
-#cvWelcomeOverlay .cv-shane-avatar,
-#cvWelcomeOverlay #cvShaneAvatar{
-  visibility:hidden!important;
-}
-#cvWelcomeOverlay .cv-intro-visual::after{
-  content:none!important;
-  display:none!important;
-}
+<style id="sss-v19-9-master-v29">
+/* V19.9 / Master V29 — authoritative Welcome presentation layer. */
+
+/* Exact legacy identity sources remain suppressed. */
+#cvWelcomeOverlay .cv-intro-visual::after,
 #cvWelcomeOverlay .cv-welcome-scroll::before{
   content:none!important;
   display:none!important;
 }
 
-/* Grey header: primary one physical line; secondary one line or JS hides it. */
+/* Restore exact original Shane asset; no src mutation, no distortion. */
+#cvWelcomeOverlay .cv-intro-visual{
+  position:relative!important;
+  overflow:hidden!important;
+}
+#cvWelcomeOverlay .cv-shane-avatar,
+#cvWelcomeOverlay #cvShaneAvatar{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  position:absolute!important;
+  inset:3% 4% 3% 4%!important;
+  width:92%!important;
+  height:94%!important;
+  max-width:none!important;
+  max-height:none!important;
+  margin:0!important;
+  transform:none!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  z-index:2!important;
+  animation:none!important;
+}
+#cvWelcomeOverlay .v199-identity{
+  position:absolute!important;
+  left:5%!important;
+  bottom:4%!important;
+  z-index:8!important;
+  pointer-events:none!important;
+  padding:7px 10px 8px!important;
+  border-left:2px solid rgba(112,170,205,.82)!important;
+  background:linear-gradient(90deg,rgba(6,17,25,.88),rgba(6,17,25,.40),transparent)!important;
+  color:#eef5f8!important;
+  text-shadow:0 1px 4px rgba(0,0,0,.72)!important;
+  line-height:1.05!important;
+}
+#cvWelcomeOverlay .v199-identity-kicker{
+  display:block!important;
+  margin-bottom:4px!important;
+  font-size:9px!important;
+  font-weight:800!important;
+  letter-spacing:.16em!important;
+  color:#a8c9dc!important;
+}
+#cvWelcomeOverlay .v199-identity-name{
+  display:block!important;
+  font-size:17px!important;
+  font-weight:900!important;
+  letter-spacing:.055em!important;
+}
+
+/* Header: exact one-line containment; JS computes final font size. */
 #cvWelcomeOverlay .cv-welcome-heading,
 #cvWelcomeOverlay .cv-welcome-capabilities{
   white-space:nowrap!important;
   text-wrap:nowrap!important;
   max-width:none!important;
-  width:max-content;
+  width:max-content!important;
   margin-left:auto!important;
   margin-right:auto!important;
   overflow:visible!important;
 }
 
-/* Original V19.5 narrative host remains the parent of every paragraph/quote. */
+/* Original narrative host remains parent of all source paragraphs/quote. */
 #cvWelcomeOverlay .cv-welcome-scroll{
   position:relative!important;
   overflow:hidden!important;
 }
 
-/* Fixed reserved strip; it does not own/re-parent narrative nodes. */
+/* Reserved strip: doubled status typography and doubled V19.8 bar height. */
 #cvWelcomeOverlay .v198-control-strip{
   position:absolute!important;
   z-index:40!important;
   left:clamp(18px,3vw,42px)!important;
   right:clamp(18px,3vw,42px)!important;
-  top:10px!important;
-  height:42px!important;
+  top:8px!important;
+  height:58px!important;
   display:grid!important;
   grid-template-columns:minmax(0,1fr) auto!important;
-  grid-template-rows:30px 2px!important;
+  grid-template-rows:38px 4px!important;
   column-gap:12px!important;
-  row-gap:5px!important;
+  row-gap:6px!important;
   align-items:center!important;
   color:#405866!important;
-  font-size:9px!important;
+  font-size:18px!important; /* V19.8 desktop 9px × 2 */
   font-weight:850!important;
-  letter-spacing:.105em!important;
+  letter-spacing:.075em!important;
   text-transform:uppercase!important;
   pointer-events:auto!important;
 }
 #cvWelcomeOverlay .v198-timer{
   white-space:nowrap!important;
+  font-size:1em!important;
+  line-height:1!important;
   font-variant-numeric:tabular-nums!important;
+  font-feature-settings:"tnum" 1!important;
 }
 #cvWelcomeOverlay .v198-action{
   box-sizing:border-box!important;
@@ -2689,7 +2738,7 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 }
 #cvWelcomeOverlay .v198-track{
   grid-column:1/-1!important;
-  height:2px!important;
+  height:4px!important; /* V19.8 desktop 2px × 2 */
   overflow:hidden!important;
   background:rgba(49,84,104,.14)!important;
 }
@@ -2701,7 +2750,7 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
   background:rgba(37,101,142,.70)!important;
 }
 
-/* Simplified bottom controls. No bottom Skip/Next. */
+/* Bottom navigation remains Back / Pause-Play / one permanent View My CV. */
 #cvWelcomeOverlay .v19-control-group{
   display:grid!important;
   grid-template-columns:auto auto 1fr auto!important;
@@ -2722,14 +2771,50 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
   margin:0!important;
   padding:10px 16px!important;
 }
+
 @media(max-width:700px){
+  #cvWelcomeOverlay .cv-shane-avatar,
+  #cvWelcomeOverlay #cvShaneAvatar{
+    inset:2% 3% 2% 3%!important;
+    width:94%!important;
+    height:96%!important;
+    object-fit:contain!important;
+    object-position:center bottom!important;
+  }
+  #cvWelcomeOverlay .v199-identity{
+    left:4%!important;
+    bottom:3%!important;
+    padding:5px 8px 6px!important;
+  }
+  #cvWelcomeOverlay .v199-identity-kicker{font-size:7.5px!important;margin-bottom:3px!important}
+  #cvWelcomeOverlay .v199-identity-name{font-size:14px!important}
+
+  #cvWelcomeOverlay .cv-welcome-header{
+    padding-left:10px!important;
+    padding-right:10px!important;
+    box-sizing:border-box!important;
+  }
   #cvWelcomeOverlay .v198-control-strip{
-    left:13px!important;right:13px!important;top:7px!important;height:36px!important;
-    grid-template-rows:26px 1px!important;column-gap:7px!important;font-size:7.5px!important;
+    left:10px!important;
+    right:10px!important;
+    top:5px!important;
+    height:48px!important;
+    grid-template-rows:32px 2px!important;
+    column-gap:7px!important;
+    row-gap:5px!important;
+    font-size:15px!important; /* V19.8 mobile 7.5px × 2 */
+    letter-spacing:.055em!important;
+  }
+  #cvWelcomeOverlay .v198-track{
+    height:2px!important; /* V19.8 mobile 1px × 2 */
   }
   #cvWelcomeOverlay .v198-action{
-    width:92px!important;min-width:92px!important;height:25px!important;min-height:25px!important;
-    font-size:7.5px!important;padding:0 5px!important;
+    width:92px!important;
+    min-width:92px!important;
+    height:25px!important;
+    min-height:25px!important;
+    font-size:7.5px!important;
+    padding:0 5px!important;
   }
   #cvWelcomeOverlay .v19-control-group{padding:6px 8px!important;gap:5px!important}
   #cvWelcomeOverlay .v19-control-group button{min-height:32px!important;padding:6px 8px!important;font-size:9px!important}
@@ -5168,13 +5253,14 @@ function toggleXcleanCompactContext(event, button){
   }
   return false;
 }
-</script><script id="cv-welcome-narrative-v19-8">
+</script><script id="cv-welcome-narrative-v19-9">
 (()=>{
 "use strict";
 
 const READ_WPM=238;
 const REVEAL_WPM=READ_WPM*1.30;
-const ALLOW=[6000,8000,4000,4000,4000,4000];
+const V198_ALLOW=[6000,8000,4000,4000,4000,4000];
+const V29_REDUCTION=[3000,3000,3000,2000,2000,2000,2000];
 
 const overlay=document.getElementById("cvWelcomeOverlay");
 const host=overlay?.querySelector(".cv-welcome-scroll");
@@ -5182,10 +5268,12 @@ const header=overlay?.querySelector(".cv-welcome-header");
 const heading=overlay?.querySelector(".cv-welcome-heading");
 const capabilities=overlay?.querySelector(".cv-welcome-capabilities");
 const closeBtn=document.getElementById("cvWelcomeClose");
-if(!overlay||!host||!header||!heading||!capabilities||!closeBtn)return;
+const visual=overlay?.querySelector(".cv-intro-visual");
+const avatar=document.getElementById("cvShaneAvatar");
+if(!overlay||!host||!header||!heading||!capabilities||!closeBtn||!visual||!avatar)return;
 
 const sourceNodes=[...host.children].filter(el=>el.matches("p, blockquote.cv-commercial-quote"));
-if(!sourceNodes.length)return;
+if(sourceNodes.length!==7){console.error("V19.9 BUILD FAIL: expected seven narrative states.");return}
 const originalParent=host;
 const states=sourceNodes.map((el,index)=>({el,index,isQuote:el.matches("blockquote.cv-commercial-quote"),text:el.textContent.trim()}));
 const originalQuoteHTML=new Map(states.filter(s=>s.isQuote).map(s=>[s.el,s.el.innerHTML]));
@@ -5193,6 +5281,7 @@ const originalQuoteHTML=new Map(states.filter(s=>s.isQuote).map(s=>[s.el,s.el.in
 let current=0,generation=0,paused=false,phase="idle",skipRequested=false;
 let activeWait=null,clock=null,clockRAF=0,resizeRAF=0;
 let controlsReady=false,backBtn=null,pauseBtn=null,strip=null,timerLabel=null,actionBtn=null,fill=null;
+let identity=null;
 
 const wordCount=t=>Math.max(1,t.trim().split(/\s+/).filter(Boolean).length);
 const revealMs=t=>wordCount(t)/REVEAL_WPM*60000;
@@ -5202,30 +5291,53 @@ const normalOrdinal=st=>{
  for(const s of states){if(!s.isQuote)n++;if(s===st)return s.isQuote?-1:n-1}
  return -1;
 };
-function stripReserve(){
- const mobile=innerWidth<=700;
- return mobile?52:64;
-}
+
+function stripReserve(){return innerWidth<=700?64:78}
 function stageCenterY(){
  const reserve=stripReserve();
  return reserve+(Math.max(0,host.clientHeight-reserve)/2);
 }
-function fitOneLine(el,preferred,min,ls0,lsMin){
- el.style.display="block";el.style.whiteSpace="nowrap";el.style.fontSize=preferred+"px";el.style.letterSpacing=ls0+"px";
- const safe=Math.max(1,header.clientWidth-24);
- let fs=preferred;
- while(fs>min&&el.scrollWidth>safe){fs=Math.max(min,fs-.25);el.style.fontSize=fs+"px"}
- let ls=ls0;
- while(el.scrollWidth>safe&&ls>lsMin){ls=Math.max(lsMin,ls-.05);el.style.letterSpacing=ls+"px"}
- return el.scrollWidth<=safe;
+
+/* Exact measured fit. Primary has no minimum-font overflow escape. */
+function exactFitOneLine(el,preferredPx,safeWidth,minReadablePx,hideBelowMin){
+ el.style.display="block";
+ el.style.whiteSpace="nowrap";
+ el.style.setProperty("font-size",preferredPx+"px","important");
+ el.style.letterSpacing="0px";
+ el.style.transform="none";
+ const natural=Math.max(1,el.getBoundingClientRect().width);
+ let target=preferredPx*Math.min(1,safeWidth/natural);
+ if(hideBelowMin&&target<minReadablePx){el.style.display="none";return false}
+ el.style.setProperty("font-size",target+"px","important");
+ for(let i=0;i<4;i++){
+   const w=el.getBoundingClientRect().width;
+   if(w<=safeWidth+.01)break;
+   target*=safeWidth/w*.997;
+   el.style.setProperty("font-size",target+"px","important");
+ }
+ const r=el.getBoundingClientRect();
+ if(r.width>safeWidth+.25){
+   if(hideBelowMin){el.style.display="none";return false}
+   target*=safeWidth/r.width*.992;
+   el.style.setProperty("font-size",target+"px","important");
+ }
+ return true;
 }
 function fitHeader(){
  const mobile=innerWidth<=700;
- fitOneLine(heading,mobile?20:34,mobile?9.5:18,mobile?.1:.65,mobile?-.35:-.15);
+ const safe=Math.max(1,Math.min(header.clientWidth,innerWidth)-(mobile?20:24));
+ exactFitOneLine(heading,mobile?20:34,safe,0,false);
  capabilities.style.display="block";
- if(!fitOneLine(capabilities,mobile?10.5:14,mobile?7.5:9,mobile?.05:.2,mobile?-.35:-.15)){
-   capabilities.style.display="none";
- }
+ exactFitOneLine(capabilities,mobile?10.5:14,safe,mobile?7.5:9,true);
+}
+
+function ensureIdentity(){
+ if(identity)return;
+ identity=document.createElement("div");
+ identity.className="v199-identity";
+ identity.setAttribute("aria-hidden","true");
+ identity.innerHTML='<span class="v199-identity-kicker">ABOUT / WELCOME</span><span class="v199-identity-name">SHANE SOPER</span>';
+ visual.appendChild(identity);
 }
 
 function clearWait(){
@@ -5238,8 +5350,7 @@ function wait(ms,g){
   if(g!==generation){resolve();return}
   const rec={remaining:Math.max(0,ms),started:performance.now(),resolve,id:0};
   rec.id=setTimeout(()=>{if(activeWait===rec)activeWait=null;resolve()},rec.remaining);
-  activeWait=rec;
-  if(paused)clearTimeout(rec.id);
+  activeWait=rec;if(paused)clearTimeout(rec.id);
  });
 }
 function pauseWait(){
@@ -5252,16 +5363,10 @@ function resumeWait(){
  activeWait.started=performance.now();
  activeWait.id=setTimeout(()=>{const r=activeWait?.resolve;activeWait=null;r?.()},activeWait.remaining);
 }
-function stopClock(){
- if(clockRAF)cancelAnimationFrame(clockRAF);
- clockRAF=0;clock=null;
-}
-function cancelCurrent(){
- generation++;clearWait();stopClock();skipRequested=false;
-}
+function stopClock(){if(clockRAF)cancelAnimationFrame(clockRAF);clockRAF=0;clock=null}
+function cancelCurrent(){generation++;clearWait();stopClock();skipRequested=false}
 function setPaused(v){
- if(paused===v)return;
- paused=v;
+ if(paused===v)return;paused=v;
  if(v){
   pauseWait();
   if(clock&&!clock.paused){clock.remaining=Math.max(0,clock.deadline-performance.now());clock.paused=true}
@@ -5276,10 +5381,7 @@ function setPaused(v){
 function hideAllStates(){
  states.forEach(st=>{
   st.el.classList.remove("v19-active");
-  st.el.style.transition="";
-  st.el.style.top="";
-  st.el.style.opacity="";
-  st.el.style.visibility="";
+  st.el.style.transition="";st.el.style.top="";st.el.style.opacity="";st.el.style.visibility="";
   if(st.isQuote&&originalQuoteHTML.has(st.el))st.el.innerHTML=originalQuoteHTML.get(st.el);
  });
 }
@@ -5312,23 +5414,15 @@ function buildReserved(el,text){
  }
  return chars;
 }
-function placeNormal(el){
- el.style.top=stageCenterY()+"px";
-}
+function placeNormal(el){el.style.top=stageCenterY()+"px"}
 function prepareNormal(st){
  hideAllStates();
- const el=st.el;
- el.classList.add("v19-active");
+ const el=st.el;el.classList.add("v19-active");
  el.style.visibility="visible";el.style.opacity="1";el.style.transition="none";
- const chars=buildReserved(el,st.text);
- placeNormal(el);
- void el.getBoundingClientRect();
- return chars;
+ const chars=buildReserved(el,st.text);placeNormal(el);void el.getBoundingClientRect();return chars;
 }
 function visibleCount(chars){return chars.reduce((n,c)=>n+(c.classList.contains("v195-visible")?1:0),0)}
-function renderGuard(chars){
- return chars.length>0&&visibleCount(chars)>=chars.length;
-}
+function renderGuard(chars){return chars.length>0&&visibleCount(chars)>=chars.length}
 
 function ensureStrip(){
  if(strip)return;
@@ -5337,8 +5431,7 @@ function ensureStrip(){
  actionBtn=document.createElement("button");actionBtn.type="button";actionBtn.className="v198-action";actionBtn.textContent="SKIP →";
  const track=document.createElement("div");track.className="v198-track";
  fill=document.createElement("span");fill.className="v198-fill";track.appendChild(fill);
- strip.append(timerLabel,actionBtn,track);
- host.appendChild(strip); /* strip only; narrative nodes remain original children of host */
+ strip.append(timerLabel,actionBtn,track);host.appendChild(strip);
  actionBtn.addEventListener("click",()=>{
   if(phase==="reveal")finishCurrentNow();
   else if(phase==="complete")advanceOne();
@@ -5356,23 +5449,23 @@ function initBottomControls(){
  backBtn.addEventListener("click",previousState);
  pauseBtn.addEventListener("click",()=>setPaused(!paused));
 }
-
-function setRevealState(){
- phase="reveal";actionBtn.textContent="SKIP →";actionBtn.disabled=false;pauseBtn.disabled=false;
-}
+function setRevealState(){phase="reveal";actionBtn.textContent="SKIP →";actionBtn.disabled=false;pauseBtn.disabled=false}
 function setCompleteState(chars){
  if(!renderGuard(chars)){
   phase="error";actionBtn.textContent="REVEAL ERROR";actionBtn.disabled=true;pauseBtn.disabled=true;
-  console.error("V19.8 BUILD FAIL: completion guard failed; NEXT forbidden.");
-  return false;
+  console.error("V19.9 BUILD FAIL: completion guard failed; NEXT forbidden.");return false;
  }
- phase="complete";actionBtn.textContent="NEXT →";actionBtn.disabled=false;pauseBtn.disabled=false;
- return true;
+ phase="complete";actionBtn.textContent="NEXT →";actionBtn.disabled=false;pauseBtn.disabled=false;return true;
 }
-function clockTotal(st){
+
+/* V29: mechanically preserve V19.8 clock, then subtract per-state reduction. */
+function v198ClockTotal(st){
  if(st.isQuote)return 1140+4000;
  const ord=normalOrdinal(st);
- return revealMs(st.text)+(ALLOW[ord]??4000);
+ return revealMs(st.text)+(V198_ALLOW[ord]??4000);
+}
+function clockTotal(st){
+ return Math.max(1000,v198ClockTotal(st)-V29_REDUCTION[st.index]);
 }
 function startClock(st,g){
  stopClock();
@@ -5382,10 +5475,8 @@ function startClock(st,g){
 }
 function tickClock(){
  if(!clock||clock.paused)return;
- const c=clock;
- if(c.g!==generation){stopClock();return}
- const rem=Math.max(0,c.deadline-performance.now());
- c.remaining=rem;
+ const c=clock;if(c.g!==generation){stopClock();return}
+ const rem=Math.max(0,c.deadline-performance.now());c.remaining=rem;
  timerLabel.textContent=`NEXT SLIDE IN ${String(Math.ceil(rem/1000)).padStart(2,"0")}s`;
  fill.style.transform=`scaleX(${c.total?rem/c.total:0})`;
  if(rem<=0){stopClock();deadline(c.st,c.g);return}
@@ -5393,27 +5484,18 @@ function tickClock(){
 }
 function deadline(st,g){
  if(g!==generation)return;
- if(st.isQuote){advanceOne(true);return}
- const ord=normalOrdinal(st);
- if(ord>=0&&ord<5){advanceOne(true);return}
- if(ord===5){
-  phase="terminal";timerLabel.textContent="READY TO CONTINUE";actionBtn.textContent="GO TO CV →";
-  actionBtn.disabled=false;pauseBtn.disabled=true;
- }
+ if(st.index<states.length-1){advanceOne(true);return}
+ phase="terminal";timerLabel.textContent="READY TO CONTINUE";actionBtn.textContent="GO TO CV →";
+ actionBtn.disabled=false;pauseBtn.disabled=true;
 }
 
 async function runNormal(st,g){
- setRevealState();
- const chars=prepareNormal(st);
+ setRevealState();const chars=prepareNormal(st);
  if(!chars.length){
   phase="error";actionBtn.textContent="REVEAL ERROR";actionBtn.disabled=true;
-  console.error("V19.8 BUILD FAIL: expected character count is zero.");
-  return;
+  console.error("V19.9 BUILD FAIL: expected character count is zero.");return;
  }
- if(reducedMotion()){
-  chars.forEach(c=>c.classList.add("v195-visible"));
-  setCompleteState(chars);return;
- }
+ if(reducedMotion()){chars.forEach(c=>c.classList.add("v195-visible"));setCompleteState(chars);return}
  const step=revealMs(st.text)/chars.length;
  for(let i=0;i<chars.length;i++){
   if(g!==generation)return;
@@ -5423,8 +5505,7 @@ async function runNormal(st,g){
    for(let j=i;j<chars.length;j++)chars[j].classList.add("v195-visible");
    setCompleteState(chars);return;
   }
-  chars[i].classList.add("v195-visible");
-  await wait(step,g);
+  chars[i].classList.add("v195-visible");await wait(step,g);
  }
  if(g===generation)setCompleteState(chars);
 }
@@ -5444,36 +5525,28 @@ async function runQuote(st,g){
  if(g===generation)finish();
 }
 function runState(index){
- cancelCurrent();setPaused(false);
- current=Math.max(0,Math.min(index,states.length-1));
- backBtn.disabled=current===0;
- const g=generation,st=states[current];
- startClock(st,g);
+ cancelCurrent();setPaused(false);current=Math.max(0,Math.min(index,states.length-1));
+ backBtn.disabled=current===0;const g=generation,st=states[current];startClock(st,g);
  st.isQuote?runQuote(st,g):runNormal(st,g);
 }
 function advanceOne(){if(current<states.length-1)runState(current+1)}
 function previousState(){if(current>0)runState(current-1)}
-function finishCurrentNow(){
- if(phase!=="reveal")return;
- skipRequested=true;clearWait();
-}
+function finishCurrentNow(){if(phase!=="reveal")return;skipRequested=true;clearWait()}
+function parentInvariant(){return sourceNodes.every(n=>n.parentElement===originalParent)}
 
-function parentInvariant(){
- return sourceNodes.every(n=>n.parentElement===originalParent);
+function portraitAssetCheck(){
+ if(avatar.complete&&avatar.naturalWidth>0&&avatar.naturalHeight>0)return true;
+ console.error("V19.9 PORTRAIT ASSET NOT AVAILABLE IN THIS RUNTIME:",avatar.getAttribute("src"));
+ return false;
 }
 function activate(){
- ensureStrip();initBottomControls();fitHeader();
- if(!parentInvariant()){
-  console.error("V19.8 BUILD FAIL: narrative DOM parent changed.");
-  return;
- }
+ ensureIdentity();ensureStrip();initBottomControls();
+ if(!parentInvariant()){console.error("V19.9 BUILD FAIL: narrative DOM parent changed.");return}
+ portraitAssetCheck(); /* Report asset failure, but do not destroy functional-engine testability. */
+ requestAnimationFrame(()=>requestAnimationFrame(fitHeader));
  runState(0);
 }
-
-/* Proven V18 startup contract retained. */
-overlay.addEventListener("animationstart",e=>{
- if(e.animationName==="v18WelcomeSignal")activate();
-});
+overlay.addEventListener("animationstart",e=>{if(e.animationName==="v18WelcomeSignal")activate()});
 closeBtn.addEventListener("click",cancelCurrent,{capture:true});
 addEventListener("resize",()=>{
  if(resizeRAF)cancelAnimationFrame(resizeRAF);
