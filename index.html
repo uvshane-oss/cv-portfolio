@@ -2323,7 +2323,294 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
   .cv-welcome-capabilities{font-size:12px;}
   .cv-welcome-scroll{padding-left:17px;padding-right:17px;}
 }
+
+
+/* ==========================================================
+   V18 WELCOME / ABOUT-ME — HTML/CSS-FIRST MATERIAL PROTOTYPE
+   Presentation-only override. HQ, tracker, role and media logic untouched.
+   ========================================================== */
+.cv-welcome-overlay{
+  --v18-navy:#0d2f4f;
+  --v18-blue:#1f6f9f;
+  --v18-steel-hi:#edf1f3;
+  --v18-steel:#c8cdd0;
+  --v18-steel-mid:#aeb5b9;
+  --v18-graphite:#14191d;
+  --v18-graphite-2:#22292e;
+  padding:clamp(14px,2.2vw,32px);
+  background:
+    radial-gradient(circle at 50% 34%,rgba(34,93,132,.22),transparent 34%),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 1px,transparent 1px 5px),
+    linear-gradient(135deg,#0b0e11 0%,#1a2025 46%,#0a0d10 100%);
+  backdrop-filter:none;
+  animation:v18WelcomeSignal .001s linear;
+}
+@keyframes v18WelcomeSignal{from{opacity:.999}to{opacity:1}}
+.cv-welcome-panel{
+  position:relative;
+  width:min(1120px,100%);
+  max-height:calc(100dvh - clamp(28px,4.4vw,64px));
+  border-radius:8px;
+  border:1px solid rgba(218,229,236,.25);
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.07),transparent 14%,transparent 86%,rgba(255,255,255,.045)),
+    linear-gradient(180deg,#20272c 0%,#11161a 100%);
+  box-shadow:0 30px 90px rgba(0,0,0,.55),0 0 0 1px rgba(0,0,0,.55),inset 0 1px rgba(255,255,255,.12);
+  overflow:hidden;
+}
+.cv-welcome-panel::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 1px,transparent 1px 4px);
+  opacity:.5;
+}
+.cv-welcome-header,.cv-welcome-content,.cv-welcome-close{position:relative;z-index:1}
+.cv-welcome-header{
+  padding:clamp(18px,2.2vw,28px) clamp(22px,3vw,40px) clamp(15px,1.8vw,22px);
+  text-align:left;
+  background:linear-gradient(180deg,rgba(8,13,17,.72),rgba(19,26,31,.9));
+  border-bottom:1px solid rgba(118,171,207,.32);
+  box-shadow:inset 0 -1px rgba(0,0,0,.75);
+}
+.cv-welcome-heading{
+  display:inline-block;padding:0;margin:0;color:#f5f7f8;background:none!important;
+  font-size:clamp(22px,2.35vw,34px);line-height:1.05;font-weight:850;letter-spacing:.055em;
+  text-shadow:0 1px 0 #000,0 0 22px rgba(72,151,202,.12);
+}
+.cv-welcome-heading::after{content:"";display:block;width:min(310px,48vw);height:2px;margin-top:11px;background:linear-gradient(90deg,#4c8bb3,rgba(76,139,179,0));}
+.cv-welcome-capabilities{margin-top:9px;color:#bfc9cf;font-size:clamp(11px,1.1vw,14px);font-weight:650;letter-spacing:.045em;}
+.cv-welcome-content{
+  display:grid;grid-template-columns:minmax(290px,36%) minmax(0,64%);min-height:min(600px,67vh);overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.09),transparent 34%),
+    repeating-linear-gradient(0deg,rgba(25,31,35,.035) 0 1px,transparent 1px 4px),
+    linear-gradient(115deg,var(--v18-steel-hi) 0%,#cdd2d5 22%,#aeb5b9 53%,#dce0e2 78%,#b5bcc0 100%);
+}
+.cv-intro-visual{
+  grid-column:1;grid-row:1;position:relative;min-height:0;padding:0;overflow:hidden;
+  display:flex;align-items:flex-end;justify-content:center;
+  background:
+    radial-gradient(circle at 48% 28%,rgba(69,137,179,.18),transparent 34%),
+    linear-gradient(90deg,#10161a 0%,#252d32 72%,#151b1f 100%);
+  border-right:1px solid rgba(20,29,35,.72);
+  box-shadow:inset -12px 0 28px rgba(0,0,0,.28),inset 0 0 0 1px rgba(255,255,255,.045);
+}
+.cv-intro-visual::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,rgba(255,255,255,.022) 0 1px,transparent 1px 5px);}
+.cv-intro-visual::after{content:"SHANE SOPER";position:absolute;left:20px;bottom:18px;z-index:3;color:rgba(239,245,248,.78);font-size:11px;font-weight:800;letter-spacing:.22em;text-shadow:0 1px 2px #000;}
+.cv-shane-avatar{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;z-index:2;filter:drop-shadow(0 16px 20px rgba(0,0,0,.34));}
+.cv-welcome-scroll{
+  grid-column:2;grid-row:1;position:relative;min-width:0;min-height:0;padding:clamp(34px,4.6vw,68px) clamp(30px,4.4vw,58px);
+  display:flex;align-items:center;overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.17),transparent 18%),
+    repeating-linear-gradient(0deg,rgba(27,35,40,.032) 0 1px,transparent 1px 4px);
+}
+.cv-welcome-scroll::before{content:"ABOUT / WELCOME";position:absolute;top:24px;left:clamp(30px,4.4vw,58px);font-size:10px;font-weight:850;letter-spacing:.19em;color:#52636d;}
+.cv-welcome-scroll p,.cv-commercial-quote{
+  display:none;width:100%;margin:0!important;padding:0!important;border:0!important;background:none!important;
+  color:#1e2a31!important;font-size:clamp(17px,1.48vw,21px)!important;line-height:1.58!important;font-weight:520;
+  text-align:left;box-shadow:none!important;
+}
+.cv-welcome-scroll .v18-active{display:block;}
+.cv-welcome-scroll .v18-fading{display:block;animation:v18NarrativeFade .46s ease forwards;}
+@keyframes v18NarrativeFade{to{opacity:0;transform:translateY(-4px)}}
+.cv-commercial-quote.v18-active{
+  position:relative;color:#102838!important;font-size:clamp(20px,1.85vw,27px)!important;line-height:1.42!important;font-weight:720;
+  padding:22px 24px!important;border-left:3px solid #2c6f9a!important;
+  background:linear-gradient(90deg,rgba(255,255,255,.34),rgba(255,255,255,.08))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.42),0 10px 26px rgba(31,55,70,.10)!important;
+}
+.v18-quote-first{display:inline;opacity:0;animation:v18QuoteResolve .24s ease forwards;}
+.v18-quote-second{display:inline-block;opacity:0;transform:scale(.93);transform-origin:left center;}
+.v18-quote-second.v18-go{animation:v18QuotePunch .48s cubic-bezier(.2,.78,.22,1) forwards;}
+@keyframes v18QuoteResolve{to{opacity:1}}
+@keyframes v18QuotePunch{to{opacity:1;transform:scale(1)}}
+.cv-welcome-close{
+  flex:0 0 auto;width:100%;border:0;border-top:1px solid rgba(100,161,201,.35);padding:16px 22px;
+  background:linear-gradient(180deg,#153e5d 0%,#0d2d47 100%);color:#f8fbfd;font-size:14px;font-weight:850;letter-spacing:.08em;cursor:pointer;
+  box-shadow:inset 0 1px rgba(255,255,255,.12);transition:filter .18s ease,letter-spacing .18s ease;
+}
+.cv-welcome-close:hover{filter:brightness(1.12);letter-spacing:.105em}
+.cv-welcome-close:focus-visible{outline:2px solid #dcecf6;outline-offset:-4px}
+@media(max-width:700px){
+  .cv-welcome-overlay{padding:0;align-items:stretch;}
+  .cv-welcome-panel{width:100%;height:100dvh;max-height:100dvh;border-radius:0;}
+  .cv-welcome-header{padding:14px 17px 12px;text-align:left;}
+  .cv-welcome-heading{font-size:clamp(18px,5.5vw,23px);line-height:1.1;letter-spacing:.025em;}
+  .cv-welcome-heading::after{width:180px;margin-top:8px;}
+  .cv-welcome-capabilities{margin-top:7px;font-size:11px;line-height:1.35;letter-spacing:.02em;}
+  .cv-welcome-content{display:grid;grid-template-columns:1fr;grid-template-rows:minmax(190px,36vh) minmax(0,1fr);min-height:0;flex:1;overflow:hidden;}
+  .cv-intro-visual{grid-column:1;grid-row:1;min-height:0;border-right:0;border-bottom:1px solid rgba(93,148,184,.28);}
+  .cv-shane-avatar{width:100%;height:100%;object-fit:contain;object-position:center bottom;}
+  .cv-intro-visual::after{left:14px;bottom:10px;font-size:9px;}
+  .cv-welcome-scroll{grid-column:1;grid-row:2;padding:38px 20px 20px;align-items:center;overflow:hidden;}
+  .cv-welcome-scroll::before{top:15px;left:20px;font-size:9px;}
+  .cv-welcome-scroll p,.cv-commercial-quote{font-size:clamp(14px,3.75vw,17px)!important;line-height:1.48!important;}
+  .cv-commercial-quote.v18-active{font-size:clamp(16px,4.4vw,20px)!important;padding:15px 16px!important;}
+  .cv-welcome-close{padding:14px 16px;font-size:12px;}
+}
+@media(max-width:420px){
+  .cv-welcome-content{grid-template-rows:minmax(165px,31vh) minmax(0,1fr);}
+  .cv-welcome-scroll{padding-left:17px;padding-right:17px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .cv-welcome-overlay{animation:none}
+  .cv-welcome-scroll{display:block;overflow-y:auto;padding-top:38px;}
+  .cv-welcome-scroll p,.cv-commercial-quote{display:block!important;opacity:1!important;transform:none!important;margin:0 0 13px!important;animation:none!important;}
+  .cv-commercial-quote{padding:13px 14px!important;border-left:3px solid #2c6f9a!important;background:rgba(255,255,255,.22)!important;}
+}
+
 </style>
+<style id="sss-v19-5-positioning-base">
+/* V19.2 — rebuilt inside confirmed-working V18 Welcome architecture */
+#cvWelcomeOverlay .cv-welcome-header,
+#cvWelcomeOverlay .cv-welcome-heading,
+#cvWelcomeOverlay .cv-welcome-capabilities{
+  text-align:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+#cvWelcomeOverlay .cv-welcome-heading{
+  max-width:100%;
+  text-wrap:balance;
+  font-size:clamp(1.05rem,2vw,1.72rem) !important;
+  line-height:1.12 !important;
+}
+#cvWelcomeOverlay .cv-welcome-scroll{
+  position:relative;
+  overflow:hidden;
+  min-height:clamp(230px,34vh,430px);
+}
+#cvWelcomeOverlay .cv-welcome-scroll > p,
+#cvWelcomeOverlay .cv-welcome-scroll > blockquote.cv-commercial-quote{
+  position:absolute;
+  left:50%;
+  width:min(92%,760px);
+  margin:0;
+  opacity:0;
+  visibility:hidden;
+  transform:translate(-50%,-50%);
+  box-sizing:border-box;
+}
+#cvWelcomeOverlay .cv-welcome-scroll > .v19-active{
+  display:block !important;
+  visibility:visible;
+  opacity:1;
+}
+#cvWelcomeOverlay .cv-commercial-quote.v19-active{
+  inset:0;
+  left:0;
+  width:100%;
+  transform:none;
+  border:0;
+  padding:0;
+  background:transparent;
+}
+#cvWelcomeOverlay .v19-qpart{position:absolute; margin:0; white-space:nowrap;}
+#cvWelcomeOverlay .v19-qtop{
+  left:44%; top:37%; transform:translate(-50%,-50%);
+  font-size:clamp(.95rem,1.45vw,1.35rem);
+}
+#cvWelcomeOverlay .v19-qcentre{
+  left:50%; top:50%; transform:translate(-50%,-50%);
+  font-size:clamp(1.35rem,2.4vw,2.35rem);
+  font-weight:800; letter-spacing:.07em; text-align:center;
+}
+#cvWelcomeOverlay .v19-qbottom{
+  left:57%; top:63%; transform:translate(-50%,-50%) scale(.94);
+  opacity:0; font-size:clamp(.95rem,1.45vw,1.35rem);
+}
+#cvWelcomeOverlay .v19-qbottom.v19-qdone{opacity:1;transform:translate(-50%,-50%) scale(1)}
+#cvWelcomeOverlay .v19-control-group{
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  width:max-content;max-width:100%;margin:12px auto 0;flex-wrap:wrap;
+}
+#cvWelcomeOverlay .v19-control-group button{
+  width:auto !important; margin:0 !important; flex:0 0 auto;
+  min-height:40px; padding:.55rem .82rem;
+}
+#cvWelcomeOverlay .v19-secondary{
+  background:rgba(8,22,32,.9);color:#edf4f8;
+  border:1px solid rgba(160,190,207,.38);border-radius:5px;
+}
+#cvWelcomeOverlay .v19-terminal{
+  position:absolute;inset:5%;display:flex;align-items:center;justify-content:center;
+  text-align:center;opacity:0;visibility:hidden;overflow:auto;
+}
+#cvWelcomeOverlay .v19-terminal.v19-active{opacity:1;visibility:visible}
+@media(max-width:700px){
+  #cvWelcomeOverlay .cv-welcome-scroll{min-height:300px}
+  #cvWelcomeOverlay .v19-control-group{width:100%;gap:.3rem}
+  #cvWelcomeOverlay .v19-control-group button{font-size:.78rem;padding:.48rem .58rem}
+  #cvWelcomeOverlay .v19-qpart{white-space:normal;width:88%;text-align:center}
+  #cvWelcomeOverlay .v19-qtop{left:47%;top:35%}
+  #cvWelcomeOverlay .v19-qcentre{left:50%;top:50%;width:94%}
+  #cvWelcomeOverlay .v19-qbottom{left:53%;top:65%}
+}
+@media(prefers-reduced-motion:reduce){
+  #cvWelcomeOverlay .cv-welcome-scroll > p,
+  #cvWelcomeOverlay .v19-qpart{transition:none !important}
+}
+</style>
+<style id="sss-v19-5-reading-control">
+/* V19.4 quote geometry override: defeat normal paragraph translate centering. */
+#cvWelcomeOverlay .cv-welcome-scroll > blockquote.cv-commercial-quote.v19-active{
+  inset:0 !important;
+  left:0 !important;
+  top:0 !important;
+  width:100% !important;
+  height:100% !important;
+  transform:none !important;
+}
+
+/* V19.3 reading-control refinement: controls do not participate in narrative-box geometry. */
+#cvWelcomeOverlay .cv-welcome-scroll{
+  position:relative;
+}
+#cvWelcomeOverlay .v19-control-group{
+  position:relative;
+}
+#cvWelcomeOverlay .v19-progress{
+  width:auto !important;
+  margin:0 !important;
+  flex:0 0 auto;
+}
+#cvWelcomeOverlay .v19-progress[hidden]{
+  display:none !important;
+}
+#cvWelcomeOverlay .v19-progress.v19-comfort-cue{
+  filter:brightness(1.10);
+  box-shadow:0 0 12px rgba(150,190,215,.22);
+}
+#cvWelcomeOverlay .v19-control-group.v19-final .v19-secondary:not(.v19-back):not(.v19-progress),
+#cvWelcomeOverlay .v19-control-group.v19-final #cvWelcomeClose{
+  display:none !important;
+}
+#cvWelcomeOverlay .v19-control-group.v19-final .v19-back,
+#cvWelcomeOverlay .v19-control-group.v19-final .v19-progress{
+  display:inline-flex !important;
+}
+</style>
+
+<style id="sss-v19-5-fixed-geometry">
+#cvWelcomeOverlay .cv-welcome-scroll > p.v19-active{
+  transition:none !important;
+}
+#cvWelcomeOverlay .v195-sentence{
+  display:block;
+  position:relative;
+  width:100%;
+}
+#cvWelcomeOverlay .v195-token{
+  white-space:nowrap;
+}
+#cvWelcomeOverlay .v195-char{
+  visibility:hidden;
+}
+#cvWelcomeOverlay .v195-char.v195-visible{
+  visibility:visible;
+}
+</style>
+
 </head>
 <body><div aria-live="polite" aria-label="Shane Soper CV loading" class="cv-loading-gate" id="cvLoadingGate">
 <div class="sss-hq-live" id="sssHqLive" aria-hidden="true">
@@ -4755,6 +5042,415 @@ function toggleXcleanCompactContext(event, button){
   }
   return false;
 }
+</script><script id="cv-welcome-narrative-v19-5">
+(()=>{
+"use strict";
+
+const READ_WPM=238;
+const REVEAL_WPM=READ_WPM*1.30;
+const COMFORT_MULTIPLIER=1.10;
+
+const overlay=document.getElementById("cvWelcomeOverlay");
+const host=overlay?.querySelector(".cv-welcome-scroll");
+const closeBtn=document.getElementById("cvWelcomeClose");
+if(!overlay||!host||!closeBtn) return;
+
+const sourceNodes=[...host.children].filter(el=>el.matches("p, blockquote.cv-commercial-quote"));
+if(!sourceNodes.length) return;
+
+const states=sourceNodes.map((el,index)=>({
+  el,index,isQuote:el.matches("blockquote.cv-commercial-quote"),
+  text:el.textContent.trim()
+}));
+const originalQuoteHTML=new Map(states.filter(s=>s.isQuote).map(s=>[s.el,s.el.innerHTML]));
+
+let current=0;
+let generation=0;
+let paused=false;
+let phase="idle"; // idle | reveal | complete | transition | terminal
+let skipRequested=false;
+let activeWait=null;
+let activeFrame=0;
+let comfortTimer=0;
+let runPromise=null;
+let controls=null,backBtn=null,pauseBtn=null,skipBtn=null,progressBtn=null;
+let controlsInitialized=false;
+
+const wordCount=t=>Math.max(1,t.trim().split(/\s+/).filter(Boolean).length);
+const researchReadingMs=t=>wordCount(t)/READ_WPM*60000;
+const comfortReadingMs=t=>researchReadingMs(t)*COMFORT_MULTIPLIER;
+const revealMs=t=>wordCount(t)/REVEAL_WPM*60000;
+const reducedMotion=()=>matchMedia("(prefers-reduced-motion: reduce)").matches;
+const escapeHTML=t=>t.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+
+function clearComfort(){
+  if(comfortTimer){clearTimeout(comfortTimer);comfortTimer=0}
+  progressBtn?.classList.remove("v19-comfort-cue");
+}
+function clearWait(){
+  if(!activeWait)return;
+  clearTimeout(activeWait.id);
+  const resolve=activeWait.resolve;
+  activeWait=null;
+  resolve?.();
+}
+function cancelCurrent(){
+  generation++;
+  clearComfort();
+  clearWait();
+  if(activeFrame) cancelAnimationFrame(activeFrame);
+  activeFrame=0;
+  skipRequested=false;
+}
+function wait(ms,g){
+  return new Promise(resolve=>{
+    if(g!==generation){resolve();return}
+    const record={
+      remaining:Math.max(0,ms),
+      started:performance.now(),
+      resolve,
+      id:0
+    };
+    record.id=setTimeout(()=>{
+      if(activeWait===record) activeWait=null;
+      resolve();
+    },record.remaining);
+    activeWait=record;
+    if(paused){
+      clearTimeout(record.id);
+      record.remaining=ms;
+    }
+  });
+}
+function pauseActiveWait(){
+  if(!activeWait)return;
+  clearTimeout(activeWait.id);
+  activeWait.remaining=Math.max(0,activeWait.remaining-(performance.now()-activeWait.started));
+}
+function resumeActiveWait(){
+  if(!activeWait)return;
+  activeWait.started=performance.now();
+  activeWait.id=setTimeout(()=>{
+    const resolve=activeWait?.resolve;
+    activeWait=null;
+    resolve?.();
+  },activeWait.remaining);
+}
+function setPaused(value){
+  if(paused===value)return;
+  paused=value;
+  if(paused){
+    pauseActiveWait();
+    pauseBtn.textContent="Play";
+  }else{
+    resumeActiveWait();
+    pauseBtn.textContent="Pause";
+  }
+}
+function hideAllStates(){
+  states.forEach(s=>{
+    s.el.classList.remove("v19-active");
+    s.el.style.transition="";
+    s.el.style.top="";
+    s.el.style.opacity="";
+    s.el.style.visibility="";
+    if(s.isQuote && originalQuoteHTML.has(s.el)) s.el.innerHTML=originalQuoteHTML.get(s.el);
+  });
+}
+function setControlsForActive(){
+  controls.classList.remove("v19-final");
+  progressBtn.hidden=true;
+  progressBtn?.classList.remove("v19-comfort-cue");
+  backBtn.disabled=current===0;
+  pauseBtn.disabled=false;
+  skipBtn.disabled=false;
+  closeBtn.style.display="";
+}
+function setControlsForComplete(isFinal){
+  phase=isFinal?"terminal":"complete";
+  pauseBtn.disabled=true;
+  skipBtn.disabled=true;
+  progressBtn.hidden=false;
+  progressBtn.textContent=isFinal?"Go to CV →":"Next";
+  progressBtn.dataset.mode=isFinal?"cv":"next";
+  if(isFinal){
+    controls.classList.add("v19-final");
+    backBtn.disabled=current===0;
+  }else{
+    controls.classList.remove("v19-final");
+    closeBtn.style.display="";
+  }
+}
+function armComfortCue(st,g){
+  clearComfort();
+  const delay=comfortReadingMs(st.text);
+  comfortTimer=setTimeout(()=>{
+    if(g===generation && (phase==="complete"||phase==="terminal") && !progressBtn.hidden){
+      progressBtn.classList.add("v19-comfort-cue");
+    }
+  },delay);
+}
+function boxCenterY(){
+  const r=host.getBoundingClientRect();
+  return r.height/2;
+}
+function placeNormalAtFinalCenter(el){
+  /* V19.5: final vertical center is established BEFORE character 1 and remains fixed. */
+  el.style.top=boxCenterY()+"px";
+}
+function sentenceSegments(text){
+  if(typeof Intl!=="undefined" && Intl.Segmenter){
+    try{
+      const seg=new Intl.Segmenter(undefined,{granularity:"sentence"});
+      const parts=[...seg.segment(text)].map(x=>x.segment.trim()).filter(Boolean);
+      if(parts.length)return parts;
+    }catch(_){}
+  }
+  /* Conservative fallback: split only after .!? followed by whitespace/end. */
+  const parts=(text.match(/[^.!?]+(?:[.!?]+(?=\s|$)|$)/g)||[])
+    .map(x=>x.trim())
+    .filter(Boolean);
+  return parts.length?parts:[text];
+}
+function appendReservedToken(line,token,chars){
+  if(/^\s+$/.test(token)){
+    for(const ch of token){
+      const c=document.createElement("span");
+      c.className="v195-char";
+      c.textContent=ch;
+      line.appendChild(c);
+      chars.push(c);
+    }
+    return;
+  }
+  const wrapper=document.createElement("span");
+  wrapper.className="v195-token";
+  for(const ch of token){
+    const c=document.createElement("span");
+    c.className="v195-char";
+    c.textContent=ch;
+    wrapper.appendChild(c);
+    chars.push(c);
+  }
+  line.appendChild(wrapper);
+}
+function buildReservedSentenceLayout(el,text){
+  const sentences=sentenceSegments(text);
+  const chars=[];
+  el.textContent="";
+  sentences.forEach(sentence=>{
+    const line=document.createElement("span");
+    line.className="v195-sentence";
+    const tokens=sentence.split(/(\s+)/).filter(Boolean);
+    tokens.forEach(token=>appendReservedToken(line,token,chars));
+    el.appendChild(line);
+  });
+  return {sentences,chars};
+}
+function prepareNormal(st){
+  hideAllStates();
+  const el=st.el;
+  el.classList.add("v19-active");
+  el.style.visibility="visible";
+  el.style.opacity="1";
+  el.style.transition="none";
+
+  /* COMPLETE final sentence-broken layout exists before character 1. */
+  const reserved=buildReservedSentenceLayout(el,st.text);
+
+  /* Lock final Y before reveal. Hidden chars still reserve the complete geometry. */
+  placeNormalAtFinalCenter(el);
+
+  /* Force the browser to resolve final wrapping/height now. */
+  const fullRect=el.getBoundingClientRect();
+  const hostRect=host.getBoundingClientRect();
+  const textCenterY=(fullRect.top+fullRect.bottom)/2;
+  const boxCenterAbs=(hostRect.top+hostRect.bottom)/2;
+
+  return {
+    el,
+    reserved,
+    measuredHeight:fullRect.height,
+    anchorY:parseFloat(el.style.top)||0,
+    centerError:textCenterY-boxCenterAbs
+  };
+}
+async function completeState(st,g){
+  if(g!==generation)return;
+  const isFinal=st.index===states.length-1;
+  setControlsForComplete(isFinal);
+  armComfortCue(st,g);
+}
+async function runNormal(st,g){
+  phase="reveal";
+  setControlsForActive();
+  const prepared=prepareNormal(st);
+  const el=prepared.el;
+  const chars=prepared.reserved.chars;
+
+  if(reducedMotion()){
+    chars.forEach(c=>c.classList.add("v195-visible"));
+    await completeState(st,g);
+    return;
+  }
+
+  const totalReveal=revealMs(st.text);
+  const step=totalReveal/Math.max(1,chars.length);
+
+  for(let i=0;i<chars.length;i++){
+    if(g!==generation)return;
+    while(paused && g===generation) await new Promise(r=>setTimeout(r,30));
+    if(skipRequested){
+      skipRequested=false;
+      for(let j=i;j<chars.length;j++) chars[j].classList.add("v195-visible");
+      await completeState(st,g);
+      return;
+    }
+    chars[i].classList.add("v195-visible");
+    await wait(step,g);
+  }
+
+  if(g!==generation)return;
+  await completeState(st,g);
+}
+async function runQuote(st,g){
+  phase="reveal";
+  setControlsForActive();
+  hideAllStates();
+  const el=st.el;
+  el.classList.add("v19-active");
+  el.style.opacity="1";
+  el.style.visibility="visible";
+  el.innerHTML=`<span class="v19-qpart v19-qtop">A good solution doesn't have to cost</span><span class="v19-qpart v19-qcentre">A MILLION DOLLARS</span><span class="v19-qpart v19-qbottom">— but it just might generate it.</span>`;
+
+  const top=el.querySelector(".v19-qtop");
+  const centre=el.querySelector(".v19-qcentre");
+  const bottom=el.querySelector(".v19-qbottom");
+  top.style.opacity="0";
+  centre.style.opacity="0";
+
+  const finishQuote=async()=>{
+    top.style.transition="";
+    centre.style.transition="";
+    bottom.style.transition="";
+    top.style.opacity="1";
+    centre.style.opacity="1";
+    bottom.classList.add("v19-qdone");
+    await completeState(st,g);
+  };
+
+  if(reducedMotion()||skipRequested){
+    skipRequested=false;
+    await finishQuote();
+    return;
+  }
+
+  top.style.transition="opacity .22s ease";
+  top.style.opacity="1";
+  await wait(360,g);
+  if(g!==generation)return;
+  if(skipRequested){skipRequested=false;await finishQuote();return}
+
+  centre.style.transition="opacity .25s ease";
+  centre.style.opacity="1";
+  await wait(300,g);
+  if(g!==generation)return;
+  if(skipRequested){skipRequested=false;await finishQuote();return}
+
+  bottom.style.transition="transform .48s cubic-bezier(.2,.72,.25,1),opacity .48s ease";
+  bottom.classList.add("v19-qdone");
+  await wait(480,g);
+  if(g!==generation)return;
+  await completeState(st,g);
+}
+function runState(index){
+  cancelCurrent();
+  setPaused(false);
+  current=Math.max(0,Math.min(index,states.length-1));
+  const g=generation;
+  const st=states[current];
+  runPromise=st.isQuote?runQuote(st,g):runNormal(st,g);
+}
+function nextState(){
+  if(phase!=="complete")return;
+  if(current<states.length-1) runState(current+1);
+}
+function previousState(){
+  if(current<=0)return;
+  runState(current-1);
+}
+function finishCurrentNow(){
+  if(phase!=="reveal")return;
+  skipRequested=true;
+  clearWait();
+}
+function goToCV(){
+  /* Preserve and invoke the proven V18 #cvWelcomeClose handoff. */
+  closeBtn.click();
+}
+
+/* Controls are created ONLY after the proven V18 Welcome activation signal. */
+function initControlsOnce(){
+  if(controlsInitialized)return;
+  controlsInitialized=true;
+  const parent=closeBtn.parentElement;
+  controls=document.createElement("div");
+  controls.className="v19-control-group";
+  parent.insertBefore(controls,closeBtn);
+
+  const makeButton=(text,cls)=>{
+    const b=document.createElement("button");
+    b.type="button";
+    b.className=`v19-secondary ${cls||""}`.trim();
+    b.textContent=text;
+    return b;
+  };
+
+  backBtn=makeButton("Back","v19-back");
+  pauseBtn=makeButton("Pause","v19-pause");
+  skipBtn=makeButton("Skip","v19-skip");
+  progressBtn=makeButton("Next","v19-progress");
+  progressBtn.hidden=true;
+
+  /* Move the original #cvWelcomeClose element only now; its protected listener remains attached. */
+  controls.append(backBtn,pauseBtn,skipBtn,progressBtn,closeBtn);
+
+  backBtn.addEventListener("click",previousState);
+  pauseBtn.addEventListener("click",()=>setPaused(!paused));
+  skipBtn.addEventListener("click",finishCurrentNow);
+  progressBtn.addEventListener("click",()=>{
+    clearComfort();
+    if(progressBtn.dataset.mode==="cv") goToCV();
+    else nextState();
+  });
+}
+/* V19.5: reserved full layout naturally reflows at the new width; recenter once per frame. */
+let resizeFrame=0;
+addEventListener("resize",()=>{
+  if(resizeFrame)cancelAnimationFrame(resizeFrame);
+  resizeFrame=requestAnimationFrame(()=>{
+    resizeFrame=0;
+    const st=states[current];
+    if(st && !st.isQuote && (phase==="reveal"||phase==="complete"||phase==="terminal")){
+      placeNormalAtFinalCenter(st.el);
+      void st.el.getBoundingClientRect();
+    }
+  });
+},{passive:true});
+
+/* PROVEN V18 STARTUP CONTRACT: primary and only Welcome narrative activation path. */
+function activateFromV18Signal(){
+  initControlsOnce();
+  runState(0);
+}
+overlay.addEventListener("animationstart",(e)=>{
+  if(e.animationName==="v18WelcomeSignal") activateFromV18Signal();
+});
+closeBtn.addEventListener("click",cancelCurrent,{capture:true});
+document.addEventListener("keydown",(e)=>{
+  if(e.key==="Escape"&&!overlay.hidden) cancelCurrent();
+});
+})();
 </script><script id="cv-loading-sound-flow-v2">
 (function(){
  "use strict";
