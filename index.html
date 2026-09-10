@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <!--
 SSS BUILD PROVENANCE
-Implementation: V30.6 — NEW WELCOME 2 CLEAN MANUAL-START BUILD
-Governing Master: V36 + approved Supervisor Change Order
-Built: 2026-09-10 22:16 NZST
+Implementation: V30.7 — MOBILE PAINT + SENTENCE/QUOTE COMPOSITION
+Master Architect Directive: V37
+Built: 2026-09-10 22:35 NZST
 Status: SANDBOX — NOT PRODUCTION
-Baseline SHA256: 93e0072889a4237bc4a3a927ef22712c7ac6a62bbeff25708b5095ca8dd70ca3
+Baseline: V30.6
+Baseline SHA256: 4962a15f214d259296b3a79acb61a144e3b2fb220e1b3d9286b44470497372ae
 -->
 <html lang="en">
 <head>
@@ -2226,7 +2227,6 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
   }
 }
 </style>
-
 <style id="cv-welcome-commercial-operator-v26">
 /* v26 Welcome-only architecture. Existing CV content/functionality remains untouched. */
 @media (min-width:701px){
@@ -2681,7 +2681,6 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
   display:inline-flex !important;
 }
 </style>
-
 <style id="sss-v19-5-fixed-geometry">
 #cvWelcomeOverlay .cv-welcome-scroll > p.v19-active{
   transition:none !important;
@@ -2701,8 +2700,6 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
   visibility:visible;
 }
 </style>
-
-
 <style id="sss-v19-9-master-v29">
 /* V19.9 / Master V29 — authoritative Welcome presentation layer. */
 
@@ -2912,8 +2909,6 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
   #cvWelcomeOverlay .v19-control-group #cvWelcomeClose{min-width:128px!important;padding:7px 9px!important;font-size:9px!important}
 }
 </style>
-
-
 <style id="sss-v30-1-portrait-narrative-repair">
 /* V30.1 / Master V31 — consolidated portrait + narrative geometry repair. */
 
@@ -3063,8 +3058,6 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
   }
 }
 </style>
-
-
 <style id="sss-v30-2-mobile-visible-render-recovery">
 /* V30.2 / Master V33. Controller remains authoritative; presentation recovery only. */
 
@@ -3184,12 +3177,7 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
   }
 }
 </style>
-
-
-
-
-
-<style id="sss-welcome2-clean-manual-start-v30-6">
+<style id="sss-welcome2-mobile-paint-sentence-quote-v30-7">
 /* NEW WELCOME 2 — clean, isolated, manual-start engineering build. */
 #sssWelcome2.sssWelcome2-root{
   position:fixed!important;
@@ -3442,15 +3430,21 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
   letter-spacing:.018em!important;
 }
 #sssWelcome2 .sssWelcome2-word{
-  visibility:visible;
+  visibility:visible!important;
   opacity:1;
-  color:inherit;
+  color:inherit!important;
 }
 #sssWelcome2.sssWelcome2-running .sssWelcome2-slide--active .sssWelcome2-word{
-  visibility:hidden;
+  visibility:visible!important;
+  opacity:0!important;
 }
 #sssWelcome2.sssWelcome2-running .sssWelcome2-slide--active .sssWelcome2-word.sssWelcome2-word--visible{
-  visibility:visible;
+  visibility:visible!important;
+  opacity:1!important;
+}
+#sssWelcome2 .sssWelcome2-slide.sssWelcome2-paintFallback .sssWelcome2-word{
+  visibility:visible!important;
+  opacity:1!important;
 }
 
 #sssWelcome2 .sssWelcome2-footer{
@@ -3602,61 +3596,105 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
   #sssWelcome2 .sssWelcome2-footer{padding-left:12px!important;padding-right:12px!important}
   #sssWelcome2 .sssWelcome2-viewCv{min-width:126px!important;padding-left:.8rem!important;padding-right:.8rem!important}
 }
-</style>
 
+#sssWelcome2 .sssWelcome2-copy{
+  display:block!important;
+  width:100%!important;
+}
+#sssWelcome2 .sssWelcome2-sentence{
+  display:block!important;
+  width:100%!important;
+}
+#sssWelcome2 .sssWelcome2-sentence + .sssWelcome2-sentence{
+  margin-top:.72em!important;
+}
+#sssWelcome2 .sssWelcome2-quoteLine{
+  display:block!important;
+  width:100%!important;
+}
+#sssWelcome2 .sssWelcome2-quoteLine--left{
+  text-align:left!important;
+  padding-right:14%!important;
+}
+#sssWelcome2 .sssWelcome2-quoteLine--middle{
+  margin:.34em 0!important;
+  text-align:center!important;
+  text-transform:uppercase!important;
+  font-size:1.18em!important;
+  line-height:1.12!important;
+  font-weight:950!important;
+  letter-spacing:.055em!important;
+}
+#sssWelcome2 .sssWelcome2-quoteLine--right{
+  text-align:right!important;
+  padding-left:14%!important;
+}
+@media (max-width:700px){
+  #sssWelcome2 .sssWelcome2-sentence + .sssWelcome2-sentence{
+    margin-top:.62em!important;
+  }
+  #sssWelcome2 .sssWelcome2-quoteLine--left{
+    padding-right:9%!important;
+  }
+  #sssWelcome2 .sssWelcome2-quoteLine--middle{
+    margin:.42em 0!important;
+    font-size:1.22em!important;
+    letter-spacing:.045em!important;
+  }
+  #sssWelcome2 .sssWelcome2-quoteLine--right{
+    padding-left:9%!important;
+  }
+}
+</style>
 </head>
-<body><div aria-live="polite" aria-label="Shane Soper CV loading" class="cv-loading-gate" id="cvLoadingGate">
-<div class="sss-hq-live" id="sssHqLive" aria-hidden="true">
-<img class="sss-hq-logo" id="sssHqLogo" src="ChatGPT Image Sep 10, 2026, 05_49_56 AM(1).png" alt=""/>
+<body><div aria-label="Shane Soper CV loading" aria-live="polite" class="cv-loading-gate" id="cvLoadingGate">
+<div aria-hidden="true" class="sss-hq-live" id="sssHqLive">
+<img alt="" class="sss-hq-logo" id="sssHqLogo" src="ChatGPT Image Sep 10, 2026, 05_49_56 AM(1).png"/>
 <div class="cv-countdown" id="cvCountdown">10</div>
 <div class="sss-hq-dots" id="sssHqDots"><span class="sss-hq-dot"></span><span class="sss-hq-dot"></span><span class="sss-hq-dot"></span><span class="sss-hq-dot"></span></div>
 </div></div>
-<div id="sssWelcome2" class="sssWelcome2-root" role="dialog" aria-modal="true" aria-labelledby="sssWelcome2Title" hidden style="display:none">
-  <div class="sssWelcome2-shell">
-    <header class="sssWelcome2-header">
-      <h2 id="sssWelcome2Title" class="sssWelcome2-title">COMMERCIAL OPERATOR. SALES LEADER. PROBLEM SOLVER.</h2>
-      <div class="sssWelcome2-rule" aria-hidden="true"></div>
-      <div class="sssWelcome2-capabilities">Growth · Commercial Strategy · Financial Judgement · Operations · Execution</div>
-    </header>
-
-    <main class="sssWelcome2-main">
-      <section class="sssWelcome2-portraitPane" aria-label="About Shane Soper">
-        <div class="sssWelcome2-portraitFrame">
-          <img id="sssWelcome2Portrait" class="sssWelcome2-portrait" src="shane cover.png" alt="Shane Soper welcome"/>
-          <div class="sssWelcome2-identity">
-            <span class="sssWelcome2-identityLine" aria-hidden="true"></span>
-            <div class="sssWelcome2-identityText">
-              <div class="sssWelcome2-identityEyebrow">ABOUT / WELCOME</div>
-              <div class="sssWelcome2-identityName">SHANE SOPER</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="sssWelcome2-storyPane" aria-label="Welcome narrative">
-        <div class="sssWelcome2-playback">
-          <div id="sssWelcome2Timer" class="sssWelcome2-timer">READY TO START</div>
-          <button id="sssWelcome2Action" class="sssWelcome2-action" type="button">START →</button>
-          <div class="sssWelcome2-progress" aria-hidden="true"><span id="sssWelcome2Progress" class="sssWelcome2-progressFill"></span></div>
-        </div>
-
-        <div id="sssWelcome2Viewport" class="sssWelcome2-viewport" aria-live="polite" aria-atomic="false">
-          <section class="sssWelcome2-slide sssWelcome2-slide--active" data-sss-welcome2-slide="1" aria-hidden="false"><div class="sssWelcome2-copy"><span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">can</span> <span class="sssWelcome2-word">sell.</span> <span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">can</span> <span class="sssWelcome2-word">lead.</span> <span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">can</span> <span class="sssWelcome2-word">bring</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">best</span> <span class="sssWelcome2-word">out</span> <span class="sssWelcome2-word">of</span> <span class="sssWelcome2-word">people</span> <span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">but</span> <span class="sssWelcome2-word">I'm</span> <span class="sssWelcome2-word">just</span> <span class="sssWelcome2-word">as</span> <span class="sssWelcome2-word">comfortable</span> <span class="sssWelcome2-word">rolling</span> <span class="sssWelcome2-word">my</span> <span class="sssWelcome2-word">sleeves</span> <span class="sssWelcome2-word">up</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">doing</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">job</span> <span class="sssWelcome2-word">alongside</span> <span class="sssWelcome2-word">them.</span></div></section><section class="sssWelcome2-slide" data-sss-welcome2-slide="2" aria-hidden="true"><div class="sssWelcome2-copy"><span class="sssWelcome2-word">I’m</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">commercial</span> <span class="sssWelcome2-word">operator</span> <span class="sssWelcome2-word">with</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">documented</span> <span class="sssWelcome2-word">record</span> <span class="sssWelcome2-word">of</span> <span class="sssWelcome2-word">dominating</span> <span class="sssWelcome2-word">in</span> <span class="sssWelcome2-word">retail,</span> <span class="sssWelcome2-word">cold</span> <span class="sssWelcome2-word">calling</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">key</span> <span class="sssWelcome2-word">account</span> <span class="sssWelcome2-word">management.</span> <span class="sssWelcome2-word">I’m</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">true</span> <span class="sssWelcome2-word">hunter</span> <span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">can</span> <span class="sssWelcome2-word">find</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">opportunity,</span> <span class="sssWelcome2-word">open</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">door,</span> <span class="sssWelcome2-word">win</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">business</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">grow</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">account.</span> <span class="sssWelcome2-word">Beyond</span> <span class="sssWelcome2-word">sales,</span> <span class="sssWelcome2-word">I’ve</span> <span class="sssWelcome2-word">grown</span> <span class="sssWelcome2-word">revenue</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">teams,</span> <span class="sssWelcome2-word">managed</span> <span class="sssWelcome2-word">margins</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">costs,</span> <span class="sssWelcome2-word">developed</span> <span class="sssWelcome2-word">new</span> <span class="sssWelcome2-word">markets</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">taken</span> <span class="sssWelcome2-word">difficult</span> <span class="sssWelcome2-word">projects</span> <span class="sssWelcome2-word">from</span> <span class="sssWelcome2-word">idea</span> <span class="sssWelcome2-word">through</span> <span class="sssWelcome2-word">to</span> <span class="sssWelcome2-word">delivery.</span></div></section><section class="sssWelcome2-slide" data-sss-welcome2-slide="3" aria-hidden="true"><div class="sssWelcome2-copy"><span class="sssWelcome2-word">I've</span> <span class="sssWelcome2-word">always</span> <span class="sssWelcome2-word">been</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">player-coach.</span> <span class="sssWelcome2-word">I'd</span> <span class="sssWelcome2-word">rather</span> <span class="sssWelcome2-word">work</span> <span class="sssWelcome2-word">shoulder-to-shoulder,</span> <span class="sssWelcome2-word">show</span> <span class="sssWelcome2-word">people</span> <span class="sssWelcome2-word">what</span> <span class="sssWelcome2-word">works</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">recognise</span> <span class="sssWelcome2-word">what</span> <span class="sssWelcome2-word">they're</span> <span class="sssWelcome2-word">doing</span> <span class="sssWelcome2-word">well.</span> <span class="sssWelcome2-word">“Try</span> <span class="sssWelcome2-word">this”</span> <span class="sssWelcome2-word">has</span> <span class="sssWelcome2-word">always</span> <span class="sssWelcome2-word">worked</span> <span class="sssWelcome2-word">better</span> <span class="sssWelcome2-word">for</span> <span class="sssWelcome2-word">me</span> <span class="sssWelcome2-word">than</span> <span class="sssWelcome2-word">“get</span> <span class="sssWelcome2-word">in</span> <span class="sssWelcome2-word">my</span> <span class="sssWelcome2-word">office.”</span></div></section><section class="sssWelcome2-slide" data-sss-welcome2-slide="4" aria-hidden="true"><div class="sssWelcome2-copy"><span class="sssWelcome2-word">Business</span> <span class="sssWelcome2-word">is</span> <span class="sssWelcome2-word">much</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">same.</span> <span class="sssWelcome2-word">Find</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">pain</span> <span class="sssWelcome2-word">point,</span> <span class="sssWelcome2-word">understand</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">numbers,</span> <span class="sssWelcome2-word">work</span> <span class="sssWelcome2-word">out</span> <span class="sssWelcome2-word">what</span> <span class="sssWelcome2-word">makes</span> <span class="sssWelcome2-word">commercial</span> <span class="sssWelcome2-word">sense</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">get</span> <span class="sssWelcome2-word">on</span> <span class="sssWelcome2-word">with</span> <span class="sssWelcome2-word">solving</span> <span class="sssWelcome2-word">it.</span> <span class="sssWelcome2-word">I’m</span> <span class="sssWelcome2-word">as</span> <span class="sssWelcome2-word">comfortable</span> <span class="sssWelcome2-word">working</span> <span class="sssWelcome2-word">through</span> <span class="sssWelcome2-word">margins,</span> <span class="sssWelcome2-word">costs</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">commercial</span> <span class="sssWelcome2-word">decisions</span> <span class="sssWelcome2-word">as</span> <span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">am</span> <span class="sssWelcome2-word">turning</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">solution</span> <span class="sssWelcome2-word">into</span> <span class="sssWelcome2-word">something</span> <span class="sssWelcome2-word">that</span> <span class="sssWelcome2-word">actually</span> <span class="sssWelcome2-word">works.</span></div></section><section class="sssWelcome2-slide sssWelcome2-slide--quote" data-sss-welcome2-slide="5" aria-hidden="true"><div class="sssWelcome2-copy"><span class="sssWelcome2-word">“A</span> <span class="sssWelcome2-word">good</span> <span class="sssWelcome2-word">solution</span> <span class="sssWelcome2-word">doesn't</span> <span class="sssWelcome2-word">have</span> <span class="sssWelcome2-word">to</span> <span class="sssWelcome2-word">cost</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">million</span> <span class="sssWelcome2-word">dollars</span> <span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">but</span> <span class="sssWelcome2-word">it</span> <span class="sssWelcome2-word">just</span> <span class="sssWelcome2-word">might</span> <span class="sssWelcome2-word">generate</span> <span class="sssWelcome2-word">it.”</span></div></section><section class="sssWelcome2-slide" data-sss-welcome2-slide="6" aria-hidden="true"><div class="sssWelcome2-copy"><span class="sssWelcome2-word">My</span> <span class="sssWelcome2-word">roles</span> <span class="sssWelcome2-word">overlap,</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">being</span> <span class="sssWelcome2-word">driven</span> <span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">setting</span> <span class="sssWelcome2-word">targets,</span> <span class="sssWelcome2-word">cracking</span> <span class="sssWelcome2-word">inefficiencies</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">removing</span> <span class="sssWelcome2-word">pain</span> <span class="sssWelcome2-word">points</span> <span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">has</span> <span class="sssWelcome2-word">kept</span> <span class="sssWelcome2-word">me</span> <span class="sssWelcome2-word">fully</span> <span class="sssWelcome2-word">engaged</span> <span class="sssWelcome2-word">for</span> <span class="sssWelcome2-word">decades.</span> <span class="sssWelcome2-word">After</span> <span class="sssWelcome2-word">delivering</span> <span class="sssWelcome2-word">on</span> <span class="sssWelcome2-word">Devil</span> <span class="sssWelcome2-word">Burger's</span> <span class="sssWelcome2-word">success,</span> <span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">deliberately</span> <span class="sssWelcome2-word">took</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">proper</span> <span class="sssWelcome2-word">break</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">used</span> <span class="sssWelcome2-word">that</span> <span class="sssWelcome2-word">time</span> <span class="sssWelcome2-word">to</span> <span class="sssWelcome2-word">achieve</span> <span class="sssWelcome2-word">some</span> <span class="sssWelcome2-word">personal</span> <span class="sssWelcome2-word">goals,</span> <span class="sssWelcome2-word">spend</span> <span class="sssWelcome2-word">valuable</span> <span class="sssWelcome2-word">time</span> <span class="sssWelcome2-word">with</span> <span class="sssWelcome2-word">my</span> <span class="sssWelcome2-word">family</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">my</span> <span class="sssWelcome2-word">mum</span> <span class="sssWelcome2-word">before</span> <span class="sssWelcome2-word">she</span> <span class="sssWelcome2-word">passed.</span></div></section><section class="sssWelcome2-slide" data-sss-welcome2-slide="7" aria-hidden="true"><div class="sssWelcome2-copy"><span class="sssWelcome2-word">Now</span> <span class="sssWelcome2-word">I'm</span> <span class="sssWelcome2-word">ready</span> <span class="sssWelcome2-word">to</span> <span class="sssWelcome2-word">get</span> <span class="sssWelcome2-word">back</span> <span class="sssWelcome2-word">in</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">trenches</span> <span class="sssWelcome2-word">with</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">good</span> <span class="sssWelcome2-word">team.</span> <span class="sssWelcome2-word">Leading</span> <span class="sssWelcome2-word">or</span> <span class="sssWelcome2-word">following</span> <span class="sssWelcome2-word">isn't</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">important</span> <span class="sssWelcome2-word">part</span> <span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">put</span> <span class="sssWelcome2-word">me</span> <span class="sssWelcome2-word">where</span> <span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">can</span> <span class="sssWelcome2-word">contribute,</span> <span class="sssWelcome2-word">set</span> <span class="sssWelcome2-word">some</span> <span class="sssWelcome2-word">worthwhile</span> <span class="sssWelcome2-word">goals,</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">let's</span> <span class="sssWelcome2-word">get</span> <span class="sssWelcome2-word">on</span> <span class="sssWelcome2-word">with</span> <span class="sssWelcome2-word">achieving</span> <span class="sssWelcome2-word">them.</span></div></section>
-        </div>
-      </section>
-    </main>
-
-    <footer class="sssWelcome2-footer">
-      <div class="sssWelcome2-footerLeft">
-        <button id="sssWelcome2Back" class="sssWelcome2-footerButton" type="button" disabled>Back</button>
-        <button id="sssWelcome2Pause" class="sssWelcome2-footerButton" type="button" disabled>Pause</button>
-      </div>
-      <button id="sssWelcome2ViewCV" class="sssWelcome2-viewCv" type="button">View My CV →</button>
-    </footer>
-  </div>
+<div aria-labelledby="sssWelcome2Title" aria-modal="true" class="sssWelcome2-root" hidden="" id="sssWelcome2" role="dialog" style="display:none">
+<div class="sssWelcome2-shell">
+<header class="sssWelcome2-header">
+<h2 class="sssWelcome2-title" id="sssWelcome2Title">COMMERCIAL OPERATOR. SALES LEADER. PROBLEM SOLVER.</h2>
+<div aria-hidden="true" class="sssWelcome2-rule"></div>
+<div class="sssWelcome2-capabilities">Growth · Commercial Strategy · Financial Judgement · Operations · Execution</div>
+</header>
+<main class="sssWelcome2-main">
+<section aria-label="About Shane Soper" class="sssWelcome2-portraitPane">
+<div class="sssWelcome2-portraitFrame">
+<img alt="Shane Soper welcome" class="sssWelcome2-portrait" id="sssWelcome2Portrait" src="shane cover.png"/>
+<div class="sssWelcome2-identity">
+<span aria-hidden="true" class="sssWelcome2-identityLine"></span>
+<div class="sssWelcome2-identityText">
+<div class="sssWelcome2-identityEyebrow">ABOUT / WELCOME</div>
+<div class="sssWelcome2-identityName">SHANE SOPER</div>
+</div>
+</div>
+</div>
+</section>
+<section aria-label="Welcome narrative" class="sssWelcome2-storyPane">
+<div class="sssWelcome2-playback">
+<div class="sssWelcome2-timer" id="sssWelcome2Timer">READY TO START</div>
+<button class="sssWelcome2-action" id="sssWelcome2Action" type="button">START →</button>
+<div aria-hidden="true" class="sssWelcome2-progress"><span class="sssWelcome2-progressFill" id="sssWelcome2Progress"></span></div>
+</div>
+<div aria-atomic="false" aria-live="polite" class="sssWelcome2-viewport" id="sssWelcome2Viewport">
+<section aria-hidden="false" class="sssWelcome2-slide sssWelcome2-slide--active" data-sss-welcome2-slide="1"><div class="sssWelcome2-copy"><span class="sssWelcome2-sentence"><span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">can</span> <span class="sssWelcome2-word">sell.</span></span><span class="sssWelcome2-sentence"><span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">can</span> <span class="sssWelcome2-word">lead.</span></span><span class="sssWelcome2-sentence"><span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">can</span> <span class="sssWelcome2-word">bring</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">best</span> <span class="sssWelcome2-word">out</span> <span class="sssWelcome2-word">of</span> <span class="sssWelcome2-word">people</span> <span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">but</span> <span class="sssWelcome2-word">I'm</span> <span class="sssWelcome2-word">just</span> <span class="sssWelcome2-word">as</span> <span class="sssWelcome2-word">comfortable</span> <span class="sssWelcome2-word">rolling</span> <span class="sssWelcome2-word">my</span> <span class="sssWelcome2-word">sleeves</span> <span class="sssWelcome2-word">up</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">doing</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">job</span> <span class="sssWelcome2-word">alongside</span> <span class="sssWelcome2-word">them.</span></span></div></section><section aria-hidden="true" class="sssWelcome2-slide" data-sss-welcome2-slide="2"><div class="sssWelcome2-copy"><span class="sssWelcome2-sentence"><span class="sssWelcome2-word">I’m</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">commercial</span> <span class="sssWelcome2-word">operator</span> <span class="sssWelcome2-word">with</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">documented</span> <span class="sssWelcome2-word">record</span> <span class="sssWelcome2-word">of</span> <span class="sssWelcome2-word">dominating</span> <span class="sssWelcome2-word">in</span> <span class="sssWelcome2-word">retail,</span> <span class="sssWelcome2-word">cold</span> <span class="sssWelcome2-word">calling</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">key</span> <span class="sssWelcome2-word">account</span> <span class="sssWelcome2-word">management.</span></span><span class="sssWelcome2-sentence"><span class="sssWelcome2-word">I’m</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">true</span> <span class="sssWelcome2-word">hunter</span> <span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">can</span> <span class="sssWelcome2-word">find</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">opportunity,</span> <span class="sssWelcome2-word">open</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">door,</span> <span class="sssWelcome2-word">win</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">business</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">grow</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">account.</span></span><span class="sssWelcome2-sentence"><span class="sssWelcome2-word">Beyond</span> <span class="sssWelcome2-word">sales,</span> <span class="sssWelcome2-word">I’ve</span> <span class="sssWelcome2-word">grown</span> <span class="sssWelcome2-word">revenue</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">teams,</span> <span class="sssWelcome2-word">managed</span> <span class="sssWelcome2-word">margins</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">costs,</span> <span class="sssWelcome2-word">developed</span> <span class="sssWelcome2-word">new</span> <span class="sssWelcome2-word">markets</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">taken</span> <span class="sssWelcome2-word">difficult</span> <span class="sssWelcome2-word">projects</span> <span class="sssWelcome2-word">from</span> <span class="sssWelcome2-word">idea</span> <span class="sssWelcome2-word">through</span> <span class="sssWelcome2-word">to</span> <span class="sssWelcome2-word">delivery.</span></span></div></section><section aria-hidden="true" class="sssWelcome2-slide" data-sss-welcome2-slide="3"><div class="sssWelcome2-copy"><span class="sssWelcome2-sentence"><span class="sssWelcome2-word">I've</span> <span class="sssWelcome2-word">always</span> <span class="sssWelcome2-word">been</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">player-coach.</span></span><span class="sssWelcome2-sentence"><span class="sssWelcome2-word">I'd</span> <span class="sssWelcome2-word">rather</span> <span class="sssWelcome2-word">work</span> <span class="sssWelcome2-word">shoulder-to-shoulder,</span> <span class="sssWelcome2-word">show</span> <span class="sssWelcome2-word">people</span> <span class="sssWelcome2-word">what</span> <span class="sssWelcome2-word">works</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">recognise</span> <span class="sssWelcome2-word">what</span> <span class="sssWelcome2-word">they're</span> <span class="sssWelcome2-word">doing</span> <span class="sssWelcome2-word">well.</span></span><span class="sssWelcome2-sentence"><span class="sssWelcome2-word">“Try</span> <span class="sssWelcome2-word">this”</span> <span class="sssWelcome2-word">has</span> <span class="sssWelcome2-word">always</span> <span class="sssWelcome2-word">worked</span> <span class="sssWelcome2-word">better</span> <span class="sssWelcome2-word">for</span> <span class="sssWelcome2-word">me</span> <span class="sssWelcome2-word">than</span> <span class="sssWelcome2-word">“get</span> <span class="sssWelcome2-word">in</span> <span class="sssWelcome2-word">my</span> <span class="sssWelcome2-word">office.”</span></span></div></section><section aria-hidden="true" class="sssWelcome2-slide" data-sss-welcome2-slide="4"><div class="sssWelcome2-copy"><span class="sssWelcome2-sentence"><span class="sssWelcome2-word">Business</span> <span class="sssWelcome2-word">is</span> <span class="sssWelcome2-word">much</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">same.</span></span><span class="sssWelcome2-sentence"><span class="sssWelcome2-word">Find</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">pain</span> <span class="sssWelcome2-word">point,</span> <span class="sssWelcome2-word">understand</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">numbers,</span> <span class="sssWelcome2-word">work</span> <span class="sssWelcome2-word">out</span> <span class="sssWelcome2-word">what</span> <span class="sssWelcome2-word">makes</span> <span class="sssWelcome2-word">commercial</span> <span class="sssWelcome2-word">sense</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">get</span> <span class="sssWelcome2-word">on</span> <span class="sssWelcome2-word">with</span> <span class="sssWelcome2-word">solving</span> <span class="sssWelcome2-word">it.</span></span><span class="sssWelcome2-sentence"><span class="sssWelcome2-word">I’m</span> <span class="sssWelcome2-word">as</span> <span class="sssWelcome2-word">comfortable</span> <span class="sssWelcome2-word">working</span> <span class="sssWelcome2-word">through</span> <span class="sssWelcome2-word">margins,</span> <span class="sssWelcome2-word">costs</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">commercial</span> <span class="sssWelcome2-word">decisions</span> <span class="sssWelcome2-word">as</span> <span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">am</span> <span class="sssWelcome2-word">turning</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">solution</span> <span class="sssWelcome2-word">into</span> <span class="sssWelcome2-word">something</span> <span class="sssWelcome2-word">that</span> <span class="sssWelcome2-word">actually</span> <span class="sssWelcome2-word">works.</span></span></div></section><section aria-hidden="true" class="sssWelcome2-slide sssWelcome2-slide--quote" data-sss-welcome2-slide="5"><div class="sssWelcome2-copy"><span class="sssWelcome2-quoteLine sssWelcome2-quoteLine--left"><span class="sssWelcome2-word">“A</span> <span class="sssWelcome2-word">good</span> <span class="sssWelcome2-word">solution</span> <span class="sssWelcome2-word">doesn't</span> <span class="sssWelcome2-word">have</span> <span class="sssWelcome2-word">to</span> <span class="sssWelcome2-word">cost</span></span><span class="sssWelcome2-quoteLine sssWelcome2-quoteLine--middle"><span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">million</span> <span class="sssWelcome2-word">dollars</span></span><span class="sssWelcome2-quoteLine sssWelcome2-quoteLine--right"><span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">but</span> <span class="sssWelcome2-word">it</span> <span class="sssWelcome2-word">just</span> <span class="sssWelcome2-word">might</span> <span class="sssWelcome2-word">generate</span> <span class="sssWelcome2-word">it.”</span></span></div></section><section aria-hidden="true" class="sssWelcome2-slide" data-sss-welcome2-slide="6"><div class="sssWelcome2-copy"><span class="sssWelcome2-sentence"><span class="sssWelcome2-word">My</span> <span class="sssWelcome2-word">roles</span> <span class="sssWelcome2-word">overlap,</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">being</span> <span class="sssWelcome2-word">driven</span> <span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">setting</span> <span class="sssWelcome2-word">targets,</span> <span class="sssWelcome2-word">cracking</span> <span class="sssWelcome2-word">inefficiencies</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">removing</span> <span class="sssWelcome2-word">pain</span> <span class="sssWelcome2-word">points</span> <span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">has</span> <span class="sssWelcome2-word">kept</span> <span class="sssWelcome2-word">me</span> <span class="sssWelcome2-word">fully</span> <span class="sssWelcome2-word">engaged</span> <span class="sssWelcome2-word">for</span> <span class="sssWelcome2-word">decades.</span></span><span class="sssWelcome2-sentence"><span class="sssWelcome2-word">After</span> <span class="sssWelcome2-word">delivering</span> <span class="sssWelcome2-word">on</span> <span class="sssWelcome2-word">Devil</span> <span class="sssWelcome2-word">Burger's</span> <span class="sssWelcome2-word">success,</span> <span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">deliberately</span> <span class="sssWelcome2-word">took</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">proper</span> <span class="sssWelcome2-word">break</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">used</span> <span class="sssWelcome2-word">that</span> <span class="sssWelcome2-word">time</span> <span class="sssWelcome2-word">to</span> <span class="sssWelcome2-word">achieve</span> <span class="sssWelcome2-word">some</span> <span class="sssWelcome2-word">personal</span> <span class="sssWelcome2-word">goals,</span> <span class="sssWelcome2-word">spend</span> <span class="sssWelcome2-word">valuable</span> <span class="sssWelcome2-word">time</span> <span class="sssWelcome2-word">with</span> <span class="sssWelcome2-word">my</span> <span class="sssWelcome2-word">family</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">my</span> <span class="sssWelcome2-word">mum</span> <span class="sssWelcome2-word">before</span> <span class="sssWelcome2-word">she</span> <span class="sssWelcome2-word">passed.</span></span></div></section><section aria-hidden="true" class="sssWelcome2-slide" data-sss-welcome2-slide="7"><div class="sssWelcome2-copy"><span class="sssWelcome2-sentence"><span class="sssWelcome2-word">Now</span> <span class="sssWelcome2-word">I'm</span> <span class="sssWelcome2-word">ready</span> <span class="sssWelcome2-word">to</span> <span class="sssWelcome2-word">get</span> <span class="sssWelcome2-word">back</span> <span class="sssWelcome2-word">in</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">trenches</span> <span class="sssWelcome2-word">with</span> <span class="sssWelcome2-word">a</span> <span class="sssWelcome2-word">good</span> <span class="sssWelcome2-word">team.</span></span><span class="sssWelcome2-sentence"><span class="sssWelcome2-word">Leading</span> <span class="sssWelcome2-word">or</span> <span class="sssWelcome2-word">following</span> <span class="sssWelcome2-word">isn't</span> <span class="sssWelcome2-word">the</span> <span class="sssWelcome2-word">important</span> <span class="sssWelcome2-word">part</span> <span class="sssWelcome2-word">—</span> <span class="sssWelcome2-word">put</span> <span class="sssWelcome2-word">me</span> <span class="sssWelcome2-word">where</span> <span class="sssWelcome2-word">I</span> <span class="sssWelcome2-word">can</span> <span class="sssWelcome2-word">contribute,</span> <span class="sssWelcome2-word">set</span> <span class="sssWelcome2-word">some</span> <span class="sssWelcome2-word">worthwhile</span> <span class="sssWelcome2-word">goals,</span> <span class="sssWelcome2-word">and</span> <span class="sssWelcome2-word">let's</span> <span class="sssWelcome2-word">get</span> <span class="sssWelcome2-word">on</span> <span class="sssWelcome2-word">with</span> <span class="sssWelcome2-word">achieving</span> <span class="sssWelcome2-word">them.</span></span></div></section>
+</div>
+</section>
+</main>
+<footer class="sssWelcome2-footer">
+<div class="sssWelcome2-footerLeft">
+<button class="sssWelcome2-footerButton" disabled="" id="sssWelcome2Back" type="button">Back</button>
+<button class="sssWelcome2-footerButton" disabled="" id="sssWelcome2Pause" type="button">Pause</button>
+</div>
+<button class="sssWelcome2-viewCv" id="sssWelcome2ViewCV" type="button">View My CV →</button>
+</footer>
+</div>
 </div>
 <div class="container">
-<div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-10 22:16 NZST</div>
+<div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-10 22:35 NZST</div>
 <div class="cv-header">
 <h1>Shane Soper</h1>
 <p>153 East Road, Ascot, Invercargill, Southland, New Zealand</p>
@@ -3668,7 +3706,7 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role1')">
 <div class="role-meta">2023–2025</div>
 <div class="role-company-name">DEVIL BURGER</div><div class="main-role-title">Operations Manager</div>
-<div class="role-front-highlights" aria-label="Role achievements">
+<div aria-label="Role achievements" class="role-front-highlights">
 <div class="role-front-highlight">5× Promo Turnover</div>
 <div class="role-front-highlight">Created New Income Streams</div>
 </div>
@@ -3891,7 +3929,7 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role2')">
 <div class="role-meta">2018–2022</div>
 <div class="role-company-name">XCLEAN</div><div class="main-role-title role-mobile-single-line">National Sales Manager</div>
-<div class="role-front-highlights" aria-label="Role achievements">
+<div aria-label="Role achievements" class="role-front-highlights">
 <div class="role-front-highlight">Rebuilt Company Reputation Through National Cold Calling</div>
 <div class="role-front-highlight">Personal $550K GP p.a. while Building 8-Region Team</div>
 </div>
@@ -4093,7 +4131,7 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role3')">
 <div class="role-meta">2017</div>
 <div class="role-company-name">ROYAL ALBATROSS CENTRE</div><div class="main-role-title albatross-mobile-title">Bespoke Project Sales</div>
-<div class="role-front-highlights" aria-label="Role achievements">
+<div aria-label="Role achievements" class="role-front-highlights">
 <div class="role-front-highlight">Closed Six-Figure Project That Only Existed on Paper</div>
 <div class="role-front-highlight">Delivered a Solution Every Competitor Walked Away From</div>
 </div>
@@ -4202,7 +4240,7 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role4')">
 <div class="role-meta">2015–2017</div>
 <div class="role-company-name">ISEE DIGITAL</div><div class="main-role-title isee-mobile-title">Site Acquisition Manager</div>
-<div class="role-front-highlights" aria-label="Role achievements">
+<div aria-label="Role achievements" class="role-front-highlights">
 <div class="role-front-highlight">Delivered National B2B Network Under Budget</div>
 <div class="role-front-highlight">2,000+ Individual Leases for 8-Figure Infrastructure</div>
 </div>
@@ -4499,7 +4537,7 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role5')">
 <div class="role-meta">2013–2015</div>
 <div class="role-company-name">XCLEAN</div><div class="main-role-title">Sales Manager</div>
-<div class="role-front-highlights" aria-label="Role achievements">
+<div aria-label="Role achievements" class="role-front-highlights">
 <div class="role-front-highlight">Built a Cold-Prospecting + Demonstration + Closing Sales Process</div>
 <div class="role-front-highlight">Turned Personal Sales Success into Teams across 6 Regions</div>
 </div>
@@ -4561,7 +4599,7 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role6')">
 <div class="role-meta">2007–2014</div>
 <div class="role-company-name">INTEGRATE GROUP / SKY</div><div class="main-role-title">Regional Sales Manager</div>
-<div class="role-front-highlights" aria-label="Role achievements">
+<div aria-label="Role achievements" class="role-front-highlights">
 <div class="role-front-highlight">Cold Calling to Deliver 6,000+ New Subscribers a Year</div>
 <div class="role-front-highlight">Recruiting · Onboarding · Coaching · Team Growth From 1 to 8</div>
 </div>
@@ -4624,7 +4662,7 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role7')">
 <div class="role-meta">2002–2006</div>
 <div class="role-company-name">MOBILEFONE SOLUTIONS</div><div class="main-role-title">Manager — Vodafone Franchise</div>
-<div class="role-front-highlights" aria-label="Role achievements">
+<div aria-label="Role achievements" class="role-front-highlights">
 <div class="role-front-highlight">4× Monthly Turnover while Growing From 1 to 8 Staff</div>
 <div class="role-front-highlight">National Recognition for Outbound Sales</div>
 </div>
@@ -4699,7 +4737,7 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role8')">
 <div class="role-meta">2001–2002</div>
 <div class="role-company-name">H&amp;J SMITH</div><div class="main-role-title">Department Manager</div>
-<div class="role-front-highlights" aria-label="Role achievements">
+<div aria-label="Role achievements" class="role-front-highlights">
 <div class="role-front-highlight">Set Sales Records</div>
 <div class="role-front-highlight">Initiatives Rolled Out Multi-Store</div>
 </div>
@@ -4745,9 +4783,9 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 <div class="role-card" onclick="toggleRole(event, this, 'role9')">
 <div class="role-meta">1992–2001</div>
 <div class="role-company-name">SMITHS CITY / POWERSTORE</div><div class="main-role-title">Area &amp; Branch Manager</div>
-<div class="role-front-highlights" aria-label="Role achievements">
+<div aria-label="Role achievements" class="role-front-highlights">
 <div class="role-front-highlight">$100K+ Monthly Personal Sales during Multi-Store Leadership</div>
-<div class="role-front-highlight">Orchestrated Off-Site Promotions & Opened Additional Stores</div>
+<div class="role-front-highlight">Orchestrated Off-Site Promotions &amp; Opened Additional Stores</div>
 </div>
 <div class="role-summary-highlight role-front-capability">High-Value Sales · Promotions · Multi-Store Leadership</div>
 <div class="collapsible-content" id="role9">
@@ -6072,7 +6110,7 @@ function toggleXcleanCompactContext(event, button){
   }
   return false;
 }
-</script><script type="application/x-sss-disabled" id="cv-welcome-narrative-v19-9">
+</script><script id="cv-welcome-narrative-v19-9" type="application/x-sss-disabled">
 (()=>{
 "use strict";
 
@@ -6441,7 +6479,7 @@ addEventListener("resize",()=>{
  let n=10;count.hidden=false;count.textContent='10';
  const tick=setInterval(()=>{n--;if(n<1){clearInterval(tick);setTimeout(()=>{count.hidden=true;enter();},180);return;}count.textContent=String(n);count.classList.remove('hq-tick');void count.offsetWidth;count.classList.add('hq-tick');},1000);
 })();
-</script><script type="application/x-sss-disabled" id="cv-avatar-path-bootstrap-v1">
+</script><script id="cv-avatar-path-bootstrap-v1" type="application/x-sss-disabled">
 (function(){
  const a=document.getElementById('cvShaneAvatar');
  if(a) a.src=encodeURI('shane cover.png');
@@ -6789,10 +6827,7 @@ addEventListener("resize",()=>{
   else addEventListener("load",()=>setTimeout(boot,500),{once:true});
 })();
 </script>
-
-
-
-<script type="application/x-sss-disabled" id="sss-v30-5-isolated-narrative-controller">
+<script id="sss-v30-5-isolated-narrative-controller" type="application/x-sss-disabled">
 (function(){
  "use strict";
 
@@ -7020,9 +7055,7 @@ addEventListener("resize",()=>{
  document.addEventListener("visibilitychange",()=>{if(!document.hidden)activateOnce("visibilitychange")},{passive:true});
 })();
 </script>
-
-
-<script id="sss-welcome2-clean-manual-controller-v30-6">
+<script id="sss-welcome2-mobile-paint-controller-v30-7">
 (function(){
   "use strict";
 
@@ -7111,12 +7144,38 @@ addEventListener("resize",()=>{
     pause.textContent="Pause";
     back.disabled=current===0;
     root.classList.add("sssWelcome2-running");
+    slides.forEach(s=>s.classList.remove("sssWelcome2-paintFallback"));
     hideAll();
     action.textContent="SKIP →";
     updateClock();
+    setTimeout(()=>enforcePaintFallback("start-slide-"+(current+1)),700);
   }
 
   function completeReveal(){
+    showAll();
+    phase="complete";
+    action.textContent=current===slides.length-1?"GO TO CV →":"NEXT →";
+  }
+
+  function paintedVisibleWord(){
+    const vr=viewport.getBoundingClientRect();
+    return words().some(w=>{
+      if(!w.classList.contains("sssWelcome2-word--visible"))return false;
+      const cs=getComputedStyle(w);
+      if(cs.display==="none"||cs.visibility==="hidden"||Number(cs.opacity)<=0)return false;
+      return [...w.getClientRects()].some(r=>
+        r.width>0&&r.height>0&&
+        r.bottom>vr.top&&r.top<vr.bottom&&
+        r.right>vr.left&&r.left<vr.right
+      );
+    });
+  }
+
+  function enforcePaintFallback(label){
+    if(phase!=="revealing"&&phase!=="complete")return;
+    if(visibleWords>0&&paintedVisibleWord())return;
+    console.error("WELCOME2 V30.7 PAINT ASSERT FAIL",label,{state:current+1,visibleWords});
+    slides[current].classList.add("sssWelcome2-paintFallback");
     showAll();
     phase="complete";
     action.textContent=current===slides.length-1?"GO TO CV →":"NEXT →";
@@ -7224,6 +7283,5 @@ addEventListener("resize",()=>{
   pause.disabled=true;
 })();
 </script>
-
 </body>
 </html>
