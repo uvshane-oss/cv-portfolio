@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <!--
 SSS BUILD PROVENANCE
-Implementation: V30.8 — WELCOME2 AUTOPLAY
-Master Architect Directive: V38
-Built: 2026-09-10 22:46 NZST
+Implementation: V30.9 — MOBILE HEADER + QUOTE PRESENTATION REFINE
+Master Architect Directive: V39
+Built: 2026-09-11 06:06 NZST
 Status: SANDBOX — NOT PRODUCTION
-Baseline: V30.7
-Baseline SHA256: 943eda6e4b9361f43f1cce4d45251facf363bbecdd178eec6585ae7c53b315f8
+Baseline: V30.8
+Baseline SHA256: 6e249bb8fed234168f0f9b9ac4df72d74e3df2426507c9b97e8d215808fcdb62
 -->
 <html lang="en">
 <head>
@@ -3646,6 +3646,24 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
   }
 }
 </style>
+
+<style id="sss-welcome2-v30-9-mobile-header-quote-refine">
+@media (max-width:700px){
+ #sssWelcome2 .sssWelcome2-header{overflow:hidden!important}
+ #sssWelcome2 .sssWelcome2-title,#sssWelcome2 .sssWelcome2-capabilities{
+   max-width:100%!important;box-sizing:border-box!important;white-space:nowrap!important;
+   overflow:visible!important;text-overflow:clip!important}
+ #sssWelcome2 .sssWelcome2-slide--quote,#sssWelcome2 .sssWelcome2-slide--quote .sssWelcome2-copy{overflow:hidden!important}
+ #sssWelcome2 .sssWelcome2-slide--quote .sssWelcome2-copy{width:100%!important;max-width:100%!important}
+ #sssWelcome2 .sssWelcome2-quoteLine{display:block!important;width:max-content!important;max-width:none!important;
+   white-space:nowrap!important;box-sizing:border-box!important}
+ #sssWelcome2 .sssWelcome2-quoteLine--left{margin-left:0!important;margin-right:auto!important;padding:0!important;text-align:left!important}
+ #sssWelcome2 .sssWelcome2-quoteLine--middle{margin:.42em auto!important;padding:0!important;text-align:center!important;
+   text-transform:uppercase!important;font-weight:950!important;letter-spacing:.045em!important}
+ #sssWelcome2 .sssWelcome2-quoteLine--right{margin-left:auto!important;margin-right:0!important;padding:0!important;text-align:right!important}
+}
+</style>
+
 </head>
 <body><div aria-label="Shane Soper CV loading" aria-live="polite" class="cv-loading-gate" id="cvLoadingGate">
 <div aria-hidden="true" class="sss-hq-live" id="sssHqLive">
@@ -3694,7 +3712,7 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 </div>
 </div>
 <div class="container">
-<div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-10 22:46 NZST</div>
+<div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-11 06:06 NZST</div>
 <div class="cv-header">
 <h1>Shane Soper</h1>
 <p>153 East Road, Ascot, Invercargill, Southland, New Zealand</p>
@@ -7287,5 +7305,48 @@ if(phase==="revealing"){
   root.addEventListener("sssWelcome2Shown",activateWelcome2,{once:true});
 })();
 </script>
+
+<script id="sss-welcome2-v30-9-mobile-fit-controller">
+(function(){
+"use strict";
+const root=document.getElementById("sssWelcome2");if(!root)return;
+const title=root.querySelector(".sssWelcome2-title");
+const secondary=root.querySelector(".sssWelcome2-capabilities");
+const viewport=root.querySelector("#sssWelcome2Viewport");
+const quoteLines=[...root.querySelectorAll(".sssWelcome2-quoteLine")];
+
+function fitOneLine(el,maxPx,minPx){
+ if(!el)return false;
+ el.style.removeProperty("font-size");el.style.removeProperty("display");el.style.whiteSpace="nowrap";
+ const available=Math.floor(el.parentElement.getBoundingClientRect().width);if(available<=0)return false;
+ let size=maxPx;el.style.fontSize=size+"px";
+ while(size>minPx&&el.scrollWidth>available){size=Math.max(minPx,size-.25);el.style.fontSize=size+"px"}
+ return el.scrollWidth<=available;
+}
+function fitQuoteLine(el,startPx,minPx,available){
+ if(!el)return;let size=startPx;el.style.fontSize=size+"px";
+ while(size>minPx&&el.scrollWidth>available){size=Math.max(minPx,size-.25);el.style.fontSize=size+"px"}
+}
+function applyMobileFit(){
+ if(!matchMedia("(max-width:700px)").matches){
+  if(title)title.style.removeProperty("font-size");
+  if(secondary){secondary.style.removeProperty("font-size");secondary.style.removeProperty("display")}
+  quoteLines.forEach(x=>x.style.removeProperty("font-size"));return;
+ }
+ fitOneLine(title,20,9);
+ if(secondary){secondary.style.display="block";const ok=fitOneLine(secondary,13,9);secondary.style.display=ok?"block":"none"}
+ if(viewport&&quoteLines.length===3){
+  const available=Math.max(0,Math.floor(viewport.getBoundingClientRect().width)-2);
+  fitQuoteLine(quoteLines[0],20,11,available);
+  fitQuoteLine(quoteLines[1],27,15,available);
+  fitQuoteLine(quoteLines[2],20,11,available);
+ }
+}
+let queued=0;function queueFit(){cancelAnimationFrame(queued);queued=requestAnimationFrame(applyMobileFit)}
+addEventListener("resize",queueFit,{passive:true});addEventListener("orientationchange",queueFit,{passive:true});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(queueFit);queueFit();
+})();
+</script>
+
 </body>
 </html>
