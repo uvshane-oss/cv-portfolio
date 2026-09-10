@@ -6,9 +6,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>SSS About / Welcome — Isolated Sandbox</title>
 <!--
-Implementation: ISOLATED ABOUT/WELCOME V5 — STATE5 TIMING/VISIBILITY ONLY
-Master Architect Directive: V56
-Built: 2026-09-11 09:30 NZST
+Implementation: ISOLATED ABOUT/WELCOME V6 — 9:16 VERTICAL-SPACE RECOVERY
+Master Architect Directive: V57
+Built: 2026-09-11 10:12 NZST
 Baseline: ISOLATED STATE 5 V2
 Shell/reference: V30.8 approved Welcome2 + V30.7 ordinary-tile reveal contract
 NO HQ / NO CV / NO TRACKER / NO MEDIA
@@ -28,6 +28,46 @@ body{min-height:100dvh;padding:clamp(14px,2.2vw,28px);display:flex;align-items:c
 .quote{position:relative;width:100%;height:100%;overflow:visible;--safe:18px}.qline{position:absolute;white-space:nowrap;font-weight:800;line-height:1;overflow:visible}.qmid{font-size:52px;font-weight:900;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center}.qtop,.qbottom{font-size:32px}.qtop .paint,.qbottom .paint{display:inline-block;white-space:nowrap;clip-path:inset(0 100% 0 0);will-change:clip-path}.qmid .hero,.qmid .dots{opacity:0}.qmid .dots{letter-spacing:.08em}
 @media(max-width:700px){body{padding:0;display:block}.shell{width:100%;height:100dvh;min-height:0;border:0;border-radius:0;grid-template-rows:auto minmax(0,1fr)}.header{padding:16px 14px 12px}.header h1{font-size:clamp(11px,4vw,20px)}.header .sub{font-size:clamp(8px,2.5vw,11px)}.main{display:grid;grid-template-columns:1fr;grid-template-rows:minmax(230px,36vh) minmax(0,1fr)}.portrait{padding:16px}.photo img{object-position:center 29%}.identity{left:16px;bottom:16px;max-width:calc(100% - 32px)}.panel{height:auto;min-height:0;padding:18px 18px 70px}.slide{left:18px;right:18px;top:78px;bottom:70px}.narrative{font-size:clamp(16px,4.2vw,20px)}.sentence+.sentence{margin-top:.62em}.quote{--safe:12px}}
 </style>
+
+<style id="isolated-welcome-v6-mobile-shell-only">
+@media (max-width:700px){
+  /* V6: recover 9:16 vertical space without changing narrative or State 5. */
+  .header{padding:10px 14px 8px}
+  .header h1{
+    display:block;
+    width:100%;
+    max-width:100%;
+    white-space:nowrap;
+    overflow:visible;
+    text-overflow:clip;
+    line-height:1;
+  }
+  .header .rule{margin:8px 0 6px}
+  .header .sub{
+    display:block;
+    width:100%;
+    max-width:100%;
+    white-space:nowrap;
+    overflow:visible;
+    text-overflow:clip;
+    line-height:1.05;
+  }
+
+  /* Shorter portrait row: reclaimed height goes to the narrative panel below. */
+  .main{grid-template-rows:minmax(176px,27vh) minmax(0,1fr)}
+  .portrait{padding:10px 16px 8px}
+  .photo img{
+    object-fit:cover;
+    object-position:center 35%;
+  }
+  .identity{left:16px;bottom:8px}
+
+  /* Narrative typography/reveal remains untouched; only shell space changes. */
+  .panel{padding-top:14px}
+  .slide{top:70px}
+}
+</style>
+
 </head>
 <body>
 <div class="shell" id="welcome">
@@ -158,4 +198,46 @@ body{min-height:100dvh;padding:clamp(14px,2.2vw,28px);display:flex;align-items:c
  playBtn.textContent='Pause';show(0);raf=requestAnimationFrame(paint);
 })();
 </script>
+
+<script id="isolated-welcome-v6-mobile-heading-fit">
+(()=>{
+  const mq=window.matchMedia('(max-width:700px)');
+  const primary=document.querySelector('.header h1');
+  const secondary=document.querySelector('.header .sub');
+  if(!primary||!secondary)return;
+
+  function fitOneLine(el,minPx){
+    el.style.display='block';
+    el.style.fontSize='';
+    let size=parseFloat(getComputedStyle(el).fontSize)||16;
+    const available=el.clientWidth;
+    while(size>minPx && el.scrollWidth>available){
+      size-=0.25;
+      el.style.fontSize=size+'px';
+    }
+    return el.scrollWidth<=available;
+  }
+
+  function apply(){
+    if(!mq.matches){
+      primary.style.fontSize='';
+      secondary.style.fontSize='';
+      secondary.style.display='';
+      return;
+    }
+    fitOneLine(primary,8);
+    secondary.style.display='block';
+    secondary.style.fontSize='';
+    if(!fitOneLine(secondary,7)){
+      secondary.style.display='none';
+    }
+  }
+
+  document.fonts?.ready.then(apply);
+  window.addEventListener('resize',apply,{passive:true});
+  mq.addEventListener?.('change',apply);
+  apply();
+})();
+</script>
+
 </body></html>
