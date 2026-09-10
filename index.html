@@ -2906,6 +2906,157 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 }
 </style>
 
+
+<style id="sss-v30-1-portrait-narrative-repair">
+/* V30.1 / Master V31 — consolidated portrait + narrative geometry repair. */
+
+/* DESKTOP: retain column split; enlarge portrait inside its existing region. */
+@media(min-width:701px){
+  #cvWelcomeOverlay .cv-intro-visual{
+    overflow:hidden!important;
+    isolation:isolate!important;
+  }
+  #cvWelcomeOverlay .cv-shane-avatar,
+  #cvWelcomeOverlay #cvShaneAvatar{
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    max-width:none!important;
+    max-height:none!important;
+    margin:0!important;
+    object-fit:cover!important;
+    object-position:center 20%!important;
+    transform:none!important;
+  }
+  #cvWelcomeOverlay .v199-identity{
+    left:5%!important;
+    bottom:4%!important;
+    max-width:90%!important;
+  }
+}
+
+/* MOBILE: four-region architecture:
+   portrait -> control strip (inside host reserve) -> narrative viewport -> bottom nav. */
+@media(max-width:700px){
+  #cvWelcomeOverlay .cv-welcome-content{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    grid-template-rows:clamp(205px,27vh,235px) minmax(0,1fr)!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+
+  #cvWelcomeOverlay .cv-intro-visual{
+    grid-column:1!important;
+    grid-row:1!important;
+    position:relative!important;
+    min-height:0!important;
+    overflow:hidden!important;
+    contain:paint!important;
+    isolation:isolate!important;
+  }
+
+  #cvWelcomeOverlay .cv-shane-avatar,
+  #cvWelcomeOverlay #cvShaneAvatar{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    max-width:none!important;
+    max-height:none!important;
+    margin:0!important;
+    object-fit:cover!important;
+    object-position:center 21%!important;
+    transform:none!important;
+    z-index:2!important;
+  }
+
+  #cvWelcomeOverlay .v199-identity{
+    left:14px!important;
+    right:auto!important;
+    bottom:10px!important;
+    max-width:calc(100% - 28px)!important;
+    overflow:hidden!important;
+    z-index:8!important;
+  }
+
+  #cvWelcomeOverlay .cv-welcome-scroll{
+    grid-column:1!important;
+    grid-row:2!important;
+    position:relative!important;
+    min-height:0!important;
+    padding:0!important;
+    overflow:hidden!important;
+    isolation:isolate!important;
+  }
+
+  #cvWelcomeOverlay .v198-control-strip{
+    position:absolute!important;
+    left:12px!important;
+    right:12px!important;
+    top:8px!important;
+    height:50px!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    grid-template-rows:32px 3px!important;
+    column-gap:8px!important;
+    row-gap:5px!important;
+    align-items:center!important;
+    z-index:70!important;
+    font-size:13px!important;
+    letter-spacing:.035em!important;
+    pointer-events:auto!important;
+  }
+  #cvWelcomeOverlay .v198-timer{
+    min-width:0!important;
+    overflow:hidden!important;
+    text-overflow:clip!important;
+    white-space:nowrap!important;
+  }
+  #cvWelcomeOverlay .v198-action{
+    width:86px!important;
+    min-width:86px!important;
+    height:26px!important;
+    min-height:26px!important;
+    font-size:8px!important;
+  }
+  #cvWelcomeOverlay .v198-track{
+    grid-column:1/-1!important;
+    height:3px!important;
+  }
+
+  /* Narrative states remain absolute, but their centre is now computed by JS
+     against the usable viewport below the reserved strip. */
+  #cvWelcomeOverlay .cv-welcome-scroll > p,
+  #cvWelcomeOverlay .cv-welcome-scroll > blockquote.cv-commercial-quote{
+    width:calc(100% - 34px)!important;
+    max-width:760px!important;
+  }
+
+  /* Quote is also confined below the reserved strip. */
+  #cvWelcomeOverlay .cv-welcome-scroll > blockquote.cv-commercial-quote.v19-active{
+    left:0!important;
+    top:66px!important;
+    width:100%!important;
+    height:calc(100% - 66px)!important;
+  }
+}
+
+@media(max-width:420px){
+  #cvWelcomeOverlay .cv-welcome-content{
+    grid-template-rows:clamp(195px,26vh,220px) minmax(0,1fr)!important;
+  }
+  #cvWelcomeOverlay .cv-shane-avatar,
+  #cvWelcomeOverlay #cvShaneAvatar{
+    object-position:center 20%!important;
+  }
+  #cvWelcomeOverlay .v198-control-strip{
+    left:10px!important;
+    right:10px!important;
+    font-size:12px!important;
+  }
+}
+</style>
+
 </head>
 <body><div aria-live="polite" aria-label="Shane Soper CV loading" class="cv-loading-gate" id="cvLoadingGate">
 <div class="sss-hq-live" id="sssHqLive" aria-hidden="true">
@@ -5376,10 +5527,20 @@ const normalOrdinal=st=>{
  return -1;
 };
 
-function stripReserve(){return innerWidth<=700?64:78}
-function stageCenterY(){
+function stripReserve(){return innerWidth<=700?66:78}
+function narrativeBounds(blockHeight=0){
  const reserve=stripReserve();
- return reserve+(Math.max(0,host.clientHeight-reserve)/2);
+ const gap=innerWidth<=700?10:12;
+ const top=reserve+gap;
+ const bottom=Math.max(top,host.clientHeight-gap);
+ const h=Math.max(0,blockHeight);
+ const minCenter=top+h/2;
+ const maxCenter=Math.max(minCenter,bottom-h/2);
+ return {top,bottom,center:(top+bottom)/2,minCenter,maxCenter};
+}
+function stageCenterY(blockHeight=0){
+ const b=narrativeBounds(blockHeight);
+ return Math.min(b.maxCenter,Math.max(b.minCenter,b.center));
 }
 
 /* Exact measured fit. Primary has no minimum-font overflow escape. */
@@ -5498,7 +5659,10 @@ function buildReserved(el,text){
  }
  return chars;
 }
-function placeNormal(el){el.style.top=stageCenterY()+"px"}
+function placeNormal(el){
+ const h=el.getBoundingClientRect().height;
+ el.style.top=stageCenterY(h)+"px";
+}
 function prepareNormal(st){
  hideAllStates();
  const el=st.el;el.classList.add("v19-active");
