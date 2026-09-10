@@ -6,9 +6,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>SSS About / Welcome — Isolated Sandbox</title>
 <!--
-Implementation: ISOLATED ABOUT/WELCOME V6 — 9:16 VERTICAL-SPACE RECOVERY
-Master Architect Directive: V57
-Built: 2026-09-11 10:12 NZST
+Implementation: ISOLATED ABOUT/WELCOME V7 — IDENTITY + STATE5 BOTTOM ALIGNMENT
+Master Architect Directive: V58
+Built: 2026-09-11 10:36 NZST
 Baseline: ISOLATED STATE 5 V2
 Shell/reference: V30.8 approved Welcome2 + V30.7 ordinary-tile reveal contract
 NO HQ / NO CV / NO TRACKER / NO MEDIA
@@ -68,6 +68,20 @@ body{min-height:100dvh;padding:clamp(14px,2.2vw,28px);display:flex;align-items:c
 }
 </style>
 
+
+<style id="isolated-welcome-v7-mobile-identity-only">
+@media (max-width:700px){
+  .identity{
+    width:max-content;
+    max-width:calc(100% - 32px);
+    padding:.58em .78em .54em .78em;
+  }
+  .identity .eyebrow{font-size:clamp(12px,3.0vw,16px);letter-spacing:.16em}
+  .identity .name{font-size:clamp(20px,5.2vw,27px);line-height:1.02}
+  .identity::before{transform:scaleY(.75);transform-origin:bottom}
+}
+</style>
+
 </head>
 <body>
 <div class="shell" id="welcome">
@@ -79,7 +93,7 @@ body{min-height:100dvh;padding:clamp(14px,2.2vw,28px);display:flex;align-items:c
 <div class="main">
 <aside class="portrait">
 <div class="photo"><img alt="Shane Soper welcome" src="shane cover.png"/></div>
-<div class="identity"><small>ABOUT / WELCOME</small><strong>SHANE SOPER</strong></div>
+<div class="identity"><small>ABOUT</small><strong>SHANE SOPER</strong></div>
 </aside>
 <main class="panel">
 <div class="statusRow"><div class="status" id="status">NEXT SLIDE IN 09s</div><button id="skip">Skip →</button></div>
@@ -141,9 +155,21 @@ body{min-height:100dvh;padding:clamp(14px,2.2vw,28px);display:flex;align-items:c
    // Top: right edge as close to centre as possible, but never left of safe edge.
    const topLeft=Math.max(leftSafe,centre-tr.width);
    px(top,'left',topLeft); top.style.right='auto'; top.style.transform='none';
-   // Bottom: furthest-right valid placement; left edge may not cross middle centre.
-   const preferred=rightSafe-br.width;
-   const bottomLeft=Math.max(centre,preferred);
+   // V7 bottom horizontal placement only:
+   // Prefer the T of “They” directly below the rendered left edge of N in “MILLION”.
+   // Then enforce the existing safe-right boundary with the minimum required left shift.
+   const heroText=hero.textContent||'';
+   const nIndex=heroText.indexOf('N');
+   const range=document.createRange();
+   const heroNode=hero.firstChild;
+   let preferredBottomLeft=centre;
+   if(heroNode&&nIndex>=0){
+     range.setStart(heroNode,nIndex); range.setEnd(heroNode,nIndex+1);
+     const nr=range.getBoundingClientRect();
+     preferredBottomLeft=nr.left-qr.left;
+   }
+   const maxBottomLeft=rightSafe-br.width;
+   const bottomLeft=Math.min(preferredBottomLeft,maxBottomLeft);
    px(bottom,'left',bottomLeft); bottom.style.right='auto'; bottom.style.transform='none';
    // Vertical positions independently reference middle actual bounds.
    const localMidTop=mr.top-qr.top, localMidBottom=mr.bottom-qr.top;
