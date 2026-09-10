@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <!--
 SSS BUILD PROVENANCE
-Implementation: V30.7 — MOBILE PAINT + SENTENCE/QUOTE COMPOSITION
-Master Architect Directive: V37
-Built: 2026-09-10 22:35 NZST
+Implementation: V30.8 — WELCOME2 AUTOPLAY
+Master Architect Directive: V38
+Built: 2026-09-10 22:46 NZST
 Status: SANDBOX — NOT PRODUCTION
-Baseline: V30.6
-Baseline SHA256: 4962a15f214d259296b3a79acb61a144e3b2fb220e1b3d9286b44470497372ae
+Baseline: V30.7
+Baseline SHA256: 943eda6e4b9361f43f1cce4d45251facf363bbecdd178eec6585ae7c53b315f8
 -->
 <html lang="en">
 <head>
@@ -3675,8 +3675,8 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 </section>
 <section aria-label="Welcome narrative" class="sssWelcome2-storyPane">
 <div class="sssWelcome2-playback">
-<div class="sssWelcome2-timer" id="sssWelcome2Timer">READY TO START</div>
-<button class="sssWelcome2-action" id="sssWelcome2Action" type="button">START →</button>
+<div class="sssWelcome2-timer" id="sssWelcome2Timer">NEXT SLIDE IN 09s</div>
+<button class="sssWelcome2-action" id="sssWelcome2Action" type="button">SKIP →</button>
 <div aria-hidden="true" class="sssWelcome2-progress"><span class="sssWelcome2-progressFill" id="sssWelcome2Progress"></span></div>
 </div>
 <div aria-atomic="false" aria-live="polite" class="sssWelcome2-viewport" id="sssWelcome2Viewport">
@@ -3694,7 +3694,7 @@ html.sss-hq-active,body.sss-hq-active{overflow:hidden!important}
 </div>
 </div>
 <div class="container">
-<div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-10 22:35 NZST</div>
+<div class="revision-stamp" id="dynamic-revision-stamp">Rev: 2026-09-10 22:46 NZST</div>
 <div class="cv-header">
 <h1>Shane Soper</h1>
 <p>153 East Road, Ascot, Invercargill, Southland, New Zealand</p>
@@ -6472,7 +6472,7 @@ addEventListener("resize",()=>{
  let raf=0; function onResize(){cancelAnimationFrame(raf);raf=requestAnimationFrame(registerGeometry)}
  function enter(){
    clearInterval(tick);removeEventListener('resize',onResize);gate.hidden=true;gate.style.display='none';
-   welcome.hidden=false;welcome.style.display='flex';welcome.style.visibility='visible';welcome.style.opacity='1';avatar.style.display='block';avatar.src=encodeURI(cover);lock();
+   welcome.hidden=false;welcome.style.display='flex';welcome.style.visibility='visible';welcome.style.opacity='1';avatar.style.display='block';avatar.src=encodeURI(cover);lock();welcome.dispatchEvent(new CustomEvent('sssWelcome2Shown'));
  }
  close.addEventListener('click',()=>{welcome.hidden=true;welcome.style.display='none';unlock();},true);
  gate.hidden=false;gate.style.display='block';welcome.hidden=true;welcome.style.display='none';lock();registerGeometry();addEventListener('resize',onResize,{passive:true});
@@ -7055,7 +7055,7 @@ addEventListener("resize",()=>{
  document.addEventListener("visibilitychange",()=>{if(!document.hidden)activateOnce("visibilitychange")},{passive:true});
 })();
 </script>
-<script id="sss-welcome2-mobile-paint-controller-v30-7">
+<script id="sss-welcome2-autoplay-controller-v30-8">
 (function(){
   "use strict";
 
@@ -7241,12 +7241,7 @@ addEventListener("resize",()=>{
   }
 
   action.addEventListener("click",()=>{
-    if(phase==="idle"){
-      startSlide(0);
-      if(!frameId)frameId=requestAnimationFrame(tick);
-      return;
-    }
-    if(phase==="revealing"){
+if(phase==="revealing"){
       completeReveal();
       return;
     }
@@ -7269,18 +7264,27 @@ addEventListener("resize",()=>{
     lastTs=performance.now();
   },{passive:true});
 
-  /* Manual-start engineering baseline.
-     State 1 is deliberately visible before START so a renderer failure can never
-     present an empty recruiter-facing narrative panel. */
+  /* V30.8 explicit HQ->Welcome2 autoplay. */
+  let activated=false;
+  function activateWelcome2(){
+    if(activated)return;
+    activated=true;
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      startSlide(0);
+      if(!frameId)frameId=requestAnimationFrame(tick);
+    }));
+  }
+
   setActive(0);
   root.classList.remove("sssWelcome2-running");
   showAll(0);
   phase="idle";
-  timer.textContent="READY TO START";
-  action.textContent="START →";
+  timer.textContent="NEXT SLIDE IN 09s";
+  action.textContent="SKIP →";
   progress.style.width="0%";
   back.disabled=true;
   pause.disabled=true;
+  root.addEventListener("sssWelcome2Shown",activateWelcome2,{once:true});
 })();
 </script>
 </body>
