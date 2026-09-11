@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>SSS About / Welcome — Isolated Sandbox</title>
+<!--
+Implementation: ISOLATED ABOUT/WELCOME V9 — ODT POSITION + RED-LINE BEHAVIOUR FIX
+Master Architect Directive: V59
+Built: 2026-09-11 — V9 coder execution
+Baseline: ISOLATED STATE 5 V2
+Shell/reference: V30.8 approved Welcome2 + V30.7 ordinary-tile reveal contract
+NO HQ / NO CV / NO TRACKER / NO MEDIA
+-->
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif}
+body{min-height:100dvh;padding:clamp(14px,2.2vw,28px);display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 74% 28%,rgba(45,92,119,.12),transparent 34%),linear-gradient(180deg,#111820 0%,#0a1117 100%);color:#17252d}
+.shell{width:min(1160px,calc(100vw - 36px));height:min(760px,calc(100dvh - 36px));min-height:590px;display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden;border:1px solid rgba(156,181,197,.42);border-radius:7px;background:#101820;box-shadow:0 22px 70px rgba(0,0,0,.42)}
+.header{min-width:0;padding:25px clamp(28px,4vw,48px) 19px;text-align:center;color:#fff;background:linear-gradient(90deg,rgba(32,47,58,.98),rgba(13,23,30,.98)),repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 1px,transparent 1px 5px)}
+.header h1{margin:0;white-space:nowrap;font-size:clamp(18px,2.2vw,29px);line-height:1.05;letter-spacing:.01em}.header .rule{height:1px;background:#55b6e6;margin:14px 0 9px}.header .sub{font-weight:700;font-size:13px;white-space:nowrap}
+.main{display:grid;grid-template-columns:36% 64%;min-height:0;overflow:hidden}.portrait{position:relative;min-width:0;min-height:0;padding:28px;background:#101e28}.photo{position:relative;width:100%;height:100%;min-height:0;overflow:hidden;border:1px solid rgba(128,159,177,.36);background:#162630}.photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.identity{position:absolute;left:28px;bottom:28px;max-width:calc(100% - 56px);border-left:3px solid #54b9e9;padding:6px 12px;background:rgba(8,22,31,.82);color:white}.identity small{display:block;color:#8ed6f5;letter-spacing:.16em;font-weight:700}.identity strong{display:block;font-size:18px}
+.panel{background:linear-gradient(#f4f9fc,#e9f2f7);position:relative;min-width:0;min-height:0;padding:24px 36px 78px;overflow:hidden}.statusRow{display:flex;align-items:center;justify-content:space-between;gap:18px}.status{font-size:18px;font-weight:800;color:#27536b}.statusRow #skip{margin-left:auto;flex:0 0 auto}.progress{height:4px;background:#cfdee6;margin-top:12px}.progress>i{display:block;height:100%;width:0;background:#4aa8d4}
+.slide{position:absolute;left:36px;right:36px;top:92px;bottom:78px;display:none}.slide.active{display:flex;align-items:center;justify-content:center}.narrative{font-size:22px;line-height:1.34;font-weight:700;max-width:880px;width:100%}.sentence{display:block}.sentence+.sentence{margin-top:.48em}.word{opacity:0}.word.revealed{opacity:1}
+.controls{position:absolute;left:14px;right:14px;bottom:12px;display:flex;gap:8px}button{border:1px solid #7b9bab;background:#fff;color:#16374a;padding:9px 15px;border-radius:3px;font-weight:700}button.primary{margin-left:auto;background:#07527d;color:#fff;border-color:#1979a9}
+/* State 5 V2 remains sovereign. */
+.quote{position:relative;width:100%;height:100%;overflow:visible;--safe:18px}.qline{position:absolute;white-space:nowrap;font-weight:800;line-height:1;overflow:visible}.qmid{font-size:52px;font-weight:900;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center}.qtop,.qbottom{font-size:32px}.qtop .paint,.qbottom .paint{display:inline-block;white-space:nowrap;clip-path:inset(0 100% 0 0);will-change:clip-path}.qmid .hero,.qmid .dots{opacity:0}.qmid .dots{letter-spacing:.08em}
+@media(max-width:700px){body{padding:0;display:block}.shell{width:100%;height:100dvh;min-height:0;border:0;border-radius:0;grid-template-rows:auto minmax(0,1fr)}.header{padding:16px 14px 12px}.header h1{font-size:clamp(11px,4vw,20px)}.header .sub{font-size:clamp(8px,2.5vw,11px)}.main{display:grid;grid-template-columns:1fr;grid-template-rows:minmax(230px,36vh) minmax(0,1fr)}.portrait{padding:16px}.photo img{object-position:center 29%}.identity{left:16px;bottom:16px;max-width:calc(100% - 32px)}.panel{height:auto;min-height:0;padding:18px 18px 70px}.slide{left:18px;right:18px;top:78px;bottom:70px}.narrative{font-size:clamp(16px,4.2vw,20px)}.sentence+.sentence{margin-top:.62em}.quote{--safe:12px}}
+</style>
+<style id="isolated-welcome-v6-mobile-shell-only">
+@media (max-width:700px){
+  /* V6: recover 9:16 vertical space without changing narrative or State 5. */
+  .header{padding:10px 14px 8px}
+  .header h1{
+    display:block;
+    width:100%;
+    max-width:100%;
+    white-space:nowrap;
+    overflow:visible;
+    text-overflow:clip;
+    line-height:1;
+  }
+  .header .rule{margin:8px 0 6px}
+  .header .sub{
+    display:block;
+    width:100%;
+    max-width:100%;
+    white-space:nowrap;
+    overflow:visible;
+    text-overflow:clip;
+    line-height:1.05;
+  }
+
+  /* Shorter portrait row: reclaimed height goes to the narrative panel below. */
+  .main{grid-template-rows:minmax(176px,27vh) minmax(0,1fr)}
+  .portrait{padding:10px 16px 8px}
+  .photo img{
+    object-fit:cover;
+    object-position:center 35%;
+  }
+  .identity{left:16px;bottom:8px}
+
+  /* Narrative typography/reveal remains untouched; only shell space changes. */
+  .panel{padding-top:14px}
+  .slide{top:70px}
+}
+</style>
+<style id="isolated-welcome-v7-mobile-identity-only">
+@media (max-width:700px){
+  .identity{
+    width:max-content;
+    max-width:calc(100% - 32px);
+    padding:.58em .78em .54em .78em;
+  }
+  .identity .eyebrow{font-size:clamp(12px,3.0vw,16px);letter-spacing:.16em}
+  .identity .name{font-size:clamp(20px,5.2vw,27px);line-height:1.02}
+  .identity::before{transform:scaleY(.75);transform-origin:bottom}
+}
+</style>
+<style id="isolated-welcome-v9-authored-choreography">
+.narrative.authored .sentence{display:block;margin:0 0 .38em;position:relative;max-width:max-content}
+.narrative.authored .sentence[data-authored-x]{white-space:nowrap}
+.narrative.authored .instant-beat{opacity:0;color:inherit}
+.narrative.authored .instant-beat.revealed{opacity:1}
+.narrative.authored .but-sequence{min-height:1.25em}
+.narrative.authored .but-word{display:inline-block;font-weight:800}
+.narrative.authored .but-dots{display:inline-block;opacity:0;white-space:pre}
+.narrative.authored .emphasis{font-weight:700}
+@media(max-width:700px){
+ .narrative.authored .sentence{margin-bottom:.30em}
+}
+</style>
+</head>
+<body>
+<div class="shell" id="welcome">
+<header class="header">
+<h1>COMMERCIAL OPERATOR. SALES LEADER. PROBLEM SOLVER.</h1>
+<div class="rule"></div>
+<div class="sub">Growth · Commercial Strategy · Financial Judgement · Operations · Execution</div>
+</header>
+<div class="main">
+<aside class="portrait">
+<div class="photo"><img alt="Shane Soper welcome" src="shane cover.png"/></div>
+<div class="identity"><small>ABOUT</small><strong>SHANE SOPER</strong></div>
+</aside>
+<main class="panel">
+<div class="statusRow"><div class="status" id="status">NEXT SLIDE IN 09s</div><button id="skip">Skip →</button></div>
+<div class="progress"><i id="bar"></i></div>
+<section class="slide" data-seconds="7.105" data-slide="1"><div class="narrative authored">
+<span class="sentence" data-post-ms="500"><span class="word">Hello</span> <span class="word">and</span> <span class="word">welcome</span></span>
+<span class="sentence"><span class="word">If</span> <span class="word">you</span> <span class="word">got</span> <span class="word">90</span> <span class="word">seconds</span></span>
+<span class="sentence" data-post-ms="500"><span class="word">we</span> <span class="word">can</span> <span class="word">do</span> <span class="word">proper</span> <span class="word">introductions</span></span>
+<span class="sentence" data-post-ms="3500"><span class="word">If</span> <span class="word">not</span> <span class="word">Skip</span> <span class="word">to</span> <span class="word">my</span> <span class="word">CV</span></span>
+</div></section>
+<section class="slide" data-seconds="5.523" data-slide="2"><div class="narrative authored slide-b">
+<span class="sentence instant-beat" data-post-ms="500">Now thats out the way</span>
+<span class="sentence" data-post-ms="500"><span class="word">Hi</span> <span class="word">I’m</span> <span class="word">Shane</span></span>
+<span class="sentence instant-beat" data-post-ms="500">I can sell.</span>
+<span class="sentence instant-beat" data-post-ms="500">I can lead.</span>
+<span class="sentence"><span class="word">I</span> <span class="word">can</span> <span class="word">bring</span> <span class="word">the</span> <span class="word">best</span> <span class="word">out</span> <span class="word">of</span> <span class="word">people</span></span>
+<span class="sentence but-sequence" data-authored-x="34" data-post-ms="500"><span class="instant-beat but-word">BUT</span><span class="but-dots">.....</span></span>
+<span class="sentence"><span class="word">I'm</span> <span class="word">just</span> <span class="word">as</span> <span class="word">comfortable</span></span>
+<span class="sentence"><span class="word">rolling</span> <span class="word">my</span> <span class="word">sleeves</span> <span class="word">up</span> <span class="word">doing</span> <span class="word">the</span> <span class="word">job.</span></span>
+</div></section>
+<section class="slide" data-seconds="22.428" data-slide="3"><div class="narrative authored">
+<span class="sentence" data-post-ms="500"><span class="word">I’m</span> <span class="word">a</span> <span class="word">commercial</span> <span class="word">operator</span> <span class="word">with</span> <span class="word">a</span> <span class="word">documented</span> <span class="word">record</span> <span class="word">of</span></span>
+<span class="sentence instant-beat emphasis" data-authored-x="28" data-post-ms="500">Dominating in retail</span>
+<span class="sentence instant-beat emphasis" data-authored-x="28" data-post-ms="500">Cold calling</span>
+<span class="sentence instant-beat emphasis" data-authored-x="28" data-post-ms="500">Key account management.</span>
+<span class="sentence" data-post-ms="500" data-pre-ms="500"><span class="word">I’m</span> <span class="word">a</span> <span class="word">true</span> <span class="word">hunter</span> <span class="word">—</span> <span class="word">I</span> <span class="word">can</span> <span class="word">find</span> <span class="word">the</span> <span class="word">Opportunity</span></span>
+<span class="sentence instant-beat emphasis" data-authored-x="30" data-post-ms="500">Open the door</span>
+<span class="sentence instant-beat emphasis" data-authored-x="30" data-post-ms="500">Win the business</span>
+<span class="sentence instant-beat emphasis" data-authored-x="30" data-post-ms="500">Grow the account</span>
+<span class="sentence" data-post-ms="500"><span class="word">Beyond</span> <span class="word">sales,</span> <span class="word">I’ve</span> <span class="word">Grown</span> <span class="word">revenue</span> <span class="word">and</span> <span class="word">teams,</span></span>
+<span class="sentence instant-beat emphasis" data-authored-x="29" data-post-ms="500">Managed margins and costs,</span>
+<span class="sentence instant-beat emphasis" data-authored-x="29" data-post-ms="500">Developed new markets</span>
+<span class="sentence" data-post-ms="2000"><span class="word">&amp;</span> <span class="word">taken</span> <span class="word">difficult</span> <span class="word">projects</span> <span class="word">from</span> <span class="word">idea</span> <span class="word">through</span> <span class="word">to</span> <span class="word">delivery.</span></span>
+</div></section>
+<section class="slide" data-seconds="14.635" data-slide="4"><div class="narrative authored">
+<span class="sentence" data-post-ms="500"><span class="word">I've</span> <span class="word">always</span> <span class="word">been</span> <span class="word">a</span> <span class="word">player-coach.</span></span>
+<span class="sentence" data-post-ms="500"><span class="word">I'd</span> <span class="word">rather</span> <span class="word">work</span> <span class="word">shoulder-to-shoulder,</span></span>
+<span class="sentence instant-beat" data-authored-x="28" data-post-ms="500">show people what works</span>
+<span class="sentence instant-beat" data-authored-x="28" data-post-ms="500">recognise what they're doing well.</span>
+<span class="sentence instant-beat emphasis" data-post-ms="500">“How about , Try this ?”</span>
+<span class="sentence" data-authored-x="24" data-post-ms="500"><span class="word">Will always work better than</span></span>
+<span class="sentence instant-beat emphasis" data-authored-x="48" data-post-ms="3500">“GET IN MY OFFICE”</span>
+</div></section>
+<section class="slide" data-seconds="13.602" data-slide="5"><div class="narrative authored">
+<span class="sentence" data-post-ms="500"><span class="word">Business</span> <span class="word">is</span> <span class="word">much</span> <span class="word">the</span> <span class="word">same.</span></span>
+<span class="sentence instant-beat emphasis" data-authored-x="34" data-post-ms="500">Find the pain point,</span>
+<span class="sentence instant-beat emphasis" data-authored-x="34" data-post-ms="500">Understand the numbers</span>
+<span class="sentence" data-pre-ms="500"><span class="word">Work</span> <span class="word">out</span> <span class="word">what</span> <span class="word">makes</span> <span class="word">commercial</span> <span class="word">sense</span></span>
+<span class="sentence" data-authored-x="38" data-post-ms="500"><span class="word">and</span> <span class="word">get</span> <span class="word">on</span> <span class="word">with</span> <span class="word">solving</span> <span class="word">it.</span></span>
+<span class="sentence"><span class="word">I’m</span> <span class="word">just</span> <span class="word">as</span> <span class="word">comfortable</span> <span class="word">working</span> <span class="word">through</span> <span class="word">margins,</span></span>
+<span class="sentence" data-authored-x="31" data-post-ms="500"><span class="word">costs</span> <span class="word">and</span> <span class="word">commercial</span> <span class="word">decisions</span></span>
+<span class="sentence" data-post-ms="2500"><span class="word">as</span> <span class="word">I</span> <span class="word">am</span> <span class="word">turning</span> <span class="word">the</span> <span class="word">solution</span> <span class="word">into</span> <span class="word">something</span> <span class="word">that</span> <span class="word">works.</span></span>
+</div></section>
+<section class="slide" data-seconds="13.150" data-slide="6"><div aria-label="Good solutions don't cost A MILLION DOLLARS They look, feel and generate that." class="quote" id="state5Quote">
+<div class="qline qtop"><span class="paint">“Good solutions don't cost</span></div>
+<div class="qline qmid"><span class="hero">A MILLION DOLLARS</span><span class="dots">......</span></div>
+<div class="qline qbottom"><span class="paint">They look, feel and generate that.”</span></div>
+</div></section>
+<section class="slide" data-seconds="17.834" data-slide="7"><div class="narrative authored">
+<span class="sentence" data-post-ms="500"><span class="word">My</span> <span class="word">roles</span> <span class="word">overlap,</span> <span class="word">and</span> <span class="word">being</span> <span class="word">driven</span> <span class="word">by</span></span>
+<span class="sentence instant-beat emphasis" data-authored-x="52" data-post-ms="500">Setting targets</span>
+<span class="sentence instant-beat emphasis" data-authored-x="52" data-post-ms="500">Cracking inefficiencies</span>
+<span class="sentence instant-beat emphasis" data-authored-x="52" data-post-ms="500">Removing pain points</span>
+<span class="sentence" data-post-ms="500"><span class="word">I’ve</span> <span class="word">kept</span> <span class="word">myself</span> <span class="word">fully</span> <span class="word">engaged</span> <span class="word">for</span> <span class="word">decades.</span></span>
+<span class="sentence"><span class="word">After</span> <span class="word">delivering</span> <span class="word">on</span> <span class="word">Devil</span> <span class="word">Burger's</span> <span class="word">success,</span></span>
+<span class="sentence instant-beat emphasis" data-authored-x="33" data-post-ms="1000">I deliberately took a proper break.</span>
+<span class="sentence" data-post-ms="500"><span class="word">Using</span> <span class="word">that</span> <span class="word">time</span> <span class="word">to</span> <span class="word">achieve</span> <span class="word">some</span> <span class="word">personal</span> <span class="word">goals,</span></span>
+<span class="sentence" data-authored-x="8" data-post-ms="500"><span class="word">spend</span> <span class="word">valuable</span> <span class="word">time</span> <span class="word">with</span> <span class="word">my</span> <span class="word">family</span></span>
+<span class="sentence" data-post-ms="2500"><span class="word">&amp;</span> <span class="word">mum</span> <span class="word">before</span> <span class="word">she</span> <span class="word">passed.</span></span>
+</div></section>
+<section class="slide" data-seconds="11.200" data-slide="8"><div class="narrative authored">
+<span class="sentence" data-post-ms="500"><span class="word">Now</span> <span class="word">I'm</span> <span class="word">ready</span> <span class="word">to</span> <span class="word">get</span> <span class="word">back</span> <span class="word">in</span> <span class="word">the</span> <span class="word">trenches</span></span>
+<span class="sentence instant-beat" data-authored-x="55" data-post-ms="500">with a good team.</span>
+<span class="sentence" data-post-ms="500" data-pre-ms="500"><span class="word">Leading</span> <span class="word">or</span> <span class="word">following</span> <span class="word">?</span></span>
+<span class="sentence" data-post-ms="500" data-pre-ms="500"><span class="word">Whats</span> <span class="word">important</span> <span class="word">important</span> <span class="word">to</span> <span class="word">me</span> <span class="word">?</span></span>
+<span class="sentence" data-post-ms="500"><span class="word">Either</span> <span class="word">way</span> <span class="word">I’m</span> <span class="word">happy</span> <span class="word">put</span> <span class="word">me</span> <span class="word">where</span> <span class="word">I</span> <span class="word">can</span> <span class="word">contribute</span></span>
+<span class="sentence" data-post-ms="500"><span class="word">Lets</span> <span class="word">set</span> <span class="word">some</span> <span class="word">worthwhile</span> <span class="word">goals,</span></span>
+<span class="sentence" data-authored-x="30" data-post-ms="500"><span class="word">and</span> <span class="word">get</span> <span class="word">on</span> <span class="word">with</span> <span class="word">achieving</span> <span class="word">them.</span></span>
+</div></section>
+<div class="controls">
+<button id="back">Back</button><button id="play">Play</button>
+<button class="primary" id="view">View My CV →</button>
+</div>
+</main>
+</div>
+</div>
+<script id="isolated-state5-v2">
+(()=>{
+ const slide=document.querySelector('.slide[data-slide="5"]'), quote=document.getElementById('state5Quote');
+ if(!slide||!quote)return;
+ const top=quote.querySelector('.qtop'), mid=quote.querySelector('.qmid'), bottom=quote.querySelector('.qbottom');
+ const topPaint=top.querySelector('.paint'), hero=mid.querySelector('.hero'), dots=mid.querySelector('.dots'), bottomPaint=bottom.querySelector('.paint');
+ let frozen=false, metrics=null;
+
+ function normalGap(){
+   const n=document.querySelector('.slide[data-slide="1"] .narrative');
+   if(!n)return 8;
+   const cs=getComputedStyle(n), fs=parseFloat(cs.fontSize)||22, lh=parseFloat(cs.lineHeight)||fs*1.34;
+   return Math.max(1,lh-fs);
+ }
+ function px(el,p,v){el.style.setProperty(p,v+'px')}
+ function fitOneLine(el,maxWidth,start,min){
+   let size=start; el.style.fontSize=size+'px';
+   while(size>min && el.getBoundingClientRect().width>maxWidth){size-=.5;el.style.fontSize=size+'px'}
+   return size;
+ }
+ function layout(force=false){
+   if(frozen&&!force)return;
+   const qr=quote.getBoundingClientRect(), safe=parseFloat(getComputedStyle(quote).getPropertyValue('--safe'))||18;
+   const centre=qr.width/2, leftSafe=safe, rightSafe=qr.width-safe;
+   // Middle: exact text-box centre; shrink only if its complete final string cannot be contained.
+   mid.style.left='50%';mid.style.top='50%';mid.style.transform='translate(-50%,-50%)';mid.style.right='auto';mid.style.bottom='auto';
+   fitOneLine(mid,Math.max(100,qr.width-2*safe),52,24);
+   const mr=mid.getBoundingClientRect();
+   // Supporting font: independent measurements, one matched final size, each corridor = half-box minus safe padding.
+   const topAvail=Math.max(80,centre-leftSafe), botAvail=Math.max(80,rightSafe-centre);
+   top.style.fontSize='32px';bottom.style.fontSize='32px';
+   const topNeed=top.getBoundingClientRect().width, botNeed=bottom.getBoundingClientRect().width;
+   let support=32;
+   support=Math.min(support,32*topAvail/topNeed,32*botAvail/botNeed);
+   support=Math.max(13,support);
+   top.style.fontSize=support+'px';bottom.style.fontSize=support+'px';
+   // Recheck common size until both full strings fit their independent corridors.
+   while(support>13&&(top.getBoundingClientRect().width>topAvail||bottom.getBoundingClientRect().width>botAvail)){
+     support-=.25;top.style.fontSize=support+'px';bottom.style.fontSize=support+'px';
+   }
+   const tr=top.getBoundingClientRect(), br=bottom.getBoundingClientRect();
+   const gap=normalGap()*2;
+   // Top: right edge as close to centre as possible, but never left of safe edge.
+   const topLeft=Math.max(leftSafe,centre-tr.width);
+   px(top,'left',topLeft); top.style.right='auto'; top.style.transform='none';
+   // V7 bottom horizontal placement only:
+   // Prefer the T of “They” directly below the rendered left edge of N in “MILLION”.
+   // Then enforce the existing safe-right boundary with the minimum required left shift.
+   const heroText=hero.textContent||'';
+   const nIndex=heroText.indexOf('N');
+   const range=document.createRange();
+   const heroNode=hero.firstChild;
+   let preferredBottomLeft=centre;
+   if(heroNode&&nIndex>=0){
+     range.setStart(heroNode,nIndex); range.setEnd(heroNode,nIndex+1);
+     const nr=range.getBoundingClientRect();
+     preferredBottomLeft=nr.left-qr.left;
+   }
+   const maxBottomLeft=rightSafe-br.width;
+   const bottomLeft=Math.min(preferredBottomLeft,maxBottomLeft);
+   px(bottom,'left',bottomLeft); bottom.style.right='auto'; bottom.style.transform='none';
+   // Vertical positions independently reference middle actual bounds.
+   const localMidTop=mr.top-qr.top, localMidBottom=mr.bottom-qr.top;
+   px(top,'top',localMidTop-gap-tr.height); top.style.bottom='auto';
+   px(bottom,'top',localMidBottom+gap); bottom.style.bottom='auto';
+   metrics={safe,centre,gap,support,middle:parseFloat(getComputedStyle(mid).fontSize),topLeft,bottomLeft};
+   frozen=true;
+ }
+ function resetPaint(){
+   topPaint.style.clipPath='inset(0 100% 0 0)';
+   hero.style.opacity='1';
+   dots.style.opacity='0';
+   dots.style.clipPath='inset(0 100% 0 0)';
+   bottomPaint.style.clipPath='inset(0 100% 0 0)';
+ }
+ function paint(ms){
+   layout();
+   // V5 timing/visibility only. Geometry and typography remain frozen.
+   // Hero is complete at tile entry. Reserve 1550ms: the same duration previously
+   // assigned to a progressive supporting-line reveal, then top -> dots -> bottom.
+   const heroReserve=1550, topDuration=1550, topExtraHold=1500, dotsDuration=650, dotsExtraHold=500, bottomDuration=1900, bottomExtraHold=4000;
+   const topStart=heroReserve, dotsStart=topStart+topDuration+topExtraHold, bottomStart=dotsStart+dotsDuration+dotsExtraHold;
+   hero.style.opacity='1';
+   const topP=Math.max(0,Math.min(1,(ms-topStart)/topDuration));
+   topPaint.style.clipPath=`inset(0 ${100-topP*100}% 0 0)`;
+   const dotP=Math.max(0,Math.min(1,(ms-dotsStart)/dotsDuration));
+   dots.style.opacity=dotP>0?'1':'0';
+   dots.style.clipPath=`inset(0 ${100-dotP*100}% 0 0)`;
+   const botP=Math.max(0,Math.min(1,(ms-bottomStart)/bottomDuration));
+   bottomPaint.style.clipPath=`inset(0 ${100-botP*100}% 0 0)`;
+ }
+ window.SSSState5V2={layout,paint,reset:resetPaint,metrics:()=>metrics};
+ document.fonts?.ready.then(()=>{frozen=false;layout(true)}); 
+ window.addEventListener('resize',()=>{frozen=false;layout(true)},{passive:true});
+ resetPaint();
+})();
+</script>
+<!-- V23 TIMING MANIFEST
+  Tile 1: content 8.864s + 2.000s buffer = 10.864s countdown
+  Tile 2: content 8.000s + 2.000s buffer = 10.000s countdown
+  Tile 3: content 32.330s + 2.000s buffer = 34.330s countdown
+  Tile 4: content 20.119s + 2.000s buffer = 22.119s countdown
+  Tile 5: content 20.629s + 2.000s buffer = 22.629s countdown
+  Tile 6: content 11.650s + 2.000s buffer = 13.650s countdown
+  Tile 7: content 27.216s + 2.000s buffer = 29.216s countdown
+  Tile 8: content 16.918s + 2.000s buffer = 18.918s countdown
+--><script id="isolated-welcome-v14-controller">
+(()=>{
+ const slides=[...document.querySelectorAll('.slide')],status=document.getElementById('status'),bar=document.getElementById('bar'),playBtn=document.getElementById('play');
+ const MILLION_INDEX=5;
+ let idx=0,playing=true,started=0,elapsed=0,raf=0;
+ const total=()=>+slides[idx].dataset.seconds*1000;
+ const charCount=text=>Math.max(1,[...String(text||'').trim()].length);
+
+ function ordinaryUnits(){
+   const root=slides[idx];
+   const units=[];
+   root.querySelectorAll('.narrative.authored .sentence').forEach((sentence,lineIndex)=>{
+     if(sentence.classList.contains('but-sequence')){
+       const el=sentence.querySelector('.but-word'),dots=sentence.querySelector('.but-dots');
+       units.push({kind:'but',el,dots,chars:charCount(el?.textContent),lineIndex,pre:+sentence.dataset.preMs||0,post:+sentence.dataset.postMs||0});
+       return;
+     }
+     if(sentence.classList.contains('instant-beat')){
+       units.push({kind:'instant',el:sentence,chars:charCount(sentence.textContent),lineIndex,pre:+sentence.dataset.preMs||0,post:+sentence.dataset.postMs||0});
+       return;
+     }
+     const words=[...sentence.querySelectorAll('.word')]; words.forEach((el,wi)=>units.push({kind:'word',el,chars:charCount(el.textContent),lineIndex,pre:wi===0?(+sentence.dataset.preMs||0):0,post:wi===words.length-1?(+sentence.dataset.postMs||0):0}));
+   });
+   return units;
+ }
+ function resetOrdinary(){
+   slides.forEach((slide,n)=>{
+     if(n===MILLION_INDEX)return;
+     slide.querySelectorAll('.word,.instant-beat').forEach(el=>el.classList.remove('revealed'));
+     slide.querySelectorAll('.but-dots').forEach(el=>{el.style.opacity='0';el.style.clipPath='inset(0 100% 0 0)';el.textContent='......'});
+   });
+ }
+ function layoutAuthoredPositions(slide=slides[idx]){
+   const narrative=slide.querySelector('.narrative.authored');
+   if(!narrative)return;
+   const box=narrative.getBoundingClientRect();
+   if(!box.width)return;
+   narrative.querySelectorAll('.sentence[data-authored-x]').forEach(line=>{
+     line.style.left='0px';
+     line.style.fontSize='';
+     const preferred=(parseFloat(line.dataset.authoredX)||0)/100*box.width;
+     let width=line.getBoundingClientRect().width;
+     const base=parseFloat(getComputedStyle(line).fontSize)||parseFloat(getComputedStyle(narrative).fontSize)||22;
+     let size=base;
+     while(width>box.width && size>base*.72){
+       size-=.25;line.style.fontSize=size+'px';width=line.getBoundingClientRect().width;
+     }
+     const maxLeft=Math.max(0,box.width-width);
+     line.style.left=Math.max(0,Math.min(preferred,maxLeft))+'px';
+   });
+ }
+ function revealOrdinary(e){
+   const units=ordinaryUnits();
+   if(!units.length)return;
+   // V23 universal timing: fixed typing speed 10% faster than V13, fully independent of slide countdown.
+   const keyMs=21.9921;
+   const dotsChars=(idx===1?5:6);
+   let cursor=0;
+   let previousLine=null;
+   let previousLineKind=null;
+   for(const u of units){
+     cursor+=u.pre||0;
+     const enteringNewLine=previousLine!==null && u.lineIndex!==previousLine;
+     const currentLineKind=u.kind;
+     // V10 rhythm: exactly one 500ms transition at a line boundary whenever
+     // either side of that boundary is an instant/drop event. This covers
+     // normal -> drop, drop -> normal and drop -> drop without double-counting.
+     if(idx!==1 && enteringNewLine && (previousLineKind==='instant' || previousLineKind==='but' || currentLineKind==='instant' || currentLineKind==='but')){
+       cursor+=500;
+     }
+     if(u.kind==='but'){
+       u.el.classList.toggle('revealed',e>=cursor);
+       // Tile 2 was explicitly reset from its latest storyboard: @BUT + 0.5s, then dots.
+       // Other tiles retain the established displaced typing hold + special 1s BUT hold.
+       const dotsStart=idx===1 ? cursor+(u.post||0) : cursor+(u.chars*keyMs)+1000;
+       if(e>=dotsStart){
+         const shown=Math.max(0,Math.min(6,Math.floor((e-dotsStart)/keyMs)+1));
+         u.dots.style.opacity=shown>0?'1':'0';
+         u.dots.style.clipPath='none';
+         u.dots.textContent='.'.repeat(shown);
+       }else{
+         u.dots.style.opacity='0';
+         u.dots.style.clipPath='none';
+         u.dots.textContent='......';
+       }
+       cursor=dotsStart+(dotsChars*keyMs)+(idx===1?0:(u.post||0));
+       previousLine=u.lineIndex;previousLineKind='but';
+       continue;
+     }
+     if(u.kind==='instant'){
+       u.el.classList.toggle('revealed',e>=cursor);
+       // Each authored red physical line is independent: instant appearance,
+       // then a hold equal to its own character/keystroke production time.
+       cursor+=(idx===1?0:u.chars*keyMs)+(u.post||0);
+       previousLine=u.lineIndex;previousLineKind='instant';
+       continue;
+     }
+     u.el.classList.toggle('revealed',e>=cursor);
+     cursor+=u.chars*keyMs+(u.post||0);
+     previousLine=u.lineIndex;previousLineKind='word';
+   }
+ }
+ function show(i){
+   idx=Math.max(0,Math.min(slides.length-1,i));
+   if(typeof setSkipMode==='function')setSkipMode(false);
+   slides.forEach((sl,n)=>sl.classList.toggle('active',n===idx));
+   elapsed=0;started=performance.now();resetOrdinary();
+   requestAnimationFrame(()=>layoutAuthoredPositions(slides[idx]));
+   if(idx===MILLION_INDEX){window.SSSState5V2?.reset();window.SSSState5V2?.layout(true)}
+   paint();
+ }
+ function paint(now=performance.now()){
+   const e=playing?elapsed+(now-started):elapsed,p=Math.min(1,e/total());
+   if(idx===MILLION_INDEX)window.SSSState5V2?.paint(e);else revealOrdinary(e);
+   status.textContent=`NEXT SLIDE IN ${String(Math.max(0,Math.ceil((total()-e)/1000))).padStart(2,'0')}s`;
+   bar.style.width=(p*100)+'%';
+   if(playing&&p>=1){
+     if(idx===slides.length-1){
+       // HARD FINAL STOP: complete final tile and remain here. No loop.
+       elapsed=total();
+       playing=false;
+       cancelAnimationFrame(raf);
+       if(idx===MILLION_INDEX)window.SSSState5V2?.paint(total());else revealOrdinary(total());
+       status.textContent='WELCOME COMPLETE';
+       bar.style.width='100%';
+       playBtn.textContent='Play';
+       if(typeof setSkipMode==='function')setSkipMode(true);
+       return;
+     }
+     show(idx+1);
+     return;
+   }
+   if(playing)raf=requestAnimationFrame(paint);
+ }
+ playBtn.onclick=()=>{playing=!playing;playBtn.textContent=playing?'Pause':'Play';if(playing){started=performance.now();raf=requestAnimationFrame(paint)}else{elapsed+=performance.now()-started;cancelAnimationFrame(raf);paint()}};
+ document.getElementById('back').onclick=()=>show(idx-1);
+ const skipBtn=document.getElementById('skip');
+ let skipIsNext=false;
+ function setSkipMode(nextMode){
+   skipIsNext=!!nextMode;
+   skipBtn.textContent=skipIsNext?'Next →':'Skip →';
+ }
+ function completeCurrentSlideForSkip(){
+   // Reveal the COMPLETE CURRENT TILE and stop on it.
+   elapsed=total();
+   playing=false;
+   cancelAnimationFrame(raf);
+   if(idx===MILLION_INDEX)window.SSSState5V2?.paint(total());else revealOrdinary(total());
+   status.textContent='SLIDE COMPLETE';
+   bar.style.width='100%';
+   playBtn.textContent='Play';
+   setSkipMode(true);
+ }
+ skipBtn.onclick=()=>{
+   if(!skipIsNext){
+     completeCurrentSlideForSkip();
+     return;
+   }
+   if(idx>=slides.length-1){
+     status.textContent='WELCOME COMPLETE';
+     setSkipMode(true);
+     return;
+   }
+   playing=true;
+   playBtn.textContent='Pause';
+   setSkipMode(false);
+   show(idx+1);
+ };
+ document.getElementById('view').onclick=()=>alert('Isolated sandbox: CV integration intentionally disabled.');
+ document.addEventListener('visibilitychange',()=>{if(document.hidden&&playing){elapsed+=performance.now()-started;cancelAnimationFrame(raf)}else if(!document.hidden&&playing){started=performance.now();raf=requestAnimationFrame(paint)}});
+ window.addEventListener('resize',()=>requestAnimationFrame(()=>layoutAuthoredPositions(slides[idx])),{passive:true});
+ playBtn.textContent='Pause';show(0);raf=requestAnimationFrame(paint);
+})();
+</script>
+<script id="isolated-welcome-v6-mobile-heading-fit">
+(()=>{
+  const mq=window.matchMedia('(max-width:700px)');
+  const primary=document.querySelector('.header h1');
+  const secondary=document.querySelector('.header .sub');
+  if(!primary||!secondary)return;
+
+  function fitOneLine(el,minPx){
+    el.style.display='block';
+    el.style.fontSize='';
+    let size=parseFloat(getComputedStyle(el).fontSize)||16;
+    const available=el.clientWidth;
+    while(size>minPx && el.scrollWidth>available){
+      size-=0.25;
+      el.style.fontSize=size+'px';
+    }
+    return el.scrollWidth<=available;
+  }
+
+  function apply(){
+    if(!mq.matches){
+      primary.style.fontSize='';
+      secondary.style.fontSize='';
+      secondary.style.display='';
+      return;
+    }
+    fitOneLine(primary,8);
+    secondary.style.display='block';
+    secondary.style.fontSize='';
+    if(!fitOneLine(secondary,7)){
+      secondary.style.display='none';
+    }
+  }
+
+  document.fonts?.ready.then(apply);
+  window.addEventListener('resize',apply,{passive:true});
+  mq.addEventListener?.('change',apply);
+  apply();
+})();
+</script>
+
+</body></html>
