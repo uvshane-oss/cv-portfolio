@@ -91,6 +91,63 @@ body{min-height:100dvh;padding:clamp(14px,2.2vw,28px);display:flex;align-items:c
  .narrative.authored .sentence{margin-bottom:.30em}
 }
 </style>
+
+<style id="v24-collated-refinements">
+/* Tile 1: exact spacing and final instruction alignment */
+section.slide[data-slide="1"] .tile1-gap{
+  display:block;
+  height:2.2em;
+}
+section.slide[data-slide="1"] .tile1-closing{
+  display:block;
+  width:max-content;
+  max-width:100%;
+}
+section.slide[data-slide="1"] .tile1-ifnot{
+  display:block;
+  text-align:center;
+}
+section.slide[data-slide="1"] .tile1-viewcv{
+  display:block;
+  white-space:nowrap;
+}
+
+/* Tile 3 only: controlled mobile wrap, with reveal artefact suppression */
+section.slide[data-slide="3"] .tile3-mobile-break{
+  display:none;
+}
+section.slide[data-slide="3"] .tile3-opening,
+section.slide[data-slide="3"] .tile3-opening *{
+  text-decoration:none !important;
+  background-image:none !important;
+  box-shadow:none !important;
+}
+@media (max-width: 640px){
+  section.slide[data-slide="3"] .tile3-mobile-break{
+    display:block;
+    height:0;
+    flex-basis:100%;
+  }
+  section.slide[data-slide="3"] .tile3-opening{
+    white-space:normal !important;
+  }
+}
+
+/* Tile 7 only: centred ampersand and Mum line against family reference block */
+section.slide[data-slide="7"] .tile7-family-group{
+  display:block;
+  width:max-content;
+  max-width:100%;
+}
+section.slide[data-slide="7"] .tile7-family-reference,
+section.slide[data-slide="7"] .tile7-family-centered{
+  display:block;
+}
+section.slide[data-slide="7"] .tile7-family-centered{
+  text-align:center;
+}
+</style>
+
 </head>
 <body>
 <div class="shell" id="welcome">
@@ -108,10 +165,15 @@ body{min-height:100dvh;padding:clamp(14px,2.2vw,28px);display:flex;align-items:c
 <div class="statusRow"><div class="status" id="status">NEXT SLIDE IN 09s</div><button id="skip">Skip →</button></div>
 <div class="progress"><i id="bar"></i></div>
 <section class="slide" data-seconds="7.105" data-slide="1"><div class="narrative authored">
-<span class="sentence" data-post-ms="500"><span class="word">Hello</span> <span class="word">and</span> <span class="word">welcome</span></span>
-<span class="sentence"><span class="word">If</span> <span class="word">you</span> <span class="word">got</span> <span class="word">90</span> <span class="word">seconds</span></span>
-<span class="sentence" data-post-ms="500"><span class="word">we</span> <span class="word">can</span> <span class="word">do</span> <span class="word">proper</span> <span class="word">introductions</span></span>
-<span class="sentence" data-post-ms="3500"><span class="word">If</span> <span class="word">not</span> <span class="word">Skip</span> <span class="word">to</span> <span class="word">my</span> <span class="word">CV</span></span>
+      <span class="sentence tile1-line tile1-hello" data-post-ms="0"><span class="word">Hello</span> <span class="word">and</span> <span class="word">welcome</span></span>
+      <span class="tile1-gap" aria-hidden="true"></span>
+      <span class="sentence tile1-line tile1-intro" data-post-ms="0"><span class="word">If</span> <span class="word">you</span> <span class="word">got</span> <span class="word">90</span> <span class="word">seconds</span></span>
+      <span class="sentence tile1-line tile1-intro" data-post-ms="0"><span class="word">we</span> <span class="word">can</span> <span class="word">do</span> <span class="word">proper</span> <span class="word">introductions</span></span>
+      <span class="tile1-gap" aria-hidden="true"></span>
+      <span class="tile1-closing">
+        <span class="sentence tile1-line tile1-ifnot" data-post-ms="0"><span class="word">If</span> <span class="word">not</span></span>
+        <span class="sentence tile1-line tile1-viewcv" data-post-ms="3500"><span class="word">Click</span> <span class="word">:</span> <span class="word">View</span> <span class="word">My</span> <span class="word">CV</span> <span class="word">-</span> <span class="word">Bottom</span> <span class="word">left</span></span>
+      </span>
 </div></section>
 <section class="slide" data-seconds="5.523" data-slide="2"><div class="narrative authored slide-b">
 <span class="sentence instant-beat" data-post-ms="500">Now thats out the way</span>
@@ -124,7 +186,7 @@ body{min-height:100dvh;padding:clamp(14px,2.2vw,28px);display:flex;align-items:c
 <span class="sentence"><span class="word">rolling</span> <span class="word">my</span> <span class="word">sleeves</span> <span class="word">up</span> <span class="word">doing</span> <span class="word">the</span> <span class="word">job.</span></span>
 </div></section>
 <section class="slide" data-seconds="22.428" data-slide="3"><div class="narrative authored">
-<span class="sentence" data-post-ms="500"><span class="word">I’m</span> <span class="word">a</span> <span class="word">commercial</span> <span class="word">operator</span> <span class="word">with</span> <span class="word">a</span> <span class="word">documented</span> <span class="word">record</span> <span class="word">of</span></span>
+<span class="sentence tile3-opening" data-post-ms="500"><span class="word">I’m</span> <span class="word">a</span> <span class="word">commercial</span> <span class="word">operator</span> <span class="word">with</span> <span class="word">a</span><span class="tile3-mobile-break" aria-hidden="true"></span> <span class="word">documented</span> <span class="word">record</span> <span class="word">of</span></span>
 <span class="sentence instant-beat emphasis" data-authored-x="28" data-post-ms="500">Dominating in retail</span>
 <span class="sentence instant-beat emphasis" data-authored-x="28" data-post-ms="500">Cold calling</span>
 <span class="sentence instant-beat emphasis" data-authored-x="28" data-post-ms="500">Key account management.</span>
@@ -170,8 +232,12 @@ body{min-height:100dvh;padding:clamp(14px,2.2vw,28px);display:flex;align-items:c
 <span class="sentence"><span class="word">After</span> <span class="word">delivering</span> <span class="word">on</span> <span class="word">Devil</span> <span class="word">Burger's</span> <span class="word">success,</span></span>
 <span class="sentence instant-beat emphasis" data-authored-x="33" data-post-ms="1000">I deliberately took a proper break.</span>
 <span class="sentence" data-post-ms="500"><span class="word">Using</span> <span class="word">that</span> <span class="word">time</span> <span class="word">to</span> <span class="word">achieve</span> <span class="word">some</span> <span class="word">personal</span> <span class="word">goals,</span></span>
-<span class="sentence" data-authored-x="8" data-post-ms="500"><span class="word">spend</span> <span class="word">valuable</span> <span class="word">time</span> <span class="word">with</span> <span class="word">my</span> <span class="word">family</span></span>
-<span class="sentence" data-post-ms="2500"><span class="word">&amp;</span> <span class="word">mum</span> <span class="word">before</span> <span class="word">she</span> <span class="word">passed.</span></span>
+
+      <span class="tile7-family-group">
+        <span class="sentence tile7-family-reference" data-post-ms="0"><span class="word">spend</span> <span class="word">valuable</span> <span class="word">time</span> <span class="word">with</span> <span class="word">my</span> <span class="word">family</span></span>
+        <span class="sentence tile7-family-centered tile7-amp" data-post-ms="0"><span class="word">&amp;</span></span>
+        <span class="sentence tile7-family-centered tile7-mum" data-post-ms="2000"><span class="word">Mum</span> <span class="word">before</span> <span class="word">she</span> <span class="word">passed.</span></span>
+      </span>
 </div></section>
 <section class="slide" data-seconds="11.200" data-slide="8"><div class="narrative authored">
 <span class="sentence" data-post-ms="500"><span class="word">Now</span> <span class="word">I'm</span> <span class="word">ready</span> <span class="word">to</span> <span class="word">get</span> <span class="word">back</span> <span class="word">in</span> <span class="word">the</span> <span class="word">trenches</span></span>
@@ -286,7 +352,7 @@ body{min-height:100dvh;padding:clamp(14px,2.2vw,28px);display:flex;align-items:c
  resetPaint();
 })();
 </script>
-<!-- V23 TIMING MANIFEST
+<!-- V24 TIMING MANIFEST
   Tile 1: content 8.864s + 2.000s buffer = 10.864s countdown
   Tile 2: content 8.000s + 2.000s buffer = 10.000s countdown
   Tile 3: content 32.330s + 2.000s buffer = 34.330s countdown
@@ -349,7 +415,7 @@ body{min-height:100dvh;padding:clamp(14px,2.2vw,28px);display:flex;align-items:c
  function revealOrdinary(e){
    const units=ordinaryUnits();
    if(!units.length)return;
-   // V23 universal timing: fixed typing speed 10% faster than V13, fully independent of slide countdown.
+   // V24 universal timing: fixed typing speed 10% faster than V13, fully independent of slide countdown.
    const keyMs=21.9921;
    const dotsChars=(idx===1?5:6);
    let cursor=0;
