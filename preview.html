@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>C006 R10.1 — Mobile V2 Text Sandbox</title>
+<style>
+:root{
+  --bg:#0b0d10; --screen:#111820; --text:#f4f5f6; --muted:#9aa4ae;
+  --accent:#42d6b2; --line:#34414c;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+body{display:flex;justify-content:center;padding:18px 10px 28px}
+.wrap{width:min(100%,520px)}
+h1{font-size:15px;margin:0 0 5px;text-align:center}
+.note{font-size:11px;color:var(--muted);text-align:center;margin-bottom:12px;line-height:1.35}
+.phone{
+  width:min(calc(100vw - 20px),390px);
+  height:700px; max-height:calc(100dvh - 112px);
+  margin:auto; position:relative; border:1px solid #2b333b; border-radius:22px;
+  background:#080b0e; overflow:hidden;
+}
+.v2{
+  position:absolute;
+  width:77.1%; height:52.04%;
+  left:9.72%; top:33.01%;
+  background:var(--screen); border:1px solid var(--line); overflow:hidden;
+}
+.slide{
+  position:absolute; inset:0; padding:16px 14px; opacity:0; pointer-events:none;
+  font-size:15px; line-height:1.22; font-weight:700;
+}
+.slide.active{opacity:1;pointer-events:auto}
+.line{display:block;margin:.42em 0; opacity:0}
+.line.show{opacity:1}
+.left{text-align:left}
+.center{text-align:center}
+.right{text-align:right}
+.push1{padding-left:12%}
+.push2{padding-left:25%}
+.push3{padding-left:38%}
+.push4{padding-left:50%}
+.indent{padding-left:14%;text-align:left}
+.indent2{padding-left:22%;text-align:left}
+.big{font-size:1.32em;font-weight:900}
+.hero{font-size:1.5em;font-weight:900}
+.accent{color:var(--accent)}
+.spacer{height:.42em}
+.quote-top{position:absolute;left:10px;top:24%;white-space:nowrap}
+.quote-mid{position:absolute;left:0;right:0;top:45%;text-align:center;font-size:1.3em;font-weight:900}
+.quote-bottom{position:absolute;right:10px;top:66%;white-space:nowrap;text-align:right}
+.paint{overflow:hidden;display:inline-block;white-space:nowrap;width:0}
+.controls{display:flex;gap:7px;justify-content:center;margin-top:12px;align-items:center}
+button{background:#1a222a;color:#fff;border:1px solid #3b4752;border-radius:8px;padding:8px 11px;font-weight:700}
+button:hover{background:#25313b}
+#status{min-width:88px;text-align:center;color:var(--muted);font-size:12px}
+.legend{text-align:center;font-size:10px;color:#76818b;margin-top:7px}
+@media(max-height:760px){
+ body{padding-top:8px}
+ .phone{height:620px;max-height:calc(100dvh - 98px)}
+ .slide{font-size:13.5px;padding:13px 12px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>R10.1 — MOBILE V2 TEXT-ONLY SANDBOX</h1>
+<div class="note">Isolated review file. R10 production is untouched. Slides 1–9 use the approved layout discussion; Slide 1 is the only coloured slide.</div>
+
+<div class="phone">
+  <div class="v2" id="v2">
+
+    <section class="slide active" data-slide="1" data-seconds="7.105">
+      <span class="line center big accent">HELLO</span>
+      <span class="line center big accent">&amp;</span>
+      <span class="line center hero accent">WELCOME</span>
+      <div class="spacer"></div>
+      <span class="line center">Got <span class="accent">90 secs?</span></span>
+      <span class="line center">We’ll do proper introductions</span>
+      <div class="spacer"></div>
+      <span class="line center">If not</span>
+      <span class="line center big accent" id="inlineCV" style="cursor:pointer;text-decoration:underline">View My CV</span>
+    </section>
+
+    <section class="slide" data-slide="2" data-seconds="5.523">
+      <span class="line left">Now that’s out of the way</span>
+      <span class="line center big">Hi, I’m Shane.</span>
+      <span class="line left">I can sell.</span>
+      <span class="line push2">I can lead.</span>
+      <span class="line left">I can bring the best</span>
+      <span class="line push3">out of people.</span>
+      <span class="line center big">BUT.....</span>
+      <span class="line left">I’m just as comfortable</span>
+      <span class="line push2">rolling my sleeves up,</span>
+      <span class="line push3">doing the job.</span>
+    </section>
+
+    <section class="slide" data-slide="3" data-seconds="14.003">
+      <span class="line left">I’m a commercial operator with a</span>
+      <span class="line push2">documented record of</span>
+      <span class="line indent">• Dominating in retail</span>
+      <span class="line indent">• Cold calling</span>
+      <span class="line indent">• Key account management.</span>
+      <span class="line left">I’m a true hunter —</span>
+      <span class="line push2">I can find the opportunity</span>
+      <span class="line indent">• Open the door</span>
+      <span class="line indent">• Win the business</span>
+      <span class="line indent">• Grow the account</span>
+    </section>
+
+    <section class="slide" data-slide="4" data-seconds="8.925">
+      <span class="line left">Beyond sales, I’ve grown</span>
+      <span class="line push2">revenue and teams,</span>
+      <span class="line indent">• Managed margins and costs</span>
+      <span class="line indent">• Developed new markets</span>
+      <span class="line center big">&amp;</span>
+      <span class="line left">taken difficult projects</span>
+      <span class="line push2">from idea through</span>
+      <span class="line push3">to delivery.</span>
+    </section>
+
+    <section class="slide" data-slide="5" data-seconds="14.635">
+      <span class="line left">I’ve always been a player-coach.</span>
+      <span class="line left">I’d rather work shoulder-to-shoulder,</span>
+      <span class="line push2">show people what works</span>
+      <span class="line push1">recognise what they’re doing well.</span>
+      <span class="line center big">“How about, try this?”</span>
+      <span class="line left">Will always work better than</span>
+      <span class="line center hero">“GET IN MY OFFICE”</span>
+    </section>
+
+    <section class="slide" data-slide="6" data-seconds="13.602">
+      <span class="line left">Business is much the same.</span>
+      <span class="line indent">• Find the pain point</span>
+      <span class="line indent">• Understand the numbers</span>
+      <span class="line indent">• What’s commercially sensible?</span>
+      <span class="line indent">• Get on with solving it</span>
+      <span class="line left">I’m just as comfortable working</span>
+      <span class="line push2">through margins,</span>
+      <span class="line push3">costs and commercial decisions</span>
+      <span class="line left">as I am turning the solution</span>
+      <span class="line push2">into something that works.</span>
+    </section>
+
+    <section class="slide" data-slide="7" data-seconds="13.150">
+      <span class="line quote-top">“Good solutions don't cost</span>
+      <span class="line quote-mid">A MILLION DOLLARS<br><span id="qDots">......</span></span>
+      <span class="line quote-bottom">They look, feel and generate that.”</span>
+    </section>
+
+    <section class="slide" data-slide="8" data-seconds="17.834">
+      <span class="line left">My roles overlap, and being driven by</span>
+      <span class="line indent">• Setting targets</span>
+      <span class="line indent">• Cracking inefficiencies</span>
+      <span class="line indent">• Removing pain points</span>
+      <span class="line left">I’ve kept myself fully engaged</span>
+      <span class="line push3">for decades.</span>
+      <span class="line left">After delivering on Devil Burger’s success,</span>
+      <span class="line indent2">I deliberately took a proper break.</span>
+      <span class="line left">Using that time to achieve</span>
+      <span class="line push2">some personal goals,</span>
+      <span class="line left">spend valuable time with my family</span>
+      <span class="line center big">&amp;</span>
+      <span class="line push3">Mum before she passed.</span>
+    </section>
+
+    <section class="slide" data-slide="9" data-seconds="11.200">
+      <span class="line left">Now I’m ready to get back in the trenches</span>
+      <span class="line push4">with a good team.</span>
+      <span class="line left">Leading or following?</span>
+      <span class="line left">What’s important to me?</span>
+      <span class="line left">Either way I’m happy —</span>
+      <span class="line left">put me where I can contribute.</span>
+      <span class="line left">Let’s set some worthwhile goals,</span>
+      <span class="line push1">and get on with</span>
+      <span class="line push3">achieving them.</span>
+    </section>
+
+  </div>
+</div>
+
+<div class="controls">
+<button id="back">← Back</button>
+<button id="play">Replay</button>
+<span id="status">Slide 1 / 9</span>
+<button id="next">Next →</button>
+</div>
+<div class="legend">Review sandbox only • Back/Next changes slides • Replay runs the current slide</div>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let index=0, timers=[];
+function clearTimers(){timers.forEach(clearTimeout);timers=[]}
+function showLine(el,ms){timers.push(setTimeout(()=>el.classList.add('show'),ms))}
+function activate(i){
+  clearTimers(); index=(i+slides.length)%slides.length;
+  slides.forEach((s,n)=>{s.classList.toggle('active',n===index); s.querySelectorAll('.line').forEach(x=>x.classList.remove('show'))});
+  document.getElementById('status').textContent=`Slide ${index+1} / 9`;
+  playCurrent();
+}
+function playCurrent(){
+  clearTimers();
+  const s=slides[index], lines=[...s.querySelectorAll('.line')];
+  lines.forEach(x=>x.classList.remove('show'));
+  if(index===6){
+    // Protected Slide 7 hierarchy: middle first, top, dots beat, bottom.
+    const top=s.querySelector('.quote-top'), mid=s.querySelector('.quote-mid'), bottom=s.querySelector('.quote-bottom');
+    showLine(mid,0); showLine(top,1550); showLine(bottom,5750);
+    return;
+  }
+  // Review approximation preserving the established rhythm/duration envelope.
+  const total=parseFloat(s.dataset.seconds)*1000;
+  const usable=Math.min(total-1200, Math.max(1800, lines.length*520));
+  lines.forEach((el,n)=>showLine(el, Math.round((usable/Math.max(1,lines.length-1))*n)));
+}
+document.getElementById('back').onclick=()=>activate(index-1);
+document.getElementById('next').onclick=()=>activate(index+1);
+document.getElementById('play').onclick=()=>playCurrent();
+document.getElementById('inlineCV').onclick=()=>alert('Sandbox: this phrase is reserved to trigger the same action as the production View My CV control.');
+activate(0);
+</script>
+</body>
+</html>
