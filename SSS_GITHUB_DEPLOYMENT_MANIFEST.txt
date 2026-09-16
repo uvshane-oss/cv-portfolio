@@ -1,0 +1,104 @@
+SSS GITHUB LIVE BETA DEPLOYMENT CANDIDATE
+Source: SSS_MASTER_BETA_HANDOFF_20260917-060755.zip
+Local Master Beta: NOT MODIFIED
+Full local backup: NOT MODIFIED
+Existing GitHub Live Beta: NOT TOUCHED BY THIS PACKAGE
+
+Excluded from public deployment:
+- admin/ (local editing candidate; not public-authenticated)
+- skills retired revisions
+- empty reserved component folders
+- internal dissection/readme files
+
+Deployment-only repair:
+- Existing index media references were pointed at assets/ because the harvested structure stores media there.
+
+Static src/href unresolved refs: 0
+None
+
+FILES:
+assets/1758755805584.jpeg
+assets/1758755929727.jpeg
+assets/1758755954119.jpeg
+assets/1758755979137.jpeg
+assets/1758756024609.jpeg
+assets/1758756069198.jpeg
+assets/1758756574017.jpeg
+assets/1758756639804.jpeg
+assets/1758756679346.jpeg
+assets/1758756712158.jpeg
+assets/1758756759188.jpeg
+assets/1758756798411.jpeg
+assets/1758756849533.jpeg
+assets/1758756921948.jpeg
+assets/1758756956376.jpeg
+assets/1758756996703.jpeg
+assets/1758757029987.jpeg
+assets/1758757078499.jpeg
+assets/1758757119457.jpeg
+assets/1758757157638.jpeg
+assets/Alana Talks On Her Time Working With Shane (1) thumb.png
+assets/Alice GM Devil Burger thumb.png
+assets/BB1758835159986.jpeg
+assets/BB1758835290442.jpeg
+assets/BB1758835313131.jpeg
+assets/BB1758835334807.jpeg
+assets/Bruce Cushen Sales Manager at Sky Television thumb.png
+assets/ChatGPT Image Sep 10, 2026, 05_49_56 AM(1).png
+assets/DB portfolio.png
+assets/Deb Crump talks about he experience working with Shane thumb.png
+assets/Glen Hackell owner of XClean 2015 thumb.png
+assets/Install day - midway through thumb.png
+assets/Integrate logo.png
+assets/Jenna speaks on her time working for Shane thumb.png
+assets/Radio DEVILSTAIRCASE_FRIDAY.wav
+assets/Radio Long Weekend.mp3
+assets/Radio PORKDEATH.wav
+assets/Radio SPICEYBEEF.wav
+assets/Radio Salmon.mp3
+assets/Sanitiser hunting and fishing.png
+assets/Screen end & projector.jpg
+assets/Screen side.jpg
+assets/September 1, 2021 thumb.png
+assets/Smiths city Group Michael Botting Store manager thumb.png
+assets/Tim Smellie _ Owner Devil Burger Invercargill thumb.png
+assets/Video testimonial 2 thumb.png
+assets/Video testimonial 3 thumb.png
+assets/Video testimonial 4 thumb.png
+assets/X Clean covid crisis thumb.png
+assets/albatross logo.png
+assets/back of screen.jpg
+assets/devil-burger-social-1-thumb.png
+assets/devil-burger-social-2-thumb.png
+assets/devil-burger-social-3-thumb.png
+assets/devil-burger-social-4-thumb.png
+assets/front on.jpg
+assets/h&J logo.png
+assets/image1.png
+assets/isee digital logo.jpeg
+assets/isee digital portfolio.png
+assets/mobilefone solutions logo.png
+assets/radio button.png
+assets/sanitiser kmart.png
+assets/sanitiser pack n save.png
+assets/sanitiser the warehouse.png
+assets/shane cover.png
+assets/smiths city logo.png
+assets/social media 1.mp4
+assets/social media 2.mp4
+assets/social media 3.mp4
+assets/social media 4.mp4
+assets/social media carosel.jpg
+assets/summer promotion.jpg
+assets/video testimonial overlay.png
+assets/wide_cinematic_interior_scene_modern_luxury_offic.png
+assets/xclean portfolio-4.png
+assets/xclean.jpg
+assets/xcvCabinetry Shane Build for all vehicles .jpeg
+assets/xcvShane painted the vehicles and sign-write them 1 .jpg
+assets/xcvShane painted the vehicles and sign-write them 2.jpg
+assets/xcvShanes Surface shield see the clean spot .jpg
+index.html
+skills/SSS_SKILLS_PUBLISHED.json
+skills/renderer.css
+skills/renderer.js
