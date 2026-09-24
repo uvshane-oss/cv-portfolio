@@ -38,7 +38,8 @@ function openLiveCvWarning(){
 #sssLiveCvWarning .sss-live-warning-hurry strong{display:block;color:#fff}
 #sssLiveCvWarning .sss-live-warning-skills{color:#9ed1ff;text-decoration:underline;font-weight:900}
 #sssLiveCvWarning .sss-live-warning-head-actions{display:flex;justify-content:flex-end;margin-top:16px}
-#sssLiveCvWarning .sss-live-warning-enter{border:1px solid #fff;border-radius:6px;background:#fff;color:#0759ae;padding:10px 15px;font-weight:900;cursor:pointer}
+#sssLiveCvWarning .sss-live-warning-enter{border:1px solid #0759ae;border-radius:6px;background:#fff;color:#0759ae;padding:10px 15px;font-weight:900;cursor:pointer}
+#sssLiveCvWarning .sss-live-warning-bottom-actions{display:flex;justify-content:center;margin-top:22px;padding-top:18px;border-top:1px solid #cfdae4}
 #sssLiveCvWarning .sss-live-warning-body{padding:25px 28px 27px}
 #sssLiveCvWarning .sss-live-warning-plain-title{text-align:center;font-weight:900;font-size:22px;margin:0;color:#172330}
 #sssLiveCvWarning .sss-live-warning-plain-lead{text-align:center;font-weight:800;font-size:17px;margin:4px 0 0;line-height:1.35}
@@ -75,7 +76,6 @@ Finding commercially viable solutions where conventional options<br>
 <span>The mundane things a recruiter expects are in the <a class="sss-live-warning-skills" href="${carry('skills/index.html')}">Skills section of the menu</a>,</span>
 </div>
 </div>
-<div class="sss-live-warning-head-actions"><button type="button" class="sss-live-warning-enter">ENTER LIVE CV →</button></div>
 </header>
 <div class="sss-live-warning-body">
 <div class="sss-live-warning-plain-title">Plain English — the LIVE CV</div>
@@ -89,6 +89,7 @@ Finding commercially viable solutions where conventional options<br>
 <div>Then we can afford as many ladders as we need</div>
 </div>
 <p class="sss-live-warning-closing">You'll see the context, timelines and hero moments, hear from employers, staff and customers who were there, and where I've got the work to show you — I'll show you that too.</p>
+<div class="sss-live-warning-bottom-actions"><button type="button" class="sss-live-warning-enter">ENTER LIVE CV →</button></div>
 </div>
 </section>`;
     document.body.appendChild(overlay);
