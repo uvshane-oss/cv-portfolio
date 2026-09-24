@@ -15,7 +15,81 @@ document.getElementById('sssLiveFloatingMenu').onclick=open;nav.querySelector('.
 const row=(label,answer,cls='')=>`<div class="sss-emp-row"><span class="sss-emp-label">${label}</span><span class="sss-emp-answer ${cls}">${answer}</span></div>`;
 const item=(id,title,body)=>`<section class="sss-emp-item"><button type="button" class="sss-emp-trigger" aria-expanded="false" aria-controls="${id}"><span>${title}</span><span class="sss-emp-chevron">⌄</span></button><div class="sss-emp-panel" id="${id}" hidden>${body}</div></section>`;
 function openEmployment(){close();let overlay=document.getElementById('sssEmploymentOverlay');if(!overlay){overlay=document.createElement('div');overlay.id='sssEmploymentOverlay';overlay.setAttribute('aria-hidden','true');overlay.innerHTML=`<aside id="sssEmploymentDrawer" role="dialog" aria-modal="true" aria-labelledby="sssEmploymentTitle"><div class="sss-employment-head"><div><h2 id="sssEmploymentTitle">EMPLOYMENT &amp; AVAILABILITY</h2><p>The routine stuff employers eventually ask.</p></div><button type="button" id="sssEmploymentClose">CLOSE ×</button></div><div class="sss-employment-accordions">${item('sssEmpWork','WORK ELIGIBILITY &amp; AVAILABILITY',row('NZ WORK ELIGIBILITY','Legally entitled to work in New Zealand.')+row('SPONSORSHIP','No sponsorship required.')+row('CURRENT DRIVER LICENCE','Full NZ driver licence.')+row('TRAVEL','Available to travel for work.')+row('START AVAILABILITY','By arrangement.'))}${item('sssEmpConduct','EMPLOYMENT HISTORY &amp; CONDUCT',row('DISMISSED FOR SERIOUS MISCONDUCT OR DISHONESTY','No.')+row('ASKED TO RESIGN FOR SERIOUS MISCONDUCT OR DISHONESTY','No.')+row('EMPLOYMENT HISTORY VERIFICATION','Happy to comply.')+row('REFERENCES','Available when required.'))}${item('sssEmpBackground','CRIMINAL, LEGAL &amp; BACKGROUND',row('CRIMINAL CONVICTIONS','None.')+row('PENDING CRIMINAL OR LEGAL MATTERS','None.')+row('MOJ / POLICE / APPROPRIATE BACKGROUND CHECKS','Happy to comply.'))}${item('sssEmpHealth','HEALTH &amp; FITNESS FOR WORK',row('GENERAL HEALTH','Very good.')+row('FIT FOR WORK','Yes.')+row('CURRENT INJURY','Recovering from an ankle injury following a fall from a ladder. Approximately 80% recovered and continuing to improve.')+row('PRE-EMPLOYMENT MEDICAL / FUNCTIONAL ASSESSMENT','Happy to comply where reasonably required.'))}${item('sssEmpDrug','DRUG &amp; ALCOHOL',row('DRUG &amp; ALCOHOL TESTING',"Certainly. Cool kids don’t do drugs.",'sss-emp-personality')+row('WORKPLACE DRUG &amp; ALCOHOL POLICY','Happy to comply.'))}${item('sssEmpDriving','DRIVER LICENCE &amp; DRIVING HISTORY',row('CURRENT LICENCE','Full NZ driver licence.')+row('PREVIOUS LICENCE LOSS','Approximately 30 years ago, I lost my licence for six months after exceeding the legal blood-alcohol limit. I learned from it and have never repeated the mistake.')+row('DRIVING / LICENCE CHECKS','Happy to comply where required.'))}${item('sssEmpQualifications','QUALIFICATIONS &amp; EXPERIENCE',row('',"School of Hard Knocks — Road Scholar.<br>Got the nicks and scrapes to prove it.",'sss-emp-personality')+row('PRACTICAL EXPERIENCE','30+ years of practical sales, management, operations and leadership experience.')+row('VERIFICATION','Employment history, experience and licences — happy to have them verified.'))}</div></aside>`;document.body.appendChild(overlay);overlay.querySelectorAll('.sss-emp-trigger').forEach(b=>b.onclick=()=>{const p=overlay.querySelector('#'+b.getAttribute('aria-controls')),opening=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',opening);p.hidden=!opening});const shut=()=>{overlay.classList.remove('sss-employment-visible');overlay.setAttribute('aria-hidden','true');document.documentElement.classList.remove('sss-employment-open');document.body.classList.remove('sss-employment-open')};overlay.querySelector('#sssEmploymentClose').onclick=shut;overlay.onmousedown=e=>{if(e.target===overlay)shut()}}overlay.classList.add('sss-employment-visible');overlay.setAttribute('aria-hidden','false');document.documentElement.classList.add('sss-employment-open');document.body.classList.add('sss-employment-open')}
-nav.onclick=e=>{if(e.target===nav)return close();const b=e.target.closest('[data-route]');if(!b)return;const r=b.dataset.route;if(r==='employment')return openEmployment();if(r==='about'){if(document.body.classList.contains('introduction-page')){close();return dispatchEvent(new CustomEvent('sss-start-about'))}location.href=carry('introduction/index.html',{start:'about'})}if(r==='cv')location.href=carry('cv/index.html');if(r==='skills')location.href=carry('skills/index.html');if(r==='feedback'){close();if(typeof window.SSSOpenFeedback==='function')return window.SSSOpenFeedback();location.href=carry('cv/index.html',{open:'feedback'})}};
+
+function openLiveCvWarning(){
+  close();
+  let overlay=document.getElementById('sssLiveCvWarning');
+  if(!overlay){
+    overlay=document.createElement('div');
+    overlay.id='sssLiveCvWarning';
+    overlay.setAttribute('aria-hidden','true');
+    overlay.innerHTML=`<style>
+#sssLiveCvWarning{position:fixed;inset:0;z-index:2147483000;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(5,16,29,.78);font-family:Arial,Helvetica,sans-serif;color:#0b223d}
+#sssLiveCvWarning.sss-live-warning-visible{display:flex}
+#sssLiveCvWarning *{box-sizing:border-box}
+#sssLiveCvWarning .sss-live-warning-modal{width:min(750px,94vw);max-height:94vh;overflow:auto;background:#fff;border:1px solid #d5e0ea;border-radius:12px;box-shadow:0 18px 55px rgba(0,0,0,.30)}
+#sssLiveCvWarning .sss-live-warning-title{margin:0;padding:18px 24px 15px;text-align:center;font-size:24px;line-height:1.12;font-weight:800;border-bottom:1px solid #dbe4ec}
+#sssLiveCvWarning .sss-live-warning-content{padding:22px 20px 12px}
+#sssLiveCvWarning .sss-live-warning-label{font-weight:800;margin:0 0 8px}
+#sssLiveCvWarning .sss-live-warning-corporate{margin:0 0 22px;text-align:left;line-height:1.18;font-size:16px}
+#sssLiveCvWarning .sss-live-warning-right-turn{text-align:left;padding-left:220px}
+#sssLiveCvWarning .sss-live-warning-skills{color:#0d4b7f;text-decoration:underline;font-weight:700;cursor:pointer}
+#sssLiveCvWarning .sss-live-warning-plain-title{text-align:center;font-weight:800;font-size:18px;margin:0}
+#sssLiveCvWarning .sss-live-warning-plain-lead{font-weight:800;font-size:17px;margin:2px 0 0;line-height:1.35;text-align:center}
+#sssLiveCvWarning .sss-live-warning-plain-normal{margin:0;line-height:1.35;font-size:16px;text-align:center}
+#sssLiveCvWarning .sss-live-warning-ladder{margin:22px auto;text-align:center;font-size:16px;font-weight:800;line-height:1.22}
+#sssLiveCvWarning .sss-live-warning-ladder div{margin:0;padding:0}
+#sssLiveCvWarning .sss-live-warning-closing{margin:0;line-height:1.45;font-size:16px;font-weight:400}
+#sssLiveCvWarning .sss-live-warning-actions{display:flex;justify-content:center;padding:18px 20px 20px}
+#sssLiveCvWarning .sss-live-warning-enter{border:0;border-radius:10px;padding:12px 22px;font-weight:700;background:#0d4b7f;color:#fff;cursor:pointer}
+@media(max-width:600px){
+ #sssLiveCvWarning{padding:10px}
+ #sssLiveCvWarning .sss-live-warning-title{font-size:20px;padding:15px 16px 13px}
+ #sssLiveCvWarning .sss-live-warning-content{padding:17px 16px 10px}
+ #sssLiveCvWarning .sss-live-warning-corporate,#sssLiveCvWarning .sss-live-warning-plain-normal,#sssLiveCvWarning .sss-live-warning-closing,#sssLiveCvWarning .sss-live-warning-ladder{font-size:15px}
+ #sssLiveCvWarning .sss-live-warning-plain-lead{font-size:16px}
+ #sssLiveCvWarning .sss-live-warning-right-turn{padding-left:38px}
+}
+</style>
+<section class="sss-live-warning-modal" role="dialog" aria-modal="true" aria-labelledby="sssLiveWarningTitle">
+<h1 class="sss-live-warning-title" id="sssLiveWarningTitle">WARNING – LIVE CV<br>&amp;<br>OVER THE WALL MOMENTS</h1>
+<div class="sss-live-warning-content">
+<p class="sss-live-warning-label">In corporate speak</p>
+<div class="sss-live-warning-corporate">
+You'll see a timeline of Shane's employment,<br>
+Repeatedly encouraged to step beyond brief<br>
+Increasing velocity — shortening timelines, creating revenue<br>
+Finding commercially viable solutions where conventional options<br>
+<div class="sss-live-warning-right-turn">*weren't affordable or available<br>
+*while still managing the day-to-day job.</div>
+<br>
+<strong>IF YOUR IN A HURRY - DONT LOOK</strong><br>
+<span>You will only find interesting and usefull stuff but you will linger longer than a quick skim</span><br>
+<span>The mundane things a recruiter expects are in the <a class="sss-live-warning-skills" href="${carry('skills/index.html')}">Skills section of the menu</a>,</span>
+</div>
+<div class="sss-live-warning-plain-title">Plain English — the LIVE CV</div>
+<p class="sss-live-warning-plain-lead">Its about the times that doing the job as a title defined wasn't enough.</p>
+<p class="sss-live-warning-plain-normal">Opportunities, people &amp; the solutions defining the “OVER THE WALL” moments</p>
+<div class="sss-live-warning-ladder">
+<div>There's a bag of money</div>
+<div>It’s on the other side of a wall</div>
+<div>The obstacle is money to buy a ladder</div>
+<div>I'll find another way over the wall.</div>
+<div>Then we can afford as many ladders as we need</div>
+</div>
+<p class="sss-live-warning-closing">You'll see the context, timelines and hero moments, hear from employers, staff and customers who were there, and where I've got the work to show you — I'll show you that too.</p>
+</div>
+<div class="sss-live-warning-actions"><button type="button" class="sss-live-warning-enter">Enter Live CV</button></div>
+</section>`;
+    document.body.appendChild(overlay);
+    overlay.querySelector('.sss-live-warning-enter').onclick=()=>location.href=carry('cv/index.html');
+  }
+  overlay.classList.add('sss-live-warning-visible');
+  overlay.setAttribute('aria-hidden','false');
+  requestAnimationFrame(()=>overlay.querySelector('.sss-live-warning-enter')?.focus({preventScroll:true}));
+}
+
+nav.onclick=e=>{if(e.target===nav)return close();const b=e.target.closest('[data-route]');if(!b)return;const r=b.dataset.route;if(r==='employment')return openEmployment();if(r==='about'){if(document.body.classList.contains('introduction-page')){close();return dispatchEvent(new CustomEvent('sss-start-about'))}location.href=carry('introduction/index.html',{start:'about'})}if(r==='cv')return openLiveCvWarning();if(r==='skills')location.href=carry('skills/index.html');if(r==='feedback'){close();if(typeof window.SSSOpenFeedback==='function')return window.SSSOpenFeedback();location.href=carry('cv/index.html',{open:'feedback'})}};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.getElementById('sssEmploymentOverlay')?.classList.contains('sss-employment-visible'))document.getElementById('sssEmploymentClose').click();else close()}});
 window.SSSSiteNav={open,close,carry,openEmployment};
 })();
