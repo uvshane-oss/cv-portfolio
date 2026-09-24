@@ -24,37 +24,44 @@ function openLiveCvWarning(){
     overlay.id='sssLiveCvWarning';
     overlay.setAttribute('aria-hidden','true');
     overlay.innerHTML=`<style>
-#sssLiveCvWarning{position:fixed;inset:0;z-index:2147483000;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(5,16,29,.78);font-family:Arial,Helvetica,sans-serif;color:#0b223d}
+#sssLiveCvWarning{position:fixed;inset:0;z-index:2147483000;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(8,18,31,.72);overflow:auto;font-family:Arial,Helvetica,sans-serif;color:#172330}
 #sssLiveCvWarning.sss-live-warning-visible{display:flex}
 #sssLiveCvWarning *{box-sizing:border-box}
-#sssLiveCvWarning .sss-live-warning-modal{width:min(750px,94vw);max-height:94vh;overflow:auto;background:#fff;border:1px solid #d5e0ea;border-radius:12px;box-shadow:0 18px 55px rgba(0,0,0,.30)}
-#sssLiveCvWarning .sss-live-warning-title{margin:0;padding:18px 24px 15px;text-align:center;font-size:24px;line-height:1.12;font-weight:800;border-bottom:1px solid #dbe4ec}
-#sssLiveCvWarning .sss-live-warning-content{padding:22px 20px 12px}
-#sssLiveCvWarning .sss-live-warning-label{font-weight:800;margin:0 0 8px}
-#sssLiveCvWarning .sss-live-warning-corporate{margin:0 0 22px;text-align:left;line-height:1.18;font-size:16px}
-#sssLiveCvWarning .sss-live-warning-right-turn{text-align:left;padding-left:220px}
-#sssLiveCvWarning .sss-live-warning-skills{color:#0d4b7f;text-decoration:underline;font-weight:700;cursor:pointer}
-#sssLiveCvWarning .sss-live-warning-plain-title{text-align:center;font-weight:800;font-size:18px;margin:0}
-#sssLiveCvWarning .sss-live-warning-plain-lead{font-weight:800;font-size:17px;margin:2px 0 0;line-height:1.35;text-align:center}
-#sssLiveCvWarning .sss-live-warning-plain-normal{margin:0;line-height:1.35;font-size:16px;text-align:center}
-#sssLiveCvWarning .sss-live-warning-ladder{margin:22px auto;text-align:center;font-size:16px;font-weight:800;line-height:1.22}
-#sssLiveCvWarning .sss-live-warning-ladder div{margin:0;padding:0}
-#sssLiveCvWarning .sss-live-warning-closing{margin:0;line-height:1.45;font-size:16px;font-weight:400}
-#sssLiveCvWarning .sss-live-warning-actions{display:flex;justify-content:center;padding:18px 20px 20px}
-#sssLiveCvWarning .sss-live-warning-enter{border:0;border-radius:10px;padding:12px 22px;font-weight:700;background:#0d4b7f;color:#fff;cursor:pointer}
-@media(max-width:600px){
- #sssLiveCvWarning{padding:10px}
- #sssLiveCvWarning .sss-live-warning-title{font-size:20px;padding:15px 16px 13px}
- #sssLiveCvWarning .sss-live-warning-content{padding:17px 16px 10px}
- #sssLiveCvWarning .sss-live-warning-corporate,#sssLiveCvWarning .sss-live-warning-plain-normal,#sssLiveCvWarning .sss-live-warning-closing,#sssLiveCvWarning .sss-live-warning-ladder{font-size:15px}
- #sssLiveCvWarning .sss-live-warning-plain-lead{font-size:16px}
- #sssLiveCvWarning .sss-live-warning-right-turn{padding-left:38px}
+#sssLiveCvWarning .sss-live-warning-modal{width:min(980px,100%);max-height:calc(100vh - 44px);overflow:auto;background:#eef2f5;border-radius:15px;box-shadow:0 24px 75px rgba(0,0,0,.34)}
+#sssLiveCvWarning .sss-live-warning-head{position:relative;padding:25px 28px 23px;color:#fff;background:linear-gradient(135deg,#263b50,#152536)}
+#sssLiveCvWarning .sss-live-warning-kicker{margin:0 0 5px;color:#9ed1ff;font-size:12px;font-weight:900;letter-spacing:.11em}
+#sssLiveCvWarning .sss-live-warning-title{margin:0 0 14px;text-align:center;font-size:30px;line-height:1.08;font-weight:800;color:#fff}
+#sssLiveCvWarning .sss-live-warning-corporate-label{margin:0 0 7px;font-size:16px;font-weight:900;color:#fff}
+#sssLiveCvWarning .sss-live-warning-corporate{margin:0;color:#deebf5;font-size:16px;line-height:1.25}
+#sssLiveCvWarning .sss-live-warning-right-turn{padding-left:220px}
+#sssLiveCvWarning .sss-live-warning-hurry{margin-top:18px;padding-top:15px;border-top:1px solid rgba(255,255,255,.20);line-height:1.28}
+#sssLiveCvWarning .sss-live-warning-hurry strong{display:block;color:#fff}
+#sssLiveCvWarning .sss-live-warning-skills{color:#9ed1ff;text-decoration:underline;font-weight:900}
+#sssLiveCvWarning .sss-live-warning-head-actions{display:flex;justify-content:flex-end;margin-top:16px}
+#sssLiveCvWarning .sss-live-warning-enter{border:1px solid #fff;border-radius:6px;background:#fff;color:#0759ae;padding:10px 15px;font-weight:900;cursor:pointer}
+#sssLiveCvWarning .sss-live-warning-body{padding:25px 28px 27px}
+#sssLiveCvWarning .sss-live-warning-plain-title{text-align:center;font-weight:900;font-size:22px;margin:0;color:#172330}
+#sssLiveCvWarning .sss-live-warning-plain-lead{text-align:center;font-weight:800;font-size:17px;margin:4px 0 0;line-height:1.35}
+#sssLiveCvWarning .sss-live-warning-plain-normal{text-align:center;margin:0;line-height:1.35;font-size:16px}
+#sssLiveCvWarning .sss-live-warning-ladder{width:min(620px,100%);margin:22px auto;background:#fff;border:1px solid #cfdae4;border-radius:11px;padding:18px 20px;text-align:center;font-size:16px;font-weight:800;line-height:1.28}
+#sssLiveCvWarning .sss-live-warning-closing{width:min(860px,100%);margin:0 auto;font-size:16px;line-height:1.45;color:#31475b}
+@media(max-width:700px){
+ #sssLiveCvWarning{padding:0;align-items:stretch;background:#eef2f5}
+ #sssLiveCvWarning .sss-live-warning-modal{width:100%;max-height:none;min-height:100vh;border-radius:0}
+ #sssLiveCvWarning .sss-live-warning-head{padding:22px 16px 20px}
+ #sssLiveCvWarning .sss-live-warning-title{font-size:26px}
+ #sssLiveCvWarning .sss-live-warning-right-turn{padding-left:35px}
+ #sssLiveCvWarning .sss-live-warning-head-actions{justify-content:stretch}
+ #sssLiveCvWarning .sss-live-warning-enter{width:100%}
+ #sssLiveCvWarning .sss-live-warning-body{padding:20px 14px 24px}
+ #sssLiveCvWarning .sss-live-warning-plain-title{font-size:20px}
 }
 </style>
 <section class="sss-live-warning-modal" role="dialog" aria-modal="true" aria-labelledby="sssLiveWarningTitle">
+<header class="sss-live-warning-head">
+<div class="sss-live-warning-kicker">LIVE CV</div>
 <h1 class="sss-live-warning-title" id="sssLiveWarningTitle">WARNING – LIVE CV<br>&amp;<br>OVER THE WALL MOMENTS</h1>
-<div class="sss-live-warning-content">
-<p class="sss-live-warning-label">In corporate speak</p>
+<p class="sss-live-warning-corporate-label">In corporate speak</p>
 <div class="sss-live-warning-corporate">
 You'll see a timeline of Shane's employment,<br>
 Repeatedly encouraged to step beyond brief<br>
@@ -62,11 +69,15 @@ Increasing velocity — shortening timelines, creating revenue<br>
 Finding commercially viable solutions where conventional options<br>
 <div class="sss-live-warning-right-turn">*weren't affordable or available<br>
 *while still managing the day-to-day job.</div>
-<br>
-<strong>IF YOUR IN A HURRY - DONT LOOK</strong><br>
-<span>You will only find interesting and usefull stuff but you will linger longer than a quick skim</span><br>
+<div class="sss-live-warning-hurry">
+<strong>IF YOUR IN A HURRY - DONT LOOK</strong>
+<span>Its good recruiter stuff but SO INTERESTING you will linger longer than just a quick skim</span><br>
 <span>The mundane things a recruiter expects are in the <a class="sss-live-warning-skills" href="${carry('skills/index.html')}">Skills section of the menu</a>,</span>
 </div>
+</div>
+<div class="sss-live-warning-head-actions"><button type="button" class="sss-live-warning-enter">ENTER LIVE CV →</button></div>
+</header>
+<div class="sss-live-warning-body">
 <div class="sss-live-warning-plain-title">Plain English — the LIVE CV</div>
 <p class="sss-live-warning-plain-lead">Its about the times that doing the job as a title defined wasn't enough.</p>
 <p class="sss-live-warning-plain-normal">Opportunities, people &amp; the solutions defining the “OVER THE WALL” moments</p>
@@ -79,7 +90,6 @@ Finding commercially viable solutions where conventional options<br>
 </div>
 <p class="sss-live-warning-closing">You'll see the context, timelines and hero moments, hear from employers, staff and customers who were there, and where I've got the work to show you — I'll show you that too.</p>
 </div>
-<div class="sss-live-warning-actions"><button type="button" class="sss-live-warning-enter">Enter Live CV</button></div>
 </section>`;
     document.body.appendChild(overlay);
     overlay.querySelector('.sss-live-warning-enter').onclick=()=>location.href=carry('cv/index.html');
