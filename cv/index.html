@@ -7033,8 +7033,8 @@ addEventListener("resize",()=>{
     started=true;
     const body={visitor_id:visitorId,session_id:sessionId,device_type:deviceType,browser:navigator.userAgent};
     body[identifierKind==="ref"?"public_ref":"tracking_code"]=identifier;
-    post("/track/"+encodeURIComponent(identifier),body).then(d=>{
-      visitId=d.visit_id||d.visitId||null; flushPending();
+    (window.SSSJourneyTrack?.start() || post("/track/"+encodeURIComponent(identifier),body).then(d=>d.visit_id||d.visitId||null)).then(id=>{
+      visitId=id; flushPending();
     }).catch(()=>{disabled=true;});
   }
   function updateVisit(finalUpdate) {
@@ -8055,5 +8055,5 @@ queue();
 
 
 
-<script src="shared/site-nav.js"></script><script src="shared/feedback-bridge.js"></script><script>(()=>{const oldReturn=document.getElementById('sssReturnIntroduction');if(oldReturn)oldReturn.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();SSSSiteNav.open()},{capture:true});const p=new URLSearchParams(location.search);addEventListener('load',()=>{if(p.get('open')==='employment')document.getElementById('sssEmploymentAvailabilityOpen')?.click()})})();</script></body>
+<script src="shared/journey-tracker.js"></script><script src="shared/site-nav.js"></script><script src="shared/feedback-bridge.js"></script><script>(()=>{const oldReturn=document.getElementById('sssReturnIntroduction');if(oldReturn)oldReturn.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();SSSSiteNav.open()},{capture:true});const p=new URLSearchParams(location.search);addEventListener('load',()=>{if(p.get('open')==='employment')document.getElementById('sssEmploymentAvailabilityOpen')?.click()})})();</script></body>
 </html>

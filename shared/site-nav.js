@@ -10,7 +10,7 @@ const icons={
  feedback:`<svg ${common}><path d="M9 10h30v22H21l-8 7v-7H9Z" stroke="#0B2341" stroke-width="2.4"/><circle cx="18" cy="21" r="1.7" fill="#0B2341" stroke="none"/><circle cx="24" cy="21" r="1.7" fill="#169BFF" stroke="none"/><circle cx="30" cy="21" r="1.7" fill="#0B2341" stroke="none"/></svg>`};
 const html=`<button id="sssLiveFloatingMenu" type="button" aria-label="Open navigation menu">MENU</button><div id="sssConsolidatedNav" aria-hidden="true"><div class="navDialog" role="dialog" aria-modal="true" aria-labelledby="sssNavTitle"><div class="navHead"><h2 id="sssNavTitle">Welcome</h2><div class="navSub">You’re in Control</div><button type="button" class="navClose" aria-label="Close">×</button></div><div class="navIntro">Thank you for taking the time to consider me for the role advertised.<br>I’ve recruited extensively myself, so I know your time matters.<br>Throughout my career, I’ve always gone through the next door that opened, never stopping to create a CV.<br>This is my way of showing the path I’ve taken, the roles I’ve performed, and the skills and experience I’ve collected along the way.<br><strong>Start anywhere you like. You can return here at any time to explore further.</strong></div><div class="navGrid"><button class="sss-nav-card" data-route="about"><span class="sss-approved-icon-slot" data-icon="about"></span><span class="sss-nav-copy"><strong>ABOUT ME</strong><span>A 90 second introduction to who I am, my career and how I approach things.</span></span></button><button class="sss-nav-card live" data-route="cv"><span class="sss-approved-icon-slot" data-icon="live-cv"></span><span class="sss-nav-copy"><strong>LIVE CV</strong><span>See as little or as much as you need. Explore my actual work, roles, responsibilities, results, employers and supporting evidence.</span></span></button><button class="sss-nav-card" data-route="skills"><span class="sss-approved-icon-slot" data-icon="skills"></span><span class="sss-nav-copy"><strong>SKILLS</strong><span>Explore the skills I’ve demonstrated across my career — not just those suggested by my job titles.</span></span></button><button class="sss-nav-card" data-route="employment"><span class="sss-approved-icon-slot" data-icon="employment"></span><span class="sss-nav-copy"><strong>PRE-EMPLOYMENT</strong><span>Employment, availability and other practical information answered upfront.</span></span></button><button class="sss-nav-card" data-route="feedback"><span class="sss-approved-icon-slot" data-icon="feedback"></span><span class="sss-nav-copy"><strong>FEEDBACK</strong><span>If something is missing, unclear or could be done better, I’d genuinely appreciate you letting me know.</span></span></button></div></div></div>`;
 document.body.insertAdjacentHTML("beforeend",html);document.querySelectorAll('[data-icon]').forEach(s=>s.innerHTML=icons[s.dataset.icon]||'');
-const nav=document.getElementById('sssConsolidatedNav'),open=()=>{nav.classList.add('open');nav.setAttribute('aria-hidden','false')},close=()=>{nav.classList.remove('open');nav.setAttribute('aria-hidden','true')};
+const nav=document.getElementById('sssConsolidatedNav'),open=()=>{nav.classList.add('open');nav.setAttribute('aria-hidden','false');window.SSSJourneyTrack?.event('navigation','Menu','Opened')},close=()=>{nav.classList.remove('open');nav.setAttribute('aria-hidden','true')};
 document.getElementById('sssLiveFloatingMenu').onclick=open;nav.querySelector('.navClose').onclick=()=>{close();if(document.body.classList.contains('introduction-page'))dispatchEvent(new CustomEvent('sss-start-about'))};
 const row=(label,answer,cls='')=>`<div class="sss-emp-row"><span class="sss-emp-label">${label}</span><span class="sss-emp-answer ${cls}">${answer}</span></div>`;
 const item=(id,title,body)=>`<section class="sss-emp-item"><button type="button" class="sss-emp-trigger" aria-expanded="false" aria-controls="${id}"><span>${title}</span><span class="sss-emp-chevron">⌄</span></button><div class="sss-emp-panel" id="${id}" hidden>${body}</div></section>`;
@@ -34,75 +34,54 @@ function openLiveCvWarning(){
 #sssLiveCvWarning .sss-live-warning-corporate-label{margin:0 0 7px;font-size:16px;font-weight:900;color:#fff}
 #sssLiveCvWarning .sss-live-warning-corporate{margin:0;color:#deebf5;font-size:16px;line-height:1.25}
 #sssLiveCvWarning .sss-live-warning-right-turn{padding-left:220px}
-#sssLiveCvWarning .sss-live-warning-hurry{margin-top:18px;padding-top:15px;border-top:1px solid rgba(255,255,255,.20);line-height:1.28}
-#sssLiveCvWarning .sss-live-warning-hurry strong{display:block;color:#fff}
-#sssLiveCvWarning .sss-live-warning-skills{color:#9ed1ff;text-decoration:underline;font-weight:900}
-#sssLiveCvWarning .sss-live-warning-head-actions{display:flex;justify-content:flex-end;margin-top:16px}
-#sssLiveCvWarning .sss-live-warning-enter{border:1px solid #0759ae;border-radius:6px;background:#fff;color:#0759ae;padding:10px 15px;font-weight:900;cursor:pointer}
-#sssLiveCvWarning .sss-live-warning-bottom-actions{display:flex;justify-content:center;margin-top:22px;padding-top:18px;border-top:1px solid #cfdae4}
 #sssLiveCvWarning .sss-live-warning-body{padding:25px 28px 27px}
 #sssLiveCvWarning .sss-live-warning-plain-title{text-align:center;font-weight:900;font-size:22px;margin:0;color:#172330}
-#sssLiveCvWarning .sss-live-warning-plain-lead{text-align:center;font-weight:800;font-size:17px;margin:4px 0 0;line-height:1.35}
-#sssLiveCvWarning .sss-live-warning-plain-normal{text-align:center;margin:0;line-height:1.35;font-size:16px}
-#sssLiveCvWarning .sss-live-warning-ladder{width:min(620px,100%);margin:22px auto;background:#fff;border:1px solid #cfdae4;border-radius:11px;padding:18px 20px;text-align:center;font-size:16px;font-weight:800;line-height:1.28}
-#sssLiveCvWarning .sss-live-warning-closing{width:min(860px,100%);margin:0 auto;font-size:16px;line-height:1.45;color:#31475b}
-@media(max-width:700px){
- #sssLiveCvWarning{padding:0;align-items:stretch;background:#eef2f5}
- #sssLiveCvWarning .sss-live-warning-modal{width:100%;max-height:none;min-height:100vh;border-radius:0}
- #sssLiveCvWarning .sss-live-warning-head{padding:22px 16px 20px}
- #sssLiveCvWarning .sss-live-warning-title{font-size:26px}
- #sssLiveCvWarning .sss-live-warning-right-turn{padding-left:35px}
- #sssLiveCvWarning .sss-live-warning-head-actions{justify-content:stretch}
- #sssLiveCvWarning .sss-live-warning-enter{width:100%}
- #sssLiveCvWarning .sss-live-warning-body{padding:20px 14px 24px}
- #sssLiveCvWarning .sss-live-warning-plain-title{font-size:20px}
-}
+#sssLiveCvWarning .sss-live-warning-lines{text-align:center;font-size:16px;line-height:1.35;margin:4px 0 0}
+#sssLiveCvWarning .sss-live-warning-bottom-actions{display:flex;justify-content:center;margin-top:22px}
+#sssLiveCvWarning .sss-live-warning-enter{border:1px solid #0759ae;border-radius:6px;background:#fff;color:#0759ae;padding:10px 15px;font-weight:900;cursor:pointer;text-decoration:none}
+#sssLiveCvWarning .sss-live-warning-skills-copy{width:min(860px,100%);margin:18px auto 0;color:#31475b;font-size:16px;line-height:1.45}
+#sssLiveCvWarning .sss-live-warning-skills{color:#0759ae;text-decoration:underline;font-weight:900}
+#sssLiveCvWarning .sss-wall-trigger{border:0;padding:0;background:none;color:inherit;font:inherit;font-weight:inherit;text-decoration:underline dotted;text-underline-offset:4px;cursor:pointer}
+#sssLiveCvWarning .sss-wall-trigger:focus-visible{outline:2px solid #9ed1ff;outline-offset:3px}
+#sssLiveCvWarning .sss-wall-detail{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(8,18,31,.72)}
+#sssLiveCvWarning .sss-wall-detail.open{display:flex}
+#sssLiveCvWarning .sss-wall-card{width:min(620px,100%);background:#fff;border:1px solid #cfdae4;border-radius:11px;box-shadow:0 24px 75px rgba(0,0,0,.34);padding:25px 28px;text-align:center;font-size:16px;font-weight:800;line-height:1.28}
+#sssLiveCvWarning .sss-wall-card h2{font-size:22px;margin:0 0 18px}
+#sssLiveCvWarning .sss-wall-card p{margin:0}
+#sssLiveCvWarning .sss-wall-close{margin-top:22px;padding:10px 15px;border:1px solid #0759ae;border-radius:6px;background:#fff;color:#0759ae;font-weight:900;cursor:pointer}
+@media(max-width:700px){#sssLiveCvWarning{padding:0;align-items:stretch;background:#eef2f5}#sssLiveCvWarning .sss-live-warning-modal{width:100%;max-height:none;min-height:100vh;border-radius:0}#sssLiveCvWarning .sss-live-warning-head{padding:22px 16px 20px}#sssLiveCvWarning .sss-live-warning-title{font-size:26px}#sssLiveCvWarning .sss-live-warning-right-turn{padding-left:35px}#sssLiveCvWarning .sss-live-warning-body{padding:20px 14px 24px}#sssLiveCvWarning .sss-live-warning-plain-title{font-size:20px}#sssLiveCvWarning .sss-live-warning-enter{width:100%;text-align:center}#sssLiveCvWarning .sss-wall-card{padding:20px 14px}}
 </style>
 <section class="sss-live-warning-modal" role="dialog" aria-modal="true" aria-labelledby="sssLiveWarningTitle">
 <header class="sss-live-warning-head">
 <div class="sss-live-warning-kicker">LIVE CV</div>
-<h1 class="sss-live-warning-title" id="sssLiveWarningTitle">WARNING – LIVE CV<br>&amp;<br>OVER THE WALL MOMENTS</h1>
+<h1 class="sss-live-warning-title" id="sssLiveWarningTitle">LIVE CV<br>&amp;<br><button type="button" class="sss-wall-trigger" title="What does over the wall mean?">OVER THE WALL MOMENTS</button></h1>
 <p class="sss-live-warning-corporate-label">In corporate speak</p>
-<div class="sss-live-warning-corporate">
-You'll see a timeline of Shane's employment,<br>
-Repeatedly encouraged to step beyond brief<br>
-Increasing velocity — shortening timelines, creating revenue<br>
-Finding commercially viable solutions where conventional options<br>
-<div class="sss-live-warning-right-turn">*weren't affordable or available<br>
-*while still managing the day-to-day job.</div>
-<div class="sss-live-warning-hurry">
-<strong>IF YOUR IN A HURRY - DONT LOOK</strong>
-<span>Its good recruiter stuff but SO INTERESTING you will linger longer than just a quick skim</span><br>
-<span>The mundane things a recruiter expects are in the <a class="sss-live-warning-skills" href="${carry('skills/index.html')}">Skills section of the menu</a>,</span>
-</div>
-</div>
-</header>
-<div class="sss-live-warning-body">
-<div class="sss-live-warning-plain-title">Plain English — the LIVE CV</div>
-<p class="sss-live-warning-plain-lead">Its about the times that doing the job as a title defined wasn't enough.</p>
-<p class="sss-live-warning-plain-normal">Opportunities, people &amp; the solutions defining the “OVER THE WALL” moments</p>
-<div class="sss-live-warning-ladder">
-<div>There's a bag of money</div>
-<div>It’s on the other side of a wall</div>
-<div>The obstacle is money to buy a ladder</div>
-<div>I'll find another way over the wall.</div>
-<div>Then we can afford as many ladders as we need</div>
-</div>
-<p class="sss-live-warning-closing">You'll see the context, timelines and hero moments, hear from employers, staff and customers who were there, and where I've got the work to show you — I'll show you that too.</p>
-<div class="sss-live-warning-bottom-actions"><button type="button" class="sss-live-warning-enter">ENTER LIVE CV →</button></div>
-</div>
-</section>`;
+<div class="sss-live-warning-corporate">You’ll see a timeline of Shane’s employment,<br>Repeatedly encouraged to step beyond brief<br>Increasing velocity — shortening timelines, creating revenue<br>Finding commercially viable solutions where conventional options<div class="sss-live-warning-right-turn">*weren’t affordable or available<br>*while still managing the day-to-day job.</div></div>
+</header><div class="sss-live-warning-body">
+<h2 class="sss-live-warning-plain-title">Plain English — the LIVE CV</h2>
+<p class="sss-live-warning-lines">Just like a normal CV you’ll see timelines and roles<br>Drill down further you can see hero moments<br>Where doing the job as a title defined wasn’t enough.<br>Opportunities, people &amp; solutions: the “<button type="button" class="sss-wall-trigger" title="What does over the wall mean?">OVER THE WALL</button>” moments<br>See &amp; hear from those who were<br>Employers, staff and customers<br>Where I’ve got the work to show you — I’ll show you that too.</p>
+<div class="sss-live-warning-bottom-actions"><a class="sss-live-warning-enter" href="${carry('cv/index.html')}">ENTER LIVE CV →</a></div>
+<p class="sss-live-warning-skills-copy">The mundane things a recruiter expects to see<br>Like can Shane sell, manage people, use a CRM? are answered in the <a class="sss-live-warning-skills" href="${carry('skills/index.html')}">Skills section of the menu</a>.</p>
+</div></section>
+<div class="sss-wall-detail" aria-hidden="true"><section class="sss-wall-card" role="dialog" aria-modal="true" aria-labelledby="sssWallTitle"><h2 id="sssWallTitle">OVER THE WALL</h2><p>There’s a bag of money<br>It’s on the other side of a wall<br>The obstacle is money to buy a ladder<br>I’ll find another way over the wall.<br>Then we can afford as many ladders as we need</p><button type="button" class="sss-wall-close">CLOSE</button></section></div>`;
     document.body.appendChild(overlay);
-    overlay.querySelector('.sss-live-warning-enter').onclick=()=>location.href=carry('cv/index.html');
+    const detail=overlay.querySelector('.sss-wall-detail');let returnFocus=null;
+    const closeDetail=()=>{detail.classList.remove('open');detail.setAttribute('aria-hidden','true');returnFocus?.focus()};
+    overlay.querySelectorAll('.sss-wall-trigger').forEach((button,index)=>button.onclick=()=>{returnFocus=button;detail.classList.add('open');detail.setAttribute('aria-hidden','false');window.SSSJourneyTrack?.event('popup','Over the wall','Explanation opened',index===0?'Heading':'Body');detail.querySelector('.sss-wall-close').focus()});
+    detail.querySelector('.sss-wall-close').onclick=closeDetail;
+    detail.onmousedown=e=>{if(e.target===detail)closeDetail()};
+    overlay.addEventListener('keydown',e=>{if(e.key==='Escape'&&detail.classList.contains('open')){e.stopPropagation();closeDetail()}});
+    overlay.querySelector('.sss-live-warning-enter').onclick=()=>window.SSSJourneyTrack?.event('popup','Live CV popup','Enter Live CV');
+    overlay.querySelector('.sss-live-warning-skills').onclick=()=>window.SSSJourneyTrack?.event('popup','Live CV popup','Go to Skills');
   }
-  overlay.classList.add('sss-live-warning-visible');
-  overlay.setAttribute('aria-hidden','false');
+  overlay.classList.add('sss-live-warning-visible');overlay.setAttribute('aria-hidden','false');
+  window.SSSJourneyTrack?.event('popup','Live CV popup','Opened');
   requestAnimationFrame(()=>overlay.querySelector('.sss-live-warning-enter')?.focus({preventScroll:true}));
 }
 
-nav.onclick=e=>{if(e.target===nav)return close();const b=e.target.closest('[data-route]');if(!b)return;const r=b.dataset.route;if(r==='employment')return openEmployment();if(r==='about'){if(document.body.classList.contains('introduction-page')){close();return dispatchEvent(new CustomEvent('sss-start-about'))}location.href=carry('introduction/index.html',{start:'about'})}if(r==='cv')return openLiveCvWarning();if(r==='skills')location.href=carry('skills/index.html');if(r==='feedback'){close();if(typeof window.SSSOpenFeedback==='function')return window.SSSOpenFeedback();location.href=carry('cv/index.html',{open:'feedback'})}};
+nav.onclick=e=>{if(e.target===nav)return close();const b=e.target.closest('[data-route]');if(!b)return;const r=b.dataset.route;window.SSSJourneyTrack?.event('navigation','Menu','Selected '+r);if(r==='employment')return openEmployment();if(r==='about'){if(document.body.classList.contains('introduction-page')){close();return dispatchEvent(new CustomEvent('sss-start-about'))}location.href=carry('introduction/index.html',{start:'about'})}if(r==='cv')return openLiveCvWarning();if(r==='skills')location.href=carry('skills/index.html');if(r==='feedback'){close();if(typeof window.SSSOpenFeedback==='function')return window.SSSOpenFeedback();location.href=carry('cv/index.html',{open:'feedback'})}};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.getElementById('sssEmploymentOverlay')?.classList.contains('sss-employment-visible'))document.getElementById('sssEmploymentClose').click();else close()}});
-window.SSSSiteNav={open,close,carry,openEmployment};
+window.SSSSiteNav={open,close,carry,openEmployment,openLiveCvWarning};
 })();
 
 /* Employment drawer keyboard-focus containment and return. */
