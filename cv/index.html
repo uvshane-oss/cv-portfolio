@@ -7058,11 +7058,28 @@ addEventListener("resize",()=>{
     if(!target||!target.closest)return;
     const role=roleName(target);
 
+    // Record the action when it happens; linger timers below still measure time open.
+    const overviewToggle=target.closest('[class*="overview-toggle"]');
+    if(overviewToggle && /expand/i.test(visibleText(overviewToggle))){
+      emit("open_details",role,"Role Overview","");
+    }
+
+    // Overview Expand buttons use a custom panel rather than native details.
+    if(overviewToggle){
+      const overview=overviewToggle.closest('.role-overview');
+      setTimeout(()=>{
+        if(!overview)return;
+        const panel=overview.querySelector('[class*="overview-more"]');
+        if(panel?.classList.contains('show'))begin(panel,role,'Viewed','Role Overview');
+        else if(panel)finish(panel);
+      },0);
+    }
+
     const summary=target.closest("summary");
     if(summary && summary.closest(".role-card")){
       const d=summary.closest("details"), label=semanticLabel(summary);
       setTimeout(()=>{
-        if(d.open) begin(d,role,"Viewed",label);
+        if(d.open){ emit("open_details",role,label,""); begin(d,role,"Viewed",label); }
         else finish(d);
       },0);
       return;
@@ -7075,7 +7092,7 @@ addEventListener("resize",()=>{
         const was=roleOpenState.get(c.id)===true;
         setTimeout(()=>{
           const isOpen=c.classList.contains("show");
-          if(!was && isOpen) begin(c,roleName(card),"Viewed","Overview");
+          if(!was && isOpen){ emit("open_role",roleName(card),"Overview",""); begin(c,roleName(card),"Viewed","Overview"); }
           if(was && !isOpen){ finishInside(c); finish(c); }
           roleOpenState.set(c.id,isOpen);
           // toggleRole can close other roles; reconcile them without generating false opens.

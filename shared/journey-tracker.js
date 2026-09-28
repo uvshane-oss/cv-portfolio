@@ -31,6 +31,33 @@
     const id=await start();if(!id)return;
     try{await fetch(API+'/event',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({visit_id:id,event_type:clean(type),section:clean(section),item:clean(item),value:clean(value)}),keepalive:true})}catch(_){}
   }
-  window.SSSJourneyTrack={start,event,ref};
-  if(valid)event('page_view','Site',page);
+  // Timers count only time while the document is visible, and write completed
+  // views to the existing /event endpoint without changing the Worker schema.
+  const timers=new Map();
+  let visible=!document.hidden;
+  function begin(name,section,item,action='Viewed'){
+    if(!valid||timers.has(name))return;
+    timers.set(name,{section,item,action,ms:0,at:performance.now(),running:visible});
+  }
+  function end(name){
+    const t=timers.get(name);if(!t)return;
+    if(t.running)t.ms+=Math.max(0,performance.now()-t.at);
+    timers.delete(name);
+    event('linger',t.section,t.item,t.action+'|'+Math.max(0,Math.round(t.ms/1000)));
+  }
+  function endAll(){for(const name of [...timers.keys()])end(name)}
+  document.addEventListener('visibilitychange',()=>{
+    const now=performance.now();visible=!document.hidden;
+    timers.forEach(t=>{
+      if(t.running)t.ms+=Math.max(0,now-t.at);
+      t.running=visible;t.at=now;
+    });
+  });
+  addEventListener('pagehide',endAll);
+  window.SSSJourneyTrack={start,event,begin,end,endAll,ref};
+  if(valid){
+    event('page_view','Site',page);
+    const label=page.includes('/introduction/')?'Introduction':page.includes('/skills/')?'Skills':page.includes('/cv/')?'Live CV':'Countdown';
+    begin('site-page','Site',label);
+  }
 })();
