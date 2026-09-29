@@ -278,7 +278,7 @@ const content = {
  ashes:{kicker:"Explore ashes & keepsakes",heading:"A place to keep them close.",description:"Ask about ashes caskets and keepsakes, including personalised choices for pets. We can help you find a size and style that feels right.",image:"./assets/category/urns-boxes.webp",source:assets.gallery[42].source,alt:"Ashes box and urn design visualisation"},
  pet:{kicker:"Explore pet memorials",heading:"For the friend who was family.",description:"Pet headstones, plaques, photo ceramics, cremation rocks, stone statues and ashes caskets offer many ways to remember a companion.",image:"./assets/category/pet-memorials.webp",source:assets.gallery[42].source,alt:"Pet memorial design visualisation"}
 };
-let selectedType = "headstone", selectedInterests = new Set(), activeFilter = "all", showAll = false;
+let selectedType = "headstone", selectedInterests = new Set(), activeFilter = "all", showAll = false, visibleItems = [];
 function setType(type) {
  selectedType=type;
  document.querySelectorAll(".choice").forEach(b=>{const on=b.dataset.type===type;b.classList.toggle("active",on);b.setAttribute("aria-pressed",String(on))});
@@ -291,10 +291,13 @@ document.querySelectorAll(".option-list button").forEach(b=>b.addEventListener("
 function renderWork() {
  const list=assets.gallery.filter(item=>activeFilter==="all"||item.category===activeFilter);
  const shown=showAll?list:list.slice(0,6);
+ visibleItems=shown;
  const grid=$("#work-grid");grid.replaceChildren();
- shown.forEach(item=>{
+ shown.forEach((item,index)=>{
   const card=document.createElement("article");card.className="work-card";
-  const wrap=document.createElement("div");wrap.className="image-wrap";
+  const wrap=document.createElement("button");wrap.type="button";wrap.className="image-wrap image-open";
+  wrap.setAttribute("aria-label",`View ${item.name} larger`);
+  wrap.addEventListener("click",()=>openImageViewer(visibleItems,index));
   const img=document.createElement("img");img.loading="lazy";setPreferred(img,item);wrap.append(img);
   const copy=document.createElement("div");copy.className="card-copy";
   const small=document.createElement("small");small.textContent=item.category==="personal"?"Personal story":item.category==="plaque"?"Memorial plaque":"Stone & form";
@@ -305,6 +308,73 @@ function renderWork() {
  });
  $("#more-work").hidden=shown.length>=list.length;
 }
+// Created here so the small GitHub update only replaces app.js and styles.css.
+const viewer=document.createElement("dialog");
+viewer.className="image-viewer";
+viewer.setAttribute("aria-label","Memorial image viewer");
+viewer.innerHTML=`<div class="viewer-shell">
+ <div class="viewer-toolbar">
+  <button type="button" class="viewer-close" aria-label="Close image viewer">Close <span aria-hidden="true">×</span></button>
+  <div class="viewer-zoom">
+   <button type="button" class="viewer-zoom-out" aria-label="Zoom out">−</button>
+   <span class="viewer-zoom-label" aria-live="polite">100%</span>
+   <button type="button" class="viewer-zoom-in" aria-label="Zoom in">+</button>
+  </div>
+ </div>
+ <div class="viewer-stage">
+  <button type="button" class="viewer-prev" aria-label="Previous image">‹</button>
+  <div class="viewer-scroll"><img class="viewer-image" alt=""></div>
+  <button type="button" class="viewer-next" aria-label="Next image">›</button>
+ </div>
+ <div class="viewer-caption"><span class="viewer-title"></span><span class="viewer-count"></span><a class="viewer-original" href="#" target="_blank" rel="noopener">View original photo ↗</a></div>
+</div>`;
+document.body.append(viewer);
+let viewerItems=[],viewerIndex=0,viewerZoom=1;
+const viewerImg=viewer.querySelector(".viewer-image");
+const viewerScroll=viewer.querySelector(".viewer-scroll");
+const zoomLevels=[1,1.5,2,3];
+function updateZoom(){
+ viewerImg.style.width=`${viewerZoom*100}%`;
+ viewerImg.style.maxHeight=viewerZoom===1?"70vh":"none";
+ viewer.querySelector(".viewer-zoom-label").textContent=`${Math.round(viewerZoom*100)}%`;
+ viewer.querySelector(".viewer-zoom-out").disabled=viewerZoom===zoomLevels[0];
+ viewer.querySelector(".viewer-zoom-in").disabled=viewerZoom===zoomLevels[zoomLevels.length-1];
+ viewerScroll.scrollTo(0,0);
+}
+function showViewerImage(){
+ const item=viewerItems[viewerIndex];
+ if(item.local)setPreferred(viewerImg,item);
+ else {viewerImg.onerror=null;viewerImg.src=item.image;viewerImg.alt=item.alt||item.name}
+ viewer.querySelector(".viewer-title").textContent=item.name;
+ viewer.querySelector(".viewer-count").textContent=viewerItems.length>1?`${viewerIndex+1} / ${viewerItems.length}`:"";
+ viewer.querySelector(".viewer-original").href=item.source;
+ viewer.querySelector(".viewer-prev").hidden=viewerItems.length<2;
+ viewer.querySelector(".viewer-next").hidden=viewerItems.length<2;
+ viewerZoom=1;updateZoom();
+}
+function openImageViewer(items,index){
+ viewerItems=items.slice();viewerIndex=index;showViewerImage();
+ viewer.showModal();
+ viewer.querySelector(".viewer-close").focus();
+}
+function moveViewer(step){viewerIndex=(viewerIndex+step+viewerItems.length)%viewerItems.length;showViewerImage()}
+viewer.querySelector(".viewer-close").addEventListener("click",()=>viewer.close());
+viewer.querySelector(".viewer-prev").addEventListener("click",()=>moveViewer(-1));
+viewer.querySelector(".viewer-next").addEventListener("click",()=>moveViewer(1));
+viewer.querySelector(".viewer-zoom-out").addEventListener("click",()=>{viewerZoom=zoomLevels[Math.max(0,zoomLevels.indexOf(viewerZoom)-1)];updateZoom()});
+viewer.querySelector(".viewer-zoom-in").addEventListener("click",()=>{viewerZoom=zoomLevels[Math.min(zoomLevels.length-1,zoomLevels.indexOf(viewerZoom)+1)];updateZoom()});
+viewer.addEventListener("click",e=>{if(e.target===viewer)viewer.close()});
+viewer.addEventListener("keydown",e=>{
+ if(e.key==="ArrowLeft"&&viewerItems.length>1){e.preventDefault();moveViewer(-1)}
+ if(e.key==="ArrowRight"&&viewerItems.length>1){e.preventDefault();moveViewer(1)}
+});
+const explorerImg=$("#explorer-img");
+explorerImg.setAttribute("tabindex","0");
+explorerImg.setAttribute("role","button");
+explorerImg.setAttribute("aria-label","View selected memorial image larger");
+function openExplorer(){const c=content[selectedType];openImageViewer([{name:c.kicker,image:c.image,source:c.source,alt:c.alt}],0)}
+explorerImg.addEventListener("click",openExplorer);
+explorerImg.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openExplorer()}});
 document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{activeFilter=b.dataset.filter;showAll=false;document.querySelectorAll(".filter").forEach(x=>{const on=x===b;x.classList.toggle("active",on);x.setAttribute("aria-pressed",String(on))});renderWork()}));
 $("#more-work").addEventListener("click",()=>{showAll=true;renderWork()});
 setPreferred($("#craft-img"),assets.gallery[31]);
