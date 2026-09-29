@@ -1,14 +1,134 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-NZ">
 <head>
-  <meta charset="UTF-8">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Made in Stone — Beta Development</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#151d20">
+  <meta name="description" content="Explore headstones, plaques, engraving and ashes memorials by Maiden Stone, monumental masons in Invercargill, Southland.">
+  <title>Maiden Stone | Memorials made personal</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://static.wixstatic.com">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+  <script src="./demo.js" defer></script>
 </head>
-
 <body>
-  <h1>Made in Stone</h1>
-  <p>Beta development site.</p>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Maiden Stone, home"><img src="./assets/logo.svg" alt="Maiden Stone Monumental Masons"></a>
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">Menu</button>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#explore">Explore memorials</a><a href="#design-demo">Design demo</a><a href="#work">Our work</a><a href="#restoration">Restoration</a><a href="#contact">Contact</a>
+    </nav>
+    <a class="header-call" href="tel:+6432170666">03 217 0666</a>
+  </header>
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-photo" role="img" aria-label="A personalised Maiden Stone memorial"></div>
+      <div class="hero-shade"></div>
+      <div class="hero-content">
+        <p class="eyebrow light">Monumental masons · Southland</p>
+        <h1 id="hero-title">Memories<br><em>Carved for Generations.</em></h1>
+        <p>Quality headstones, memorial plaques, urns and keepsakes, crafted with care to celebrate the lives of your loved ones.</p>
+        <div class="hero-actions"><a class="button gold" href="#work">View our work</a><a class="text-link light-link" href="#contact">Get a quote <span aria-hidden="true">↗</span></a></div>
+      </div>
+      
+    </section>
+
+    <section id="explore" class="explore section-pad" aria-labelledby="explore-title">
+      <div class="section-intro">
+        <p class="eyebrow">Begin with what matters to you</p>
+        <h2 id="explore-title">What would you like<br>to create?</h2>
+        <p>You do not need to know every detail. Choose a starting point and explore the materials, artwork and personal touches that can make a memorial their own.</p>
+      </div>
+      <div class="choice-grid" role="group" aria-label="Choose a memorial type">
+        <button class="choice active" type="button" data-type="headstone" aria-pressed="true"><img src="./assets/category/headstones.webp" alt="" loading="lazy"><span class="choice-no">01</span><strong>Headstones</strong><span>Custom designs to honour your loved ones</span><span class="choice-mark" aria-hidden="true">↗</span></button>
+        <button class="choice" type="button" data-type="plaque" aria-pressed="false"><img src="./assets/category/plaques.webp" alt="" loading="lazy"><span class="choice-no">02</span><strong>Memorial plaques</strong><span>For homes, cemeteries and special places</span><span class="choice-mark" aria-hidden="true">↗</span></button>
+        <button class="choice" type="button" data-type="ashes" aria-pressed="false"><img src="./assets/category/urns-boxes.webp" alt="" loading="lazy"><span class="choice-no">03</span><strong>Ashes & keepsakes</strong><span>A range of urns and keepsakes</span><span class="choice-mark" aria-hidden="true">↗</span></button>
+        <button class="choice" type="button" data-type="pet" aria-pressed="false"><img src="./assets/category/pet-memorials.webp" alt="" loading="lazy"><span class="choice-no">04</span><strong>Pet memorials</strong><span>For a faithful companion</span><span class="choice-mark" aria-hidden="true">↗</span></button>
+      </div>
+      <div class="explorer-panel">
+        <div class="explorer-image"><img id="explorer-img" src="" alt=""><a class="photo-credit" id="explorer-original" target="_blank" rel="noopener" href="#">View original photo ↗</a></div>
+        <div class="explorer-detail">
+          <p class="eyebrow" id="explorer-kicker">Explore headstones</p>
+          <h3 id="explorer-heading">A tribute as individual as they were.</h3>
+          <p id="explorer-description">From classic granite forms to custom shapes, lettering and artwork, we can help you bring the details together.</p>
+          <div class="detail-rule"></div>
+          <p class="detail-label">Make it personal</p>
+          <div class="option-list" role="group" aria-label="Personalisation interests">
+            <button type="button" data-interest="Colour artwork" aria-pressed="false">Colour artwork</button>
+            <button type="button" data-interest="Photographs" aria-pressed="false">Photographs</button>
+            <button type="button" data-interest="Custom lettering" aria-pressed="false">Custom lettering</button>
+            <button type="button" data-interest="A special shape" aria-pressed="false">A special shape</button>
+          </div>
+          <p class="selection-note" aria-live="polite" id="selection-note">Select a detail that interests you, or simply keep exploring.</p>
+          <a class="button dark" href="#design-demo" id="explorer-next">Try a design</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="design-demo" class="design-demo section-pad" aria-labelledby="design-title">
+      <div class="section-heading-row demo-heading">
+        <div><p class="eyebrow">Try it for yourself</p><h2 id="design-title">Imagine their memorial.</h2></div>
+        <p>Choose a starting style and add your own words. This is a representative design idea to begin a conversation, rather than a final engraving proof.</p>
+      </div>
+      <div class="demo-shell">
+        <form id="design-form" class="demo-controls" autocomplete="off">
+          <fieldset class="demo-fieldset">
+            <legend>1. Choose a memorial</legend>
+            <div class="demo-segments" role="group" aria-label="Memorial type">
+              <button class="demo-segment active" type="button" data-demo-type="headstone" aria-pressed="true">Headstone</button>
+              <button class="demo-segment" type="button" data-demo-type="plaque" aria-pressed="false">Plaque</button>
+            </div>
+          </fieldset>
+          <fieldset class="demo-fieldset">
+            <legend>2. Add the wording</legend>
+            <label for="demo-name">Name</label>
+            <input id="demo-name" name="name" type="text" maxlength="48" placeholder="Name as you would like it shown" spellcheck="false">
+            <label for="demo-dates">Dates or years</label>
+            <input id="demo-dates" name="dates" type="text" maxlength="48" placeholder="For example, 1948 – 2024" spellcheck="false">
+            <label for="demo-message">A short message</label>
+            <textarea id="demo-message" name="message" maxlength="160" rows="3" placeholder="Your own words, exactly as you want them shown" spellcheck="false"></textarea>
+          </fieldset>
+          <fieldset class="demo-fieldset">
+            <legend>3. Choose the lettering</legend>
+            <div class="demo-choice-row">
+              <label for="demo-font">Style<select id="demo-font" name="font"><option value="classic">Classic serif</option><option value="modern">Modern sans serif</option></select></label>
+              <label for="demo-colour">Colour<select id="demo-colour" name="colour"><option value="gold">Warm gold</option><option value="white">Soft white</option></select></label>
+            </div>
+          </fieldset>
+          <div class="demo-actions"><button class="button dark" id="download-design" type="button">Download draft image</button><button class="demo-reset" type="reset">Start again</button></div>
+        </form>
+        <div class="demo-preview">
+          <div class="demo-preview-head"><span>Live preview</span><span id="demo-style-label">Black granite headstone</span></div>
+          <canvas id="memorial-canvas" width="1254" height="1254" role="img" aria-label="Representative memorial design preview"></canvas>
+          <p class="preview-status" id="preview-status" aria-live="polite">Your wording stays on this device. Download the image to keep it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="work section-pad" aria-labelledby="work-title">
+      <div class="section-heading-row"><div><p class="eyebrow">Made personal</p><h2 id="work-title">Work that tells a story.</h2></div><p>Some memorials speak through a familiar shape. Others reflect a favourite place, passion or person. Explore the ideas behind these Maiden Stone examples.</p></div>
+      <p class="visualisation-note">Design visualisations based on existing examples. Each example links to its original photograph.</p>
+      <div class="filter-row" role="group" aria-label="Filter examples"><button class="filter active" data-filter="all" aria-pressed="true">All work</button><button class="filter" data-filter="personal" aria-pressed="false">Personal stories</button><button class="filter" data-filter="stone" aria-pressed="false">Stone & form</button><button class="filter" data-filter="plaque" aria-pressed="false">Plaques</button></div>
+      <div class="work-grid" id="work-grid"></div>
+      <button class="more-button" type="button" id="more-work">Show more work</button>
+    </section>
+
+    <section id="craft" class="craft" aria-labelledby="craft-title">
+      <div class="craft-image"><img id="craft-img" alt="Detailed artwork engraved on a Maiden Stone headstone" loading="lazy"></div>
+      <div class="craft-copy"><p class="eyebrow light">The details make it theirs</p><h2 id="craft-title">More than a name<br>on stone.</h2><p>Artwork, photographs, lettering and colour can say something no standard design could. From a favourite flower to a landscape, hobby or family symbol, we’ll help you explore a fitting way to remember them.</p><a class="text-link light-link" href="#explore">Explore personal touches <span aria-hidden="true">↗</span></a></div>
+    </section>
+
+    <section id="restoration" class="restoration section-pad" aria-labelledby="restoration-title">
+      <div class="section-intro narrow"><p class="eyebrow">Caring for what is already there</p><h2 id="restoration-title">Bring a memorial<br>back to life.</h2><p>Maiden Stone cleans and renovates worn or damaged gravestones and memorials, refreshes indistinct writing and can add new inscriptions to a family memorial.</p></div>
+      <div class="compare" id="compare"><img id="after-img" alt="Restored headstone after work"><div class="before-mask" id="before-mask"><img id="before-img" alt="Headstone before restoration"></div><div class="compare-line"></div><span class="compare-tag before">Before</span><span class="compare-tag after">After</span><input id="compare-range" type="range" min="0" max="100" value="50" aria-label="Compare before and after restoration"></div>
+      <p class="compare-caption">Drag the divider to compare a restoration example.</p>
+    </section>
+
+    <section class="process section-pad" aria-labelledby="process-title"><div class="process-head"><p class="eyebrow">A way forward</p><h2 id="process-title">We’ll take it<br>one step at a time.</h2></div><div class="process-steps"><div><span>01</span><h3>Talk</h3><p>Share the person, place or idea you have in mind.</p></div><div><span>02</span><h3>Explore</h3><p>Look at shapes, materials, engraving and personal details.</p></div><div><span>03</span><h3>Decide</h3><p>Review a direction and discuss a quote before work begins.</p></div><div><span>04</span><h3>Remember</h3><p>A memorial made with care, to hold their story for years to come.</p></div></div></section>
+
+    <section id="contact" class="contact section-pad" aria-labelledby="contact-title"><div><p class="eyebrow light">Start a conversation</p><h2 id="contact-title">Tell us what<br>you have in mind.</h2><p>You may have a complete design, a small idea, or no idea where to begin. We can talk through the options together.</p><a class="button gold" href="tel:+6432170666">Call 03 217 0666</a></div><div class="contact-card"><span>Visit the showroom</span><strong>221 Yarrow Street<br>Invercargill 9810</strong><p>Southland, New Zealand</p><a href="https://maps.google.com/?q=221+Yarrow+Street+Invercargill" target="_blank" rel="noopener">Get directions <span aria-hidden="true">↗</span></a></div></section>
+  </main>
+  <footer><div class="footer-brand"><img src="./assets/logo.svg" alt="Maiden Stone Monumental Masons"><span>Creating unique memorials for the people of Southland.</span></div><div class="footer-links"><a href="#explore">Explore memorials</a><a href="#design-demo">Design demo</a><a href="#work">Our work</a><a href="#contact">Contact</a></div><div class="footer-bottom"><span>© <span id="year"></span> Maiden Stone</span><span>Invercargill · Southland</span></div></footer>
 </body>
 </html>
