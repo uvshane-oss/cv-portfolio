@@ -303,7 +303,8 @@ function renderWork() {
   const small=document.createElement("small");small.textContent=item.category==="personal"?"Personal story":item.category==="plaque"?"Memorial plaque":"Stone & form";
   const title=document.createElement("h3");title.textContent=item.name;
   const p=document.createElement("p");p.textContent="Explore the shape, surface and personal details in this Maiden Stone example.";
-  const a=document.createElement("a");a.className="original-link";a.textContent="View original photo ↗";a.href=item.source;a.target="_blank";a.rel="noopener";
+  const a=document.createElement("a");a.className="original-link";a.textContent="View original photo ↗";a.href=item.source;
+  a.addEventListener("click",e=>{e.preventDefault();openImageViewer(visibleItems,index,"original")});
   copy.append(small,title,p,a);card.append(wrap,copy);grid.append(card);
  });
  $("#more-work").hidden=shown.length>=list.length;
@@ -326,10 +327,10 @@ viewer.innerHTML=`<div class="viewer-shell">
   <div class="viewer-scroll"><img class="viewer-image" alt=""></div>
   <button type="button" class="viewer-next" aria-label="Next image">›</button>
  </div>
- <div class="viewer-caption"><span class="viewer-title"></span><span class="viewer-count"></span><a class="viewer-original" href="#" target="_blank" rel="noopener">View original photo ↗</a></div>
+ <div class="viewer-caption"><span class="viewer-title"></span><span class="viewer-count"></span><a class="viewer-original" href="#">View original photo</a></div>
 </div>`;
 document.body.append(viewer);
-let viewerItems=[],viewerIndex=0,viewerZoom=1;
+let viewerItems=[],viewerIndex=0,viewerZoom=1,viewerMode="visualisation";
 const viewerImg=viewer.querySelector(".viewer-image");
 const viewerScroll=viewer.querySelector(".viewer-scroll");
 const zoomLevels=[1,1.5,2,3];
@@ -343,17 +344,20 @@ function updateZoom(){
 }
 function showViewerImage(){
  const item=viewerItems[viewerIndex];
- if(item.local)setPreferred(viewerImg,item);
+ if(viewerMode==="original"){
+  viewerImg.onerror=null;viewerImg.src=item.source;viewerImg.alt=`Original photograph: ${item.name}`;
+ } else if(item.local)setPreferred(viewerImg,item);
  else {viewerImg.onerror=null;viewerImg.src=item.image;viewerImg.alt=item.alt||item.name}
- viewer.querySelector(".viewer-title").textContent=item.name;
+ viewer.querySelector(".viewer-title").textContent=item.name+(viewerMode==="original"?" · Original photograph":"");
  viewer.querySelector(".viewer-count").textContent=viewerItems.length>1?`${viewerIndex+1} / ${viewerItems.length}`:"";
  viewer.querySelector(".viewer-original").href=item.source;
+ viewer.querySelector(".viewer-original").textContent=viewerMode==="original"?"View visualisation":"View original photo";
  viewer.querySelector(".viewer-prev").hidden=viewerItems.length<2;
  viewer.querySelector(".viewer-next").hidden=viewerItems.length<2;
  viewerZoom=1;updateZoom();
 }
-function openImageViewer(items,index){
- viewerItems=items.slice();viewerIndex=index;showViewerImage();
+function openImageViewer(items,index,mode="visualisation"){
+ viewerItems=items.slice();viewerIndex=index;viewerMode=mode;showViewerImage();
  viewer.showModal();
  viewer.querySelector(".viewer-close").focus();
 }
@@ -363,6 +367,7 @@ viewer.querySelector(".viewer-prev").addEventListener("click",()=>moveViewer(-1)
 viewer.querySelector(".viewer-next").addEventListener("click",()=>moveViewer(1));
 viewer.querySelector(".viewer-zoom-out").addEventListener("click",()=>{viewerZoom=zoomLevels[Math.max(0,zoomLevels.indexOf(viewerZoom)-1)];updateZoom()});
 viewer.querySelector(".viewer-zoom-in").addEventListener("click",()=>{viewerZoom=zoomLevels[Math.min(zoomLevels.length-1,zoomLevels.indexOf(viewerZoom)+1)];updateZoom()});
+viewer.querySelector(".viewer-original").addEventListener("click",e=>{e.preventDefault();viewerMode=viewerMode==="original"?"visualisation":"original";showViewerImage()});
 viewer.addEventListener("click",e=>{if(e.target===viewer)viewer.close()});
 viewer.addEventListener("keydown",e=>{
  if(e.key==="ArrowLeft"&&viewerItems.length>1){e.preventDefault();moveViewer(-1)}
@@ -375,6 +380,8 @@ explorerImg.setAttribute("aria-label","View selected memorial image larger");
 function openExplorer(){const c=content[selectedType];openImageViewer([{name:c.kicker,image:c.image,source:c.source,alt:c.alt}],0)}
 explorerImg.addEventListener("click",openExplorer);
 explorerImg.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openExplorer()}});
+$("#explorer-original").removeAttribute("target");
+$("#explorer-original").addEventListener("click",e=>{e.preventDefault();const c=content[selectedType];openImageViewer([{name:c.kicker,image:c.image,source:c.source,alt:c.alt}],0,"original")});
 document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{activeFilter=b.dataset.filter;showAll=false;document.querySelectorAll(".filter").forEach(x=>{const on=x===b;x.classList.toggle("active",on);x.setAttribute("aria-pressed",String(on))});renderWork()}));
 $("#more-work").addEventListener("click",()=>{showAll=true;renderWork()});
 setPreferred($("#craft-img"),assets.gallery[31]);
